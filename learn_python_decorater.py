@@ -2,8 +2,14 @@
 import random
 import time
 import functools
+import sys
+import traceback
 
+from learn_python_get_func_name import get_function_name
 # from func_timeout import func_set_timeout, FunctionTimeOut
+
+# 测试装饰器是什么时候执行的
+# link: https://www.cnblogs.com/qiu-hua/p/12938930.html
 
 
 # @func_set_timeout(1)
@@ -45,8 +51,6 @@ def retry(times):
     return decorater
 
 
-
-
 # @comment 等价于 comment(inner)
 @comment
 def inner(a):
@@ -75,10 +79,70 @@ def test_1():
     return fl
 
 
+"""
+测试怎么解决遇到重复异常时退出
+"""
+have_exception = True
+func_stack = []
+def catch_except(func):
+    """用来测试遇到重复异常时退出"""
+    def wrapper(*args, **kwargs):
+        try:
+            func_stack.append(func.__code__)
+            func(*args, **kwargs)
+        except AssertionError as e1:
+            exc_type, exc_value, exc_obj_1 = sys.exc_info()
+            # print(exc_obj_1)
+            # e_1 = traceback.print_exception(exc_type, exc_value, exc_obj, limit=2,
+            #                                 file=sys.stdout)
+            e_1 = traceback.format_exc(limit=2)
+            # raise e
+            exception_handler()
+            # kwargs["have_exception"] = have_exception
+            try:
+                func(*args, **kwargs)
+            except AssertionError as e2:
+                exc_type, exc_value, exc_obj_2 = sys.exc_info()
+                # print(exc_obj_2)
+                # e_2 = traceback.format_exc(limit=2)
+
+                # print(e_1, end="\n\n")
+                # print(e_2, end="\n\n")
+                # if exc_obj_1 != exc_obj_2:
+                print(func_stack)
+                raise e2
+    return wrapper
 
 
+@catch_except
+def test_catch_exception():
+    get_function_name("start")
+    # if have_exception:
+    #     raise AssertionError("出错了")
 
-# 在类中使用装饰器
+    test_catch_exception_child()
+    if have_exception:
+        raise AssertionError("{}出错了".format(get_function_name()))
+    get_function_name("end")
+
+
+@catch_except
+def test_catch_exception_child(have_exception=True):
+    get_function_name("start")
+    if have_exception:
+        raise AssertionError("{}出错了".format(get_function_name()))
+    get_function_name("end")
+
+
+def exception_handler():
+    global have_exception
+    have_exception = False
+    get_function_name("end")
+
+
+"""
+在类中使用装饰器
+"""
 class TestClass:
     pass
 
@@ -100,6 +164,17 @@ def debug_desc_in_class():
     # t.test_a()
 
 
+"""
+装饰器在被装饰的函数被定义的时候执行，这通常是导入该模块时
+def comment(func):
+    print("ready") # 不管被装饰的函数执行多少次，这个语句只执行一次，并且在导入该模块时执行
+    def wrapper(*args, **kwargs):
+        print("<function: {}> start...".format(func.__name__))
+        func(*args, **kwargs)
+    return wrapper
+# 多层装饰器，return 函数 之前的语句都会只执行一次，可以联想调用时的括号有几个，就能知道为什么了
+"""
+
 
 if __name__ == '__main__':
     # inner("b")  # comment(inner)("b") == inner("b")
@@ -110,6 +185,8 @@ if __name__ == '__main__':
     # print([f1(), f2(), f3()])
 
     # 在类中使用装饰器
-    debug_desc_in_class()
+    # debug_desc_in_class()
     # no_name()
 
+    # 捕获异常
+    test_catch_exception()

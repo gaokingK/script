@@ -1,0 +1,25 @@
+#name: Tom Smith
+#age: 37
+#---
+spouse:
+    name: Jane Smith
+    age: 25
+    boy: false
+    dd: ~ # 也可以用 ~ 号来表示 null
+#    time:  2016-09-22t11:43:30.20+08:00
+#    date:  2016-09-22
+    letter: line\nline
+    special_letter: "line\nline"  # 含有特殊字符的加单引号后相当于r"xxx"
+    no_escape_letter: 'line\nline'
+    # 引用
+    obj1: &x guagua
+    obj2: *x # 引用必须这样，不能拼接，可以对被引用的对象重命名
+    # 强制转换
+    str: !!str 3.14
+    int: !!int "123" # 不能转换的会报错ValueError
+#---
+#children:
+# - name: Jimmy Smith
+#   age: 15
+# - name1: Jenny Smith
+#   age1: 12

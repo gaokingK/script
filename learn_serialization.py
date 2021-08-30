@@ -1,0 +1,125 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# yaml 简单使用 link: https://www.cnblogs.com/klb561/p/9326677.html
+# yaml 构造器、表示器、解析器 link：https://www.cnblogs.com/klb561/p/9326677.html
+import yaml
+
+f_r = open(r"./learn_yaml_load_config.yml", encoding="gbk", errors="ignore")
+f_w = open(r"./learn_yaml_dump_config.yml", "w")
+
+
+def simple_yaml_load():
+    # 没有Loader 会报错，因为load能随意调用任何python函数，
+    # 所以需要用该参数指定一个加载器：FullLoader，这个加载器禁止执行任意参数
+    # config = yaml.load(f, Loader=yaml.FullLoader)
+    config = yaml.safe_load(f_r)
+    print(config)
+
+
+def multiple_yaml_load():
+    # config: generator
+    config = yaml.load_all(f_r, Loader=yaml.FullLoader)
+    for config in config:
+        print(config)
+
+
+def simple_yaml_dump(obj, f_name=None):
+    dump_res = yaml.dump(obj, stream=f_name)  # 有stream和没有stream的返回时不一样的
+    print(dump_res, )
+    print("dump_res's types: {}".format(type(dump_res)))
+
+
+def multiple_yaml_dump():
+    obj1 = {"key": "value", "key1": "value"}
+    obj2 = [0, 1, 2]
+    dump_res = yaml.dump_all([obj1, obj2], stream=f_w)
+    print(dump_res)
+    print("dump_res's types: {}".format(type(dump_res)))
+
+# 上面是使用yaml 序列化python的内置对象（int、float、str、list、dict、bool、time、datetime）
+# 怎么序列化自定义的对象呢？
+
+
+class Person(yaml.YAMLObject):
+    # 不重新声明这个变量也是可以的，他的默认值是（!python/object:__main__.Person)
+    yaml_tag = "!person"
+
+    def __init__(self, name, age):
+        """
+        yaml.YAMLObject用元类来注册一个构造器，让你把yaml节点转为Python对象实例
+        :param name:
+        :param age:
+        """
+        self.name = name
+        self.age = age
+
+    def __repr__(self):
+        """
+        表示器是返回实例的自我描述信息：print(instance)
+        这里用表示器（也就是代码里的 repr() 函数）来让你把Python对象转为yaml节点
+        不加这个magic方法，也能正常的dump和load
+        :return:
+        """
+        return '{}(name={}, age={})'.format(self.__class__.__name__,
+                                            self.name, self.age)
+
+
+def serialization_instance():
+    # 序列化与反序列化python对象实例
+    jam = Person("jame", 20)
+    print(jam)
+    dump_res = yaml.dump(jam)
+    print(dump_res)
+
+    # yaml.constructor.ConstructorError: could not determine a constructor for
+    # the tag '!persson'
+    load_res = yaml.load('!person {name: jam, age: 20}', Loader=yaml.FullLoader)
+    print(load_res)
+    print("type of load_res %s" % (type(load_res)))
+
+
+# 上面的类的实例虽然能被序列化，可是类是通过元类的方式，怎么序列化正常定义的类呢
+class People:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def __repr__(self):
+        return "Person({} {})".format(self.name, self.age)
+
+
+if __name__ == '__main__':
+    # simple_yaml_load()
+    # multiple_yaml_load()
+    # simple_yaml_dump({"key": "value"}, f_name=f_w)
+    # multiple_yaml_dump()
+
+    # serialization_instance()
+
+    # 序列化正常定义的类
+    jam = People("gagaga", 22)
+    print(yaml.dump(jam))
+    print(yaml.load(yaml.dump(jam), Loader=yaml.FullLoader))
+    print(yaml.load("!!python/object:__main__.People {age: 22, name: gagaga}",
+                    Loader=yaml.FullLoader))
+
+    # 创建表示器
+    def people_repr(dumper, data):
+        # represent_mapping表示器，用于dict
+        return dumper.represent_mapping(u"!people",
+                                        {"name": data.name, "age": data.age})
+    # 添加表示器
+    yaml.add_representer(People, people_repr)
+    print(yaml.dump(jam))
+
+    # 构造器
+    def people_cons(loader, node):
+        value = loader.construct_mapping(node)
+        name = value["name"]
+        age = value["age"]
+        return People(name, age)
+    # 这个是为指定的yaml标签添加构造器
+    yaml.add_constructor(u"!people", people_cons)
+    jam = yaml.load("!people {name: wawa, age: 20}", Loader=yaml.FullLoader)
+    print(jam)
+    print("over")
