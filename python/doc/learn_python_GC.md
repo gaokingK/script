@@ -1,0 +1,1 @@
+# Python的GC机制是引用计数为主，标记清除和分代回收为辅 + 缓存机制[link](https://blog.csdn.net/qq_37388085/article/details/105852718)
