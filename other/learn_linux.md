@@ -1,3 +1,9 @@
+1. #### nl filename 带行号显示文件内容
+1. [sed](https://www.runoob.com/linux/linux-comm-sed.html)
+- -i 直接修改文件
+- -e '$assssss' filename 在最后一行后添加aaaaaa
+- $ 代表最后一行
+
 ### Linux之间配置SSH互信（SSH免密码登录）
 [lind](https://blog.csdn.net/linxc008/article/details/81278446)
 将已经生成的公钥私钥对id_rsa.pub发送到其他的服务器上。
