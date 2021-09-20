@@ -1,3 +1,16 @@
+1. #### linux 单用户模式
+   centos 进入单用户模式 ro 改为rw（可读改为可写） `init=/bin/bash`
+   修改完成后 `exec /sbin/init` 退出单用户模式
+2. #### yum /y/d/N 
+   d 只下载不安装
+3. #### manjaro 最受欢迎的linux发行版 基于arch
+4. #### [/etc/profile与/etc/profile.d/的作用](https://www.cnblogs.com/kevin1990/p/8641315.html)
+   /etc/profile是一个脚本，这个脚本在login shell启动的时候，就是在用户登录的时候还有su切换用户的时候会执行;Non-login shell 启动的时候不会
+   /etc/profile.d/是一个文件夹 可以在里面放一些脚本用来设置一些变量和运行一些初始化过程的，/etc/profile 中使用一个for循环语句来调用这些脚本
+5. #### BSD和SystemV
+- 是Unix 操作系统的两种操作风格
+1. #### Linux不能称为"标准的Unix“而只被称为"Unix Like"的原因有一部分就是来自它的操作风格介乎两者之间
+
 1. #### nl filename 带行号显示文件内容
 1. [sed](https://www.runoob.com/linux/linux-comm-sed.html)
 - -i 直接修改文件

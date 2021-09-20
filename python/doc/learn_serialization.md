@@ -4,3 +4,5 @@
 ```
 python -c ‘import yaml; yaml.load("!!python/object/new:os.system [echo EXPLOIT!]")’
 ```
+
+### pickle/msgpack 是和json一样功能的序列化库 会将数据序列化为bytes

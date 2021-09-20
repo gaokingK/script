@@ -1,4 +1,13 @@
 ### git
+##### 1. .gitignore 失效
+    在.gitignore 中定义的文件还会出现在git status中
+    新建的文件在git中会有缓存，如果某些文件已经被纳入了版本管理中，就算是在.gitignore中已经声明了忽略路径也是不起作用的，这时候我们就应该先把本地缓存删除，然后再进行git的push，这样就不会出现忽略的文件了。git清除本地缓存命令如下：
+    ```
+    # 先进入根目录中
+    git rm -r --cached .
+    git add .
+    git commit -m 'update .gitignore'
+    ```
 ##### 1. git add -e 好像是用来编辑改变的，就还是编辑删除了什么内容，添加的什么内容的那个显示
 ##### 1. 忽略git 文件 .gitignore 会上传到库变成公共的
     `git update-index --assume-unchanged /path/to/file`

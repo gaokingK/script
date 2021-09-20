@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import inspect
 import random
 import time
 import functools
@@ -27,13 +28,20 @@ def comment(func):
     return wrapper
 
 
+# @comment 等价于 comment(inner)
+@comment
+def debug_simple_decorater(a):
+    print("main...")
+    print("parm1: {}".format(a))
+
+
 # 调用的效果: retry(wrap_parm)(func)(func_parm)
 #        -> decorate(func)(func_parm)
 #        -> wrapper(func_parm)
 def retry(times):
     def decorater(func):
         @functools.wraps(func)
-        def wrapper(*args, **kwargs):
+        def wrapper_func(*args, **kwargs):
             nonlocal times
             while times > 0:
                 print("<function: {}> start... attempt times: {}".format(func.__name__, times))
@@ -47,19 +55,12 @@ def retry(times):
                 finally:
                     print("finally...")
         # wrapper.__name__ = func.__name__
-        return wrapper
+        return wrapper_func
     return decorater
 
 
-# @comment 等价于 comment(inner)
-@comment
-def inner(a):
-    print("main...")
-    print("parm1: {}".format(a))
-
-
 @retry(5)
-def inner2(a):
+def debug_retry_decorater(a):
     print("main...")
     print("parm1: {}".format(a))
     if random.randint(0, 4) == 6:
@@ -69,6 +70,7 @@ def inner2(a):
 
 
 def test_1():
+    # To: 闭包不一定要避免有可变变量
     fl = []
     for i in range(1, 4):
         def g(i):
@@ -80,6 +82,7 @@ def test_1():
 
 
 """
+exercise
 测试怎么解决遇到重复异常时退出
 """
 have_exception = True
@@ -142,9 +145,11 @@ def exception_handler():
 
 """
 在类中使用装饰器
+若是想被其他方法装饰(如其他模块的方法), 像正常方法使用就好
+    只是实例方法被其他方法装饰后, 方法的类型会从method变成function
+
 """
 class TestClass:
-    pass
 
     def clear(func):
         def wrapper(self, *args, **kwargs):
@@ -177,9 +182,9 @@ def comment(func):
 
 
 if __name__ == '__main__':
-    # inner("b")  # comment(inner)("b") == inner("b")
+    debug_simple_decorater("b")  # comment(inner)("b") == inner("b")
 
-    # inner2("b")  # retry(parm1)(inner2)("b") == inner2("b")
+    # debug_retry_decorater("b")  # retry(parm1)(inner2)("b") == inner2("b")
 
     # f1, f2, f3 = test_1()
     # print([f1(), f2(), f3()])
@@ -189,4 +194,4 @@ if __name__ == '__main__':
     # no_name()
 
     # 捕获异常
-    test_catch_exception()
+    # test_catch_exception()

@@ -1,9 +1,28 @@
-
-2. Redis command
+1. #### 提示符号错误的时候,首先去排除是否是看起来相同, 可能是中文的,最好的办法是从未报错的地方复制一个过来
+1. #### 程序运行时依赖的内存结构, 命名空间 ------------------------------------------未
+   1. 堆栈里放的帧
+2. #### 二进制安全
+    redsi的string是二进制安全的，是指其可以包含任何数据，如jpg图片或者序列化的对象
+3. #### 幂等
+    多次执行后结果一致
+4. #### 正则表达式
+    在linux中，正则表达式分为正则表达式、扩展正则表达式和Perl 的正则表达式，不知道别的也是不是这样分的
+    [扩展正则表达式](https://blog.csdn.net/yufenghyc/article/details/51078107)
+5. #### 流程图
+   [link](https://blog.csdn.net/L_786795853/article/details/108878289)
+```mermaid
+graph LR
+A[hh] --> B[hh]
+```
+1. #### pycharm 不能预览markdown
+   在setting>Languages_**>markdown 中显示 “ there are no available preview providers” 
+   [解决方法](https://intellij-support.jetbrains.com/hc/en-us/community/posts/360001515959-markdown-support-plugin-preview-not-working-in-linux)
+   是jdk的问题
+2. #### Redis command
     hkeys 
     hgetall
 
-3.Vim
+3. #### Vim
     :bd关闭 多个标签中一个
     
 #### Flask如何保证线程安全
