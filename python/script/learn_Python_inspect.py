@@ -138,6 +138,44 @@ def debug_setattr():
     a.func_a()
 
 
+"""
+exercise：
+目录
+- learn__python_inspect.py class AA在这里获取子类的实例中的属性
+- learn_python_inspect_wingman1 classB(AA) 子类
+- learn_python_inspect_wingman2 B的实例 有私有属性__doc__
+"""
+
+
+class AA:
+    """
+    define class AA
+    """
+    def __init__(self):
+        self.name = "AA"
+        self.get_child_class_property()
+
+    def get_child_class_property(self):
+        """
+        define func get_child...
+        :return:
+        """
+        parm1 = "pass"
+        a = inspect.stack()
+        # 比较两者不同
+        # current_frame_info = inspect.getframeinfo(inspect.currentframe())
+        # current_frame = inspect.currentframe()
+
+        #
+        outter_farme = inspect.currentframe().f_back.f_back.f_back
+        pass
+
+"""
+inspect.stack() 很多frame 如果在调试的时候增加这个表达式， 打断点的模块会在中部，不会在两端, 而如果把这个写在程序中，第一个frame就是当前的
+里面的frame 里的frame>f_locals有在pycharme中显示的变量；frame>stacks是调用栈
+"""
+
+
 if __name__ == '__main__':
     # debug_getmember()
     # debug_get_call_stack(4)
