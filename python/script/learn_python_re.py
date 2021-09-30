@@ -12,6 +12,10 @@ def choice_num(num="[40,256][88,888]"):
     res = re.finditer(r'(\d+)', num)
     print([x.group() for x in res])
 
+"""
+re.search() 返回一个匹配的对象
+re.findall() 返回一个列表, 里面是匹配到的内容, 如果里面有分组的话,只显示分组的
+"""
 if __name__ == "__main__":
     choice_num()
 

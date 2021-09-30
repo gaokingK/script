@@ -4,7 +4,7 @@
       1. PATH 是系统的环境变量
       2. sys.path 是python的搜索模块的路径集
       3. PYTHONPATH 是环境变量PATH中的一个值， 默认是空
-      4. sys.path始化时默认包含了输入脚本（或者当前目录）， PYTHONPATH 和python安装目录
+      4. sys.path始化时默认包含了输入脚本所在的目录（或者当前目录）， PYTHONPATH 和python安装目录
       5. 修改PYTHONATH影响sys.path
         ```shell
         huawei ~/Desktop/people/pc_kbox/pc_kbox% export PYTHONPATH="/5555555"
@@ -22,6 +22,8 @@
         >>> 
         ```
    2. 文件路径的操作封装在os.path里的方法
+      1. [Python3 OS 文件/目录方法](https://www.runoob.com/python3/python3-os-file-methods.html)
+        
 2. #### import moudle 中搜索模块的顺序
    1. 输入脚本的目录
    2. PYTHONPATH中的目录

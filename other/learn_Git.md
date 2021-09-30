@@ -1,4 +1,48 @@
 ### git
+1. ##### 查看分支的提交历史 git log --graph --pretty=oneline --abbrev-commit branch1 branch2
+    ```
+    * fad6d82 (HEAD -> back-master, origin/master, origin/HEAD, master) 根据冒烟用例适配
+    * 8f8de25 根据日构建修改
+    * f84aed0 新增虎扑app用例
+    * 8a8a15b 修改kbox_run.py
+    * 90011a7 日构建ini适配
+    * 13cca5e 日构建适配
+    * f464707 音频测试底层方法
+    * b38b8e3 根据日构建修改网易云音乐、小红书用例
+    * a3a11d9 生态用例修改
+    * e2304c5 新增monkey文件
+    * bac2f98 修改uos_app.ini,修改微信窗口事件用例，新增虎扑monkey测试用例
+    | *   e16cb07 (origin/test_debug_floder, cherry-pick) Merge branch 'test_debug_floder' of 90.90.0.140:/home/git/pc_kbox into test_debug_floder 
+    | |\  
+    | | * e046c02 按照检视意见修改异常处理代码
+    | * | 6f71848 适配钉钉/豆瓣/今日头条/金山词霸/美团open用例
+    | * | 2d12e09 按照检视意见修改异常处理代码
+    | |/  
+    | * b7f5966 异常处理未检视代码
+    | * e7bedfb 调试信息
+    |/  
+    *   e7d9c47 Merge branch 'master' of 90.90.0.140:/home/git/pc_kbox
+    ```
+1. ##### git mergetool -t opendiff --------------------------------------no
+2. ##### git cherry-pick 来将A分支的部分提交合并到B分支上
+   1. 如果需要多个commitid `git cherry-pick commitid_a commitid_b commitid_c` 只合并这三个
+   2. 先合并a, 如果有冲突就结局, 然后git cherry-pick --continue 完成后就把a给搞好了; 然后合并b,如果有冲突, 解决,然后git cherry-pick --continue....
+3. ##### [把同一个分支里的提交放到其他的分支里](https://github.com/k88hudson/git-flight-rules/blob/master/README_zh-CN.md#rebasing-%E5%92%8C%E5%90%88%E5%B9%B6merging)
+   1. git log commitid1, commitid2, commit3
+   2. git reset --hard commit3
+   3. git checkout -b new_branch
+   4. git cherry-pick commid1 # 即使commitid 在git log中看不到了, 已经reset-hard了,仍然能找到这个commit
+4. ##### git branch
+   1. [link](https://blog.csdn.net/duxing_langzi/article/details/80295573?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link)
+   2. 在新建分支上切换到master之前, 要留意你的工作目录和暂存区里那些还没有被提交的修改， 它可能会和你即将检出的分支产生冲突从而阻止 Git 切换到该分支。 最好的方法是，在你切换分支之前，保持好一个干净的状态。 有一些方法可以绕过这个问题（即，暂存（stashing） 和 修补提交（commit amending））
+   3. 当你切换分支的时候，Git 会重置你的工作目录，使其看起来像回到了你在那个分支上**最后一次提交**的样子
+5. ##### git log -p filename /git log filename
+6. ##### git rebase
+   1. git rebase 是干什么的
+7. ##### 使用 git rebase -i commits 来修改已经提交的commit
+- [link](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E5%86%99%E5%8E%86%E5%8F%B2)
+- 修改的那个提交在log中会有两个
+##### 强推(force push) 为什么会对大的团队造成麻烦
 ##### 1. 为什么切换分支后 把改动在另一个分支上提交后这个分支上就看不到改动了?
 ##### 1. .gitignore 失效
     在.gitignore 中定义的文件还会出现在git status中
