@@ -81,6 +81,15 @@ def test_1():
     return fl
 
 
+def test_2():
+    # To: 使用父函数的变量
+    var = 1
+    def wrapper():
+        print("partent var is %s"%var)
+        var+=1
+    wrapper()
+
+
 """
 exercise
 测试怎么解决遇到重复异常时退出
@@ -182,7 +191,8 @@ def comment(func):
 
 
 if __name__ == '__main__':
-    debug_simple_decorater("b")  # comment(inner)("b") == inner("b")
+    test_2()
+    # debug_simple_decorater("b")  # comment(inner)("b") == inner("b")
 
     # debug_retry_decorater("b")  # retry(parm1)(inner2)("b") == inner2("b")
 

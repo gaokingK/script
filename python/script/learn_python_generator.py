@@ -3,7 +3,8 @@
 """
 
 # 参考：https://www.liaoxuefeng.com/wiki/1016959663602400/1017318207388128
-# generator保存的是算法, 每次调用next(g)，就计算出g的下一个元素的值，直到计算到最后一个元素，没有更多的元素时，抛出StopIteration的错误
+# 惰性求值
+# generator保存的是算法, 每次调用next(g)，就计算出g的下一个元素的值，直到计算到最后一个元素，没有更多的元素时，抛出StopIteration的错误 
 
 # 函数是顺序执行，遇到return语句或者最后一行函数语句就返回。而变成generator的函数，在每次调用next()的时候执行，
 # 遇到yield语句返回，再次执行时从上次返回的yield语句处继续执行
