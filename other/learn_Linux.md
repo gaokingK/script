@@ -1,3 +1,4 @@
+1. #### chmod u+x file 表示为文件的所有者增加可执行权限
 1. #### linux 单用户模式
    centos 进入单用户模式 ro 改为rw（可读改为可写） `init=/bin/bash`
    修改完成后 `exec /sbin/init` 退出单用户模式

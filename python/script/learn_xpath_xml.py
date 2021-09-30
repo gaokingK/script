@@ -1,4 +1,16 @@
 #!/usr/bin/python3
+"""
+# 解析xml文件 python 中用lxml
+link: https://www.w3school.com.cn/xpath/xpath_axes.asp
+#### 轴怎么用
+- `preceding-sibling::` 要加两个冒号
+#### 一些语句
+- `//*[@text=\"aaa\"]` 获取属性名为text其值为aaa的所有节点集合 A
+- `A/node[1]` 获取A的子元素的所有node元素中的第一个
+- `A//node[@text!='']` 获取A的后代中的所有node元素且text!=空的
+- `A/../preceding-sibling::node[1]/descendant::node[last()]` A 的父节点/所有同级节点
+- `A//node[last()]不能获取所有后代的最后一个`
+"""
 from lxml import html
 
 
