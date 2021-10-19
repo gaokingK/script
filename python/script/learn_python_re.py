@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+string = "113/kbox_result_202110180959.txt"
+ls 113/*.txt|sed "s/*kbox_r.*t_//g" 为什么kbox前的那个星号没有用，因为sed也能用正则，但是*号代表前个模式匹配0次或者多次， 但为什没有用呢？难道前面不是null吗
+"""
 import re
 
 
