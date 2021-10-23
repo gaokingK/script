@@ -1,18 +1,67 @@
-1. #### Bash内建参数 
-1. #### 模式匹配替换、替换
-   1. 模式匹配替换
+1. #### top ---------------------------no
+2. #### 在终端中使用上次命令中的内容 ---------------------------no
+   
+3. #### alias 使用外部传参
+   ```shell
+   alias s='UpMachine(){ ssh root@$1;};UpMachine'
+   $ s 192.168.22.2
+   # 其实就是相当于写一个行命令 把参数不放在alias当中(怎么不放呢,就通过函数实现)
+   ``` 
+4. #### 输出参数提示(redis) -----------------------------------no
+5. #### declare 
+   - [link](https://www.runoob.com/linux/linux-comm-declare.html)
+   - -A 定义一个map
+   - -i 声明一个数值型
+   - -p 查看一个变量类型
+6. ##### shell 数据类型
+   - map [link](https://blog.csdn.net/wssnxcj/article/details/82907886)
+   ```shell
+   #必须先声明
+   declare -A dic
+   dic=([key1]="value1" [key2]="value2" [key3]="value3")
+   ```
+7. #### vim 
+   - [link](https://www.cnblogs.com/huxinga/p/7942194.html)
+   - 替换语法
+     - 光标所在行 `:s/xxx/xxx/[c,g]`； 多行`:%s/...`
+     - 
+8. #### awk
+   - `{print $NF}` 输出切割后的最后一项; `'{print $(NF-1)}` 倒数第二项
+   - 可以指定多个分隔符 `awk -F '[b,]' ` 先使用b，后使用，
+9. #### scp
+   - scp 文件 `scp file_path target_file_path/target_dir_path`  如果要重命名， target_file_path 不存在也可以
+   - 如果要放到文件夹中 `scp file_path target_dir_path/.` dir_path/. 要加 `/.`
+10. #### netstat
+   - netstat -ntl |grep -v Active| grep -v Proto|awk '{print $4}'|awk -F: '{print $NF}' 获取正在使用的端口
+11. #### exit
+   - 执行exit可使shell以指定的状态值退出。若不设置状态值参数，则shell以预设值退出。状态值0代表执行成功，其他值代表执行失败。
+   - exit也可用在script，离开正在执行的script，回到shell。
+11. #### script 能够将终端的会话过程录制下来 ---------------------------------no
+   - [link](https://www.cnblogs.com/cheyunhua/p/11136161.html)
+   - 利用script记录某人行为
+12. #### sort
+   1. [link](https://www.cnblogs.com/51linux/archive/2012/05/23/2515299.html)
+   - -r
+   - -u unique 
+13. #### less
+   1. [link](https://www.cnblogs.com/molao-doing/articles/6541455.html)
+   2. less file1 file2 `:n :p 切换文件（next/previous`
+14. #### ps -ef|-aux 区别 -------------------------no
+15. #### Bash内建参数 
+16. #### 模式匹配替换、替换
+   3. 模式匹配替换
       1. {var%pattern} 必须以pattern结尾，去掉patter匹配到的最短内容；{var%%pattern} 去掉patter匹配到的最长内容；
       2. {var#pattern} 必须以pattern开始，去掉patter匹配到的最短内容；{var##pattern} 去掉patter匹配到的最长内容；
-   2. 替换
+   4. 替换
       1. {var:-string} return var if not var else string 但是只是返回， var 不被赋值
       2. {var:=string} var = var if not var else string ,var被赋值
       3. {var:+string} var = var if not var else string ,var 为null 时不会被赋值 `echo ${res:+"2223"}` res为空输出null， res不为null时输出2223
       4. {var:?string} var = var if var else print string 若变量var为空，则把string输出到标准错误中，并从脚本中退出
       5. string 也可以是命令 `echo ${file:+$(ls 113/*.txt)}`
-   3. 不能嵌套吧？就是先给变量赋值，然后使用模式匹配替换
-2. #### touch 
-   1. touch -r 文件    文件夹 # 意思是把文件的日期设置给文件夹。
-3. #### linux 特殊符号和通配符 
+   5. 不能嵌套吧？就是先给变量赋值，然后使用模式匹配替换
+17. #### touch 
+   6. touch -r 文件    文件夹 # 意思是把文件的日期设置给文件夹。
+18. #### linux 特殊符号和通配符 
    ```shell 
    # https://www.cnblogs.com/0zcl/p/6821213.html
    |     #管道符，或者（正则）
@@ -38,34 +87,37 @@
    .       #当前目录的硬链接
    ..      #上级目录的硬链接
    ```
-4. #### shell 数组
+   - 通配符作用 cp a[,.bak] ; cp a a.bak
+   - rm -rf 11{2..3} 怎么不弹出提示
+   - [a-z] {a..z} 有什么区别?-----------------------------no
+11. #### shell 数组
    [link](https://www.runoob.com/linux/linux-shell-array.html)
    ```shell 
    a = (ele1, ele2.....)
    a[index]
    a[@]/a[*] 获取所有元素
    ```
-5. #### date 
+11. #### date 
    - [时间域](https://www.cnblogs.com/yy3b2007com/p/8098831.html)
    - `echo $(date +%y%m%d) ` m 是月 M 是分  中间的加号后面不能有空格 
    - `echo $(date +%ya_string%d) `  还可以这样替换，结果是2021a_string13
    
-6. #### xargs 怎么只接受一次参数 ------------------------------------------------no
-7. #### ls 
+11. #### xargs 怎么只接受一次参数 ------------------------------------------------no
+12. #### ls 
    1. ls -t 按时间顺序显示
    2. ls -r 显示文件夹中
-8. #### linux中单引号‘ ,双引号“, 反引号 ` `, $, $(), ${}与变量；shell中各种括号的作用()、(())、[]、[[]]、{}
-   1. [shell中各种括号的作用()、(())、[]、[[]]、{}](https://blog.csdn.net/taiyang1987912/article/details/39551385?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link) -------------------------------------------no
-   2. [linux 单引号‘ ,双引号“, 反引号 ` `, $, $(), ${}与变量](https://blog.csdn.net/qq_40491569/article/details/83688652)
-   3. 
-   4. 不加引号、单引号、双引号的区别：
+13. #### linux中单引号‘ ,双引号“, 反引号 ` `, $, $(), ${}与变量；shell中各种括号的作用()、(())、[]、[[]]、{}
+   3. [shell中各种括号的作用()、(())、[]、[[]]、{}](https://blog.csdn.net/taiyang1987912/article/details/39551385?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link) -------------------------------------------no
+   4. [linux 单引号‘ ,双引号“, 反引号 ` `, $, $(), ${}与变量](https://blog.csdn.net/qq_40491569/article/details/83688652)
+   5. 
+   6. 不加引号、单引号、双引号的区别：
       1. 单引号剥夺了所有字符的特殊含义, 里面的就是单纯的字符, 双引号不会
       2. ![单引号：所见即所得。双引号：解析特殊符号，特殊符号有了原本的特殊意思 不加引号：比较特殊，支持通配符](https://images2015.cnblogs.com/blog/1038183/201705/1038183-20170507173906929-1826372684.png)
-   5. 使用$来使用变量 echo $a
-   6. 变量赋值的时候, 如果含有空格 需要用单引号或者双引号
-   7. $(cmd) 会将命令的执行结果赋值给变量 如 `a=$(echo aaa)`; 反引号也可以 for line in `ls *.apk`
-   8. ${ }中放的是变量，例如echo ${hello}取hello变量的值并打印，也可以不加括号比如$hello。
-9.  #### read [option] [变量名] 接受键盘输入
+   7. 使用$来使用变量 echo $a
+   8. 变量赋值的时候, 如果含有空格 需要用单引号或者双引号
+   9. $(cmd) 会将命令的执行结果赋值给变量 如 `a=$(echo aaa)`; 反引号也可以 for line in `ls *.apk`
+   10. ${ }中放的是变量，例如echo ${hello}取hello变量的值并打印，也可以不加括号比如$hello。
+14. #### read [option] [变量名] 接受键盘输入
    ![提示信息](https://images2015.cnblogs.com/blog/35158/201610/35158-20161011104351477-686622915.png)
 11. #### echo
    1. -n 不换行输出 `echo -n "aaa" && echo "bbb"`
@@ -102,7 +154,7 @@
    - -ctime n n天修改
    - -amin n n 分钟读取
    - find 的有效输出到文件中
-      ```bash
+      ```shell
       find / -name "*ython3.*" 2 > invalid.txt 
       find / -name "*ython3.*" 1 > valid.txt
       ```
@@ -141,11 +193,13 @@
       ``` 
    - prnue -prune是一个动作项，它表示当文件是一个目录文件时，不进入此目录进行搜索;-prune经常和-path或-wholename一起使用，以避开某个目录
    - -empty
+   - -delete 直接删除查询结果（怎么删除文件夹呢）
+      使用delete 和 -exec rm {} 删除文件夹会报错 ---------------------no
    - `find . -name "*.txt" -ctime -7 -exec grep  -H -E ".*jinshan.*open.*004.*" {} \;` grep 在find -exec选项中显示文件名
 
 
-10. #### nl filename 带行号显示文件内容
-12. #### [sed](https://www.runoob.com/linux/linux-comm-sed.html)
+12. #### nl filename 带行号显示文件内容
+13. #### [sed](https://www.runoob.com/linux/linux-comm-sed.html)
    1. 命令应该使用单引号不应该使用双引号
    2. -i 直接修改文件
    3. -e '$assssss' filename 在最后一行后添加aaaaaa
@@ -154,7 +208,7 @@
    6. sed -i "1a aa" a.txt 如果a是空文件，会写不进去
    7. echo "xxxxx"|sed "s/re_/substance/g" 可以使用正则
       1. string = "113/kbox_result_202110180959.txt" ls 113/*.txt|sed "s/*kbox_r.*t_//g" 为什么kbox前的那个星号没有用，因为sed也能用正则，但是*号代表前个模式匹配0次或者多次， 但为什没有用呢？难道前面不是null吗
-13. #### ps -ef/ aux/ -aux的区别
+14. #### ps -ef/ aux/ -aux的区别
    显示的风格不同;aux会截断命令,如果后面配合grep可能会影响效果;
 11. #### linux 命令分割符 `;`/`&&`/`||`
     - 逻辑符
@@ -226,7 +280,7 @@
 
 ### commands
 1. `cd /home/huawei/Desktop/autotest/;find . -type d -name "*$(date +%Y%m%d)*" -o -name "*$(date +%Y%m%d)*.txt" |tar -zcvf 111back.tar.gz -T -&&scp 111back.tar.gz huawei@90.90.0.152:/home/huawei/Desktop/smoke/.`
-2. `mkdir -p 11{1..4};rm -rf 11[1-4]/*; for file in `ls *.gz`; do dir=$(echo $file|grep -E -o "[0-9]{3}"); tar -zxf $file -C $dir; mv $dir/*.txt $(ls ./${dir}/*.txt|sed "s/kbox_r.*t_/${dir}_/g"); done; find . -name "*.txt" -exec python3 find_author.py {} \;`
+2. `mkdir -p 11{1..5};rm -rf 11[1-5]/*; for file in `ls *.gz`; do dir=$(echo $file|grep -E -o "[0-9]{3}"); tar -zxf $file -C $dir; cp $dir/*.txt $(ls ./${dir}/*.txt|sed "s/kbox_r.*t_/${dir}_/g"); done; find . -name "*.txt" -exec python3 find_author.py {} \;`
 3. `for file in `find . -type f -name kbo*x*.txt`; do python3 find_author.py $file; done`
 4. `for dir in `find / -type d -iname kbox 2>/dev/null`; do find $dir -type f -name "*.sh" 2>/dev/null; done;`
 

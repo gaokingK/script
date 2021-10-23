@@ -1,8 +1,9 @@
-1. #### [linux-ssh远程后台执行脚本-放置后台执行问题](https://www.cnblogs.com/vijayfly/p/6264744.html) --------------------------no
+1. #### bash -c "cmd or path_to_script_what_have_exec_permission" 使用bash执行命令，命令要用双括号，
 1. #### [Linux Crontab 定时任务](https://www.runoob.com/w3cnote/linux-crontab-tasks.html)
-1. #### [linux 在命令行下的快捷键](https://blog.csdn.net/u014429186/article/details/52629029)
+   - [时间表达式预览](https://tool.lu/crontab/)
+2. #### [linux 在命令行下的快捷键](https://blog.csdn.net/u014429186/article/details/52629029)
 
-2. #### chmod u+x file 表示为文件的所有者增加可执行权限
+3. #### chmod u+x file 表示为文件的所有者增加可执行权限
    1. [link](https://www.cnblogs.com/du-jun/p/11550968.html)
    2. u+x 是两个部分u、+x
       - u、g、o、a
@@ -10,29 +11,18 @@
       - +x 可执行
         - +w 可读
         - 
-3. #### linux 单用户模式
+4. #### linux 单用户模式
    centos 进入单用户模式 ro 改为rw（可读改为可写） `init=/bin/bash`
    修改完成后 `exec /sbin/init` 退出单用户模式
-4. #### yum /y/d/N 
+5. #### yum /y/d/N 
    d 只下载不安装
-5. #### manjaro 最受欢迎的linux发行版 基于arch
-6. #### [/etc/profile与/etc/profile.d/的作用](https://www.cnblogs.com/kevin1990/p/8641315.html)
+6. #### manjaro 最受欢迎的linux发行版 基于arch
+7. #### [/etc/profile与/etc/profile.d/的作用](https://www.cnblogs.com/kevin1990/p/8641315.html)
    /etc/profile是一个脚本，这个脚本在login shell启动的时候，就是在用户登录的时候还有su切换用户的时候会执行;Non-login shell 启动的时候不会
    /etc/profile.d/是一个文件夹 可以在里面放一些脚本用来设置一些变量和运行一些初始化过程的，/etc/profile 中使用一个for循环语句来调用这些脚本
-7. #### BSD和SystemV
+8. #### BSD和SystemV
 - 是Unix 操作系统的两种操作风格
 1. #### Linux不能称为"标准的Unix“而只被称为"Unix Like"的原因有一部分就是来自它的操作风格介乎两者之间
-
-
-### Linux之间配置SSH互信（SSH免密码登录）
-[lind](https://blog.csdn.net/linxc008/article/details/81278446)
-将已经生成的公钥私钥对id_rsa.pub发送到其他的服务器上。
-```shell
-# 命令
-ssh-copy-id -i /root/.ssh/id_rsa.pub 192.168.137.129
-# 或者手动
-ssh root@web-2 cat ~/.ssh/id_dsa.pub >> ~/.ssh/authorized_keys
-```
 
 ### vim
    1. 在 10 - 20 行添加 # 注释 `:10,20s/^/#/g`
