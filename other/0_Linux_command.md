@@ -1,37 +1,70 @@
-1. #### top ---------------------------no
-2. #### 在终端中使用上次命令中的内容 ---------------------------no
-   
-3. #### alias 使用外部传参
+### doc comm
+   1. [link1](http://www.gnu.org/software/bash/manual/bash.html#Process-Substitution)
+### other
+1. #### shell 多行注释
+   ```shell
+   # 方法1 block自定义的单词（可以是字符） 推荐
+   :<<！
+   被注释的内容
+   block
+   ！
+   # or
+   :'
+   被注释的内容
+   '
+   ```
+2. #### sh 不支持function
+3. #### 进程替换 与 Here document --------------no
+   1. 形如<(command)的写法叫做process substitution
+   2. [解释了底层怎样支持](https://www.oschina.net/question/113421_241288)
+   3. [进程替换](https://www.runoob.com/w3cnote/shell-process-substitution.html) ---------no
+   4. [Here document使用方法总结](https://blog.csdn.net/liumiaocn/article/details/86715953) -------------no
+4. #### top ---------------------------no
+5. #### 在终端中使用上次命令中的内容 ---------------------------no
+6. #### 重定向
+   - 进程替换 与 Here document 做区分?
+   ```
+   command > file	将输出重定向到 file。
+   command < file	将输入重定向到 file。
+   command >> file	将输出以追加的方式重定向到 file。
+   n > file	将文件描述符为 n 的文件重定向到 file。
+   n >> file	将文件描述符为 n 的文件以追加的方式重定向到 file。
+   n >& m	将输出文件 m 和 n 合并。
+   n <& m	将输入文件 m 和 n 合并。
+   << tag	将开始标记 tag 和结束标记 tag 之间的内容作为输入。 EOF
+   ```
+7. #### alias 使用外部传参
    ```shell
    alias s='UpMachine(){ ssh root@$1;};UpMachine'
    $ s 192.168.22.2
    # 其实就是相当于写一个行命令 把参数不放在alias当中(怎么不放呢,就通过函数实现)
    ``` 
-4. #### 输出参数提示(redis) -----------------------------------no
-5. #### declare 
+8. #### 输出参数提示(redis) -----------------------------------no
+9.  #### declare 
    - [link](https://www.runoob.com/linux/linux-comm-declare.html)
    - -A 定义一个map
    - -i 声明一个数值型
    - -p 查看一个变量类型
-6. ##### shell 数据类型
+11. ##### shell 数据类型/语法
    - map [link](https://blog.csdn.net/wssnxcj/article/details/82907886)
    ```shell
    #必须先声明
    declare -A dic
    dic=([key1]="value1" [key2]="value2" [key3]="value3")
    ```
-7. #### vim 
+   - $@ 获取所有参数(不包括$0), $0脚本的地址,
+12. #### vim 
    - [link](https://www.cnblogs.com/huxinga/p/7942194.html)
    - 替换语法
      - 光标所在行 `:s/xxx/xxx/[c,g]`； 多行`:%s/...`
      - 
-8. #### awk
+11. #### awk
    - `{print $NF}` 输出切割后的最后一项; `'{print $(NF-1)}` 倒数第二项
    - 可以指定多个分隔符 `awk -F '[b,]' ` 先使用b，后使用，
-9. #### scp
+11. #### scp
    - scp 文件 `scp file_path target_file_path/target_dir_path`  如果要重命名， target_file_path 不存在也可以
    - 如果要放到文件夹中 `scp file_path target_dir_path/.` dir_path/. 要加 `/.`
-10. #### netstat
+12. #### netstat
    - netstat -ntl |grep -v Active| grep -v Proto|awk '{print $4}'|awk -F: '{print $NF}' 获取正在使用的端口
 11. #### exit
    - 执行exit可使shell以指定的状态值退出。若不设置状态值参数，则shell以预设值退出。状态值0代表执行成功，其他值代表执行失败。
@@ -43,11 +76,24 @@
    1. [link](https://www.cnblogs.com/51linux/archive/2012/05/23/2515299.html)
    - -r
    - -u unique 
+   - 不加选项的时候 sort 命令将以默认的方式将文本文件的第一列以 ASCII 码的次序排列
 13. #### less
    1. [link](https://www.cnblogs.com/molao-doing/articles/6541455.html)
    2. less file1 file2 `:n :p 切换文件（next/previous`
 14. #### ps -ef|-aux 区别 -------------------------no
-15. #### Bash内建参数 
+15. #### Bash内建参数 和 bash 参数
+    - -s 允许在调用交互式shell时设置位置变量, 可以将标准输入 作为命令 去使用参数
+      > 因为你用bash -s...这个参数是如果有-s，或者选项处理之后没有别的参数，那么命令从标准输入读入。这个选项允许在调用交互式shell时设置位置变量
+      link: https://www.oschina.net/question/113421_241288
+    ```shell
+    # test.sh
+    #! /bin/sh
+    echo $@
+    echo $0,$1,$2
+
+    $ cat test|bash -s stable # 输出的结果是 sh test.sh stable
+    $ bash -s stable < <(cat test.sh) # d等上
+    ``` 
 16. #### 模式匹配替换、替换
    3. 模式匹配替换
       1. {var%pattern} 必须以pattern结尾，去掉patter匹配到的最短内容；{var%%pattern} 去掉patter匹配到的最长内容；
@@ -106,17 +152,18 @@
 12. #### ls 
    1. ls -t 按时间顺序显示
    2. ls -r 显示文件夹中
+   3. -R 若目录下有文件，则以下之文件亦皆依序列出
 13. #### linux中单引号‘ ,双引号“, 反引号 ` `, $, $(), ${}与变量；shell中各种括号的作用()、(())、[]、[[]]、{}
-   3. [shell中各种括号的作用()、(())、[]、[[]]、{}](https://blog.csdn.net/taiyang1987912/article/details/39551385?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link) -------------------------------------------no
-   4. [linux 单引号‘ ,双引号“, 反引号 ` `, $, $(), ${}与变量](https://blog.csdn.net/qq_40491569/article/details/83688652)
-   5. 
-   6. 不加引号、单引号、双引号的区别：
+   4. [shell中各种括号的作用()、(())、[]、[[]]、{}](https://blog.csdn.net/taiyang1987912/article/details/39551385?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link) -------------------------------------------no
+   5. [linux 单引号‘ ,双引号“, 反引号 ` `, $, $(), ${}与变量](https://blog.csdn.net/qq_40491569/article/details/83688652)
+   6. 
+   7. 不加引号、单引号、双引号的区别：
       1. 单引号剥夺了所有字符的特殊含义, 里面的就是单纯的字符, 双引号不会
       2. ![单引号：所见即所得。双引号：解析特殊符号，特殊符号有了原本的特殊意思 不加引号：比较特殊，支持通配符](https://images2015.cnblogs.com/blog/1038183/201705/1038183-20170507173906929-1826372684.png)
-   7. 使用$来使用变量 echo $a
-   8. 变量赋值的时候, 如果含有空格 需要用单引号或者双引号
-   9. $(cmd) 会将命令的执行结果赋值给变量 如 `a=$(echo aaa)`; 反引号也可以 for line in `ls *.apk`
-   10. ${ }中放的是变量，例如echo ${hello}取hello变量的值并打印，也可以不加括号比如$hello。
+   8. 使用$来使用变量 echo $a
+   9. 变量赋值的时候, 如果含有空格 需要用单引号或者双引号
+   10. $(cmd) 会将命令的执行结果赋值给变量 如 `a=$(echo aaa)`; 反引号也可以 for line in `ls *.apk`
+   11. ${ }中放的是变量，例如echo ${hello}取hello变量的值并打印，也可以不加括号比如$hello。
 14. #### read [option] [变量名] 接受键盘输入
    ![提示信息](https://images2015.cnblogs.com/blog/35158/201610/35158-20161011104351477-686622915.png)
 11. #### echo
@@ -126,6 +173,7 @@
    - `bindkey -s '\e\e' '\C-asudo \C-e'`
 11. #### tar
    - [link](http://blog.chinaunix.net/uid-29132766-id-3862597.html)
+   - 如果a/中有b,c,d文件, 然后在a的父文件中tar .... a/ 那么解压出来 也会有个a/ 就不必在创建a/然后在-C a/了,那样就有两层
    - -z 通过gzip指令处理备份文件
    - -v 显示处理信息
    - -f file 指定文件
@@ -138,6 +186,7 @@
    - -C 解压到指定路径 如果不存在会报错 
    - -T 指定范本文件，其内含有一个或多个范本样式，让tar解开或建立符合设置条件的文件。 还可以这样
      - `find . -name "*.d" -o -name "*.conf" | tar -czvf etc.tar.gz -T -` ---------------------------------------这个 最后的- 是干啥的
+   - tar --atime-preserve=system -zxvf autotest.tar.gz 原来的时间
 11. #### find
    - find 里面的选项可以加（）但必须注意空格，也需要把被包括的命令的全部参数给包括进去 比如`；`
    - find [path1, path2] # find 111 112 -name *.txt 可以在112 111 中寻找txt
@@ -153,6 +202,9 @@
       ```
    - -ctime n n天修改
    - -amin n n 分钟读取
+   - -newer file1 ！file2：查找修改时间比file1新但是比file2旧的文件
+   - -newermt "2016-12-06" t 解释t使用 date 命令 -d选项的参数格式
+     `find ./log/20211028 -name "douyin*open_002*" -newermt "2021-10-28 03:02"`
    - find 的有效输出到文件中
       ```shell
       find / -name "*ython3.*" 2 > invalid.txt 
@@ -191,6 +243,7 @@
       find . \( -name "111*.txt" -o -name "112*.txt" \) \( -exec cat {} \; \)|wc -l
       find . -regextype posix-extended -regex ".*[[:digit:]]_test.py"
       ``` 
+   - -ok：与-exe的作用相同，只不过以一种更安全的模式来执行，每次执行命令之前否会询问，让用户选择是否要执行
    - prnue -prune是一个动作项，它表示当文件是一个目录文件时，不进入此目录进行搜索;-prune经常和-path或-wholename一起使用，以避开某个目录
    - -empty
    - -delete 直接删除查询结果（怎么删除文件夹呢）
@@ -223,7 +276,7 @@
     - `mv a/* a/.[^.]* target`
     - cp 和 mv 可以使用这样的方法 mv source_file1 source_file2 ... target_path
 
-13. #### 软连接与硬链接
+13. #### ln 软连接与硬链接
     - ln target linkname 创建指向target 的linkname
     - 软连接是ln -s 硬链接是ln 不加s
     - 修改链接要-snf 不能直接ln -s target new_linkname
@@ -268,10 +321,28 @@
 16. #### 使用命令新建文本文件（有的内核不需要-e参数）
    `echo -e 1\n2 > 1.txt`
 
-12. #### [脚本前指定解释器加-e 可以自动判断每条指令的执行结果，如果非0，脚本就会自动退出](https://www.cnblogs.com/dakewei/p/9845970.html)
+12. #### [shell set](https://blog.csdn.net/t0nsha/article/details/8606886)
+	- man set
+	- [脚本前指定解释器加-e 可以自动判断每条指令的执行结果，如果非0，脚本就会自动退出](https://www.cnblogs.com/dakewei/p/9845970.html)
     - shell 脚本是这样，别的不知道
+    - 等价于 set -e
+    - 有弊端， 比如先删除后新建的语句（如果删除的不存在会报错导致脚本退出）
+    - set -e pipefail 返回从右往左第一个非零返回值，即ls的返回值1
+    ```shell
+	# # test.sh
+	set -o pipefail
+	ls ./a.txt |echo "hi" >/dev/null
+	echo $?
+	$ ./test.sh
+	ls: ./a.txt: No such file or directory
+	# 设置了set -o pipefail，返回从右往左第一个非零返回值，即ls的返回值1
+	# 注释掉set -o pipefail 这一行，再次运行，输出：
+	ls: ./a.txt: No such file or directory
+	0  # 没有set -o pipefail，默认返回最后一个管道命令的返回值
+	```
+      
 
-13. #### linux中的通配符
+1.  #### linux中的通配符
     1. 命令中的通配符是. 
     2. 命令行下*是等于正则中的.*
 ### 通识

@@ -21,6 +21,10 @@ class A:
     def print_name(cls):
         print(cls.name)
 
+    @classmethod
+    def print_cls_name(cls):
+        print(f"cls.__name__is {cls.__name__}")
+
     @staticmethod
     def print_nothing():
         print("nothing")
@@ -34,6 +38,8 @@ if __name__ == '__main__':
     # a.print_name()
     # A.print_name()
 
-    a.print_nothing()
-    A.print_nothing()
+    # a.print_nothing()
+    # A.print_nothing()
+
+    A.print_cls_name()
     print("ok")

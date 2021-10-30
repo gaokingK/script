@@ -1,4 +1,4 @@
-from learn_class_obj import TestClass
+from learn_python_class_obj import TestClass
 
 def super_func():
     # 调用learn_class_obj 中为其添加的func1方法
