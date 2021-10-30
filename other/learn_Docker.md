@@ -1,3 +1,20 @@
+### 简单命令
+- 有的image用`docker run -d image_name /bin/sh` 会立马Existed，而使用`docker run -it image_name [/bin/sh]` 能进入docker，但是推出后容器也会跟着推出，这时可以使用`docker run -itd image_nume [/bin/sh] `选项
+- 查看本机所有容器的Docker的服务 `docker ps -a # 可以看到我们刚刚起来的hello-world`
+- 拉取指定版本的镜像`docker pull ubuntu:17.10 # 不指定版本就拉取最新的`
+- 查看本地的所有镜像`docker images`
+- 以指定版本的镜像启动一个容器`docker run image[:version] # 如果目标镜像没有，就会去dockerhub拉取，就像最初运行hello-world一样`
+- 下午搬服务器，后续更新
+#### [docker19.03限制容器使用的内存资源](https://www.cnblogs.com/architectforest/p/12586336.html)
+### 镜像
+- Simple Tags and Shared Tags [link](https://github.com/docker-library/faq#whats-the-difference-between-shared-and-simple-tags)
+- #### 镜像管理
+    - 删除镜像 `docker rmi hello-world`
+    - 搜索镜像 `docker search httpd`
+### 脚本
+- 批量删除命令 `docker ps -a|tail -n +2|head -n 1|awk '{print $1}'|xargs -i docker rm {}`
+- 删除所有的exited的container `docker ps -a|grep -w Exited|awk '{print $1}'|xargs -i docker rm {}`
+
 ### 问题
 - docker也可虚拟化？
 - 这里的 交付
@@ -154,21 +171,7 @@
     systemctl daemon-reload
     systemctl restart docker
     ```
-### 简单命令
-- 有的image用`docker run -d image_name /bin/sh` 会立马Existed，而使用`docker run -it image_name [/bin/sh]` 能进入docker，但是推出后容器也会跟着推出，这时可以使用`docker run -itd image_nume [/bin/sh] `选项
-- 查看本机所有容器的Docker的服务 `docker ps -a # 可以看到我们刚刚起来的hello-world`
-- 拉取指定版本的镜像`docker pull ubuntu:17.10 # 不指定版本就拉取最新的`
-- 查看本地的所有镜像`docker images`
-- 以指定版本的镜像启动一个容器`docker run image[:version] # 如果目标镜像没有，就会去dockerhub拉取，就像最初运行hello-world一样`
-- 下午搬服务器，后续更新
-### 镜像
-- Simple Tags and Shared Tags [link](https://github.com/docker-library/faq#whats-the-difference-between-shared-and-simple-tags)
-- #### 镜像管理
-    - 删除镜像 `docker rmi hello-world`
-    - 搜索镜像 `docker search httpd`
-### 脚本
-- 批量删除命令 `docker ps -a|tail -n +2|head -n 1|awk '{print $1}'|xargs -i docker rm {}`
-- 删除所有的exited的container `docker ps -a|grep -w Exited|awk '{print $1}'|xargs -i docker rm {}`
+
 
 ### 90.90.67.14已运行的容器
 ```
