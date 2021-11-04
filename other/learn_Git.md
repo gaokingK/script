@@ -54,6 +54,12 @@
    11. ##### 使用 git rebase -i commits 来修改已经提交的commit
       - [link](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E5%86%99%E5%8E%86%E5%8F%B2)
       - 修改的那个提交在log中会有两个
+      - 修改前需要清空 工作目录吗
+        - error: 不能rebase：您有未暂存的变更。
+        - error: 另外，您的索引中包含未提交的变更。
+        - error: 请提交或贮藏修改。
+      - 可以stash pop 吗
+        - 可以，只是要是stash pop后再把不需要的内容stash后这个stash的标题就会变成变基的那个
 ##### 强推(force push) 为什么会对大的团队造成麻烦
 ##### 1. 为什么切换分支后 把改动在另一个分支上提交后这个分支上就看不到改动了?
 ##### 1. .gitignore 失效

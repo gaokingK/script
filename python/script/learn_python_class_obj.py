@@ -1,6 +1,6 @@
 # 学习 类和对象相关的一些东西
 import inspect
-import learn_class_obj_wingman
+import learn_python_class_obj_wingman
 
 from learn_get_func_name import get_function_name
 
@@ -31,7 +31,7 @@ class TestClass:
         # 获取子类和自己的方法，如果子类有，就获取子类的
         if hasattr(self, attr):
             print("have {}".format(attr))
-            setattr(learn_class_obj_wingman, attr, getattr(self, attr))
+            setattr(learn_python_class_obj_wingman, attr, getattr(self, attr))
             # getattr(self, attr)()
         else:
             print("no attr[{}]".format(attr))

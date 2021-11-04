@@ -1,4 +1,5 @@
 
+##### 为什么不加classmethod装饰器就访问不到cls.__name --------------no
 ##### pycharm 自动完成
 [link](https://blog.csdn.net/migming/article/details/109978585)
 ##### print(1/0)会出错
