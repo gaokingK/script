@@ -1,17 +1,43 @@
 ### git
 1. ##### git patch --------------------------------no
-2. ##### git checkout
+2. ##### 远程分支回滚的三种方法：
+   link :https://www.cnblogs.com/Super-scarlett/p/8183348.html
+   自己的分支回滚直接用reset
+   公共分支回滚用revert
+   错的太远了直接将代码全部删掉，用正确代码替代
+3. ##### 冲突
+   1. 什么情况下会有冲突
+      1. user a 修改file_a 10行, commit and push, user b 已另一种内容修改file_a 10行, commit and push, 会发现push 被拒绝, 然后push -f, 这时usera 再pull 就需要merge 这种情况的解决办法:
+         1. 可以user b reset --hard 然后 pull push
+         2. user a add . /commit 这时log 会不对(其实也是对的), reset hard 到 双方都提交之前的那个commit ,然后在pull ,这时库上是b的改动(想想也合理)
+         3. 
+4. ##### 强制更新是什么意思
+   ```
+   huawei ~/Desktop/jjw% git pull
+   remote: Counting objects: 7, done.
+   remote: Compressing objects: 100% (3/3), done.
+   remote: Total 4 (delta 3), reused 2 (delta 1)
+   展开对象中: 100% (4/4), 完成.
+   来自 90.90.0.140:/home/git/pc_kbox
+ + 2961049(本地HEAD)...20f9d9a(origin master HEAD 可以show ta) master     -> origin/master  (强制更新)
+
+   ```
+3. ##### 配置
+   1. 全系统的(/etc/gitconfig)<当前用户的(~/.gitconfig)<当前仓库的(/.git/config)
+   2. 某个配置在当前仓库的中的配置中取消,但查看还在的原因是用的上层的配置
+   3. autocrlf 
+4. ##### git checkout
    1. `git checkout branch_name high_quality/dingding/function/.` 即使这个要检出的文件在现在的分支上不存在也可以检出的
-3. ##### 这张图里怎么把code从repo checkout到workspace
+5. ##### 这张图里怎么把code从repo checkout到workspace
       ![git fetch和git pull的概念](http://kmknkk.oss-cn-beijing.aliyuncs.com/image/git.jpg)
-4. ##### [git fetch](https://www.cnblogs.com/runnerjack/p/9342362.html) -----------------------------no
-5. ##### [git hook](https://www.git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90)
+6. ##### [git fetch](https://www.cnblogs.com/runnerjack/p/9342362.html) -----------------------------no
+7. ##### [git hook](https://www.git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90)
    - 非0值是指程序异常退出
    - 为hook添加运行程序是chmod这样加
    - 程序需要 `#！/path/to/python3`
-6. ##### 忽略换行符
+8. ##### 忽略换行符
    1. [link](https://blog.csdn.net/nanyilou_xiaoye/article/details/79075092) -------------------------no
-7. ##### 查看分支的提交历史 git log --graph --pretty=oneline --abbrev-commit branch1 branch2
+9.  ##### 查看分支的提交历史 git log --graph --pretty=oneline --abbrev-commit branch1 branch2
     ```
     * fad6d82 (HEAD -> back-master, origin/master, origin/HEAD, master) 根据冒烟用例适配
     * 8f8de25 根据日构建修改
@@ -35,23 +61,23 @@
     |/  
     *   e7d9c47 Merge branch 'master' of 90.90.0.140:/home/git/pc_kbox
     ```
-8. ##### git mergetool -t opendiff --------------------------------------no
-9.  ##### git cherry-pick 来将A分支的部分提交合并到B分支上
-   1. 如果需要多个commitid `git cherry-pick commitid_a commitid_b commitid_c` 只合并这三个
-   2. 先合并a, 如果有冲突就结局, 然后git cherry-pick --continue 完成后就把a给搞好了; 然后合并b,如果有冲突, 解决,然后git cherry-pick --continue....
-10. ##### [把同一个分支里的提交放到其他的分支里](https://github.com/k88hudson/git-flight-rules/blob/master/README_zh-CN.md#rebasing-%E5%92%8C%E5%90%88%E5%B9%B6merging)
-   3. git log commitid1, commitid2, commit3
-   4. git reset --hard commit3
-   5. git checkout -b new_branch
-   6. git cherry-pick commid1 # 即使commitid 在git log中看不到了, 已经reset-hard了,仍然能找到这个commit
-11. ##### git branch
-   7. [link](https://blog.csdn.net/duxing_langzi/article/details/80295573?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link)
-   8. 在新建分支上切换到master之前, 要留意你的工作目录和暂存区里那些还没有被提交的修改， 它可能会和你即将检出的分支产生冲突从而阻止 Git 切换到该分支。 最好的方法是，在你切换分支之前，保持好一个干净的状态。 有一些方法可以绕过这个问题（即，暂存（stashing） 和 修补提交（commit amending））
-   9. 当你切换分支的时候，Git 会重置你的工作目录，使其看起来像回到了你在那个分支上**最后一次提交**的样子
-12. ##### git log -p filename /git log filename
-13. ##### git rebase
-   10. git rebase 是干什么的
-   11. ##### 使用 git rebase -i commits 来修改已经提交的commit
+10. ##### git mergetool -t opendiff --------------------------------------no
+11. ##### git cherry-pick 来将A分支的部分提交合并到B分支上
+   2. 如果需要多个commitid `git cherry-pick commitid_a commitid_b commitid_c` 只合并这三个
+   3. 先合并a, 如果有冲突就结局, 然后git cherry-pick --continue 完成后就把a给搞好了; 然后合并b,如果有冲突, 解决,然后git cherry-pick --continue....
+12. ##### [把同一个分支里的提交放到其他的分支里](https://github.com/k88hudson/git-flight-rules/blob/master/README_zh-CN.md#rebasing-%E5%92%8C%E5%90%88%E5%B9%B6merging)
+   4. git log commitid1, commitid2, commit3
+   5. git reset --hard commit3
+   6. git checkout -b new_branch
+   7. git cherry-pick commid1 # 即使commitid 在git log中看不到了, 已经reset-hard了,仍然能找到这个commit
+13. ##### git branch
+   8. [link](https://blog.csdn.net/duxing_langzi/article/details/80295573?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link)
+   9. 在新建分支上切换到master之前, 要留意你的工作目录和暂存区里那些还没有被提交的修改， 它可能会和你即将检出的分支产生冲突从而阻止 Git 切换到该分支。 最好的方法是，在你切换分支之前，保持好一个干净的状态。 有一些方法可以绕过这个问题（即，暂存（stashing） 和 修补提交（commit amending））
+   10. 当你切换分支的时候，Git 会重置你的工作目录，使其看起来像回到了你在那个分支上**最后一次提交**的样子
+14. ##### git log -p filename /git log filename
+15. ##### git rebase
+   11. git rebase 是干什么的
+   12. ##### 使用 git rebase -i commits 来修改已经提交的commit
       - [link](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E5%86%99%E5%8E%86%E5%8F%B2)
       - 修改的那个提交在log中会有两个
       - 修改前需要清空 工作目录吗

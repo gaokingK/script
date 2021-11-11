@@ -15,12 +15,14 @@
    ```
 2. #### sh 不支持function
 3. #### 进程替换 与 Here document --------------no
-   1. 形如<(command)的写法叫做process substitution
+   1. 形如<(command)的写法叫做**process substitution**
    2. [解释了底层怎样支持](https://www.oschina.net/question/113421_241288)
    3. [进程替换](https://www.runoob.com/w3cnote/shell-process-substitution.html) ---------no
    4. [Here document使用方法总结](https://blog.csdn.net/liumiaocn/article/details/86715953) -------------no
+   5. 可以把<(...)整体当做一个文件名，这个文件的内容就是()中脚本的执行结果，这样第二条命令简化为
+bash -s stable <tmp.sh
 4. #### top ---------------------------no
-5. #### 在终端中使用上次命令中的内容 ---------------------------no
+
 6. #### 重定向
    - 进程替换 与 Here document 做区分?
    ```
@@ -53,15 +55,11 @@
    dic=([key1]="value1" [key2]="value2" [key3]="value3")
    ```
    - $@ 获取所有参数(不包括$0), $0脚本的地址,
-12. #### vim 
-   - [link](https://www.cnblogs.com/huxinga/p/7942194.html)
-   - 替换语法
-     - 光标所在行 `:s/xxx/xxx/[c,g]`； 多行`:%s/...`
-     - 
 11. #### awk
    - `{print $NF}` 输出切割后的最后一项; `'{print $(NF-1)}` 倒数第二项
    - 可以指定多个分隔符 `awk -F '[b,]' ` 先使用b，后使用，
-11. #### scp
+   - length 方法获取字符串的长度 `echo ${str}|awk '{print length($0)'`
+12. #### scp
    - scp 文件 `scp file_path target_file_path/target_dir_path`  如果要重命名， target_file_path 不存在也可以
    - 如果要放到文件夹中 `scp file_path target_dir_path/.` dir_path/. 要加 `/.`
 12. #### netstat
@@ -133,16 +131,10 @@
    .       #当前目录的硬链接
    ..      #上级目录的硬链接
    ```
-   - 通配符作用 cp a[,.bak] ; cp a a.bak
+   - 通配符作用 cp a{,.bak} ; cp a a.bak
    - rm -rf 11{2..3} 怎么不弹出提示
    - [a-z] {a..z} 有什么区别?-----------------------------no
-11. #### shell 数组
-   [link](https://www.runoob.com/linux/linux-shell-array.html)
-   ```shell 
-   a = (ele1, ele2.....)
-   a[index]
-   a[@]/a[*] 获取所有元素
-   ```
+     - 后者既能用在mkdir上,又能用在rm上, 而前者只能用在rm上
 11. #### date 
    - [时间域](https://www.cnblogs.com/yy3b2007com/p/8098831.html)
    - `echo $(date +%y%m%d) ` m 是月 M 是分  中间的加号后面不能有空格 
@@ -154,21 +146,23 @@
    2. ls -r 显示文件夹中
    3. -R 若目录下有文件，则以下之文件亦皆依序列出
 13. #### linux中单引号‘ ,双引号“, 反引号 ` `, $, $(), ${}与变量；shell中各种括号的作用()、(())、[]、[[]]、{}
-   4. [shell中各种括号的作用()、(())、[]、[[]]、{}](https://blog.csdn.net/taiyang1987912/article/details/39551385?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link) -------------------------------------------no
-   5. [linux 单引号‘ ,双引号“, 反引号 ` `, $, $(), ${}与变量](https://blog.csdn.net/qq_40491569/article/details/83688652)
-   6. 
-   7. 不加引号、单引号、双引号的区别：
+   1. [shell中各种括号的作用()、(())、[]、[[]]、{}](https://blog.csdn.net/taiyang1987912/article/details/39551385?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link) -------------------------------------------no
+   2. [linux 单引号‘ ,双引号“, 反引号 ` `, $, $(), ${}与变量](https://blog.csdn.net/qq_40491569/article/details/83688652)
+   3. 
+   4. 不加引号、单引号、双引号的区别：
       1. 单引号剥夺了所有字符的特殊含义, 里面的就是单纯的字符, 双引号不会
       2. ![单引号：所见即所得。双引号：解析特殊符号，特殊符号有了原本的特殊意思 不加引号：比较特殊，支持通配符](https://images2015.cnblogs.com/blog/1038183/201705/1038183-20170507173906929-1826372684.png)
-   8. 使用$来使用变量 echo $a
-   9. 变量赋值的时候, 如果含有空格 需要用单引号或者双引号
-   10. $(cmd) 会将命令的执行结果赋值给变量 如 `a=$(echo aaa)`; 反引号也可以 for line in `ls *.apk`
-   11. ${ }中放的是变量，例如echo ${hello}取hello变量的值并打印，也可以不加括号比如$hello。
+   5. 使用$来使用变量 echo $a
+   6. 变量赋值的时候, 如果含有空格 需要用单引号或者双引号
+   7.  $(cmd) 会将命令的执行结果赋值给变量 如 `a=$(echo aaa)`; 反引号也可以 for line in `ls *.apk`
+   8.  ${ }中放的是变量，例如echo ${hello}取hello变量的值并打印，也可以不加括号比如$hello。
+   9.  () 是开一个子shell执行里面的命令
 14. #### read [option] [变量名] 接受键盘输入
    ![提示信息](https://images2015.cnblogs.com/blog/35158/201610/35158-20161011104351477-686622915.png)
 11. #### echo
    1. -n 不换行输出 `echo -n "aaa" && echo "bbb"`
    2. -e 处理特殊字符: \a 发出警告声； \b 删除前一个字符；
+   3. 可以输出多个`echo "a" "a" ..`
 12. #### [zsh 的命令行中快速输入sudo](http://www.ichenfu.com/2017/03/29/bash-zsh-fast-sudo/)
    - `bindkey -s '\e\e' '\C-asudo \C-e'`
 11. #### tar
@@ -354,6 +348,7 @@
 2. `mkdir -p 11{1..5};rm -rf 11[1-5]/*; for file in `ls *.gz`; do dir=$(echo $file|grep -E -o "[0-9]{3}"); tar -zxf $file -C $dir; cp $dir/*.txt $(ls ./${dir}/*.txt|sed "s/kbox_r.*t_/${dir}_/g"); done; find . -name "*.txt" -exec python3 find_author.py {} \;`
 3. `for file in `find . -type f -name kbo*x*.txt`; do python3 find_author.py $file; done`
 4. `for dir in `find / -type d -iname kbox 2>/dev/null`; do find $dir -type f -name "*.sh" 2>/dev/null; done;`
+5. `for dir in 11[1,4]; do cd $dir; file=$(find . -type f -ctime -1 -name kbox*.txt); echo file:$file; [ ! -n "$file" ] && echo 'not file: ${#file}' &&cd ../&&continue; echo "getfile"; python3 ./../find_author.py $file; cp $file $dir.txt; cd ../; done`
 
 ### 语法糖
 ```shell 

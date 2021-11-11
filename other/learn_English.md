@@ -1,0 +1,2 @@
+- column-based 基于列的
+- The tuples returned by Query are named tuples 返回的元组是已命名的元组(返回的元组名字是tuble)

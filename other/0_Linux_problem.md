@@ -1,6 +1,9 @@
 1. ##### pt 这个命令为什么不能留在命令历史中?-----------no
-2. ##### pactl list short sinks ; arecord
-3. ##### 为什么这个后面的一个在文件中找不到
+2. ##### pactl list short sinks ; arecord -------no
+3. ##### 挂载相关
+4. ##### 为什么这个后面的一个在文件中找不到
+5. ##### 验证用户
+6. ##### 为什么zsh 的read -p 不能用?
 ```shell
 # 原来一个是抖音,一个是豆瓣 艹
 /home/huawei/Desktop/autotest/log/20211020/douban_open_004_test-20211020170055
