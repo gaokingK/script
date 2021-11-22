@@ -6,7 +6,7 @@
 
 ### 基本使用
 - 创建一个虚拟环境：
-`$ mkvirtualenv my_project`
+`$ mkvirtualenv [-p python_verison_path] my_project`
 这会在 ~/Envs 中创建 my_project 文件夹。
 
 - 在虚拟环境上工作：

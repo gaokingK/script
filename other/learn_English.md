@@ -1,2 +1,3 @@
 - column-based 基于列的
 - The tuples returned by Query are named tuples 返回的元组是已命名的元组(返回的元组名字是tuble)
+- You are all lovely people and I'm glad I get to spend time with you. 大家都是很好的人, 能和大家一起度过一点时光真的是太好了

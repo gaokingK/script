@@ -1,7 +1,16 @@
 ### doc comm
    1. [link1](http://www.gnu.org/software/bash/manual/bash.html#Process-Substitution)
 ### other
-1. #### shell 多行注释
+1. #### 应用一般安装在/usr/share/ /usr/local 下
+1. #### which whereis type locate find 
+   - link: https://www.cnblogs.com/danmiao/p/10081620.html
+   - which  查找命令是否存在，以及命令的存放位置在哪儿。
+   - whereis 只能用于搜索程序名，而且只搜索二进制文件（参数-b）、man说明文件（参数-m）和源代码文件（参数-s）。如果省略参数，则返回所有信息。
+   - type 用来区分某个命令到底是由shell自带的，还是由shell外部的独立二进制文件提供的。如果一个命令是外部命令，那么使用-p参数，会显示该命令的路径，相当于which命令
+   - locate 
+     locate命令实际是"find -name"的另一种写法，但是查找方式跟find不同，它比find快得多。因为它不搜索具体目录，而是在一个数据库(/var/lib/mlocate/mlocate.db)中搜索指定的文件。次数据库含有本地文件的所有信息，此数据库是linux系统自动创建的，数据库由updatedb程序来更新，updatedb是由cron daemon周期性建立的，默认情况下为每天更新一次
+   - 
+2. #### shell 多行注释
    ```shell
    # 方法1 block自定义的单词（可以是字符） 推荐
    :<<！
@@ -13,8 +22,7 @@
    被注释的内容
    '
    ```
-2. #### sh 不支持function
-3. #### 进程替换 与 Here document --------------no
+4. #### 进程替换 与 Here document --------------no
    1. 形如<(command)的写法叫做**process substitution**
    2. [解释了底层怎样支持](https://www.oschina.net/question/113421_241288)
    3. [进程替换](https://www.runoob.com/w3cnote/shell-process-substitution.html) ---------no
@@ -92,9 +100,9 @@ bash -s stable <tmp.sh
     $ cat test|bash -s stable # 输出的结果是 sh test.sh stable
     $ bash -s stable < <(cat test.sh) # d等上
     ``` 
-16. #### 模式匹配替换、替换
+16. #### 模式匹配替换、替换 截取
    3. 模式匹配替换
-      1. {var%pattern} 必须以pattern结尾，去掉patter匹配到的最短内容；{var%%pattern} 去掉patter匹配到的最长内容；
+      1. {var%pattern} 必须以pattern结尾(可以加*号嘛)，去掉patter匹配到的最短内容；{var%%pattern} 去掉patter匹配到的最长内容；
       2. {var#pattern} 必须以pattern开始，去掉patter匹配到的最短内容；{var##pattern} 去掉patter匹配到的最长内容；
    4. 替换
       1. {var:-string} return var if not var else string 但是只是返回， var 不被赋值
@@ -148,7 +156,7 @@ bash -s stable <tmp.sh
 13. #### linux中单引号‘ ,双引号“, 反引号 ` `, $, $(), ${}与变量；shell中各种括号的作用()、(())、[]、[[]]、{}
    1. [shell中各种括号的作用()、(())、[]、[[]]、{}](https://blog.csdn.net/taiyang1987912/article/details/39551385?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link) -------------------------------------------no
    2. [linux 单引号‘ ,双引号“, 反引号 ` `, $, $(), ${}与变量](https://blog.csdn.net/qq_40491569/article/details/83688652)
-   3. 
+   3. [shell中的(),(()),{},=,==,[],[[]]几种语法用法](https://blog.csdn.net/Michaelwubo/article/details/81698307)
    4. 不加引号、单引号、双引号的区别：
       1. 单引号剥夺了所有字符的特殊含义, 里面的就是单纯的字符, 双引号不会
       2. ![单引号：所见即所得。双引号：解析特殊符号，特殊符号有了原本的特殊意思 不加引号：比较特殊，支持通配符](https://images2015.cnblogs.com/blog/1038183/201705/1038183-20170507173906929-1826372684.png)
@@ -161,11 +169,12 @@ bash -s stable <tmp.sh
    ![提示信息](https://images2015.cnblogs.com/blog/35158/201610/35158-20161011104351477-686622915.png)
 11. #### echo
    1. -n 不换行输出 `echo -n "aaa" && echo "bbb"`
-   2. -e 处理特殊字符: \a 发出警告声； \b 删除前一个字符；
+   2. -e 处理特殊字符: \a 发出警告声； \b 删除前一个字符; \c不换行；
    3. 可以输出多个`echo "a" "a" ..`
+   4. 使用命令新建文本文件（有的内核不需要-e参数）  `echo -e 1\n2 > 1.txt`
 12. #### [zsh 的命令行中快速输入sudo](http://www.ichenfu.com/2017/03/29/bash-zsh-fast-sudo/)
    - `bindkey -s '\e\e' '\C-asudo \C-e'`
-11. #### tar
+11. #### tar zip
    - [link](http://blog.chinaunix.net/uid-29132766-id-3862597.html)
    - 如果a/中有b,c,d文件, 然后在a的父文件中tar .... a/ 那么解压出来 也会有个a/ 就不必在创建a/然后在-C a/了,那样就有两层
    - -z 通过gzip指令处理备份文件
@@ -181,6 +190,10 @@ bash -s stable <tmp.sh
    - -T 指定范本文件，其内含有一个或多个范本样式，让tar解开或建立符合设置条件的文件。 还可以这样
      - `find . -name "*.d" -o -name "*.conf" | tar -czvf etc.tar.gz -T -` ---------------------------------------这个 最后的- 是干啥的
    - tar --atime-preserve=system -zxvf autotest.tar.gz 原来的时间
+   - **zip**
+   - zip [option] dist.zip source
+   - -q 不显示指令执行过程。
+   - -r 递归处理，将指定目录下的所有文件和子目录一并处理。
 11. #### find
    - find 里面的选项可以加（）但必须注意空格，也需要把被包括的命令的全部参数给包括进去 比如`；`
    - find [path1, path2] # find 111 112 -name *.txt 可以在112 111 中寻找txt
@@ -238,11 +251,23 @@ bash -s stable <tmp.sh
       find . -regextype posix-extended -regex ".*[[:digit:]]_test.py"
       ``` 
    - -ok：与-exe的作用相同，只不过以一种更安全的模式来执行，每次执行命令之前否会询问，让用户选择是否要执行
-   - prnue -prune是一个动作项，它表示当文件是一个目录文件时，不进入此目录进行搜索;-prune经常和-path或-wholename一起使用，以避开某个目录
+   - -prune是一个动作项，它表示当文件是一个目录文件时，不进入此目录进行搜索;-prune经常和-path或-wholename一起使用，以避开某个目录
+     **注意：圆括号()表示表达式的结合。即指示 shell 不对后面的字符作特殊解释，而留给 find 命令去解释其意义。由于命令行不能直接使用圆括号，所以需要用反斜杠'\'进行转意(即'\'转意字符使命令行认识圆括号)。同时注意'′，′'两边都需空格。**
+     在当前目录及除aa和bb之外的子目录中查找txt文件 　　
+     `find . \( -path './dir0' -o -path './dir1' \) -prune -o -name '*.txt' -print`
    - -empty
    - -delete 直接删除查询结果（怎么删除文件夹呢）
       使用delete 和 -exec rm {} 删除文件夹会报错 ---------------------no
-   - `find . -name "*.txt" -ctime -7 -exec grep  -H -E ".*jinshan.*open.*004.*" {} \;` grep 在find -exec选项中显示文件名
+   - `find . -name "*.txt" -ctime -7 -exec grep  -H -E ".*jinshan.*open.*004.*" {} \;` grep在find -exec选项中显示文件名
+   - -depth ---------------------------------------------------------no
+     `find . -depth -name '__pycache__' -exec rm -rf {} ';'`
+   - -build  ---------------------------------------------------------no
+     ```shell
+     find . -name '*.so.[0-9]*.[0-9]*' -exec rm -f {} ';'
+     find build -name 'fficonfig.h' -exec rm -f {} ';' || true
+     find build -name '*.py' -exec rm -f {} ';' || true
+     find build -name '*.py[co]' -exec rm -f {} ';' || true
+     ```
 
 
 12. #### nl filename 带行号显示文件内容
@@ -268,13 +293,12 @@ bash -s stable <tmp.sh
 
 12. #### 移动和复制文件夹时复制隐藏文件
     - `mv a/* a/.[^.]* target`
-    - cp 和 mv 可以使用这样的方法 mv source_file1 source_file2 ... target_path
+    - cp 和 mv 可以使用这样的方法 mv source_file1 source_file2 ... target_path; cp 多个文件
 
 13. #### ln 软连接与硬链接
     - ln target linkname 创建指向target 的linkname
     - 软连接是ln -s 硬链接是ln 不加s
     - 修改链接要-snf 不能直接ln -s target new_linkname
-14. #### linux 命令中的通配符是*，grep中的通配符是.
 15. #### grep
     - grep 怎么只搜索文件夹中的某个文件类型 -------------------------------------------------------no
     - grep 怎样直接从字符串中搜索，不用echo ------------------------------------------------------no
@@ -311,9 +335,7 @@ bash -s stable <tmp.sh
     - -o 只显示匹配的部分
     - -H  --with-filename : 在显示符合样式的那一行之前，表示该行所属的文件名 
        - `find . -name "*.txt" -ctime -7 -exec grep  -H -E ".*jinshan.*open.*004.*" {} \;` grep 在find -exec选项中显示文件名
-
-16. #### 使用命令新建文本文件（有的内核不需要-e参数）
-   `echo -e 1\n2 > 1.txt`
+    - 搜索选项 `grep "\-c"`  
 
 12. #### [shell set](https://blog.csdn.net/t0nsha/article/details/8606886)
 	- man set
@@ -339,6 +361,8 @@ bash -s stable <tmp.sh
 1.  #### linux中的通配符
     1. 命令中的通配符是. 
     2. 命令行下*是等于正则中的.*
+    3. linux 命令中的通配符是*，grep中的通配符是.
+
 ### 通识
 1. ### 环境变量应该在~/.bash_profile中定义
    1. `export XXX="xxx"`
