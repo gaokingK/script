@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""
+通过装饰器来对类或者函数添加额外的功能或者约束
+"""
 import inspect
 import random
 import time
