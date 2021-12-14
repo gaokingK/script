@@ -100,17 +100,7 @@ bash -s stable <tmp.sh
     $ cat test|bash -s stable # 输出的结果是 sh test.sh stable
     $ bash -s stable < <(cat test.sh) # d等上
     ``` 
-16. #### 模式匹配替换、替换 截取
-   3. 模式匹配替换
-      1. {var%pattern} 必须以pattern结尾(可以加*号嘛)，去掉patter匹配到的最短内容；{var%%pattern} 去掉patter匹配到的最长内容；
-      2. {var#pattern} 必须以pattern开始，去掉patter匹配到的最短内容；{var##pattern} 去掉patter匹配到的最长内容；
-   4. 替换
-      1. {var:-string} return var if not var else string 但是只是返回， var 不被赋值
-      2. {var:=string} var = var if not var else string ,var被赋值
-      3. {var:+string} var = var if not var else string ,var 为null 时不会被赋值 `echo ${res:+"2223"}` res为空输出null， res不为null时输出2223
-      4. {var:?string} var = var if var else print string 若变量var为空，则把string输出到标准错误中，并从脚本中退出
-      5. string 也可以是命令 `echo ${file:+$(ls 113/*.txt)}`
-   5. 不能嵌套吧？就是先给变量赋值，然后使用模式匹配替换
+
 17. #### touch 
    6. touch -r 文件    文件夹 # 意思是把文件的日期设置给文件夹。
 18. #### linux 特殊符号和通配符 
@@ -259,6 +249,7 @@ bash -s stable <tmp.sh
    - -delete 直接删除查询结果（怎么删除文件夹呢）
       使用delete 和 -exec rm {} 删除文件夹会报错 ---------------------no
    - `find . -name "*.txt" -ctime -7 -exec grep  -H -E ".*jinshan.*open.*004.*" {} \;` grep在find -exec选项中显示文件名
+   - 显示文件名 不显示路径 find . -name "*.log" -exec basename {} \;
    - -depth ---------------------------------------------------------no
      `find . -depth -name '__pycache__' -exec rm -rf {} ';'`
    - -build  ---------------------------------------------------------no
@@ -269,9 +260,15 @@ bash -s stable <tmp.sh
      find build -name '*.py[co]' -exec rm -f {} ';' || true
      ```
 
-
-12. #### nl filename 带行号显示文件内容
-13. #### [sed](https://www.runoob.com/linux/linux-comm-sed.html)
+12. #### 变量 替换
+      1. {var:-string} return var if not var else string 但是只是返回， var 不被赋值
+      2. {var:=string} var = var if not var else string ,var被赋值
+      3. {var:+string} var = var if not var else string ,var 为null 时不会被赋值 `echo ${res:+"2223"}` res为空输出null， res不为null时输出2223
+      4. {var:?string} var = var if var else print string 若变量var为空，则把string输出到标准错误中，并从脚本中退出
+      5. string 也可以是命令 `echo ${file:+$(ls 113/*.txt)}`
+      6. 
+13. #### nl filename 带行号显示文件内容
+14. #### [sed](https://www.runoob.com/linux/linux-comm-sed.html)
    1. 命令应该使用单引号不应该使用双引号
    2. -i 直接修改文件
    3. -e '$assssss' filename 在最后一行后添加aaaaaa
@@ -280,7 +277,7 @@ bash -s stable <tmp.sh
    6. sed -i "1a aa" a.txt 如果a是空文件，会写不进去
    7. echo "xxxxx"|sed "s/re_/substance/g" 可以使用正则
       1. string = "113/kbox_result_202110180959.txt" ls 113/*.txt|sed "s/*kbox_r.*t_//g" 为什么kbox前的那个星号没有用，因为sed也能用正则，但是*号代表前个模式匹配0次或者多次， 但为什没有用呢？难道前面不是null吗
-14. #### ps -ef/ aux/ -aux的区别
+15. #### ps -ef/ aux/ -aux的区别
    显示的风格不同;aux会截断命令,如果后面配合grep可能会影响效果;
 11. #### linux 命令分割符 `;`/`&&`/`||`
     - 逻辑符
@@ -300,6 +297,7 @@ bash -s stable <tmp.sh
     - 软连接是ln -s 硬链接是ln 不加s
     - 修改链接要-snf 不能直接ln -s target new_linkname
 15. #### grep
+    - 怎么高亮输出中目标字符串, 如cat xxx|grep "str" 还显示xxx的全部内容,只是高亮str呢? --------------no
     - grep 怎么只搜索文件夹中的某个文件类型 -------------------------------------------------------no
     - grep 怎样直接从字符串中搜索，不用echo ------------------------------------------------------no
     - [Grep命令详解-9个经典使用场景](https://www.open-open.com/lib/view/open1426417914694.html)
@@ -311,9 +309,11 @@ bash -s stable <tmp.sh
     - -d skip 跳过子文件夹
     - -r 搜索子文件夹
     - 带符号时要转义， 要不搜索不出来`grep --help|grep '\-filename'`
+      - grep "pattern\(\)"
     - -h -H 前者不显示文件名,后者显示
     - --context=5 显示结果上下5行  
-    - -c 显示结果符合的个数  
+    - -c 显示结果符合的个数 
+    - -v,–invert-match 参数显示不符合的总行数
     - -a --text 不忽略二进制数据（当匹配到`\000 NUL` 会认为文件是二进制文件）如果不加 会显示匹配到二进制文件xxx 而不显示文件中的内容
     - 在文件中搜索 `grep  ".aaa." <通配符文件名 或者多个文件名已空格隔开>`
     - -r 在文件夹中递归搜索 -r <dir or *filetype>  `grep ".aaa." -r .` 如果没有*.filetype 会报错
@@ -324,20 +324,26 @@ bash -s stable <tmp.sh
       - [懂了](https://blog.csdn.net/yufenghyc/article/details/51078107))
       - grep 什么都不加是基本正则表达式、-E 扩展正则表达式、-P perl正则表达式
     - zgrep 搜索压缩文件
-    - -w 精确匹配 - Fx 完全匹配
+    - -F 它只能找固定的文本，而不是规则表达式。
+      - grep -F step* 的*不是通配符了
+    - -x 匹配整行
+      - grep -x aaaa == grep '^aaaa$'
+    - -w 精确匹配 - Fx 完全匹配 
       ```
       $ grep -Fx ls_recurse_enable=YES  /etc/vsftpd/vsftpd.conf
       ls_recurse_enable=YES
       ```
     - -i 忽略大小写
-    - 搜索这个或者那个
-      - grep “des_a\|des_b\|des_c” a.text
+    - 搜索这个或者那个 grep搜索多个字符串
+      - grep “des_a\|des_b\|des_c” a.text # 当使用基本正则表达式时，需要使用\转义符为|管道符转义。
+      - 使用扩展模式，就不需要为|管道符添加转义符了 grep "des_a|des_b|des_c"
     - -o 只显示匹配的部分
     - -H  --with-filename : 在显示符合样式的那一行之前，表示该行所属的文件名 
        - `find . -name "*.txt" -ctime -7 -exec grep  -H -E ".*jinshan.*open.*004.*" {} \;` grep 在find -exec选项中显示文件名
     - 搜索选项 `grep "\-c"`  
+    - -q 不打印任何标准输出, 但是有错误会打印; 如果有结果,返回0;如果有错误,返回错误码. 可用于if
 
-12. #### [shell set](https://blog.csdn.net/t0nsha/article/details/8606886)
+16. #### [shell set](https://blog.csdn.net/t0nsha/article/details/8606886)
 	- man set
 	- [脚本前指定解释器加-e 可以自动判断每条指令的执行结果，如果非0，脚本就会自动退出](https://www.cnblogs.com/dakewei/p/9845970.html)
     - shell 脚本是这样，别的不知道

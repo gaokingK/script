@@ -35,8 +35,12 @@
    - 非0值是指程序异常退出
    - 为hook添加运行程序是chmod这样加
    - 程序需要 `#！/path/to/python3`
-8. ##### 忽略换行符
+8. ##### git diff 忽略换行符格式/ 忽略所有的tab, white space, 换行符 
    1. [link](https://blog.csdn.net/nanyilou_xiaoye/article/details/79075092) -------------------------no
+   2. [link](https://www.it1352.com/801295.html) ok
+      1. git diff --no-index --color --ignore-all-space< file1> < file2> # 忽略换行符
+      2. git diff --no-index --word-diff-regex=[^[:space:]] a.html b.html # 只看文字是否相同, 但这个没有用,不知为啥
+
 9.  ##### 查看分支的提交历史 git log --graph --pretty=oneline --abbrev-commit branch1 branch2
     ```
     * fad6d82 (HEAD -> back-master, origin/master, origin/HEAD, master) 根据冒烟用例适配
@@ -61,21 +65,36 @@
     |/  
     *   e7d9c47 Merge branch 'master' of 90.90.0.140:/home/git/pc_kbox
     ```
-10. ##### git mergetool -t opendiff --------------------------------------no
-11. ##### git cherry-pick 来将A分支的部分提交合并到B分支上
+10. ##### git log merge
+```
+commit dadfd7d8547cf5a34d73da27e54a00575800f667
+Merge: aef79ca e19dd62 aef79ca 是本地的, e19dd62是远端的
+Author: jjw <jjw@fuck.com>
+Date:   Wed Sep 15 09:21:00 2021 +0800
+
+    Merge branch 'master' of 90.90.0.140:/home/git/pc_kbox
+
+commit aef79cab68a700bc720888746117117b2f6c1823
+Author: jjw <jjw@fuck.com>
+Date:   Wed Sep 15 09:20:45 2021 +0800
+
+    修改抖音部分用例
+```
+11. ##### git mergetool -t opendiff --------------------------------------no
+12. ##### git cherry-pick 来将A分支的部分提交合并到B分支上
    2. 如果需要多个commitid `git cherry-pick commitid_a commitid_b commitid_c` 只合并这三个
    3. 先合并a, 如果有冲突就结局, 然后git cherry-pick --continue 完成后就把a给搞好了; 然后合并b,如果有冲突, 解决,然后git cherry-pick --continue....
-12. ##### [把同一个分支里的提交放到其他的分支里](https://github.com/k88hudson/git-flight-rules/blob/master/README_zh-CN.md#rebasing-%E5%92%8C%E5%90%88%E5%B9%B6merging)
+13. ##### [把同一个分支里的提交放到其他的分支里](https://github.com/k88hudson/git-flight-rules/blob/master/README_zh-CN.md#rebasing-%E5%92%8C%E5%90%88%E5%B9%B6merging)
    4. git log commitid1, commitid2, commit3
    5. git reset --hard commit3
    6. git checkout -b new_branch
    7. git cherry-pick commid1 # 即使commitid 在git log中看不到了, 已经reset-hard了,仍然能找到这个commit
-13. ##### git branch
+14. ##### git branch
    8. [link](https://blog.csdn.net/duxing_langzi/article/details/80295573?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link)
    9. 在新建分支上切换到master之前, 要留意你的工作目录和暂存区里那些还没有被提交的修改， 它可能会和你即将检出的分支产生冲突从而阻止 Git 切换到该分支。 最好的方法是，在你切换分支之前，保持好一个干净的状态。 有一些方法可以绕过这个问题（即，暂存（stashing） 和 修补提交（commit amending））
    10. 当你切换分支的时候，Git 会重置你的工作目录，使其看起来像回到了你在那个分支上**最后一次提交**的样子
-14. ##### git log -p filename /git log filename
-15. ##### git rebase
+15. ##### git log -p filename /git log filename
+16. ##### git rebase
    11. git rebase 是干什么的
    12. ##### 使用 git rebase -i commits 来修改已经提交的commit
       - [link](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E5%86%99%E5%8E%86%E5%8F%B2)
@@ -86,7 +105,7 @@
         - error: 请提交或贮藏修改。
       - 可以stash pop 吗
         - 可以，只是要是stash pop后再把不需要的内容stash后这个stash的标题就会变成变基的那个
-##### 强推(force push) 为什么会对大的团队造成麻烦
+##### 强推(force push) 为什么会对大的团队造成麻烦 ----------------------no
 ##### 1. 为什么切换分支后 把改动在另一个分支上提交后这个分支上就看不到改动了?
 ##### 1. .gitignore 失效
     在.gitignore 中定义的文件还会出现在git status中

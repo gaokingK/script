@@ -1,6 +1,8 @@
 # 记录工具使用的问题
-
-1. #### apt
+1. #### rpm(redhat package manager)
+	- 原本是 Red Hat Linux 发行版专门用来管理 Linux 各项套件的程序，由于它遵循 GPL 规则且功能强大方便，因而广受欢迎。所以逐渐受到其他发行版的采用。RPM 套件管理方式的出现，让 Linux 易于安装，升级，间接提升了 Linux 的适用度
+	- 如果系统的默认程序列表中不带,可以使用其他的包管理去安装
+2. #### apt(Advanced Packaging Tool)
     - 更换源之前需要备份源
     ```shell
 	cp source.list{,.bak}

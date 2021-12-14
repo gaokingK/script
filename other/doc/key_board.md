@@ -37,6 +37,7 @@
 1. ctrl + ; 剪贴板
    
 ### linux
+1. 终端 ctrl + Shift + / 快捷键信息
 1. 怎么搜索历史命令 切换下一条?
 2. 在终端中使用上次命令中的内容 ---------------------------no
 3. [shell命令行 快捷键](https://www.cnblogs.com/betterquan/p/11456820.html)

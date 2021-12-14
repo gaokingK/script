@@ -2,7 +2,7 @@
 处理kbox_result 在用例后加上姓名
 python3 find_author.py kbox_result_xxx.txt
 
-f.read(1000) 返回1000字节的字符串
+f.read([1000]) 返回1000字节的字符串
 f.readlines(1000) 从0开始读, 读1000个字节, 以行为元素返回一个列表
 f.readline(1000) 返回当前行, 如果该行大于1000 只显示前1000个字节
 f.writelines(collection) 要把换行符写在集合中

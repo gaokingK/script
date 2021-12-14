@@ -1,3 +1,34 @@
 - column-based 基于列的
 - The tuples returned by Query are named tuples 返回的元组是已命名的元组(返回的元组名字是tuble)
 - You are all lovely people and I'm glad I get to spend time with you. 大家都是很好的人, 能和大家一起度过一点时光真的是太好了
+- If a database name contains special characters, the name for the database directory contains encoded versions of those characters as described in Section 9.2.4, “Mapping of Identifiers to File Names”
+- Certain objects within MySQL # MySQL 中的某些对象，
+- backtick 反引号
+- Let’s consider how a second table, related to User, can be mapped and queried 让我们考虑如何映射和查询与 User 相关的第二个表
+- his implies a basic one to many association
+- are referred to 被称为
+- Arguments to relationship() which concern the remote class can be specified using strings which是修饰Arguments的
+- Working with Related Objects 使用关系型对象
+- jack as well as the two Address members in the corresponding addresses collection are both added to the session at once jack 以及相应地址集合中的两个地址成员都同时添加到会话中
+- MySQL supports the following JOIN syntaxes for the table_references part of SELECT statements and multiple-table DELETE and UPDATE statements mysql对select语句以及多表delete和update语句中的table_reference部分支持以下的join语法
+- we can use Query.filter() to equate their related columns together. equate是说query.filter()方法功能等同遇把相关的columnstogether起来; 或者是equate 两表相关的列
+- The actual SQL JOIN syntax, on the other hand, is most easily achieved using the Query.join() method: 另一方面, join 最容易用Query.join实现
+- The Query.join() method will typically join from the leftmost item in the list of entities A 方法往往会从实体列表中最左边的item开始join
+- me, who never got this far 从未走到这一步的我
+- may be used to 可以被用于, 不是可能被用于
+- When joining to relationships using using (两个using)aliased(), the special attribute method PropComparator.of_type() may be used to alter the target of a relationship join   to   refer to    a given aliased() object. 当使用 aliased() 连接到关系时，特殊的属性方法 PropComparator.of_type() 会以引用给定的 aliased() 对象 来更改关系连接的目标
+- In addition to using the PropComparator.of_type() method, 除了使用xxx方法之外
+- from the inside out. 从内到外
+- and the subquery() method on Query produces a SQL expression construct representing a SELECT statement embedded within an alias Query 上的 subquery() 方法生成一个 SQL 表达式构造，表示嵌入在alias中的 SELECT 语句
+- The Query features several operators which make usage of EXISTS automatically. Query 有几个运营商可以自动使用 EXISTS
+- explicit EXISTS construct, 显式的Exists构造
+- recall earlier 回想一下之前...
+- when we accessed the User.addresses collection of a User and SQL was emitted. and 不是和的意思, 而是当xxx时SQL 才发出
+- All three are usually invoked via functions known as query options which give additional instructions to the Query on how we would like various attributes to be loaded, via the Query.options() method. 这三个函数通常通过称为查询选项的函数调用，这些函数通过 Query.options() 方法向 Query 提供关于我们希望如何加载各种属性的附加指令。(学学如何断句)
+- emits a second SELECT statement  发出第二个select语句, 这个a是起描述作用的
+- note that even though the User.addresses collection on jack is actually populated right now populated 代表东西已经加载
+- Note that even though the OUTER JOIN resulted in two rows 注意即使外连接返回了两行结果.
+- This is specifically so that joined eager loading can be applied without affecting the query results. 这特别是为了...
+- Another form of loading, subqueryload(), also exists, which can be used in place of selectinload() when making use of composite primary keys on certain backends. 也存在另一种加载形式 subqueryload() 当在某些后端使用复合主键时，它可以代替 selectinload() 使用。
+- An Query.order_by() or Query.filter() call cannot reference these aliased tables - so-called “user space” joins are constructed using Query.join() xxx 不能引用这些别名表, 即使用query.join()连接得来的所谓的用户空间
+- The rationale for this is that joinedload() is only applied in order to affect how related objects or collections are loaded as an optimizing detail - it can be added or removed with no impact on actual results. 这样做的基本原理是，joinedload() 仅用于影响相关对象或集合作为优化细节加载的方式 - 可以添加或删除它而不影响实际结果。
