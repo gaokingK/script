@@ -32,3 +32,7 @@
 - Another form of loading, subqueryload(), also exists, which can be used in place of selectinload() when making use of composite primary keys on certain backends. 也存在另一种加载形式 subqueryload() 当在某些后端使用复合主键时，它可以代替 selectinload() 使用。
 - An Query.order_by() or Query.filter() call cannot reference these aliased tables - so-called “user space” joins are constructed using Query.join() xxx 不能引用这些别名表, 即使用query.join()连接得来的所谓的用户空间
 - The rationale for this is that joinedload() is only applied in order to affect how related objects or collections are loaded as an optimizing detail - it can be added or removed with no impact on actual results. 这样做的基本原理是，joinedload() 仅用于影响相关对象或集合作为优化细节加载的方式 - 可以添加或删除它而不影响实际结果。
+- feel free to file an issue for this tutorial 随意为本教程提出问题 
+- To use MSVC from a command line or VS Code, you must run from a Developer Command Prompt for Visual Studio.(不翻译）An ordinary shell such as PowerShell, Bash, or the Windows command prompt does not have the necessary path environment variables set. PowerShell、Bash 或 Windows 命令提示符等普通 shell 没有设置必要的路径环境变量。 （而不是说xxx是像PS、bash等一样的）而且还可以注意这个句号
+-  In the dropdown, which will display a tasks dropdown listing various predefined build tasks for C++ compilers.  In the dropdown, which will display a tasks dropdown listing various predefined build tasks for C++ compilers.
+- You might need to press Enter a couple of times initially to see the PowerShell prompt in the terminal. 您最初可能需要按 Enter 几次才能在终端中看到 PowerShell 提示符。

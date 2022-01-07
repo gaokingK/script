@@ -1,3 +1,5 @@
+1. ### shell 中小命令
+   - id -u 判断当前用户是不是root 是root返回0 `if $(id -u) !=0`
 1. #### expr 
     ```
     huawei ~/Desktop/smoke% expr 2 + 1

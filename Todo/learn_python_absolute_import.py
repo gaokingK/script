@@ -25,7 +25,12 @@ from __future__ import absolute_import 引入了绝对导入这个特性
 # link(https://segmentfault.com/q/1010000000458562)
 
 # 解决模块找不到的原因和几种方法 http://c.biancheng.net/view/4645.html
-
+# import moudle 中搜索模块的顺序
+   3. 输入脚本的目录
+   4. PYTHONPATH中的目录
+   5. Python默认的安装路径中
+   6. 实际上，解释器由 sys.path 变量指定的路径目录搜索模块，该变量初始化时默认包含了输入脚本（或者当前目录）， PYTHONPATH 和安装目录。这样就允许 Python程序了解如何修改或替换模块搜索目录。
+# 有些模块需要显示导入
 """
 
 
@@ -35,3 +40,11 @@ print(string.ascii_uppercase)
 from string import ascii_lowercase
 print(ascii_lowercase)
 print(string.ascii_lowercase)
+
+"""
+To: 有些模块需要显示导入
+"""
+def test_explicit_import():
+    import logging # 这样导入config会报错
+    import logging.config # 必须这样导入才不报错
+    logging.config.fileConfig() 

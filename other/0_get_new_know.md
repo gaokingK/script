@@ -4,19 +4,31 @@
    - [Unique [key] 而不用 [unique [key]]
    - [COLUMN_FORMAT {FIXED|DYNAMIC|DEFAULT}] 带关键字参数的
 2. #### [帮助中心]https://help.aliyun.com/document_detail/70478.html
-2. #### BMP(Basic Multilingual Plane)
+3. ### IOPS（Input/Output Operations Per Second）
+   - 是一个用于计算机存储设备（如硬盘（HDD）、固态硬盘（SSD）或存储区域网络（SAN））性能测试的量测方式，可以视为是每秒的读写次数
+4. ### VNC
+   - Virtual Network Console 虚拟网络控制台， 可以连接到远程环境，像ssh一样
+5. ### libsodium 
+   - Sodium is a modern, easy-to-use software library for encryption, decryption, signatures, password hashing and more. 
+   - https://doc.libsodium.org/
+6. ### URL中%2F,%2B等特殊字符
+   - link： https://blog.csdn.net/w892824196/article/details/108198197
+   -  %2B 表示+号
+7. ### MSVC 微软VC运行库
+   - VC运行库，是Visual C++的运行库。很多程序在编制的时候，使用了微软的运行库，大大减少了软件的编码量，却提高了兼容性。但运行的时候，需要这些运行库。这些运行库简称就是MSVC。
+8. #### BMP(Basic Multilingual Plane)
    - 基本多文种平面，BMP(Basic Multilingual Plane)，或称第零平面(Plane 0)，是Unicode中的一个编码区段
    - 是表示各种语言的
-3. #### Seafile
+9.  #### Seafile
    - Seafile 是一个开源的文件云存储平台
-4. #### wayland和weston的介绍
+11. #### wayland和weston的介绍
    - [Linux图形系统] https://blog.csdn.net/ztguang/article/details/80452717
    - Wayland是一套display server(Wayland compositor)与client间的通信协议，而Weston是Wayland compositor的参考实现。它们定位于在Linux上替换X图形系统
 
-5. #### GPG
+11. #### GPG
    - 目前最流行、最好用的加密工具之一。
    - [使用](https://www.ruanyifeng.com/blog/2013/07/gpg.html)
-6. #### 缩写
+11. #### 缩写
    - noop 没有操作
       no operate
    - RTFM(Read The Fucking Manual)
@@ -27,12 +39,12 @@
    - LTO 
      Link Time Optimization (LTO)
    - GA(Generally Available) 通用版本
-7. #### 术语
+11. #### 术语
    1. 性能抖动
    2. 句柄(session orm database)
-8. #### 从请求中拿到数据后，再添加一些数据的过程叫什么？ ----------------------------------------------no
-9.  #### 接口中的用到的临时数据，叫什么？ ----------------------------------------------no
-10. #### Grokking The System Design Interview（系统设计）
+12. #### 从请求中拿到数据后，再添加一些数据的过程叫什么？ ----------------------------------------------no
+13. #### 接口中的用到的临时数据，叫什么？ ----------------------------------------------no
+14. #### Grokking The System Design Interview（系统设计）
    - Grokking The System Design Interview（系统设计）
 11. #### ptaishanpublic2:Huawei123@90.90.64.10 
    - 用户名:密码@ip
