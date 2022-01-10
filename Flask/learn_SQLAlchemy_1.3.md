@@ -4,9 +4,11 @@
 
 It provides a full suite of well known enterprise-level persistence patterns, designed for efficient and high-performing database access, adapted into a simple and Pythonic domain language.
 - SQLAlchemy Object Relational Mapper 提供了一种将用户定义的Python类与数据库 以及 这些类的实例与相应表中的行关联起来的方法。 它包括一个透明的同步对象及其相关行之间状态的所有更改的系统：Unit of work，以及用户定义的类及其相互之间定义的关系表示数据库查询的系统（查询）
-### 版本 1.x 2.0 
-This tutorial covers the well known SQLAlchemy ORM API that has been in use for many years. As of SQLAlchemy 1.4, there are two distinct styles of ORM use known as 1.x style and 2.0 style, the latter of which makes a wide range of changes most prominently around how ORM queries are constructed and executed.
-- 本文档是按照1.4翻译的, 但是可能会假如一些1.3的
+### 版本 1.x 1.4 2.0 
+- This tutorial covers the well known SQLAlchemy ORM API that has been in use for many years. As of SQLAlchemy 1.4, there are two distinct styles of ORM use known as 1.x style and 2.0 style, the latter of which makes a wide range of changes most prominently around how ORM queries are constructed and executed.
+- 如上所述, 大致分为三种版本, 1.0.0-1.3.x(统称为1.x)/1.4(向下兼容1.x, 又有2.0的语法)/2.0
+- 本文档是1.3的, 因为是1.4复制过来的原因, 某些地方仍是1.4的.
+- 之前也是使用1.3.9
 
 ### links
 - [doc]: https://www.osgeo.cn/sqlalchemy/orm/tutorial.html **教程好像是1.4的**
@@ -18,6 +20,18 @@ This tutorial covers the well known SQLAlchemy ORM API that has been in use for 
 
 # 使用
 ### 问题
+- 为什么查询的结果不显示主键呢？
+	```python
+	>>> b = User(id=5, name="b", ip="xx")
+	>>> session.add(b)
+	>>> session.query(User).filter(User.id.__eq__(4)).all()
+	[<User(name=jj, ip=xxx>]
+	```
+- session.flush、session.commit()---------no
+- 创建映射类的实例时必须使用关键字参数吗？
+- Mysql DBAPI
+  - 是相当于一个中间层, 能提供对mysql的操作和交互
+  - 这种工具有很多语言的实现(如pypi包, OurSQL)
 - [创建一个没有主键的表](https://docs.sqlalchemy.org/en/14/faq/ormconfiguration.html#faq-mapper-primary-key) ----------------------no
 - 多对多关系有方向吗? 为什么说BlogPost.keyword是多对多关系
 - 正常建立一个模型需要怎么做？
@@ -35,15 +49,14 @@ This tutorial covers the well known SQLAlchemy ORM API that has been in use for 
 - 只有这一种使用方法吗?
 - 只能回滚当前事务中的吗? 提交后的会话中能回滚吗
 - 如何查看生成的SQL?
-	
-
-
 ### 连接到数据库 使用orm时,并不需要显式的创建引擎
+***
+
 - 例子: 连接到 内存数据库SQListe
-```
->>> from sqlalchemy import create_engine
->>> engine = create_engine('sqlite:///:memory:', echo=True)
-```
+	```
+	>>> from sqlalchemy import create_engine
+	>>> engine = create_engine('sqlite:///:memory:', echo=True)
+	```
 - echo 参数 能看到生成的所有SQL, echo参数能开启SQLAlchemy的日志, 是通过python的logging实现的
 - create_engine() 返回一个Engine的实例, 具有和数据库交互的核心接口, 通过[dialect]()处理DBAPI的细节来适配.
 - ##### [Lazy Connecting]， 创建时虽然有返回，但并未实际尝试链接到数据库，而是在第一次要求它对数据库执行任务时发生
@@ -53,74 +66,162 @@ This tutorial covers the well known SQLAlchemy ORM API that has been in use for 
 
 
 ### 声明映射
+***
 - "使用ORM时，配置过程首先描述将要处理的数据库表，然后定义 将映射到这些表 的自己的类" 这个类不是指我们所定义的类吧? ----no
 - 现在的SQLAlchemy中, 上面两个任务被Declarative Extensions 这个系统一块执行了, 这个系统语序我们创建 包括 对要映射的数据库的描述指令 的 类.
 - 使用声明式系统映射的类是根据基类定义的，该基类维护与该基相关的类和表的目录 - 这称为**声明式基类**。我们的应用程序通常在一个通用导入的模块中只有这个base的一个实例。
 - 例子: 使用声明式基类定义一个类
-```
->>> from sqlalchemy.orm import declarative_base
->>> Base = declarative_base()
-# 现在, 就有了一个base, 我们可以根据它来定义任何个被映射的类, 先定义一个user表, 一个名为 User 的新类将是我们将此表映射到的类。在这个类中,我们定义要映射的表的细节, 主要是表名以及列的名称和数据类型：
->>> from sqlalchemy import Column, Integer, String
->>> class User(Base):
-...     __tablename__ = 'users'
-...
-...     id = Column(Integer, primary_key=True)
-...     name = Column(String)
-...     fullname = Column(String)
-...     nickname = Column(String)
-...
-...     def __repr__(self):
-...        return "<User(name='%s', fullname='%s', nickname='%s')>" % (self.name, self.fullname, self.nickname)
-```
+	```
+	>>> from sqlalchemy.orm import declarative_base
+	>>> Base = declarative_base()
+	# 现在, 就有了一个base, 我们可以根据它来定义任何个被映射的类, 先定义一个user表, 一个名为 User 的新类将是我们将此表	映射到的类。在这个类中,我们定义要映射的表的细节, 主要是表名以及列的名称和数据类型：
+	>>> from sqlalchemy import Column, Integer, String
+	>>> class User(Base):
+	...     __tablename__ = 'users'
+	...
+	...     id = Column(Integer, primary_key=True)
+	...     name = Column(String)
+	...     fullname = Column(String)
+	...     nickname = Column(String)
+	...
+	...     def __repr__(self):
+	...        return "<User(name='%s', fullname='%s', nickname='%s')>" % (self.name, self.fullname, 	self.nickname)
+	```
 - 上面的__repr__方法是可选的, 这里定义它是为了更好的格式化user obj
 - 使用Declarative的类最少要有一个__tablename__属性, 并且至少一个列是主键(at least one Column which is part of a primary key 主键能有很多列吗?) -----------------no
 - SQLAlchemy 本身从不对类所引用的表做出任何假设，包括它没有关于名称、数据类型或约束的内置约定。
 - 但这并不意味着需要样板； 相反，我们鼓励您使用辅助函数和 mixin 类创建自己的自动化约定，在[ Mixin and Custom Base Classes.] 中有详细描述。
 - 当我们的类被构造时，Declarative使用descriptors替换了Column；这种行为被称为 instrumentation . “instructed”映射类将为我们提供 在SQL上下文中引用表 以及 从数据库中持久化和加载列值 的方法。
 - 除了映射过程对我们的类所做的事情之外，该类在其他方面仍然主要是一个普通的 Python 类，我们可以为其定义应用程序所需的任意数量的普通属性和方法。 
-	
-### 创建一个模式
+
+### 创建一个schema(大纲或模型形式的计划或理论的表示)
+***
+- 就是把这个orm给创建出来 `Base.metadata.create_all(engine)`
 - 上面的User类通过Declarative system 被构造, 通过User, 我们定义了关于我们表的信息,这些信息被称为table metadata. 这个object被 SQLAlchemy 用来表示一个特殊表的信息, 这个表被称为Table object, 并且here Declarative 已经为我们搞了一个. 我们可以查看这个object 通过`User.__table__`
-- 当我们声明User时, Declartive 使用Python metaclass来完成声明, 为了在类声明完成后执行额外的activities, 他(Declartive)然后创建 Table object 根据我们的规则, 并且通过构造一个mapping object关联他(Declartive?).这个对象是一个我们通常不需要直接处理的幕后对象（尽管它可以在我们需要的时候提供关于我们的映射的大量信息）
-- Table object 是 MetaData的成员, 后者有一个更大的collection, 当使用Declartive时, 可以通过 声明性基类(Base) 的metadata属性去访问
-- 这个 MetaData 是一个 registry 其中包括向数据库发出一组有限的模式生成命令的能力。用 MetaData 为尚未存在的所有表向数据库发出create table语句
+  
 - ###### 经典映射
 	- 尽管强烈建议使用声明性系统，但使用sqlacalchemy的ORM不需要声明性系统
 	- 不通过Declartive, 任何普通的类都一一映射到Table使用mapper (), 这种用法称为经典映射
-- ###### 最小表描述vs完整描述
-	- 面对不同的数据库, 在类似于create table 这种语句构造上的区别,及解决办法
-	- 熟悉create table语法的用户可能会注意到上面生成的SQL中varchar列的生成没有长度；在sqlite和postgresql上，这是一个有效的数据类型，但在其他数据类型上，这是不允许的
+	- 更多不常见的使用参见[Classical Mappings]
+  
+- 当我们声明User时, Declartive 使用Python metaclass来完成声明, 为了在类声明完成后执行额外的activities, 他(Declartive)然后创建 Table object 根据我们的规则, 并且通过构造一个mapping object关联他(Declartive?).这个对象是一个我们通常不需要直接处理的幕后对象（尽管它可以在我们需要的时候提供关于我们的映射的大量信息）
+- Table object 是 MetaData的成员, 后者有一个更大的collection, 当使用Declartive时, 可以通过 声明性基类(Base) 的metadata属性去访问
+- 这个 MetaData 是一个 registry 其中包括向数据库发出一组有限的模式生成命令的能力。当SQLlite事实上没有user表, 用 MetaData 为尚未存在的所有表向数据库发出create table语句,
+- 例子: 调用MetaData.create_all()方法, 传入engine 作为连接数据库的源头. 我们将看到首先发出特殊命令以检查用户表的存在，然后是实际的 CREATE TABLE 语句：
+	```
+	>>> Base.metadata.create_all(engine)
+	```
+
+- ##### 最小表描述vs完整描述
+	- 主要说的是面对不同的数据库, 在类似于create table 这种语句构造上的区别,及解决办法
+	- 熟悉create table语法的用户可能会注意到上面生成的SQL中varchar列的生成没有长度；在sqlite和postgresql上，这是一个有效的数据类型，但在其他数据类型上，这是不允许的。所以当你使用其他数据库，且使用SQLAlchemy来提交create table， 需要执行string类型的长度。
+	- 除了在创建表时，SQLAlchemy 不引用 String 上的长度字段，以及 Integer、Numeric 等上可用的类似精度/小数位数字段。
 
 ### 创建映射类的实例
+***
 - 即使在下面的语句中,我们并没有指定id的值, 当我们访问id的时候仍然能得到一个None,而不是python抛出一个Attribute 异常. SQLAlchemy`s instrumention 一般在第一次被访问时produces被映射的属性的默认值. 对于那些实际上指定了一个值的属性, instrumenttation 系统会跟踪这些值为了在最终的INSERT 语句发出到database的时候使用
-- ###### 使用Declartive 系统定义的类已经提供了一个构造函数,能自动接受与映射的列匹配的关键字的名字, 如果重新定义,原有的会覆盖
+	```
+	# 必须使用关键字参数指定吗？
+	>>> ed_user = User(name='ed', fullname='Ed Jones', nickname='edsnickname')
+	>>> ed_user.name
+	'ed'
+	>>> ed_user.nickname
+	'edsnickname'
+	>>> str(ed_user.id)
+	'None'
+	```
+- ##### the __init__() method
+  -  使用Declartive 系统定义的类已经提供了一个构造函数,能自动接受与映射的列匹配的关键字的名字；我们可以很容易的再定义一个__init__,  如果重新定义,原有的会覆盖
+
 
 ### 创建Session
+***
 - Session 是会话对象, 是ORM操作database的句柄, 在create_engine同样的等级, 创建一个Session类
+	```
+	from sqlalchemy.orm import sessionmaker
+	Session = sessionmaker(bind=engine)
+	```
 - 如果没有create_engine时, 可以先穿件Session类,然后使用` Session.configure(bind=engine)`去连接Session
-- ###### Session的生命周期
+	```
+	Session = sessionmaker()
+	Session.configure(bind=engine)  # once engine is available
+	```
+- 使用的时候需要实例化session`session = Session()`
+- ##### Session的生命周期
 	- (何时构造一个Session, 何时提交Session, 何时关闭?)[https://www.osgeo.cn/sqlalchemy/orm/session_basics.html#session-faq-whentocreate]
 	- 很大部分取决于要build的应用的类型,
 	- Session是对像的局部工作空间, 特定数据库连接的本地工作区
+- 这个定制的Session类(使用sessionmaker创造的类)将创建新的Session对象，这些对象绑定到我们的数据库。 调用 sessionmaker 时也可以定义其他事务特性； 这些将在后面的章节中描述。 然后，每当您需要与数据库进行对话时，您就可以实例化一个Session;`session = Session()`
 - session 创建出来时和engine联系在一起,但并没有打开任何连接, 当第一次被使用时,会从engine维护的连接池中取出一个连接, 并且保持这个链接直到提交所有改变或者关闭这个链接
-		 0
+		
 ### Adding and Updating Objects
+***
 - `session.add(user_obj)` 持久化obj
-	- 此时实例在**pending**状态, 还没有发出SQL, Session会立即发出SQL去持久化obj一旦obj被需要时, 使用的**flush**机制, 一旦我们查询这个obj在数据库中, 所有**pending**的信息首先会被刷新,然后查询会被立即进行
+    ```
+	a = User(name="haha", ip="2222")
+	session.add(a)
+	```
+	- 此时实例在**pending**状态, 还没有发出SQL。Session会立即发出SQL去持久化obj一旦obj被需要时, 使用被称为**flush**的机制。如果我们查询数据库中的 Ed Jones， 所有**pending**的信息首先会被刷新,然后查询会被立即进行.
+	- session.commit后才会有数据在数据库中。
+	- session.flush()会生成SQL语句。
+- 例子： 创建一个Query对象来加载User的实例。 过滤出name为ed， 并且指定结果为全部结果中的第一个， 会返回一个User实例， 这个实例和我们刚刚添加的那个是等价的。
+	```
+	>>> our_user = session.query(User).filter_by(name='ed').first() 
+	>>> our_user is a
+	True
+	```
+- 事实上session已经确认出上面返回的行和内部对象映射中已经存在的一行是等价的， 所以我们实际上得到的实例和刚刚添加的实例是相同的。
 - **identity map** 一旦具有特定主键的对象出现在 Session ，所有SQL查询 Session 将始终为该特定的主键返回同一个python对象；如果试图在会话中放置第二个已持久化且具有相同主键的对象，也会引发错误。
 - `session.dirty`
+	- flush()过的或者commit()过的
 - `session.new`
-- `session.commit()` 提交剩余的改变到数据库, 并且提交整个过程中始终运行的事务, 会发出相关sq语句的声明;会话引用的连接资源现在返回到连接池。此会话的后续操作将在 new 事务，它将在第一次需要时重新获取连接资源
-- **重新加载** 默认情况下，当第一次在新事务中访问前一个事务时，sqlAlchemy将刷新该事务中的数据，以使最新状态可用。重新加载的级别是可配置的
-- ###### Session 状态
-	- 如果没有主键，实际插入时，它将在四个可用“对象状态”中的三个之间移动- 瞬态 ， 悬而未决的 和 持久的 . 
+	- pending 状态的obj
+		```
+		session.add_all([obj1..., obj2...])
+		session.new()
+		IdentitySet([obj1, obj2])
+		```
+- 我们告诉通过session.commit()告诉Session我们想要提交剩下的改变到数据库， 并且提交这个至始至终进行着的事务。Session为在ed上的昵称改动提交update语句， 以及新增三个user对象的插入语句。
+- `session.commit()` 提交剩余的改变到数据库, 并且提交整个过程中始终运行的事务, 会发出相关sql语句的声明;会话引用的连接资源现在返回到连接池。此会话的后续操作将在 一个 new 事务，它将在第一次需要时重新获取连接资源。
+- 在 Session 在数据库中插入新行后，所有新生成的标识符和数据库生成的默认值在实例上立即可用或者是通过首次访问加载。 在这种情况下，整个行在访问时重新加载，因为在我们发出 Session.commit() 后开始了一个新事务。默认情况下，当第一次在新事务中访问前一个事务时，sqlAlchemy将刷新该事务中的数据，以使最新状态可用。重新加载的级别是可配置的
+- ##### Session 状态
+	- 当我们的 User 对象从 Session 外部移动到没有主键的 Session 内部，再到实际插入时
+	- 如果没有主键，实际插入时，它将在五个可用“对象状态”中的三个之间移动- 瞬态、悬而未决的、持久的. 
 	- (Quickie对象状态简介)[https://www.osgeo.cn/sqlalchemy/orm/session_state_management.html#session-object-states]
+		- Transient（短暂的）：instance不在session，也不在数据库中， 即没有数据库标识。 这种对象与 ORM 的唯一关系是它的类有一个与之关联的 mapper()。
+		- Pending： 把transient 的instance session.add(), 就是pending。 仍然没有真正的flushed到database中，会在下一次flush的时候发生
+		- Persistent： 在session中和数据库中都存在这个instance. 您可以通过刷新使挂起的实例成为持久实例，或通过查询数据库中的现有实例（或将持久实例从其他会话移动到本地会话中）来获取持久实例。
+		- Delete: 已在刷新中删除但事务尚未完成的实例。(比如删除后调用session.flush) 处于这种状态的对象本质上与“挂起”状态相反； 当会话的事务提交时，对象将移动到分离状态。 或者，当会话的事务回滚时，删除的对象移回持久状态
+		- Detach:对应于或先前对应于数据库中的记录但当前不在任何会话中的实例。
+		- 可随时使用inspect来查看已映射obj的状态
+			```
+			>>> from sqlalchemy import inspect
+			>>> insp = inspect(my_object)
+			>>> insp.persistent
+			True
+			>>> insp.transient
+			False
+			```
+
 
 ### 回滚
+***
 - 使用session.rollback()
+	```python
+	# 改变
+	>>> ed_user.name = "xxx" # 已有的对象上改变
+	>>> fake_user = User(name="xx") # 再增加一个新的
+	>>> session.ad(fake_user)
+	# Query 这个session， 这些改动已经flushend 到当前事务中
+	>>> session.query(User).filter(User.name.in_(['xx', 'fakeuser'])).all()
+	# 略
+	# 回滚 ， 会发现已有对象上的改动会恢复， 然后新增的就不在session中了
+	session.rollback()
+	fake_user in session # false
+	```
 - 只有这一种使用方法吗? ---------------------------no
 - 只能回滚当前事务中的吗? 提交后的会话中能回滚吗 ----------------------no
+- 回滚是回归到上次提交时的状态吗？
 	
 # 查询
 - session.query() 创建一个Query obj, 参数可以是类和class-instrumented 相互组合的多个或者单个参数
@@ -160,7 +261,7 @@ This tutorial covers the well known SQLAlchemy ORM API that has been in use for 
 >>> for name, in session.query(User.name).\
 ...             filter_by(fullname='Ed Jones'):
 ```
-- 或者是使用更领过的SQL构造的filter(), 能在映射类上使用具有类级属性的常规python运算符
+- 或者是使用更灵活的SQL构造的filter(), 能在映射类上使用具有类级属性的常规python运算符
 ```python
 >>> for name, in session.query(User.name).\
 ...             filter(User.fullname=='Ed Jones'):
@@ -168,11 +269,43 @@ This tutorial covers the well known SQLAlchemy ORM API that has been in use for 
 
 - Query 对象是完全生成的，**这意味着大多数方法调用都会返回一个新的 Query 对象，在该对象上可以添加更多条件。** 例如，要查询名为“ed”且全名为“Ed Jones”的用户，您可以调用 filter() 两次，它使用 AND 连接条件
 
-### [常用筛选器运算符](https://www.osgeo.cn/sqlalchemy/orm/tutorial.html#common-filter-operators)
+### [filter()中常用筛选器运算符](https://www.osgeo.cn/sqlalchemy/orm/tutorial.html#common-filter-operators)
+- 某些操作符可以工作在query obj上
+- use tuple_() for composite (multi-column) queries
+- 某些逻辑表达式有两种写法
+```python
+>>>query.filter(User.name == "ed") # ._eq__ /.is_可以代替==号
+>>>query.filter(User.name != "ed") # __ne__ / isnot
+>>>query.filter(User.name.like("%ed%"))
+
+# 某些操作符可以工作在query obj上
+>>> query.filter(User.name.in_(session.query(User.name).filter(User.name.like('%ed%')))) 
+# use tuple_() for composite (multi-column) queries
+>>> from sqlalchemy import tuple_
+query.filter(tuple_(User.name, User.nickname).in_([('ed', 'edsnickname'), ('wendy', 'windy')]))
+
+# not in
+>>> query.filter(~User.name.in_(['ed', 'wendy', 'jack']))
+
+# AND:
+from sqlalchemy import and_
+query.filter(and_(User.name == 'ed', User.fullname == 'Ed Jones'))
+# 或者使用
+query.filter(User.name == 'ed', User.fullname == 'Ed Jones')
+# 或者使用 chain
+query.filter(User.name == 'ed').filter(User.fullname == 'Ed Jones')
+
+# or
+from sqlalchemy import or_
+query.filter(or_(User.name == 'ed', User.name == 'wendy'))
+
+# match
+query.filter(User.name.match('wendy'))
+```
 - like 呈现like运算符，它在某些后端不区分大小写，在其他后端区分大小写。对于保证不区分大小写的比较，请使用 ColumnOperators.ilike()
-- 大多数后端不直接支持iLike。对于那些 ColumnOperators.ilike() 运算符呈现一个表达式，该表达式与应用于每个操作数的下SQL函数组合在一起。
+  - 大多数后端不直接支持iLike。对于那些 ColumnOperators.ilike() 运算符呈现一个表达式，该表达式与应用于每个操作数的下SQL函数组合在一起。
 - 对于AND/OR/ 确保使用and_/or_而不是python的操作符
-- ColumnOperators.match() uses a database-specific MATCH or CONTAINS function; its behavior will vary by backend and is not available on some backends such as SQLite.****
+- ColumnOperators.match() uses a database-specific MATCH or CONTAINS function; its behavior will vary by backend and is not available on some backends such as SQLite.****. MySQL时会报错
 
 ### 返回list和scalars
 - 是Query的各种方法

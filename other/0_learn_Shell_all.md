@@ -5,7 +5,7 @@
     huawei ~/Desktop/smoke% 2 + 1     
     cd:cd:2: too many arguments
     ```
-2. #### shell 数组
+2. #### shell 数组 列表
    - [link](https://www.runoob.com/linux/linux-shell-array.html)
    ```shell 
    a = (ele1, ele2.....)

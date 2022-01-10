@@ -1,4 +1,12 @@
-### git
+# git
+## 问题
+- git stash 会把所有的改动都存起来，文件就没有改动了，但是如果此时再次改动b， 然后stash pop， 改动b仍然存在。
+- git stash error: 权限不足，无法在仓库对象库 .git/objects 中添加对象 不能记录工作区状态
+   - 等一会重试就可以了（不知道为啥， 可能是别的编辑器正在占用？）
+- git stash error: 权限不足，无法在仓库对象库 .git/objects 中添加对象 fatal: git-write-tree: error building trees 无法保存当前索引状态
+  - git add . 重试就好了
+
+## other
 1. ##### git patch --------------------------------no
 2. ##### 远程分支回滚的三种方法：
    link :https://www.cnblogs.com/Super-scarlett/p/8183348.html
