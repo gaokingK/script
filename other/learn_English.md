@@ -70,3 +70,7 @@
 -  be sure to 务必
 -  As our User object moved from being outside the Session, to inside the Session without a primary key, to actually being inserted. 当我们的 User 对象从 Session 外部移动到没有主键的 Session 内部，再到实际插入时
 -  The only relationship such an object has to the ORM is that its class has a mapper() associated with it.这种对象与 ORM 的唯一关系是它的类有一个与之关联的 mapper()。
+- feel free to file an issue for this tutorial 随意为本教程提出问题 
+- To use MSVC from a command line or VS Code, you must run from a Developer Command Prompt for Visual Studio.(不翻译）An ordinary shell such as PowerShell, Bash, or the Windows command prompt does not have the necessary path environment variables set. PowerShell、Bash 或 Windows 命令提示符等普通 shell 没有设置必要的路径环境变量。 （而不是说xxx是像PS、bash等一样的）而且还可以注意这个句号
+-  In the dropdown, which will display a tasks dropdown listing various predefined build tasks for C++ compilers.  In the dropdown, which will display a tasks dropdown listing various predefined build tasks for C++ compilers.
+- You might need to press Enter a couple of times initially to see the PowerShell prompt in the terminal. 您最初可能需要按 Enter 几次才能在终端中看到 PowerShell 提示符。

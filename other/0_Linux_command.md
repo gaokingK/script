@@ -24,7 +24,15 @@
    被注释的内容
    '
    ```
-3. #### 进程替换 与 Here document --------------no
+3. ### 查看端口
+   - 端口是否被占用`lsof -i 8080`
+     - link: https://www.runoob.com/w3cnote/linux-check-port-usage.html
+     - 应该用root来执行，否之看不到
+   - netstat -tunlp 用于显示 tcp，udp 的端口和进程等相关情况。`netstat -tunlp | grep 8000`
+4. ### lsof 列出系统啥进程打开了啥文件
+   - link：https://www.runoob.com/w3cnote/linux-check-port-usage.html
+   - lsof +d /usr/local/：显示目录下被进程开启的文件
+5. #### 进程替换 与 Here document --------------no
    1. 形如<(command)的写法叫做**process substitution**
    2. [解释了底层怎样支持](https://www.oschina.net/question/113421_241288)
    3. [进程替换](https://www.runoob.com/w3cnote/shell-process-substitution.html) ---------no
@@ -32,7 +40,20 @@
    5. 可以把<(...)整体当做一个文件名，这个文件的内容就是()中脚本的执行结果，这样第二条命令简化为
 bash -s stable <tmp.sh
 4. #### top ---------------------------no
-
+5. #### strings
+   - link: https://blog.csdn.net/test1280/article/details/80978717
+   - string 工具可以对任何文件的内容进行分析，并输出可打印字符长度不小于4的串。
+   - 这里“任何文件”，包括文本文件和二进制文件。其实“文本文件”和“二进制文件“两者并没有啥差别，所有的文件本质都是 Binary，文本文件只不过是一些特殊的 Binary 
+   - -n 修改可打印字符串的最小长度
+   - 使用场景
+   ```
+   # main.c 中有版本号， 我们可以通过已编译的main识别版本
+   gcc -o main main.c
+   strangs main|grep version_char
+   # 定位main.c 源文件最后会编译到哪个 Binary 文件中
+   strings -f * | grep "main.c中的字段"
+   # 更多见link
+   ```
 6. #### 重定向
    - 进程替换 与 Here document 做区分?
    ```
@@ -145,6 +166,7 @@ bash -s stable <tmp.sh
    1. ls -t 按时间顺序显示
    2. ls -r 显示文件夹中
    3. -R 若目录下有文件，则以下之文件亦皆依序列出
+   4. ls -d 显示目录
 13. #### linux中单引号‘ ,双引号“, 反引号 ` `, $, $(), ${}与变量；shell中各种括号的作用()、(())、[]、[[]]、{}
    1. [shell中各种括号的作用()、(())、[]、[[]]、{}](https://blog.csdn.net/taiyang1987912/article/details/39551385?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link) -------------------------------------------no
    2. [linux 单引号‘ ,双引号“, 反引号 ` `, $, $(), ${}与变量](https://blog.csdn.net/qq_40491569/article/details/83688652)
@@ -153,7 +175,7 @@ bash -s stable <tmp.sh
       1. 单引号剥夺了所有字符的特殊含义, 里面的就是单纯的字符, 双引号不会
       2. ![单引号：所见即所得。双引号：解析特殊符号，特殊符号有了原本的特殊意思 不加引号：比较特殊，支持通配符](https://images2015.cnblogs.com/blog/1038183/201705/1038183-20170507173906929-1826372684.png)
    5. 使用$来使用变量 echo $a
-   6. 变量赋值的时候, 如果含有空格 需要用单引号或者双引号或者使用\来转义空格
+   6. 变量赋值的时候, 如果含有空格 需要用单引号或者双引号
    7.  $(cmd) 会将命令的执行结果赋值给变量 如 `a=$(echo aaa)`; 反引号也可以 for line in `ls *.apk`
    8.  ${ }中放的是变量，例如echo ${hello}取hello变量的值并打印，也可以不加括号比如$hello。
    9.  () 是开一个子shell执行里面的命令

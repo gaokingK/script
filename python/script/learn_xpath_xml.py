@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 """
 # 解析xml文件 python 中用lxml
-link: https://www.w3school.com.cn/xpath/xpath_axes.asp
+link: 
+    - https://www.w3school.com.cn/xpath/xpath_axes.asp
+    - https://www.cnblogs.com/yyds/p/6627208.html
 #### 轴怎么用
 - `preceding-sibling::` 要加两个冒号
 #### 一些语句
