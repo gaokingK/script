@@ -1,10 +1,12 @@
 # 一些知识网站, 没事的时候可以看一下上面
 - https://martinfowler.com/eaaCatalog/index.html 
-### 共识
+# 共识
    - 对于doc, 把自己用的给记下来, 其他的了解下就行, 慢慢补充
    - SELECT column_name(s) FROM table1; # 意思是可以选择一个列或者多个列
    - [Unique [key] 而不用 [unique [key]]
    - [COLUMN_FORMAT {FIXED|DYNAMIC|DEFAULT}] 带关键字参数的
+### MVCC(Mutil-Version Concurrency Control) 多版本并发控制
+   - 是一种并发控制的方法， 一般在数据库管理系统中， 实现对数据库的并发访问
 ### 有些错误别着急，重试，重启 说不定就好了    
 ### mssql 指微软的SQLServer数据库服务器 ms sql
 ### RFC-1738 URL组合规范大概是
@@ -12,7 +14,7 @@
 ### json 布尔值类型
    - true; false
 ### semanage
-- semanage命令 是用来查询与修改SELinux默认目录的安全上下文。
+   - semanage命令 是用来查询与修改SELinux默认目录的安全上下文。
 ### erlang
    - Erlang是一种通用的面向并发的编程语言，它由瑞典电信设备制造商爱立信所辖的CS-Lab开发，目的是创造一种可以应对大规模并发活动的编程语言和运行环境。
    - Erlang是运行于虚拟机的解释性语言，但是也包含有乌普萨拉大学高性能Erlang计划（HiPE）开发的本地代码编译器
@@ -54,8 +56,8 @@
    - GA(Generally Available) 通用版本
    - 关系数据库管理系统(RDBM)
 ### 术语
-   1. 性能抖动
-   2. 句柄(session orm database)
+   - 性能抖动
+   - 句柄(session orm database)
 ### 从请求中拿到数据后，再添加一些数据的过程叫什么？ ----------------------------------------------no
 ### 接口中的用到的临时数据，叫什么？ ----------------------------------------------no
 ### Grokking The System Design Interview（系统设计）
@@ -63,8 +65,8 @@
 ### ptaishanpublic2:Huawei123@90.90.64.10 
    - 用户名:密码@ip
 ### [linux下EOF写法梳理](https://www.cnblogs.com/gzxbkk/p/10298799.html)
-   1. EOP (end of file )表示自定义终止符, 可以随意设置别名, 在linux按ctrl-d就代表EOF
-   2. << :标准输入来自命令行的一对分隔号(EOF就是分隔符)的中间内容.
+   - EOP (end of file )表示自定义终止符, 可以随意设置别名, 在linux按ctrl-d就代表EOF
+   - << :标准输入来自命令行的一对分隔号(EOF就是分隔符)的中间内容.
     ```shell
     # 怎么输入wang呢 ------------------no
     cat << wang > haha.txt
@@ -77,7 +79,7 @@
 ### 非选项参数
 ### 提示符号错误的时候,首先去排除是否是看起来相同, 可能是中文的,最好的办法是从未报错的地方复制一个过来
 ### 程序运行时依赖的内存结构, 命名空间 ------------------------------------------未
-   3. 堆栈里放的帧
+   - 堆栈里放的帧
 ### 二进制安全
     redsi的string是二进制安全的，是指其可以包含任何数据，如jpg图片或者序列化的对象
 ### 幂等

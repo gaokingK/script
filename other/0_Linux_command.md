@@ -1,15 +1,15 @@
 # doc comm
    1. [link1](http://www.gnu.org/software/bash/manual/bash.html#Process-Substitution)
 # other
-## tmux 
+### tmux 
 - link: http://www.ruanyifeng.com/blog/2019/10/tmux.html
 - 新建窗口： ctrl + b, c
 - 切换窗口：ctrl + b, n
  
-#### CentOS系统Tab补全功能
+### CentOS系统Tab补全功能
 - link: https://blog.csdn.net/RunSnail2018/article/details/81185957
 - yum install bash-completion
-#### pkill
+### pkill
 - Linux pkill 用于杀死一个进程，与 kill 不同的是它会杀死指定名字的所有进程，类似于 killall 命令
 - -t 指定开启进程的终端
 - 也能发送信号
@@ -323,12 +323,12 @@
 - link:
     - [官方文档](https://www.gnu.org/software/sed/manual/html_node/sed-commands-list.html#sed-commands-list)
     - [详细](https://blog.csdn.net/hdyebd/article/details/83617292)
-- ##### 参数
+- #### 参数
      - 可以使用sed [opt] 4a\ "str_append" filename # 这样来输入（防止字符串来转义）
     - **命令应该使用单引号不应该使用双引号** 不加引号的话应该用\来分割`sed -e 1a\ hhhh\ sss change_pc_90.90.0.140.md`
     - -i 直接修改文件
     - -e<script>或--expression=<script> 以选项中指定的script来处理输入的文本文件。
-- ##### 动作
+- #### 动作
     - $ 代表最后一行
     - 使用正则`echo "xxxxx"|sed "s/re_/substance/g`
     - a：新增
@@ -338,7 +338,7 @@
     - i：插入 `sed -e 4inewline` # 在第4行前添加
     - ! ：表示后面的命令对所有没有被选定的行发生作用 `sed '1!d' input.in`
     - r 从文件读取
-- ##### 注意
+- #### 注意
   	- 如何将命令的结果作为sed的输入
         - link
             - https://www.thinbug.com/q/39317465

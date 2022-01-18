@@ -1,4 +1,7 @@
-### 通识
+# 通识
+### python -i -c 
+    - -i -i其实就是执行文件内容或者执行命令后再进入交互模式。不会去读取$PYTHONSTARTUP这个配置文件。
+    - -c 执行命令`python -i -c "print 'hello world'"`
 ### round
 ```
 round(float(5/9), 4) * 1
@@ -50,9 +53,9 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
 ### 字符串
 ### Python 如何声明变量类型
    - from typing import List def hello(con: List)
-## 模块级别与功能级别 不重要
+### 模块级别与功能级别 不重要
    - http://blog.sina.com.cn/s/blog_6b9b69f10100w1xr.html
-## return 和 break 的区别
+### return 和 break 的区别
    - for 循环中的return 能终止循环吗？ 可以终止    
 ### 涉及到字符串匹配的把 a， b都sorted()后再对比
    - sorted(iterable, /, *, key=None, reverse=False)
@@ -72,7 +75,6 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
 ### 格式化字符串
     - f 格式化字符串中不能又反斜杠，只能用单引号
 ###  3>=2 <6
-
 ### 鸭子类型
    - 介绍？
    - 这个特性的用处？
@@ -93,16 +95,13 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
    a = [None, False, True]
    print(reduce(la, a))
    print(reduce(exec_mode, a))
-
    ```
-
 ### timeit的使用
     - [link](https://www.cnblogs.com/Uncle-Guang/p/8796507.html)
       - 关于timeer类的描述有误， 不是用timer对象去调用
     - 直接看这两个方法
     - timeit.timit()
     - timeit.repeate()   
-
 ### f字符串中输出{}
    - [link](https://stackoverflow.com/questions/5466451/how-can-i-print-literal-curly-brace-characters-in-a-string-and-also-use-format)
    - `f"{{}}"`
@@ -143,7 +142,6 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
         os.path.dirname(path) # 文件所在文件夹名 是按格式判断的
         os.path.isdir(path) # path存在，且是文件夹、不是按格式判断的
         ```
-
 ### python2.x和python3.x 中range的不同以及python2中xrange
     - python2 中的range返回一个list，python3中返回一个可迭代对象
     - python2 中xrange返回一个生成器
@@ -151,19 +149,16 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
     - 参照learn_python_namespace_scrope
 ### if condition1 and condition2 的执行顺序
     - 如果condition1 为false, 就直接返回了,不会在执行condition2, 于是我们可以这样`a=4;res = True if hasattr(a, "add") and a.add(5) else False`
-        
 ### import moudle 中搜索模块的顺序
     - 输入脚本的目录
     - PYTHONPATH中的目录
     - Python默认的安装路径中
     - 实际上，解释器由 sys.path 变量指定的路径目录搜索模块，该变量初始化时默认包含了输入脚本（或者当前目录）， PYTHONPATH 和安装目录。这样就允许 Python程序了解如何修改或替换模块搜索目录。
-
 ### list.pop/remote/del 区别
     - a.remove(value)  删除首个符合条件的元素;返回空
     - a.pop(index) 删除索引并且返回
     - del a[start[, end]] 删除下标, 可以是范围
     - 值必须都有效,否则会报错
-
 ### dict.setdefault(key, value)
     - 字典中的value能为空和None
     - 如果字典中a有值(即使为空或者None), 执行该方法后还是原样, 如果没有, 就等同于添加一个新键值对
@@ -176,22 +171,18 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
     b[0] = 5这不是赋值，而是改变b[0]数据块所指的值
     ```
     - 简单的object，copy与deepcopy没有区别，而复杂的object(对象中嵌套对象的)，copy与deepcopy在是引用还是复制其子对象（如嵌套在里面的list）就有所
-
 ### 单例模式的几种实现方法
 - [link](https://www.cnblogs.com/huchong/p/8244279.html)
 - 某些类我们希望在程序运行期间只有一个实例存在，比如读取配置信息的appconfig类
 ### 实现单例的几种方法
     - 通过模块
         python的模块就是一个天然的单例模式，模块在第一次导入时会生成.pyc文件，在以后import的时候，会直接加载.pyc文件，而不会再重新执行模块代码
-
 ### 关于对数据的称呼 如变量和数据对象的理解 如a = 1
     - 1 就是数据对象, a就是变量
     - 变量三要素 标识/类型/值 其中的值就是数据对象 标识是内存中的地址, 但这个地址存的是数据还是这个变量呢? 即数据对象和变量究竟对等不对等
     - 变量就是对象的别名, 我们可以通过变量找到对象,进而操纵对象
     - 标识是数据对象在内存中的地址
     - 在python总, 数据对象并不是只指向内存地址, 地址中存放值, 数据对象是一个结构体,当中有数据的值, 还有辅助的变量如维护引用计数的值
-  
-
 ### 绝对引用 绝对导入absolute_import和unicode_literals 与相对导入, python3 默认是绝对导入
     - from __future__ import absolute_import
     - 前者是为了解决自定义文件名和包名冲突的情况 如果自定义了一个string.py 会和库中的string冲突
@@ -202,7 +193,6 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
     - 地址引用 形参存储的是实参的地址
     - python中不支持指定 地址引用或者值引用。python中是传对象引用，如果传入的是可变对象，那么实参就不会改变，如果传入的是可变对象，那么就会改变
     - c支持选择地址引用还是值引用[link](https://www.cnblogs.com/hahahakc/p/14241166.html)
-
 ### python 理解赋值 [link](https://blog.csdn.net/dta0502/article/details/80827359)
     - a = xxx 将对象xxx赋值给变量a
     - 赋值语句总是建立对象的引用，而不是复制对象
@@ -215,13 +205,11 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
     [link](https://blog.csdn.net/liuchunming033/article/details/87643041)
     返回传入字符串格式的表达式的结果，变量赋值时，把等号右边的表达式写成字符串的格式，将这个字符串作为eval的参数
     eval 也可以被用来执行系统命令 如`eval("__import__('os').system('ls /Users/chunming.liu/Downloads/')")` 所以很危险
-
 ### (for else)/(while else)/(try else)
     for 如果正常结束 else中内容会执行 
     while 如果正常结束 else中内容会执行
     try 是如果try中的内容正常执行了，执行else中内容
     总的来说都是正常结束了，会执行else中内容
-
 ### 方法和函数的区别
     方法绑定在对象上面，通过对象调用; 方法被调用时,self会自动加到函数参数列表首位;method 就是封装了一个func和一个对象
     函数可以独立运行
@@ -230,8 +218,6 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
     func.__code__ 对象
     inspect.stack()， inspect.signature()， sys._getframe()等api应该可以获取调用my_super的函数的第一个参数
     [异常信息](https://www.cnblogs.com/oddcat/articles/11362961.html) 
-
-
 ### timeit 
     只能在ipython的交互式命令行中直接使用
     其他版本的python命令行中也能使用
@@ -242,7 +228,6 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
     None is 任何对象都是False，除非他自己
     如果__eq__方法没被重载过，'' [] 等空值 == None 的结果也是False，并且使用== 和None比较也是不符合PEP8规范的。
     is 比 == 快很多
-
 ### 字符串连接时编译和运行
     ```python
     >>> s1 = "hell"
@@ -311,7 +296,6 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
     但是从内存地址来说，如果这个地址存储的是可变类型变量，那么如果变量改变了，他还存在这里
     如果一个不可变类型被改变了，那地址也会更改
     不可变：int str tuple 元组的内容是不可变的，但是其中如果嵌套的有列表这些可变数据类型a，那么可以通过改变这个a的值来改变元组的值，这是元组对已经绑定的可变对象的绑定关系是不可变的，就是元组里的索引一旦绑定了一个对象，就不能修改这个绑定，不能再将这个索引绑定到其它对象。但是如果元组的元素包含可变对象，那元组的内容是可以改变的，因为可变对象的值可以改变
-
 ### `python -m venv` -m参数的含义 相当于import,叫做当做模块来启动，不同的加载py文件的方式，主要是影响——sys.path 这个属性。sys.path 就相当于liunx中的PATH。
 ### 使用python3的venv来创建虚拟环境
     ```python
@@ -319,13 +303,11 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
     . venv_name/bin/activate
     # 然后终端提示符前面出现了你的venv_name
     ```
-
 ### python 模块和包
     模块是单个的文件(*.py), 包是一组模块
 ### pop(key[,default]) 
     从低点对象中移除key，并且返回该key的value，如果default给的话就返回default，如果key不存在会raise KeyError
 ### __init__的作用
-    
 # 异常
 - str' object does not support item assignment 
     - 因为str类型的对象属于不可变类型
