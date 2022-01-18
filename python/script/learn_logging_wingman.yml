@@ -21,3 +21,5 @@ loggers:
 root:
   level: DEBUG
   handlers: [console_err]
+
+# 如果是指定了文件的路径，则路径文件夹必须存在

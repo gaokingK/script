@@ -1,12 +1,12 @@
 ### 从简单命令学起
-1. #### [数据类型](https://www.runoob.com/redis/redis-data-types.html)
+### [数据类型](https://www.runoob.com/redis/redis-data-types.html)
 - string 指的是单个单个的键值对 `set get del`
 - hash 是键值对的集合 `hmset hash_name key1 value1 ...` `hget`
 - list 列表
 - set 集合
 - zset 有序集合 根据权值排序
 
-2. #### scan
+### scan
 - link:
   - 简单: https://www.cnblogs.com/wy123/p/10955153.html
   - 详细: https://blog.csdn.net/qq_40399646/article/details/109034331
@@ -56,7 +56,7 @@
   - 在同一时间， 可以有任意多个客户端对同一数据集进行迭代， 客户端每次执行迭代都需要传入一个游标， 并在迭代执行之后获得一个新的游标， 而这个游标就包含了迭代的所有状态， 因此， 服务器无须为迭代记录任何状态。
 
 
-3. #### string
+### string
 - link
   - https://blog.csdn.net/qq_40399646/article/details/108906116#t21
 - API
