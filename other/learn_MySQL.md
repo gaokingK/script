@@ -30,7 +30,14 @@ MariaDB [(none)]> # none 是当前使用数据库的名字
 - help contents 按目录查看
 - help create database;
 - Mycli 是一个 MySQL，MariaDB 和 Percona 命令行客户端，具有自动补全、智能补全、别名支持、页面调整和语法高亮功能。
+- 帮助网站
+	- https://riptutorial.com/sql/example/938/implicit-join
+	- http://www.jooq.org/doc/latest/manual/sql-building/sql-statements/select-statement/implicit-join/
+  - [ourmysql](http://ourmysql.com/)
 ### 管理MySQL
+- 允许通过远程链接
+  - link: https://blog.csdn.net/weixin_52988911/article/details/120100574
+  - 允许用户myuser从ip为192.168.1.6的主机连接到mysql服务器,使用mypassword作为密码`GRANT ALL PRIVILEGES ON *.* TO 'myuser'@'192.168.0.1' IDENTIFIED BY'mypassword' WITH GRANT OPTION;`
 - link: https://www.runoob.com/mysql/mysql-administration.html
 - show databases;
   - information_schema/mysql以及 performance_schema是系统数据库
@@ -52,9 +59,12 @@ MariaDB [(none)]> # none 是当前使用数据库的名字
   mysql> SHOW TABLE STATUS from RUNOOB LIKE 'runoob%';     # 表名以runoob开头的表的信息
   mysql> SHOW TABLE STATUS from RUNOOB LIKE 'runoob%'\G;   # 加上 \G，查询结果按列打印
   ```
+- 获取表的主键信息
+  `SELECT TABLE_NAME,COLUMN_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE TABLE_NAMe="Person";`
+  - link:https://www.cnblogs.com/zouhao/p/6651995.html
 
 # 简单命令
-### 表 
+# 表 
 - 创建表 help create table;
 ```
 create table table_name
@@ -74,15 +84,24 @@ alter table Person modify Id int not null auto_increment unique key comment 'id�
 alter table tbl_name change old_name new_name 随便一个属性;
 
 # 自增, 自增属性必须为key, 且一个表中自增只有一个;
-# 删除自增属性,
+# 删除自增属性, 其他的属性会消失吗?
  alter table Profession modify id int(11), drop primary key;
 ```
-- SHOW [FULL] COLUMNS FROM tbl_name [FROM db_name] [like_or_where] 等价于desc tbl_name
+- SHOW [FULL] COLUMNS FROM tbl_name [FROM db_name] [like_or_where] 等价于desc tbl_name # 查看columns status
 - 插入行
 ```
 insert into 
 ```
-### sorted by 
+
+### 列子句
+- 排序规则 collate
+  - link
+    - https://www.cnblogs.com/binjoy/articles/2638708.html
+  - 使用
+    - `collate collation_name`
+      - `CityName nvarchar(10)collate chinese_prc_ci_as null`
+    - 参数collate_name是应用于表达式、列定义或数据库定义的排序规则的名称。collation_name 可以只是指定的 Windows_collation_name 或 SQL_collation_name。
+- #### sorted by 
   - link: https://www.cnblogs.com/Guhongying/p/10541979.html
   - SELECT * FROM stu ORDER BY Sno DESC; desc 只作用于前面的一个列， 降序排列； asc是升序，默认
   - 
@@ -167,6 +186,7 @@ commit;
   - decimal(10, 4) 一共能存10位数字，小数部分最多有4位。（多的化会四舍五入后把多出来的扔掉）
   - 定义了zerofill后，插入负数会报错
 ### 连接 join
+- 连接是SQL的核心
 - 全连接应该也属于外连接吧? -------------no
 ![各种连接结果](https://www.runoob.com/wp-content/uploads/2019/01/sql-join.png)
 ![连接分类](https://images2018.cnblogs.com/blog/592892/201804/592892-20180423145538091-1111373527.png)
@@ -193,6 +213,13 @@ commit;
     - left outer join 与 left join 等价，一般写成left join
     - 可以根据where 右表为空去排除交集 注意使用is 而不是=
     `select * from tbl_A a left join tbl_B b on a.id=b.id where b.id is null(NULL)`
+    - 连接多个表
+    ```
+    select a.xx ... 
+    from a 
+    join b on xxx
+    join c on xxx
+    ```
   
   - 右连接
     - 取右表的全部, 左表按条件, 符合的显示, 不符合显示NULL
@@ -212,6 +239,37 @@ commit;
     union 
     select * from Person as a right join Profession b on a.id=b.id where a.id is null or b.id is null;
     ```
+
+# 主键
+- 主键是唯一的索引
+  - 
+- 复合主键(联合主键) 和唯一键
+  - link
+    - https://www.cnblogs.com/binjoy/articles/2638708.html
+  - 复合主键
+    - 两者是一个东西,不同叫法
+    - 一个表只允许有一个主键,但一个主键可以允许由多个字段构成,这时称为复合主键
+    - 使用方式`help constraint`
+      ```
+      CREATE TABLE product (category INT NOT NULL, id INT NOT NULL, price DECIMAL,
+                            PRIMARY KEY(category, id)) ENGINE=INNODB;
+      ```
+    - 为什么需要复合主键
+      - 为什么ID可以作为主键, 还需要复合主键呢, 因为有的表可能没有ID, 一个学生表，没有唯一能标识学生的ID，怎么办呢，学生的名字、年龄、班级都可能重复，无法使用单个字段来唯一标识
+      - 这时，我们可以将多个字段设置为主键,由这多个字段联合标识唯一性，其中，某几个主键字段值出现重复是没有问题的，只要不是有多条记录的所有主键值完全一样，就不算重复。
+  - 唯一键
+    - 限制字段的记录不重复的, 比如docker表要把`ip, port, delete_time` `name, delete_time`做成两个唯一键
+# 索引
+- 主键和唯一索引的区别
+  - link
+    - https://blog.csdn.net/weixin_38750084/article/details/84885565
+    - https://www.cnblogs.com/-619569179/p/6528896.html
+  - 主键是一种约束，唯一索引是一种索引，两者在本质上是不同的。
+  - 主键不允许空值，唯一索引允许空值
+  - 主键只允许一个，唯一索引允许多个
+  - 主键产生唯一的聚集索引，唯一索引产生唯一的非聚集索引
+- 索引的特点
+  - 索引可以提高查询的速度。
 # 问题
 - SQL 中主要关键字的执行顺序
 ```
@@ -249,3 +307,12 @@ use database_name 时可以不用加
   - 至于table_factor/join_table是什么意思?
 - implicit join是什么?
   - http://www.jooq.org/doc/3.1/manual/sql-building/sql-statements/select-statement/implicit-join/
+  - https://www.cybertec-postgresql.com/en/postgressql-implicit-vs-explicit-joins/#:~:text=An%20implicit%20join%20is%20the%20simplest%20way%20to,commo%20n%20way%20to%20connect%20two%20tab%20les.        --------no
+  - 隐式join就是不包含join关键字, 表与表之间使用逗号分割, 在where中定义之间的关系, 可以在form后跟多个表
+  - 不建议使用的原因:
+    - 可能会导致cross join, 意外的得到不正确的结果, 尤其是当在查询中有很多链接的时候
+    - 如果你故意使用隐私链接来完成全连接, 这不是一个清晰的句法(井盖使用Cross join去替代), 也不利于别人维护
+  - 好处
+  ```
+  select a.name, b.name from Person a, Profession b where a.id=b.id;
+  ```

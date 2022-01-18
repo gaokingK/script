@@ -23,7 +23,7 @@
     rm "$var"
    ```
 
-3. #### glob模式 Word Splitting IFS
+3. #### glob模式 Word Splitting IFS 分隔符
    - [Linux shell 通配符 / glob 模式](https://www.cnblogs.com/divent/archive/2016/08/11/5762154.html)
    - glob 模式（globbing）也被称之为 shell 通配符
    - shell 通配符 / glob 模式通常用来匹配目录以及文件，而不是文本！！！
@@ -35,6 +35,7 @@
 4. #### sh bash 不同
    - 定义函数时不同, sh 的函数不能带括号?
    - sh 不支持function
+   - bash -n xxx.sh shell脚本语法检查
 5. #### (文件描述符 fd)[https://blog.csdn.net/yushuaigee/article/details/107883964]
    -  `echo log > /dev/null 2>&1`
 6. #### bash -c "cmd or path_to_script_what_have_exec_permission" 使用bash执行命令，命令要用双括号，

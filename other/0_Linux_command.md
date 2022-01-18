@@ -21,8 +21,15 @@
    - type 用来区分某个命令到底是由shell自带的，还是由shell外部的独立二进制文件提供的。如果一个命令是外部命令，那么使用-p参数，会显示该命令的路径，相当于which命令
    - locate 
      locate命令实际是"find -name"的另一种写法，但是查找方式跟find不同，它比find快得多。因为它不搜索具体目录，而是在一个数据库(/var/lib/mlocate/mlocate.db)中搜索指定的文件。次数据库含有本地文件的所有信息，此数据库是linux系统自动创建的，数据库由updatedb程序来更新，updatedb是由cron daemon周期性建立的，默认情况下为每天更新一次
+<<<<<<< HEAD
    - 
 3. #### shell 多行注释
+=======
+1. ### 标准输入 标准输出
+   - 管道符后面的内容可以从/dev/stdin 读入
+     - cat file_name |awk xxxx |sh /dev/stdin # awk 后当成命令执行
+2. #### shell 多行注释
+>>>>>>> 0cc22dd09c3c9bba54178bd8dfee7ed146cd75d8
    ```shell
    # 方法1 block自定义的单词（可以是字符） 推荐
    :<<！
@@ -184,17 +191,17 @@ bash -s stable <tmp.sh
    3. -R 若目录下有文件，则以下之文件亦皆依序列出
    4. ls -d 显示目录
 13. #### linux中单引号‘ ,双引号“, 反引号 ` `, $, $(), ${}与变量；shell中各种括号的作用()、(())、[]、[[]]、{}
-   5. [shell中各种括号的作用()、(())、[]、[[]]、{}](https://blog.csdn.net/taiyang1987912/article/details/39551385?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link) -------------------------------------------no
-   6. [linux 单引号‘ ,双引号“, 反引号 ` `, $, $(), ${}与变量](https://blog.csdn.net/qq_40491569/article/details/83688652)
-   7. [shell中的(),(()),{},=,==,[],[[]]几种语法用法](https://blog.csdn.net/Michaelwubo/article/details/81698307)
-   8. 不加引号、单引号、双引号的区别：
+   1. [shell中各种括号的作用()、(())、[]、[[]]、{}](https://blog.csdn.net/taiyang1987912/article/details/39551385?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link) -------------------------------------------no
+   2. [linux 单引号‘ ,双引号“, 反引号 ` `, $, $(), ${}与变量](https://blog.csdn.net/qq_40491569/article/details/83688652)
+   3. [shell中的(),(()),{},=,==,[],[[]]几种语法用法](https://blog.csdn.net/Michaelwubo/article/details/81698307)
+   4. 不加引号、单引号、双引号的区别：
       1. 单引号剥夺了所有字符的特殊含义, 里面的就是单纯的字符, 双引号不会
       2. ![单引号：所见即所得。双引号：解析特殊符号，特殊符号有了原本的特殊意思 不加引号：比较特殊，支持通配符](https://images2015.cnblogs.com/blog/1038183/201705/1038183-20170507173906929-1826372684.png)
-   9. 使用$来使用变量 echo $a
-   10. 变量赋值的时候, 如果含有空格 需要用单引号或者双引号
-   11. $(cmd) 会将命令的执行结果赋值给变量 如 `a=$(echo aaa)`; 反引号也可以 for line in `ls *.apk`
-   12. ${ }中放的是变量，例如echo ${hello}取hello变量的值并打印，也可以不加括号比如$hello。
-   13. () 是开一个子shell执行里面的命令
+   5. 使用$来使用变量 echo $a
+   6. 变量赋值的时候, 如果含有空格 需要用单引号或者双引号
+   7.  $(cmd) 会将命令的执行结果赋值给变量 如 `a=$(echo aaa)`; 反引号也可以 for line in `ls *.apk`
+   8.  ${ }中放的是变量，例如echo ${hello}取hello变量的值并打印，也可以不加括号比如$hello。
+   9.  () 是开一个子shell执行里面的命令
 14. #### read [option] [变量名] 接受键盘输入
    ![提示信息](https://images2015.cnblogs.com/blog/35158/201610/35158-20161011104351477-686622915.png)
 11. #### echo
@@ -318,15 +325,35 @@ bash -s stable <tmp.sh
       5. string 也可以是命令 `echo ${file:+$(ls 113/*.txt)}`
       6. 
 13. #### nl filename 带行号显示文件内容
-14. #### [sed](https://www.runoob.com/linux/linux-comm-sed.html)
-   1. 命令应该使用单引号不应该使用双引号
-   2. -i 直接修改文件
-   3. -e '$assssss' filename 在最后一行后添加aaaaaa
-   4. $ 代表最后一行
-   5. 最后一行追加 `sed -i '$a # This is a test' regular_express.txt`
-   6. sed -i "1a aa" a.txt 如果a是空文件，会写不进去
-   7. echo "xxxxx"|sed "s/re_/substance/g" 可以使用正则
-      1. string = "113/kbox_result_202110180959.txt" ls 113/*.txt|sed "s/*kbox_r.*t_//g" 为什么kbox前的那个星号没有用，因为sed也能用正则，但是*号代表前个模式匹配0次或者多次， 但为什没有用呢？难道前面不是null吗
+14. #### [sed](https://www.runoob.com/linux/linux-comm-sed.html）
+    - link:
+      - [官方文档](https://www.gnu.org/software/sed/manual/html_node/sed-commands-list.html#sed-commands-list)
+      - [详细](https://blog.csdn.net/hdyebd/article/details/83617292)
+    - 
+    - ##### 参数
+      - 可以使用sed [opt] 4a\ "str_append" filename # 这样来输入（防止字符串来转义）
+      - **命令应该使用单引号不应该使用双引号** 不加引号的话应该用\来分割`sed -e 1a\ hhhh\ sss change_pc_90.90.0.140.md`
+      - -i 直接修改文件
+      - -e<script>或--expression=<script> 以选项中指定的script来处理输入的文本文件。
+	- ##### 动作
+    	- $ 代表最后一行
+    	- 使用正则`echo "xxxxx"|sed "s/re_/substance/g`
+    	- a：新增
+        	```
+			sed -e 4a\ newLine testfile # 在第4行后添加
+			```
+		- i：插入 `sed -e 4inewline` # 在第4行前添加
+		- ! ：表示后面的命令对所有没有被选定的行发生作用 `sed '1!d' input.in`
+		- r 从文件读取
+	- ##### 注意
+  	- 如何将命令的结果作为sed的输入
+    	- link
+      	- https://www.thinbug.com/q/39317465
+		- `cmd | sed -i '6r /dev/stdin' file_name` # 在第6行后插入
+    - 输入换行`sed -e '1i /\nhhhh' file_name`
+    - sed -i "1a aa" a.txt 如果a是空文件，会写不进去
+    - string = "113/kbox_result_202110180959.txt" ls 113/*.txt|sed "s/*kbox_r.*t_//g" 为什么kbox的那个星号没有用，因为sed也能用正则，但是*号代表前个模式匹配0次或者多次， 但为什没有用呢？难道前面不是null吗
+
 15. #### ps -ef/ aux/ -aux的区别
    显示的风格不同;aux会截断命令,如果后面配合grep可能会影响效果;
 11. #### linux 命令分割符 `;`/`&&`/`||`

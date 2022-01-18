@@ -1,8 +1,13 @@
-1. #### 共识
+# 一些知识网站, 没事的时候可以看一下上面
+- https://martinfowler.com/eaaCatalog/index.html 
+1. ### 共识
    - 对于doc, 把自己用的给记下来, 其他的了解下就行, 慢慢补充
    - SELECT column_name(s) FROM table1; # 意思是可以选择一个列或者多个列
    - [Unique [key] 而不用 [unique [key]]
    - [COLUMN_FORMAT {FIXED|DYNAMIC|DEFAULT}] 带关键字参数的
+2. ### 有些错误别着急，重试，重启 说不定就好了    
+4. ### mssql 指微软的SQLServer数据库服务器 ms sql
+5. ### RFC-1738 URL组合规范大概是
 2. #### [帮助中心]https://help.aliyun.com/document_detail/70478.html
 ### json 布尔值类型
    - true; false
@@ -47,6 +52,7 @@
    - LTO 
      Link Time Optimization (LTO)
    - GA(Generally Available) 通用版本
+   - 关系数据库管理系统(RDBM)
 11. #### 术语
    1. 性能抖动
    2. 句柄(session orm database)
