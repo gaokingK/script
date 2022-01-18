@@ -5,26 +5,28 @@
    - SELECT column_name(s) FROM table1; # 意思是可以选择一个列或者多个列
    - [Unique [key] 而不用 [unique [key]]
    - [COLUMN_FORMAT {FIXED|DYNAMIC|DEFAULT}] 带关键字参数的
+### MVCC(Mutil-Version Concurrency Control) 多版本并发控制
+   - 是一种并发控制的方法， 一般在数据库管理系统中， 实现对数据库的并发访问
 2. ### 有些错误别着急，重试，重启 说不定就好了    
-4. ### mssql 指微软的SQLServer数据库服务器 ms sql
-5. ### RFC-1738 URL组合规范大概是
-2. #### [帮助中心]https://help.aliyun.com/document_detail/70478.html
-3. ### IOPS（Input/Output Operations Per Second）
+3. ### mssql 指微软的SQLServer数据库服务器 ms sql
+4. ### RFC-1738 URL组合规范大概是
+5. #### [帮助中心]https://help.aliyun.com/document_detail/70478.html
+6. ### IOPS（Input/Output Operations Per Second）
    - 是一个用于计算机存储设备（如硬盘（HDD）、固态硬盘（SSD）或存储区域网络（SAN））性能测试的量测方式，可以视为是每秒的读写次数
-4. ### VNC
+7. ### VNC
    - Virtual Network Console 虚拟网络控制台， 可以连接到远程环境，像ssh一样
-5. ### libsodium 
+8. ### libsodium 
    - Sodium is a modern, easy-to-use software library for encryption, decryption, signatures, password hashing and more. 
    - https://doc.libsodium.org/
-6. ### URL中%2F,%2B等特殊字符
+9. ### URL中%2F,%2B等特殊字符
    - link： https://blog.csdn.net/w892824196/article/details/108198197
    -  %2B 表示+号
-7. ### MSVC 微软VC运行库
+10. ### MSVC 微软VC运行库
    - VC运行库，是Visual C++的运行库。很多程序在编制的时候，使用了微软的运行库，大大减少了软件的编码量，却提高了兼容性。但运行的时候，需要这些运行库。这些运行库简称就是MSVC。
-8. #### BMP(Basic Multilingual Plane)
+11. #### BMP(Basic Multilingual Plane)
    - 基本多文种平面，BMP(Basic Multilingual Plane)，或称第零平面(Plane 0)，是Unicode中的一个编码区段
    - 是表示各种语言的
-9.  #### Seafile
+12. #### Seafile
    - Seafile 是一个开源的文件云存储平台
 11. #### wayland和weston的介绍
    - [Linux图形系统] https://blog.csdn.net/ztguang/article/details/80452717

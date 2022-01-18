@@ -1,4 +1,7 @@
 ### 通识
+### python -i -c 
+    - -i -i其实就是执行文件内容或者执行命令后再进入交互模式。不会去读取$PYTHONSTARTUP这个配置文件。
+    - -c 执行命令`python -i -c "print 'hello world'"`
 1. #### 字符串
 2. #### Python 如何声明变量类型
    - from typing import List def hello(con: List)
