@@ -1,13 +1,14 @@
 """
 #关于logger的配置
-- ## link
+## link
     - [多模块使用logging、日志回滚](https://www.cnblogs.com/qianyuliang/p/7234217.html)
+        - 如果在同一个程序中一直都使用同名的logger，其实会拿到同一个实例，使用这个技巧就可以跨模块调用同样的logger来记录日志。
         - 略
     - [更详细的一篇文章](https://blog.csdn.net/lilong117194/article/details/82852054)
         - 主要参考这个来了解logging模块， 具体的使用看别的
     - [配置日志的几种方式](https://www.cnblogs.com/yyds/p/6885182.html)
     - [logging.handlers.TimedRotatingFileHandler()使用](https://www.codingdict.com/sources/py/logging.handlers/9083.html)
-- ## 问题
+## 问题
     - TimedRotatingFileHandler 另一个程序正在使用此文件,进程无法访问
         - link： https://www.cnblogs.com/zepc007/p/10936623.html
         - 未解决：因为是window上出现的，放在linux就没问题
@@ -18,13 +19,18 @@
     - root logger 的问题
         - root日志器会重复输出其他日志器输出的日志
     - 文件锁、过滤
-- ## logging 简介
+    - get_logger/getLogger
+        - 如果参数为空，默认获取rootlogger
+        - 如果获取name logger不存在，也获取rootlogger
+    - ValueError: Unable to configure handler 'file_handler'
+        - file_handler 中指定的文件路径应该被创建
+## logging 简介
     - logging里定义了五个日志级别， 从低到高分别是debug<info<warning<error<critacal, 也可以自己定义日志级别，但不推荐，因为会对别人带来影响
-- ## logging模块的使用方式介绍
+## logging模块的使用方式介绍
     - 第一种方式是使用logging提供的模块级别的函数
     - 第二种方式是使用Logging日志系统的四大组件
     - 其实，logging所提供的模块级别的日志记录函数也是对logging日志系统相关类的封装而已。
-- ## 使用logging提供的模块级别的函数记录日志
+## 使用logging提供的模块级别的函数记录日志
     ```
     LOG_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
     logging.basicConfig(filename='my.log', level=logging.DEBUG, format=LOG_FORMAT)
@@ -44,7 +50,7 @@
         - exc_info： 其值为布尔值，如果该参数的值设置为True，则会将异常异常信息添加到日志消息中。如果没有异常信息则添加None到日志信息中。
         - stack_info： 其值也为布尔值，默认值为False。如果该参数的值设置为True，栈信息将会被添加到日志信息中。
         - extra： 这是一个字典（dict）参数，它可以用来自定义消息格式中所包含的字段，但是它的key不能与logging模块定义的字段冲突。
-- ## logging模块日志流处理流程
+## logging模块日志流处理流程
 在介绍logging模块的高级用法之前，很有必要对logging模块所包含的重要组件以及其工作流程做个全面、简要的介绍，这有助于我们更好的理解我们所写的代码（将会触发什么样的操作）。
     - logging日志模块四大组件
         - 日志器(对应类名：Logger)：提供了应用程序可一直使用的接口
@@ -63,7 +69,7 @@
         - logging.getLogger()方法有一个可选参数name，该参数表示将要返回的日志器的名称标识，如果不提供该参数，则其值为'root'。若以相同的name参数值多次调用getLogger()方法，将会返回指向同一个logger对象的引用。
         - 略
     - 略
-- ## 配置日志的几种方式
+## 配置日志的几种方式
     - 有三种方式来配置
         - 使用Python代码显式的创建loggers, handlers和formatters并分别调用它们的配置函数；
             - logging.basicConfig()也就是这种方式
@@ -71,7 +77,10 @@
         - 创建一个日志配置文件，然后使用fileConfig()函数来读取该文件的内容；
         - 创建一个包含配置信息的dict，然后把它传递个dictConfig()函数；
             - 更加灵活，因为我们可把很多的数据转换成字典。
-- ## 一个实际的配置
+## TimedRotatingFileHandler
+- when: midnight [取值](https://docs.python.org/2/library/logging.handlers.html#logging.handlers.TimedRotatingFileHandler)
+
+## 一个实际的配置
 """
 import logging
 import logging.config

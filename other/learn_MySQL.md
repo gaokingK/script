@@ -80,9 +80,12 @@ alter table tbl_name change old_name new_name 随便一个属性;
 - SHOW [FULL] COLUMNS FROM tbl_name [FROM db_name] [like_or_where] 等价于desc tbl_name
 - 插入行
 ```
-insert into
+insert into 
 ```
-
+### sorted by 
+  - link: https://www.cnblogs.com/Guhongying/p/10541979.html
+  - SELECT * FROM stu ORDER BY Sno DESC; desc 只作用于前面的一个列， 降序排列； asc是升序，默认
+  - 
 ### select
 - help select
 - select_expr
@@ -90,6 +93,12 @@ insert into
   - 表达式 是mysql函数如 AVG/count : https://www.runoob.com/mysql/mysql-functions.html
     - count() 返回查询的记录总数 `select id, count(*) as address_count from tbl_b group by id AS tbl_new;` 返回tbl_b的行数, 并生成一个两列名分别为id, address_count(表示tbl_b中id的个数)的新表, 新表名为tbl_new 用在查询中; 需要靠id分组, 要不只有一行
 ### insert
+```
+insert into 列名不需要加双引号
+```
+### update
+```
+```
 ### union
   - UNION 用于把来自多个 SELECT 语句的结果组合到一个结果集合中
   - 多个 SELECT 语句中，对应的列应该具有相同的字段属性，且第一个 SELECT 语句中被使用的字段名称也被用于结果的字段名称
@@ -145,7 +154,7 @@ commit;
 
   - 行格式 compact redundant DYNAMIC COMPRESSED
     - 在 msyql 5.7.9 及以后版本，默认行格式由innodb_default_row_format变量决定，它的默认值是DYNAMIC，也可以在 create table 的时候指定ROW_FORMAT=DYNAMIC。用户可以通过命令 SHOW TABLE STATUS LIKE'table_name' 来查看当前表使用的行格式，其中 row_format 列表示当前所使用的行记录结构类型。
-    - 一个表的行格式决定了它的物理存储,进而会影响查询和DML(Data Manipulation Language)操作的性能
+    - 一个表的行格式决定了它的物理存储,进而会影响查询和DML(Data Manipulation Language 数据操作语言)操作的性能
 
 
 ### 数据类型
@@ -154,6 +163,9 @@ commit;
   - link: https://www.cnblogs.com/wayne173/p/3747477.html
   - 从小到大是 tinyint/smallint/mediumint/int/bight
 
+- decimal
+  - decimal(10, 4) 一共能存10位数字，小数部分最多有4位。（多的化会四舍五入后把多出来的扔掉）
+  - 定义了zerofill后，插入负数会报错
 ### 连接 join
 - 全连接应该也属于外连接吧? -------------no
 ![各种连接结果](https://www.runoob.com/wp-content/uploads/2019/01/sql-join.png)

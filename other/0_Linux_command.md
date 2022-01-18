@@ -1,8 +1,20 @@
-### doc comm
+# doc comm
    1. [link1](http://www.gnu.org/software/bash/manual/bash.html#Process-Substitution)
-### other
+# other
+## tmux 
+- link: http://www.ruanyifeng.com/blog/2019/10/tmux.html
+- 新建窗口： ctrl + b, c
+- 切换窗口：ctrl + b, n
+ 
+#### CentOS系统Tab补全功能
+- link: https://blog.csdn.net/RunSnail2018/article/details/81185957
+- yum install bash-completion
+#### pkill
+- Linux pkill 用于杀死一个进程，与 kill 不同的是它会杀死指定名字的所有进程，类似于 killall 命令
+- -t 指定开启进程的终端
+- 也能发送信号
 1. #### 应用一般安装在/usr/share/ /usr/local 下
-1. #### which whereis type locate find 
+2. #### which whereis type locate find 
    - link: https://www.cnblogs.com/danmiao/p/10081620.html
    - which  查找命令是否存在，以及命令的存放位置在哪儿。
    - whereis 只能用于搜索程序名，而且只搜索二进制文件（参数-b）、man说明文件（参数-m）和源代码文件（参数-s）。如果省略参数，则返回所有信息。
@@ -10,7 +22,7 @@
    - locate 
      locate命令实际是"find -name"的另一种写法，但是查找方式跟find不同，它比find快得多。因为它不搜索具体目录，而是在一个数据库(/var/lib/mlocate/mlocate.db)中搜索指定的文件。次数据库含有本地文件的所有信息，此数据库是linux系统自动创建的，数据库由updatedb程序来更新，updatedb是由cron daemon周期性建立的，默认情况下为每天更新一次
    - 
-2. #### shell 多行注释
+3. #### shell 多行注释
    ```shell
    # 方法1 block自定义的单词（可以是字符） 推荐
    :<<！
@@ -22,15 +34,20 @@
    被注释的内容
    '
    ```
-3. ### 查看端口
+4. ### 查看端口
    - 端口是否被占用`lsof -i 8080`
      - link: https://www.runoob.com/w3cnote/linux-check-port-usage.html
      - 应该用root来执行，否之看不到
    - netstat -tunlp 用于显示 tcp，udp 的端口和进程等相关情况。`netstat -tunlp | grep 8000`
-4. ### lsof 列出系统啥进程打开了啥文件
+     - -t (tcp) 仅显示tcp相关选项
+     - -u (udp)仅显示udp相关选项
+     - -n 拒绝显示别名，能显示数字的全部转化为数字
+     - -l 仅列出在Listen(监听)的服务状态
+     - -p 显示建立相关链接的程序名
+5. ### lsof 列出系统啥进程打开了啥文件
    - link：https://www.runoob.com/w3cnote/linux-check-port-usage.html
    - lsof +d /usr/local/：显示目录下被进程开启的文件
-5. #### 进程替换 与 Here document --------------no
+6. #### 进程替换 与 Here document --------------no
    1. 形如<(command)的写法叫做**process substitution**
    2. [解释了底层怎样支持](https://www.oschina.net/question/113421_241288)
    3. [进程替换](https://www.runoob.com/w3cnote/shell-process-substitution.html) ---------no
@@ -105,8 +122,9 @@ bash -s stable <tmp.sh
    - -u unique 
    - 不加选项的时候 sort 命令将以默认的方式将文本文件的第一列以 ASCII 码的次序排列
 13. #### less
-   1. [link](https://www.cnblogs.com/molao-doing/articles/6541455.html)
-   2. less file1 file2 `:n :p 切换文件（next/previous`
+   - [link](https://www.cnblogs.com/molao-doing/articles/6541455.html)
+   - less file1 file2 `:n :p 切换文件（next/previous`
+   - -N 显示每行的行号
 14. #### ps -ef|-aux 区别 -------------------------no
 15. #### Bash内建参数 和 bash 参数
     - -s 允许在调用交互式shell时设置位置变量, 可以将标准输入 作为命令 去使用参数
@@ -122,9 +140,9 @@ bash -s stable <tmp.sh
     $ bash -s stable < <(cat test.sh) # d等上
     ``` 
 
-17. #### touch 
-   6. touch -r 文件    文件夹 # 意思是把文件的日期设置给文件夹。
-18. #### linux 特殊符号和通配符 
+16. #### touch 
+   3. touch -r 文件    文件夹 # 意思是把文件的日期设置给文件夹。
+17. #### linux 特殊符号和通配符 
    ```shell 
    # https://www.cnblogs.com/0zcl/p/6821213.html
    |     #管道符，或者（正则）
@@ -270,6 +288,16 @@ bash -s stable <tmp.sh
    - -empty
    - -delete 直接删除查询结果（怎么删除文件夹呢）
       使用delete 和 -exec rm {} 删除文件夹会报错 ---------------------no
+      ```
+      find . -type d -name "__pycache__" -exec rm -r {} \; # 又执行一遍就好了
+      [root@localhost src]# find . -type d -name "__pycache__" -exec rm -r {} \;
+      find: ‘./processor/__pycache__’: No such file or directory
+      find: ‘./dataset/__pycache__’: No such file or directory
+      find: ‘./predict/__pycache__’: No such file or directory
+      find: ‘./analyzer/__pycache__’: No such file or directory
+      find: ‘./__pycache__’: No such file or directory
+
+      ```
    - `find . -name "*.txt" -ctime -7 -exec grep  -H -E ".*jinshan.*open.*004.*" {} \;` grep在find -exec选项中显示文件名
    - 显示文件名 不显示路径 find . -name "*.log" -exec basename {} \;
    - -depth ---------------------------------------------------------no

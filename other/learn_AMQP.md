@@ -1,6 +1,6 @@
 ### AMQP概述
 [link](https://blog.csdn.net/weixin_37641832/article/details/83270778)
-AMQP(Advanced Message Queuing Protocol)高级消息队列协议是一个进程间传递异步消息的网络协议
+AMQP(Advanced Message Queuing Protocol)高级消息队列协议 是一个进程间传递异步消息的网络协议
 ```mermaid
 graph LR
 A[发布者]-->B[交换机Exchange] --> C[队列Queue] --> D[消费者]

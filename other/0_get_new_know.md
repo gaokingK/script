@@ -4,6 +4,14 @@
    - [Unique [key] 而不用 [unique [key]]
    - [COLUMN_FORMAT {FIXED|DYNAMIC|DEFAULT}] 带关键字参数的
 2. #### [帮助中心]https://help.aliyun.com/document_detail/70478.html
+### json 布尔值类型
+   - true; false
+### semanage
+- semanage命令 是用来查询与修改SELinux默认目录的安全上下文。
+### erlang
+   - Erlang是一种通用的面向并发的编程语言，它由瑞典电信设备制造商爱立信所辖的CS-Lab开发，目的是创造一种可以应对大规模并发活动的编程语言和运行环境。
+   - Erlang是运行于虚拟机的解释性语言，但是也包含有乌普萨拉大学高性能Erlang计划（HiPE）开发的本地代码编译器
+   - 进程间上下文切换对于Erlang来说仅仅 只是一两个环节，比起C程序的线程切换要高效得多得多了。
 3. ### IOPS（Input/Output Operations Per Second）
    - 是一个用于计算机存储设备（如硬盘（HDD）、固态硬盘（SSD）或存储区域网络（SAN））性能测试的量测方式，可以视为是每秒的读写次数
 4. ### VNC
@@ -16,10 +24,10 @@
    -  %2B 表示+号
 7. ### MSVC 微软VC运行库
    - VC运行库，是Visual C++的运行库。很多程序在编制的时候，使用了微软的运行库，大大减少了软件的编码量，却提高了兼容性。但运行的时候，需要这些运行库。这些运行库简称就是MSVC。
-8. #### BMP(Basic Multilingual Plane)
+8.  #### BMP(Basic Multilingual Plane)
    - 基本多文种平面，BMP(Basic Multilingual Plane)，或称第零平面(Plane 0)，是Unicode中的一个编码区段
    - 是表示各种语言的
-9.  #### Seafile
+11. #### Seafile
    - Seafile 是一个开源的文件云存储平台
 11. #### wayland和weston的介绍
    - [Linux图形系统] https://blog.csdn.net/ztguang/article/details/80452717

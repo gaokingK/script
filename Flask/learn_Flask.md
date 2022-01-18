@@ -22,6 +22,7 @@
             return redirect(url_for('success',name = user))
         else:
             user = request.args.get('nm')
+            # user = request.args.get("nm", type=bool)# 只有字符串为空才会是False 请求参数传递bool布尔值
             return redirect(url_for('success',name = user))
     ```
 
