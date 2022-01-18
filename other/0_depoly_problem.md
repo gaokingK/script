@@ -52,6 +52,8 @@ sudo apt-get update
       - apt-get和apt-cache是Ubuntu Linux中的命令行下的包管理工具
 
 # yum 
+- RPM-based Linux (RedHat Enterprise Linux, CentOS, Fedora, openSUSE) yum 适用的系统
+- yum provides semanage # 查询semanage 这个命令是哪个包提供的，或者查询libcrypto.so.6在那个包中，然后再安装这个包
 - 更换源
     ```
 	# 备份配置文件：
@@ -89,6 +91,22 @@ sudo apt-get update
 	同上 先试下网络通不通ping mirror.lzu.edu.cn
 	- 尝试使用root用户来yum， 141就是普通用户会出错
 	```
+# nginx
+- nginx: [emerg] bind() to 127.0.0.1:31302 failed (13: Permission denied)
+	- link: https://blog.csdn.net/RunSnail2018/article/details/81185138
+	- 解决：
+		- 1024以下端口启动时需要root权限, sudo nginx即可。
+		- 端口大于1024
+			- semanage port -l | grep http_port_t # 查看http允许访问的端口
+			- semanage port -a -t http_port_t  -p tcp 8090 # 将要启动的端口加入到如上端口列表中
+	- 另一种方式https://blog.csdn.net/qq_32448349/article/details/109725173
+- nginx: [emerg] bind() to 127.0.0.1:31302 failed (98: Address already in use)
+	- link： https://blog.csdn.net/weixin_38450689/article/details/75142404
+	- 解决：
+		- netstat -tunlp # 查看端口占用情况
+			- 发现是nginx 占用 就pkill nginx
+			- 或者fuser -k 80/tcp
+		- 重新启动nginx
 # 安装PyQt5
     - 之前pip install PyQt5老是出错, 报错提示依赖的xxx不满足什么的,我以为是源里没有这个东西,结果看了这个链接,才发现有的包是需要依赖的
     - [基于arm64的ubuntu18.04的qt5与pyqt5环境搭建](https://blog.csdn.net/yikunbai5708/article/details/103569677)
@@ -123,6 +141,7 @@ sudo apt-get update
 - `manylinux1`
   - manylinux1 wheels are built on a baseline linux environment based on Centos 5.11 and should work on most x86 and x86_64 glibc based linux environments.
 # pip
+	-u 如果以安装就升级到最新版
 	- pip 离线安装 whl
 		- 下的慢的话可以直接在浏览器里下载
 		- `pip install /path/to/xxx.whl`
@@ -204,7 +223,11 @@ sudo apt-get update
 # redis安装
 	 安装后reids-cli cu出现 connection refuse
 	 1. systemctl status redis 
-   
+
+# rabbitmq 安装
+- link：
+  - https://www.rabbitmq.com/install-rpm.html
+
 # virtualenv
 - ## link：
     - [看这个 virtualenv，virtualenvwrapper安装及使用 ](https://www.cnblogs.com/zixinyu/p/11308659.html)
@@ -264,5 +287,5 @@ sudo apt-get update
 	- `virtualenvwrapper` 命令的完全列表 。
 	- `cpvirtualenv oldenv newenv; rmvirtualenv oldenv` 重命名虚拟空间
 
-1. #### 铜豌豆
+### 铜豌豆
    - https://www.atzlinux.com/allpackages.htm

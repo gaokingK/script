@@ -74,3 +74,4 @@
 - To use MSVC from a command line or VS Code, you must run from a Developer Command Prompt for Visual Studio.(不翻译）An ordinary shell such as PowerShell, Bash, or the Windows command prompt does not have the necessary path environment variables set. PowerShell、Bash 或 Windows 命令提示符等普通 shell 没有设置必要的路径环境变量。 （而不是说xxx是像PS、bash等一样的）而且还可以注意这个句号
 -  In the dropdown, which will display a tasks dropdown listing various predefined build tasks for C++ compilers.  In the dropdown, which will display a tasks dropdown listing various predefined build tasks for C++ compilers.
 - You might need to press Enter a couple of times initially to see the PowerShell prompt in the terminal. 您最初可能需要按 Enter 几次才能在终端中看到 PowerShell 提示符。
+- The URL was defined with a trailing slash so Flask will automatically redirect to the URL with the trailing slash if it was accessed without one. URL是用斜杠定义的，因此如果在没有斜杠的情况下访问该 URL，Flask 将自动重定向到带有斜杠的 URL
