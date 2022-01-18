@@ -7,3 +7,4 @@
 # vim Dockerfile
 From 镜像名 # 
 ```
+# 设置镜像源

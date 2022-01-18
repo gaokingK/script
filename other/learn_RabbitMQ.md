@@ -10,4 +10,6 @@
 - sudo rabbitmqctl set_permissions -p myvhost myuser ".*" ".*" ".*"
 - 查看用户 rabbitmqctl user list_users
 - rabbitmqctl status
+- 
 # 152
+用户 

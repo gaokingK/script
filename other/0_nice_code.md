@@ -1,5 +1,5 @@
 # 好的代码
-1. ##### 关键的日志最好有标识
+### 关键的日志最好有标识
 ```python
     print(script_log_path) 
     print(f"get path is: [{script_log_path}])

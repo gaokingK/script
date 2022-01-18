@@ -97,7 +97,7 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
    ```
 
 ### timeit的使用
-   1. [link](https://www.cnblogs.com/Uncle-Guang/p/8796507.html)
+    - [link](https://www.cnblogs.com/Uncle-Guang/p/8796507.html)
       - 关于timeer类的描述有误， 不是用timer对象去调用
     - 直接看这两个方法
     - timeit.timit()
@@ -109,14 +109,14 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
    - `hello = "HELLO"\n print(f"{{{hello.lower()}}}") # 输出{hello}`
 ### @overload ---------------------------------no
 ### python中path相关的
-   1. 环境变量：PATH和sys.path 以及PYTHONPATH
-      1. PATH 是系统的环境变量
-      2. sys.path 是python的搜索模块的路径集
+    - 环境变量：PATH和sys.path 以及PYTHONPATH
+      - PATH 是系统的环境变量
+      - sys.path 是python的搜索模块的路径集
          - sys.path.insert(0, "path1") # 将path1加入搜索路径中
          - import 相关：https://blog.csdn.net/weixin_38256474/article/details/81228492
-      3. PYTHONPATH 是环境变量PATH中的一个值， 默认是空
-      4. sys.path始化时默认包含了输入脚本所在的目录（python path/to/script, path/to 会在path中）， PYTHONPATH 和python安装目录
-      5. 修改PYTHONATH影响sys.path
+      - PYTHONPATH 是环境变量PATH中的一个值， 默认是空
+      - sys.path始化时默认包含了输入脚本所在的目录（python path/to/script, path/to 会在path中）， PYTHONPATH 和python安装目录
+      - 修改PYTHONATH影响sys.path
         ```shell
         huawei ~/Desktop/people/pc_kbox/pc_kbox% export PYTHONPATH="/5555555"
         huawei ~/Desktop/people/pc_kbox/pc_kbox% python3
@@ -132,7 +132,7 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
         ['', '/home/huawei/Desktop/people/pc_kbox/pc_kbox/5555555', '/usr/lib/python37.zip', '/usr/lib/python3.7', '/usr/lib/python3.7/lib-dynload', '/home/huawei/.local/lib/python3.7/site-packages', '/usr/local/lib/python3.7/dist-packages', '/usr/lib/python3/dist-packages']
         >>> 
         ```
-   2. 文件路径的操作封装在os.path里的方法
+   - 文件路径的操作封装在os.path里的方法
         - link:
             - [os.path()模块](https://www.runoob.com/python3/python3-os-path.html)
             - [Python3 OS 文件/目录方法](https://www.runoob.com/python3/python3-os-file-methods.html)
@@ -153,10 +153,10 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
     - 如果condition1 为false, 就直接返回了,不会在执行condition2, 于是我们可以这样`a=4;res = True if hasattr(a, "add") and a.add(5) else False`
         
 ### import moudle 中搜索模块的顺序
-   1. 输入脚本的目录
-   2. PYTHONPATH中的目录
-   3. Python默认的安装路径中
-   4. 实际上，解释器由 sys.path 变量指定的路径目录搜索模块，该变量初始化时默认包含了输入脚本（或者当前目录）， PYTHONPATH 和安装目录。这样就允许 Python程序了解如何修改或替换模块搜索目录。
+    - 输入脚本的目录
+    - PYTHONPATH中的目录
+    - Python默认的安装路径中
+    - 实际上，解释器由 sys.path 变量指定的路径目录搜索模块，该变量初始化时默认包含了输入脚本（或者当前目录）， PYTHONPATH 和安装目录。这样就允许 Python程序了解如何修改或替换模块搜索目录。
 
 ### list.pop/remote/del 区别
     - a.remove(value)  删除首个符合条件的元素;返回空
@@ -167,25 +167,22 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
 ### dict.setdefault(key, value)
     - 字典中的value能为空和None
     - 如果字典中a有值(即使为空或者None), 执行该方法后还是原样, 如果没有, 就等同于添加一个新键值对
-### 类方法、静态方法、实例方法
-
 ### copy.copy 与 copy.deepcopy不同的原因
-    [link](https://blog.csdn.net/u010712012/article/details/79754132)
-    与其他的OOP语言存储变量不同，Python中为变量赋值，并不是将值赋给变量，而是将对值的引用复制给变量
+    - [link](https://blog.csdn.net/u010712012/article/details/79754132)
+    - 与其他的OOP语言存储变量不同，Python中为变量赋值，并不是将值赋给变量，而是将对值的引用复制给变量
     ```
     a = [1,2,3]
     b = a 将对变量a的引用赋值给b
     b[0] = 5这不是赋值，而是改变b[0]数据块所指的值
     ```
-    简单的object，copy与deepcopy没有区别，而复杂的object(对象中嵌套对象的)，copy与deepcopy在是引用还是复制其子对象（如嵌套在里面的list）就有所
-
+    - 简单的object，copy与deepcopy没有区别，而复杂的object(对象中嵌套对象的)，copy与deepcopy在是引用还是复制其子对象（如嵌套在里面的list）就有所
 
 ### 单例模式的几种实现方法
-    [link](https://www.cnblogs.com/huchong/p/8244279.html)
-    某些类我们希望在程序运行期间只有一个实例存在，比如读取配置信息的appconfig类
+- [link](https://www.cnblogs.com/huchong/p/8244279.html)
+- 某些类我们希望在程序运行期间只有一个实例存在，比如读取配置信息的appconfig类
 ### 实现单例的几种方法
-    ##### 通过模块
-    python的模块就是一个天然的单例模式，模块在第一次导入时会生成.pyc文件，在以后import的时候，会直接加载.pyc文件，而不会再重新执行模块代码
+    - 通过模块
+        python的模块就是一个天然的单例模式，模块在第一次导入时会生成.pyc文件，在以后import的时候，会直接加载.pyc文件，而不会再重新执行模块代码
 
 ### 关于对数据的称呼 如变量和数据对象的理解 如a = 1
     - 1 就是数据对象, a就是变量

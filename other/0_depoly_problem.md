@@ -287,5 +287,5 @@ sudo apt-get update
 	- `virtualenvwrapper` 命令的完全列表 。
 	- `cpvirtualenv oldenv newenv; rmvirtualenv oldenv` 重命名虚拟空间
 
-1. #### 铜豌豆
+### 铜豌豆
    - https://www.atzlinux.com/allpackages.htm

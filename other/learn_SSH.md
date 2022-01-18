@@ -46,7 +46,7 @@ Get-NetFirewallRule -Name *ssh* # OpenSSH-Server-In-TCP这个状态是 enabled
 # 本地端口和远程端口
 - 其实都一样的， `ssh xxx@xxx -p 222` 对执行命令的机器来说， 222 就是要访问的远程端口， 对xxx来说， 222就是本地端口
 
-1. ### sshpass ssh带密码
+### sshpass ssh带密码
     - link：
       - https://www.cnblogs.com/misswangxing/p/10637718.html
     ```
@@ -55,8 +55,8 @@ Get-NetFirewallRule -Name *ssh* # OpenSSH-Server-In-TCP这个状态是 enabled
     # 使用 注意后面也要输入ssh
     sshpass -p passwd ssh root@192.168.11.11
     ```
-2. #### ssh 连接上去的默认路径是默认用户/或者连接使用的用户的默认～ 执行命令也是
-3. ### Linux之间配置SSH互信（SSH免密码登录）
+### ssh 连接上去的默认路径是默认用户/或者连接使用的用户的默认～ 执行命令也是
+### Linux之间配置SSH互信（SSH免密码登录）
     - [link](https://blog.csdn.net/linxc008/article/details/81278446)
     - 将已经生成的公钥私钥对id_rsa.pub发送到其他的服务器上。
     ```shell
@@ -65,12 +65,12 @@ Get-NetFirewallRule -Name *ssh* # OpenSSH-Server-In-TCP这个状态是 enabled
     # 或者手动
     ssh root@web-2 cat ~/.ssh/id_dsa.pub >> ~/.ssh/authorized_keys
     ```
-4. ### 禁止root ssh [link](https://www.cnblogs.com/toughlife/p/5633510.html)
+### 禁止root ssh [link](https://www.cnblogs.com/toughlife/p/5633510.html)
   ```
   vim /etc/ssh/sshd**
   service sshd restart
   ```
-1. #### [linux-ssh远程后台执行脚本-放置后台执行问题](https://www.cnblogs.com/vijayfly/p/6264744.html) --------------------------no
+### [linux-ssh远程后台执行脚本-放置后台执行问题](https://www.cnblogs.com/vijayfly/p/6264744.html) --------------------------no
 - ssh user@ip "command" （多个命令需要用括号包括，防止后面的命令在本地执行？）
 - 执行需要交互的命令 -t
   - 因为不加-t 不会分配终端（除非ssh user@ip），命令执行完就退出了，会提示“no tty ...”
