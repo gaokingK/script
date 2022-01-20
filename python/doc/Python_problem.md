@@ -3,7 +3,7 @@
 2. #### 鸭子类型
    - 介绍？
    - 这个特性的用处？
-3. #### 三元表达式 lambda
+3. #### 三元表达式 lambda 、lambda无参数的语法
    ```python
    from functools import reduce
 
@@ -18,7 +18,8 @@
    a = [None, False, True]
    print(reduce(la, a))
    print(reduce(exec_mode, a))
-
+   # 无参数的语法
+   [lambda : i * i for i in range(4)] 
    ```
 4. #### timeit的使用
    1. [link](https://www.cnblogs.com/Uncle-Guang/p/8796507.html)
