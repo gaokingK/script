@@ -1,17 +1,56 @@
-### git
-1. ##### git patch --------------------------------no
-2. ##### git checkout
-   1. `git checkout branch_name high_quality/dingding/function/.` 即使这个要检出的文件在现在的分支上不存在也可以检出的
-3. ##### 这张图里怎么把code从repo checkout到workspace
+# git
+## 问题
+- git stash 会把所有的改动都存起来，文件就没有改动了，但是如果此时再次改动b， 然后stash pop， 改动b仍然存在。
+- git stash error: 权限不足，无法在仓库对象库 .git/objects 中添加对象 不能记录工作区状态
+   - 等一会重试就可以了（不知道为啥， 可能是别的编辑器正在占用？）
+- error: 权限不足，无法在仓库对象库 .git/objects 中添加对象 fatal: git-write-tree: error building trees 无法保存当前索引状态
+  - insufficient permission for adding an object to repository database
+  - 原因： 服务端上把repo的owner改了，再改回来
+  - link：https://my.oschina.net/u/4437884/blog/4416200
+## other
+### git patch --------------------------------no
+### 远程分支回滚的三种方法：
+   link :https://www.cnblogs.com/Super-scarlett/p/8183348.html
+   自己的分支回滚直接用reset
+   公共分支回滚用revert
+   错的太远了直接将代码全部删掉，用正确代码替代
+### 冲突
+   - 什么情况下会有冲突
+      - user a 修改file_a 10行, commit and push, user b 已另一种内容修改file_a 10行, commit and push, 会发现push 被拒绝, 然后push -f, 这时usera 再pull 就需要merge 这种情况的解决办法:
+         - 可以user b reset --hard 然后 pull push
+         - user a add . /commit 这时log 会不对(其实也是对的), reset hard 到 双方都提交之前的那个commit ,然后在pull ,这时库上是b的改动(想想也合理)
+         - 
+### 强制更新是什么意思
+   ```
+   huawei ~/Desktop/jjw% git pull
+   remote: Counting objects: 7, done.
+   remote: Compressing objects: 100% (3/3), done.
+   remote: Total 4 (delta 3), reused 2 (delta 1)
+   展开对象中: 100% (4/4), 完成.
+   来自 90.90.0.140:/home/git/pc_kbox
+ + 2961049(本地HEAD)...20f9d9a(origin master HEAD 可以show ta) master     -> origin/master  (强制更新)
+
+   ```
+### 配置
+   - 全系统的(/etc/gitconfig)<当前用户的(~/.gitconfig)<当前仓库的(/.git/config)
+   - 某个配置在当前仓库的中的配置中取消,但查看还在的原因是用的上层的配置
+   - autocrlf 
+### git checkout
+   - `git checkout branch_name high_quality/dingding/function/.` 即使这个要检出的文件在现在的分支上不存在也可以检出的
+### 这张图里怎么把code从repo checkout到workspace
       ![git fetch和git pull的概念](http://kmknkk.oss-cn-beijing.aliyuncs.com/image/git.jpg)
-4. ##### [git fetch](https://www.cnblogs.com/runnerjack/p/9342362.html) -----------------------------no
-5. ##### [git hook](https://www.git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90)
+### [git fetch](https://www.cnblogs.com/runnerjack/p/9342362.html) -----------------------------no
+### [git hook](https://www.git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90)
    - 非0值是指程序异常退出
    - 为hook添加运行程序是chmod这样加
    - 程序需要 `#！/path/to/python3`
-6. ##### 忽略换行符
-   1. [link](https://blog.csdn.net/nanyilou_xiaoye/article/details/79075092) -------------------------no
-7. ##### 查看分支的提交历史 git log --graph --pretty=oneline --abbrev-commit branch1 branch2
+### git diff 忽略换行符格式/ 忽略所有的tab, white space, 换行符 
+   - [link](https://blog.csdn.net/nanyilou_xiaoye/article/details/79075092) -------------------------no
+   - [link](https://www.it1352.com/801295.html) ok
+      - git diff --no-index --color --ignore-all-space< file1> < file2> # 忽略换行符
+      - git diff --no-index --word-diff-regex=[^[:space:]] a.html b.html # 只看文字是否相同, 但这个没有用,不知为啥
+
+### 查看分支的提交历史 git log --graph --pretty=oneline --abbrev-commit branch1 branch2
     ```
     * fad6d82 (HEAD -> back-master, origin/master, origin/HEAD, master) 根据冒烟用例适配
     * 8f8de25 根据日构建修改
@@ -35,23 +74,38 @@
     |/  
     *   e7d9c47 Merge branch 'master' of 90.90.0.140:/home/git/pc_kbox
     ```
-8. ##### git mergetool -t opendiff --------------------------------------no
-9.  ##### git cherry-pick 来将A分支的部分提交合并到B分支上
-   1. 如果需要多个commitid `git cherry-pick commitid_a commitid_b commitid_c` 只合并这三个
-   2. 先合并a, 如果有冲突就结局, 然后git cherry-pick --continue 完成后就把a给搞好了; 然后合并b,如果有冲突, 解决,然后git cherry-pick --continue....
-10. ##### [把同一个分支里的提交放到其他的分支里](https://github.com/k88hudson/git-flight-rules/blob/master/README_zh-CN.md#rebasing-%E5%92%8C%E5%90%88%E5%B9%B6merging)
-   3. git log commitid1, commitid2, commit3
-   4. git reset --hard commit3
-   5. git checkout -b new_branch
-   6. git cherry-pick commid1 # 即使commitid 在git log中看不到了, 已经reset-hard了,仍然能找到这个commit
-11. ##### git branch
-   7. [link](https://blog.csdn.net/duxing_langzi/article/details/80295573?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link)
-   8. 在新建分支上切换到master之前, 要留意你的工作目录和暂存区里那些还没有被提交的修改， 它可能会和你即将检出的分支产生冲突从而阻止 Git 切换到该分支。 最好的方法是，在你切换分支之前，保持好一个干净的状态。 有一些方法可以绕过这个问题（即，暂存（stashing） 和 修补提交（commit amending））
-   9. 当你切换分支的时候，Git 会重置你的工作目录，使其看起来像回到了你在那个分支上**最后一次提交**的样子
-12. ##### git log -p filename /git log filename
-13. ##### git rebase
-   10. git rebase 是干什么的
-   11. ##### 使用 git rebase -i commits 来修改已经提交的commit
+### git log merge
+```
+commit dadfd7d8547cf5a34d73da27e54a00575800f667
+Merge: aef79ca e19dd62 aef79ca 是本地的, e19dd62是远端的
+Author: jjw <jjw@fuck.com>
+Date:   Wed Sep 15 09:21:00 2021 +0800
+
+    Merge branch 'master' of 90.90.0.140:/home/git/pc_kbox
+
+commit aef79cab68a700bc720888746117117b2f6c1823
+Author: jjw <jjw@fuck.com>
+Date:   Wed Sep 15 09:20:45 2021 +0800
+
+    修改抖音部分用例
+```
+### git mergetool -t opendiff --------------------------------------no
+### git cherry-pick 来将A分支的部分提交合并到B分支上
+   - 如果需要多个commitid `git cherry-pick commitid_a commitid_b commitid_c` 只合并这三个
+   - 先合并a, 如果有冲突就结局, 然后git cherry-pick --continue 完成后就把a给搞好了; 然后合并b,如果有冲突, 解决,然后git cherry-pick --continue....
+### [把同一个分支里的提交放到其他的分支里](https://github.com/k88hudson/git-flight-rules/blob/master/README_zh-CN.md#rebasing-%E5%92%8C%E5%90%88%E5%B9%B6merging)
+   - git log commitid1, commitid2, commit3
+   - git reset --hard commit3
+   - git checkout -b new_branch
+   - git cherry-pick commid1 # 即使commitid 在git log中看不到了, 已经reset-hard了,仍然能找到这个commit
+### git branch
+   - [link](https://blog.csdn.net/duxing_langzi/article/details/80295573?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link)
+   - 在新建分支上切换到master之前, 要留意你的工作目录和暂存区里那些还没有被提交的修改， 它可能会和你即将检出的分支产生冲突从而阻止 Git 切换到该分支。 最好的方法是，在你切换分支之前，保持好一个干净的状态。 有一些方法可以绕过这个问题（即，暂存（stashing） 和 修补提交（commit amending））
+   - 当你切换分支的时候，Git 会重置你的工作目录，使其看起来像回到了你在那个分支上**最后一次提交**的样子
+### git log -p filename /git log filename
+### git rebase
+   - git rebase 是干什么的
+   - ##### 使用 git rebase -i commits 来修改已经提交的commit
       - [link](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E5%86%99%E5%8E%86%E5%8F%B2)
       - 修改的那个提交在log中会有两个
       - 修改前需要清空 工作目录吗
@@ -60,9 +114,9 @@
         - error: 请提交或贮藏修改。
       - 可以stash pop 吗
         - 可以，只是要是stash pop后再把不需要的内容stash后这个stash的标题就会变成变基的那个
-##### 强推(force push) 为什么会对大的团队造成麻烦
-##### 1. 为什么切换分支后 把改动在另一个分支上提交后这个分支上就看不到改动了?
-##### 1. .gitignore 失效
+### 强推(force push) 为什么会对大的团队造成麻烦 ----------------------no
+### 为什么切换分支后 把改动在另一个分支上提交后这个分支上就看不到改动了?
+### .gitignore 失效
     在.gitignore 中定义的文件还会出现在git status中
     新建的文件在git中会有缓存，如果某些文件已经被纳入了版本管理中，就算是在.gitignore中已经声明了忽略路径也是不起作用的，这时候我们就应该先把本地缓存删除，然后再进行git的push，这样就不会出现忽略的文件了。git清除本地缓存命令如下：
     ```
@@ -71,8 +125,8 @@
     git add .
     git commit -m 'update .gitignore'
     ```
-##### 1. git add -e 好像是用来编辑改变的，就还是编辑删除了什么内容，添加的什么内容的那个显示
-##### 1. 忽略git 文件 .gitignore 会上传到库变成公共的
+### git add -e 好像是用来编辑改变的，就还是编辑删除了什么内容，添加的什么内容的那个显示
+### 忽略git 文件 .gitignore 会上传到库变成公共的
     `git update-index --assume-unchanged /path/to/file`
     `git update-index --no-assume-unchanged /path/to/file`
     or 

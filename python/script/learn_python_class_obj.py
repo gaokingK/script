@@ -1,4 +1,7 @@
-# 学习 类和对象相关的一些东西
+"""
+# 类和对象相关的一些东西
+类可以多次初始化吗?
+"""
 import inspect
 import learn_python_class_obj_wingman
 
@@ -16,9 +19,10 @@ def trace(cls):
 
 # @trace
 class TestClass:
-    def __init__(self):
+    def __init__(self, age=None):
         self.set_attr("func1")
         self.name = "ojbk"
+        self.age = age
 
     def func1(self):
         print(self.name)
@@ -66,6 +70,18 @@ def debug_decri():
     trace(t)
 
 
+"""
+类可以多次初始化吗?
+可以
+"""
+def debug_multi_init():
+    t1 = TestClass(5)
+    print(t1.age)
+    t2 = TestClass(t1)
+    print(t2.age)  # 是个TestClass的实例
+
+
 if __name__ == '__main__':
     # debug_getattr()
-    debug_decri()
+    # debug_decri()
+    debug_multi_init()
