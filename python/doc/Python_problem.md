@@ -1,3 +1,5 @@
+# link
+- [How collections.deque works?](https://zhuanlan.zhihu.com/p/63502912) -------no
 # 通识
 ### python -i -c 
     - -i -i其实就是执行文件内容或者执行命令后再进入交互模式。不会去读取$PYTHONSTARTUP这个配置文件。
