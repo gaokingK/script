@@ -213,6 +213,18 @@ commit;
 - decimal
   - decimal(10, 4) 一共能存10位数字，小数部分最多有4位。（多的化会四舍五入后把多出来的扔掉）
   - 定义了zerofill后，插入负数会报错
+- datetime
+  - 不能为空
+    ``` 
+    mysql> update autotest set kass_pro_date="" where id =3;
+    ERROR 1292 (22007): Incorrect datetime value: '' for column 'kass_pro_date' at row 1
+    ```
+- varchar(128)可以存多少汉字
+  - 4.0版本以下，varchar(50)，指的是50字节，如果存放UTF8汉字时，只能存16个（每个汉字3字节） 
+  - 5.0版本以上，varchar(50)，指的是50字符，无论存放的是数字、字母还是UTF8汉字（每个汉字3字节），都可以存放50个
+
+- TEXT 长文本字段，能存储64kb
+- blob 长文本字段， 保存的是二进制，可以用来存储图片
 ### 连接 join
 - 连接是SQL的核心
 - 全连接应该也属于外连接吧? -------------no
@@ -287,6 +299,12 @@ commit;
       - 这时，我们可以将多个字段设置为主键,由这多个字段联合标识唯一性，其中，某几个主键字段值出现重复是没有问题的，只要不是有多条记录的所有主键值完全一样，就不算重复。
   - 唯一键
     - 限制字段的记录不重复的, 比如docker表要把`ip, port, delete_time` `name, delete_time`做成两个唯一键
+# 外键
+- 新增外键
+```
+alter table issue_record add column uid int after id; # 新增列
+alter table issue_record add constraint fk_issue_user foreign key (uid) references user(id); # 添加约束
+```
 # 索引
 - 主键和唯一索引的区别
   - link
@@ -299,6 +317,7 @@ commit;
 - 索引的特点
   - 索引可以提高查询的速度。
 # 问题
+- 外键一定要是主键吗？
 - SQL 中怎么会用到索引？
 - SQL 中主要关键字的执行顺序
 ```

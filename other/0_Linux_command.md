@@ -21,6 +21,12 @@
    - type 用来区分某个命令到底是由shell自带的，还是由shell外部的独立二进制文件提供的。如果一个命令是外部命令，那么使用-p参数，会显示该命令的路径，相当于which命令
    - locate 
      locate命令实际是"find -name"的另一种写法，但是查找方式跟find不同，它比find快得多。因为它不搜索具体目录，而是在一个数据库(/var/lib/mlocate/mlocate.db)中搜索指定的文件。次数据库含有本地文件的所有信息，此数据库是linux系统自动创建的，数据库由updatedb程序来更新，updatedb是由cron daemon周期性建立的，默认情况下为每天更新一次
+     ```
+     [huawei@localhost redis-6.2.0]$ locate libatomic                                                  
+     /usr/lib64/libatomic.so.1                                                                         
+     /usr/lib64/libatomic.so.1.2.0                                                                     
+     /usr/local/mysql/lib/libatomic.so.1.2.0 
+     ```
 
 ### 标准输入 标准输出
    - 管道符后面的内容可以从/dev/stdin 读入
@@ -118,11 +124,25 @@
 ### script 能够将终端的会话过程录制下来 ---------------------------------no
    - [link](https://www.cnblogs.com/cheyunhua/p/11136161.html)
    - 利用script记录某人行为
+### more
+more 命令类似 cat ，不过会以一页一页的形式显示，更方便使用者逐页阅读，而最基本的指令就是按空白键（space）就往下一页显示，按 b 键就会往回（back）一页显示，而且还有搜寻字串的功能（与 vi 相似），使用中的说明文件，请按 h 。
+- link:
+  - https://www.runoob.com/linux/linux-comm-more.html
+
 ### sort
-   1. [link](https://www.cnblogs.com/51linux/archive/2012/05/23/2515299.html)
-   - -r
-   - -u unique 
+- link
+   - (https://www.cnblogs.com/51linux/archive/2012/05/23/2515299.html)
+   - [ sort -n 与 -g 排序对比](https://www.cnblogs.com/z977690557/p/8945261.html)
+- opt
+   - -r 默认第一列进行排序并且是降序
+   - -u unique 输出行中去除重复行。
+   - -n 按数值的大小排序
+   - -k 选择以哪个区间来排序
+   - -t 可以在后面设定间隔符
    - 不加选项的时候 sort 命令将以默认的方式将文本文件的第一列以 ASCII 码的次序排列
+```
+sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分割结果的第二列来排序
+```
 ### less
    - [link](https://www.cnblogs.com/molao-doing/articles/6541455.html)
    - less file1 file2 `:n :p 切换文件（next/previous`
@@ -239,8 +259,9 @@
       ---(+n)----------|----------(n)----------|----------(-n)---
             (n+1)*24H前|     (n+1)*24H~n*24H间   |n*24H内
       ```
-   - -ctime n n天修改
-   - -amin n n 分钟读取
+   - -ctime n n天前修改过文件的状态 （显示的是文件的权限、拥有者、所属的组、链接数发生改变时的时间。当然当内容改变时也会随之改变（即inode内容发生改变和Block内容发生改变时）
+   - -mtime n n天前修改过文件的内容
+   - -amin n n分钟前读取过
    - -newer file1 ！file2：查找修改时间比file1新但是比file2旧的文件
    - -newermt "2016-12-06" t 解释t使用 date 命令 -d选项的参数格式
      `find ./log/20211028 -name "douyin*open_002*" -newermt "2021-10-28 03:02"`

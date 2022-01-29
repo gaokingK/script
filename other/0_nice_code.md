@@ -30,3 +30,34 @@ huawei@huawei-PC:~/Desktop/autotest$
 ### learn_structure_tree find_child_tree
    -  while 后不要跟不会变的变量,会死循环
 ### 方法注释中参数的类型应该怎么写
+
+# 巧合问题
+- "Identifier name '<bound method ? of <class 'common.model.test2_model.Child'>>_ibfk_1' is too long") 使用声明系统创建一个表时表名太长。 
+```
+# 出错代码
+class Parent(Base):
+    __tablename__ = 'parent'
+    id = Column(Integer, primary_key=True)
+    children = relationship("Child")
+
+
+class Child(Base):
+    __tablename_ = 'child'
+    id = Column(Integer, primary_key=True)
+    parent_id = Column(Integer, ForeignKey('parent.id'))
+    # parent = relationship("Parent", back_populates="children")
+
+# class Parent(Base):
+#     __tablename__ = 'parent'
+#     id = Column(Integer, primary_key=True)
+#     children = relationship("Child")
+#
+#
+# class Child(Base):
+#     __tablename__ = 'child'
+#     id = Column(Integer, primary_key=True)
+#     parent_id = Column(Integer, ForeignKey('parent.id'))
+
+# 分析流程，和其他的对比没有对比出来出错原因，后来采用重写方案，把源代码给复制过来，发现能好，又对比了一波，还没对比出来，后来用”compare with clipbord“ 也费了好久才发现是__tablename__写成了__tablename_
+# 影响：1. 发现不了就重写，这样能把不易发现的错误给避免。2. 没错的东西应该相信没错，不要再对比了3. 类似对比__tablename__的过程中，对比了好几次，不应该忽略tablename此外的东西,包括__这些符号
+```

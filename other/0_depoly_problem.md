@@ -1,4 +1,7 @@
 # 记录工具使用、部署、运行
+# 通识
+- 文件编译安装在/usr/local下
+- 创建命令软链接 `ln -s /usr/local/redis/bin/redis-cli /usr/bin/redis`
 # 问题
 - 搜索时可以完全贴上
   - `build/temp.linux-aarch64-3.6/_sodium.c:57:20: fatal error: Python.h: No such`
@@ -10,6 +13,38 @@
 - python import error /usr/lib64/libstdc++.so.6: version `CXXABI_1.3.8' not found
 	- link： http://www.xiaosongit.com/index/detail/id/900.html
 	-当前gcc版本的某些库缺失， 安装新版本
+
+- [cannot find -l**** 问题的解决办法](https://blog.csdn.net/yingyujianmo/article/details/49634511)
+	- 原因是没有找到库文件 libname.so;编译软件时，经常出现这样的问题
+	```
+	/bin/ld: cannot find -latomic
+	collect2: error: ld returned 1 exit status
+	make[1]: *** [redis-server] Error 1
+	make[1]: Leaving directory `/home/huawei/redis-6.2.0/src'
+	make: *** [all] Error 2
+	```
+	- /usr/bin/ld: cannot find -lgfortran 就是libgfortran.so没有找到，或者被重命名了name.so.1等
+	- 解决：
+	```
+	# 先在系统中查找下该文件, 报错提示的库名把l换成lib
+	[huawei@localhost redis-6.2.0]$ locate libatomic
+	/usr/lib64/libatomic.so.1
+	/usr/lib64/libatomic.so.1.2.0
+	/usr/local/mysql/lib/libatomic.so.1.2.0
+	# 进入so.N所在的目录中，新建一个软连接，使其链接到已有的so文件
+	[huawei@localhost redis-6.2.0]$ sudo ln -s /usr/lib64/libatomic.so.1 /usr/lib64/libatomic.so
+	```
+
+# make 
+## 编译安装的流程
+```
+make
+make test
+make install 
+make clean # 如果出错了需要重新make时
+```
+## 选项
+-  make install PREFIX=/usr/local/redis # 安装到指定目录
 
 # rar
 	- 没有找到arm的
@@ -220,9 +255,63 @@ sudo apt-get update
         >>> from PyQt5.QtWidgets import QWidget, QApplication
         >>> exit()
       ```
-# redis安装
-	 安装后reids-cli cu出现 connection refuse
-	 1. systemctl status redis 
+- centos7 Python3终端中敲击方向键显示「^[[C^[[D」
+	- link：https://www.linuxidc.com/Linux/2015-02/112891.htm
+	- 查找得知，是由于系统缺少了readline相关模块。CentOS 5.8默认只安装了readline模块而没有安装readline-devel模块，所以只要安装下，然后重新编译
+# redis安装和运行
+- redhat 可以通过apt安装
+```
+$ curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+$ echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+$ sudo apt-get update
+$ sudo apt-get install redis
+```
+- centos 安装，从源码安装[link](https://www.cnblogs.com/heqiuyong/p/10463334.html)
+```
+# 下载源码包 解压
+$ wget https://download.redis.io/releases/redis-6.2.6.tar.gz
+$ tar xzf redis-6.2.6.tar.gz
+# cd切换到redis解压目录下，执行编译
+$ cd redis-6.2.6
+$ make # 会生成一个src文件夹可执行文件就在这里
+# 此时可以验证是否安装好，./src/redis-server 
+# 安装并指定安装目录
+$ sudo make install PREFIX=/usr/local/redis
+# 后台启动 启动时要在后面带上redis.conf
+# 从 redis 的源码目录中复制 redis.conf 到 redis 的安装目录
+sudo cp /usr/local/redis-5.0.3/redis.conf /usr/local/redis/bin/
+# 修改 redis.conf 文件，把 daemonize no 改为 daemonize yes
+# 后台启动 ./usr/local/redis/bin/redis-server redis.conf
+
+# 设置开机启动 
+# 添加开机启动服务 里面的ExecStart配置成自己的路径 
+vi /etc/systemd/system/redis.service # 没有就新建
+[Unit]
+Description=redis-server
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/local/redis/bin/redis-server /usr/local/redis/bin/redis.conf
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+# 设置开机启动
+[root@localhost bin]# systemctl daemon-reload
+[root@localhost bin]# systemctl start redis.service
+[root@localhost bin]# systemctl enable redis.service
+# 创建 redis 命令软链接
+ ln -s /usr/local/redis/bin/redis-cli /usr/bin/redis
+```
+## redis 问题
+- 安装后$reids-cli 出现 connection refuse
+    - systemctl status redis 
+- 编译时出现cannot find -l***问题 见上
+- ./redis-server 时告警[link](https://joy-panda.blog.csdn.net/article/details/52006376)
+  - 如果告警不解决就不会起来
+  - 可以在redis.conf 中取消注释 ignore-warnings ARM64-COW-BUG 
+  - 可以解决一些告警，但update kernel 不能解决，所以还是直接注释吧
 
 # rabbitmq 安装
 - link：
