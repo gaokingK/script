@@ -81,7 +81,7 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
    - 这个特性的用处？
 ### enumerate
    - `for value, index in enumerate(list[, 枚举起始位置])`
-### 三元表达式 lambda
+### 三元表达式 lambda、lambda无参数的语法
    ```python
    from functools import reduce
 
@@ -96,6 +96,8 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
    a = [None, False, True]
    print(reduce(la, a))
    print(reduce(exec_mode, a))
+   # 无参数的语法
+   [lambda : i * i for i in range(4)] 
    ```
 ### timeit的使用
     - [link](https://www.cnblogs.com/Uncle-Guang/p/8796507.html)
