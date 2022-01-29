@@ -77,7 +77,8 @@ def debug_decri():
 def debug_multi_init():
     t1 = TestClass(5)
     print(t1.age)
-    t2 = TestClass(t1)
+    # t2 = TestClass(t1)
+    t2 = TestClass(TestClass(5))
     print(t2.age)  # 是个TestClass的实例
 
 

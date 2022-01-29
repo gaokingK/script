@@ -547,6 +547,10 @@ select addr.user_id, ... from addr where addr.user_id in ? order by addr.id [...
 
 # 删除
 - 例子: 删除jack, 然后进行count query 得到0, 然后发现jack的addr对象还存在. 分析提交的SQL, 原来是每个addr对象的只是把其中user_id列置空, 行并没有删除; SQLAlchemy并不假设删除级联, 必须告诉它才能让他删除
+```
+self.session.query(model_cls).filter_by(
+	**condition).delete(synchronize_session=False)
+```
 
 ### 配置删除/孤儿删除 级联
 - 在user address关系上配置cascade 选项去改变这个删除时的行为. 虽然SQLALchemy允许你去添加新属性和关系在任何时间, 但此时这种情况需要移除关系, 
@@ -565,7 +569,8 @@ ROLLBACK
 ##### 参考 
 - 级联的细节和配置: https://docs.sqlalchemy.org/en/14/orm/cascades.html#unitofwork-cascades
 - 级联功能能被顺畅的结合到关系数据库的ON/Delete/Cascade功能上: https://docs.sqlalchemy.org/en/14/orm/cascades.html#passive-deletes
-
+##### 孤儿删除
+- delete-orphan：仅限于一对多，只有一对多的时候才有类似父子关系的存在，才有父子表的存在。认为一的一方是父方。因为一个父亲是可以有多个孩子的。多的一方是子的一方。当一个客户与某个订单解除关系，其实就是将外键置为null，如果你的订单没有所属的客户，那你的订单还有意义吗？订单没有了所属客户，就相当于一个孩子没有了父亲，将这种记录就删除了，这就叫做孤儿删除
 # 建立多对多关系
 - 会假如一些其他的功能
 - 例子: 写一个博客, 用户能写BlogPost item, 有Keyword和其关联
@@ -579,9 +584,42 @@ ROLLBACK
 ... )
 ```
 - 比起直接声明一个映射类来声明表的方式, 上面直接声明一个表. Table是一个构造函数, 所以每个column参数是被一个逗号分割, Column 对象也有明确的名称，而不是从指定的属性名称中获取。
-- 定义BlogPost/ Keyword; 双方都使用relationship()构造,每个构造都将 post_keywords 表称为关联表
+- 定义BlogPost/ Keyword表; 双方都使用relationship()构造,每个构造都将 post_keywords 表称为关联表
 ```
-# 声明code 略
+# 声明code 
+>>> class BlogPost(Base):
+...     __tablename__ = 'posts'
+...
+...     id = Column(Integer, primary_key=True)
+...     user_id = Column(Integer, ForeignKey('users.id'))
+...     headline = Column(String(255), nullable=False)
+...     body = Column(Text)
+...
+...     # many to many BlogPost<->Keyword
+...     keywords = relationship('Keyword',
+...                             secondary=post_keywords,
+...                             back_populates='posts')
+...
+...     def __init__(self, headline, body, author):
+...         self.author = author
+...         self.headline = headline
+...         self.body = body
+...
+...     def __repr__(self):
+...         return "BlogPost(%r, %r, %r)" % (self.headline, self.body, self.author)
+
+
+>>> class Keyword(Base):
+...     __tablename__ = 'keywords'
+...
+...     id = Column(Integer, primary_key=True)
+...     keyword = Column(String(50), nullable=False, unique=True)
+...     posts = relationship('BlogPost',
+...                          secondary=post_keywords,
+...                          back_populates='keywords')
+...
+...     def __init__(self, keyword):
+...         self.keyword = keyword
 注意这个init 是可选的当使用 Declarative时
 ```
 - 上面定义的多对多关系是BlogPost.keywords

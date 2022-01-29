@@ -5,14 +5,39 @@
    - SELECT column_name(s) FROM table1; # 意思是可以选择一个列或者多个列
    - [Unique [key] 而不用 [unique [key]]
    - [COLUMN_FORMAT {FIXED|DYNAMIC|DEFAULT}] 带关键字参数的
+### python交互中导入的方法，在原方法改变后，这里的不生效
 ### MVCC(Mutil-Version Concurrency Control) 多版本并发控制
    - 是一种并发控制的方法， 一般在数据库管理系统中， 实现对数据库的并发访问
 ### 有些错误别着急，重试，重启 说不定就好了    
+- postman发不了请求了，最后发现是本机开代理了
 ### mssql 指微软的SQLServer数据库服务器 ms sql
 ### RFC-1738 URL组合规范大概是
 ### [帮助中心]https://help.aliyun.com/document_detail/70478.html
 ### json 布尔值类型
-   - true; false
+   - true; false、
+### 包命名
+```
+https://download.libsodium.org/libsodium/releases/README.html
+Libsodium distribution files
+The files in this [directory](https://download.libsodium.org/libsodium/releases) are signed with Minisign, and, for the manually-generated ones, with GPG as well.
+
+The relevant public keys can be found in the libsodium documentation.
+
+LATEST.tar.gz is a direct link to the latest stable version of the source code. It is an automated daily copy of the stable branch in the Git repository.
+libsodium-x.y.z.tar.gz is the source code of version x.y.z. These files are immutable. They don't receive any bug fixes or security updates. These will have to wait until a new point version is released.
+libsodium-x.y.z-mingw.tar.gz contain pre-built libraries for Windows, built using MingW on MSYS2. These archives include Win32 and Win64 versions of the static and shared libraries, as well as the debugging symbols. These files are immutable. The code having been compiled is exactly the one from the point release, without any bug or security fixes.
+libsodium-x.y.z-msvc.zip contains pre-built libraries for Windows, built using Visual Studio. These archives include Win32 and Win64 versions of the static and shared libraries, built for Visual Studio 2015, 2017, 2019 and 2022, as well as the debugging symbols. These files are immutable. The code having been compiled is exactly the one from the point release, without any bug or security fixes.
+libsodium-x.y.z-stable.tar.gz is the source code of x.y.z with bug fixes, security fixes and minor improvements immediately backported from the next version being currently in development. These additions over the point release are guaranteed to never change the behavior or API. Version x.y.z-stable is always fully compatible with version x.y.z. New features or breaking changes will never be introduced in a stable set of changes. libsodium-x.y.z-stable.tar.gz is an automated daily copy of the stable branch in the Git repository.
+libsodium-x.y.z-stable-mingw.tar.gz and libsodium-x.y.z-stable-msvc.zip are pre-built libraries for Windows of x.y.z-stable. They are updated when the additions actually produce different code, or when major updates of Visual Studio or MinGW have been released.
+.sig files are detached GPG signatures, and .minisig files are Minisign signatures, that can be verified with:
+minisign -P RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3 -m <file>
+
+stable versions are regularly updated. Signatures should be used to verify them. If you need to pin a specific stable version, check out the relevant revision from the stable branch of the Git repository.
+
+Development code is only available in Git, and should never be used in production.
+```
+### MSYS2
+- MSYS2 is a collection of tools and libraries providing you with an easy-to-use environment for building, installing and running native Windows software.
 ### semanage
    - semanage命令 是用来查询与修改SELinux默认目录的安全上下文。
 ### erlang

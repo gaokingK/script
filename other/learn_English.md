@@ -76,3 +76,4 @@
 - You might need to press Enter a couple of times initially to see the PowerShell prompt in the terminal. 您最初可能需要按 Enter 几次才能在终端中看到 PowerShell 提示符。
 - The URL was defined with a trailing slash so Flask will automatically redirect to the URL with the trailing slash if it was accessed without one. URL是用斜杠定义的，因此如果在没有斜杠的情况下访问该 URL，Flask 将自动重定向到带有斜杠的 URL
 - Process substitution is supported on systems that support named pipes (FIFOs) or the /dev/fd method of naming open files.支持命名管道 (FIFO) 或命名打开文件的 /dev/fd 方法的系统支持进程替换。
+- any fractional part is ignored 任何小数部分都被忽略

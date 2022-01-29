@@ -19,10 +19,11 @@ from __future__ import absolute_import 引入了绝对导入这个特性
     从上面这个例子可以看到, import xx 这种特性是绝对引入,  from pkg import xxx 是相对导入
     相对导入只能在包（package）中执行
 
-
-# link(https://docs.python.org/3/reference/import.html)
-# link(https://www.jianshu.com/p/04701cb81e38)
-# link(https://segmentfault.com/q/1010000000458562)
+# link:
+- link(https://docs.python.org/3/reference/import.html)
+- link(https://www.jianshu.com/p/04701cb81e38)
+- link(https://segmentfault.com/q/1010000000458562)
+- [import详解](https://blog.csdn.net/weixin_38256474/article/details/81228492)
 
 # 解决模块找不到的原因和几种方法 http://c.biancheng.net/view/4645.html
 # import moudle 中搜索模块的顺序
@@ -34,6 +35,9 @@ from __future__ import absolute_import 引入了绝对导入这个特性
 # sys.chdir()带来的问题
     - 使用os.path.abspath(path)时会根据工作目录 与 path做拼接，如果path是以/开头的绝对路径时没有问题，但如果是相对路径（相对与执行脚本的路径，而不是脚本里面改到的路径）就会出问题
     [root@localhost detect]# python3 BalckWhite/src/BalckWhite.py -i  video2image/test_5_second/ 后面的路径是相对于detect的，而BalckWhite.py里把路径改到了detect/src/ 那么abspath获取test_5_scend时就会得到 xxx/detect/src/video2image/test_5_scend
+# __init__.py 中的字段
+    - __all__是一个重要的变量, 来指定import *时，哪些模块（module）会被import进【当前作用域中】
+    - __path__也是一个常用变量，是个列表，默认情况下只有一个元素，即当前包（package）的路径。修改__path__可改变包（package）内的搜索路径。
 """
 
 
