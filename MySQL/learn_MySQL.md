@@ -131,6 +131,9 @@ alter table tbl_name change old_name new_name 随便一个属性;
 - PreparedStatement是用来执行SQL查询语句的API之一, 用于执行参数化查询；这里会用到占位符和拼接符
 - #{}表示一个占位符号，通过#{}把parameterType 传入的内容通过preparedStatement向占位符中设置值，自动进行java类型和jdbc类型转换，#{}可以有效防止sql注入。
 
+### 比较操作符
+- =,>,>=,<,<=和between
+
 ### top/limit
 ```
 mysql 语法
