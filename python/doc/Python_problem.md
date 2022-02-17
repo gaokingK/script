@@ -1,5 +1,14 @@
 ### 通识
-1. #### list.pop/remote/del 区别
+1. #### sort/sorted区别
+    - sort 是应用在 list 上的方法，sorted 可以对所有可迭代的对象进行排序操作
+    - sort是在原来的list上操作， sorted 返回一个新的
+    - sorted(iterable, key=None, reverse=False)
+        - key 是用来排序的值，默认是可迭代对象中的第一个元素（如果有嵌套的话）可返回对迭代对象中的元素的操作
+        - 取相反数排序 `sorted([5,3,4,1,7,9], key=lambda x: x*-1)`
+        - 指定按迭代对象中的哪一个值排序 `sorted([[3,4], [3,2,7]], key=lambda x: x[1])`
+        - 按字典的value排序 `sorted({"a": "4", "b": "1", "c": 1}.items(), key = lambda x: x[1])`
+        - 若是想完成 “先按xx排序， 再按xxx排序”这种， 就把key=（xx, xxx）
+1. #### list.pop/remove/del 区别
     - a.remove(value)  删除首个符合条件的元素;返回空
     - a.pop(index) 删除索引并且返回
     - del a[start[, end]] 删除下标, 可以是范围

@@ -1,4 +1,6 @@
 # 记录工具使用的问题
+1. #### [centos redis install](https://www.cnblogs.com/autohome7390/p/6433956.html)
+1. #### [v2ray ](https://qv2ray.net/getting-started/step1.html#linux-debian-ubuntu-and-their-derivatives)
 1. #### redis安装
 	 安装后reids-cli cu出现 connection refuse
 	 1. systemctl status redis 
