@@ -1,6 +1,8 @@
 # 问题
 - 当mysql作为database时，使用String/Integer数据类型需要注意的地方
   - ip = Column(String(12)) # 必须显示标识长度 
+- "Identifier name '<bound method ? of <class 'common.model.test2_model.Child'>>_ibfk_1' is too long") 使用声明系统创建一个表时表名太长。
+  - 是把__tablename__写成了__tablename_
 # 声明基类
 - 主文档中已经简单介绍了声明一个映射类的方式, 但某些场景下, 可能还需要一些其他的方式, SQLAlchemy也提供了相应的方法
 - link

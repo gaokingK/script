@@ -1,5 +1,5 @@
 # 准备和使用
-### 产品和版本选择
+### 产品和版本、存储引擎
   - link
     - 产品:https://blog.csdn.net/chw0629/article/details/106206272
     - 版本:
@@ -10,6 +10,10 @@
     - MySQL Workbench（GUITOOL）一款专为MySQL设计的ER/数据库建模工具。它是著名的数据库设计工具DBDesigner4的继任者。
   - mysql-server主要的三个版本 5.6/5,7/8.0
     - 使用5.7
+  - 存储引擎
+    - MySQL的存储引擎有MyISAM、InnoDB
+    - MyISAM是MySQL的默认数据库引擎（5.5版之前），由早期的ISAM所改良。虽然性能极佳，但却不支持事务处理
+    - 
 ### 连接服务器
 - 添加用户:
   - link:https://www.runoob.com/mysql/mysql-administration.html
@@ -126,7 +130,15 @@ alter table tbl_name change old_name new_name 随便一个属性;
 - link：https://www.cnblogs.com/xdyixia/p/7844984.html
 - PreparedStatement是用来执行SQL查询语句的API之一, 用于执行参数化查询；这里会用到占位符和拼接符
 - #{}表示一个占位符号，通过#{}把parameterType 传入的内容通过preparedStatement向占位符中设置值，自动进行java类型和jdbc类型转换，#{}可以有效防止sql注入。
-- 
+
+### 比较操作符
+- =,>,>=,<,<=和between
+
+### top/limit
+```
+mysql 语法
+select * from tbl_name [limit 5 offset 4]前4个不要往后排5个
+```
 ### like
 - 模糊查询 like not like
 - 占位符
@@ -211,8 +223,21 @@ commit;
   - 从小到大是 tinyint/smallint/mediumint/int/bight
 
 - decimal
+  - 据类型最多可存储 38 个数字，所有数字都能够放到小数点的右边。
   - decimal(10, 4) 一共能存10位数字，小数部分最多有4位。（多的化会四舍五入后把多出来的扔掉）
   - 定义了zerofill后，插入负数会报错
+- datetime
+  - 不能为空
+    ``` 
+    mysql> update autotest set kass_pro_date="" where id =3;
+    ERROR 1292 (22007): Incorrect datetime value: '' for column 'kass_pro_date' at row 1
+    ```
+- varchar(128)可以存多少汉字
+  - 4.0版本以下，varchar(50)，指的是50字节，如果存放UTF8汉字时，只能存16个（每个汉字3字节） 
+  - 5.0版本以上，varchar(50)，指的是50字符，无论存放的是数字、字母还是UTF8汉字（每个汉字3字节），都可以存放50个
+
+- TEXT 长文本字段，能存储64kb
+- blob 长文本字段， 保存的是二进制，可以用来存储图片
 ### 连接 join
 - 连接是SQL的核心
 - 全连接应该也属于外连接吧? -------------no
@@ -287,6 +312,12 @@ commit;
       - 这时，我们可以将多个字段设置为主键,由这多个字段联合标识唯一性，其中，某几个主键字段值出现重复是没有问题的，只要不是有多条记录的所有主键值完全一样，就不算重复。
   - 唯一键
     - 限制字段的记录不重复的, 比如docker表要把`ip, port, delete_time` `name, delete_time`做成两个唯一键
+# 外键
+- 新增外键
+```
+alter table issue_record add column uid int after id; # 新增列
+alter table issue_record add constraint fk_issue_user foreign key (uid) references user(id); # 添加约束
+```
 # 索引
 - 主键和唯一索引的区别
   - link
@@ -299,6 +330,7 @@ commit;
 - 索引的特点
   - 索引可以提高查询的速度。
 # 问题
+- 外键一定要是主键吗？
 - SQL 中怎么会用到索引？
 - SQL 中主要关键字的执行顺序
 ```

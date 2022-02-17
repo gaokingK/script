@@ -1,7 +1,41 @@
-# Flask app 方法
+# Flask app 方法 
 - app.route()
-- app.before_request
-- app.teardown_request
+
+## 钩子函数
+- link
+  - https://zhuanlan.zhihu.com/p/48141683
+钩子函数可以分为两层说明，第一层是 app 层，第二层则是 blueprint 层
+### app层的钩子函数
+- app.before_request # 在每次请求前都会执行，如果有return 则会作为这次请求的返回
+```
+app = Flask(__name__)
+
+@app.before_request
+def before_request():
+    print('before request started')
+    return "" 
+```
+- app.before_first_request 
+  - 仅在第一次请求的时候去调用这个函数，比如初始化加载一次性的数据。和 before_request 不同的是, 它的非空返回值会被忽略。 会比before_request 先执行
+
+- after_request
+  - 在每次请求结束后运行
+  - 带有一个参数，用来接收response_class，一个响应对象，一般用来统一修改响应的内容，比如修改响应头。
+- app.teardown_request 
+  - 在每次请求结束调用，不管是否出现异常,
+  - 需要一个参数，这个参数用来接收异常，当然没有异常的情况下这个参数的值为 None,
+  - 一般它用来释放程序所占用的资源，比如释放数据库连接
+  - fter_request 先执行。从Flask 0.7开始，如果出现未处理的异常，after_request 将不会被执行,而这个将正常运行并接收异常
+### blueprint层的钩子函数
+```
+user = Blueprint("user", __name__)
+
+@user.before_app_request 每次请求前都会做
+@user.before_request 只有user路由的每次请求前才会做
+def check_login():
+    user_service.check_permission()
+```
+
 # Flask HTTP方法
 ### 不同的HTTP方法代表了从指定URL中获取数据的不同方法
     |   |   |
@@ -13,6 +47,8 @@
     |DELETE|删除由URL给出的当前资源的所有当前表示|
 
 ### 不同方法获取参数
+- request.get_data() # 获取body里的参数
+- request.get_json() 只能获取json格式参数， # 请求头Content-Type: application/json
     ```python
     # 请求体中有个表格
     @app.route('/login',methods = ['POST', 'GET'])
@@ -61,7 +97,17 @@
     <script type = "text/javascript" 
         src = "{{ url_for('static', filename = 'hello.js') }}" ></script>
     ```
-
+# Flask g/session/request
+## g(global)
+- 保存的内容在一个请求的生命周期中可以全局使用
+- g能存储dict吗 可以
+```
+from flask import g
+g.account = xxx
+# 获取
+print(g.accout)
+uid = g.get("uid", None)
+```
 # Flask request对象
 ### request 代表来自客户网页端的数据作为全局请求对象发送到服务器
     |||

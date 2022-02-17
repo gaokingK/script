@@ -32,7 +32,9 @@
 - pycharm c f v 代表什么?
     - link: https://www.jetbrains.com/help/pycharm/symbols.html
     - link2:  
-
+- pycharm 设置自动换行
+  - link：https://www.cnblogs.com/grimm/p/12401826.html
+  -  File-> Settings-> Editor-> General 找到Soft Wraps，勾选Soft-wrap files
 # uos
 - ctrl + ; 剪贴板
    

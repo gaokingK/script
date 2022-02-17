@@ -1,7 +1,10 @@
+# link
+- [How collections.deque works?](https://zhuanlan.zhihu.com/p/63502912) -------no
 # 通识
 ### python -i -c 
     - -i -i其实就是执行文件内容或者执行命令后再进入交互模式。不会去读取$PYTHONSTARTUP这个配置文件。
     - -c 执行命令`python -i -c "print 'hello world'"`
+### print(str, file_obj) # 输入到文件当中， file默认是file=sys.stdout，所以如果是file_obj就不输出到控制台了
 ### round
 ```
 round(float(5/9), 4) * 1
@@ -113,7 +116,7 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
     - 环境变量：PATH和sys.path 以及PYTHONPATH
       - PATH 是系统的环境变量
       - sys.path 是python的搜索模块的路径集
-         - sys.path.insert(0, "path1") # 将path1加入搜索路径中
+         - sys.path.insert(0, "path1") # 将path1加入搜索路径中, 2个必选参数
          - import 相关：https://blog.csdn.net/weixin_38256474/article/details/81228492
       - PYTHONPATH 是环境变量PATH中的一个值， 默认是空
       - sys.path始化时默认包含了输入脚本所在的目录（python path/to/script, path/to 会在path中）， PYTHONPATH 和python安装目录
@@ -133,7 +136,7 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
         ['', '/home/huawei/Desktop/people/pc_kbox/pc_kbox/5555555', '/usr/lib/python37.zip', '/usr/lib/python3.7', '/usr/lib/python3.7/lib-dynload', '/home/huawei/.local/lib/python3.7/site-packages', '/usr/local/lib/python3.7/dist-packages', '/usr/lib/python3/dist-packages']
         >>> 
         ```
-   - 文件路径的操作封装在os.path里的方法
+   - 文件路径的操作封装在os.path里的方法, 此外，还有shutil该库为python内置库，是一个对文件及文件夹高级操作的库，可以与os库互补完成一些操作，如文件夹的整体复制，移动文件夹，对文件重命名等。
         - link:
             - [os.path()模块](https://www.runoob.com/python3/python3-os-path.html)
             - [Python3 OS 文件/目录方法](https://www.runoob.com/python3/python3-os-file-methods.html)
@@ -143,7 +146,14 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
         os.path.basename(path) # 文件名带格式 按格式判断
         os.path.dirname(path) # 文件所在文件夹名 是按格式判断的
         os.path.isdir(path) # path存在，且是文件夹、不是按格式判断的
+        os.rmdir(path) # 删除文件夹，文件夹非空的话会报错
+        os.removedirs() # 递归删除目录
+            - os.removedirs("./test2/test1") # test1如果为null，就删除，然后删除test2
+        - os.walk() # 遍历文件夹下的所有文件
+        shutil.rmtree("path") # 空不空都能删除
+
         ```
+        - 
 ### python2.x和python3.x 中range的不同以及python2中xrange
     - python2 中的range返回一个list，python3中返回一个可迭代对象
     - python2 中xrange返回一个生成器
@@ -321,3 +331,4 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
     [int(x) for x in range(5)]
     [x+y for x,y in zip(1,2)]
     ```
+- `if "_get" or "_add" or "_update" in url:` # 结果无论如何都是True， 因为get和add的or结果是True
