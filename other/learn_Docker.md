@@ -1,3 +1,14 @@
+# 准备和使用
+### 产品和版本、存储引擎
+- docker版本、docker-ce/docker-ee和docker-io的区别
+    - link：https://blog.csdn.net/zsy_1991/article/details/90261419
+    - docker-io/docker-engine是docker的早期版本、默认centos7 安装的是docker-io、版本号是1.x，docker-io的最新版本是1.13; docker-ce是新的版本分为社区版docker-ce(Docker Community Edition)和企业版docker-ee(Docker Enterprise Edition)，版本号是17.x，最新的版本是17.12
+    - docker-ce 和docker-ee 的可用版本是根据year-month 来的
+    - 检查是哪个版本？
+        - [docker 版本号说明](https://www.cnblogs.com/lcword/p/14478791.html)
+        - `docker -v` 看版本号，Docker-ce 在 17.03 版本之前叫 Docker-engine/docker-io
+### 安装docker-ce
+    - 参考https://mirrors.huaweicloud.com/home
 ### 简单命令
 - 有的image用`docker run -d image_name /bin/sh` 会立马Existed，而使用`docker run -it image_name [/bin/sh]` 能进入docker，但是推出后容器也会跟着推出，这时可以使用`docker run -itd image_nume [/bin/sh] `选项
 - 查看本机所有容器的Docker的服务 `docker ps -a # 可以看到我们刚刚起来的hello-world`

@@ -5,3 +5,8 @@
 
 # flask其他组件问题
 - app.register_blueprint(assign_task, url_perfix="/assign_task") 能接受关键字参数，所以参数名写错也不会报错，这里url_perfix写错了就导致路由未注册成功。
+
+### Flask如何保证线程安全
+[关于flask线程安全的简单研究](https://www.cnblogs.com/fengff/p/9087660.html)
+简单结论：处理应用的server并非只有一种类型，如果在实例化server的时候如果指定threaded参数就会启动一个ThreadedWSGIServer，而ThreadedWSGIServer是ThreadingMixIn和BaseWSGIServer的子类，ThreadingMixIn的实例以多线程的方式去处理每一个请求
+只有在启动app的时候将threded参数设置为True，flask才会真正以多线程的方式去处理每一个请求。
