@@ -75,3 +75,8 @@ r.ok                              # 查看r.ok的布尔值便可以知道是否�
 r.json()                         #Requests中内置的JSON解码器，以json形式返回,前提返回的内容确保是json格式的，不然解析出错会抛异常
 r.raise_for_status()             #失败请求(非200响应)抛出异常
 ```
+
+### Flask如何保证线程安全
+[关于flask线程安全的简单研究](https://www.cnblogs.com/fengff/p/9087660.html)
+简单结论：处理应用的server并非只有一种类型，如果在实例化server的时候如果指定threaded参数就会启动一个ThreadedWSGIServer，而ThreadedWSGIServer是ThreadingMixIn和BaseWSGIServer的子类，ThreadingMixIn的实例以多线程的方式去处理每一个请求
+只有在启动app的时候将threded参数设置为True，flask才会真正以多线程的方式去处理每一个请求。

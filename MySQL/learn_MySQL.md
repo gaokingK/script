@@ -1,5 +1,5 @@
 # 准备和使用
-### 产品和版本选择
+### 产品和版本、存储引擎
   - link
     - 产品:https://blog.csdn.net/chw0629/article/details/106206272
     - 版本:
@@ -10,6 +10,10 @@
     - MySQL Workbench（GUITOOL）一款专为MySQL设计的ER/数据库建模工具。它是著名的数据库设计工具DBDesigner4的继任者。
   - mysql-server主要的三个版本 5.6/5,7/8.0
     - 使用5.7
+  - 存储引擎
+    - MySQL的存储引擎有MyISAM、InnoDB
+    - MyISAM是MySQL的默认数据库引擎（5.5版之前），由早期的ISAM所改良。虽然性能极佳，但却不支持事务处理
+    - 
 ### 连接服务器
 - 添加用户:
   - link:https://www.runoob.com/mysql/mysql-administration.html
@@ -127,7 +131,15 @@ alter table tbl_name change old_name new_name 随便一个属性;
 - link：https://www.cnblogs.com/xdyixia/p/7844984.html
 - PreparedStatement是用来执行SQL查询语句的API之一, 用于执行参数化查询；这里会用到占位符和拼接符
 - #{}表示一个占位符号，通过#{}把parameterType 传入的内容通过preparedStatement向占位符中设置值，自动进行java类型和jdbc类型转换，#{}可以有效防止sql注入。
-- 
+
+### 比较操作符
+- =,>,>=,<,<=和between
+
+### top/limit
+```
+mysql 语法
+select * from tbl_name [limit 5 offset 4]前4个不要往后排5个
+```
 ### like
 - 模糊查询 like not like
 - 占位符
@@ -217,6 +229,7 @@ commit;
   - 从小到大是 tinyint/smallint/mediumint/int/bight
 
 - decimal
+  - 据类型最多可存储 38 个数字，所有数字都能够放到小数点的右边。
   - decimal(10, 4) 一共能存10位数字，小数部分最多有4位。（多的化会四舍五入后把多出来的扔掉）
   - 定义了zerofill后，插入负数会报错
 - datetime

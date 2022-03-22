@@ -1,6 +1,7 @@
 """
 # 类和对象相关的一些东西
-类可以多次初始化吗?
+类可以多次初始化吗? 可以
+- self 只是一个约定俗成的名字
 """
 import inspect
 import learn_python_class_obj_wingman
@@ -66,12 +67,12 @@ def debug_decri():
     # learn_class_obj_wingman.super_func()
     # c.name = "ojb"
     # learn_class_obj_wingman.super_func()
-
+ q  
     trace(t)
 
 
 """
-类可以多次初始化吗?
+To：类可以多次初始化吗?
 可以
 """
 def debug_multi_init():
@@ -80,6 +81,15 @@ def debug_multi_init():
     # t2 = TestClass(t1)
     t2 = TestClass(TestClass(5))
     print(t2.age)  # t2.age是个TestClass的实例
+
+
+"""
+To: self 只是一个约定俗成的名字
+你的第一个参数是self(虽然你写成了PCO，但他指的就是类对象自己)，第二个参数是n
+你调用时传入了两个参数，再加上self本身，就是三个参数了，所以报错没毛病
+
+再一个，下边的HTTP_RecvReqWithBody，应该也会报错，报self未定义，因为在这个方法里，你的self被定义成了PC
+"""
 
 
 if __name__ == '__main__':

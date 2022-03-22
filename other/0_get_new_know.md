@@ -1,5 +1,7 @@
 # 一些知识网站, 没事的时候可以看一下上面
 - https://martinfowler.com/eaaCatalog/index.html 
+- [帮助中心]https://help.aliyun.com/document_detail/70478.html
+- 术语库
 # 共识
    - 对于doc, 把自己用的给记下来, 其他的了解下就行, 慢慢补充
    - SELECT column_name(s) FROM table1; # 意思是可以选择一个列或者多个列
@@ -28,6 +30,45 @@
    - EL6 表示软件包可以在 Red Hat 6.x，CentOS 6.x，CloudLinux 6.x 进行安装
    - EL5 表示软件包可以在 Red Hat 5.x，CentOS 5.x，CloudLinux 5.x 进行安装
    - EL7 表示软件包可以在 Red Hat 7.x，CentOS 7.x，CloudLinux 7.x 进行安装
+# 名词
+- 状态机
+```
+python按特定规则切割如下字符串怎么做
+把 'cmd | grep -E "AA|BB" | grep -E "CC| DD|EE"' 切割成 ['cmd',  "grep -E 'AA|BB'", "grep -E 'CC| DD|EE'"]
+说明：切割规则是以|为分隔符，但是不包括处于一对引号中的|。
+
+写一个状态机吧
+开始状态 s0
+s0 - 任意字符除了 | 和 " -> s0
+s0 - " -> s1
+s0 - | -> s2
+s1 - 任意字符除了 | 和 " -> s1
+s1 - " -> s0
+s1 - | -> s1
+接受 s2
+然后照着状态机去写代码 （下面忽略）
+网上找了一个状态机转正则的库 fsm2regex，生成出来的正则是 c+(a+$+b(a+c)*b)(a+b(a+c)*b)*c，其中 a 代表“任意字符除了 | 和 "”，b 代表 "，c 代表 |，结果不能用在这里好像……
+```
+### shlex 切割字符
+```
+# 试试这个
+import shlex
+
+
+cmd_str = shlex.shlex('cmd | grep -E "AA|BB" | grep -E "CC| DD|EE"', posix=True)
+cmd_str.quotes = '"'
+cmd_str.whitespace = '|'
+cmd_str.whitespace_split = True
+cmd_str = list(cmd_str)
+b = []
+for item in cmd_str:
+    b.append(item.strip())
+print(b)
+# ['cmd', 'grep -E AA|BB', 'grep -E CC| DD|EE']
+# 或者
+if we read the pattern literally, " | " (| prefixed and suffixed with single space) is the delimiter.
+cmd.split(" | ") will do the job
+```
 ### python交互中导入的方法，在原方法改变后，这里的不生效
 ### MVCC(Mutil-Version Concurrency Control) 多版本并发控制
    - 是一种并发控制的方法， 一般在数据库管理系统中， 实现对数据库的并发访问
@@ -35,7 +76,6 @@
 - postman发不了请求了，最后发现是本机开代理了
 ### mssql 指微软的SQLServer数据库服务器 ms sql
 ### RFC-1738 URL组合规范大概是
-### [帮助中心]https://help.aliyun.com/document_detail/70478.html
 ### json 布尔值类型
    - true; false、
 ### 包命名
@@ -155,15 +195,6 @@ A[hh] --> B[hh]
    在setting>Languages_**>markdown 中显示 “ there are no available preview providers” 
    [解决方法](https://intellij-support.jetbrains.com/hc/en-us/community/posts/360001515959-markdown-support-plugin-preview-not-working-in-linux)
    是jdk的问题
-# Redis command
-    hkeys 
-    hgetall
-
-    
-#### Flask如何保证线程安全
-[关于flask线程安全的简单研究](https://www.cnblogs.com/fengff/p/9087660.html)
-简单结论：处理应用的server并非只有一种类型，如果在实例化server的时候如果指定threaded参数就会启动一个ThreadedWSGIServer，而ThreadedWSGIServer是ThreadingMixIn和BaseWSGIServer的子类，ThreadingMixIn的实例以多线程的方式去处理每一个请求
-只有在启动app的时候将threded参数设置为True，flask才会真正以多线程的方式去处理每一个请求。
 
 # 奇怪的
 - 点击关闭美团的弹窗是, pyautogui的左键点击无效, 但手动能点击, 使用xdotool也点不掉, 更改点击时长也点不掉, 结果使用pg的右键点击就关闭了

@@ -36,6 +36,7 @@
 - 读已提交：允许读取并发事务已提交的数据
 - 可重复读：对同一字段的多次读取结果是一致的，除非是事务本身修改的数据。但不能避免幻读。（可能是只允许读取并发事务新插入的？）
 - 可串行化：最高隔离级别，所有事务之间依次逐个执行
+
 - mysql 默认采用的 可从复读 隔离级别；
 - 查看隔离级别：
   - `select @@tx_isolation;` # 当前事务
@@ -64,3 +65,4 @@ SELECT a.trx_id, a.trx_state, a.trx_started, a.trx_query, b.ID, b.USER, b.DB, b.
 
 # 针对mysql 5.5，查看更具体的信息：
 SELECT a.trx_id, a.trx_state, a.trx_started, a.trx_query, b.ID, b. USER, b. HOST, b.DB, b.COMMAND, b.TIME, b.STATE, b.INFO FROM information_schema.INNODB_TRX a LEFT JOIN information_schema.PROCESSLIST b ON a.trx_mysql_thread_id = b.id WHERE b.COMMAND = 'Sleep';
+```

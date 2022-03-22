@@ -1,3 +1,5 @@
+# link
+- [How collections.deque works?](https://zhuanlan.zhihu.com/p/63502912) -------no
 # 通识
 ### 这是为什么，为什么不幂等
 ```

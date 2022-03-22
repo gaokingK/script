@@ -17,7 +17,9 @@ import json
 """
 To: 树的数据结构
 二叉树怎么表示? 怎么画出树的数据结构
-Python 实现树结构: https://blog.csdn.net/m0_37324740/article/details/79435814
+Python 实现树结构: 
+    - https://blog.csdn.net/m0_37324740/article/details/79435814
+    - https://blog.csdn.net/ailinyingai/article/details/102744193
 如何画出一棵树: https://www.zhihu.com/question/280404022 
 """
 class Tree:
