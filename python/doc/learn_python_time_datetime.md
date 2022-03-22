@@ -1,5 +1,10 @@
 # link
 - https://www.cnblogs.com/mashuqi/p/11576705.html
+# 占位符
+`%Y-%m-%d %H:%M:%S`
+# 输出时间
+`print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))`
+
 # time
 - 时间戳 time.time() # 获取从1970年1月1日到现在的时间秒数
 ```

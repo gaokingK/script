@@ -28,6 +28,10 @@ Get-NetFirewallRule -Name *ssh* # OpenSSH-Server-In-TCP这个状态是 enabled
 ```
 
 ### 问题
+- [root@localhost FlaskDemo]# ssh-copy-id git@90.90.0.140
+/bin/ssh-copy-id: ERROR: failed to open ID file '/root/.pub': No such file or directory
+        (to install the contents of '/root/.pub' anyway, look at the -f option)
+    - 是公钥没有生成， 先用ssh-keygen生成
 - 连接时遇到 `ssh: connect to host 90.90.0.224 port 22: Connection refused`
     - 可能是没有安装openssh服务器
     - 可能是防火墙原因

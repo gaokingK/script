@@ -289,7 +289,8 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
       ```
    - -print ----------------------------no
       `find . -path "./tests" -prune -o -name "*.py" -print` 不加print会多输出一行 ./tests
-   - find -name "aaa" 若是要使用通配符*是匹配所有字符任意次.就是匹配. 不知道加双引号有什么区别
+   - find -name "aaa" 若是要使用通配符*是匹配所有字符任意次.就是匹配. 不知道加双引号有什么区别 
+      - find -name xxx.log 可以找到xxx.log 但不能找到xxx.log2
    - -exec commond \;
       ```shell
       `find . \( -name "111*.txt" -o -name "112*.txt" \) -exec cat {} \;` 注意结尾的反斜杠和； 否则会提示遗漏“-exec”的参数

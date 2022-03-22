@@ -1,5 +1,7 @@
 # 一些知识网站, 没事的时候可以看一下上面
 - https://martinfowler.com/eaaCatalog/index.html 
+- [帮助中心]https://help.aliyun.com/document_detail/70478.html
+- 术语库
 # 共识
    - 对于doc, 把自己用的给记下来, 其他的了解下就行, 慢慢补充
    - SELECT column_name(s) FROM table1; # 意思是可以选择一个列或者多个列
@@ -8,6 +10,68 @@
 ### 为什么在终端里面或者使用urllib就下不了的东西在浏览器里就能直接下载呢？---------------no
 ### 内存地址也是需要空间的
    - 地址一般由 文件号+块号+块内偏移组成，大概10个字节
+### 关于文件夹命名、文件命名
+- linux可以随意命名
+- windows只允许空格、数字、字母和除`/\:<>*`等的字符，可以自己试一下
+- 文件名不符合规范可能时文件创建失败的原因
+### 回调函数
+- link：https://www.cnblogs.com/-wenli/p/10970136.html
+- 讲了回调函数的一些设计方面的概念，并没有多大用
+- 回调函数三要素
+   - 中间函数：接受传入的函数的函数
+   - 起始函数：调用中间函数的函数
+   - 回调函数：被传入的函数
+- 回调函数的作用
+   - 有利于模块解耦
+   - 有利于是程序更灵活
+- 阻塞式回调与延迟式回调
+   - 起始函数调用中间函数，中间函数执行完后起始函数继续执行
+   - 延迟式回调：多于多线程有关
+### RPM 软件包名中的 el5、el6、el7 是什么？
+   - https://blog.csdn.net/liaowenxiong/article/details/117136545
+   - EL 是 Red Hat Enterprise Linux 的简写。
+   - EL6 表示软件包可以在 Red Hat 6.x，CentOS 6.x，CloudLinux 6.x 进行安装
+   - EL5 表示软件包可以在 Red Hat 5.x，CentOS 5.x，CloudLinux 5.x 进行安装
+   - EL7 表示软件包可以在 Red Hat 7.x，CentOS 7.x，CloudLinux 7.x 进行安装
+# 名词
+- 状态机
+```
+python按特定规则切割如下字符串怎么做
+把 'cmd | grep -E "AA|BB" | grep -E "CC| DD|EE"' 切割成 ['cmd',  "grep -E 'AA|BB'", "grep -E 'CC| DD|EE'"]
+说明：切割规则是以|为分隔符，但是不包括处于一对引号中的|。
+
+写一个状态机吧
+开始状态 s0
+s0 - 任意字符除了 | 和 " -> s0
+s0 - " -> s1
+s0 - | -> s2
+s1 - 任意字符除了 | 和 " -> s1
+s1 - " -> s0
+s1 - | -> s1
+接受 s2
+然后照着状态机去写代码 （下面忽略）
+网上找了一个状态机转正则的库 fsm2regex，生成出来的正则是 c+(a+$+b(a+c)*b)(a+b(a+c)*b)*c，其中 a 代表“任意字符除了 | 和 "”，b 代表 "，c 代表 |，结果不能用在这里好像……
+```
+### shlex 切割字符
+```
+# 试试这个
+import shlex
+
+
+cmd_str = shlex.shlex('cmd | grep -E "AA|BB" | grep -E "CC| DD|EE"', posix=True)
+cmd_str.quotes = '"'
+cmd_str.whitespace = '|'
+cmd_str.whitespace_split = True
+cmd_str = list(cmd_str)
+b = []
+for item in cmd_str:
+    b.append(item.strip())
+print(b)
+# ['cmd', 'grep -E AA|BB', 'grep -E CC| DD|EE']
+# 或者
+if we read the pattern literally, " | " (| prefixed and suffixed with single space) is the delimiter.
+cmd.split(" | ") will do the job
+```
 ### python交互中导入的方法，在原方法改变后，这里的不生效
 ### MVCC(Mutil-Version Concurrency Control) 多版本并发控制
    - 是一种并发控制的方法， 一般在数据库管理系统中， 实现对数据库的并发访问
@@ -15,7 +79,6 @@
 - postman发不了请求了，最后发现是本机开代理了
 ### mssql 指微软的SQLServer数据库服务器 ms sql
 ### RFC-1738 URL组合规范大概是
-### [帮助中心]https://help.aliyun.com/document_detail/70478.html
 ### json 布尔值类型
    - true; false、
 ### 包命名
@@ -71,6 +134,16 @@ Development code is only available in Git, and should never be used in productio
 ### GPG
    - 目前最流行、最好用的加密工具之一。
    - [使用](https://www.ruanyifeng.com/blog/2013/07/gpg.html)
+
+# 自动化工厂
+- 文档中心
+- 巡检
+# pc测试
+视频测试
+# ovs
+
+# compass-ci
+
 ### 缩写
    - noop 没有操作
       no operate
@@ -125,15 +198,46 @@ A[hh] --> B[hh]
    在setting>Languages_**>markdown 中显示 “ there are no available preview providers” 
    [解决方法](https://intellij-support.jetbrains.com/hc/en-us/community/posts/360001515959-markdown-support-plugin-preview-not-working-in-linux)
    是jdk的问题
-# Redis command
-    hkeys 
-    hgetall
-
-    
-#### Flask如何保证线程安全
-[关于flask线程安全的简单研究](https://www.cnblogs.com/fengff/p/9087660.html)
-简单结论：处理应用的server并非只有一种类型，如果在实例化server的时候如果指定threaded参数就会启动一个ThreadedWSGIServer，而ThreadedWSGIServer是ThreadingMixIn和BaseWSGIServer的子类，ThreadingMixIn的实例以多线程的方式去处理每一个请求
-只有在启动app的时候将threded参数设置为True，flask才会真正以多线程的方式去处理每一个请求。
 
 # 奇怪的
 - 点击关闭美团的弹窗是, pyautogui的左键点击无效, 但手动能点击, 使用xdotool也点不掉, 更改点击时长也点不掉, 结果使用pg的右键点击就关闭了
+## 因为代理的错误
+- `res = requests.post(url=f"http://90.90.0.224:8088/record` 却连到90.90.0.64:8080
+```
+[2022-02-21 14:53:49,967]<tid=281473365832192>INFO [/var/local/FlaskDemo/web_api/service/video_service.py][line 16] - send record to http://90.90.0.224:5010
+[2022-02-21 14:53:49,970]<tid=281473365832192>DEBUG [/root/archiconda3/lib/python3.7/site-packages/urllib3/connectionpool.py][line 205] - Starting new HTTP connection (1): 90.90.64.10:8080
+[2022-02-21 14:53:56,057]<tid=281473365832192>DEBUG [/root/archiconda3/lib/python3.7/site-packages/urllib3/connectionpool.py][line 393] - http://90.90.64.10:8080 "POST http://90.90.0.224:5010/record HTTP/1.1" 504 74879
+```
+   - 而且在别的机器上也没浮现，这是因为这台机器上设置了代理
+- celery 获取不到rquest.get().json() 不用celery却能够获取
+```
+# code
+put_video_handler(args) # 这里是正常执行的
+put_video_handler.apply_async(args=(args,)) # 这里就会爆出下面的错误
+
+@celery_app.task()
+def put_video_handler(video_path):
+    logger.info("video put start")
+    res = requests.post(url=f"{record_server}/video_put", data=json.dumps({"file_name": video_path}))
+    print(res.json())
+# celery log
+[2022-02-22 15:18:36,456: ERROR/ForkPoolWorker-64] Task web_api.service.video_service.testa[4bceab73-3a36-4526-9fa5-58e356d952d5] raised unexpected: JSONDecodeError('Expecting value: line 1 column 1 (char 0)
+')
+Traceback (most recent call last):
+  File "/root/archiconda3/lib/python3.7/site-packages/celery/app/trace.py", line 451, in trace_task
+    R = retval = fun(*args, **kwargs)
+  File "/root/archiconda3/lib/python3.7/site-packages/celery/app/trace.py", line 734, in __protected_call__
+    return self.run(*args, **kwargs)
+  File "/var/local/FlaskDemo/web_api/service/video_service.py", line 51, in testa
+    res = res.json()
+  File "/root/archiconda3/lib/python3.7/site-packages/requests/models.py", line 897, in json
+    return complexjson.loads(self.text, **kwargs)
+  File "/root/archiconda3/lib/python3.7/json/__init__.py", line 348, in loads
+    return _default_decoder.decode(s)
+  File "/root/archiconda3/lib/python3.7/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/root/archiconda3/lib/python3.7/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+```
+- 分析 res.text发现 是w3拦截了，但是很奇怪为什么不交给异步就没关系，后来发现是borker没有加到代理白名单里，加入，解决

@@ -19,6 +19,10 @@
     ```
 
 # pycharm 
+- pycharm 定位打开的文件(select opened file) 不显示成员
+	- 在旁边的设置中，取消选中show members
+- 创建文件时，自动生成文件头
+	- Files>Setting>Editor>File and Code Templates
 - 可以重命名project 和 directory
 - 按下Alt 点击close = 关闭all other 
 - inspections 一些检查项
@@ -35,6 +39,10 @@
 - pycharm 设置自动换行
   - link：https://www.cnblogs.com/grimm/p/12401826.html
   -  File-> Settings-> Editor-> General 找到Soft Wraps，勾选Soft-wrap files
+
+- pycharm 统计代码行数
+	- 搜索安装Statistic插件
+	- pycharm状态栏中点击插件；点击refresh selected on；（要选中项目）
 # uos
 - ctrl + ; 剪贴板
    

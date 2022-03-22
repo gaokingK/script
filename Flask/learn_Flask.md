@@ -1,10 +1,34 @@
+# link
+- [路由系统、参数、蓝图、钩子函数](https://www.shangmayuan.com/a/e4998c3f1af24130a4d041a7.html)
 # Flask app 方法 
-- app.route()
+## app.route(‘/’, endpoint=’xx’ , methods=[‘GET’,...])
+    - 默认的请求方式时只允许get
+    - endpoint后的名字,用来反向生成url的.后面的名字随便定义,只要不和其它装饰器内的重复即可.
+        - endpoint参数不指定时,默认值等于其装饰的函数名.
+        - print( url_for(‘xx’) )  # 输出xx名字对应的访问路径, 不定义endpoint时可用:url_for(‘被装饰的函数名’)
+    - url_for("xxx") 输出url地址的
+        ```
+        @app.route("/hhh", endpoint="bbbb")
+        def fund():
+            print(url_for("bbbb", _external=True, id="xxx")) # _external输出完整的url地址，带ip 如果后面加id这写参数，会把他以查询参数的方式附在url后面
+        ```
+    - redirect_to="/login"      # 永久跳转地址 301,不进入被装饰的视图函数就跳转走了.
+    - 路径参数
+        - link：https://www.jianshu.com/p/54057b4f0437
+        - 参数类型
+            - string
+            - int
+            - float
+            - path
+            - uuid
+            - any 从多个参数中选择一个
+                - @app.route("/record/<any(a,b):an>") 后一个参数的值只能是a或者b
+                - 访问的时候url只能是/record/a 或者 record/b 
 
 ## 钩子函数
 - link
   - https://zhuanlan.zhihu.com/p/48141683
-钩子函数可以分为两层说明，第一层是 app 层，第二层则是 blueprint 层
+- 钩子函数可以分为两层说明，第一层是 app 层，第二层则是 blueprint 层
 ### app层的钩子函数
 - app.before_request # 在每次请求前都会执行，如果有return 则会作为这次请求的返回
 ```
@@ -49,6 +73,7 @@ def check_login():
 ### 不同方法获取参数
 - request.get_data() # 获取body里的参数
 - request.get_json() 只能获取json格式参数， # 请求头Content-Type: application/json
+- 其他
     ```python
     # 请求体中有个表格
     @app.route('/login',methods = ['POST', 'GET'])
@@ -61,7 +86,6 @@ def check_login():
             # user = request.args.get("nm", type=bool)# 只有字符串为空才会是False 请求参数传递bool布尔值
             return redirect(url_for('success',name = user))
     ```
-
 # Flask 模板
 ### 为什么要使用模板
     - 在处理最简单的请求时，视图函数的主要作用是生成请求的响应，这里视图函数的功能大致分为两类：逻辑处理和数据展示

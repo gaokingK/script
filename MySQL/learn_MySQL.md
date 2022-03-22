@@ -112,6 +112,7 @@ alter table tbl_name change old_name new_name 随便一个属性;
 # 删除自增属性, 其他的属性会消失吗?
  alter table Profession modify id int(11), drop primary key;
 ```
+- 新建列的时候添加外键`alter table task add video_id int(11) after video_duration ,add constraint video_id foreign key (video_id) references video(id) on delete cascade on update no action;`
 - SHOW [FULL] COLUMNS FROM tbl_name [FROM db_name] [like_or_where] 等价于desc tbl_name # 查看columns status
 
 ### 列子句
@@ -185,6 +186,11 @@ insert into tbl_name(col_name, ...) 这种可以
 - col_name (column name); tbl_name(table_name)\
 
 # 其他
+### 约束
+- link：https://blog.csdn.net/qq_34306360/article/details/79717682
+- 添加约束: `alter table task add video_id int(11) after video_duration ,add constraint video_id foreign key (video_id) references video(id) on delete cascade on update no action;`
+- 可以修改 task ，但改动前、改动后的video_id都要在video存在
+- 可以修改video, 但不能修改id列的值
 ### MySql Innodb引擎 SQL中使用悲观锁
 - MySQL默认使用autocommit模式, 即执行一个更新操作后, MySql会立刻将结果进行提交; 若使用悲观锁, 需要关闭`set autocommit=0`
 - 使用 select…for update 锁数据，需要注意锁的级别，MySQL InnoDB 默认行级锁。行级锁都是基于索引的，如果一条 SQL 语句用不到索引是不会使用行级锁的，会使用表级锁把整张表锁住，这点需要注意。

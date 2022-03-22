@@ -1,3 +1,12 @@
+### 设置代理
+   - link：https://www.cnblogs.com/daijiabao/p/11358743.html
+   ```
+   export proxy="http://192.168.5.14:8118"
+   export http_proxy=$proxy
+   export https_proxy=$proxy
+   export ftp_proxy=$proxy
+   export no_proxy="localhost, 127.0.0.1, ::1" # 不适用代理的
+   ```
 ### 终端 ctrl-c, ctrl-z, ctrl-d
    - ctrl-c:( kill foreground process ) 发送 SIGINT 信号给前台进程组中的所有进程，强制终止程序的执行；
    - ctrl-z:( suspend foreground process ) 发送 SIGTSTP 信号给前台进程组中的所有进程，常用于挂起一个进程，而并非结束进程，用户可以使用使用fg/bg操作恢复执行前台或后台的进程。

@@ -109,6 +109,7 @@ Date:   Wed Sep 15 09:20:45 2021 +0800
    - [link](https://blog.csdn.net/duxing_langzi/article/details/80295573?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link)
    - 在新建分支上切换到master之前, 要留意你的工作目录和暂存区里那些还没有被提交的修改， 它可能会和你即将检出的分支产生冲突从而阻止 Git 切换到该分支。 最好的方法是，在你切换分支之前，保持好一个干净的状态。 有一些方法可以绕过这个问题（即，暂存（stashing） 和 修补提交（commit amending））
    - 当你切换分支的时候，Git 会重置你的工作目录，使其看起来像回到了你在那个分支上**最后一次提交**的样子
+   - 将本地新建的分支同步到origin `git push --set-upstream origin merge2`
 ### git log -p filename /git log filename
 ### git rebase
    - git rebase 是干什么的
