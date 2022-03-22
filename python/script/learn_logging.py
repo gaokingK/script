@@ -9,6 +9,8 @@
     - [配置日志的几种方式](https://www.cnblogs.com/yyds/p/6885182.html)
     - [logging.handlers.TimedRotatingFileHandler()使用](https://www.codingdict.com/sources/py/logging.handlers/9083.html)
 ## 问题
+    - ValueError: Unable to configure handler 'file_handler'
+        - 是yaml里面的file_handler的配置没有写对，比如日志存放的文件夹可能没有创建（他自己不会创建)
     - TimedRotatingFileHandler 另一个程序正在使用此文件,进程无法访问
         - link： https://www.cnblogs.com/zepc007/p/10936623.html
         - 未解决：因为是window上出现的，放在linux就没问题
@@ -50,6 +52,8 @@
         - exc_info： 其值为布尔值，如果该参数的值设置为True，则会将异常异常信息添加到日志消息中。如果没有异常信息则添加None到日志信息中。
         - stack_info： 其值也为布尔值，默认值为False。如果该参数的值设置为True，栈信息将会被添加到日志信息中。
         - extra： 这是一个字典（dict）参数，它可以用来自定义消息格式中所包含的字段，但是它的key不能与logging模块定义的字段冲突。
+    - Logger.exception() 创建一个类似于Logger.error()的日志消息
+        - Logger.exception()与Logger.error()的区别在于：Logger.exception()将会输出堆栈追踪信息，另外通常只是在一个exception handler中调用该方法。
 ## logging模块日志流处理流程
 在介绍logging模块的高级用法之前，很有必要对logging模块所包含的重要组件以及其工作流程做个全面、简要的介绍，这有助于我们更好的理解我们所写的代码（将会触发什么样的操作）。
     - logging日志模块四大组件

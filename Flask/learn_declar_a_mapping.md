@@ -3,6 +3,9 @@
   - ip = Column(String(12)) # 必须显示标识长度 
 - "Identifier name '<bound method ? of <class 'common.model.test2_model.Child'>>_ibfk_1' is too long") 使用声明系统创建一个表时表名太长。
   - 是把__tablename__写成了__tablename_
+
+- sqlalchemy.exc.ArgumentError: Mapper mapped class Record->record could not assemble any primary key columns for mapped table 'record'
+  - 是因为这个record model 里没有声明主键
 # 声明基类
 - 主文档中已经简单介绍了声明一个映射类的方式, 但某些场景下, 可能还需要一些其他的方式, SQLAlchemy也提供了相应的方法
 - link

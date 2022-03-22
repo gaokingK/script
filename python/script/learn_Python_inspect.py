@@ -2,6 +2,8 @@
 inspect 模块用来收集python对象的信息,可以获取类或者函数的参数, 源码; 获取栈,解析帧;对对象进行类型检查等
 收集对象的信息:
     inspect.getmember(obj)
+    inspect模块的getcallargs方法,该方法返回一个将参数名字和值作为键值对的字典(按照形参和实际传入参数的位置形成键值对)
+        - https://www.cnblogs.com/halleluyah/p/8867461.html
 """
 import inspect
 import sys
@@ -179,6 +181,26 @@ inspect.stack() 很多frame 如果在调试的时候增加这个表达式， 打
 里面的frame里的frame>f_locals有在pycharme中显示的变量；frame>stacks是调用栈
 但是不知道怎么获取stack这个变量
 """
+
+"""
+To: getcallargs 返回一个将参数名字作为键和参数值作为值的字典，(按照形参和实际传入参数的位置形成键值对)
+"""
+def is_admin(admin="admin"):
+    def decorated(func):
+        @functools.wraps(func)
+        def wrapper(*args,**kwargs):
+            func_args = inspect.getcallargs(func,*args,**kwargs)
+            if func_args.get("username")!=admin :
+                raise Exception("this user is not allowed to get food")
+            result = func(*args,**kwargs)
+            return result
+        return wrapper
+    return decorated
+
+@is_admin("admin")
+def barfoo(username="someone"):
+    """do crazy stuff"""
+    print("%s get food" % (username))
 
 
 if __name__ == '__main__':

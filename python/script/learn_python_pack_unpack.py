@@ -30,14 +30,15 @@ def debug_unpack():
     # ** 的使用方法
     # func(key_1="value_1", key_2="value_2")
     # 比较下面两个的不同
-    # func({"key_1": "value_1", "key_2": "value_2"})
-    # func(**{"key_1": "value_1", "key_2": "value_2"})
+    func({"key_1": "value_1", "key_2": "value_2"})
+    func(**{"key_1": "value_1", "key_2": "value_2"})
+    func(id=7, id2=5)
 
     # 解包的是副本，不会影响真的值, 元组是不可变的
-    args = [1, 2, 3]
-    kwargs = {"key_1": "value_1", "key_2": "value_2"}
-    func(*args, **kwargs)
-    print(kwargs)
+    # args = [1, 2, 3]
+    # kwargs = {"key_1": "value_1", "key_2": "value_2"}
+    # func(*args, **kwargs)
+    # print(kwargs)
 
 
 """
@@ -51,5 +52,5 @@ def get_geek_unpack():
 
 
 if __name__ == '__main__':
-    # debug_unpack()
-    get_geek_unpack()
+    debug_unpack()
+    # get_geek_unpack()

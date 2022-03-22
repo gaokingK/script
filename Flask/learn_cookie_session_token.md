@@ -57,6 +57,7 @@ username = session.get('username', "")
     - 这部分则是对第二部分完成后拼接成功的值，进行加密加盐，接着进行base64编码，以此来防止恶意用户构造token来进行身份伪造 JWS的主要目的是保证了数据在传输过程中不被修改，验证数据的完整性。但由于仅采用Base64对消息内容编码，因此不保证数据的不可泄露性。所以不适合用于传输敏感数据。
 ## 使用PyJWT
 - link： https://www.cnblogs.com/chnmig/p/10143324.htm
+- 安装`pip install PyJWT`
 ```
 import jwt
 import datetime

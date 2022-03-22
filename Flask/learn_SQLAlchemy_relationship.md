@@ -31,3 +31,18 @@ class Child(Base):
     id = Column(Integer, primary_key=True)
     parent_id = Column(Integer, ForeignKey('parent.id'))
 ```
+
+# backref的作用
+- link: https://www.cnblogs.com/liangmingshen/p/9769975.html
+- backref 对关系提供反向引用的声明
+
+# secondary
+- link：https://www.cnblogs.com/MilletChili/p/9177298.html
+- 用来生成多对多映射的
+
+# passive_deletes
+- link：https://www.cnblogs.com/kirito-c/p/10900024.html
+
+# lazy
+- https://blog.csdn.net/bestallen/article/details/52601457
+- 对某个有关系的列，在搜索这一行时，其相关的数据是否被加载的策略

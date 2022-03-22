@@ -79,7 +79,7 @@ def debug_multi_init():
     print(t1.age)
     # t2 = TestClass(t1)
     t2 = TestClass(TestClass(5))
-    print(t2.age)  # 是个TestClass的实例
+    print(t2.age)  # t2.age是个TestClass的实例
 
 
 if __name__ == '__main__':

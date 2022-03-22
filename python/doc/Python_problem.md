@@ -1,4 +1,25 @@
 # 通识
+### 这是为什么，为什么不幂等
+```
+>>> [i for i in range(10) if i%2==0]
+[0]
+>>> 5%2
+1
+>>> bool(5%2==0)
+False
+>>> bool(4%2==0)
+True
+>>> a = [i for i in range(10) if i %2==0]
+>>> a
+[0, 2, 4, 6, 8]
+>>> [i for i in range(10) if i %2==0]
+[0, 2, 4, 6, 8]
+>>> [i for i in range(10) if i%2==0]
+[0, 2, 4, 6, 8]
+>>>
+
+```
+### python 命令行中如果导入的方法修改了，需要重新导入，或者关闭命令行再重新打开，重新导入
 ### python -i -c 
     - -i -i其实就是执行文件内容或者执行命令后再进入交互模式。不会去读取$PYTHONSTARTUP这个配置文件。
     - -c 执行命令`python -i -c "print 'hello world'"`
@@ -139,16 +160,21 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
             - [os.path()模块](https://www.runoob.com/python3/python3-os-path.html)
             - [Python3 OS 文件/目录方法](https://www.runoob.com/python3/python3-os-file-methods.html)
         ```
-        os.path.abspath("path") # path的绝对路径
+        os.path.abspath("path") # path的绝对路径 最后一个/也会被去掉 os.path.abspath("/root/") # 输出/root
+        os.path.splittext(path)[-1] 获取后缀名
         os.getcwd() # 返回当前工作目录
         os.path.basename(path) # 文件名带格式 按格式判断
         os.path.dirname(path) # 文件所在文件夹名 是按格式判断的
         os.path.isdir(path) # path存在，且是文件夹、不是按格式判断的
+        os.path.isfile(path) # path存在，且是文件、不是按格式判断的
         os.rmdir(path) # 删除文件夹，文件夹非空的话会报错
         os.removedirs() # 递归删除目录
             - os.removedirs("./test2/test1") # test1如果为null，就删除，然后删除test2
         - os.walk() # 遍历文件夹下的所有文件
         shutil.rmtree("path") # 空不空都能删除
+        - 复制文件：https://www.jb51.net/article/145522.htm
+            - https://www.jb51.net/article/145522.htm
+            - shutil.copyfile("file.txt","file_copy.txt")
 
         ```
         - 
