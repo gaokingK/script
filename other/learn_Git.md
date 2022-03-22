@@ -10,6 +10,10 @@
 - 如何搜索历史记录， 想搜索字段， 但这些字段不知道在那个版本中被删除了
   - link：https://blog.csdn.net/asdfgh0077/article/details/103453994
   - git log -G/-S|grep <pattern>
+- fatal: unable to access https://github.com/xxxx.git/: server certificate verification failed. CAfile: none CRLfile: none
+  - `git config --global http.sslverify false`
+- gnutls_handshake() failed: the tls connection was non-properly terminated
+  - 设置代理，在终端中设置
 ## other
 ### git patch --------------------------------no
 ### 远程分支回滚的三种方法：

@@ -77,3 +77,5 @@
 - The URL was defined with a trailing slash so Flask will automatically redirect to the URL with the trailing slash if it was accessed without one. URL是用斜杠定义的，因此如果在没有斜杠的情况下访问该 URL，Flask 将自动重定向到带有斜杠的 URL
 - Process substitution is supported on systems that support named pipes (FIFOs) or the /dev/fd method of naming open files.支持命名管道 (FIFO) 或命名打开文件的 /dev/fd 方法的系统支持进程替换。
 - any fractional part is ignored 任何小数部分都被忽略
+- The OpenGL and OpenGL ES Conformance Tests are expanded versions of the OpenGL ES 2.x Conformance Test. expanded 展开 可翻译为扩展的
+- he best first step is to run the failing test cases via glcts executable to get the more verbose logs. executable 可执行的 可执行的文件

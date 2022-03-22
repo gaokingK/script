@@ -5,6 +5,9 @@
    - SELECT column_name(s) FROM table1; # 意思是可以选择一个列或者多个列
    - [Unique [key] 而不用 [unique [key]]
    - [COLUMN_FORMAT {FIXED|DYNAMIC|DEFAULT}] 带关键字参数的
+### 为什么在终端里面或者使用urllib就下不了的东西在浏览器里就能直接下载呢？---------------no
+### 内存地址也是需要空间的
+   - 地址一般由 文件号+块号+块内偏移组成，大概10个字节
 ### python交互中导入的方法，在原方法改变后，这里的不生效
 ### MVCC(Mutil-Version Concurrency Control) 多版本并发控制
    - 是一种并发控制的方法， 一般在数据库管理系统中， 实现对数据库的并发访问

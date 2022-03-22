@@ -30,8 +30,12 @@
     - 运行可以在右边的run
 
 # 名词
-*.pdb *.obj是 c++输出，调试文件
-
+- *.pdb *.obj是 c++输出，调试文件
+- C++ with exception
+  - 不知道和C++的标准异常有什么区别
+- STL（Standard Template Library），即标准模板库
+  - 自带的标准库
+  - https://blog.csdn.net/tanqiuwei/article/details/7323374
 # 简单尝试
 - 目录在 Desktop/people_win_lab/script/c_c++/下
 
