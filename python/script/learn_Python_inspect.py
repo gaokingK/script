@@ -4,6 +4,7 @@ inspect 模块用来收集python对象的信息,可以获取类或者函数的�
     inspect.getmember(obj)
 """
 import inspect
+import sys
 from functools import wraps
 from python.script.singleton import Singleton
 from wingman import Wingman
@@ -37,7 +38,7 @@ def debug_getmember():
 """
 获取栈的信息
 inspect.stack()获取当前的栈信息
-inspect.currentframe() 当前帧
+inspect.currentframe() 当前帧 也可以通过sys._getframe来获取
 inspect.currentframe().f_back 当前帧的下一帧调用者
 inspect.frameinfo(inspect.currentframe()) 获取帧的信息
 exercise: 获取当前函数的调用栈
@@ -144,6 +145,8 @@ exercise：
 - learn__python_inspect.py class AA在这里获取子类的实例中的属性
 - learn_python_inspect_wingman1 classB(AA) 子类
 - learn_python_inspect_wingman2 B的实例 有私有属性__doc__
+调试:
+在get_child_class_proerty 中打断点,在wingman2里debug
 """
 
 
@@ -168,11 +171,13 @@ class AA:
 
         #
         outter_farme = inspect.currentframe().f_back.f_back.f_back
+        sys_frame = sys._getframe()
         pass
 
 """
 inspect.stack() 很多frame 如果在调试的时候增加这个表达式， 打断点的模块会在中部，不会在两端, 而如果把这个写在程序中，第一个frame就是当前的
-里面的frame 里的frame>f_locals有在pycharme中显示的变量；frame>stacks是调用栈
+里面的frame里的frame>f_locals有在pycharme中显示的变量；frame>stacks是调用栈
+但是不知道怎么获取stack这个变量
 """
 
 

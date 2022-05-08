@@ -1,5 +1,7 @@
-### 通识
-1. #### sort/sorted区别
+# link
+- [How collections.deque works?](https://zhuanlan.zhihu.com/p/63502912) -------no
+# 通识
+### sort/sorted区别
     - sort 是应用在 list 上的方法，sorted 可以对所有可迭代的对象进行排序操作
     - sort是在原来的list上操作， sorted 返回一个新的
     - sorted(iterable, key=None, reverse=False)
@@ -8,7 +10,173 @@
         - 指定按迭代对象中的哪一个值排序 `sorted([[3,4], [3,2,7]], key=lambda x: x[1])`
         - 按字典的value排序 `sorted({"a": "4", "b": "1", "c": 1}.items(), key = lambda x: x[1])`
         - 若是想完成 “先按xx排序， 再按xxx排序”这种， 就把key=（xx, xxx）
-1. #### list.pop/remove/del 区别
+
+### python -i -c 
+    - -i -i其实就是执行文件内容或者执行命令后再进入交互模式。不会去读取$PYTHONSTARTUP这个配置文件。
+    - -c 执行命令`python -i -c "print 'hello world'"`
+### print(str, file_obj) # 输入到文件当中， file默认是file=sys.stdout，所以如果是file_obj就不输出到控制台了
+### round
+```
+round(float(5/9), 4) * 1
+0.5556
+round(float(5/9), 4) * 10
+5.556
+round(float(5/9), 4) * 100
+55.559999999999995
+round(float(5/9), 4) * 10 * 10
+55.56
+```
+### Error while finding module specification for 'web_main.py'
+```
+[huawei@localhost FlaskDemo]$ python3 -m web_main.py
+/bin/python3: Error while finding module specification for 'web_main.py' (AttributeError: module 'web_main' has no attribute '__path__')
+# 目录结构
+[huawei@localhost FlaskDemo]$ ls -la
+total 28
+drwxr-xr-x  7 huawei huawei  255 Jan 14 10:03 .
+drwxr-xr-x. 4 root   root     44 Jan 14 09:55 ..
+drwxr-xr-x  7 huawei huawei   91 Jan 14 09:55 common
+drwxr-xr-x  3 huawei huawei  127 Jan 14 09:55 .idea
+-rw-r--r--  1 huawei huawei    0 Jan 14 09:55 __init__.py
+drwxr-xr-x  2 huawei huawei   21 Jan 14 10:00 log
+-rw-------  1 huawei huawei 1568 Jan 14 09:59 nohup.out
+drwxr-xr-x  2 huawei huawei   37 Jan 14 10:03 __pycache__
+-rw-r--r--  1 huawei huawei  666 Jan 14 09:55 Readme.md
+-rw-r--r--  1 huawei huawei  387 Jan 14 09:55 requestments.txt
+-rw-r--r--  1 huawei huawei  859 Jan 14 09:55 run.log
+-rw-r--r--  1 huawei huawei    0 Jan 14 09:55 run.log.2021-12-30_10-44
+-rw-r--r--  1 huawei huawei 1405 Jan 14 09:55 ssh_test.py
+-rw-r--r--  1 huawei huawei  148 Jan 14 09:55 test.py
+drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
+-rw-r--r--  1 huawei huawei  369 Jan 14 09:55 web_main.py
+# 删除一些东西就好了
+[huawei@localhost FlaskDemo]$ rm -rf run.log* __pyc* nohu* run.log*
+```
+### 函数的参数能分多次传进去吗？
+### split(delimiter, maxsplit) 指定切割次数，从左往右切割
+### python 类成员
+   ```
+   class TestProperty:
+    name = "aaa" # 这里name相当于self.name
+    def __init__(self, name=None):
+        if name:
+            self.name = name
+   ```
+
+### 字符串
+### Python 如何声明变量类型
+   - from typing import List def hello(con: List)
+### 模块级别与功能级别 不重要
+   - http://blog.sina.com.cn/s/blog_6b9b69f10100w1xr.html
+### return 和 break 的区别
+   - for 循环中的return 能终止循环吗？ 可以终止    
+### 涉及到字符串匹配的把 a， b都sorted()后再对比
+   - sorted(iterable, /, *, key=None, reverse=False)
+   - key 指定带有单个参数的函数，用于从 iterable 的每个元素中提取用于比较的键 (例如 key=str.lower)。 默认值为 None (直接比较元素)。
+   - 是稳定的
+   ```
+   dict2 = sorted(dict1) # 只有key
+   dict3 = sorted(dict1.items(), key=lambda x: x[1],reverse=True)
+   ```
+### 进制转换
+   - link: https://blog.csdn.net/weixin_43353539/article/details/89444838
+   - 有两种方法, 一种是内置的函数,一种是format函数
+   - 其他进制转10进制 int(n, 2/8/16) # n是字符串 后面的是n的进制
+   - 其他进制转其他进制 先转为10进制 bin/oct/int/hex 
+     - 如hex(int('10', 2)) 二进制转16进制
+   - 使用format函数进行格式化数字操作
+### 格式化字符串
+    - f 格式化字符串中不能又反斜杠，只能用单引号
+###  3>=2 <6
+### 鸭子类型
+   - 介绍？
+   - 这个特性的用处？
+### enumerate
+   - `for value, index in enumerate(list[, 枚举起始位置])`
+### 三元表达式 lambda、lambda无参数的语法
+   ```python
+   from functools import reduce
+
+   strict_mode =False
+   if strict_mode:
+       la = lambda a,b: a and b
+   else:
+       la = lambda a,b: a or b
+   
+   exec_mode = lambda a,b: a and b if strict_mode else lambda a,b: a        or b
+   
+   a = [None, False, True]
+   print(reduce(la, a))
+   print(reduce(exec_mode, a))
+   # 无参数的语法
+   [lambda : i * i for i in range(4)] 
+   ```
+### timeit的使用
+    - [link](https://www.cnblogs.com/Uncle-Guang/p/8796507.html)
+      - 关于timeer类的描述有误， 不是用timer对象去调用
+    - 直接看这两个方法
+    - timeit.timit()
+    - timeit.repeate()   
+### f字符串中输出{}
+   - [link](https://stackoverflow.com/questions/5466451/how-can-i-print-literal-curly-brace-characters-in-a-string-and-also-use-format)
+   - `f"{{}}"`
+   - `hello = "HELLO"\n print(f"{{{hello.lower()}}}") # 输出{hello}`
+### @overload ---------------------------------no
+### python中path相关的
+    - 环境变量：PATH和sys.path 以及PYTHONPATH
+      - PATH 是系统的环境变量
+      - sys.path 是python的搜索模块的路径集
+         - sys.path.insert(0, "path1") # 将path1加入搜索路径中, 2个必选参数
+         - import 相关：https://blog.csdn.net/weixin_38256474/article/details/81228492
+      - PYTHONPATH 是环境变量PATH中的一个值， 默认是空
+      - sys.path始化时默认包含了输入脚本所在的目录（python path/to/script, path/to 会在path中）， PYTHONPATH 和python安装目录
+      - 修改PYTHONATH影响sys.path
+        ```shell
+        huawei ~/Desktop/people/pc_kbox/pc_kbox% export PYTHONPATH="/5555555"
+        huawei ~/Desktop/people/pc_kbox/pc_kbox% python3
+        >>> import sys
+        >>> sys.path
+        ['', '/5555555', '/usr/lib/python37.zip', '/usr/lib/python3.7', '/usr/lib/python3.7/lib-dynload', '/home/huawei/.local/lib/python3.7/site-packages', '/usr/local/lib/python3.7/dist-packages', '/usr/lib/python3/dist-packages']
+
+        # 奇怪的是这种现象
+        huawei ~/Desktop/people/pc_kbox/pc_kbox% export PYTHONPATH="5555555"
+        huawei ~/Desktop/people/pc_kbox/pc_kbox% python3                     
+        >>> import sys
+        >>> sys.path
+        ['', '/home/huawei/Desktop/people/pc_kbox/pc_kbox/5555555', '/usr/lib/python37.zip', '/usr/lib/python3.7', '/usr/lib/python3.7/lib-dynload', '/home/huawei/.local/lib/python3.7/site-packages', '/usr/local/lib/python3.7/dist-packages', '/usr/lib/python3/dist-packages']
+        >>> 
+        ```
+   - 文件路径的操作封装在os.path里的方法, 此外，还有shutil该库为python内置库，是一个对文件及文件夹高级操作的库，可以与os库互补完成一些操作，如文件夹的整体复制，移动文件夹，对文件重命名等。
+        - link:
+            - [os.path()模块](https://www.runoob.com/python3/python3-os-path.html)
+            - [Python3 OS 文件/目录方法](https://www.runoob.com/python3/python3-os-file-methods.html)
+        ```
+        os.path.abspath("path") # path的绝对路径
+        os.getcwd() # 返回当前工作目录
+        os.path.basename(path) # 文件名带格式 按格式判断
+        os.path.dirname(path) # 文件所在文件夹名 是按格式判断的
+        os.path.isdir(path) # path存在，且是文件夹、不是按格式判断的
+        os.rmdir(path) # 删除文件夹，文件夹非空的话会报错
+        os.removedirs() # 递归删除目录
+            - os.removedirs("./test2/test1") # test1如果为null，就删除，然后删除test2
+        - os.walk() # 遍历文件夹下的所有文件
+        shutil.rmtree("path") # 空不空都能删除
+
+        ```
+        - 
+### python2.x和python3.x 中range的不同以及python2中xrange
+    - python2 中的range返回一个list，python3中返回一个可迭代对象
+    - python2 中xrange返回一个生成器
+### a = b 赋值时创建对象的顺序
+    - 参照learn_python_namespace_scrope
+### if condition1 and condition2 的执行顺序
+    - 如果condition1 为false, 就直接返回了,不会在执行condition2, 于是我们可以这样`a=4;res = True if hasattr(a, "add") and a.add(5) else False`
+### import moudle 中搜索模块的顺序
+    - 输入脚本的目录
+    - PYTHONPATH中的目录
+    - Python默认的安装路径中
+    - 实际上，解释器由 sys.path 变量指定的路径目录搜索模块，该变量初始化时默认包含了输入脚本（或者当前目录）， PYTHONPATH 和安装目录。这样就允许 Python程序了解如何修改或替换模块搜索目录。
+### list.pop/remote/del 区别
     - a.remove(value)  删除首个符合条件的元素;返回空
     - a.pop(index) 删除索引并且返回
     - del a[start[, end]] 删除下标, 可以是范围

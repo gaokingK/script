@@ -1,7 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# yaml 简单使用 link: https://www.cnblogs.com/klb561/p/9326677.html
-# yaml 构造器、表示器、解析器 link：https://www.cnblogs.com/klb561/p/9326677.html
+"""
+# 序列化(dump)和反序列化(load)以及 pickling/unpickling 
+    序列化 变量从内存中变为可存储或者可传输的 过程
+    反序列化 变量从序列化的对象重新读到内存里的过程 是流转为对象
+    picking 是序列化在python中的称呼
+
+# yaml
+yaml 简单使用 link: https://www.cnblogs.com/klb561/p/9326677.html
+yaml 构造器、表示器、解析器 link：https://www.cnblogs.com/klb561/p/9326677.html
+
+# json
+    json中load和loads区别: https://www.cnblogs.com/bigtreei/p/10466518.html
+    load loads 区别: 前者读取文件/后者读字符串 可以把多的s 理解为 string(load string)
+    dump dumps 区别: 前者存入文件/后者转为字符串
+# pickle/cpickle
+    cPickle是C语言写的，速度快，pickle是纯Python写的，速度慢
+"""
 import yaml
 
 f_r = open(r"./learn_yaml_load_config.yml", encoding="gbk", errors="ignore")

@@ -1,0 +1,79 @@
+# skill
+-  括号里面的是比较好的翻译
+# main dish
+- column-based 基于列的
+- The tuples returned by Query are named tuples 返回的元组是已命名的元组(返回的元组名字是tuble)
+- You are all lovely people and I'm glad I get to spend time with you. 大家都是很好的人, 能和大家一起度过一点时光真的是太好了
+- If a database name contains special characters, the name for the database directory contains encoded versions of those characters as described in Section 9.2.4, “Mapping of Identifiers to File Names”
+- Certain objects within MySQL # MySQL 中的某些对象，
+- backtick 反引号
+- Let’s consider how a second table, related to User, can be mapped and queried 让我们考虑如何映射和查询与 User 相关的第二个表
+- his implies a basic one to many association
+- are referred to 被称为
+- Arguments to relationship() which concern the remote class can be specified using strings which是修饰Arguments的
+- Working with Related Objects 使用关系型对象
+- jack as well as the two Address members in the corresponding addresses collection are both added to the session at once jack 以及相应地址集合中的两个地址成员都同时添加到会话中
+- MySQL supports the following JOIN syntaxes for the table_references part of SELECT statements and multiple-table DELETE and UPDATE statements mysql对select语句以及多表delete和update语句中的table_reference部分支持以下的join语法
+- we can use Query.filter() to equate their related columns together. equate是说query.filter()方法功能等同遇把相关的columnstogether起来; 或者是equate 两表相关的列
+- The actual SQL JOIN syntax, on the other hand, is most easily achieved using the Query.join() method: 另一方面, join 最容易用Query.join实现
+- The Query.join() method will typically join from the leftmost item in the list of entities A 方法往往会从实体列表中最左边的item开始join
+- me, who never got this far 从未走到这一步的我
+- may be used to 可以被用于, 不是可能被用于
+- When joining to relationships using using (两个using)aliased(), the special attribute method PropComparator.of_type() may be used to alter the target of a relationship join   to   refer to    a given aliased() object. 当使用 aliased() 连接到关系时，特殊的属性方法 PropComparator.of_type() 会以引用给定的 aliased() 对象 来更改关系连接的目标
+- In addition to using the PropComparator.of_type() method, 除了使用xxx方法之外
+- from the inside out. 从内到外
+- and the subquery() method on Query produces a SQL expression construct representing a SELECT statement embedded within an alias Query 上的 subquery() 方法生成一个 SQL 表达式构造，表示嵌入在alias中的 SELECT 语句
+- The Query features several operators which make usage of EXISTS automatically. Query 有几个运营商可以自动使用 EXISTS
+- explicit EXISTS construct, 显式的Exists构造
+- recall earlier 回想一下之前...
+- when we accessed the User.addresses collection of a User and SQL was emitted. and 不是和的意思, 而是当xxx时SQL 才发出
+- All three are usually invoked via functions known as query options which give additional instructions to the Query on how we would like various attributes to be loaded, via the Query.options() method. 这三个函数通常通过称为查询选项的函数调用，这些函数通过 Query.options() 方法向 Query 提供关于我们希望如何加载各种属性的附加指令。(学学如何断句)
+- emits a second SELECT statement  发出第二个select语句, 这个a是起描述作用的
+- note that even though the User.addresses collection on jack is actually populated right now populated 代表东西已经加载
+- Note that even though the OUTER JOIN resulted in two rows 注意即使外连接返回了两行结果.
+- This is specifically so that joined eager loading can be applied without affecting the query results. 这特别是为了...
+- Another form of loading, subqueryload(), also exists, which can be used in place of selectinload() when making use of composite primary keys on certain backends. 也存在另一种加载形式 subqueryload() 当在某些后端使用复合主键时，它可以代替 selectinload() 使用。
+- An Query.order_by() or Query.filter() call cannot reference these aliased tables - so-called “user space” joins are constructed using Query.join() xxx 不能引用这些别名表, 即使用query.join()连接得来的所谓的用户空间
+- The rationale for this is that joinedload() is only applied in order to affect how related objects or collections are loaded as an optimizing detail - it can be added or removed with no impact on actual results. 这样做的基本原理是，joinedload() 仅用于影响相关对象或集合作为优化细节加载的方式 - 可以添加或删除它而不影响实际结果。
+- A third style of eager loading is when we are constructing a JOIN explicitly in order to locate the primary rows, and would like to additionally apply the extra table to a related object or collection on the primary object. xxxx, 并且还希望将额外的表应用到主对象上的相关对象或集合时。
+- on a query that needs to filter on that same object. 需要过滤相同对象的查询
+- apply the “user” columns to the Address.user attribute: 将user添加到addr上 使用addr.user来访问
+- see how that goes 看看情况如何
+- So far, so good. 到现在看来还好
+- We’re moving into the bonus round here, but lets show off a many-to-many relationship.我们正在进入奖金回合，但让我们炫耀一下多对多的关系。
+- We’ll sneak in some other features too, just to take a tour.
+- The Column object is also given its name explicitly, rather than it being taken from an assigned attribute name. 
+- Next we define BlogPost and Keyword, using complementary relationship() constructs, each referring to the post_keywords table as an association table xxx, 使用互补的relation构造, 每个构造都将 post_keywords 表称为关联表：
+- except one issue we’ll have is that a single user might have lots of blog posts.  除了一个问题我们会遇到 xxx(问题的描述)
+- we’d like to be able to filter results further so as not to load the entire collection 整个集合
+- We’re storing keywords uniquely in the database, but we know that we don’t have any yet, so we can just create them: ? 
+- flame wars have been fought over this issue围绕这个问题展开了激烈的战争
+- Therefore my post might help to shed some light on the situation. xxx 可能有助于阐明这种情况
+- the configurational process starts by describing the database 配置过程首先描述我们将处理的数据库表(并不一定要翻译为:被xx启动)
+- Classes mapped using the Declarative system are defined in terms of a base class which maintains a catalog of classes and tables relative to that base - this is known as the declarative base class. 
+- Our application will usually have just one instance of this base in a commonly imported module.我们的应用程序通常在一个通用导入的模块中只有这个基础的一个实例。(被不翻译出来)
+-  A new class called User will be the class to which we map this table.一个名为 User 的新类将是我们将此表映射到的类。
+-  Outside of what the mapping process does to our class 在映射过程对我们的类所做的之外(并不一定要把疑问翻译出来) the class remains otherwise mostly a normal Python class该类在其他方面仍然主要是一个普通的 Python 类to which we can define any number of ordinary attributes and methods needed by our application.我们可以为其定义应用程序所需的任意数量的普通属性和方法。
+-  We will see that special commands are first emitted to check for the presence of the users table, and following that the actual CREATE TABLE statement: 我们将看到首先发出特殊命令以检查用户表的存在，然后是实际的 CREATE TABLE 语句：(at first)
+-  It’s “home base” for the actual database and its DBAPI, delivered to the SQLAlchemy application through a connection pool and a Dialect, which describes how to talk to a specific kind of database/DBAPI combination.它是实际数据库及其 DBAPI 的“大本营”，通过连接池和方言传递给 SQLAlchemy 应用程序，它描述了如何与特定类型的数据库/DBAPI 组合进行对话(传送到SQLAlchemy应用通过连接词和Dialect, 描述了如何谈论到指定种类的database/DBAPI集合)
+-  an Engine references both a Dialect and a Pool, which together interpret the DBAPI’s module functions as well as the behavior of the database.引擎同时引用方言和池，它们一起解释 DBAPI 的模块功能以及数据库的行为。
+-  Creating an engine is just a matter of issuing a single call.(创建引擎只是发出一个调用的问题)
+-  The above engine creates a Dialect object tailored towards PostgreSQL, as well as a Pool object which will establish a DBAPI connection at localhost:5432 when a connection request is first received.上面的引擎创建了一个为 PostgreSQL 定制的 Dialect 对象，以及一个 Pool 对象，当第一次收到连接请求时，它将在 localhost:5432 上建立一个 DBAPI 连接。(不是在第一次接受到连接请求时才创建Pool对象)
+-  Note that the Engine and its underlying Pool do not establish the first actual DBAPI connection until the Engine.connect() method is calledor an operation which is dependent on this method such as Engine.execute() is invoked. 请注意，在调用 Engine.connect() 方法或调用依赖于该方法的操作（例如 Engine.execute()）之前，引擎及其底层池不会建立第一个实际的 DBAPI 连接。 这样，Engine 和 Pool 可以说是有惰性初始化行为。
+-  The next section, Working with Engines and Connections, will detail the usage API of the Engine and similar, typically for non-ORM applications.下一节，使用引擎和连接，将详细介绍引擎和类似的 API 的使用，通常用于非 ORM 应用程序。(类似的)
+-  a handful of others require an additional install of a separate dialect. 最常见数据库的方言包含在 SQLAlchemy 中； 少数其他人需要额外安装单独的方言
+-  The length field on String, as well as similar precision/scale fields available on Integer, Numeric, etc. are not referenced by SQLAlchemy other than when creating tables.除了在创建表时，SQLAlchemy 不引用 String 上的长度字段，以及 Integer、Numeric 等上可用的类似精度/小数位数字段。
+-  Other transactional characteristics may be defined when calling sessionmaker as well; 调用 sessionmaker 时也可以定义其他事务特性；
+-  so we actually got back the identical instance as that which we just added:所以我们实际上得到了与我们刚刚添加的相同的实例
+-  After the Session inserts new rows in the database, all newly generated identifiers and database-generated defaults become available on the instance,either immediately or via load-on-first-access. Session 在数据库中插入新行后，所有新生成的标识符和数据库生成的默认值在实例上都可用,无论是立即还是通过首次访问加载。
+-  In this case, the entire row was re-loaded on access 在这种情况下，整个行(还是所有的行)在访问时重新加载
+-  be sure to 务必
+-  As our User object moved from being outside the Session, to inside the Session without a primary key, to actually being inserted. 当我们的 User 对象从 Session 外部移动到没有主键的 Session 内部，再到实际插入时
+-  The only relationship such an object has to the ORM is that its class has a mapper() associated with it.这种对象与 ORM 的唯一关系是它的类有一个与之关联的 mapper()。
+- feel free to file an issue for this tutorial 随意为本教程提出问题 
+- To use MSVC from a command line or VS Code, you must run from a Developer Command Prompt for Visual Studio.(不翻译）An ordinary shell such as PowerShell, Bash, or the Windows command prompt does not have the necessary path environment variables set. PowerShell、Bash 或 Windows 命令提示符等普通 shell 没有设置必要的路径环境变量。 （而不是说xxx是像PS、bash等一样的）而且还可以注意这个句号
+-  In the dropdown, which will display a tasks dropdown listing various predefined build tasks for C++ compilers.  In the dropdown, which will display a tasks dropdown listing various predefined build tasks for C++ compilers.
+- You might need to press Enter a couple of times initially to see the PowerShell prompt in the terminal. 您最初可能需要按 Enter 几次才能在终端中看到 PowerShell 提示符。
+- The URL was defined with a trailing slash so Flask will automatically redirect to the URL with the trailing slash if it was accessed without one. URL是用斜杠定义的，因此如果在没有斜杠的情况下访问该 URL，Flask 将自动重定向到带有斜杠的 URL
+- Process substitution is supported on systems that support named pipes (FIFOs) or the /dev/fd method of naming open files.支持命名管道 (FIFO) 或命名打开文件的 /dev/fd 方法的系统支持进程替换。
+- any fractional part is ignored 任何小数部分都被忽略

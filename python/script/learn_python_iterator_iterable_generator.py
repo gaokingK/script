@@ -64,5 +64,6 @@ def debug_iterator():
 
 
 if __name__ == '__main__':
+    # debug_iterable()
     debug_iterator()
     print("OK")
