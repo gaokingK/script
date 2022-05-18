@@ -21,6 +21,12 @@ True
 >>>
 
 ```
+### with open
+    - 打开utf-8编码的中文文件出现：UnicodeDecodeError: 'gbk' codec can't decode byte 0xff in position 0: illegal multibyte sequence
+    ```
+    #  with open(file_path, encoding="gbk", errors='ignore') as f: 改成下面这样就好了，好像是打开模式的原因
+    #  with open(file_path, "r", encoding="utf-8", errors='ignore') as f: 
+    ```
 ### python 命令行中如果导入的方法修改了，需要重新导入，或者关闭命令行再重新打开，重新导入
 ### sort/sorted区别
     - sort 是应用在 list 上的方法，sorted 可以对所有可迭代的对象进行排序操作

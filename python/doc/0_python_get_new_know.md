@@ -25,3 +25,13 @@ dic = {i:2*i for i in range(3)} # {0: 0, 1: 2, 2: 4}
 Executing task id {0.id}, args: {0.args!r} kwargs: {0.kwargs!r}'.format(self.request))
 ```
 
+## 集合和集合的运算
+- link：https://blog.csdn.net/isoleo/article/details/13000975
+```
+# 交集
+a & b
+# 并集
+a | b
+# 差
+a - b # {1, 2} - {1, 3} 结果是2
+```

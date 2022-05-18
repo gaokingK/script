@@ -3,13 +3,17 @@
 # 写正则表达式困难的不是匹配到想要的内容，而是尽可能的不匹配到不想要的内容
 # 书籍：正则表达式必知必会
 - [挺好的](https://deerchao.cn/tutorials/regex/regex.htm)
-string = "113/kbox_result_202110180959.txt"
-ls 113/*.txt|sed "s/*kbox_r.*t_//g" 为什么kbox前的那个星号没有用，因为sed也能用正则，但是*号代表前个模式匹配0次或者多次， 
-但为什没有用呢？难道前面不是null吗
+- [在线正则表达式，以及有一些正则表达式语法的介绍](https://c.runoob.com/front-end/854/)
+
+
 # 问题
     - 如何用re完成if "_get" or "_add" or "_update" in "xxxxx":
 
-[a-z0-9]([-a-z0-9]*[a-z0-9])? == [a-z0-9][-a-z0-9]*
+    - string = "113/kbox_result_202110180959.txt" 命令是：ls 113/*.txt|sed "s/*kbox_r.*t_//g" 为什么kbox前的那个星号没有用，
+        - 因为sed也能用正则，但是*号代表前个模式匹配0次或者多次。
+        - 但为什没有用呢？难道前面不是null吗
+
+    - [a-z0-9]([-a-z0-9]*[a-z0-9])? == [a-z0-9][-a-z0-9]*
 """
 import re
 
@@ -68,7 +72,22 @@ p = r"(?<=A)XX(?=B)"
 To: 向后引用以及零宽断言、小括号的用法
 link: https://www.cnblogs.com/linux-wangkun/p/5978462.html
 向后引用 
-“””
+
+### 负向预查模式 `(?!expr)`
+- 前面还有个表达式A，如下面的java，在A后面进行这个模式的匹配
+- java(?!6) 就会匹配java7中的java，而不会匹配java6中的java
+- 要用括号包括起来；后面的是一个表达式
+"""
+
+"""
+To: 定位符
+- ^ 匹配输入字符串开始的位置。如果设置了 RegExp 对象的 Multiline 属性，^ 还会与 \n 或 \r 之后的位置匹配
+- $
+- \b 匹配一个单词边界，即字与空格间的位置。
+    - /ter\b/ 匹配bster中的ter，而不匹配bstera中的ter
+    - /\bv\b/ 能匹配[v]中的v
+- \B
+"""
 if __name__ == "__main__":
     choice_num()
 
