@@ -14,6 +14,13 @@
         - 但为什没有用呢？难道前面不是null吗
 
     - [a-z0-9]([-a-z0-9]*[a-z0-9])? == [a-z0-9][-a-z0-9]*
+
+    - nothing to repeat 贪婪匹配的问题
+
+    - 正则表达式如何传入参数
+        - 不可以使用f
+        - re.findall(r"(^# \b%sth\b.*$)(.*)"%(2), a, re.M)
+        - re.findall(r"(^# \b{}th\b.*$)(.*)".format(2), a, re.M)
 """
 import re
 
@@ -51,8 +58,24 @@ re.S 使 . 匹配包括换行在内的所有字符, 但这样会引起问题可�
 To: 贪婪非贪婪
 link: https://blog.csdn.net/real_ray/article/details/17502587
 Python里数量词默认是贪婪的（在少数语言里也可能是默认非贪婪）在"*","?","+","{m,n}"后面加上？，使贪婪变成非贪婪。
-
 """
+"""
+To: nothing to repeat 贪婪匹配的问题
+$ 默认也是贪婪匹配的，加了？就会报错
+"""
+def test_greedy():
+    test_str = """
+    # 1th batch case 26
+    Component_DISK_Model_0010
+    Component_FAN_092
+
+
+    # 2th batch case 26
+    """
+    # re.findall(r"(^# \b1th\b.*$?)(.*)", a, re.MULTILINE) # 会提示nothing to repeat
+    # re.findall(r"(^# \b1th\b.*$)(.*)", a, re.MULTILINE) # [('# 1th batch case 26\nComponent_DISK_Model_0010\nComponent_FAN_092\n\n\n# 2th batch case 26', '')]
+    re.findall(r"(# \b{}th\b.*?\n)(.*)".format(1), a, re.S) # 这样就好了 [('# 1th batch case 26\n', 'Component_DISK_Model_0010\nComponent_FAN_092\n\n\n# 2th batch case 26')]
+    
 """
 To: 回溯引用、向前向后查找
 link：https://www.cnblogs.com/chuxiuhong/p/5907484.html
@@ -87,6 +110,21 @@ To: 定位符
     - /ter\b/ 匹配bster中的ter，而不匹配bstera中的ter
     - /\bv\b/ 能匹配[v]中的v
 - \B
+"""
+
+"""
+To: 修饰符
+re.S        使 . 匹配包括换行在内的所有字符
+re.M        多行匹配，影响 ^ 和 $
+"""
+
+
+"""
+To: 直接将匹配结果直接转为字典模式
+s = '1102231990xxxxxxxx'
+res = re.search('(?P<province>\d{3})(?P<city>\d{3})(?P<born_year>\d{4})',s)
+print(res.groupdict())
+{'province': '110', 'city': '223', 'born_year': '1990'}
 """
 if __name__ == "__main__":
     choice_num()

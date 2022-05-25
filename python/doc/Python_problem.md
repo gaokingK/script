@@ -208,6 +208,7 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
     - PYTHONPATH中的目录
     - Python默认的安装路径中
     - 实际上，解释器由 sys.path 变量指定的路径目录搜索模块，该变量初始化时默认包含了输入脚本（或者当前目录）， PYTHONPATH 和安装目录。这样就允许 Python程序了解如何修改或替换模块搜索目录。
+    - 竟然还能`from ..Host.HostBase import HostBase` 此语句所在的文件是在Host文件夹下，即HostBase.py和此文件在同一目录下
 ### list.pop/remote/del 区别
     - a.remove(value)  删除首个符合条件的元素;返回空
     - a.pop(index) 删除索引并且返回

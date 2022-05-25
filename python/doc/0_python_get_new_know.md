@@ -1,3 +1,9 @@
+### 逻辑运算符的优先级问题
+- if "V6" or "V7" in self.productname
+    - 会先计算or
+### mmap --- 内存映射文件支持
+- 打开已加载到内存中的对象
+
 ## counter类
 - link: https://www.cnblogs.com/zhenwei66/p/6593395.html
 - 计算值出现的次数, 并能做一些运算
