@@ -27,3 +27,12 @@ a = b"hello你好"  # SyntaxError: bytes can only contain ASCII literal characte
 
 # Python在物理存储、网络传输时，为节省空间（包括物理空间和时间空间），
 # 需将字符串转换成字节序列对象bytearray，按字节Bytes发送。
+
+"""
+To: 编码
+"""
+def byte2str():
+    b = "\xe6\xb2\xa1\xe6\x9c\x89\xe9\x82\xa3\xe4\xb8\xaa\xe6\x96\x87\xe4\xbb\xb6\xe6\x88\x96\xe7\x9b\xae\xe5\xbd\x95"
+    print(b) # 直接就输出中文了"没有那个文件或目录"
+    str = "没有那个文件或目录"
+    str.encode("utf-8") # 报错UnicodeDecodeError: 'ascii' codec can't decode byte 0xe6 in position 0: ordinal not in range(128)

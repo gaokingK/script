@@ -30,6 +30,35 @@ class A:
         print("nothing")
 
 
+"""
+To: 使用类方法实现一个计数器
+"""
+class Spam:
+    numInstances = 0
+
+    @classmethod
+    def count(cls):  # 对每个类做独立计数
+        cls.numInstances += 1  # cls是实例所属于的最底层类
+
+    def __init__(self):
+        self.count()  # 里面虽然没有参数，是隐式的将self.__class__传给count方法
+
+
+class Sub(Spam):
+    numInstances = 3
+
+
+class Other(Spam):
+    numInstances = 0
+
+
+def debug_classInstanceCounter():
+    x = Spam()
+    y1, y2, y3 = Sub(), Sub(), Sub()
+    z1, z2, z3 = Other(), Other(), Other()
+    print(x.numInstances, y1.numInstances, z1.numInstances)  # 输出：(1, 6, 3)
+    print(Spam.numInstances, Sub.numInstances, Other.numInstances)  # 输出：(1, 6, 3)
+
 if __name__ == '__main__':
     a = A()
     # a.print_color()
@@ -42,4 +71,6 @@ if __name__ == '__main__':
     # A.print_nothing()
 
     A.print_cls_name()
+
+    debug_classInstanceCounte()
     print("ok")

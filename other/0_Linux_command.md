@@ -163,7 +163,11 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
     ``` 
 
 ### touch 
-   3. touch -r 文件    文件夹 # 意思是把文件的日期设置给文件夹。
+   - touch -r 文件 文件夹  # 意思是把文件的日期设置给文件夹。
+   - 修改文件时间
+      - link：https://blog.csdn.net/qq_39900031/article/details/123273907
+      - touch -a： 修改文件的访问时间
+      - touch -d： 同时修改文件的访问时间和修改时间，格式：touch -d “2021-01-02 09:32:21” 3.log
 ### linux 特殊符号和通配符 
    ```shell 
    # https://www.cnblogs.com/0zcl/p/6821213.html
@@ -201,11 +205,24 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
    - `echo $(date +%ya_string%d) `  还可以这样替换，结果是2021a_string13
    
 ### xargs 怎么只接受一次参数 ------------------------------------------------no
+### 文件时间 stat
+- 查看时间：
+   - 最近访问时间（Access）:使用cat、less等查看文件后会被修改
+   - modify时间：内容被改变的时间
+   - change时间：显示的是文件的权限、拥有者、所属的组、链接数发生改变时的时间。当然当内容改变时也会随之改变（即inode内容发生改变和Block内容发生改变时）
+   - 改变内容会改变atime、mtime、ctime；chmod只会改变ctime
+- 使用stat可以查看文件的三个时间以及其他状态
+- 修改时间
+   - 见touch使用
 ### ls 
    - ls -t 按时间顺序显示
    - ls -r 显示文件夹中
    - -R 若目录下有文件，则以下之文件亦皆依序列出
    - ls -d 显示目录
+   - 查看文件的时间
+      - link：https://blog.csdn.net/qq_39900031/article/details/123273907
+      - ll --time=atime  //查看访问时间
+      - ll --time=ctime  //查看改动时间
 ### linux中单引号‘ ,双引号“, 反引号 ` `, $, $(), ${}与变量；shell中各种括号的作用()、(())、[]、[[]]、{}
    - [shell中各种括号的作用()、(())、[]、[[]]、{}](https://blog.csdn.net/taiyang1987912/article/details/39551385?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link) -------------------------------------------no
    - [linux 单引号‘ ,双引号“, 反引号 ` `, $, $(), ${}与变量](https://blog.csdn.net/qq_40491569/article/details/83688652)

@@ -7,7 +7,22 @@
    - SELECT column_name(s) FROM table1; # 意思是可以选择一个列或者多个列
    - [Unique [key] 而不用 [unique [key]]
    - [COLUMN_FORMAT {FIXED|DYNAMIC|DEFAULT}] 带关键字参数的
+# other
+- 比如从[这里](https://github.com/Charmve)看到了cpp的图标以及一些常用的语言和框架、工具和环境
 ### 为什么在终端里面或者使用urllib就下不了的东西在浏览器里就能直接下载呢？---------------no
+
+### 怎么阅读代码
+- 调试
+   - 在想看懂的地方打断点，看调用栈
+   - 如果不知道这个模块什么时候用的，就在这里打断点，看调用栈
+### Etag和if-match
+- link：
+   - https://zh.m.wikipedia.org/zh-hans/HTTP_ETag
+   - https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/ETag
+- Etag是http协议提供的若干机制中的一种缓存验证机制。
+- 客户端第一次请求url时，服务器会使用摘要算法生成一个hash值存放在响应头的Etag字段当中，当客户端修改资源或者刷新资源时，会使用Etag字段来检测资源是否被修改，或者死否需求重新请求资源。
+- 当修改资源时，会if-match：Etag；包含在请求头当中，如果要修改的资源已经被别人修改了，服务器会返回412.
+- 当需要刷新资源时，会把if-none-match包含在请求头当中，如果资源没被修改，服务器会返回一个极短的响应，包含HTTP304（未修改）状态码，来告诉客户端说持有的资源是最新的，应该使用它。假如资源已经被修改，服务器会返回更新后的内容
 ### 内存地址也是需要空间的
    - 地址一般由 文件号+块号+块内偏移组成，大概10个字节
 ### 关于文件夹命名、文件命名
