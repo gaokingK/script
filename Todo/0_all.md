@@ -30,3 +30,4 @@
 - 视频质量评估PEVQ算法： https://www.pianshen.com/article/9287453462/
 - linux systemctl 指令： https://www.cnblogs.com/zwcry/p/9602756.html
 - 哈希表应用实例：https://blog.csdn.net/zouchunlaigo1988/article/details/7163920
+- 所有开发者都应该知道的10个GitHub仓库https://bbs.huaweicloud.com/blogs/351143?utm_source=zhihu&utm_medium=bbs-ex&utm_campaign=other&utm_content=content

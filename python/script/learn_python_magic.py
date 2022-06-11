@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+介绍一些python的解构方法
+link:
+    - https://www.cnblogs.com/wongbingming/p/13775370.html
+"""
 import sys
 
 """

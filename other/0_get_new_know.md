@@ -15,6 +15,7 @@
 - 调试
    - 在想看懂的地方打断点，看调用栈
    - 如果不知道这个模块什么时候用的，就在这里打断点，看调用栈
+   - 看类的关系 ClassName.__mro__
 ### Etag和if-match
 - link：
    - https://zh.m.wikipedia.org/zh-hans/HTTP_ETag
@@ -23,6 +24,34 @@
 - 客户端第一次请求url时，服务器会使用摘要算法生成一个hash值存放在响应头的Etag字段当中，当客户端修改资源或者刷新资源时，会使用Etag字段来检测资源是否被修改，或者死否需求重新请求资源。
 - 当修改资源时，会if-match：Etag；包含在请求头当中，如果要修改的资源已经被别人修改了，服务器会返回412.
 - 当需要刷新资源时，会把if-none-match包含在请求头当中，如果资源没被修改，服务器会返回一个极短的响应，包含HTTP304（未修改）状态码，来告诉客户端说持有的资源是最新的，应该使用它。假如资源已经被修改，服务器会返回更新后的内容
+### SSO (Single Sign On)单点登录
+- 用户只需一次登录就可以访问所有相互信任的应用系统
+- 当用户第一次访问应用系统1的时候，因为还没有登录，会被引导到身份认证系统中进行登录；根据用户提供的登录信息，认证系统进行身份校验，如果通过校验，应该返回给用户一个认证的凭据－－ticket；用户再访问别的应用的时候就会将这个ticket带上，作为自己认证的凭据，应用系统接受到请求之后会把ticket送到认证系统进行校验，检查ticket的合法性。如果通过校验，用户就可以在不用再次登录的情况下访问应用系统2和应用系统3了。
+### smart（Self-Monitoring,Analysis and Reporting Technology）
+### smartctl
+- link: https://www.jianshu.com/p/d5389994fad1
+- smartctl是常用的磁盘检查工具
+- 查看磁盘是否支持`sudo smartctl -i /dev/sda1 `
+   - ```
+      # 最后两行 
+      SMART support is: Available - device has SMART capability.          
+      SMART support is: Enabled
+       ```
+- 手动开启支持smartctl `smartctl --smart=on --offlineauto=on --saveauto=on /dev/sda1`
+- 显示磁盘的属性值`sudo smartctl -A /dev/sdl1`
+   - VALUE：这是表格中最重要的信息之一，代表给定属性的标准化值，在1到253之间。253意味着最好情况，1意味着最坏情况。取决于属性和制造商，初始化VALUE可以被设置成100或200.
+
+### XOR (exclusive OR) 更严格的or运算
+- link: https://www.ruanyifeng.com/blog/2021/01/_xor.html
+- 运算规则 
+   ```
+   1 ^ 0 = 1
+   0 ^ 0 = 0
+   1 ^ 1 = 0
+   ```
+   - 任何值 与 0 xor 都为自身
+   - 自己和自己xor 结果为0
+- 妙用：一个数组包含 n-1 个成员，这些成员是 1 到 n 之间的整数，且没有重复，请找出缺少的那个数字。
 ### 内存地址也是需要空间的
    - 地址一般由 文件号+块号+块内偏移组成，大概10个字节
 ### 关于文件夹命名、文件命名

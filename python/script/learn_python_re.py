@@ -5,6 +5,8 @@
 - [挺好的](https://deerchao.cn/tutorials/regex/regex.htm)
 - [在线正则表达式，以及有一些正则表达式语法的介绍](https://c.runoob.com/front-end/854/)
 
+# 概述
+- re.sub() 可以接受一个函数，此函数可以把匹配到的内容作为参数
 
 # 问题
     - 如何用re完成if "_get" or "_add" or "_update" in "xxxxx":

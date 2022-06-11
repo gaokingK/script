@@ -27,6 +27,7 @@
 - 按下Alt 点击close = 关闭all other 
 - inspections 一些检查项
 - ctrl + E 最近文件
+- ctrl + shift + E 最近记录
 - ctrl + F12 当前文件中的函数和变量概览
 - ctrl + N 搜索类、文件名、方法等
 - 可以从log 里看 仓库各个分支的提交log， 来判断动态（profess）

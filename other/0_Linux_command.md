@@ -48,7 +48,7 @@
      - link: https://www.runoob.com/w3cnote/linux-check-port-usage.html
      - 应该用root来执行，否之看不到
    - netstat -tunlp 用于显示 tcp，udp 的端口和进程等相关情况。`netstat -tunlp | grep 8000`
-     - -t (tcp) 仅显示tcp相关选项
+     - -t (tcp) 仅显示tcp相关选项Administrator  
      - -u (udp)仅显示udp相关选项
      - -n 拒绝显示别名，能显示数字的全部转化为数字
      - -l 仅列出在Listen(监听)的服务状态
@@ -56,6 +56,17 @@
 ### lsof 列出系统啥进程打开了啥文件
    - link：https://www.runoob.com/w3cnote/linux-check-port-usage.html
    - lsof +d /usr/local/：显示目录下被进程开启的文件
+### lsmod 显示的当前内核已经加载的模块和驱动
+   - link: https://www.cnblogs.com/machangwei-8/p/10398706.html
+   - 解析 scsi_mod            141973  7 scsi_dh,sg,libata,mptspi,mptscsih,scsi_transport_spi,sd_mod
+      - 第1列：表示模块的名称，如scsi_mod表示scsi模块。
+      - 第2列：表示模块的大小，如141973表示scsi_mod模块的大小为141973字节。
+      - 第3列：表示依赖模块的个数，如7表示有7个模块依赖scsi_mod模块。
+      - 第4列：表示依赖模块的内容
+### modprobe 从 Linux kernel 中装载和卸载模块
+   - link: https://einverne.github.io/post/2018/09/modprobe.html
+   - 使用：modprobe module_name
+   - modprobe 命令会查找 /lib/modules/'uname -r' 目录中的模块和文件 (uname -r 是内核版本），但是不会查找 /etc/modprobe.conf 和 /etc/modprobe.d/ 目录下配置所排除的内容。可以这样查找 ```find /lib/modules/`uname -r` -name ipmi*```
 ### 进程替换 与 Here document --------------no
    - 形如<(command)的写法叫做**process substitution**
    - [解释了底层怎样支持](https://www.oschina.net/question/113421_241288)
