@@ -135,11 +135,23 @@
 ### script 能够将终端的会话过程录制下来 ---------------------------------no
    - [link](https://www.cnblogs.com/cheyunhua/p/11136161.html)
    - 利用script记录某人行为
+### 这些命令格式绝大多数为 command option file
 ### more
 more 命令类似 cat ，不过会以一页一页的形式显示，更方便使用者逐页阅读，而最基本的指令就是按空白键（space）就往下一页显示，按 b 键就会往回（back）一页显示，而且还有搜寻字串的功能（与 vi 相似），使用中的说明文件，请按 h 。
 - link:
   - https://www.runoob.com/linux/linux-comm-more.html
+### less
+   - [link](https://www.cnblogs.com/molao-doing/articles/6541455.html)
+   - less 工具也是对文件或其它输出进行分页显示的工具，应该说是linux正统查看文件内容的工具，功能极其强大。less 的用法比起 more 更加的有弹性。
+   - less file1 file2 `:n :p 切换文件（next/previous`
+   - -N 显示每行的行号
+### cat
+   - -n 对输入行编号 也只能编号了
 
+### head
+   - -n num 显示前num行，若num带-号，就只是从头显示，直到最后第num行
+### tail
+   - -n num 显示后num行，use -n +K to output starting with the Kth
 ### sort
 - link
    - (https://www.cnblogs.com/51linux/archive/2012/05/23/2515299.html)
@@ -154,10 +166,7 @@ more 命令类似 cat ，不过会以一页一页的形式显示，更方便使�
 ```
 sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分割结果的第二列来排序
 ```
-### less
-   - [link](https://www.cnblogs.com/molao-doing/articles/6541455.html)
-   - less file1 file2 `:n :p 切换文件（next/previous`
-   - -N 显示每行的行号
+
 ### ps -ef|-aux 区别 -------------------------no
 ### Bash内建参数 和 bash 参数
     - -s 允许在调用交互式shell时设置位置变量, 可以将标准输入 作为命令 去使用参数

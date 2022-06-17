@@ -23,6 +23,15 @@
         - 不可以使用f
         - re.findall(r"(^# \b%sth\b.*$)(.*)"%(2), a, re.M)
         - re.findall(r"(^# \b{}th\b.*$)(.*)".format(2), a, re.M)
+    - 如何匹配数字范围
+        - https://geek-docs.com/regexp/regexp-tutorials/regular-expressions-match-numeric-ranges.html
+        - 表达式[0-255]并不能匹配0至255之间的数字。表达式[0-255]是一个字符集，它的含义是匹配 0，1，2，5中任意一个字符，这个表达式等同于[0125]
+    - 如何使用|
+        - 使得"m|food"匹配"m"或"food"。若要匹配"mood"或"food"，请使用括号创建子表达式，从而产生"(m|f)ood"。
+        - 但这样会有一个问题：re.findall(r"(18:([0-2][0-9]|30))", "18:30:55") 会有两个分组
+    - 你能看出来这里有什么问题吗？
+        - re.match(r"[0-1][0-9]|2[0-3].*", "23:52:16").group()
+        - re.match(r"[0-1][0-9]|2[0-3].*", "18:52:16").group()
 """
 import re
 

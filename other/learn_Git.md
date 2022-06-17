@@ -10,11 +10,27 @@
 - 如何搜索历史记录， 想搜索字段， 但这些字段不知道在那个版本中被删除了
   - link：https://blog.csdn.net/asdfgh0077/article/details/103453994
   - git log -G/-S|grep <pattern>
-- fatal: unable to access https://github.com/xxxx.git/: server certificate verification failed. CAfile: none CRLfile: none
+- fatal: unable to access https://github.com/xxxx.git/: server certificate verification failed. CAfile: none CRLfile: none 或者是 x509
+  - x509很熟悉，是SSL传输的证书标准，应该是ssl认证失败，执行如下命令禁用SSL认证：
   - `git config --global http.sslverify false`
 - gnutls_handshake() failed: the tls connection was non-properly terminated
   - 设置代理，在终端中设置
+- git-lfs filter-process failed 
+   - link: 
+      - lfs介绍：https://iguoli.github.io/2019/07/10/Git-LFS.html
+         - Git LFS 是由 Atlassian, GitHub 和其他开源贡献者开发的 Git 扩展，目的是减少大文件对 Git 仓库的影响，其以一种偷懒的方式下载相关版本的文件
+      - 解决：https://stackoverflow.com/questions/43989902/git-pull-smudge-filter-lfs-failed
+   - 问题原因 git lfs 拉取时不知道lfs的url？
+      - in my case the SSH-authenticated repository was updated to use LFS from another client and on my side Git-LFS didn't know about the SSH remote-url
+   - 解决办法：
+      - git config lfs.url $(git config remote.origin.url)
+      - git lfs pull
+- EOF
+   - link：https://github.com/git-lfs/git-lfs/issues/3519
+   - 出现EOF原因意味着在拉取过程中客户端和服务器出现了问题
 ## other
+### GIT_TRACE显示日志
+   - link：https://blog.csdn.net/icyfox_bupt/article/details/91627314
 ### git patch --------------------------------no
 ### 远程分支回滚的三种方法：
    link :https://www.cnblogs.com/Super-scarlett/p/8183348.html
@@ -42,6 +58,8 @@
    - 全系统的(/etc/gitconfig)<当前用户的(~/.gitconfig)<当前仓库的(/.git/config)
    - 某个配置在当前仓库的中的配置中取消,但查看还在的原因是用的上层的配置
    - autocrlf 
+   - git config --global 不加global只对当前仓库生效
+   - git config -l 查看配置
 ### git checkout
    - `git checkout branch_name high_quality/dingding/function/.` 即使这个要检出的文件在现在的分支上不存在也可以检出的
 ### 这张图里怎么把code从repo checkout到workspace

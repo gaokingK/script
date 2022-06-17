@@ -86,9 +86,11 @@ sudo apt-get update
     - [apt-cache apt-get](https://linux.cn/article-4933-1.html)
       - apt-get和apt-cache是Ubuntu Linux中的命令行下的包管理工具
 
-# yum 
+# yum & rpm
 - RPM-based Linux (RedHat Enterprise Linux, CentOS, Fedora, openSUSE) yum 适用的系统
 - yum provides semanage # 查询semanage 这个命令是哪个包提供的，或者查询libcrypto.so.6在那个包中，然后再安装这个包
+- rpm -ql ipmitool 查看ipmitool这个安装包是否安装（可以看出ipmitool未安装）
+- rpm -qa ipmitool 检测ipmitool是否安装成功
 - 更换源
     ```
 	# 备份配置文件：
@@ -258,6 +260,13 @@ sudo apt-get update
 - centos7 Python3终端中敲击方向键显示「^[[C^[[D」
 	- link：https://www.linuxidc.com/Linux/2015-02/112891.htm
 	- 查找得知，是由于系统缺少了readline相关模块。CentOS 5.8默认只安装了readline模块而没有安装readline-devel模块，所以只要安装下，然后重新编译
+
+- Windows: TclError: Can't find a usable init.tcl in the following directories:
+	- link:https://stackoverflow.com/questions/29320039/python-tkinter-throwing-tcl-error
+	- 解决方法：
+		- where python # 找到python路径
+		- 复制D:\softwares\Python27\tcl 到D:\softwares\Python27\Lib  （好像只复制tk8.5）也可以
+		- 然后重启pycharm
 # redis安装和运行
 - redhat 可以通过apt安装
 ```

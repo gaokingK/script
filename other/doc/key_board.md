@@ -24,6 +24,7 @@
 - 创建文件时，自动生成文件头
 	- Files>Setting>Editor>File and Code Templates
 - 可以重命名project 和 directory
+- 一般是按ctrl 点击寻找定义，如果变量找不到可以按ctrl+alt
 - 按下Alt 点击close = 关闭all other 
 - inspections 一些检查项
 - ctrl + E 最近文件
@@ -44,6 +45,13 @@
 - pycharm 统计代码行数
 	- 搜索安装Statistic插件
 	- pycharm状态栏中点击插件；点击refresh selected on；（要选中项目）
+- 包裹代码
+	- 选中代码，ctrl+Alt+T 但是这个只能加if这种
+	- 如果先要加函数的就先选中，再按括号，再跳到左边
+- 调试
+	- 看成员引用的时候 read 和 write过滤
+		- self.hosts[host['id']] = hostObj 会在读里面
+	- 运行到光标处时， 空的for循环会停下，但false的if不会停下 
 # uos
 - ctrl + ; 剪贴板
    
