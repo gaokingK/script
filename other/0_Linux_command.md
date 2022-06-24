@@ -231,6 +231,7 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
    - modify时间：内容被改变的时间
    - change时间：显示的是文件的权限、拥有者、所属的组、链接数发生改变时的时间。当然当内容改变时也会随之改变（即inode内容发生改变和Block内容发生改变时）
    - 改变内容会改变atime、mtime、ctime；chmod只会改变ctime
+   - windows 上显示的修改时间是mtime
 - 使用stat可以查看文件的三个时间以及其他状态
 - 修改时间
    - 见touch使用

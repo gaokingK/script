@@ -37,6 +37,7 @@ True
         - 指定按迭代对象中的哪一个值排序 `sorted([[3,4], [3,2,7]], key=lambda x: x[1])`
         - 按字典的value排序 `sorted({"a": "4", "b": "1", "c": 1}.items(), key = lambda x: x[1])`
         - 若是想完成 “先按xx排序， 再按xxx排序”这种， 就把key=（xx, xxx）
+        - 还可以按照字典中没有的值来排序如 dir_list = sorted(dir_list,  key=lambda x: os.path.getmtime(os.path.join(file_path, x)))
 
 ### python -i -c 
     - -i -i其实就是执行文件内容或者执行命令后再进入交互模式。不会去读取$PYTHONSTARTUP这个配置文件。
@@ -178,6 +179,18 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
             - [os.path()模块](https://www.runoob.com/python3/python3-os-path.html)
             - [Python3 OS 文件/目录方法](https://www.runoob.com/python3/python3-os-file-methods.html)
         ```
+        # 如果目录名字为中文 需要转码处理
+            uPath = unicode(cPath,'utf-8')
+            for fileName in os.listdir(uPath) :
+                print fileName
+        # 获取文件时间
+            os.path.getmtime() 函数是获取文件最后修改时间
+            os.path.getctime() 函数是获取文件最后创建时间
+            获取的是时间戳 time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(1654914448.7850325))
+        # 按时间排序
+            dir_list = sorted(dir_list,  key=lambda x: os.path.getmtime(os.path.join(file_path, x)))
+            获取文件和时间的字典
+            file_dict = {key: value for key,value in zip(os.listdir(download_path), [time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(os.path.getmtime(os.path.join(download_path, file)))) for file in os.listdir(download_path)])}
         os.path.abspath("path") # path的绝对路径 最后一个/也会被去掉 os.path.abspath("/root/") # 输出/root
         os.path.splittext(path)[-1] 获取后缀名
         os.getcwd() # 返回当前工作目录
@@ -377,6 +390,17 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
 1. 'str' object does not support item assignment 
     - 因为str类型的对象属于不可变类型
     - `'string'[1]='string'[2]`
+
+- TypeError: coercing to Unicode: need string or buffer, generator found
+```
+>>> [os.path.getmtime(os.path.join(download_path, file) for file in os.listdir(download_path))] # 这里的括号加错了，应该是这样
+>>> [os.path.getmtime(os.path.join(download_path, file)) for file in os.listdir(download_path)] 
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "d:\softwares\python27\lib\genericpath.py", line 62, in getmtime
+    return os.stat(filename).st_mtime
+TypeError: coercing to Unicode: need string or buffer, generator found
+```
 ### 语法糖
 1. `return (rv[0] if rv else None) if one else rv`
 2. 列表生成式

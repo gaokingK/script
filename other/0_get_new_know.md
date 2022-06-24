@@ -10,12 +10,15 @@
 # other
 - 比如从[这里](https://github.com/Charmve)看到了cpp的图标以及一些常用的语言和框架、工具和环境
 ### 为什么在终端里面或者使用urllib就下不了的东西在浏览器里就能直接下载呢？---------------no
-
+### cipher suite
+- 保证网络连接的算法集
 ### 怎么阅读代码
 - 调试
    - 在想看懂的地方打断点，看调用栈
    - 如果不知道这个模块什么时候用的，就在这里打断点，看调用栈
    - 看类的关系 ClassName.__mro__
+- 看代码结构，有哪些层（重写几次），方法是怎么调用的
+   - 比如Uniauto有wrapper层，有实际函数层还有dispath层
 ### Etag和if-match
 - link：
    - https://zh.m.wikipedia.org/zh-hans/HTTP_ETag

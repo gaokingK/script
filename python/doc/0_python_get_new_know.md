@@ -3,7 +3,7 @@
     - 会先计算or
 ### mmap --- 内存映射文件支持
 - 打开已加载到内存中的对象
-
+### pprint.pformat(value)
 ## counter类
 - link: https://www.cnblogs.com/zhenwei66/p/6593395.html
 - 计算值出现的次数, 并能做一些运算

@@ -124,10 +124,25 @@ Date:   Wed Sep 15 09:20:45 2021 +0800
    - git checkout -b new_branch
    - git cherry-pick commid1 # 即使commitid 在git log中看不到了, 已经reset-hard了,仍然能找到这个commit
 ### git branch
-   - [link](https://blog.csdn.net/duxing_langzi/article/details/80295573?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link)
+   - [git branch 命令查看分支、删除远程分支、本地分支](https://blog.csdn.net/duxing_langzi/article/details/80295573)
    - 在新建分支上切换到master之前, 要留意你的工作目录和暂存区里那些还没有被提交的修改， 它可能会和你即将检出的分支产生冲突从而阻止 Git 切换到该分支。 最好的方法是，在你切换分支之前，保持好一个干净的状态。 有一些方法可以绕过这个问题（即，暂存（stashing） 和 修补提交（commit amending））
    - 当你切换分支的时候，Git 会重置你的工作目录，使其看起来像回到了你在那个分支上**最后一次提交**的样子
    - 将本地新建的分支同步到origin `git push --set-upstream origin merge2`
+   - `git branch -vv `查看本地分支关联（跟踪）的远程分支之间的对应关系
+   - `git branch -a `查看所有分支 remote/origin/master表示的是远程分支
+   - `git push origin --delete Chapater6` 可以删除远程分支Chapater6 在删除远程分支时，同名的本地分支并不会被删除，所以还需要单独删除本地同名分支
+      - 如果发生以下错误:
+         error: unable to delete ‘origin/xxxxxxxx-fixbug’: remote ref does not exist
+         error: failed to push some refs to ‘git@github.com:xxxxxxxx/xxxxxxxxxx.git’
+         解决办法： git checkout xxxxx-fixbug 切换到当前分支上， 然后再 进行 git push --delete origin origin/xxxxx-fixbug
+   - `git branch -d Chapater8 `可以删除本地分支（在主分支中）
+   - `git fetch -p` 清理本地无效分支(远程已删除本地没删除的分支): 
+### 使用分支合并
+   - git pull git_url
+   - git checkout -b branch_name origin/branch_name # 远程已经新建了branch_name
+   - git pull master # 在自己分支上
+   - 只拉取远程分支 `git init; git remote add origin xxx.git; git fetch origin develop（develop为远程仓库的分支名）`
+      - link: https://blog.csdn.net/carfge/article/details/79691360
 ### git log -p filename /git log filename
 ### git rebase
    - git rebase 是干什么的
