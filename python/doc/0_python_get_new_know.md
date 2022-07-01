@@ -19,6 +19,22 @@ def func(b: int):
 func("b") # 照样可以正常运行
 
 ```
+### all/any 
+- link
+    - https://www.jianshu.com/p/65b6b4a62071
+- all()："有‘假’为False，全‘真’为True，iterable为空是True"
+- any()："有‘真’为True，全‘假’为False，iterable为空是False"
+- iterable为空指的是 里面的元素都是空
+```
+bool([[]])
+True
+bool([[], []])
+True
+all([[], []])
+False
+all([]) # 这种指的是iterable为空
+True
+```
 ### 字典生成式
 - link: https://www.cnblogs.com/wxj1129549016/p/9515721.html
 ```

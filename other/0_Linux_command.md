@@ -53,6 +53,18 @@
      - -n 拒绝显示别名，能显示数字的全部转化为数字
      - -l 仅列出在Listen(监听)的服务状态
      - -p 显示建立相关链接的程序名
+### jq linux json处理命令
+   - link: https://www.jianshu.com/p/6de3cfdbdb0e
+   - cat json_file| json "."  格式化输出json文本
+### file 
+   - link: http://c.biancheng.net/linux/file.html
+   - file file_name 查看文件信息
+   - -b 不显示文件名
+   - -i 可以输出文件的 MIME 类型字符串
+   - -f 查看一个文本文件中所记录的文件的信息
+   - 可以查看文件是否是可执行文件
+      - link: https://blog.csdn.net/weixin_44966641/article/details/120598561
+
 ### lsof 列出系统啥进程打开了啥文件
    - link：https://www.runoob.com/w3cnote/linux-check-port-usage.html
    - lsof +d /usr/local/：显示目录下被进程开启的文件

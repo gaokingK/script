@@ -1,6 +1,8 @@
 # git
 ## 问题
 - git stash 会把所有的改动都存起来，文件就没有改动了，但是如果此时再次改动b， 然后stash pop， 改动b仍然存在。
+- git stash 后各分支都有一样的stash栈
+   - git satsh apply stash_name
 - git stash error: 权限不足，无法在仓库对象库 .git/objects 中添加对象 不能记录工作区状态
    - 等一会重试就可以了（不知道为啥， 可能是别的编辑器正在占用？）
 - error: 权限不足，无法在仓库对象库 .git/objects 中添加对象 fatal: git-write-tree: error building trees 无法保存当前索引状态
@@ -29,6 +31,10 @@
    - link：https://github.com/git-lfs/git-lfs/issues/3519
    - 出现EOF原因意味着在拉取过程中客户端和服务器出现了问题
 ## other
+### git stash
+- link:
+   - https://www.cnblogs.com/zndxall/p/9586088.html
+- git stash –keep-index。只会备份那些没有被add的文件。
 ### GIT_TRACE显示日志
    - link：https://blog.csdn.net/icyfox_bupt/article/details/91627314
 ### git patch --------------------------------no
@@ -115,6 +121,10 @@ Date:   Wed Sep 15 09:20:45 2021 +0800
     修改抖音部分用例
 ```
 ### git mergetool -t opendiff --------------------------------------no
+### 解决merge冲突
+- git stash 存储本地修改，git pull origin master 
+- 使用pycharm 解决冲突
+   - 一共有三个格，you version 其实是服务器上pull下来的、result你操作后文件的真实结果，from server代表是你stash的 就是你本地的
 ### git cherry-pick 来将A分支的部分提交合并到B分支上
    - 如果需要多个commitid `git cherry-pick commitid_a commitid_b commitid_c` 只合并这三个
    - 先合并a, 如果有冲突就结局, 然后git cherry-pick --continue 完成后就把a给搞好了; 然后合并b,如果有冲突, 解决,然后git cherry-pick --continue....

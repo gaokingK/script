@@ -9,6 +9,22 @@
    - [COLUMN_FORMAT {FIXED|DYNAMIC|DEFAULT}] 带关键字参数的
 # other
 - 比如从[这里](https://github.com/Charmve)看到了cpp的图标以及一些常用的语言和框架、工具和环境
+### Shebang & Hashbang
+- 在计算领域中，Shebang（也称为Hashbang）是一个由井号和叹号构成的字符序列#!，其出现在文本文件的第一行的前两个字符。 在文件中存在Shebang的情况下，类Unix操作系统的程序载入器会分析Shebang后的内容，将这些内容作为解释器指令，并调用该指令，并将载有Shebang的文件路径作为该解释器的参数
+   - https://blog.csdn.net/weixin_44966641/article/details/120598561
+   - 后面必须指定的是绝对路径
+### ELF文件
+- 可执行文件
+### MIME 类型字符串
+- MIME 类型，即 Multipurpose Internet Mail Extensions，称为多用途互联网邮件扩展类型，用来标识和记录文件的打开方式，一些常见的类型包括：
+   - text/plain：普通文本。
+   - text/html：HTML文本。
+   - application/pdf：PDF文档。
+   - application/msword：Word文档。
+   - image/png：PNG图片。
+   - mage/jpeg：JPEG图片。
+   - application/x-tar：TAR文件。
+   - application/x-gzip：GZIP文件。
 ### 为什么在终端里面或者使用urllib就下不了的东西在浏览器里就能直接下载呢？---------------no
 ### cipher suite
 - 保证网络连接的算法集

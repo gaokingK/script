@@ -194,6 +194,7 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
         os.path.abspath("path") # path的绝对路径 最后一个/也会被去掉 os.path.abspath("/root/") # 输出/root
         os.path.splittext(path)[-1] 获取后缀名
         os.getcwd() # 返回当前工作目录
+        os.sep 系统的路径分隔符 win 为 "\\"; Unix 为 "/"
         os.path.basename(path) # 文件名带格式 按格式判断
         os.path.dirname(path) # 文件所在文件夹名 是按格式判断的
         os.path.isdir(path) # path存在，且是文件夹、不是按格式判断的

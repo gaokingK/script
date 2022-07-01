@@ -31,6 +31,7 @@ huawei@huawei-PC:~/Desktop/autotest$
    -  while 后不要跟不会变的变量,会死循环
 ### 方法注释中参数的类型应该怎么写
 
+### 使用这种方法来解决拼接路径导入os `self.download_path = self.bmcweb.download_dir + "\\video_osreset.rep"`
 # 巧合问题
 - "Identifier name '<bound method ? of <class 'common.model.test2_model.Child'>>_ibfk_1' is too long") 使用声明系统创建一个表时表名太长。 
 ```
