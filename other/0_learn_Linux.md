@@ -31,7 +31,12 @@
     var="Children of Men - Chapter 1.pdf"
     rm "$var"
    ```
-
+### 查看用户信息
+   - link：https://blog.csdn.net/newdriver2783/article/details/8059368
+   - w命令用于显示已经登录系统的用户的名称，以及他们正在做的事
+   - who命令用于列举出当前已登录系统的用户名称。
+   - 使用whoami命令查看你所使用的登录名称
+   - last命令可用于显示特定用户登录系统的历史记录
 ### glob模式 Word Splitting IFS 分隔符
    - [Linux shell 通配符 / glob 模式](https://www.cnblogs.com/divent/archive/2016/08/11/5762154.html)
    - glob 模式（globbing）也被称之为 shell 通配符

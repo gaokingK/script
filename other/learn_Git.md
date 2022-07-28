@@ -12,6 +12,7 @@
 - 如何搜索历史记录， 想搜索字段， 但这些字段不知道在那个版本中被删除了
   - link：https://blog.csdn.net/asdfgh0077/article/details/103453994
   - git log -G/-S|grep <pattern>
+  - pycharm 里点击历史 上面的是被修改的commit id 下面的是修改后的
 - fatal: unable to access https://github.com/xxxx.git/: server certificate verification failed. CAfile: none CRLfile: none 或者是 x509
   - x509很熟悉，是SSL传输的证书标准，应该是ssl认证失败，执行如下命令禁用SSL认证：
   - `git config --global http.sslverify false`
@@ -38,6 +39,9 @@
 ### GIT_TRACE显示日志
    - link：https://blog.csdn.net/icyfox_bupt/article/details/91627314
 ### git patch --------------------------------no
+### 删除未跟踪
+   - link: https://blog.csdn.net/uhippo/article/details/46365737
+   - git clean -nf 看那些会被删除
 ### 远程分支回滚的三种方法：
    link :https://www.cnblogs.com/Super-scarlett/p/8183348.html
    自己的分支回滚直接用reset
@@ -147,12 +151,16 @@ Date:   Wed Sep 15 09:20:45 2021 +0800
          解决办法： git checkout xxxxx-fixbug 切换到当前分支上， 然后再 进行 git push --delete origin origin/xxxxx-fixbug
    - `git branch -d Chapater8 `可以删除本地分支（在主分支中）
    - `git fetch -p` 清理本地无效分支(远程已删除本地没删除的分支): 
-### 使用分支合并
+#### 使用分支合并
    - git pull git_url
    - git checkout -b branch_name origin/branch_name # 远程已经新建了branch_name
    - git pull master # 在自己分支上
    - 只拉取远程分支 `git init; git remote add origin xxx.git; git fetch origin develop（develop为远程仓库的分支名）`
       - link: https://blog.csdn.net/carfge/article/details/79691360
+#### 创建远程分支
+   - git checkout -b my-test
+   - git push origin my-test
+   - git branch --set-upstream-to=origin/jw0013109
 ### git log -p filename /git log filename
 ### git rebase
    - git rebase 是干什么的

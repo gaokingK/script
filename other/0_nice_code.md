@@ -26,7 +26,8 @@ huawei@huawei-PC:~/Desktop/autotest$ python3 find_author.py kbox_result_20211020
 huawei@huawei-PC:~/Desktop/autotest$ 
 # 调试这个错误时, 应该直接把命令打出来
 ```
-
+### 我没改完，我没验证完
+### 清空日志 `cat /dev/null > /var/log/RemoteSyslog/syslog.log`
 ### learn_structure_tree find_child_tree
    -  while 后不要跟不会变的变量,会死循环
 ### 方法注释中参数的类型应该怎么写

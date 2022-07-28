@@ -19,6 +19,15 @@
     ```
 
 # pycharm 
+- 书签
+	- link：https://www.cnblogs.com/gl1573/p/10234478.html
+	- Ctrl + F11 并选择一个数字或一个字母以创建带有助记符的书签 
+	- 上面这种可以 按快捷键 Ctrl + 书签编号就可以跳转到响应的书签了
+	- Shift + F11 打开“书签”对话框，就可以管理书签了。
+	- Alt + 2 可以打开书签和断点
+- 关闭通知 这样任务栏图标就不闪烁了
+	- https://www.imangodoc.com/195028.html
+	- setting>notify
 - pycharm 定位打开的文件(select opened file) 不显示成员
 	- 在旁边的设置中，取消选中show members
 - 创建文件时，自动生成文件头

@@ -9,6 +9,8 @@
    - [COLUMN_FORMAT {FIXED|DYNAMIC|DEFAULT}] 带关键字参数的
 # other
 - 比如从[这里](https://github.com/Charmve)看到了cpp的图标以及一些常用的语言和框架、工具和环境
+### 任务栏图标闪烁
+- link: https://blog.csdn.net/weixin_39631261/article/details/113504221
 ### Shebang & Hashbang
 - 在计算领域中，Shebang（也称为Hashbang）是一个由井号和叹号构成的字符序列#!，其出现在文本文件的第一行的前两个字符。 在文件中存在Shebang的情况下，类Unix操作系统的程序载入器会分析Shebang后的内容，将这些内容作为解释器指令，并调用该指令，并将载有Shebang的文件路径作为该解释器的参数
    - https://blog.csdn.net/weixin_44966641/article/details/120598561
