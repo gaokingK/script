@@ -466,6 +466,7 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
     - 不知道怎么在grep中使用正则表达式，按照通常的写法写不出来,不知道扩展正则表达式都有什么
       - [懂了](https://blog.csdn.net/yufenghyc/article/details/51078107))
       - grep 什么都不加是基本正则表达式、-E 扩展正则表达式、-P perl正则表达式
+      - grep -E "RefFru|CardTyped" 搜索A或者B，如果A、B都存在会都显示
     - zgrep 搜索压缩文件
     - -F 它只能找固定的文本，而不是规则表达式。
       - grep -F step* 的*不是通配符了

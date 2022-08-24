@@ -31,7 +31,10 @@
 - EOF
    - link：https://github.com/git-lfs/git-lfs/issues/3519
    - 出现EOF原因意味着在拉取过程中客户端和服务器出现了问题
+## 帮助
+- https://docs.gitlab.com/ee/topics/git/stash.html
 ## other
+
 ### git stash
 - link:
    - https://www.cnblogs.com/zndxall/p/9586088.html
@@ -47,6 +50,17 @@
    自己的分支回滚直接用reset
    公共分支回滚用revert
    错的太远了直接将代码全部删掉，用正确代码替代
+### git reset
+   ```
+   # commit id A
+   This is test
+   # 修改为：
+   This is test2
+   # commit
+   # 修改为 This is test3
+   # reset --soft A 文件内容会变为如下，不会冲突
+   # This is test3 # 然后本行有改动的颜色标识，就像直接修改一样
+   ```
 ### 冲突
    - 什么情况下会有冲突
       - user a 修改file_a 10行, commit and push, user b 已另一种内容修改file_a 10行, commit and push, 会发现push 被拒绝, 然后push -f, 这时usera 再pull 就需要merge 这种情况的解决办法:

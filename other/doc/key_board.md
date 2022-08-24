@@ -61,6 +61,10 @@
 	- 看成员引用的时候 read 和 write过滤
 		- self.hosts[host['id']] = hostObj 会在读里面
 	- 运行到光标处时， 空的for循环会停下，但false的if不会停下 
+- 折叠代码
+	- 折叠/展开某一点：ctrl + -/+
+	- 所有代码折叠/展开： ctrl + alt + -/+
+
 # uos
 - ctrl + ; 剪贴板
    

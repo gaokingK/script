@@ -15,6 +15,15 @@
 - 在计算领域中，Shebang（也称为Hashbang）是一个由井号和叹号构成的字符序列#!，其出现在文本文件的第一行的前两个字符。 在文件中存在Shebang的情况下，类Unix操作系统的程序载入器会分析Shebang后的内容，将这些内容作为解释器指令，并调用该指令，并将载有Shebang的文件路径作为该解释器的参数
    - https://blog.csdn.net/weixin_44966641/article/details/120598561
    - 后面必须指定的是绝对路径
+
+### HDD HHD SSD sata sas nvme
+- SSD是固态硬盘、HDD是机械硬盘、HHD是混合硬盘。
+- SATA和SAS分别是链接电脑主板的接口类型
+- sas SAS是并行SCSI接口之后开发出的全新接口
+### windows锁屏路径
+   - https://images.metmuseum.org/CRDImages/ep/original/DP-20613-001.jpg
+   - C:\Users\jw0013109\AppData\Local\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets
+   - ren * *.jpg
 ### ELF文件
 - 可执行文件
 ### MIME 类型字符串

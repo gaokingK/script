@@ -285,6 +285,8 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
     while 如果正常结束 else中内容会执行
     try 是如果try中的内容正常执行了，执行else中内容
     总的来说都是正常结束了，会执行else中内容
+    最后一个循环break不会走else，最后一个循环continue会else
+    for 中如果抛出异常被捕获了，也会走到else
 17. ##### 方法和函数的区别
     方法绑定在对象上面，通过对象调用; 方法被调用时,self会自动加到函数参数列表首位;method 就是封装了一个func和一个对象
     函数可以独立运行
