@@ -19,6 +19,27 @@ def func(b: int):
 func("b") # 照样可以正常运行
 
 ```
+### 有序字典 orderdict
+- link:https://blog.csdn.net/weixin_42307036/article/details/99294242
+- 普通字典的键是排序的，不是按插入的顺序；而有序字典的键是按插入的先后顺序排列的，即使修改键对应的值不能改变它的顺序
+- 普通的dict的其中一个区别是 dict.popitem() 会移除最后一个键值对，并返回键值对，不能移除第一个键值对；OrderedDict的popItem()方法可以移除第一个键值对，并返回该键值对。 用法：排序字典.popitem(last=False)
+- 将指定键移动到字典头或者尾部move_to_end(key, last=True)
+- 可以实现O(1)复杂度的LRU缓存算法
+```
+# 普通字典
+no_order = {}
+no_order["b"] = "b"
+no_order["a"] = "a"
+no_order
+{'a': 'a', 'b': 'b'}
+# 有序字典
+from collections import OrderedDict
+order_dict = OrderedDict()
+order_dict["b"] = "b"
+order_dict["a"] = "a"
+order_dict
+OrderedDict([('b', 'b'), ('a', 'a')])
+```
 ### all/any 
 - link
     - https://www.jianshu.com/p/65b6b4a62071
