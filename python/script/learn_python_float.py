@@ -3,8 +3,13 @@
 
 from decimal import Decimal,localcontext
 # 浮点数的误差 link: https://docs.python.org/zh-cn/3/tutorial/floatingpoint.html
+# 保留指定位数的小数：https://blog.csdn.net/liuweiyuxiang/article/details/100574386
 
-
+def cat_decimal():
+    """
+    "%.3f" % (1.277)
+    "{}".format(1.277, '.3f')
+    """
 def learn_decimal():
     """
     了解Decimal模块

@@ -172,9 +172,11 @@ Date:   Wed Sep 15 09:20:45 2021 +0800
    - 只拉取远程分支 `git init; git remote add origin xxx.git; git fetch origin develop（develop为远程仓库的分支名）`
       - link: https://blog.csdn.net/carfge/article/details/79691360
 #### 创建远程分支
+   - link：https://juejin.cn/post/6844903841507311623
    - git checkout -b my-test
-   - git push origin my-test
-   - git branch --set-upstream-to=origin/jw0013109
+   - push时设置：git push -u origin test
+   - branch设置：git branch --set-upstream-to=origin/jw0013109  or git branch -u origin/test
+   - 取消设置：git branch --unset-upstream [<branchname>]
 ### git log -p filename /git log filename
 ### git rebase
    - git rebase 是干什么的

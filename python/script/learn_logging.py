@@ -29,7 +29,7 @@
 ## logging 简介
     - logging里定义了五个日志级别， 从低到高分别是debug<info<warning<error<critacal, 也可以自己定义日志级别，但不推荐，因为会对别人带来影响
 ## logging模块的使用方式介绍
-    - 第一种方式是使用logging提供的模块级别的函数
+    - 第一种方式是使用logging提供的模块级别的函数 快速使用
     - 第二种方式是使用Logging日志系统的四大组件
     - 其实，logging所提供的模块级别的日志记录函数也是对logging日志系统相关类的封装而已。
 ## 使用logging提供的模块级别的函数记录日志

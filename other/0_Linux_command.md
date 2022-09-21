@@ -13,6 +13,7 @@
 - Linux pkill 用于杀死一个进程，与 kill 不同的是它会杀死指定名字的所有进程，类似于 killall 命令
 - -t 指定开启进程的终端
 - 也能发送信号
+### 发送ctrl+c `sh', '-c', '\x03'`
 ### 应用一般安装在/usr/share/ /usr/local 下
 ### which whereis type locate find 
    - link: https://www.cnblogs.com/danmiao/p/10081620.html
@@ -85,7 +86,18 @@
    - [进程替换](https://www.runoob.com/w3cnote/shell-process-substitution.html) ---------no
    - [Here document使用方法总结](https://blog.csdn.net/liumiaocn/article/details/86715953) -------------no
    - 可以把<(...)整体当做一个文件名，这个文件的内容就是()中脚本的执行结果，这样第二条命令简化为`bash -s stable <tmp.sh`
-### top ---------------------------no
+### top 
+   - link:
+      - https://blog.csdn.net/mp624183768/article/details/76175751
+      - 
+   - 默认 top 命令是按照 CPU 使用率排序的。
+   - 按内存排序 shift + M
+   - 按M能变换样式
+   - -b 以非交互和非全屏模式运行
+   - -d 5    更新延时设置为5秒
+   - -u MySQL    只查看有效用户名为mysql的进程
+   - -n 8    退出前屏幕再刷新10次
+   - -p 通过指定监控进程ID来仅仅监控某个进程的状态
 ### strings
    - link: https://blog.csdn.net/test1280/article/details/80978717
    - string 工具可以对任何文件的内容进行分析，并输出可打印字符长度不小于4的串。
@@ -139,6 +151,7 @@
 ### scp
    - scp 文件 `scp file_path target_file_path/target_dir_path`  如果要重命名， target_file_path 不存在也可以
    - 如果要放到文件夹中 `scp file_path target_dir_path/.` dir_path/. 要加 `/.`
+   - scp 可以直接带密码 scp username:passwd@ip:/path/to/file
 ### netstat
    - netstat -ntl |grep -v Active| grep -v Proto|awk '{print $4}'|awk -F: '{print $NF}' 获取正在使用的端口
 ### exit

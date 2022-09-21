@@ -3,6 +3,7 @@
 3. 日志切割
 
 # 未读
+- 所有开发者都应该知道的10个GitHub仓库:https://bbs.huaweicloud.com/blogs/351143?utm_source=zhihu&utm_medium=bbs-ex&utm_campaign=other&utm_content=content
 - other/0_get_new_know.md 里的一些帮助网站
 - 可视化：https://charmve.github.io/computer-vision-in-action
 - shell 十三问：https://wiki.jikexueyuan.com/project/13-questions-of-shell/double-single.html

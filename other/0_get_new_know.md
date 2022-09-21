@@ -9,13 +9,18 @@
    - [COLUMN_FORMAT {FIXED|DYNAMIC|DEFAULT}] 带关键字参数的
 # other
 - 比如从[这里](https://github.com/Charmve)看到了cpp的图标以及一些常用的语言和框架、工具和环境
+### 通用电子元器件的选用与检测
+- book name 
+- 103j 103 https://zhidao.baidu.com/question/145137526.html?qbl=relate_question_0K
 ### 任务栏图标闪烁
 - link: https://blog.csdn.net/weixin_39631261/article/details/113504221
 ### Shebang & Hashbang
 - 在计算领域中，Shebang（也称为Hashbang）是一个由井号和叹号构成的字符序列#!，其出现在文本文件的第一行的前两个字符。 在文件中存在Shebang的情况下，类Unix操作系统的程序载入器会分析Shebang后的内容，将这些内容作为解释器指令，并调用该指令，并将载有Shebang的文件路径作为该解释器的参数
    - https://blog.csdn.net/weixin_44966641/article/details/120598561
    - 后面必须指定的是绝对路径
-
+### 各國語言(語系)代碼表
+- https://hoohoo.top/blog/national-language-code-table-zh-tw-zh-cn-en-us-json-format/
+- zh-tw zh-cn
 ### HDD HHD SSD sata sas nvme
 - SSD是固态硬盘、HDD是机械硬盘、HHD是混合硬盘。
 - SATA和SAS分别是链接电脑主板的接口类型
@@ -107,6 +112,12 @@
    - EL6 表示软件包可以在 Red Hat 6.x，CentOS 6.x，CloudLinux 6.x 进行安装
    - EL5 表示软件包可以在 Red Hat 5.x，CentOS 5.x，CloudLinux 5.x 进行安装
    - EL7 表示软件包可以在 Red Hat 7.x，CentOS 7.x，CloudLinux 7.x 进行安装
+### CentOS 与 RedHat 关系和区别
+   - https://blog.csdn.net/u013967628/article/details/79542541
+   - RedHat 发行版介绍
+      - Red Hat 7/8/9 普通发行版、在2003年停止了开发，它的项目有 Fedora Project 这个项目所取代，并以 Fedora Core 这个名字发行并提供普通用户免费使用
+      - Red Hat Enterprise Linux （RHEL）针对企业发行的版本
+   - CentOS 就是这样在 RHEL 发布的基础上克隆再现的一个 Linux 发行版本，因为Redhat的大多数软件包是基于GPL发布的，所以他必须公开自己的RedHat的源码，而其他人只要遵循GPL协议，均可以在原软件包的技术上在开发和发布，所以Centos就诞生了。
 # 名词
 - 状态机
 ```
