@@ -50,6 +50,14 @@
    - 定义函数时不同, sh 的函数不能带括号?
    - sh 不支持function
    - bash -n xxx.sh shell脚本语法检查
+### 引用
+```
+# in ~/.bash_profile 
+# include .bashrc if it exists
+if [ -f ~/.bashrc ]; then
+    source ~/.bashrc
+fi
+```
 ### (文件描述符 fd)[https://blog.csdn.net/yushuaigee/article/details/107883964]
    -  `echo log > /dev/null 2>&1`
 ### bash -c "cmd or path_to_script_what_have_exec_permission" 使用bash执行命令，命令要用双括号，
