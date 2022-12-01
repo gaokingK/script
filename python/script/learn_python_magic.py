@@ -24,6 +24,12 @@ To: __module__、__class__、__import__
 obj.__module__<str>:  obj所在的模块路径，相对与什么的路径，从根吗？
 obj.__class__ <obj>: obj所属的类对象
 __import__: 动态加载类和函数
+str = "dir_name.pyfile_name.class_name" 怎么导入这个类呢
+    __import__(str)
+    module = sys.modules["dir_name.pyfile_name"]
+    klass = getattr(module, "class_name") # {type} <class 'dir_name.pyfile_name.'> 代表是一个定义类 也可能是<class '__main__.class_name'>
+    demo = klass() # demo <class_name object at 0x00000299326ED9A0> 代表是一个类对象
+
 """
 def debug_mci():
     moudle_str = "learn_python_class_obj_wingman"
