@@ -18,6 +18,10 @@
             在不清楚参数数目情况下，这是一个迭代参数的好办法。
             可 以为shift提供一个参数，来实现多位移变化。
   getopt/getopts
+在bash中测试这个参数的取值
+set -- 1 2 3
+echo $0 # -bash
+echo $1 # 1
 !
 # 位置参数
 function position_param(){
