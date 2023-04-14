@@ -1,7 +1,10 @@
 # link
 - https://www.cnblogs.com/mashuqi/p/11576705.html
+- https://huaweicloud.csdn.net/63a57338b878a54545947b1f.html
 # 占位符
+- link: https://www.runoob.com/python/python-date-time.html
 `%Y-%m-%d %H:%M:%S`
+
 # 输出时间
 `print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))`
 
@@ -20,6 +23,13 @@ time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(1642613319))
 ```
 
 # datetime
+- 获取日期
+```
+import datetime
+x = datetime.datetime.now()
+print(x.strftime("%Y-%m-%d"))
+2023-02-20
+```
 - 字符串转换为datetime对象: strptime()
 ```
 t = "2022-01-16 16:00:00"
@@ -32,4 +42,12 @@ datetime.datetime.strptime(t, "%Y-%m-%dT%H:%M:%S.%fZ")
 - 操作时间 timedelta 
 ```
 local_time = utc_date_obj + datetime.timedelta(hours=8)
+```
+- 日期间计算
+```
+a=datetime.datetime.strptime("2023-02-21 07:59:00", "%Y-%m-%d %H:%M:%S")  # 也可以是datetime.datetime()对象
+b=datetime.datetime.strptime("2023-02-22 07:59:00", "%Y-%m-%d %H:%M:%S")
+c=datetime.datetime.strptime("2023-02-22 20:59:00", "%Y-%m-%d %H:%M:%S")
+print(c-a)  # 1 day, 13:00:00 
+# 但是(c-a).seconds只会输出小于一天的秒数 (c-a).seconds和(c-b).seconds的结果一样
 ```
