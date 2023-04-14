@@ -96,7 +96,9 @@ for file in `ls|grep apk`;do; adb install $file;done
 # 最后一个分号可以不写
 for file in `adb shell pm list package -3`;do;echo ${file#*:};done;
 for file in `adb shell pm list package -3`;do;echo ${file#*:};done
-
+for obj in `maint_debug_cli lsobj Cpu`;do echo $obj';'; maint_debug_cli getprop $obj.Id; done
+for p in `maint_debug_cli lsobj Policy1Class|grep -vEi "fan|mem|dts|margin|let"`;do echo "$p:";sn=$(maint_debug_cli getprop $p.SensorName);maint_debug_cli getpro
+p $sn.SensorName;done;
 ```
 
 ### 字符串截取
