@@ -1,0 +1,77 @@
+- 简述一个前端请求的处理流程，在uwsgi/nginx/django之间的处理流程
+- redis用过哪些数据结构？怎么保存的
+- redis为什么快？除了他是内存型数据库外，还有什么原因
+- 描述一个东西是什么，可以从他是干什么的，他是怎么产生的，是什么时候出现的，生命周期是怎样等去描述、有什么约束、是怎么实现的
+### 
+- 项目中redis是做什么的
+- restful 有什么特点
+- 项目是干什么的，有哪些功能
+- 自己会部署项目吗
+- 写一个项目需要那些
+    - 鉴权、接口校验、数据、handler、
+- celery用来干啥 定时任务怎么做的
+- 跨域怎么解决
+- 正向代理反向代理
+    - https://cloud.tencent.com/developer/article/1418457
+- 都用到 docker 的哪些操作？
+- 怎么去管理docker的，是shell侵入式还是docker的api，那技术选型上为什么不选择docker的api
+- 还是项目
+    - 介绍项目、项目的架构，自己的角色
+    - k8s熟悉吗
+    - 如何实现CI
+- flask 清水池
+- having to 子句 ，选择总分第二人的名字、解释下事务、视图、存储流程、游标
+- 前端图表组件了解过哪些
+- 参与过平台的设计吗？流程图画吗
+- 建模语言了解过吗
+- 介绍下k8s/docker/jekenis
+- python 多态、封装、继承
+- 存储引擎的区别
+- djano 权限控制
+    - https://blog.csdn.net/HHG20171226/article/details/93229831
+    - has_perm()s
+- 事务的特性
+- redis的数据类型、存放排行榜
+- python的内存管理
+- flask的跨域、路由、django的日志配置
+- django 排序 Track.objects.all().order_by('-id','title') - 解决
+- new和init的区别 - 解决
+- 把列表使用set去重后如何保持顺序和原来一样
+- 负载均衡算法
+    - https://zhuanlan.zhihu.com/p/68733507
+    - 轮询、源地址hash、加权轮询、加权随机、最小连接数法
+    - 加权就是根据服务器的负载能力大小分配不同权重，
+    - 加权随机就是权重高的选中的概率大
+- sqlarchme 分页怎么实现
+    - 用offset()设置索引偏移量,limit()限制取出量 `db.session.query(User.name).filter(User.email.like('%'+email+'%')).limit(page_size).offset((page_index-1)*page_size)`
+    - 用paginate(偏移量，取出量)函数,用于BaseQuery `user_obj=User.query.filter(User.email.like('%'+email+'%')).paginate(int(page_index), int(page_size),False)`
+- GIL锁、GIL锁和互斥锁的区别
+    - https://www.cnblogs.com/richardzgt/articles/7761172.html#_label0_3
+    - 区别就是颗粒度的大小不同
+- 图和树的区别
+    - 图没有根节点
+- 走象棋
+- 进程、线程、协程的区别
+    - 协程有点类似于子程序，不过区别在于协程执行的过程中可以中断，执行别的协程
+    - 协程和线程的区别
+        - 协程的切换是由程序自身控制，没有线程切换的开销，所以有很高的执行效率
+        - 不需要线程的锁机制、
+    - 多核CPU呢？最简单的方法是多进程+协程，既充分利用多核，又充分发挥协程的高效率，可获得极高的性能。
+- 进程能占满8个核、线程只能占用一个核
+- flask 获取getpost参数
+- mysql支持范围查询吗
+- a="xxx" a[0]="2"不可以
+- 索引的最左匹配
+
+- top 显示某个用户的 -u
+- 类的继承方式
+- 析构 del
+- 偏函数
+    - 把函数的某些参数给固定住
+- lambda 缺点
+    - 不能在其他地方引用
+- 创建索引的过程中可以插入数据吗
+    - 可以这样回答，我没在创建索引的过程中插入过数据，但感觉创建索引的过程中是不会锁表的吧
+- 数据库的4种隔离级别
+
+
