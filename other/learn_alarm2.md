@@ -143,3 +143,16 @@ self.bmcHost.runCmd("ipmcset -t sol -d activate -v 1 0",
 ```
 - 首先NetSnmpTool被导入到SnmpCli类中 snmpCli 的父类 ToolBase 有一个Can方法 这个方法检查方法methodName是否存在，存在就返回方法的引用 但是又怎么能调用到snmpCli的can方法呢？
 - MIB brower使用
+# redfish调用
+### redfish调用
+- 流程
+  - 打印打印self._cache_data值(是上次请求的self._cache_data)
+  - 重新获取self._cache_data值 url: https://70.176.5.82/redfish/v1/Managers/1/SmtpService (这次请求的url)
+  - 打印self._cache_data值（这次请求获取的）
+  - url: https://70.176.5.82/redfish/v1/Managers/1/SmtpService (还是 这次请求的url,不过是用来获取if_match)
+  - getresponse :（就是self._cache_data)
+  - url: https://70.176.5.82/redfish/v1/Managers/1/SmtpService (真正执行修改)
+  - response ：修改的响应
+  - 然后打印格式化的响应
+- xmind的图也不全
+- 在self.Redfish.deleteCompareSubscriptions()调用的是FusionUniautos/src/Framework/Dev/lib/UniAutos/Component/ServerField/RedFish/Huawei/IntelligentCompute.py 的 deleteCompareSubscriptions 然后又dispatch到FusionUniautos/src/Framework/Dev/lib/UniAutos/Wrapper/Api/RedFish/Function/EventService.py 的 deleteCompareSubscriptions
