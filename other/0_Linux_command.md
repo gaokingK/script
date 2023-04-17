@@ -1,5 +1,6 @@
 # doc comm
    1. [link1](http://www.gnu.org/software/bash/manual/bash.html#Process-Substitution)
+   - https://wangchujiang.com/linux-command/c/find.html
 # other
 ### tmux 
 - link: http://www.ruanyifeng.com/blog/2019/10/tmux.html
@@ -30,6 +31,25 @@
      ```
 
 ### 标准输入 标准输出
+   - link:
+     - https://blog.csdn.net/huangjuegeek/article/details/21713809
+     - https://segmentfault.com/a/1190000018650023
+   - IO
+     - I(Input)：从外部设备输入到内存
+     - O(Output)：从内存输出到外部设备
+     - 它们是/dev/stdin这个文件和/dev/stdout这个文件(连接文件)。
+   - 使用
+     - 0表示标准输入
+     - 1表示标准输出
+     - 2表示标准错误输出
+     - `>` 默认为标准输出重定向，与 `1>` 相同
+     - `2>&1` 意思是把 标准错误输出 重定向到 标准输出.
+     - `&>file` 意思是把 标准输出 和 标准错误输出 都重定向到文件file中
+     - 其中&的意思，可以看成是“The same as”、“与...一样”的意思`./conf >a1 2>&1` 2>&1的意思就是标准错误输出和标准输出一样，输出到a1中
+     - 也可以分别定义 
+        - `grep da * > file1 2>file2`
+        - `grep da * > file1 2>&1`
+        - `grep da * > file1 1>&2`但这里的file1没有内容，file1本来是有1的内容的，但是后面又被重定向了到和2一样了。就会都输出在控制台中
    - 管道符后面的内容可以从/dev/stdin 读入
      - cat file_name |awk xxxx |sh /dev/stdin # awk 后当成命令执行
 ### shell 多行注释
@@ -273,13 +293,15 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
    - [shell中各种括号的作用()、(())、[]、[[]]、{}](https://blog.csdn.net/taiyang1987912/article/details/39551385?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link) -------------------------------------------no
    - [linux 单引号‘ ,双引号“, 反引号 ` `, $, $(), ${}与变量](https://blog.csdn.net/qq_40491569/article/details/83688652)
    - [shell中的(),(()),{},=,==,[],[[]]几种语法用法](https://blog.csdn.net/Michaelwubo/article/details/81698307)
+   - [] 和 `[[]]` 的区别见learn_shell_process_control.md
    - 不加引号、单引号、双引号的区别：
+      - 单引号和双引号主要时为了包含有空格的
       - 单引号剥夺了所有字符的特殊含义, 里面的就是单纯的字符, 双引号不会
       - ![单引号：所见即所得。双引号：解析特殊符号，特殊符号有了原本的特殊意思 不加引号：比较特殊，支持通配符](https://images2015.cnblogs.com/blog/1038183/201705/1038183-20170507173906929-1826372684.png)
    - 使用$来使用变量 echo $a
    - 变量赋值的时候, 如果含有空格 需要用单引号或者双引号
    - $(cmd) 会将命令的执行结果赋值给变量 如 `a=$(echo aaa)`; 反引号也可以 for line in `ls *.apk`
-   - ${ }中放的是变量，例如echo ${hello}取hello变量的值并打印，也可以不加括号比如$hello。
+   - ${ }中放的是变量，例如echo ${hello}取hello变量的值并打印，也可以不加括号比如$hello。但加了括号可以对变量操作参见 变量替换
    - () 是开一个子shell执行里面的命令
 ### read [option] [变量名] 接受键盘输入
    ![提示信息](https://images2015.cnblogs.com/blog/35158/201610/35158-20161011104351477-686622915.png)
@@ -398,12 +420,6 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
      find build -name '*.py[co]' -exec rm -f {} ';' || true
      ```
 
-### 变量 替换
-   - {var:-string} return var if not var else string 但是只是返回， var 不被赋值
-   - {var:=string} var = var if not var else string ,var被赋值
-   - {var:+string} var = var if not var else string ,var 为null 时不会被赋值 `echo ${res:+"2223"}` res为空输出null， res不为null时输出2223
-   - {var:?string} var = var if var else print string 若变量var为空，则把string输出到标准错误中，并从脚本中退出
-   - string 也可以是命令 `echo ${file:+$(ls 113/*.txt)}`
 ### nl filename 带行号显示文件内容
 ### [sed](https://www.runoob.com/linux/linux-comm-sed.html）
 - link:
@@ -479,7 +495,7 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
     - 不知道怎么在grep中使用正则表达式，按照通常的写法写不出来,不知道扩展正则表达式都有什么
       - [懂了](https://blog.csdn.net/yufenghyc/article/details/51078107))
       - grep 什么都不加是基本正则表达式、-E 扩展正则表达式、-P perl正则表达式
-      - grep -E "RefFru|CardTyped" 搜索A或者B，如果A、B都存在会都显示
+      - grep -E "RefFru|CardTyped" 搜索A或者B，如果A、B都存在会都显示 可以和别的选项结合 `ls *|grep -vE "tem|src"` 结果中排除tem和src
     - zgrep 搜索压缩文件
     - -F 它只能找固定的文本，而不是规则表达式。
       - grep -F step* 的*不是通配符了
