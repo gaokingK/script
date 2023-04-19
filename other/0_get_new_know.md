@@ -7,8 +7,29 @@
    - SELECT column_name(s) FROM table1; # 意思是可以选择一个列或者多个列
    - [Unique [key] 而不用 [unique [key]]
    - [COLUMN_FORMAT {FIXED|DYNAMIC|DEFAULT}] 带关键字参数的
+
+# windows
+### 注册表编辑器好像是全字匹配的
+### where 与 gcm
+- 获取可执行文件的路径， gcm也差不多
+- link: https://stackoverflow.com/questions/304319/is-there-an-equivalent-of-which-on-the-windows-command-line
+
+### 使用什么命令来查看cmd中输入的alias的完整路径呢
+```
+C:\Users\jw0013109>pip
+Fatal error in launcher: Unable to create process using '"d:\softwares\python 2.7.18_64\python.exe"  "D:\softwares\Python27\Scripts\pip.exe"
+# pip 应该是等于d:\softwares\python 2.7.18_64\python.exe D:\softwares\Python27\Scripts\pip.exe 
+# 这些用什么去看呢？ 又是如何设置的呢？
+```
+
 # other
 - 比如从[这里](https://github.com/Charmve)看到了cpp的图标以及一些常用的语言和框架、工具和环境
+### VMware vSphere
+  - VMware vSphere 不是特定的产品或软件。VMware vSphere是整个VMware套件的商业名称。
+### msys(microsoft sys)
+### NFS(Network File System)
+- NFS 是Network File System的缩写，即网络文件系统。一种使用于分散式文件系统的协定，由Sun公司开发，于1984年向外公布。功能是通过网络让不同的机器、不同的操作系统能够彼此分享个别的数据，让应用程序在客户端通过网络访问位于服务器磁盘中的数据，是在类Unix系统间实现磁盘文件共享的一种方法
+
 ### 通用电子元器件的选用与检测
 - book name 
 - 103j 103 https://zhidao.baidu.com/question/145137526.html?qbl=relate_question_0K

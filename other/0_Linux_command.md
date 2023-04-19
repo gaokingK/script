@@ -515,6 +515,8 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
        - `find . -name "*.txt" -ctime -7 -exec grep  -H -E ".*jinshan.*open.*004.*" {} \;` grep 在find -exec选项中显示文件名
     - 搜索选项 `grep "\-c"`  
     - -q 不打印任何标准输出, 但是有错误会打印; 如果有结果,返回0;如果有错误,返回错误码. 可用于if
+### mkdir
+   - -v 在每个文件夹下都创建`mkdir -pv ./{nginx,mysql,httpd}/{files,templates,vars,tasks,handlers,meta,default}`
 
 ### [shell set](https://blog.csdn.net/t0nsha/article/details/8606886)
 	- man set

@@ -31,6 +31,22 @@
 - EOF
    - link：https://github.com/git-lfs/git-lfs/issues/3519
    - 出现EOF原因意味着在拉取过程中客户端和服务器出现了问题
+- client_global_hostkeys_private_confirm: server gave bad signature for RSA key 0: error in libcrypto
+   - link: https://stackoverflow.com/questions/67401049/pulling-from-git-fails-and-gives-me-following-error-client-global-hostkeys-priv
+   - 原因：
+   - 是某些ssh版本的issue
+   - 不影响
+   - 解决：
+   - 未解决
+   - 按照link上操作没有生效，可能是config这个文件的扩展名没有用
+
+- Filename too long in Git for Windows
+   - link: https://stackoverflow.com/questions/22575662/filename-too-long-in-git-for-windows
+   - 解决：
+   - git config --system core.longpaths true
+   - - 原因：
+   - git 版本使用的是windows的老版本API，对字符长度的限制是260个
+
 ## 帮助
 - https://docs.gitlab.com/ee/topics/git/stash.html
 ## other

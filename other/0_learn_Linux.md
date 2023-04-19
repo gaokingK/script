@@ -123,3 +123,55 @@ service sshd restart
 ```
  docker exec -it android_1 sh -c "ps -a|grep com.hexin" | awk '{print $2;exit}'
 ```
+### 文档
+  - https://www.thegeekstuff.com/2008/08/15-examples-to-master-linux-command-line-history/
+### jq linux json处理器
+  - https://wangchujiang.com/linux-command/c/jq.html
+### ctrl + R 搜索历史命令
+- 输入一些东西后再按ctrl + R继续搜索  
+### command
+- sh -c ps -Awwo nice,pid,ppid,comm,args|grep snmptrapd; kill -9 pid
+- 查看端口使用lsof -i:27501
+### 免密
+```
+本地客户端生成公私钥：（一路回车默认即可） ssh-keygen
+上传公钥到要免密登录的服务器（这里需要输入密码）ssh-copy-id -i ~/.ssh/id_rsa.pub root@192.168.235.22 
+上面这条命令是写到服务器上的ssh目录下去了vim root/.ssh/authorized_keys可以看到客户端写入到服务器的 id_rsa.pub （公钥）内容。
+客户端通过ssh连接远程服务器，就可以免密登录了。ssh root@192.168.235.22
+```
+### 关闭服务关不掉时先kill掉进程再service fuwuming stop
+### diff A B
+- link：
+  - https://www.runoob.com/linux/linux-comm-diff.html
+- diff log2014.log log2013.log  -y -W 50 并排格式输出
+- diff A B 的结果
+``` 
+diff A B
+> 表示此行B不为空，A是空行；< 表示此行A不为空，B是空行；| 表示此行A、B均不为空 
+">"也可以理解为表示后面文件比前面文件多了1行内容
+install:/etc/syslog-ng # diff syslog-ng.conf syslog-ng.conf.bakjjw
+255,258c255,256 # 是不同的位置，c前面的是文件A的，后面的是B
+# -- 上面的是文件A，下面的是文件B的
+<             key-file("/etc/syslog-ng/key.d/Sever_Syslog.pem")
+<             cert-file("/etc/syslog-ng/cert.d/Sever_Syslog.crt")
+<             # key-file("/etc/syslog-ng/key.d/Server_syslog.key")
+<             # cert-file("/etc/syslog-ng/cert.d/Server_syslog.crt")
+---
+>             key-file("/etc/syslog-ng/key.d/Server_syslog.key")
+>             cert-file("/etc/syslog-ng/cert.d/Server_syslog.crt")
+11,12d10 # 表示第一个文件比第二个文件多了第11和12行
+< 2013-11
+< 2013-12
+```
+- diff A B  -u 统一格式输出
+```
+它的第一部分，也是文件的基本信息：
+--- A 2012-12-07 18:01:54.000000000 +0800
++++ B 2012-12-07 16:36:26.000000000 +0800
+"---"表示变动前的文件，"+++"表示变动后的文件。
+第二部分，变动的位置用两个@作为起首和结束。
+　　 @@ -1,12 +1,10 @@
+前面的"-1,12"分成三个部分：减号表示第一个文件（即A），"1"表示第1行，"12"表示连续12行。合在一起，就表示下面是第一个文件从第1行开始的连续12行。同样的，"+1,10"表示变动后，成为第二个文件从第1行开始的连续10行。
+```
+#### 执行系统命令
+- tab 激活目录补全，左右键移动，上下键进入，enter执行命令

@@ -333,6 +333,10 @@ WantedBy=multi-user.target
 	- [Linux下virtualenv与virtualenvwrapper详解 ](https://www.cnblogs.com/fengqiang626/p/11788200.html)
 	- mkvirtualenv --help # 虽然指令中有些virtualenv关键字,但是不用写,写了会报错
 - ## 问题
+	- win 安装后运行./activate 提升因为在此系统上禁止运行脚本
+		- https://www.jianshu.com/p/4eaad2163567
+		- 使用管理员打开powershell 输入`set-executionpolicy remotesigned`
+	- 使用workon project 没有反应，因为默认终端时powershell，好像哪里有问题，切换到cmd
 	- 安装后创建环境时virtualenvwrapper could not find /home/huawei in your path
 		- 环境变量里没有virtualenvwrapper
 		```
