@@ -24,6 +24,8 @@ Fatal error in launcher: Unable to create process using '"d:\softwares\python 2.
 
 # other
 - 比如从[这里](https://github.com/Charmve)看到了cpp的图标以及一些常用的语言和框架、工具和环境
+### geofile
+- ip和地理定位的关联信息，不是很精准
 ### VMware vSphere
   - VMware vSphere 不是特定的产品或软件。VMware vSphere是整个VMware套件的商业名称。
 ### msys(microsoft sys)

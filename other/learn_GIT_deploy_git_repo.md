@@ -31,3 +31,4 @@ git merge merge_use # 在master上操作
 `git init --bare`搞出来的git 目录不带工作区,只有版本库(HEAD/hooks这些),想看里面的内容必须git clone 出来
 `git init` 带工作区
 基于本地仓库初始化远程仓库是最好选择--bare, 因为git init 会让远程仓库也包括分支的work tree, 那么当push 本地新的改变的时候, 远程仓库不会显示push的内容, 远程仓库对应的目录下还是之前的内容,必须通过git reset --hard 回退到此时的HEAD 才能看到push后的内容
+f

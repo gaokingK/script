@@ -49,6 +49,12 @@
   - https://github.com/ylx2016/Linux-NetSpeed
   - https://www.v2ray-agent.com
 
+# 使用
+- win V2rayN:
+  - 下载:https://kgithub.com/2dust/v2rayN
+  - 配置：
+    - https://v2rayn.org/
+    - 选择自动配置系统代理
 # v2ray、xray
 - [区别](http://www.vjsun.com/656.html)
 ## 数据传输协议
@@ -59,3 +65,6 @@
 # 其他
 - [gooreplacer](https://github.com/jiacai2050/gooreplacer/)
   - 资源拦截替换, 把请求的某些资源重置到别的地方获取，这样资源就能加载了
+# 一些代理
+- git: https://juejin.cn/post/7210744398640595005
+  - 
