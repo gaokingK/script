@@ -4,8 +4,16 @@
 # other
 ### tmux 
 - link: http://www.ruanyifeng.com/blog/2019/10/tmux.html
+- 简单的使用流程
+   - 新建会话tmux new -s my_session。
+   - 在 Tmux 窗口运行所需的程序。
+   - 按下快捷键Ctrl+b d将会话分离。
+   - 下次使用时，重新连接到会话tmux attach-session -t my_session。
 - 新建窗口： ctrl + b, c
 - 切换窗口：ctrl + b, n
+```cs
+Ctrl+b z：当前窗格全屏显示，再使用一次会变回原来大小。
+```
  
 ### CentOS系统Tab补全功能
 - link: https://blog.csdn.net/RunSnail2018/article/details/81185957
@@ -314,12 +322,12 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
    - `bindkey -s '\e\e' '\C-asudo \C-e'`
 ### tar zip
    - [link](http://blog.chinaunix.net/uid-29132766-id-3862597.html)
-   - 如果a/中有b,c,d文件, 然后在a的父文件中tar .... a/ 那么解压出来 也会有个a/ 就不必在创建a/然后在-C a/了,那样就有两层
+   - 如果a/中有b,c,d文件, 然后在a的父文件中tar .... a/ 那么解压出来 也会有个a/ 就不必在创建a/然后在-C a/了,那样就有两层；而是直接在目录D下`tar -zxvf file.tar.gz` 这下目录D下就会有a/了
    - -z 通过gzip指令处理备份文件
    - -v 显示处理信息
    - -f file 指定文件
    - -c -x -A -t
-      -c 建立新的备份文件
+      -c 建立新的备份文件 `tar -zcvf /tmp/etc.tar.gz /etc` 
       -A或--catenate 新增文件到已存在的备份文件。----------------------no
       -x 从备份文件中还原文件 
       -t 列出备份文件的内容
@@ -334,10 +342,10 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
    - -r 递归处理，将指定目录下的所有文件和子目录一并处理。
 ### find
    - find 里面的选项可以加（）但必须注意空格，也需要把被包括的命令的全部参数给包括进去 比如`；`
-   - find [path1, path find 111 112 -name *.txt 可以在112 111 中寻找txt
+   - find (path1[, path2]) （）带表必选参数，[]中的代表可选参数 如：`find 111 112 -name *.txt` 可以在112 111 中寻找txt
    - -name "" 要用双括号包围， 单括号也可以
    - `find . -type d -name "*$(date +%Y%m%d)*" -o -maxdepth 1 -name "*$(date +%Y%m%d)*.txt" `  为什么会失败? ------------------------------no
-   - 是否可以使用find 查找目录结构如`\a\b\`，而不是去查找文件夹,单独find不能完成。
+   - 是否可以使用find 查找目录结构如`\a\b\`，而不是去查找文件夹,单独find不能完成。看下面的-path选项
       `find  / -type d -name "b" |grep "\a\b"` 注意`b`写在find里面，而grep中写`b`而不是`b/`
       超哥提供了另外一种方法 `ls -F /*/*/*/*/*|grep /a/b/`但这样没有响应
    - -cmin n 查询在过去n分钟内修改的文件(创建也是修改)
@@ -378,7 +386,22 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
    - find -name "aaa" 若是要使用通配符*是匹配所有字符任意次.就是匹配. 不知道加双引号有什么区别 
       - find -name xxx.log 可以找到xxx.log 但不能找到xxx.log2
    - -exec commond \;
+      - [](https://www.jianshu.com/p/ea096af9d765)
+      必须在命令后面加上终结符，终结符有两个：“；”和“+”。
+      - 为什么必须有终结符？
+         - 因为一个find后面可以有多个-exec cmd，所以必须要有终结符分割他们。如果不加，会包缺少参数。
+      - 为什么要加“\”?
+      “；”是shell的命令分隔符，如果只有“；”，那么这条命令就会被shell截断。
       ```shell
+      - 其中“；”会对每一个find到的文件去执行一次cmd命令。而”+“让find到的文件一次性执行完cmd命令。
+      [work@jkz ~]$ find . -maxdepth 1 -type f -name "*.log" -exec echo {} \; -exec echo {} +
+      ./server02.log
+      ./server03.log
+      ./server00.log
+      ./server01.log
+      ./timing.log
+      ./server.log
+      ./server02.log ./server03.log ./server00.log ./server01.log ./timing.log ./server.log 输出到一块了
       `find . \( -name "111*.txt" -o -name "112*.txt" \) -exec cat {} \;` 注意结尾的反斜杠和； 否则会提示遗漏“-exec”的参数
       # 里面好像不能使用管道符
       $ find . \( -name "111*.txt" -o -name "112*.txt" \) \( -exec cat {}|wc -l \; \)
@@ -545,6 +568,10 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
     3. linux 命令中的通配符是*，grep中的通配符是.
 
 # 通识
+### “rc”，它是“runcomm”的缩写――即“run command”(运行命令)的简写
+- “rc” 是取自 “runcom”, 来自麻省理工学院在 1965 年发展的 CTSS系统。相关文献曾记载这一段话：”具有从档案中取出一系列命令来执行的功能；这称为 “run commands” 又称为 “runcom”，而这种档案又称为一个 runcom (a runcom)。
+-  rc”是很多脚本类文件的后缀，这些脚本通常在程序的启动阶段被调用，通常是Linux系统启动时。
+- Linux或Unix的许多程序在启动时，都需要“rc”后缀的初始文件或配置文件。
 ### 环境变量应该在~/.bash_profile中定义
    1. `export XXX="xxx"`
 

@@ -85,6 +85,9 @@ fi
    - ####  (对所有用户都起作用的alias)[https://blog.csdn.net/littlehaes/article/details/103144509]
    - 但是在`/etc/profile.d/00-aliases.sh 权限是644就行` 里定义的alias只对root用户有用，普通用户需要在~/.bashrc 中引入
    - profile.d 的执行顺序 -----------------------------------------------------------------------------no
+
+### 配置文件
+
 ### BSD和SystemV
 - 是Unix 操作系统的两种操作风格
 ### Linux不能称为"标准的Unix“而只被称为"Unix Like"的原因有一部分就是来自它的操作风格介乎两者之间

@@ -132,7 +132,7 @@ re.M        多行匹配，影响 ^ 和 $
 
 
 """
-To: 直接将匹配结果直接转为字典模式
+To: 直接将匹配结果直接转为字典模式 命名分组
 s = '1102231990xxxxxxxx'
 res = re.search('(?P<province>\d{3})(?P<city>\d{3})(?P<born_year>\d{4})',s)
 print(res.groupdict())

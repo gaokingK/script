@@ -10,6 +10,7 @@
 
 # windows
 ### 注册表编辑器好像是全字匹配的
+### Registry Workshop 可以用来搜索替换windows中的路径https://blog.csdn.net/Melo_FengZhi/article/details/113919143
 ### where 与 gcm
 - 获取可执行文件的路径， gcm也差不多
 - link: https://stackoverflow.com/questions/304319/is-there-an-equivalent-of-which-on-the-windows-command-line
@@ -24,6 +25,16 @@ Fatal error in launcher: Unable to create process using '"d:\softwares\python 2.
 
 # other
 - 比如从[这里](https://github.com/Charmve)看到了cpp的图标以及一些常用的语言和框架、工具和环境
+- 语义化版本 就是版本的命名 https://semver.org/lang/zh-CN/
+
+### Railway：免费容器托管平台
+### 一些部署方式
+   - https://waline.js.org/guide/deploy/railway.html#%E5%A6%82%E4%BD%95%E9%83%A8%E7%BD%B2
+
+   
+### 饿汉式加载与懒汉式加载
+- 饿汉式：声明的同时直接实例化。 特点：加载类时比较慢，但运行时获取对象的速度比较快，线程安全。
+- 懒汉式：声明的时候不实例化。 特点：加载类时比较快，但运行时获取对象的速度比较慢，线程不安全。
 ### geofile
 - ip和地理定位的关联信息，不是很精准
 ### VMware vSphere

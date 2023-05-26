@@ -34,6 +34,35 @@
 	# 进入so.N所在的目录中，新建一个软连接，使其链接到已有的so文件
 	[huawei@localhost redis-6.2.0]$ sudo ln -s /usr/lib64/libatomic.so.1 /usr/lib64/libatomic.so
 	```
+# windows 下的工具
+- 报错先看是不是管理员权限打开的命令行
+## windows terminal
+- gitbash 设置：https://zhuanlan.zhihu.com/p/418321777
+- 其实很容易把 PowerShell 和 Windows Terminal 混淆，它们是两个不同的软件。可以这么理解，PowerShell 是命令行程序，真正执行指令的程序，而 Windows Terminal 则是管理各种命令行的工具。单独使用 PowerShell 就行了，为什么还要 Windows Terminal 呢？那是因为 Windows 下不仅可以安装 CMD，还可以安装 PowerShell 5.1、PowerShell 7、WSL、Azure Cloud Shell等，它需要一个工具集中管理，它就是 Windows Terminal
+- 安装与美化：https://zhuanlan.zhihu.com/p/352882990
+## winget
+- 可以输入中文
+```
+PS C:\Users\Quantdo> winget install plink
+找不到与输入条件匹配的程序包。
+PS C:\Users\Quantdo> winget search plink
+名称   ID               版本   源
+--------------------------------------
+pp直连 bshuzhang.PPLink 11.0.2 winget
+PS C:\Users\Quantdo> winget search PPֱ�� #输入的是pp直连，按完enter后就是这样子 
+名称   ID               版本   源
+--------------------------------------
+pp直连 bshuzhang.PPLink 11.0.2 winget
+PS C:\Users\Quantdo> winget install  PPֱ��
+已找到 pp直连 [bshuzhang.PPLink] 版本 11.0.2
+此应用程序由其所有者授权给你。
+Microsoft 对第三方程序包概不负责，也不向第三方程序包授予任何许可证。
+正在下载 https://www.ppzhilian.com/download/win/pp直连 Setup 11.0.2.exe
+  ██████████████████████████████   105 MB /  105 MB
+已成功验证安装程序哈希
+正在启动程序包安装...
+已成功安装
+```
 
 # make 
 ## 编译安装的流程
@@ -195,9 +224,15 @@ sudo apt-get update
 		ERROR: Could not find a version that satisfies the requirement torch==1.10.1+cpu (from versions: 1.8.0, 1.8.1, 1.9.0, 1.10.0, 1.10.1)
 		是因为1.10.1没有arm64的包
 		```
+	- pip._vendor.urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='127.0.0.1', port=10809): Read timed out.
+		- 重新运行pip install 命令解决
 	- ssl 问题 
 		- 可以尝试--trusted-host: `pip install lightgbm -i http://pypi.douban.com/simple --trusted-host pypi.douban.com`
 		- 也可以尝试更换版本，我pip不行，pip3就好了
+	- urllib3.exceptions.ProxyError: ('Unable to connect to proxy', SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:1125)')))
+		- urllib3 版本问题 安装pip install urllib3==1.25.11 这个版本试试
+		- link：https://zhuanlan.zhihu.com/p/350015032
+		- 原因是以前 urllib3 其实并不支持 https 代理，也就是说代理服务器的地址虽然大家配置的是 https，但是一直都是悄无声息地就按照 http 连接的，刚好代理服务器确实也只支持 http，所以皆大欢喜。现在 urllib3 要支持 https 代理了，那么既然配置代理是 https 就尝试用 https 的方式去连接，但是由于代理服务器其实只支持 http，所以没法处理请求，ssl 握手阶段就出错了。注意，这里的 https 是指代理服务器自己的，和我们要访问的目标网站无关。
     - pip 编译安装失败： xxx.h 缺失
         ```
 		  build/temp.linux-aarch64-3.6/_sodium.c:57:20: fatal error: Python.h: No such file or directory
@@ -235,6 +270,8 @@ sudo apt-get update
         - python-dev的包在centos的yum中不叫python-dev，而是python-devel.
         - 有多个版本的话， 为什么只安装了2.7的python-dev
             - python3 安装使用`yum install python3-devel`
+## python vscode配置
+- 安装python environment就可以使用虚拟环境了
 ## python 运行问题
 - 只有远程执行python 脚本时才会报错：ImportError: DLL load failed: %1 不是有效的 Win32 应用程序。
     - 前提：win ssh 到 centos， 又连接到win， 执行命令 python Record_back_1204_001_可用版本.py

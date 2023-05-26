@@ -17,6 +17,11 @@
 		}
 	}
     ```
+- 快捷键：
+	- 先后按ctr+r ctrl+k就会打开快捷键的描述文档，或者你用Help菜单中打开快捷指南
+- vscode配置：https://blog.csdn.net/wohu1104/article/details/111464778
+- vscode会搜索.vscode里面的launch.json文件来配置调试，如果换了一个语言，点击下拉箭头;最下面的三个选择分别为文件夹A添加配置、为文件夹B添加配置、为工作区添加配置。选择一个点击了，会自动帮你配置
+
 
 # pycharm 
 - 书签
