@@ -23,7 +23,7 @@ Ctrl+b z：当前窗格全屏显示，再使用一次会变回原来大小。
 - -t 指定开启进程的终端
 - 也能发送信号
 ### 发送ctrl+c `sh', '-c', '\x03'`
-### 应用一般安装在/usr/share/ /usr/local 下
+
 ### which whereis type locate find 
    - link: https://www.cnblogs.com/danmiao/p/10081620.html
    - which  查找命令是否存在，以及命令的存放位置在哪儿。
@@ -60,19 +60,8 @@ Ctrl+b z：当前窗格全屏显示，再使用一次会变回原来大小。
         - `grep da * > file1 1>&2`但这里的file1没有内容，file1本来是有1的内容的，但是后面又被重定向了到和2一样了。就会都输出在控制台中
    - 管道符后面的内容可以从/dev/stdin 读入
      - cat file_name |awk xxxx |sh /dev/stdin # awk 后当成命令执行
-### shell 多行注释
-   ```shell
-   # 方法1 block自定义的单词（可以是字符） 推荐
-   :<<！
-   被注释的内容
-   block
-   ！
-   # or
-   :'
-   被注释的内容
-   '
-   ```
-### 查看端口
+
+### netstat 查看端口
    - 端口是否被占用`lsof -i 8080`
      - link: https://www.runoob.com/w3cnote/linux-check-port-usage.html
      - 应该用root来执行，否之看不到
@@ -82,6 +71,7 @@ Ctrl+b z：当前窗格全屏显示，再使用一次会变回原来大小。
      - -n 拒绝显示别名，能显示数字的全部转化为数字
      - -l 仅列出在Listen(监听)的服务状态
      - -p 显示建立相关链接的程序名
+   - 获取正在使用的端口 netstat -ntl |grep -v Active| grep -v Proto|awk '{print $4}'|awk -F: '{print $NF}' 
 ### jq linux json处理命令
    - link: https://www.jianshu.com/p/6de3cfdbdb0e
    - cat json_file| json "."  格式化输出json文本
@@ -152,12 +142,7 @@ Ctrl+b z：当前窗格全屏显示，再使用一次会变回原来大小。
    n <& m	将输入文件 m 和 n 合并。
    << tag	将开始标记 tag 和结束标记 tag 之间的内容作为输入。 EOF
    ```
-### alias 使用外部传参
-   ```shell
-   alias s='UpMachine(){ ssh root@$1;};UpMachine'
-   $ s 192.168.22.2
-   # 其实就是相当于写一个行命令 把参数不放在alias当中(怎么不放呢,就通过函数实现)
-   ``` 
+
 ### 输出参数提示(redis) -----------------------------------no
 ### declare 
    - [link](https://www.runoob.com/linux/linux-comm-declare.html)
@@ -180,8 +165,7 @@ Ctrl+b z：当前窗格全屏显示，再使用一次会变回原来大小。
    - scp 文件 `scp file_path target_file_path/target_dir_path`  如果要重命名， target_file_path 不存在也可以
    - 如果要放到文件夹中 `scp file_path target_dir_path/.` dir_path/. 要加 `/.`
    - scp 可以直接带密码 scp username:passwd@ip:/path/to/file
-### netstat
-   - netstat -ntl |grep -v Active| grep -v Proto|awk '{print $4}'|awk -F: '{print $NF}' 获取正在使用的端口
+
 ### exit
    - 执行exit可使shell以指定的状态值退出。若不设置状态值参数，则shell以预设值退出。状态值0代表执行成功，其他值代表执行失败。
    - exit也可用在script，离开正在执行的script，回到shell。
@@ -318,8 +302,7 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
    - -e 处理特殊字符: \a 发出警告声； \b 删除前一个字符; \c不换行；
    - 可以输出多个`echo "a" "a" ..`
    - 使用命令新建文本文件（有的内核不需要-e参数）  `echo -e 1\n2 > 1.txt`
-### [zsh 的命令行中快速输入sudo](http://www.ichenfu.com/2017/03/29/bash-zsh-fast-sudo/)
-   - `bindkey -s '\e\e' '\C-asudo \C-e'`
+
 ### tar zip
    - [link](http://blog.chinaunix.net/uid-29132766-id-3862597.html)
    - 如果a/中有b,c,d文件, 然后在a的父文件中tar .... a/ 那么解压出来 也会有个a/ 就不必在创建a/然后在-C a/了,那样就有两层；而是直接在目录D下`tar -zxvf file.tar.gz` 这下目录D下就会有a/了
@@ -442,6 +425,8 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
      find build -name '*.py' -exec rm -f {} ';' || true
      find build -name '*.py[co]' -exec rm -f {} ';' || true
      ```
+   - ### 对过滤的文件进行操作
+      find . -type f -name "*.sh"|grep sh|xargs -i git add {}
 
 ### nl filename 带行号显示文件内容
 ### [sed](https://www.runoob.com/linux/linux-comm-sed.html）
@@ -561,19 +546,15 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
 	0  # 没有set -o pipefail，默认返回最后一个管道命令的返回值
 	```
       
-
+# 通识
 ### linux中的通配符
     1. 命令中的通配符是. 
     2. 命令行下*是等于正则中的.*
     3. linux 命令中的通配符是*，grep中的通配符是.
 
-# 通识
-### “rc”，它是“runcomm”的缩写――即“run command”(运行命令)的简写
-- “rc” 是取自 “runcom”, 来自麻省理工学院在 1965 年发展的 CTSS系统。相关文献曾记载这一段话：”具有从档案中取出一系列命令来执行的功能；这称为 “run commands” 又称为 “runcom”，而这种档案又称为一个 runcom (a runcom)。
--  rc”是很多脚本类文件的后缀，这些脚本通常在程序的启动阶段被调用，通常是Linux系统启动时。
-- Linux或Unix的许多程序在启动时，都需要“rc”后缀的初始文件或配置文件。
-### 环境变量应该在~/.bash_profile中定义
-   1. `export XXX="xxx"`
+### 应用一般安装在/usr/share/ /usr/local 下
+
+### 按 ctrl 在命令中 以单词为单位跳转
 
 # commands
 1. `cd /home/huawei/Desktop/autotest/;find . -type d -name "*$(date +%Y%m%d)*" -o -name "*$(date +%Y%m%d)*.txt" |tar -zcvf 111back.tar.gz -T -&&scp 111back.tar.gz huawei@90.90.0.152:/home/huawei/Desktop/smoke/.`
@@ -581,7 +562,7 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
 3. `for file in `find . -type f -name kbo*x*.txt`; do python3 find_author.py $file; done`
 4. `for dir in `find / -type d -iname kbox 2>/dev/null`; do find $dir -type f -name "*.sh" 2>/dev/null; done;`
 5. `for dir in 11[1,4]; do cd $dir; file=$(find . -type f -ctime -1 -name kbox*.txt); echo file:$file; [ ! -n "$file" ] && echo 'not file: ${#file}' &&cd ../&&continue; echo "getfile"; python3 ./../find_author.py $file; cp $file $dir.txt; cd ../; done`
-
+- `sh -c ps -Awwo nice,pid,ppid,comm,args|grep snmptrapd; kill -9 pid`
 # 语法糖
 ```shell 
 1. cp a{,.bak} # cp a a.bak

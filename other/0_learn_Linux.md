@@ -1,3 +1,13 @@
+# 文档
+  - https://www.thegeekstuff.com/2008/08/15-examples-to-master-linux-command-line-history/
+# 通识
+### manjaro 最受欢迎的linux发行版 基于arch
+### BSD和SystemV
+   - 是Unix 操作系统的两种操作风格
+### ctrl + R 搜索历史命令
+- 输入一些东西后再按ctrl + R继续搜索  
+# 细节
+### Linux不能称为"标准的Unix“而只被称为"Unix Like"的原因有一部分就是来自它的操作风格介乎两者之间
 ### 设置代理
    - link：https://www.cnblogs.com/daijiabao/p/11358743.html
    ```
@@ -46,7 +56,7 @@
      - which is used to determine what characters to use as word splitting delimiters
      - 默认情况下，IFS包括：space, tab, newline 即：($' \t\n')
    - Word Splitting和Double quoting 就是分割出来的结果不同, 使用"str"分出来的结果就是Double quoting 见上
-### sh bash 不同
+### sh和bash的不同
    - 定义函数时不同, sh 的函数不能带括号?
    - sh 不支持function
    - bash -n xxx.sh shell脚本语法检查
@@ -78,19 +88,6 @@ fi
    修改完成后 `exec /sbin/init` 退出单用户模式
 ### yum /y/d/N 
    d 只下载不安装
-### manjaro 最受欢迎的linux发行版 基于arch
-### [/etc/profile与/etc/profile.d/的作用](https://www.cnblogs.com/kevin1990/p/8641315.html)
-   - /etc/profile是一个脚本，这个脚本在login shell启动的时候，就是在用户登录的时候还有su切换用户的时候会执行;Non-login shell 启动的时候不会
-   - /etc/profile.d/是一个文件夹 可以在里面放一些脚本用来设置一些变量和运行一些初始化过程的，/etc/profile 中使用一个for循环语句来调用这些脚本
-   - ####  (对所有用户都起作用的alias)[https://blog.csdn.net/littlehaes/article/details/103144509]
-   - 但是在`/etc/profile.d/00-aliases.sh 权限是644就行` 里定义的alias只对root用户有用，普通用户需要在~/.bashrc 中引入
-   - profile.d 的执行顺序 -----------------------------------------------------------------------------no
-
-### 配置文件
-
-### BSD和SystemV
-- 是Unix 操作系统的两种操作风格
-### Linux不能称为"标准的Unix“而只被称为"Unix Like"的原因有一部分就是来自它的操作风格介乎两者之间
 
 ### 行内for 循环
 ```shell
@@ -106,8 +103,7 @@ p $sn.SensorName;done;
 
 ### 字符串截取
 (link)[https://www.cnblogs.com/hurryup/articles/10241601.html]
-### 对过滤的文件进行操作
-find . -type f -name "*.sh"|grep sh|xargs -i git add {}
+
 
 ### 禁止root ssh [link](https://www.cnblogs.com/toughlife/p/5633510.html)
 ```
@@ -115,26 +111,13 @@ vim /etc/ssh/sshd**
 service sshd restart
 ```
 
-### 杂
-按 ctrl 在命令中 以单词为单位跳转
-
-
-#### alias 重启的时候会有变化
-
 ### docker
-`docker top android_1 | grep com.hexin | awk '{print $2;exit}`
-```
- docker exec -it android_1 sh -c "ps -a|grep com.hexin" | awk '{print $2;exit}'
-```
-### 文档
-  - https://www.thegeekstuff.com/2008/08/15-examples-to-master-linux-command-line-history/
+
+
 ### jq linux json处理器
   - https://wangchujiang.com/linux-command/c/jq.html
-### ctrl + R 搜索历史命令
-- 输入一些东西后再按ctrl + R继续搜索  
-### command
-- sh -c ps -Awwo nice,pid,ppid,comm,args|grep snmptrapd; kill -9 pid
-- 查看端口使用lsof -i:27501
+
+
 ### 免密
 ```
 本地客户端生成公私钥：（一路回车默认即可） ssh-keygen

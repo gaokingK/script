@@ -1,6 +1,7 @@
 1. 大厂面试题
 2. impurity
 3. 日志切割
+4 把0_learn_Linux 和 linux_command整一下
 
 # 未读
 - 所有开发者都应该知道的10个GitHub仓库:https://bbs.huaweicloud.com/blogs/351143?utm_source=zhihu&utm_medium=bbs-ex&utm_campaign=other&utm_content=content

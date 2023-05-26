@@ -22,9 +22,12 @@
 - #### 镜像管理
     - 删除镜像 `docker rmi hello-world`
     - 搜索镜像 `docker search httpd`
-### 脚本
+
+### 单行命令
 - 批量删除命令 `docker ps -a|tail -n +2|head -n 1|awk '{print $1}'|xargs -i docker rm {}`
 - 删除所有的exited的container `docker ps -a|grep -w Exited|awk '{print $1}'|xargs -i docker rm {}`
+- `docker top android_1 | grep com.hexin | awk '{print $2;exit}`
+- `docker exec -it android_1 sh -c "ps -a|grep com.hexin" | awk '{print $2;exit}'`
 
 ### 问题
 - docker也可虚拟化？

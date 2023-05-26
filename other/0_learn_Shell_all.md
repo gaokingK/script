@@ -1,6 +1,18 @@
 ### 规范
 - 缩进统一4个空格，不要tab，其实有些地方不缩进也可以（for、if）
 - 赋值时等号左右不能有空格
+### shell 多行注释
+   ```shell
+   # 方法1 block自定义的单词（可以是字符） 推荐
+   :<<！
+   被注释的内容
+   block
+   ！
+   # or
+   :'
+   被注释的内容
+   '
+   ```
 ### 查看swp等.开头的文件时`ls .*.swp`
 ### 数组
 - link：
@@ -22,7 +34,7 @@
 - echo ${test_a[$((5%3))]}
 ### set
 - link:
-  - https://blog.csdn.net/u011350541/article/details/82852911
+  - https://blog.csdn.net/fw63602/article/details/52799073?utm_source=copy
 - set – "$X"就是把X的值返回给$1, set – $X就是把X作为一个表达式的值一一返回
 - IFS=oIFS 这样会导致’o’,‘I’,‘F’,'S’都是分隔符，应该IFS=$oFIS 
 - set -- $(ls /opt)
