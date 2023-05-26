@@ -3,7 +3,12 @@
     - 会先计算or
 ### mmap --- 内存映射文件支持
 - 打开已加载到内存中的对象
+### isalnum()
+- isalnum() 方法检测字符串是否由字母和数字组成。
 ### pprint.pformat(value)
+### operator 模块
+- https://www.runoob.com/python3/python-operator.html
+- operator 模块提供了一套与 Python 的内置运算符对应的高效率函数。例如，operator.add(x, y) 与表达式 x+y 相同。
 ## counter类
 - link: https://www.cnblogs.com/zhenwei66/p/6593395.html
 - 计算值出现的次数, 并能做一些运算

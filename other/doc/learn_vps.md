@@ -48,13 +48,19 @@
 - 帮助：
   - https://github.com/ylx2016/Linux-NetSpeed
   - https://www.v2ray-agent.com
+  - https://www.v2fly.org/config/dns.html#dnsobject
 
 # 使用
 - win V2rayN:
   - 下载:https://kgithub.com/2dust/v2rayN
   - 配置：
     - https://v2rayn.org/
-    - 选择自动配置系统代理
+    - 代理方式选择“自动配置系统代理”， 路由方式选择“绕过大陆”。
+    - 路由配置：https://amoment.site/p/%E6%96%B0%E7%89%88v2rayn%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%90%86%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AEpac/
+    - 如果使用域名改变direct，配置是`domain:erebor.douban.com `而不是`erebor.douban.com` 写在规则里面有example的那个direct规则列表中就行，不用新建了
+
+
+
 # v2ray、xray
 - [区别](http://www.vjsun.com/656.html)
 ## 数据传输协议
@@ -65,6 +71,23 @@
 # 其他
 - [gooreplacer](https://github.com/jiacai2050/gooreplacer/)
   - 资源拦截替换, 把请求的某些资源重置到别的地方获取，这样资源就能加载了
+- sms-activate.org 网站注册一个虚拟号
+  - link：https://juejin.cn/post/7199657558834692157
 # 一些代理
 - git: https://juejin.cn/post/7210744398640595005
   - 
+
+
+# openAI
+- organization：org-KJCQAA8sLPd0vagGsygofPcL
+- 254774511744 +254 (774) 51 17 44 
+- API key: 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
+
+# windows 开代理后one note和micrsoft  Store 连不上网络的问题
+- Microsoft Store等软件绕过V2ray全局代理 https://zhuanlan.zhihu.com/p/413730301
+```
+CheckNetIsolation.exe loopbackexempt -a -p=S-1-15-2-1609473798-1231923017-684268153-4268514328-882773646-2760585773-1760938157
+# restore
+CheckNetIsolation.exe loopbackexempt -d -p=S-1-15-2-1609473798-1231923017-684268153-4268514328-882773646-2760585773-1760938157
+```
+- 然后还是没有用，把网络适配器删掉了，然后重新配置，打开代理又好了，真奇怪

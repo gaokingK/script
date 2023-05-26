@@ -8,13 +8,13 @@
 # 输出时间
 `print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))`
 
-# time
-- 时间戳 time.time() # 获取从1970年1月1日到现在的时间秒数
+# time 
+### 时间戳 time.time() # 获取从1970年1月1日到现在的时间秒数 timestamp
 ```
 time.time() # 1642646490.798591
 ```
 
-- 将时间戳转换为日期格式
+### 将时间戳转换为日期格式
 ```
 t = time.localtime(0)
 print(type(t)) # <class 'time.struct_time'>
@@ -23,14 +23,14 @@ time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(1642613319))
 ```
 
 # datetime
-- 获取日期
+### 获取日期
 ```
 import datetime
 x = datetime.datetime.now()
 print(x.strftime("%Y-%m-%d"))
 2023-02-20
 ```
-- 字符串转换为datetime对象: strptime()
+### 字符串转换为datetime对象: strptime()
 ```
 t = "2022-01-16 16:00:00"
 ft = datetime.datetime.strptime(t, "%Y-%m-%d %H:%M:%S") # 因该能看的出来吧，源字符串中有-，format—str里也写"-"
@@ -39,12 +39,12 @@ print(type(ft)) # <class 'datetime.datetime'>
 t = "2022-01-16T16:00:00.000Z"
 datetime.datetime.strptime(t, "%Y-%m-%dT%H:%M:%S.%fZ")
 ```
-- 操作时间 timedelta 
-```
+### 操作时间 timedelta 
+```python
 local_time = utc_date_obj + datetime.timedelta(hours=8)
 ```
-- 日期间计算
-```
+### 日期间计算
+```python
 a=datetime.datetime.strptime("2023-02-21 07:59:00", "%Y-%m-%d %H:%M:%S")  # 也可以是datetime.datetime()对象
 b=datetime.datetime.strptime("2023-02-22 07:59:00", "%Y-%m-%d %H:%M:%S")
 c=datetime.datetime.strptime("2023-02-22 20:59:00", "%Y-%m-%d %H:%M:%S")

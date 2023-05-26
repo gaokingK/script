@@ -46,11 +46,27 @@
    - git config --system core.longpaths true
    - - 原因：
    - git 版本使用的是windows的老版本API，对字符长度的限制是260个
+- git remote设置的是ssh地址，push 提示ssh: connect to host github.com port 22: Connection refused
+   - link:https://zhuanlan.zhihu.com/p/521340971
+   - windows也可以使用更改config文件修改22端口到443端口
+- git clone https://github.com/derekparker/delve.git 报Failed to connect to github.com port 443
+   - 采用ssh地址，看不到是因为github没有登陆账号
+- fatal: unable to access 'https://github.com/ScoopInstaller/Main.git/': Failed to connect to github.com port 443 after 21204 ms: Couldn't connect to server 
+   - 明明开了vpn
+   - 因为git没有用代理，在git中设置：
+      - `git config --global http.proxy http://127.0.0.1:10809` 这个端口是你vpn在本地的http监听端口
+      - `git config --global https.proxy http://127.0.0.1:10809`
+   - 清除设置
+      - `git config --global --unset http.proxy`
+      - `git config --global --unset https.proxy`
 
 ## 帮助
 - https://docs.gitlab.com/ee/topics/git/stash.html
 ## other
-
+### git clone
+-- git clone --depth=1 只克隆下包含最近一次commit的一个分支，这样这个项目文件就不会很大 https://blog.csdn.net/qq_43827595/article/details/104833980
+-- git clone --recursive
+-- git clone --recurse-submodules递归克隆子项目 https://blog.csdn.net/Mark_md/article/details/121640755 如果直接clone，子模块的代码为空
 ### git stash
 - link:
    - https://www.cnblogs.com/zndxall/p/9586088.html
