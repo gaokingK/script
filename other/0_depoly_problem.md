@@ -38,6 +38,7 @@
 # windows 下的工具
 - 报错先看是不是管理员权限打开的命令行
 - 环境变量在用户还是系统的path添加都行，添加完记得重启终端，如果有windows Termianal 要把这个程序重启
+
 ## windows terminal
 - gitbash 设置：https://zhuanlan.zhihu.com/p/418321777
 - 其实很容易把 PowerShell 和 Windows Terminal 混淆，它们是两个不同的软件。可以这么理解，PowerShell 是命令行程序，真正执行指令的程序，而 Windows Terminal 则是管理各种命令行的工具。单独使用 PowerShell 就行了，为什么还要 Windows Terminal 呢？那是因为 Windows 下不仅可以安装 CMD，还可以安装 PowerShell 5.1、PowerShell 7、WSL、Azure Cloud Shell等，它需要一个工具集中管理，它就是 Windows Terminal

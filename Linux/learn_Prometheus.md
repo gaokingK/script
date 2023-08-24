@@ -6,6 +6,7 @@
 - 告警规则在ip:9090/页面上的status-> rules里看
 ### 文档
 - 中文文档：https://hulining.gitbook.io/prometheus/guides/go-application
+
 # 指标、样本和时间序列
 - https://www.prometheus.wang/promql/what-is-prometheus-metrics-and-labels.html
 
@@ -104,6 +105,7 @@ receivers:
 ## 告警规则的配置：
 - description: "{{ $labels.node }} have {{ printf \"%.0f\" $value }} processes in zombie/dead/waitingIO state."
 - 一个告警文件里面可以有同名的告警规则
+
 # PromQL
 PromQL是Prometheus自定义查询语言，通过PromQL用户可以非常方便的对监控样本数据进行统计分析，支持常见的运算操作符，此外还提供了大量的内置函数可以实现对数据的高级处理
 - https://www.prometheus.wang/promql/prometheus-query-language.html
@@ -147,6 +149,7 @@ without: 用于从计算结果中移除列举的标签(维度)，而保留其它
 - link：https://www.prometheus.wang/promql/prometheus-promql-operators-v2.html
 - 这样也可以分组
   - `fs_block_available_count{node=~"${node:pipe}"}/fs_block_total{node=~"${node:pipe}"}`
+
 ## PromQL操作符
 ### 匹配模式
 匹配模式应用于向量和向量之间进行运算时，默认的匹配规则是找到与左边向量元素匹配（标签完全一致）的右边向量元素进行运算；但除此之外，还有一对一匹配、一对多匹配和多对一匹配。
@@ -189,11 +192,9 @@ without: 用于从计算结果中移除列举的标签(维度)，而保留其它
   - https://blog.csdn.net/hugo_lei/article/details/113400270
 - absent 判断瞬时向量是否有值,如果有样本，结果为null，感觉好反常，常用于判断某个标签的指标不存在时发出告警
 ```
-
 #先获取一个瞬时向量作为参数，然后判断这个瞬时向量是否有值
 #如果该向量存在值，则返回空向量
 #如果该向量没有值，则返回不带标签名称的时间序列 并返回值为1
- 
   - alert: NoMarketTrendReport
     expr:  absent(qmarket_topic_flowcount{topicid="{{m.topicid}}"})
     for: 1m

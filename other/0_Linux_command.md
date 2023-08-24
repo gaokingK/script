@@ -10,6 +10,7 @@
 - link:
    - http://www.ruanyifeng.com/blog/2019/10/tmux.html
    - https://www.51cto.com/article/664989.html
+
 - 简单的使用流程
    - 新建会话tmux new -s my_session。
    - 在 Tmux 窗口运行所需的程序。
@@ -58,6 +59,15 @@ https://www.cnblogs.com/weihua2020/p/13872964.html
 	- 更改密码`passwd username` 
 - 查看用户创建时间 https://www.jb51.net/article/139900.htm
 ### 命令补全 CentOS系统Tab补全功能
+=======
+- 新建窗口： ctrl + b, c
+- 切换窗口：ctrl + b, n
+```cs
+Ctrl+b z：当前窗格全屏显示，再使用一次会变回原来大小。
+```
+ 
+### CentOS系统Tab补全功能
+>>>>>>> 7ce39ce967aa6d11455c9b35a67440abec660ec7
 - link: https://blog.csdn.net/RunSnail2018/article/details/81185957
 - yum install bash-completion
 ### chroot # rootfs

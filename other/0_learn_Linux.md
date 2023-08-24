@@ -95,6 +95,9 @@ fi
 ### yum /y/d/N 
    d 只下载不安装
 
+### 配置文件
+
+
 ### 行内for 循环
 ```shell
 for i in `seq 1 10`;do; echo $i;done

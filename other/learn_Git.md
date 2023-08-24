@@ -67,6 +67,7 @@
 - 直接修改的文件会在工作区显示出来，使用git add 后被添加到暂存区；commit后就在版本库了
 - 对暂存区的文件执行`git reset HEAD .`后，文件的改动在工作区
 - 对工作区的文件执行 `git checkout -- path/to/file` 后， 文件的改动被撤销了
+
 ### git clone
 -- git clone --depth=1 只克隆下包含最近一次commit的一个分支，这样这个项目文件就不会很大 https://blog.csdn.net/qq_43827595/article/details/104833980
 -- git clone --recursive

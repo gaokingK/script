@@ -64,7 +64,10 @@ Get-NetFirewallRule -Name *ssh* # OpenSSH-Server-In-TCP这个状态是 enabled
 - 可以建立ssh隧道来进行本地、远程端口转发
     - link：https://www.cnblogs.com/Hi-blog/p/7473752.html
 - ssh -vt username@ip 可以来debug链接过程，用来排错
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7ce39ce967aa6d11455c9b35a67440abec660ec7
 # 本地端口和远程端口
 - 其实都一样的， `ssh xxx@xxx -p 222` 对执行命令的机器来说， 222 就是要访问的远程端口， 对xxx来说， 222就是本地端口
 
