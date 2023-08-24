@@ -12,3 +12,20 @@
 - 在添加环境变量的时候是把bin目录添加到系统变量里面
 - 修改密码的语句是alter user user() identified by "XXX"; 把想设置的密码放到双引号里
 - 带debug-test的是带测试用例的好像是
+
+### mysql 忘记密码
+```cs
+第一步： 关闭mysql
+$ service mysql stop
+第二步： 修改my.cnf文件，加上红框中两行内容
+$ vim /etc/mysql/my.cnf
+[mysqld]
+skip-grant-tables
+第三步： 重启mysql服务,并进入mysql修改密码
+
+$ service mysql restart
+$ mysql
+mysql> use mysql;
+mysql> update user set authentication_string=PASSWORD("new_pass") where user='root';
+第四步： 撤回对my.cnf文件的修改
+```

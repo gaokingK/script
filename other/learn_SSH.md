@@ -41,6 +41,12 @@ Get-NetFirewallRule -Name *ssh* # OpenSSH-Server-In-TCP这个状态是 enabled
 - ssh 主机的端口可能不是22,可以通过vim ~/.ssh/config来修改对某台主机进行ssh连接时使用的端口
     - https://zhuanlan.zhihu.com/p/521340971
 
+- 遇到一个问题 A主机上ssh root@b_ip 到B，在这个终端下再ssh root@b_ip就不行
+
+- ssh 链接问题可以看/etc/log/secury日志
+    - https://blog.csdn.net/GX_1_11_real/article/details/80423409
+    - https://help.aliyun.com/document_detail/41470.htm?spm=a2c4g.41473.0.0.4e235f53GDOpjl#0b2ba7509557s
+
 # windows sshpass 替代
 - 再xshell中可以使用这个工具
 - 可以安装putty来使用 putty是一个图形化界面，也是一个命令行工具 但是连上后会使用putty的终端打开
@@ -58,6 +64,7 @@ Get-NetFirewallRule -Name *ssh* # OpenSSH-Server-In-TCP这个状态是 enabled
 - 可以建立ssh隧道来进行本地、远程端口转发
     - link：https://www.cnblogs.com/Hi-blog/p/7473752.html
 - ssh -vt username@ip 可以来debug链接过程，用来排错
+
 # 本地端口和远程端口
 - 其实都一样的， `ssh xxx@xxx -p 222` 对执行命令的机器来说， 222 就是要访问的远程端口， 对xxx来说， 222就是本地端口
 

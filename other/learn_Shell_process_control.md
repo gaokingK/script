@@ -1,8 +1,44 @@
-### if test
+## if test
 - link：
   - [link](https://blog.csdn.net/qq_37960324/article/details/83145412)
   - https://blog.csdn.net/m0_37814112/article/details/103053802
   - [关于test的，选项好像也能通用](https://www.cnblogs.com/shaoshao/p/6809580.html)
+      - test [判断条件]  && 结果为true时做的 || echo "not exist" 为false做的
+      - test 2 -eq 2  && echo a || echo b
+      - `[[]]` 和 `[]` 相当于test
+         - [ 2 -eq 2 ] && echo a || echo b
+         - [[ 2 -eq 2 ]] && echo a || echo b
+
+
+  - https://www.cnblogs.com/kaishirenshi/p/9729800.html
+### 注意
+- [] 一定要和中间的东西使用空格隔开
+- 判断命令的执行结果
+   - https://www.jianshu.com/p/9097c60d8e8c
+   ```cs
+   # foo 是一个函数 但换成命令也是可以的
+   if [ "$(foo 'NO')" == "It's not YES" ]; then
+      echo "Match: NO"
+   fi
+   # 带判断命令的执行结果
+   OUT1="$(foo 'YES')"
+   if [ $? -eq 0 -a "${OUT1}" == "It's YES" ]; then
+      echo "Match: YES"
+   fi
+   # 可以直接使用grep判断，因为grep没有搜索到时返回1，搜索到时返回0
+       if   grep "add_workers:" $inventory_path  ; then # 这样如果搜索到会输出搜索结果
+           echo "searched"
+       else
+           echo "no searched"
+       fi
+       if [[ `grep "worker" $inventory_path` ]]; then # 这样不会输出搜索到的结果 一个单括号也可以的
+           echo "searched"
+       else
+           echo "no searched"
+       fi
+
+   ```
+### 选项
 - -n str 当串的长度大于0时为真(串非空)
   ```shell
   if [ 3 -ne 2 ];then echo yes;else echo no;fi # 注意方括号两边的空格，没有会报错
@@ -12,6 +48,7 @@
   # 不加“”时该if语句等效于if [ -n ]，shell 会把它当成if [ str1 ]来处理，-n自然不为空，所以为正
   # 单括号中变量必须要加双引号； 双对中括号，变量不用加双引号
   ```
+- 取非 [ ! expr ] 注意空格
 - -z str 串的长度为0时为真
 - [str] 串非空时为真 和 -n 有什么区别呢?--------------------no
 - -e file_name 文件是否存在
@@ -31,6 +68,15 @@ else
     echo "num eq 3"
 fi
 ```
+- 逻辑判断
+```cs
+[ ! EXPR ] 逻辑非，如果 EXPR 是false则返回为真。
+[ EXPR1 -a EXPR2 ] 逻辑与，如果 EXPR1 and EXPR2 全真则返回为真。
+[ EXPR1 -o EXPR2 ] 逻辑或，如果 EXPR1 或者 EXPR2 为真则返回为真。
+[ ] || [ ] 用OR来合并两个条件
+[ ] && [ ] 用AND来合并两个条件
+```
+- [ -t FD ] 如果文件描述符 FD （默认值为1）打开且指向一个终端则返回为真
 ### [] 和 [[]]
 - link:
    - https://blog.csdn.net/Michaelwubo/article/details/81698307
@@ -39,20 +85,28 @@ fi
 - 单括号中可以使用-a -o，但必须在括号内;
 - 单括号中可以使用`&&`和`||`,但必须在括号外
 
+- unary operator expected 
+   - link: https://cloud.tencent.com/developer/ask/sof/102515287
+   - if [] 报错[: -ne: unary operator expected
+   - 首先，您需要知道[ ... ]是一个命令，而不是一个语法元素。它是test命令的变体。[是命令，... ]是传递给它的参数。]应该是最后一个参数。
+   - 问题是传递给[的参数是由[解析的，而不是由bash解析的，而且if语法元素本身不会在执行的测试的非零返回值上抛出错误。
+   - 解决方法是使用[[ (扩展测试)。Bash将检查传递给[[的参数的语法
+   - 进一步阅读：http://tldp.org/LDP/abs/html/testconstructs.html
+
 ### 语句
    - `[ $? -ne 5 ] && echo "haha"` 不等于5就输出hahah
    - `[ $? -ne 5 ] && echo "haha" && echo "no"` ------------------------no
 
-### continue break
+## continue break
    - link: http://c.biancheng.net/view/1011.html
    - break n n 表示跳出循环的层数，如果省略 n，则表示跳出当前的整个循环。break 关键字通常和 if 语句一起使用，即满足条件时便跳出循环。
    - continue n 
-### select in
+## select in
    - link: http://c.biancheng.net/view/2829.html
    - select in 循环用来增强交互性，它可以显示出带编号的菜单
    - 就像for循环, 即使原内容没有了, 只会报错
 
-### for 
+## for 
    - 语句
    ```
    huawei ~/Desktop/smoke% for dir in 11[1,4]; do echo $dir;done

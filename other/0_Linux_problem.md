@@ -1,6 +1,9 @@
 ### pt 这个命令为什么不能留在命令历史中?-----------no
 ### pactl list short sinks ; arecord -------no
 ### 挂载相关
+- umount: /apt/promtail/hlogs/home: target is busy
+   - link:https://blog.csdn.net/weixin_43572042/article/details/109307072
+   - lsof(8)的意思就是lsof 路径
 ### 为什么这个后面的一个在文件中找不到
 ### 验证用户
 ### 为什么zsh 的read -p 不能用?

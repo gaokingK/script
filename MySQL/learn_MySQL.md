@@ -51,6 +51,11 @@ MariaDB [(none)]> # none 是当前使用数据库的名字
 - mysql数据库在线测试_5个免费在线 SQL 数据库环境
   - https://blog.csdn.net/weixin_32329059/article/details/114864041
 ### 管理MySQL
+- 查看信息：https://www.cnblogs.com/caoshousong/p/10845396.html
+  - 查看当前连接数 show status like  'Threads%';
+  Threads_connected ：这个数值指的是打开的连接数.
+  Threads_running ：这个数值指的是激活的连接数，这个数值一般远低于connected数值.
+  Threads_connected 跟show processlist结果相同，表示当前连接数。准确的来说，Threads_running是代表当前并发数
 - 允许通过远程链接
   - link: https://blog.csdn.net/weixin_52988911/article/details/120100574
   - 允许用户myuser从ip为192.168.1.6的主机连接到mysql服务器,使用mypassword作为密码`GRANT ALL PRIVILEGES ON *.* TO 'myuser'@'192.168.0.1' IDENTIFIED BY'mypassword' WITH GRANT OPTION;`

@@ -1,7 +1,8 @@
 # 记录工具使用、部署、运行
 # 通识
 - 文件编译安装在/usr/local下
-- 创建命令软链接 `ln -s /usr/local/redis/bin/redis-cli /usr/bin/redis`
+# 网络问题看learn_network.md
+
 # 问题
 - 搜索时可以完全贴上
   - `build/temp.linux-aarch64-3.6/_sodium.c:57:20: fatal error: Python.h: No such`
@@ -36,6 +37,7 @@
 	```
 # windows 下的工具
 - 报错先看是不是管理员权限打开的命令行
+- 环境变量在用户还是系统的path添加都行，添加完记得重启终端，如果有windows Termianal 要把这个程序重启
 ## windows terminal
 - gitbash 设置：https://zhuanlan.zhihu.com/p/418321777
 - 其实很容易把 PowerShell 和 Windows Terminal 混淆，它们是两个不同的软件。可以这么理解，PowerShell 是命令行程序，真正执行指令的程序，而 Windows Terminal 则是管理各种命令行的工具。单独使用 PowerShell 就行了，为什么还要 Windows Terminal 呢？那是因为 Windows 下不仅可以安装 CMD，还可以安装 PowerShell 5.1、PowerShell 7、WSL、Azure Cloud Shell等，它需要一个工具集中管理，它就是 Windows Terminal
@@ -94,13 +96,17 @@ make clean # 如果出错了需要重新make时
 		# 解压
 		unrar  x   file.rar #
 		```
-# linux 更改用户名密码、新增用户
-	- 新增用户`useradd name option`
-	- 更改密码`passwd username`
-# rpm(redhat package manager)
+# 包管理工具
+- Debian/Ubuntu 使用apt
+- Fedora/Centos/RHEL使用yum
+
+### 不同系统，不同架构适配
+	- arm架构的源用CentOS-AltArch，CentOS-AltArch的镜像地址为：https://repo.huaweicloud.com/centos-altarch/
+	- centos6请移步至centos-vault镜像, 配置方法与centos一致.
+### rpm(redhat package manager)
 	- 原本是 Red Hat Linux 发行版专门用来管理 Linux 各项套件的程序，由于它遵循 GPL 规则且功能强大方便，因而广受欢迎。所以逐渐受到其他发行版的采用。RPM 套件管理方式的出现，让 Linux 易于安装，升级，间接提升了 Linux 的适用度
 	- 如果系统的默认程序列表中不带,可以使用其他的包管理去安装
-# apt(Advanced Packaging Tool)
+### apt(Advanced Packaging Tool)
     - 更换源之前需要备份源
     ```shell
 	cp source.list{,.bak}
@@ -115,7 +121,7 @@ sudo apt-get update
     - [apt-cache apt-get](https://linux.cn/article-4933-1.html)
       - apt-get和apt-cache是Ubuntu Linux中的命令行下的包管理工具
 
-# yum & rpm
+### yum & rpm
 - RPM-based Linux (RedHat Enterprise Linux, CentOS, Fedora, openSUSE) yum 适用的系统
 - yum provides semanage # 查询semanage 这个命令是哪个包提供的，或者查询libcrypto.so.6在那个包中，然后再安装这个包
 - rpm -ql ipmitool 查看ipmitool这个安装包是否安装（可以看出ipmitool未安装）
@@ -130,9 +136,9 @@ sudo apt-get update
 	yum clean all
 	# 执行yum makecache（刷新缓存）或者yum repolist all（查看所有配置可以使用的文件，会自动刷新缓存）。
 	```
-- 不同系统，不同架构适配
-	- arm架构的源用CentOS-AltArch，CentOS-AltArch的镜像地址为：https://repo.huaweicloud.com/centos-altarch/
-	- centos6请移步至centos-vault镜像, 配置方法与centos一致.
+- yum groupinstall 它安装一个安装包，这个安装包包涵了很多单个软件，以及单个软件的依赖关系。
+- yum install 它安装单个软件，以及这个软件的依赖关系
+### 问题
 - 问题一
     ```
 	[root@localhost huawei]# yum install python-dev --nogpgcheck
@@ -151,7 +157,7 @@ sudo apt-get update
 	https://repo.huaweicloud.com/centos/7/os/aarch64/repodata/repomd.xml: [Errno 14] HTTPS Error 404 - Not Found
 	# 先wget -O /tmp/a.xml https://xxxxx 试一下能不能wget， 然后在浏览器里试一下
 	```
-- 问题一
+- 问题
 	```
 	curl#6 - “Could not resolve host: mirror.lzu.edu.cn； Unknown error“ 及telnet安装
 	同上 先试下网络通不通ping mirror.lzu.edu.cn
@@ -188,7 +194,7 @@ sudo apt-get update
 - 如何判断给定 wheel 包是否能够安装？
   - 通常判断依赖的时候，需要看下是否符合最低版本。不过 pip 判断给定 wheel 包的 abi 兼容的做法与此有些许差异。pip 的做法是，计算出一个支持的 abi tag 集合，然后判断目标 abi tag 是否在这个集合里。这个计算过程跟在打包时是一样的。这意味着，打包拓展的 CPython 需要跟安装的机器上的 CPython 版本是一致的，否则就装不了。对于“永远的2.7”来说，这不是什么问题；不过如果用的是 Python 3，又不能控制具体的 CPython 版本，对于 C 拓展还是现场编译安装比较靠谱。
   - 如何查看abi呢？
-  ```
+  ```cs
   # 最靠谱的方法：
   搜索pep425tags.py的位置，然后导入（这个环境是装的ancoada
   (yolov5) [root@localhost test]# find / -name "pep425tags.py" 2>/dev/null
@@ -211,13 +217,18 @@ sudo apt-get update
 	- pip 离线安装 whl
 		- 下的慢的话可以直接在浏览器里下载
 		- `pip install /path/to/xxx.whl`
-    - ~/.pip/pip.conf 配置文件 
+	- pip 配置文件位置
+    	- linux： ~/.pip/pip.conf 配置文件 
+		- windows : 如果两个都存在，会优先使用appdata下面的
+			- C:\Users\Quantdo\pip
+			- C:\Users\Quantdo\AppData\Roaming\pip\pip.ini
+		- https://blog.csdn.net/weixin_50679163/article/details/122392249
 	- pip --no-cache-dir disable the cache
 	- rm -rf ~/.cache/pip 删除cache
 	- --default-timeout=1000 或者卸载配置文件里timeout=1000
 	- -f url： fetch： 增加一个源， 但不替换原来的源（如下） 
 	- 某些版本找不到可能时因为没有对应架构的包，并不是没有版本
-		```
+		```cs
 		(yolov5) [root@localhost ~]# pip3 install 'torch==1.10.1+cpu' -f https://download.pytorch.org/whl/cpu/torch_stable.html --trusted-host=download.pytorch.org
 		Looking in indexes: https://repo.huaweicloud.com/repository/pypi/simple
 		Looking in links: https://download.pytorch.org/whl/cpu/torch_stable.html

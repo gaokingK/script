@@ -9,6 +9,10 @@
    - [COLUMN_FORMAT {FIXED|DYNAMIC|DEFAULT}] 带关键字参数的
 
 # windows
+### 可以设置为不同窗口使用不同的输入法，这样就不用来回切换中英文了
+- “开始”>“设置”>"设备">"输入">“高级键盘设置”；勾选“允许我为每个应用窗囗使用不同的输法”复选框即可。
+- link：https://zhuanlan.zhihu.com/p/82643303
+### 在命令行打开文件夹 explorer .
 ### 注册表编辑器好像是全字匹配的
 ### Registry Workshop 可以用来搜索替换windows中的路径https://blog.csdn.net/Melo_FengZhi/article/details/113919143
 ### where 与 gcm
@@ -27,6 +31,12 @@ Fatal error in launcher: Unable to create process using '"d:\softwares\python 2.
 - 比如从[这里](https://github.com/Charmve)看到了cpp的图标以及一些常用的语言和框架、工具和环境
 - 语义化版本 就是版本的命名 https://semver.org/lang/zh-CN/
 
+# 数据库url："https://101.133.168.19:3306/qdam?user=qdam&password=123456"
+### jsonpath: https://apifox.com/help/reference/json-path/
+
+### GMT、UTC、DST、CST时区代表的意义
+- https://www.jianshu.com/p/735e8444cdda
+- 
 ### Railway：免费容器托管平台
 ### 一些部署方式
    - https://waline.js.org/guide/deploy/railway.html#%E5%A6%82%E4%BD%95%E9%83%A8%E7%BD%B2

@@ -82,3 +82,13 @@ ipmcset -d ac -v 0
 ```
 passwd username # 输入两次，提示路径找不到也不用管
 ```
+### 某个键不能用了
+- 看复制粘贴能显示这个键不能 还可以开启menu-complete来用tab显示含有这个键的文件
+- bind -p 查看对应的键后面是不是self-insert
+- 如果没有就 把 "b": self-insert 放到文件中，bind -f file_path 把b换成你自己失灵的键
+- 或者bind '"b": self-insert'
+### code=exited status=203/exec 错误
+- link:https://blog.csdn.net/wangxiaozhonga/article/details/125322210
+- 因为服务的可执行程序找不到了，就是service文件里的程序找不到了
+
+### 有service启动不来时，可以systemctl deamon-relaod 后重新systemctl start xxx

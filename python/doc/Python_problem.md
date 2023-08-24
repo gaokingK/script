@@ -21,7 +21,12 @@ True
 >>>
 
 ```
-### with open
+### list_type.append("xxx")返回是空 所以不能return list_a.append("xx")
+### with open # open
+    - open 操作符link: https://www.runoob.com/python/python-func-open.html
+        - r+ 读和追加写 文件不存在报错
+        - w+ 可读可写，但文件打开时就没有内容了
+        - a+ 读和追加写 可以用f.seed(0)这样就是从开头写了
     - 打开utf-8编码的中文文件出现：UnicodeDecodeError: 'gbk' codec can't decode byte 0xff in position 0: illegal multibyte sequence
     ```
     #  with open(file_path, encoding="gbk", errors='ignore') as f: 改成下面这样就好了，好像是打开模式的原因
@@ -149,66 +154,70 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
    - `f"{{}}"`
    - `hello = "HELLO"\n print(f"{{{hello.lower()}}}") # 输出{hello}`
 ### @overload ---------------------------------no
-### python中path相关的
-    - 环境变量：PATH和sys.path 以及PYTHONPATH
-      - PATH 是系统的环境变量
-      - sys.path 是python的搜索模块的路径集
-         - sys.path.insert(0, "path1") # 将path1加入搜索路径中, 2个必选参数
-         - import 相关：https://blog.csdn.net/weixin_38256474/article/details/81228492
-      - PYTHONPATH 是环境变量PATH中的一个值， 默认是空
-      - sys.path始化时默认包含了输入脚本所在的目录（python path/to/script, path/to 会在path中）， PYTHONPATH 和python安装目录
-      - 修改PYTHONATH影响sys.path
-        ```shell
-        huawei ~/Desktop/people/pc_kbox/pc_kbox% export PYTHONPATH="/5555555"
-        huawei ~/Desktop/people/pc_kbox/pc_kbox% python3
-        >>> import sys
-        >>> sys.path
-        ['', '/5555555', '/usr/lib/python37.zip', '/usr/lib/python3.7', '/usr/lib/python3.7/lib-dynload', '/home/huawei/.local/lib/python3.7/site-packages', '/usr/local/lib/python3.7/dist-packages', '/usr/lib/python3/dist-packages']
+### path pyth # 路径 python中path相关的
+- 环境变量：PATH和sys.path 以及PYTHONPATH
+    - PATH 是系统的环境变量
+    - sys.path 是python的搜索模块的路径集
+        - sys.path.insert(0, "path1") # 将path1加入搜索路径中, 2个必选参数
+        - import 相关：https://blog.csdn.net/weixin_38256474/article/details/81228492
+    - PYTHONPATH 是环境变量PATH中的一个值， 默认是空
+    - sys.path始化时默认包含了输入脚本所在的目录（python path/to/script, path/to 会在path中）， PYTHONPATH 和python安装目录
+    - 修改PYTHONATH影响sys.path
+    ```shell
+    huawei ~/Desktop/people/pc_kbox/pc_kbox% export PYTHONPATH="/5555555"
+    huawei ~/Desktop/people/pc_kbox/pc_kbox% python3
+    >>> import sys
+    >>> sys.path
+    ['', '/5555555', '/usr/lib/python37.zip', '/usr/lib/python3.7', '/usr/lib/python3.7/lib-dynload', '/home/huawei/.local/lib/python3.7/site-packages', '/usr/local/lib/python3.7/dist-packages', '/usr/lib/python3/dist-packages']
 
-        # 奇怪的是这种现象
-        huawei ~/Desktop/people/pc_kbox/pc_kbox% export PYTHONPATH="5555555"
-        huawei ~/Desktop/people/pc_kbox/pc_kbox% python3                     
-        >>> import sys
-        >>> sys.path
-        ['', '/home/huawei/Desktop/people/pc_kbox/pc_kbox/5555555', '/usr/lib/python37.zip', '/usr/lib/python3.7', '/usr/lib/python3.7/lib-dynload', '/home/huawei/.local/lib/python3.7/site-packages', '/usr/local/lib/python3.7/dist-packages', '/usr/lib/python3/dist-packages']
-        >>> 
-        ```
-   - 文件路径的操作封装在os.path里的方法, 此外，还有shutil该库为python内置库，是一个对文件及文件夹高级操作的库，可以与os库互补完成一些操作，如文件夹的整体复制，移动文件夹，对文件重命名等。
-        - link:
-            - [os.path()模块](https://www.runoob.com/python3/python3-os-path.html)
-            - [Python3 OS 文件/目录方法](https://www.runoob.com/python3/python3-os-file-methods.html)
-        ```
-        # 如果目录名字为中文 需要转码处理
-            uPath = unicode(cPath,'utf-8')
-            for fileName in os.listdir(uPath) :
-                print fileName
-        # 获取文件时间
-            os.path.getmtime() 函数是获取文件最后修改时间
-            os.path.getctime() 函数是获取文件最后创建时间
-            获取的是时间戳 time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(1654914448.7850325))
-        # 按时间排序
-            dir_list = sorted(dir_list,  key=lambda x: os.path.getmtime(os.path.join(file_path, x)))
-            获取文件和时间的字典
-            file_dict = {key: value for key,value in zip(os.listdir(download_path), [time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(os.path.getmtime(os.path.join(download_path, file)))) for file in os.listdir(download_path)])}
-        os.path.abspath("path") # path的绝对路径 最后一个/也会被去掉 os.path.abspath("/root/") # 输出/root
-        os.path.splittext(path)[-1] 获取后缀名
-        os.getcwd() # 返回当前工作目录
-        os.sep 系统的路径分隔符 win 为 "\\"; Unix 为 "/"
-        os.path.basename(path) # 文件名带格式 按格式判断
-        os.path.dirname(path) # 文件所在文件夹名 是按格式判断的
-        os.path.isdir(path) # path存在，且是文件夹、不是按格式判断的
-        os.path.isfile(path) # path存在，且是文件、不是按格式判断的
-        os.rmdir(path) # 删除文件夹，文件夹非空的话会报错
-        os.removedirs() # 递归删除目录
-            - os.removedirs("./test2/test1") # test1如果为null，就删除，然后删除test2
-        - os.walk() # 遍历文件夹下的所有文件
-        shutil.rmtree("path") # 空不空都能删除
-        - 复制文件：https://www.jb51.net/article/145522.htm
-            - https://www.jb51.net/article/145522.htm
-            - shutil.copyfile("file.txt","file_copy.txt")
+    # 奇怪的是这种现象
+    huawei ~/Desktop/people/pc_kbox/pc_kbox% export PYTHONPATH="5555555"
+    huawei ~/Desktop/people/pc_kbox/pc_kbox% python3                     
+    >>> import sys
+    >>> sys.path
+    ['', '/home/huawei/Desktop/people/pc_kbox/pc_kbox/5555555', '/usr/lib/python37.zip', '/usr/lib/python3.7', '/usr/lib/python3.7/lib-dynload', '/home/huawei/.local/lib/python3.7/site-packages', '/usr/local/lib/python3.7/dist-packages', '/usr/lib/python3/dist-packages']
+    >>> 
+    ```
+- 文件路径的操作封装在os.path里的方法, 此外，还有shutil该库为python内置库，是一个对文件及文件夹高级操作的库，可以与os库互补完成一些操作，如文件夹的整体复制，移动文件夹，对文件重命名等。
+    - link:
+        - [os.path()模块](https://www.runoob.com/python3/python3-os-path.html)
+        - [Python3 OS 文件/目录方法](https://www.runoob.com/python3/python3-os-file-methods.html)
+    - 如果文件打不开，先使用os.getcwd()看下工作目录是哪里
+    ```
+    # 如果目录名字为中文 需要转码处理
+        uPath = unicode(cPath,'utf-8')
+        for fileName in os.listdir(uPath) :
+            print fileName
+    # 获取文件时间
+        os.path.getmtime() 函数是获取文件最后修改时间
+        os.path.getctime() 函数是获取文件最后创建时间
+        获取的是时间戳 time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(1654914448.7850325))
+    # 按时间排序
+        dir_list = sorted(dir_list,  key=lambda x: os.path.getmtime(os.path.join(file_path, x)))
+        获取文件和时间的字典
+        file_dict = {key: value for key,value in zip(os.listdir(download_path), [time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(os.path.getmtime(os.path.join(download_path, file)))) for file in os.listdir(download_path)])}
+    os.path.abspath("path") # path的绝对路径 最后一个/也会被去掉 os.path.abspath("/root/") # 输出/root
+    os.path.splittext(path)[-1] 获取后缀名
+    os.getcwd() # 返回当前工作目录
+    os.path.join(path1[, path2[, ...]])	把目录和文件名合成一个路径
+    os.sep 系统的路径分隔符 win 为 "\\"; Unix 为 "/"
+    os.path.basename(path) # 文件名带格式 按格式判断
+    os.path.dirname(path) # 文件所在文件夹名 是按格式判断的
+    os.path.isdir(path) # path存在，且是文件夹、不是按格式判断的
+    os.path.isfile(path) # path存在，且是文件、不是按格式判断的
+    os.rmdir(path) # 删除文件夹，文件夹非空的话会报错
+    os.removedirs() # 递归删除目录
+        - os.removedirs("./test2/test1") # test1如果为null，就删除，然后删除test2
+    - os.walk() # 遍历文件夹下的所有文件
+    shutil.rmtree("path") # 空不空都能删除
+    - 复制文件：https://www.jb51.net/article/145522.htm
+        - https://www.jb51.net/article/145522.htm
+        - shutil.copyfile("file.txt","file_copy.txt")
 
-        ```
-        - 
+    ```
+- file
+    - w+ 读不到原本文件的内容了
+    - r+ 从开头读 如果文件不存在会报错
 ### python2.x和python3.x 中range的不同以及python2中xrange
     - python2 中的range返回一个list，python3中返回一个可迭代对象
     - python2 中xrange返回一个生成器

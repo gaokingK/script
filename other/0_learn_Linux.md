@@ -6,6 +6,12 @@
    - 是Unix 操作系统的两种操作风格
 ### ctrl + R 搜索历史命令
 - 输入一些东西后再按ctrl + R继续搜索  
+
+### 查看架构 lscpu
+
+### 包管理工具的区别在other/0_depoly_problem.md
+
+
 # 细节
 ### Linux不能称为"标准的Unix“而只被称为"Unix Like"的原因有一部分就是来自它的操作风格介乎两者之间
 ### 设置代理
@@ -82,7 +88,7 @@ fi
         - u 当前用户、g当前用户组、o其他、a所有人
       - +x 可执行
         - +w 可读
-        - 
+        - r 表示可读取，w 表示可写入，x 表示可执行，X 表示只有当该文件是个子目录或者该文件已经被设定过为可执行。 
 ### linux 单用户模式
    centos 进入单用户模式 ro 改为rw（可读改为可写） `init=/bin/bash`
    修改完成后 `exec /sbin/init` 退出单用户模式
@@ -113,6 +119,48 @@ service sshd restart
 
 ### docker
 
+### service 文件 Linux添加自定义服务
+- link:
+   - https://juejin.cn/post/7037000593839243301
+- Linux中.service文件是某项服务对应的配置文件，可用于systemd管理和控制的服务的设置。.service 文件通常包含3个模块，
+   - [Unit]控制单元，表示启动顺序和依赖关系；
+   - [Service]服务，表示服务的定义；
+   - [Install]安装，表示如何安装配置文件。
+- .service 文件配置的服务常用systemd管理。然而，systemd有系统和用户区分；
+   - 系统（/user/lib/systemd/system/）、
+   - 用户（/etc/lib/systemd/user/）。
+   - `/etc/systemd/system/` 一般系统管理员手工创建的单元文件建议存放在`/etc/systemd/system/`目录下面。
+- 可以对文件重命名，重命名后会提示systemctl daemon-reload 但知道原来的service服务stop前，原服务名仍能使用
+- 服务启动失败后可以使用journalctl -xe来查看日志
+### proc 目录 根据pid显示进程信息
+- link: https://www.cnblogs.com/DswCnblog/p/5780389.html
+- ll /proc/<pid>
+- cmdline — 启动当前进程的完整命令，但僵尸进程目录中的此文件不包含任何信息；  cat cmdline
+- cwd — 指向当前进程运行目录的一个符号链接；就是工作目录
+- exe — 指向启动当前进程的可执行文件（完整路径）的符号链接，通过/proc/N/exe可以启动当前进程的一个拷贝； 
+- root — 指向当前进程运行根目录的符号链接；在Unix和Linux系统上，通常采用chroot命令使每个进程运行于独立的根目录； 
+- 如果是服务，这三个目录都是不带服务中定义的根路径的
+
+### linux 怎么通过进程pid找出所属的服务呢 方法3最有用
+
+在 Linux 中，你可以通过进程的 PID（进程 ID）来查找所属的服务。通常，服务在 Linux 中是通过守护进程（daemon）形式运行的。
+下面是几种常见的方法来找出一个进程所属的服务：
+1. 使用 `ps` 命令：可以使用 `ps` 命令结合进程的 PID 来查找进程的详细信息，包括所属的服务。使用以下命令：
+   ```bash
+   ps -p <PID> -o comm=
+   ```
+   将 `<PID>` 替换为你要查找的进程的实际 PID。上述命令将返回指定 PID 的进程的命令名称（通常是可执行文件的名称）。根据约定，服务通常具有明确的命名规则，例如 `httpd`、`sshd`、`nginx` 等。因此，通过比对命令名称，你可以识别所属的服务。
+2. 使用 `/proc` 文件系统：在 Linux 中，每个正在运行的进程都有一个对应的 `/proc/<PID>` 目录。你可以通过检查该目录中的信息来确定所属的服务。进入 `/proc/<PID>` 目录并查看 `exe` 符号链接的路径，它指向正在运行的进程的可执行文件。例如：
+   ```bash
+   ls -l /proc/<PID>/exe
+   ```
+   上述命令将显示进程可执行文件的路径。根据路径中的目录或文件名，你可以推断出所属的服务。
+3. 使用 `systemctl` 命令：如果你使用的是基于 systemd 的 Linux 发行版，可以使用 `systemctl` 命令来查找所属的服务。执行以下命令：
+   ```bash
+   systemctl status <PID>
+   ```
+   替换 `<PID>` 为你要查找的进程的实际 PID。该命令将显示与该进程关联的服务的状态信息，其中包含服务名称。
+请注意，这些方法可以提供关于进程所属的服务的线索，但并不是绝对准确的。有时进程名称和服务名称之间可能存在差异，或者一个服务可能由多个进程组成。因此，在分析进程所属服务时，需要结合其他信息进行综合判断。
 
 ### jq linux json处理器
   - https://wangchujiang.com/linux-command/c/jq.html

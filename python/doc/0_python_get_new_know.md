@@ -1,3 +1,13 @@
+### 封装、继承、多态
+- link：https://zhuanlan.zhihu.com/p/112421024
+封装 , 这是定义类的 准则，单个类
+    - 根据 职责 将 属性 和 方法 封装 到一个抽象的 类 中，
+继承 , 这是设计类的 技巧，父与子
+    - 主要体现是实现代码的 重用，相同的代码不需要重复的编写
+    - 子类可以在父类功能上进行重写，扩展类的功能
+多态, 不同的 子类对象调用 相同的 父类方法，产生 不同的 执行结果，可以增加代码的外部 调用灵活度
+    - 多态以 继承 和 重写 父类方法 为前提
+    - 多态是调用方法的技巧，不会影响到类的内部设计
 ### 逻辑运算符的优先级问题
 - if "V6" or "V7" in self.productname
     - 会先计算or
@@ -139,6 +149,7 @@ sys.stdin.readlines() 能接受多行 按ctrl + D结束
 ```
 ### 解包*
 ```
+* 的用处就是把一个列表对象变成几个对象 a=[1,2] ；*a ==（1，2）
 # 第一种用处：用在定义时，表示定义的可变参数
 def check(*args):
     if len(args) != 3:
@@ -161,6 +172,17 @@ check(a=1, b=2, c=3) # 报错
 # 第二种用处，用在调用时，对容器类型的参数加*是因为函数定义时是有多个参数
 def check(a, b, c):
   pass
+```
+- 字典unpack时默认是解包键，如果键的数量和接受值的个数不一样的话也会报错
+```
+a={"x": "1", "y": "2", "z": "3"}
+b,c=a
+Traceback (most recent call last):
+  File "D:\software\PyCharm 2023.1\plugins\python\helpers\pydev\pydevconsole.py", line 364, in runcode
+    coro = func()
+  File "<input>", line 1, in <module>
+ValueError: too many values to unpack (expected 2)
+b,c,d = a
 ```
 ### 演示dict的items()与iteritems()的区别
 从演示结果可以看出iteritems()对于大的dict性能方面是有很大的提升的

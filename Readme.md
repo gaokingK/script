@@ -40,3 +40,4 @@
 - 有时可能会在学某个体系的地方认识到了一些别的东西，就把这些东西放到other里,如MySQL/other.md
 - 每个概念性的东西中考虑是否建一个标题 如MySQL/learn_index.md/# ## 索引的一些名词 ##索引的一些语法
 - 在开头加上TO来对文件的内容summary
+- 学习新东西的时候把从哪里入手和简单的helloworld一定要写 或者搞出来xxx_hello_world.md

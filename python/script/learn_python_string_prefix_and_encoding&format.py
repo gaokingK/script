@@ -58,6 +58,7 @@ def byte2str():
 """
 ### 格式化字符串
     - f 格式化字符串中不能又反斜杠，只能用单引号
+    - df[col].map(lambda x: f'{x:0>6}') 如果 x 少于 6 位，这意味着对于 x 的任何值右对齐前填充零:
 ### % 格式化
 - link: https://www.cnblogs.com/nutix/p/4504899.html
 - %d格式化符: 将任何Python对象转化为整数，如果转化失败，则报错。

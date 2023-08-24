@@ -25,8 +25,8 @@
 ## [数据类型](https://www.runoob.com/redis/redis-data-types.html)
 - string 指的是单个单个的键值对 `set get del`
 - hash 是键值对的集合 `hmset hash_name key1 value1 ...` `hget`
-- list 列表
-- set 集合
+- list 列表 只有一个值是字符串的集合
+- set 集合 和列表差不多，但是值是唯一的
 - zset 有序集合 根据权值排序
 
 ### 对键的命令

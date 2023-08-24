@@ -1,3 +1,5 @@
+# 协议
+- httpdoc: https://developer.mozilla.org/zh-CN/docs/web/http/overview 
 # http 状态码
 ## link
 - https://www.runoob.com/http/http-status-codes.html
@@ -20,3 +22,74 @@
 注意没有100%的安全，就像你的密码被人盗了，他能100%伪装成你一样。
 ## 跨站请求伪造（ CSRF ）
 - 使用cookie会造成CSRF, 本质原因是他伪造的请求中有cookie，而这个cookie是浏览器层面的原因。所以采用类似session的一次性令牌可以解决，但是如果他把你session拿走了，就像把你的密码拿走了
+# 网络问题
+- 内网穿透：https://blog.csdn.net/qq_45878803/article/details/121651477
+- ngrok
+- 不是从局域网访问，而是可以从公网访问 ngrok需要一直运行
+- 启动命令 ngrok http 8000
+
+### 开启端口允许外部访问 
+link:
+	- windows https://blog.csdn.net/lm_is_dc/article/details/118335869
+- 控制的维度不仅有端口、还有该端口使用的协议、该端口是入站还是出站、来源主机的ip、来源主机的用户、都可以设置
+### 网络访问不了 https://www.maketecheasier.com/fix-no-route-to-host-error-linux/
+- 先看dns有没有 /etc/resolv.conf
+
+# 常识
+- http 基于tcp协议
+
+# netstat 查看端口 # 端口管理 打开端口 # port
+   - 端口是否被占用`lsof -i 8080`
+     - link: https://www.runoob.com/w3cnote/linux-check-port-usage.html
+     - 应该用root来执行，否之看不到
+   - netstat -tunlp 用于显示 tcp，udp 的端口和进程等相关情况。`netstat -tunlp | grep 8000`
+     - link:https://zhuanlan.zhihu.com/p/367635200 
+     - -t (tcp) 仅显示tcp相关选项Administrator  
+     - -u (udp)仅显示udp相关选项
+     - -n 拒绝显示别名，能显示数字的全部转化为数字
+     - -l 仅列出在Listen(监听)的服务状态
+     - -p 显示建立相关链接的程序名
+     - -a：--all，显示所有链接和监听端口
+     - -anp：显示系统端口使用情况
+   - 获取正在使用的端口 netstat -ntl |grep -v Active| grep -v Proto|awk '{print $4}'|awk -F: '{print $NF}' 
+   - 打开端口
+      - link：https://www.cnblogs.com/sxmny/p/11224842.html
+      - systemctl start firewalld 开启防火墙 
+      - firewall-cmd --zone=public --add-port=1935/tcp --permanent # 开放指定端口
+         - --zone #作用域
+         - --add-port=1935/tcp  #添加端口，格式为：端口/通讯协议
+         - --permanent  #永久生效，没有此参数重启后失效
+      - systemctl restart firewalld.service
+      -  firewall-cmd --reload 重启防火墙
+   - 测试端口连通性 https://www.cnblogs.com/lijinshan950823/p/9376085.html
+      - curl ip:port 如果远程主机开通了相应的端口，都会输出信息，如果没有开通相应的端口，则没有任何提示，需要CTRL+C断开。。
+      - wget ip:port
+      - telnet ip port 
+      - ip 也可以是域名 curl  https://cee6-140-206-192-11.ngrok-free.app 不用加端口
+   - firewall-cmd --zone=public --list-ports 查看开放的端口
+      - https://blog.csdn.net/s_frozen/article/details/120636667
+   - 查询指定端口是否已开启 firewall-cmd --query-port=3306/tcp 提示 yes，表示开启；no表示未开启。
+   - 端口不仅受防火墙控制，还受iptable规则控制
+# iptables
+- link: 
+   - 使用：https://www.cnblogs.com/wanstack/p/8351718.html
+   - 查看已有的规则：https://www.cnblogs.com/wanstack/p/8351209.html
+- iptables -L -n 查看规则
+- -L <链名> 查看链得规则，如果省略就看所有链得
+- -t 指定表名
+- -v选项，查看出更多的、更详细的信息
+   - pkts:对应规则匹配到的报文的个数。
+   - bytes:对应匹配到的报文包的大小总和。
+   - target:规则对应的target，往往表示规则对应的"动作"，即规则匹配成功后需要采取的措施。
+   - prot:表示规则对应的协议，是否只针对某些协议应用此规则。
+   - opt:表示规则对应的选项。
+   - in:表示数据包由哪个接口(网卡)流入，我们可以设置通过哪块网卡流入的报文需要匹配当前规则。
+   - out:表示数据包由哪个接口(网卡)流出，我们可以设置通过哪块网卡流出的报文需要匹配当前规则。
+   - source:表示规则对应的源头地址，可以是一个IP，也可以是一个网段。
+   - destination:表示规则对应的目标地址。可以是一个IP，也可以是一个网段。
+- 保存规则：
+   - centos6中，使用"service iptables save"
+   - centos7: iptables-save > /etc/sysconfig/iptables
+
+# 网段、子网掩码计算方法
+- https://blog.csdn.net/yzpbright/article/details/81384559

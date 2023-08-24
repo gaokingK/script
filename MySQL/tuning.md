@@ -4,6 +4,9 @@
 3. 主从复制、读写分离
 4. 垂直切分
 5. 水平切分
+### 练习项目和网站
+- 练习网站：https://www.db-fiddle.com/f/3JSpBxVgcqL3W2AzfRNCyq/1?ref=hackernoon.com
+- 分析：https://mp.weixin.qq.com/s/oPkney3KI0v5jxOVEHTbSQ
 ### explain
 - link：
     - https://dev.mysql.com/doc/refman/5.7/en/explain-output.html#explain-extra-information

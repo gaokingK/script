@@ -54,3 +54,77 @@ def add_path(new_path):
         import sys
         sys.path.append(new_path)
 add_path('./')
+
+"""
+局部变量和全局变量可以同名，但同名的话就用不了全局变量了，参照下面的
+"""
+"""
+TO: # 值引用 地址引用 python中的变量在一个地方改变另外一个地方是否受影响
+看是可变变量还是不可变变量，可变变量会受影响，不可变变量不会受影响
+而且可变变量只有在改变的情况下才会影响原来的变量，赋值的就不会影响, （也不绝对看下面的To）
+extend_conf(all_cluster_conf_dict[key])  这样即使不用返回值接受，也会改变的
+"""
+# a.py
+a_dic = {"key": "hhh"}
+a_str = "a_str"
+# b.py
+from a import a_dic, a_str
+
+
+def change_dict_obj_test(a_str_value, **kwargs):
+    a_dic.update(kwargs)
+    # a_dic = kwargs # 这个就不会影响
+    a_str = a_str_value + a_str # 不能写a_str 但同名的话就用但同名的话就用不了全局变量了，因为这个a_str是局部变量，还没有定义，所以就会报错
+# c.py
+from a import a_dic, a_str
+from b import change_dict_obj_test
+
+
+def test_change_dict_obj():
+    for i in range(10):
+        print(a_dic, a_str)
+        change_dict_obj_test("a_%s" % str(i), **{"a_%s" % str(i): "hhh"})
+        print(a_dic, a_str)
+
+
+if __name__ == '__main__':
+    test_change_dict_obj()
+
+"""
+To: 赋值也改变
+"""
+class ClusterConf(object):
+    def __init__(self, conf_dict):
+        conf_dict = self.convert_time(conf_dict)
+        self.op_morning = conf_dict["op_morning"]
+        self.op_settle = conf_dict["op_settle"]
+
+def update_conf():
+    # 补充配置
+    cluster_conf = {}
+    cluster_conf["amoduleset"] = list(set(cluster_conf.get("amoduleset")))
+    cluster_conf["op_morning"]["prestart"] = cluster_conf["op_flow"]["end"]
+    cluster_conf["op_settle"]["prestart"] = cluster_conf["op_night"]["end"]  # op_night.end
+    cluster_conf["op_next"]["prestart"] = cluster_conf["op_morning"]["end"]  # op_morning.end
+    cluster_conf["op_flow"]["prestart"] = cluster_conf["op_morning"]["end"]
+    cluster_conf["op_night"]["prestart"] = cluster_conf["op_settle"]["end"]
+    cluster_conf1 = ClusterConf(copy(cluster_conf))  # 只有这样才不会改变
+
+"""
+TO: 把字典里面的值传给a，改变a, 原来的也会改变
+"""
+def and_diff_cluster_conf(cluster_list):
+    """
+    合并不同cluster配置，用于多cluster overviewwx计算
+    """
+    res_conf = clusters_conf[cluster_list[0]]
+    res_conf = copy(clusters_conf[cluster_list[0]]) # 这样才不会改变
+
+    for cluster in cluster_list:
+        # active_module_set = list(set(res_conf.active_module_set) | set(clusters_conf[cluster].active_module_set))
+        res_conf.active_module_set = list(set(res_conf.active_module_set) | set(clusters_conf[cluster].active_module_set))
+        res_conf.active_module_set = [1]
+        pass
+
+clusters_conf = init_conf()
+and_diff_cluster_conf(["cluster1", "cluster2"])

@@ -109,7 +109,7 @@ link: https://www.cnblogs.com/linux-wangkun/p/5978462.html
 
 ### 负向预查模式 `(?!expr)`
 - 前面还有个表达式A，如下面的java，在A后面进行这个模式的匹配
-- java(?!6) 就会匹配java7中的java，而不会匹配java6中的java
+- java(?!6) 就会匹配java7中的java，而不会匹配java6中的java; 是不是可以(?!6)java
 - Windows(?!95|98|NT|2000)"能匹配"Windows3.1"中的"Windows"，但不能匹配"Windows2000"中的"Windows"
 - 要用括号包括起来；后面的是一个表达式
 """

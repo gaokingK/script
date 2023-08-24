@@ -1,14 +1,51 @@
 # 帮助信息
 - 文档的阅读说明：https://docs.djangoproject.com/zh-hans/4.2/intro/whatsnext/
 - index: https://docs.djangoproject.com/zh-hans/4.2/topics/
+# 注意
+- 没有返回Response 对象会报错
 # 正文
 ### 运行端口
 - 配置：link：https://blog.csdn.net/lkballip/article/details/109205373
 - 在命令中`python manage.py runserver xxx`
+- Django设置外网、局域网访问 https://blog.csdn.net/dorlolo/article/details/116074074
+    - ALLOWED_HOSTS = ["localhost", "127.0.0.1", "192.168.110.1", "*"] 也代表所有能访问
+    - 这样设置只能局域网访问，要想从公网访问还得设置内网穿透https://blog.csdn.net/qq_45878803/article/details/121651477 ngrok
 ### shell 
 - 运行djadmin:`shell` 命令`python manage.py shell` 是可交互窗口
+# 处理请求
+### 保存文件
+- link:https://docs.djangoproject.com/zh-hans/4.2/topics/http/file-uploads/
+```
+def update_conf(self, request):
+        handle_uploaded_file(request.FILES["file"])
+def handle_uploaded_file(f):
+    with open("./new_worker_alert_conf.json", "wb+") as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+```
+# module
+### field
+- models.DateTimeField(default=datetime.fromisoformat("1900-01-01T00:00:00.000"), tzinfo=time_zone) 使用的是datetime.datetime类型
+    - 日期转换：https://www.cnblogs.com/presleyren/p/10310859.html
+    
+# setting.py
+### USE_TZ TIME_ZONE 
+- https://www.cnblogs.com/zhuminghui/p/9196801.html
+- USE_TZ设置为True，Django会自动根据所设的时区对时间进行转换，所以程序中和数据保存的时间都转UTC时间，只有模版渲染时会把时间转为TIME_ZONE所设置的时区的时间。
+- datetime.datetime.utcnow()输出的是不带时区的utc时间，称为naive time
+- 使用django.utils.timezone.now()输出的是带时区的utc时间，称为active time
+
+### Database
+- NAME： 要使用的数据库的名称。对于 SQLite，它是数据库文件的完整路径。当指定路径时，总是使用斜线，即使在 Windows 上也是如此（例如 C:/homes/user/mysite/sqlite3.db）。
+
+
 # migrate
 - link:https://docs.djangoproject.com/zh-hans/4.2/topics/migrations/
+- 新建或者修改modules.py
+    - makemigrations：修改module.py后使用
+    - migrate 然后使用这个
+- 删除表后的操作： https://blog.csdn.net/yrx0619/article/details/81387351
+
 - python manage.py command
 # QuerySet API 参考
 - https://docs.djangoproject.com/zh-hans/4.2/ref/models/querysets/#queryset-api-reference
@@ -36,6 +73,7 @@ class QuestionModelTests(TestCase):
 - 运行测试的`python manage.py test polls`
 # ORM
 ## filter
+### filter Field  https://docs.djangoproject.com/zh-hans/4.2/ref/models/querysets/#field-lookups
 ### datatime filter
 - https://zhuanlan.zhihu.com/p/113481999
 - 可以使用module中datetime 类型的字段名称加上`操作符`来查找符合条件的日期数据 `AlertRecord.objects.filter(end__gt=timezone.now())`
@@ -84,4 +122,14 @@ def get_handler():
 ```
 - 然后再urlconf中分别把url和处理这个url的视图通过path给对照起来
 
+## action 
+- link:https://zhuanlan.zhihu.com/p/278167686
+- 视图函数使用action装饰器可以自动生成对该函数的路由
+- detail：基于哪个路由生成的新路由
+    - 如果是True是基于带id的路由生成的
+    - 如果是False，是基于不带id的路由生成的
+- methods：什么请求方式会触发被装饰函数的执行
+用法
+@action(methods=['get'], detail=True)
+def 视图类方法
 ## 使用类视图

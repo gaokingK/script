@@ -58,6 +58,7 @@
     - 代理方式选择“自动配置系统代理”， 路由方式选择“绕过大陆”。
     - 路由配置：https://amoment.site/p/%E6%96%B0%E7%89%88v2rayn%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%90%86%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AEpac/
     - 如果使用域名改变direct，配置是`domain:erebor.douban.com `而不是`erebor.douban.com` 写在规则里面有example的那个direct规则列表中就行，不用新建了
+- 输入 vasma 查看账号
 
 
 

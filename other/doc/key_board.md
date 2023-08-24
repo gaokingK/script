@@ -1,7 +1,9 @@
 # vscode
 - 移动当前行 alt + up/down
 - alt + shift + up/down 复制当前行
-- ctrl + shift +up/down 多行编辑，移动光标
+- ctrl + shift +up/down 多行编辑，移动光标 qq音乐会占用
+- ctrl + shift + p 输入setting.json打开json
+- ctrl + D 高亮选中的词，按enter能多点编辑
 - 配置颜色
     ```json
     // link: https://code.visualstudio.com/docs/getstarted/themes
@@ -24,6 +26,11 @@
 
 
 # pycharm 
+- 激活：IT资源工具分享17群被人投诉了 https://arcstack.top/tools/jetbrains/idea/jetbrains-error.html
+	- https://arcstack.top/?token=lwK1ex5yyjI=
+	- 【2022～Latest】 下载jetbrains-agent.jar 密码:ghqn
+
+- gittoolbox 插件 显示每一行修改历史
 - 书签
 	- link：https://www.cnblogs.com/gl1573/p/10234478.html
 	- Ctrl + F11 并选择一个数字或一个字母以创建带有助记符的书签 

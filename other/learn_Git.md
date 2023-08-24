@@ -63,6 +63,10 @@
 ## 帮助
 - https://docs.gitlab.com/ee/topics/git/stash.html
 ## other
+### 工作区、暂存区、版本库
+- 直接修改的文件会在工作区显示出来，使用git add 后被添加到暂存区；commit后就在版本库了
+- 对暂存区的文件执行`git reset HEAD .`后，文件的改动在工作区
+- 对工作区的文件执行 `git checkout -- path/to/file` 后， 文件的改动被撤销了
 ### git clone
 -- git clone --depth=1 只克隆下包含最近一次commit的一个分支，这样这个项目文件就不会很大 https://blog.csdn.net/qq_43827595/article/details/104833980
 -- git clone --recursive
@@ -113,9 +117,9 @@
 ### 配置
    - 全系统的(/etc/gitconfig)<当前用户的(~/.gitconfig)<当前仓库的(/.git/config)
    - 某个配置在当前仓库的中的配置中取消,但查看还在的原因是用的上层的配置
-   - autocrlf 
-   - git config --global 不加global只对当前仓库生效
-   - git config -l 查看配置
+   - `core.autocrlf` [link](https://www.jianshu.com/p/f13ef9e538e0)
+   - `git config --global` 不加global只对当前仓库生效
+   - `git config -l` 查看配置
 ### git checkout
    - `git checkout branch_name high_quality/dingding/function/.` 即使这个要检出的文件在现在的分支上不存在也可以检出的
 ### 这张图里怎么把code从repo checkout到workspace
