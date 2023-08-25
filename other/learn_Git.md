@@ -135,6 +135,7 @@
    - [link](https://www.it1352.com/801295.html) ok
       - git diff --no-index --color --ignore-all-space< file1> < file2> # 忽略换行符
       - git diff --no-index --word-diff-regex=[^[:space:]] a.html b.html # 只看文字是否相同, 但这个没有用,不知为啥
+      - git diff [<options>] <commit> <commit>…​ <commit> [--] [<path>…​] 看某个路径下的两个提交之间的不同
 
 ### 查看分支的提交历史 git log --graph --pretty=oneline --abbrev-commit branch1 branch2
     ```
