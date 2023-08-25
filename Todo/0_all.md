@@ -93,3 +93,10 @@
 - 编程宝库:http://www.codebaoku.com/
 - https://blog.csdn.net/weixin_38889300?type=blog
 - https://unminify.com/
+
+
+- 安卓自动化神器：https://taskerm.com/2019/10/12/tasker-basic-course
+- Making Images with Midjourney：https://docs.midjourney.com/docs/quick-start
+- Go如何实现一个简单分布式系统：https://juejin.cn/post/7158685917006266398
+- 镜像托管：https://railway.app/project/d93e7e59-b53f-4044-968a-39a805f3095a/service/d45200cf-bcd9-4ecb-a161-f5adddb23779
+- charles：修改报文

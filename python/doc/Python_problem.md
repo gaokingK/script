@@ -221,6 +221,7 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
 ### python2.x和python3.x 中range的不同以及python2中xrange
     - python2 中的range返回一个list，python3中返回一个可迭代对象
     - python2 中xrange返回一个生成器
+    - python3 3/2=1.5 python2种3/2=1
 ### a = b 赋值时创建对象的顺序
     - 参照learn_python_namespace_scrope
 ### if condition1 and condition2 的执行顺序
@@ -236,9 +237,14 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
     - a.pop(index) 删除索引并且返回
     - del a[start[, end]] 删除下标, 可以是范围
     - 值必须都有效,否则会报错
-2. #### dict.setdefault(key, value)
-    - 字典中的value能为空和None
-    - 如果字典中a有值(即使为空或者None), 执行该方法后还是原样, 如果没有, 就等同于添加一个新键值对
+#### dict
+    - dict.setdefault(key, value)
+        - 字典中的value能为空和None
+        - 如果字典中a有值(即使为空或者None), 执行该方法后还是原样, 如果没有, 就等同于添加一个新键值对
+    - dict.pop("key") 
+        - 从字典中删除一个键，如果键不存在会报错
+        - 返回这个键的值
+    - dict.popitem() 返回并删除字典中的最后一对键和值。
 3. #### 类方法、静态方法、实例方法
 
 4. #### copy.copy 与 copy.deepcopy不同的原因
