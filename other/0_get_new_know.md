@@ -36,7 +36,9 @@ Fatal error in launcher: Unable to create process using '"d:\softwares\python 2.
 
 ### GMT、UTC、DST、CST时区代表的意义
 - https://www.jianshu.com/p/735e8444cdda
-- 
+### linux 设置时区
+- link：https://blog.csdn.net/gezilan/article/details/79422864
+- sudo timedatectl set-timezone 'Asia/Shanghai'
 ### Railway：免费容器托管平台
 ### 一些部署方式
    - https://waline.js.org/guide/deploy/railway.html#%E5%A6%82%E4%BD%95%E9%83%A8%E7%BD%B2
@@ -106,7 +108,13 @@ Fatal error in launcher: Unable to create process using '"d:\softwares\python 2.
 ### SSO (Single Sign On)单点登录
 - 用户只需一次登录就可以访问所有相互信任的应用系统
 - 当用户第一次访问应用系统1的时候，因为还没有登录，会被引导到身份认证系统中进行登录；根据用户提供的登录信息，认证系统进行身份校验，如果通过校验，应该返回给用户一个认证的凭据－－ticket；用户再访问别的应用的时候就会将这个ticket带上，作为自己认证的凭据，应用系统接受到请求之后会把ticket送到认证系统进行校验，检查ticket的合法性。如果通过校验，用户就可以在不用再次登录的情况下访问应用系统2和应用系统3了。
+### 宏
+- 宏在编程语言中通常被定义为一种能够扩展语言语法或执行特定任务的特殊指令。然而，Python 的设计理念之一是“简洁胜于复杂”，它更倾向于通过其他方式（如装饰器、生成器等）来实现相似的功能。
 ### smart（Self-Monitoring,Analysis and Reporting Technology）
+### ip Vip
+- VIP即Virtual IP Address，是实现HA（高可用）系统的一种方案，高可用的目的是通过技术手段避免因为系统出现故障而导致停止对外服务，一般实现方式是部署备用服务器，在主服务器出现故障时接管业务。 VIP用于向客户端提供一个固定的“虚拟”访问地址，以避免后端服务器发生切换时对客户端的影响
+- VIP虽然名字上叫虚拟IP，却是实打实存在的一个IP，这个IP同时绑定在负载均衡设备上和提供服务的Realserver上
+- 就是多台服务器对外暴漏的一个ip
 ### smartctl
 - link: https://www.jianshu.com/p/d5389994fad1
 - smartctl是常用的磁盘检查工具

@@ -3,9 +3,15 @@
 - https://huaweicloud.csdn.net/63a57338b878a54545947b1f.html
 # 占位符
 - link: https://www.runoob.com/python/python-date-time.html
-`%Y-%m-%d %H:%M:%S`
+```cs
+%Y-%m-%d %H:%M:%S
+%f 代表毫秒
+%F 等于%Y-%m-%d 2023-01-15
+```
+
+
 # some
--  ISO format.  yyyy-mm-dd.
+- ISO format.  yyyy-mm-dd.
 - offset-naive型，就是一个不含时区的datetime。含时区的offset-aware型 https://blog.csdn.net/myli_binbin/article/details/94011880
 # 输出时间
 `print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))`
@@ -53,7 +59,7 @@ print(x.strftime("%Y-%m-%d"))
 2023-02-20
 ```
 ### 字符串转换为datetime对象: strptime()
-```
+```py
 t = "2022-01-16 16:00:00"
 ft = datetime.datetime.strptime(t, "%Y-%m-%d %H:%M:%S") # 因该能看的出来吧，源字符串中有-，format—str里也写"-"
 print(type(ft)) # <class 'datetime.datetime'>
@@ -72,4 +78,18 @@ b=datetime.datetime.strptime("2023-02-22 07:59:00", "%Y-%m-%d %H:%M:%S")
 c=datetime.datetime.strptime("2023-02-22 20:59:00", "%Y-%m-%d %H:%M:%S")
 print(c-a)  # 1 day, 13:00:00 
 # 但是(c-a).seconds只会输出小于一天的秒数 (c-a).seconds和(c-b).seconds的结果一样
+```
+
+### 日期转换为时间戳
+```py
+import datetime
+import time
+# 获取当前时间
+dtime = datetime.datetime.now()
+un_time = time.mktime(dtime.timetuple())
+print(un_time)
+# 将unix时间戳转换为“当前时间”格式
+times = datetime.datetime.fromtimestamp(un_time)
+print(times)
+
 ```

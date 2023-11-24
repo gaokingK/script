@@ -99,7 +99,7 @@ MariaDB [(none)]> # none 是当前使用数据库的名字
 # 表 
 - 查看表信息
   - [descript|desc] tbl_name
-  - SHOW [FULL] COLUMNS FROM tbl_name [FROM db_name] [like_or_where] 等价于desc tbl_name # 查看columns status
+  - SHOW [FULL] COLUMNS FROM tbl_name [FROM db_name] [like_or_where] 等价于`desc tbl_name`# 查看columns status
     - link:https://dev.mysql.com/doc/refman/8.0/en/show-columns.html
     - 关于Key值：
       - empty：没有索引，或者作为覆盖索引或者非唯一索引的第二列
@@ -234,26 +234,9 @@ alter table issue_record add constraint fk_issue_user foreign key (uid) referenc
 # 问题
 - 外键一定要是主键吗？
 - SQL 中怎么会用到索引？
-- SQL 中主要关键字的执行顺序
+
 ```
-from
-on
-join
-where
-group by
-having
-select
-distinct
-union
-order by
-# 因此一个显而易见的SQL优化的方案是，当两张表的数据量比较大又需要连接查询时, 应该使用on, 而不是where, 因为后者会在内存中先生成一张数据量比较大的笛卡尔积表，增加了内存的开销。
-```
-- 有没有一个地方能看帮助中synatx的名词的意思?
-  - http://www.jooq.org/doc/3.1/manual/sql-building/sql-statements/select-statement/implicit-join/
-- `help select `的syntax中 为啥么是from table_references 而不是tbl_name
-  - 并不一定从已有表中查询, 当进行子查询,链接查询时, 就是从一个查询结果中去查询,这时就是reference
 - create database test-test;
-```
 MariaDB [ccnet-db]> create database test-test;
 ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '-test' at line 1
 # 为什么会报错呢?

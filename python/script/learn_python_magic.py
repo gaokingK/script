@@ -90,7 +90,8 @@ def debug_mro():
 
 
 """
-__del__方法 用来销毁实例
+# 析构函数
+__del__方法 析构函数 用来销毁实例
 link: https://blog.csdn.net/weixin_39724009/article/details/110785744
 当删除一个实例时，python解释器也会默认调用一个方法，这个方法为__del__()方法
 如论是手动调用del还是由python自动回收都会触发
@@ -133,3 +134,20 @@ if __name__ == '__main__':
     debug_classmethod()
     # debug_del()
     print("hhh")
+
+"""
+TO: 运算符重载
+是一种允许我们自定义运算符的一些行为，主要通过定义一些特殊的方法实现，这些方法以双下划线开头和结尾，例如__add__、__sub__、__mul__等。
+当这些方法在你定义的类中存在时，Python就会在执行相应的运算符时自动调用它们。
+例如，假设你定义了一个名为Vector的类，你想要能够使用加号(+)运算符来添加两个Vector对象。你可以在Vector类中定义一个__add__方法，如下：
+"""
+class Vector:  
+    def __init__(self, x, y):  
+        self.x = x  
+        self.y = y  
+  
+    def __add__(self, other):  
+        if isinstance(other, Vector):  
+            return Vector(self.x + other.x, self.y + other.y)  
+        else:  
+            raise TypeError("Unsupported operand type")

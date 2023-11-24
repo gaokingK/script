@@ -80,12 +80,13 @@
 # uos
 - ctrl + ; 剪贴板
    
-# linux
+# linux # bash快捷键
 - 终端 ctrl + Shift + / 快捷键信息
 - 怎么搜索历史命令 切换下一条?
 - 在终端中使用上次命令中的内容 ---------------------------no
 - [shell命令行 快捷键](https://www.cnblogs.com/betterquan/p/11456820.html)
 ```
 Alt + f, b ：按单词前移（右向）/后移（左向）
-
+Ctrl + u ：从光标处删除至命令行首
+Ctrl + k ：从光标处删除至命令行尾
 ```

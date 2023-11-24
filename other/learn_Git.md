@@ -72,6 +72,7 @@
 -- git clone --depth=1 只克隆下包含最近一次commit的一个分支，这样这个项目文件就不会很大 https://blog.csdn.net/qq_43827595/article/details/104833980
 -- git clone --recursive
 -- git clone --recurse-submodules递归克隆子项目 https://blog.csdn.net/Mark_md/article/details/121640755 如果直接clone，子模块的代码为空
+- clone http配置免密 git config --global credential.helper store 只需要输入一次密码就可以
 ### git stash
 - link:
    - https://www.cnblogs.com/zndxall/p/9586088.html
@@ -121,6 +122,8 @@
    - `core.autocrlf` [link](https://www.jianshu.com/p/f13ef9e538e0)
    - `git config --global` 不加global只对当前仓库生效
    - `git config -l` 查看配置
+   - git config --global user.name "bryan sun"
+   - git config --global user.email "hitsjt@gmail.com"
 ### git checkout
    - `git checkout branch_name high_quality/dingding/function/.` 即使这个要检出的文件在现在的分支上不存在也可以检出的
 ### 这张图里怎么把code从repo checkout到workspace

@@ -9,8 +9,9 @@ set -e #这句话和上一句是一样的，写一个就好了
 inventory_path2=echo "$inventory_path"|awk -F rootfs/ '{print $2}'
 要这样 var=`command` 或者 var=$(command)
 ```
-### 脚本debug
+### 脚本debug # shell调试
 - https://blog.csdn.net/qq_27546717/article/details/123130393
+- 前面1个加号的是命令 两个加号的是一行命令拆分出来的
 ```
 [root@10.0.5.89 ~/jjw-deploy0529]
 $ sh -x update -i inventory_10.0.5.89.yamll

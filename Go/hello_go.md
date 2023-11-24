@@ -1,58 +1,13 @@
+# doc
+- 经典教材中文翻译：https://golang-china.github.io/gopl-zh/preface.html
+- 文档2：https://learnku.com/go/wikis/38122
 # some
 - go虽然是把代码写在了一个一个的程序文件当中，但当程序运行的时候，是通过main函数运行的，会运行所有的文件
-# module、package、import
-### Go Module
-- link
-    - https://juejin.cn/post/6869570760738865166#heading-10
-    - https://www.jianshu.com/p/2d4d0bd7d2e4
-    - 一些问题：https://blog.csdn.net/qq_39852676/article/details/121132613
-- 一个Module就是package(go 包)的集合. 即: 一个Module含有多个package; 一个package含有多个.go文件.
-- Go Modules不是module，Go Modules是 Go 语言中的一种包管理机制，
-    - 它通过go.mod 可以帮助开发者有效地管理项目的依赖库和版本，提高开发效率
-    - 除了go.mod之外，go命令还维护一个名为go.sum的文件，其中包含特定模块版本内容的预期加密哈希 go命令使用go.sum文件确保这些模块的未来下载检索与第一次下载相同的位，以确保项目所依赖的模块不会出现意外更改，无论是出于恶意、意外还是其他原因。 go.mod和go.sum都应检入版本控制
-    - go.sum 不需要手工维护，所以可以不用太关注。
-    - 子目录里是不需要init的，所有的子目录里的依赖都会组织在根目录的go.mod文件里
-- Modules是相关Go包的集合，是源代码交换和版本控制的**单元**。go命令直接支持使用Modules，包括记录和解析对其他模块的依赖性。Modules替换旧的基于GOPATH的方法，来指定使用哪些源文件。
-- 发展历史
-    - Go modules 是 Go 语言的依赖解决方案，发布于 Go1.11，成长于 Go1.12，丰富于 Go1.13，正式于 Go1.14 推荐在生产上使用。
-    - Go moudles 目前集成在 Go 的工具链中，只要安装了 Go，自然而然也就可以使用 Go moudles 了，而 Go modules 的出现也解决了在 Go1.11 前的几个常见争议问题：
-        - Go 语言长久以来的依赖管理问题。
-        - “淘汰”现有的 GOPATH 的使用模式。
-        - 统一社区中的其它的依赖管理工具（提供迁移功能）。
-```go
-// go mod init myservice
-module example.com/myservice // 模块路径为example.com/myservice 模块名称为myservice
-go 1.12
-require (
-    github.com/gorilla/mux v1.7.3 //依赖的其他模块及其版本
-    github.com/go-sql-driver/mysql v1.5.0
-)
-```
-- 模块路径
-    - module关键字指定的模块路径表示当前模块的全局唯一标识符，用于声明当前模块所属的命名空间。在Go语言中，每个模块都有一个唯一的模块路径，可以用来区分不同的模块，并确保模块之间的依赖关系不产生冲突。
-    - 具体来说，一个模块的模块路径是以域名倒序排列后，在其后面加上模块名所组成的。例如，github.com/user/project就是一个合法的模块路径。
-    - 模块路径的作用如下：
-        1. 帮助Go工具管理依赖关系。Go工具在下载、安装或更新依赖的时候，会根据模块路径来识别模块并获取其代码。
-        2. 确保代码的唯一性。模块路径是全局唯一的，不同的模块使用不同的模块路径，避免了不同的代码库使用相同的包名导致的代码冲突。
-        3. 方便模块发布和分发。通过指定模块路径，可以方便地将模块发布到包管理系统或者其他代码仓库中，并能够在不同的项目中方便地复用。
-- 一个项目可以有多个模块
-    - Go语言的模块化体系允许在一个项目中使用多个模块。每个模块都可以拥有自己的代码和依赖关系，这样可以使项目结构更加清晰和易于维护。在使用Go模块时，建议每个模块都创建一个新的文件夹来存放其代码，且每个模块都拥有自己的go.mod文件来管理其依赖关系。
-### package
-- link:
-    - https://juejin.cn/post/6869570760738865166
-- go使用包来组织源代码的，并实现命名空间的管理，任何一个Go语言程序必须属于一个包，即每个go程序的开头要写上`package <pkg_name>`
-- Go语言包一般要满足如下三个条件：
-1. 同一个目录下的同级(不包括子目录)的所有go文件应该属于一个包；
-2. 包的名称可以跟目录不同名，不过建议同名；
-3. 一个Go语言程序有且只有一个main函数(多个文件中只能有一个main函数)，他是Go语言程序的入口函数，且必须属于main包，没有或者多于一个进行Go语言程序编译时都会报错；
-### import
-- 导入的方式是当前文件的相对目录
-- 导入的包必须要使用，否则也会报错。
-- 如果一个包要引用另一个包的标识符(比如结构体、变量、常量、函数等)，那么首先必须要将其导出，导出的具体做法就是在定义这些标识符的时候保证首字母大写(首字母小写的标识符只能限制在包内引用)。另外在被导出的的结构体或者接口中，只有首字母大写的字段和方法才能被包外访问，而结构体中首字母小写的字段和方法不能被包外访问
-- 设置别名 `设置别名引用 import format_go fmt` 别名在前
-- import引入的都是包所在的目录名, 只不过因为有条包名要和所在目录同名的这条规范, 所以会给人一种我是导入的包的错觉
-- `import _ "crypto/rand" `只执行init函数
-- `import path` 指的是import后面跟的路径即`import <import path>`
+# GO语言的特点
+- 没有隐式的数据转换、没有构造函数和析构函数、没有运算符重载、没有默认参数、没有继承、没有泛型、没有异常、没有宏、没有函数修饰、没有线程局部存储
+- 诺保证向后兼容：用之前的Go语言编写程序可以用新版本的Go语言编译器和标准库直接构建而不需要修改代码。
+- Go语言的面向对象机制与一般语言不同。它没有类层次结构，甚至可以说没有类；仅仅通过组合（而不是继承）简单的对象来构建复杂的对象。方法不仅可以定义在结构体上，而且，可以定义在任何用户自定义的类型上；并且，具体类型和抽象类型（接口）之间的关系是隐式的，所以很多类型的设计者可能并不知道该类型到底实现了哪些接口
+
 
 ### 初始化的执行顺序
 ```css
@@ -72,6 +27,9 @@ go run *.go
 
 - init()与sync.Once对比------no
 
+# go get 是获取、编译、安装项目
+- 安装到$GOPATH/bin下
+
 # build项目
 - build命令
     - -o myexec参数，表示指定输出文件名为 myexec。
@@ -85,45 +43,7 @@ go mod tidy
 go get -u  // 如果不加这个的话go.mod里面就没有依赖的信息，build就会报错，好像是依赖没有下载下来，但是依赖已经在$GOPATH下面的pkg文件夹里了啊，没有，当时并没有下载
 go build -o proc_exporter --ldflags '-w -s -linkmode external -extldflags "-static"' server/main.go
 ```
-### 问题
-- go mod tidy 
-```
-[root@iZuf68h0usx91bux03msu1Z procexporter]# go mod tidy                                                                                   │mod  sumdb
-go: finding module for package gopkg.in/alecthomas/kingpin.v2                                                                              │[root@iZuf68h0usx91bux03msu1Z gopath]# ls pkg/mod/
-go: finding module for package github.com/prometheus/client_golang/prometheus                                                              │cache  github.com  gopkg.in
-go: finding module for package github.com/prometheus/client_golang/prometheus/promhttp                                                     │[root@iZuf68h0usx91bux03msu1Z gopath]# ls pkg/mod/github.com/
-go: finding module for package github.com/go-kit/log                                                                                       │go-kit  prometheus
-go: found github.com/go-kit/log in github.com/go-kit/log v0.2.1                                                                            │[root@iZuf68h0usx91bux03msu1Z gopath]# grep kingpin.v2 -r .
-go: found github.com/prometheus/client_golang/prometheus in github.com/prometheus/client_golang v1.15.1                                    │./src/github.com/prometheus/quantdo_mysqld_exporter_patch/quantdo_seat.go:      "gopkg.in/alecthomas/kingpin.v2"
-go: found github.com/prometheus/client_golang/prometheus/promhttp in github.com/prometheus/client_golang v1.15.1                           │./src/procexporter/quantdo_seat.go:     "gopkg.in/alecthomas/kingpin.v2"
-go: found gopkg.in/alecthomas/kingpin.v2 in gopkg.in/alecthomas/kingpin.v2 v2.3.2                                                          │./src/go.sum:gopkg.in/alecthomas/kingpin.v2 v2.2.6/go.mod h1:FMv+mEhP44yOT+4EoQTLFTRgOQ1FBLkstjWtayDeSgw=
-go: procexporter imports                                                                                                                   │./pkg/mod/gopkg.in/alecthomas/kingpin.v2@v2.3.2/doc.go://     import "github.com/alecthomas/kingpin/v2"
-        gopkg.in/alecthomas/kingpin.v2: gopkg.in/alecthomas/kingpin.v2@v2.3.2: parsing go.mod:                                             │./pkg/mod/gopkg.in/alecthomas/kingpin.v2@v2.3.2/go.mod:module github.com/alecthomas/kingpin/v2
-        module declares its path as: github.com/alecthomas/kingpin/v2                                                                      │./pkg/mod/gopkg.in/alecthomas/kingpin.v2@v2.3.2/README.md:    $ go get github.com/alecthomas/kingpin/v2
-                but was required as: gopkg.in/alecthomas/kingpin.v2
-# 解决这个module declares its path as xxx, but was required as:xxxx https://blog.csdn.net/liuqun0319/article/details/104054313
-vim go mod 
-# 添加
-replace github.com/alecthomas/kingpin/v2 => gopkg.in/alecthomas/kingpin.v2 v2.3.2 // indirect
-replace gopkg.in/alecthomas/kingpin.v2 => github.com/alecthomas/kingpin/v2 v2.3.2 // indirect
-```
-- found packages procexporter (cgroup.go) and collector (quantdo_seat.go) in /root/j_go/monitor/gopath/src/procexporter
-原因是在同一个folder存在多个package, 则加载失败. 即使是main, 也一样
 
-- used for two different module paths 
-```
-// 解决办法https://blog.csdn.net/oscarun/article/details/105321846
-go mod edit -replace=github.com/alecthomas/kingpin/v2@v2.3.2=gopkg.in/alecthomas/kingpin.v2@v2.3.2 //这时go.mod里会增加一行然后再手动增加一行,结果是下面这样子
-replace (
-        github.com/alecthomas/kingpin/v2 v2.3.2 => gopkg.in/alecthomas/kingpin.v2 v2.3.2 
-        gopkg.in/alecthomas/kingpin.v2 v2.3.2 => github.com/alecthomas/kingpin/v2 v2.3.2
-)
-
-
-// 正确的回显
-[root@iZuf68h0usx91bux03msu1Z mysqld_exporter]# go get github.com/prometheus/mysqld_exporter                                                
-go: added gopkg.in/alecthomas/kingpin.v2 v2.3.2 
-```
 
 # 错误和异常处理
 ### panic 

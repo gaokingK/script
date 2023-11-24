@@ -1,6 +1,27 @@
 ### 子查询
 - link：https://blog.csdn.net/qq_44111805/article/details/124680208
 - ` select * from emp where sal>(select sal from emp where empno=100013) ;` 查看比100013号员工工资高的行
+### sql语法规范
+- https://help.aliyun.com/zh/dataworks/user-guide/sql-coding-guidelines-and-specifications
+### SQL 中主要关键字的执行顺序
+```
+from
+on
+join
+where
+group by
+having
+select
+distinct
+union
+order by
+limit offset
+# 因此一个显而易见的SQL优化的方案是，当两张表的数据量比较大又需要连接查询时, 应该使用on, 而不是where, 因为后者会在内存中先生成一张数据量比较大的笛卡尔积表，增加了内存的开销。
+```
+- 有没有一个地方能看帮助中synatx的名词的意思?
+  - http://www.jooq.org/doc/3.1/manual/sql-building/sql-statements/select-statement/implicit-join/
+- `help select `的syntax中 为啥么是from table_references 而不是tbl_name
+  - 并不一定从已有表中查询, 当进行子查询,链接查询时, 就是从一个查询结果中去查询,这时就是reference
 ### select
 - help select
 - select_expr
@@ -20,11 +41,31 @@ insert into #列名不需要加双引号
    
 ### group by
 - link:https://www.jianshu.com/p/8f35129dd2ab
-- group by col_name 子句会根据给定的数据列col_name的每个成员对查询结果进行分组
-- select 子句中必须只有分组列和列函数，(否则会报错，因为其他列不一定会只有一个结果，即一个分组后一个col_name可能会对应多个别的值)，列函数对每个分组返回一个值
+- group by col_name 子句会根据给定的数据列col_name的每个成员对查询结果进行分组（比如group by col_a, 就类似把col_a 为value_A的化为一块，value_B的化为一块）
+- select 子句中必须只有分组列， 如果含有其他列必修对其他列使用列函数，(否则会报错，因为其他列不一定会只有一个结果，即一个分组后一个col_name可能会对应多个别的值)，列函数对每个分组返回一个值； 其他列可以使用*代替
 ```
 select sal,deptno from emp group by sal;
 ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'go.emp.deptno' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+```
+- select sum(dept_no) from dept_manager group by dept_no; 结果列中全为0，因为通过dept_no分组后的列中就没有dept_no了，但是可以count(dept_no)
+
+
+### having
+- https://www.runoob.com/sql/sql-having.html
+- where子句中无法使用聚合函数，having子句可以让我们筛选分组后的数据
+- where 和having之后都是筛选条件，但是有区别的：
+  - where在group by前， having在group by 之后
+  - 聚合函数（avg、sum、max、min、count），不能作为条件放在where之后，但可以放在having之后
+```sql
+//现在我们想要查找总访问量大于 200 的网站，并且 alexa 排名小于 200。
+SELECT Websites.name, SUM(access_log.count) AS nums FROM Websites
+INNER JOIN access_log
+ON Websites.id=access_log.site_id
+WHERE Websites.alexa < 200 
+GROUP BY Websites.name
+HAVING SUM(access_log.count) > 200;
+// 好像不能使用列，必须要用列的聚合函数
+select count(dept_no) as a from dept_manager group by dept_no having a>2
 ```
 
 ### sorted by 
@@ -51,6 +92,16 @@ SELECT TOP 2 percent * FROM Persons 结果的2%
   - [!abc] 除字符a或者字符b或者字符c的任意字符
   - `select * from user where name like ‘_[AB]%’` # 查找name第二个字符为A或者B的用户信息。
 
+### on
+- 在 SQL 中，ON 子句用于指定连接两个表时的条件。他用于过滤连接的结果，只使两个表中满足条件的行返回。
+- ON 子句和笛卡尔积（Cartesian product）是相关的，但它们不是完全相同的概念。笛卡尔积返回的结果是两个表中所有行之间所有可能的组合。（笛卡尔积发生在没有指定连接条件，或者没有适当的连接条件）
+```sql
+// dept_manger有24行，departments有9行
+select count(*) from dept_manager a join departments b on a.dept_no=b.dept_no; //返回24
+select count(*) from dept_manager join departments; //返回216=9*24
+```
+- JOIN 关键字用于表示连接操作。ON 关键字用于指定连接条件，即在两个表中相互匹配的列。连接条件通常是两个表之间的相等关系，但也可以是其他条件，具体取决于你的需求。通常是一起使用的但也可分开`SELECT * FROM table1 JOIN table2 USING (column_name);`
+
 ### 连接 join
 - 连接是SQL的核心
 - 全连接应该也属于外连接吧? -------------no
@@ -58,7 +109,7 @@ SELECT TOP 2 percent * FROM Persons 结果的2%
 ![连接分类](https://images2018.cnblogs.com/blog/592892/201804/592892-20180423145538091-1111373527.png)
 - link
   - https://www.cnblogs.com/wanglijun/p/8916790.html
-  - 图中带颜色的表是代表在该表在结果中出现, 而不是结果中相关表的内容是不是为空
+  - 圆圈代表表，一个圆圈全部有颜色代表所有行都在结果中，两个园圈重合的代表都满足连接条件的行，图中带颜色的表是代表该表在结果中出现, 而不是结果中相关表的内容是不是为空
 - cross join 笛卡尔积/ 交叉连接
   ```
   select * from tbl_A cross join tbl_B; # 显示的交叉连接

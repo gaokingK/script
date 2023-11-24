@@ -1,4 +1,13 @@
-# TO: 进程、线程的使用及区别
+# TO: 进程和线程的使用及区别
+## hello_world
+```py
+def func(arg1, arg2):
+    pass
+target = threading.Thread(target=func, args=(arg1, arg2)) # 注意这里时func 不能写为func() 这样虽然也能运行，但是下面的语句就不会运行了
+target.start()
+target.join() # join的意思时主程序会等待进程结束后才结束
+```
+
 ## 注意
 - cpu是指一核cpu
 - 并行性和并发性：并行性是同一时刻多个任务同时执行，并发性是一个时间段内，会执行多个任务。但并行也需要多个cpu

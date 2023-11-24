@@ -1,4 +1,4 @@
-# sed(https://www.runoob.com/linux/linux-comm-sed.html）
+ne# sed(https://www.runoob.com/linux/linux-comm-sed.html）
 ## link:
     - [官方文档](https://www.gnu.org/software/sed/manual/html_node/sed-commands-list.html#sed-commands-list)
     - [详细](https://blog.csdn.net/hdyebd/article/details/83617292)
@@ -80,7 +80,8 @@ sed OPTIONS 'expression' input_file
     - 搜索元字符：
       - & 保存搜索字符用来替换其他字符，如s/love/&2/，love替换为love2;
     - -n或--quiet或--silent 仅显示script处理后的结果。
-- #### 动作
+
+#### 动作
 - 多个命令使用;来分割
     - 这个匹配多行的后面怎么只能用一个sed动作呢？cat rootfs/deploy/files/prometheus-config.yaml |sed -n "/rule_files:/,/^ *$/p"|sed -n '1d;$d;p' 
     - 试试这样 `sed -n "/^ *master: *$/,/^ *$/{p;1d}" rootfs/deploy/inventory_dir/inventory_master.yaml`
@@ -97,11 +98,14 @@ sed -e 4a\ newLine testfile # 在第4行后添加
     - sed -i '/proc_target/i4h' prometheus-config.yaml 在含有proc_target的哪一行
 - ! ：表示后面的命令对所有没有被选定的行发生作用 `sed '1!d' input.in`
 - r 从文件读取内容追加 `sed -i '$r test.txt' prometheus-config.yaml`
+- w 写入，指定行内容重定向写入到指定文件
+    - sed '/partten/w file_name' 处理的文件
+    - 会清空后再写
 - s 替换 (是把匹配掉的替换，如果想替换整行就要匹配整行)
     -  `sed -i '1s/^/2hhh/' prometheus-config.yaml` 第一行开头增加2hhh 注意要使用用`/`结束
     - 匹配整行使用s/^$/sss/
     - 对某一行中的部分进行替换
-    - sed -n '/http.*10.0.5.89/s/10.0.5.89/ddd/p' /apt/promtail/opt/promtail-config.yaml
+        - sed -n '/http.*10.0.5.89/s/10.0.5.89/ddd/p' /apt/promtail/opt/promtail-config.yaml
     - sed -i "s/add_workers:/add_work/" inventory_10.0.5.89.yaml
     - 替换时引用分组，分组一定要用（）括起来，而且括号要用\来转义
         -  sed -i "s/\(add_workers:\)/hide_\1/" inventory_10.0.5.89.yaml
@@ -140,6 +144,7 @@ sed -e 4a\ newLine testfile # 在第4行后添加
 - #### 注意
    - 在双引号中使用变量 https://qastack.cn/ubuntu/76808/how-do-i-use-variables-in-a-sed-command
    - 如果又多个符合匹配的结果，会将结果都打印出来，但是不会贪婪匹配
+   - 符号要转义，否则就会每行后面都加`sed -i '/\[Service\]atest' xxx`
    - sed -i 'cluster1.yamld' prometheus-config.yaml 会将所有行替换为cluster1.yamld
    - string = "113/kbox_result_202110180959.txt" ls 113/*.txt|sed "s/*kbox_r.*t_//g" 为什么kbox的那个星号没有用，因为sed也能用正则，但是*号代表前个模式匹配0次或者多次， 但为什没有用呢？难道前面不是null吗
   	- 如何将命令的结果作为sed的输入

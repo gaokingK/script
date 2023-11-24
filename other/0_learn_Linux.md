@@ -1,6 +1,39 @@
 # 文档
   - https://www.thegeekstuff.com/2008/08/15-examples-to-master-linux-command-line-history/
+  - https://linux.cn/article-10096-1.html
+  - 鸟哥linux： https://wizardforcel.gitbooks.io/vbird-linux-basic-4e/content/150.html
 # 通识
+### sudo和sudo su 和su之间有什么区别啊
+sudo 用于以当前用户的权限执行特定命令，提供了更细粒度的权限控制。输入当前用户的密码
+sudo su 用于通过 sudo 切换到 root 用户，提供了安全性和权限隔离。输入当前用户的密码，根据配置来决定是否还要输入root的密码
+su 用于在已知目标用户密码的情况下切换到其他用户，通常用于切换到 root 用户。切换到哪个用户，输入哪个用户的密码，后面什么不跟就切换到root用户
+- sudo
+```
+sudo（Superuser Do）允许普通用户以超级用户（root）的权限来执行特定命令。
+用户需要在 sudo 命令后指定要运行的命令，并在需要时输入自己的密码。系统管理员可以在配置文件（通常是 /etc/sudoers）中指定哪些用户或用户组可以使用 sudo，以及可以运行哪些命令。
+sudo 的一个重要优势是可以实现细粒度的权限控制，允许不同用户执行不同的命令，而不必提供完整的 root 权限。
+```
+- sudo su：
+```
+sudo su 是通过 sudo 来以超级用户（root）身份启动一个新的 shell。它实际上是在当前用户上下文中切换到 root 用户，因此需要输入当前用户的密码，然后输入 root 用户的密码（如果被配置为需要 root 密码）。
+使用 sudo su 可以在不直接暴露 root 用户密码的情况下切换到 root 用户，这有助于提高安全性。
+```
+
+- su：
+```
+su（Switch User）允许用户切换到其他用户账户，包括超级用户（root）。
+使用 su 命令，用户需要输入目标用户的密码，然后可以在新的 shell 中执行命令。如果要切换到 root 用户，通常需要输入 root 用户的密码。
+su 命令的主要限制是，只有具有特殊权限的用户（通常是系统管理员）才能使用它来切换到 root 用户。
+```
+- 有些命令不加sudo就没有输出
+### 更换内核 debian 
+- link：https://www.cnblogs.com/faberbeta/p/16339288.html
+- 搜索新内核 apt-cache search linux-image
+- 安装搜索到的新内核 apt install linux-image-5.10.0-13-amd64
+- 查看可用的内核cat /boot/grub/grub.cfg |grep menuentry
+- 修改grub文件使用上一步找到的可用内核
+- grub-update
+- reboot
 ### manjaro 最受欢迎的linux发行版 基于arch
 ### BSD和SystemV
    - 是Unix 操作系统的两种操作风格
@@ -53,7 +86,7 @@
    - who命令用于列举出当前已登录系统的用户名称。
    - 使用whoami命令查看你所使用的登录名称
    - last命令可用于显示特定用户登录系统的历史记录
-### glob模式 Word Splitting IFS 分隔符
+### glob模式 Word Splitting IFS 分隔符 # 通配符
    - [Linux shell 通配符 / glob 模式](https://www.cnblogs.com/divent/archive/2016/08/11/5762154.html)
    - glob 模式（globbing）也被称之为 shell 通配符
    - shell 通配符 / glob 模式通常用来匹配目录以及文件，而不是文本！！！
@@ -62,6 +95,12 @@
      - which is used to determine what characters to use as word splitting delimiters
      - 默认情况下，IFS包括：space, tab, newline 即：($' \t\n')
    - Word Splitting和Double quoting 就是分割出来的结果不同, 使用"str"分出来的结果就是Double quoting 见上
+   ```sh
+   mv *bak* a/ 会把xxx.bakxxx 和 xxxbakxxx移动到a中
+   *.bak*只会移动前者
+   *.bak[0-9]*
+
+   ```
 ### sh和bash的不同
    - 定义函数时不同, sh 的函数不能带括号?
    - sh 不支持function
@@ -81,14 +120,7 @@ fi
    - [时间表达式预览](https://tool.lu/crontab/)
 ### [linux 在命令行下的快捷键](https://blog.csdn.net/u014429186/article/details/52629029)
 
-### chmod u+x file 表示为文件的所有者增加可执行权限
-   - [link](https://www.cnblogs.com/du-jun/p/11550968.html)
-   - u+x 是两个部分u、+x
-      - u、g、o、a
-        - u 当前用户、g当前用户组、o其他、a所有人
-      - +x 可执行
-        - +w 可读
-        - r 表示可读取，w 表示可写入，x 表示可执行，X 表示只有当该文件是个子目录或者该文件已经被设定过为可执行。 
+
 ### linux 单用户模式
    centos 进入单用户模式 ro 改为rw（可读改为可写） `init=/bin/bash`
    修改完成后 `exec /sbin/init` 退出单用户模式
@@ -135,6 +167,7 @@ service sshd restart
    - `/etc/systemd/system/` 一般系统管理员手工创建的单元文件建议存放在`/etc/systemd/system/`目录下面。
 - 可以对文件重命名，重命名后会提示systemctl daemon-reload 但知道原来的service服务stop前，原服务名仍能使用
 - 服务启动失败后可以使用journalctl -xe来查看日志
+- 
 ### proc 目录 根据pid显示进程信息
 - link: https://www.cnblogs.com/DswCnblog/p/5780389.html
 - ll /proc/<pid>

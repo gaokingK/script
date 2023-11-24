@@ -4,7 +4,12 @@
   - https://blog.csdn.net/m0_37814112/article/details/103053802
   - [关于test的，选项好像也能通用](https://www.cnblogs.com/shaoshao/p/6809580.html)
       - test [判断条件]  && 结果为true时做的 || echo "not exist" 为false做的
-      - test 2 -eq 2  && echo a || echo b
+         - `test 2 -eq 2  && echo a || echo b`
+         - 不能执行命令吗
+         ```sh
+         test `ps -ef|grep bio` && echo "yes" || echo "no"
+         - bash: test: too many argument
+         ```
       - `[[]]` 和 `[]` 相当于test
          - [ 2 -eq 2 ] && echo a || echo b
          - [[ 2 -eq 2 ]] && echo a || echo b
@@ -48,11 +53,13 @@
   # 不加“”时该if语句等效于if [ -n ]，shell 会把它当成if [ str1 ]来处理，-n自然不为空，所以为正
   # 单括号中变量必须要加双引号； 双对中括号，变量不用加双引号
   ```
-- 取非 [ ! expr ] 注意空格
+- 取非 [ ! expr ] 注意空格 可以是带选项的
 - -z str 串的长度为0时为真
 - [str] 串非空时为真 和 -n 有什么区别呢?--------------------no
-- -e file_name 文件是否存在
-- [] bash 的内部命令，[和test是等同的。如果我们不用绝对路径指明，通常我们用的都是bash自带的命令。if/test结构中的左中括号是调用test的命令标识，右中括号是关闭条件判断的。这个命令把它的参数作为比较表达式或者作为文件测试，并且根据比较的结果来返回一个退出状态码。if/test结构中并不是必须右中括号，但是新版的Bash中要求必须这样。
+- -e file_name 文件或者文件夹是否存在
+- -x file　　　　　用户可执行为真 
+- -d 文件 判断文件是否存在，并且是否为目录文件
+- [] bash 的内部命令，[和test是等同的。如果-我们不用绝对路径指明，通常我们用的都是bash自带的命令。if/test结构中的左中括号是调用test的命令标识，右中括号是关闭条件判断的。这个命令把它的参数作为比较表达式或者作为文件测试，并且根据比较的结果来返回一个退出状态码。if/test结构中并不是必须右中括号，但是新版的Bash中要求必须这样。
 - true = 0 flase = 1 和python 刚好相反
 ```
 if cat 111-tmp.txt | grep ting1
@@ -101,23 +108,41 @@ fi
    - link: http://c.biancheng.net/view/1011.html
    - break n n 表示跳出循环的层数，如果省略 n，则表示跳出当前的整个循环。break 关键字通常和 if 语句一起使用，即满足条件时便跳出循环。
    - continue n 
+
+### while
+```sh
+while [ $a -le 5 ]
+do
+if [ $a -eq 3 ]
+then
+break
+fi
+echo "a=$a"
+a=$[$a+1]
+done
+```
+
 ## select in
    - link: http://c.biancheng.net/view/2829.html
    - select in 循环用来增强交互性，它可以显示出带编号的菜单
    - 就像for循环, 即使原内容没有了, 只会报错
 
 ## for 
+- link: https://www.cnblogs.com/liuyuelinfighting/p/16396308.html
    - 语句
-   ```
+   ```sh
    huawei ~/Desktop/smoke% for dir in 11[1,4]; do echo $dir;done
    111
    114
+
    for line in $@
    do
    cat << EOF
       $line
    EOF
    done
+
+   for i in {1..4} //1,2,3,4
    ```
 
 ### 单行命令

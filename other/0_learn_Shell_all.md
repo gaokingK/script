@@ -71,6 +71,21 @@ fi
 ```
 ### shell 中小命令
    - id -u 判断当前用户是不是root 是root返回0 `if $(id -u) !=0`
+### 执行用户
+- sudo -u other_user /path/to/your/script.sh
+- 切换用户后，所有后续的操作都在新用户的环境下执行
+```sh
+su - new_user // 连字符（-）用于启动一个新的shell，以确保使用新用户的环境。如果不使用连字符，它将保留在当前shell，但切换为新用户。
+
+```
+### 用户判断
+```sh
+if [ `whoami` = "root" ];then
+	echo "root用户！"
+else
+	echo "非root用户！"
+fi
+```
 ### expr 计算
     ```
     huawei ~/Desktop/smoke% expr 2 + 1
