@@ -1,6 +1,12 @@
+### 注意
+- 实在找不到问题的sql报错可以试着是不是某个变量是关键字，比如rank
+- 空有两种，一种是null，一种是字符串的空
+  - 判空 要用is null 不能用=null
+  - trim(column)=''
 ### 子查询
 - link：https://blog.csdn.net/qq_44111805/article/details/124680208
 - ` select * from emp where sal>(select sal from emp where empno=100013) ;` 查看比100013号员工工资高的行
+- 子查询必须在括号内
 ### sql语法规范
 - https://help.aliyun.com/zh/dataworks/user-guide/sql-coding-guidelines-and-specifications
 ### SQL 中主要关键字的执行顺序
@@ -14,7 +20,7 @@ having
 select
 distinct
 union
-order by
+order by 默认升序
 limit offset
 # 因此一个显而易见的SQL优化的方案是，当两张表的数据量比较大又需要连接查询时, 应该使用on, 而不是where, 因为后者会在内存中先生成一张数据量比较大的笛卡尔积表，增加了内存的开销。
 ```
@@ -29,16 +35,46 @@ limit offset
   - 表达式 是mysql函数如 AVG/count : https://www.runoob.com/mysql/mysql-functions.html
     - count() 返回查询的记录总数 `select id, count(*) as address_count from tbl_b group by id AS tbl_new;` 返回tbl_b的行数, 并生成一个两列名分别为id, address_count(表示tbl_b中id的个数)的新表, 新表名为tbl_new 用在查询中; 需要靠id分组, 要不只有一行
 
+### update
+- 更新一个值：`UPDATE coupon_pool SET serialno = '20170319010010'  WHERE id = 10;`
+- 更新多个值:`UPDATE coupon_pool SET serialno = '20170319010010' , name = '名字10'  WHERE id = 10;`
+- delete 不能来自删除来自同一个表的,你需要一个子表 :可以这样写 DELETE FROM Person WHERE id NOT IN ( select *from (SELECT MIN(id) as id FROM Person GROUP BY email ) as a )
+- DELETE p1 FROM Person p1, Person p2 WHERE p1.Email = p2.Email AND p1.Id > p2.Id
+  - a. 从驱动表（左表）取出N条记录；
+  - b. 拿着这N条记录，依次到被驱动表（右表）查找满足WHERE条件的记录；如果有满足条件的，就删除
+
+作者：😼吴腾跃
+链接：https://leetcode.cn/problems/delete-duplicate-emails/solutions/219860/dui-guan-fang-ti-jie-zhong-delete-he-de-jie-shi-by/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 ### insert
 - 插入行
 ```
 insert into #列名不需要加双引号
 ```
+### delete
+DELETE FROM table_name WHERE condition;
+### in # exists
+- 使用 IN 和 EXISTS 子句时，注意它们之间的差异。IN 用于比较一个值是否在子查询返回的结果集中，而 EXISTS 用于检查子查询是否返回了任何行。
+- 简单使用方法 `select * from tbl_1 where col_1 in ("value1", "value2",...)`
+- 从表中比较`select * from tbl_1 where col_1 in (select )`
+- 多列比较必须加括号，顺序可以不对应 但数量和列一定要对应（查询子句中有salary，departmentId，必须要用salary，departmentId来比较）`select  name as Employee, salary from Employee where (salary, departmentId) in (select max(salary), departmentId from Employee group by departmentId) `
+
 ### union
   - UNION 用于把来自多个 SELECT 语句的结果组合到一个结果集合中
   - 多个 SELECT 语句中，对应的列应该具有相同的字段属性，且第一个 SELECT 语句中被使用的字段名称也被用于结果的字段名称
   - 当使用 UNION 时，MySQL 会把结果集中重复的记录删掉; 而使用 UNION ALL ，MySQL 会把所有的记录返回，且效率高于 UNION
-   
+
+### order by
+- 默认升序 ascending 
+- 降序 SELECT * FROM Products ORDER BY ProductName DESC;
+- 子查询一个数据的时候，order 慢与 min函数（也可能给值得类型有关系）
+
+### distinct 去重
+- select distinct name from A
+- select id, distinct name from A;   --会提示错误，因为distinct必须放在开头
+- select distinct name， id 是根据name+id来去重的，如果name相同，id不同，distinct会认为两个是不同的，可以使用`select *, count(distinct name) from table group by name`
+
 ### group by
 - link:https://www.jianshu.com/p/8f35129dd2ab
 - group by col_name 子句会根据给定的数据列col_name的每个成员对查询结果进行分组（比如group by col_a, 就类似把col_a 为value_A的化为一块，value_B的化为一块）
@@ -48,7 +84,6 @@ select sal,deptno from emp group by sal;
 ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'go.emp.deptno' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
 ```
 - select sum(dept_no) from dept_manager group by dept_no; 结果列中全为0，因为通过dept_no分组后的列中就没有dept_no了，但是可以count(dept_no)
-
 
 ### having
 - https://www.runoob.com/sql/sql-having.html
@@ -66,8 +101,9 @@ GROUP BY Websites.name
 HAVING SUM(access_log.count) > 200;
 // 好像不能使用列，必须要用列的聚合函数
 select count(dept_no) as a from dept_manager group by dept_no having a>2
+// 可以用列的，见group by
+select email from Person group by email having count(email) > 1;
 ```
-
 ### sorted by 
   - link: https://www.cnblogs.com/Guhongying/p/10541979.html
   - SELECT * FROM stu ORDER BY Sno DESC; desc 只作用于前面的一个列， 降序排列； asc是升序，默认
@@ -81,7 +117,7 @@ top语法
 SELECT TOP 2 * FROM Persons 头两条
 SELECT TOP 2 percent * FROM Persons 结果的2%
 ```
-
+- limit 不支持运算 不能使用 limit 5-1 ；必须set N=5-1 然后再limit N
 ### like
 - 模糊查询 like not like
 - 不会区分大小写了 like "Ab" 也能查到ab
@@ -101,8 +137,10 @@ select count(*) from dept_manager a join departments b on a.dept_no=b.dept_no; /
 select count(*) from dept_manager join departments; //返回216=9*24
 ```
 - JOIN 关键字用于表示连接操作。ON 关键字用于指定连接条件，即在两个表中相互匹配的列。连接条件通常是两个表之间的相等关系，但也可以是其他条件，具体取决于你的需求。通常是一起使用的但也可分开`SELECT * FROM table1 JOIN table2 USING (column_name);`
-
-### 连接 join
+### 自连接
+- 把自己的表连接到直接的表
+- `select a.name as "Employee"  from Employee as a join Employee as b on a.managerId = b.id where a.salary > b.salary`
+### 连接 # join
 - 连接是SQL的核心
 - 全连接应该也属于外连接吧? -------------no
 ![各种连接结果](https://www.runoob.com/wp-content/uploads/2019/01/sql-join.png)
@@ -118,9 +156,10 @@ select count(*) from dept_manager join departments; //返回216=9*24
   ```
 - 内联接
   - 取交集
-  - 等价写法 inner join; straight_join; join; 还有where写法
+  - 等价写法 inner join; straight_join; join; 还有where写法 
   ```
   select <select_list> from tableA [as] A] join/inner join/straight_join tblB B on condition;
+  select xxx from tbl_name1, tbl_name2 where tbl_name1.col=tbl_name2.col
   ```
 - 外连接
   - 取并集
@@ -175,6 +214,15 @@ select count(*) from dept_manager join departments; //返回216=9*24
 - #{}表示一个占位符号，通过#{}把parameterType 传入的内容通过preparedStatement向占位符中设置值，自动进行java类型和jdbc类型转换，#{}可以有效防止sql注入。
 
 # SQL
+- 一个表使用两次
+```sql
+select a.score as score, 
+(select count(distinct b.score) from Scores b where b.score >= a.score) as 'Rank' 
+from Scores a 
+order by a.score Desc
+# 另外一个
+select a.name as "Employee"  from Employee as a join Employee as b on a.managerId = b.id where a.salary > b.salary
+```
 - where 中带括号是什么意思:`select * from Person where id = 1;`
 - 子查询(表子查询)
   - `select * from (select * from Person where age>10) as a;`

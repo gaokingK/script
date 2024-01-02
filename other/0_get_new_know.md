@@ -67,10 +67,7 @@ Fatal error in launcher: Unable to create process using '"d:\softwares\python 2.
 ### 各國語言(語系)代碼表
 - https://hoohoo.top/blog/national-language-code-table-zh-tw-zh-cn-en-us-json-format/
 - zh-tw zh-cn
-### HDD HHD SSD sata sas nvme
-- SSD是固态硬盘、HDD是机械硬盘、HHD是混合硬盘。
-- SATA和SAS分别是链接电脑主板的接口类型
-- sas SAS是并行SCSI接口之后开发出的全新接口
+
 ### windows锁屏路径
    - https://images.metmuseum.org/CRDImages/ep/original/DP-20613-001.jpg
    - C:\Users\jw0013109\AppData\Local\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets

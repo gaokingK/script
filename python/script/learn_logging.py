@@ -197,6 +197,12 @@ logging.basicConfig(handlers=[fh], level=logging.DEBUG, format=LOG_FORMAT) # 如
 logger = logging.getLogger("log")
 logger.addHandler(fh)
 """
+"""
+TO: hello_world
+import logging
+logging.basicConfig(level=logging.DEBUG)// 默认是error
+logging.info（）就可以用了
+"""
 if __name__ == '__main__':
     # logging_by_conf()
     logging_by_dict_yaml()

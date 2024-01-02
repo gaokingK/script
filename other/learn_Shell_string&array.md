@@ -1,5 +1,10 @@
 
+### 把命令赋值给字符串，再执行命令
+```cs
+aa="systemctl list-units --all|grep mave" # 管道符左右要加空格，否则均会被识别为systemctl的选项
+${aa}
 
+```
 ### 单引号 双引号 不带引号 
 - 单引号会原样输出
 - 双引号里面可以有变量，双引号里面可以出现转义字符
@@ -50,3 +55,27 @@ variable_in_string
       2. {var#pattern} 必须以pattern开始，去掉patter匹配到的最短内容；{var##pattern} 去掉patter匹配到的最长内容；
    3. 不能嵌套吧？就是先给变量赋值，然后使用模式匹配替换
 
+### 大小写转换
+- link：https://www.cnblogs.com/codeking100/p/10196434.html
+```cs
+此方法为bash 4.0以后新增，bash 4.0 2009年发布
+
+$ test="abcDEF"
+
+# 把变量中的第一个字符换成大写
+
+$ echo ${test^}
+AbcDEF
+
+# 把变量中的所有小写字母，全部替换为大写
+$ echo ${test^^}
+ABCDEF
+
+# 把变量中的第一个字符换成小写
+$ echo ${test,}
+abcDEF
+
+# 把变量中的所有大写字母，全部替换为小写
+$ echo ${test,,}
+abcdef
+```

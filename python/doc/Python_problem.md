@@ -27,11 +27,19 @@ True
         - r+ 读和追加写 文件不存在报错
         - w+ 可读可写，但文件打开时就没有内容了
         - a+ 读和追加写 可以用f.seed(0)这样就是从开头写了
+        - t是windows平台特有的所谓text mode(文本模式),区别在于会自动识别windows平台的换行符。
+        - 类Unix平台的换行符是\n，而windows平台用的是\r\n两个ASCII字符来表示换行，python内部采用的是\n来表示换行符。
+        - rt模式下，python在读取文本时会自动把\r\n转换成\n.
+        - wt模式下，Python写文件时会用\r\n来表示换行。
+    - with open("./python/script/RESTFull_Api/res.json/aa") 打开目录下的aa文件
+    - with open("aa") 打开程序source path下的aa文件
     - 打开utf-8编码的中文文件出现：UnicodeDecodeError: 'gbk' codec can't decode byte 0xff in position 0: illegal multibyte sequence
     ```
     #  with open(file_path, encoding="gbk", errors='ignore') as f: 改成下面这样就好了，好像是打开模式的原因
     #  with open(file_path, "r", encoding="utf-8", errors='ignore') as f: 
     ```
+    - Python 使用 json.dump() 保存文件时中文会变成 Unicode。在打开写出文件时加入 encoding="utf8"，在dump时加入 ensure_ascii=False 即可解决。
+    
 ### python 命令行中如果导入的方法修改了，需要重新导入，或者关闭命令行再重新打开，重新导入
 ### sort/sorted区别
     - sort 是应用在 list 上的方法，sorted 可以对所有可迭代的对象进行排序操作

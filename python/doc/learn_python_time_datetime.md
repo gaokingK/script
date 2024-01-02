@@ -51,11 +51,11 @@ time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(1642613319))
 ```
 
 # datetime
-### 获取日期
-```
+### 获取指定格式的日期
+```py
 import datetime
 x = datetime.datetime.now()
-print(x.strftime("%Y-%m-%d"))
+print(x.strftime("%Y-%m-%d")) #%Y-%m-%d %H:%M:%S
 2023-02-20
 ```
 ### 字符串转换为datetime对象: strptime()

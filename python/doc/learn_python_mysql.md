@@ -26,7 +26,9 @@ import pymysql
 db = pymysql.connect(host='localhost',
                      user='testuser',
                      password='test123',
-                     database='TESTDB')
+                     database='TESTDB',
+                     charset='utf8mb4',
+                     cursorclass=pymysql.cursors.DictCursor )
  
 # 使用 cursor() 方法创建一个游标对象 cursor
 cursor = db.cursor()

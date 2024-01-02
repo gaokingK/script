@@ -4,6 +4,9 @@
 - 如果某些函数的值会出现在结果列当中，可以使用As来为这个列重命名，如果没有AS，这个列名就是这个函数的语句
 - 函数分为标准SQL函数、特定数据库系统，例如 MySQL、PostgreSQL、Oracle 等，它们可能提供了自己的时间处理函数
 ### 查看变量 SELECT FLOOR(25.75);
+### ifnull(value, b) 
+- 如果value不为null，返回value，否则返回b
+- `select ifnull((select max(b) from tbl_name), 222 )` # 如果是一个表达式，应该是一个子查询的形式，，并且只能返回一行一列
 ### round
 - 此函数返回x舍入到最接近的整数。如果第二个参数，D有提供，则函数返回x四舍五入至第D位小数点。D必须是正数,如果省略D，则返回整数（无小数）
 ### concat
@@ -35,7 +38,6 @@ LEFT JOIN Products ON OrderDetails.ProductID = Products.ProductID;
 - 计算某列非空值的数量`select count(col_name) from tbl_name`
 - 计算某列不重复值的数量`select count(distinct col_name) from tbl_name`
 - 计算每个国家的客户数量`select count(Customer) from Order group by Country`
-
 ### case
 - link:https://www.w3schools.com/sql/sql_case.asp
 - 作用与行，每行都有结果
@@ -56,7 +58,109 @@ OrderID	Quantity	test
 10249	9	The quantity is under 30
 10249	40	The quantity is greater than 30
 ```
+### dense_rank() over()和# rank() over() # row_number
+- 用来看排名 
+- rank 是跳次排序 1,1,1,4, dense_rank是不跳次排序1,1,1,2, row_number是顺序1,2,3,4
+- 注意逗号分隔
+- over() 子句指定如何对窗口函数rank() 的表行进行分区和排序
+```sql
+RANK() OVER (
+    PARTITION BY <expression>[{,<expression>...}]
+    ORDER BY <expression> [ASC|DESC], [{,<expression>...}]
+) 
+select score, dense_rank() over(order by score desc) as "rank" from Scores; # 相同的分数排名相同，不占用排名
+| score | Rank |
+| ----- | ---- |
+| 4     | 1    |
+| 4     | 1    |
+| 3.85  | 2    |
+| 3.65  | 3    |
+| 3.65  | 3    |
+| 3.5   | 4    |
+select score, rank() over(order by score desc) as "rank" from Scores; # 相同的分数虽然排名相同，但是占用排名
+| score | Rank |
+| ----- | ---- |
+| 4     | 1    |
+| 4     | 1    |
+| 3.85  | 3    |
+| 3.65  | 4    |
+| 3.65  | 4    |
+| 3.5   | 6    |
+```
+### 窗口函数 #PARTITION BY 
+- link:https://www.cnblogs.com/cjsblog/p/16743807.html
+- 一句话概述就是可以结合函数，然后把parttion子句写在over函数内来为每一个结果行添加一个列，列的值就是函数的值
 
+- 窗口函数对一组查询行执行类似聚合的操作。不同之处在于聚合操作将查询行分组到单个结果行，而窗口函数为每个查询行产生一个结果:
+    - 函数求值发生的行称为当前行
+    - 与发生函数求值的当前行相关的查询行组成了当前行的窗口
+- 窗口操作不会将一组查询行折叠到单个输出行。相反，它们为每一行生成一个结果。
+- 窗口函数只允许在查询列表和 ORDER BY 子句中使用。
+- 查询结果行由 FROM 子句确定，在 WHERE、GROUP BY 和 HAVING 处理之后，窗口执行发生在 ORDER BY、LIMIT 和 SELECT DISTINCT 之前。
+```sql
+RANK() OVER (
+    PARTITION BY <expression>[{,<expression>...}]
+    ORDER BY <expression> [ASC|DESC], [{,<expression>...}]
+) 
+
+select emp_no,salary,
+    sum(salary) over(partition by emp_no) as per_emp_total_salary, 
+    sum(salary) over() as total_salary 
+from (select * from salaries limit 0, 20) salaries;
++--------+--------+----------------------+--------------+
+| emp_no | salary | per_emp_total_salary | total_salary |
++--------+--------+----------------------+--------------+
+|  10001 |  60117 |              1281612 |      1480883 |
+|  10001 |  62102 |              1281612 |      1480883 |
+|  10001 |  66074 |              1281612 |      1480883 |
+|  10001 |  66596 |              1281612 |      1480883 |
+|  10001 |  66961 |              1281612 |      1480883 |
+|  10001 |  71046 |              1281612 |      1480883 |
+|  10001 |  74333 |              1281612 |      1480883 |
+|  10001 |  75286 |              1281612 |      1480883 |
+|  10001 |  75994 |              1281612 |      1480883 |
+|  10001 |  76884 |              1281612 |      1480883 |
+|  10001 |  80013 |              1281612 |      1480883 |
+|  10001 |  81025 |              1281612 |      1480883 |
+|  10001 |  81097 |              1281612 |      1480883 |
+|  10001 |  84917 |              1281612 |      1480883 |
+|  10001 |  85112 |              1281612 |      1480883 |
+|  10001 |  85097 |              1281612 |      1480883 |
+|  10001 |  88958 |              1281612 |      1480883 |
+|  10002 |  65828 |               199271 |      1480883 |
+|  10002 |  65909 |               199271 |      1480883 |
+|  10002 |  67534 |               199271 |      1480883 |
++--------+--------+----------------------+--------------+
+- 第一个 OVER 子句是空的，它将整个查询行集视为一个分区。窗口函数因此产生一个全局和，但对每一行都这样做。
+- 第二个 OVER 子句按 manufacturer 划分行，产生每个分区（每个manufacturer）的总和。该函数为每个分区行生成此总和 
+```
+- OVER子句被允许用于许多聚合函数，因此，这些聚合函数可以用作窗口函数或非窗口函数，具体取决于是否存在 OVER 子句：
+AVG()
+BIT_AND()
+BIT_OR()
+BIT_XOR()
+COUNT()
+JSON_ARRAYAGG()
+JSON_OBJECTAGG()
+MAX()
+MIN()
+STDDEV_POP(), STDDEV(), STD()
+STDDEV_SAMP()
+SUM()
+VAR_POP(), VARIANCE()
+VAR_SAMP()
+- 只能作为窗口函数使用的非聚合函数 对于这些，OVER子句是必须的
+CUME_DIST()
+DENSE_RANK()
+FIRST_VALUE()
+LAG()
+LAST_VALUE()
+LEAD()
+NTH_VALUE()
+NTILE()
+PERCENT_RANK()
+RANK()
+ROW_NUMBER()
 ### TIMESTAMPDIFF和TIMESTAMPADD
 - https://blog.csdn.net/zmxiangde_88/article/details/8011661
 - 计算时间的

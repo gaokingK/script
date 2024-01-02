@@ -3,6 +3,7 @@
    - https://wangchujiang.com/linux-command/c/find.html
    - https://linuxpip.org/ 问题
    - 搜索用法就搜 man手册参数详细解释
+   - Linux 系统的介绍linux各种命令：https://docs.oracle.com/cd/E56344_01/html/E54075/ksh-1.html
 # other
 ### 改变工作目录 cd xxxx; other command
 
@@ -205,6 +206,40 @@ Ctrl+b z：当前窗格全屏显示，再使用一次会变回原来大小。
    - -u MySQL    只查看有效用户名为mysql的进程
    - -n 8    退出前屏幕再刷新10次
    - -p 通过指定监控进程ID来仅仅监控某个进程的状态
+   - htop 是top的增强版本，需要重新安装
+   - 通过”shift + >”或”shift + <”可以向右或左改变排序列
+   ```cs
+   PID — 进程id
+   USER — 进程所有者
+   PR — 进程优先级
+   NI — nice值。负值表示高优先级，正值表示低优先级
+   VIRT — 进程使用的虚拟内存总量，单位kb。VIRT=SWAP+RES
+   RES — 进程使用的、未被换出的物理内存大小，单位kb。RES=CODE+DATA
+   SHR — 共享内存大小，单位kb
+   S — 进程状态。D=不可中断的睡眠状态 R=运行 S=睡眠 T=跟踪/停止 Z=僵尸进程
+   %CPU — 上次更新到现在的CPU时间占用百分比
+   %MEM — 进程使用的物理内存百分比
+   TIME+ — 进程使用的CPU时间总计，单位1/100秒
+   COMMAND — 进程名称（命令名/命令行）
+   ```
+   - 交互命令 在top 命令执行过程中可以使用的一些交互命令。这些命令都是单字母的，如果在命令行中使用了s 选项， 其中一些命令可能会被屏蔽。
+      - h 显示帮助画面，给出一些简短的命令总结说明
+      - k 终止一个进程。
+      - i 忽略闲置和僵死进程。这是一个开关式命令。
+      - q 退出程序
+      - r 重新安排一个进程的优先级别
+      - S 切换到累计模式
+      - s 改变两次刷新之间的延迟时间（单位为s），如果有小数，就换算成m s。输入0值则系统将不断刷新，默认值是5 s
+      - f或者F 从当前显示中添加或者删除项目
+      - o或者O 改变显示项目的顺序
+      - l 切换显示平均负载和启动时间信息
+      - m 切换显示内存信息
+      - t 切换显示进程和CPU状态信息
+      - c 切换显示命令名称和完整命令行
+      - M 根据驻留内存大小进行排序
+      - P 根据CPU使用百分比大小进行排序
+      - T 根据时间/累计时间进行排序
+      - W 将当前设置写入~/.toprc文件中 
 ### strings
    - link: https://blog.csdn.net/test1280/article/details/80978717
    - string 工具可以对任何文件的内容进行分析，并输出可打印字符长度不小于4的串。
@@ -237,6 +272,7 @@ Ctrl+b z：当前窗格全屏显示，再使用一次会变回原来大小。
    - [进程替换](https://www.runoob.com/w3cnote/shell-process-substitution.html) ---------no
    - [Here document使用方法总结](https://blog.csdn.net/liumiaocn/article/details/86715953) -------------no
    - 可以把<(...)整体当做一个文件名，这个文件的内容就是()中脚本的执行结果，这样第二条命令简化为`bash -s stable <tmp.sh` 或 $(<file_name)
+   - sed -e 's/\(.*\)/\L\1/' <<< "$a" 
 ### 输出参数提示(redis) -----------------------------------no
 ### declare 
    - [link](https://www.runoob.com/linux/linux-comm-declare.html)
@@ -393,6 +429,9 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
 - 修改时间
    - 见touch使用
 ### ls 
+   - ls *bak* 
+      - * 匹配任何字符0或多次
+      - . 匹配.字符
    - ls -t 按时间顺序显示 最新的文件在最前
    - ls -r 显示文件夹中
    - -R 若目录下有文件，则以下之文件亦皆依序列出
@@ -461,8 +500,9 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
    -num : 选取第1个到num个的字节/字符/片段；
    ```
 
-### tar zip
+### tar # zip # gzip 
    - [link](http://blog.chinaunix.net/uid-29132766-id-3862597.html)
+   - 从标准输入读取文件解压 `gunzip -c s.mave-5.0.6.0-l-20230926.AIX.6.1.0.0_64.tar.gz|tar -xvf -`
    - 如果a/中有b,c,d文件, 然后在a的父文件中tar .... a/ 那么解压出来 也会有个a/ 就不必在创建a/然后在-C a/了,那样就有两层；而是直接在目录D下`tar -zxvf file.tar.gz` 这下目录D下就会有a/了
    - -z 通过gzip指令处理备份文件
    - -v 显示处理信息
@@ -486,6 +526,8 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
    - -r 递归处理，将指定目录下的所有文件和子目录一并处理。
    - **问题**
    - not gzip format 原因是用wget命令直接下载的JDK，这是问题的根源。去Oracle官网下载过jdk的童鞋应该都知道，下载之前需要同意Oracle的安装协议，不然不能下载，但是用wget的方式，默认是不同意，虽然能下载下来，但是下载下来的文件会有问题，所以在Linux上解压一直失败。解决方法是手动上传
+   - **gzip**
+      - -c：将解压缩后的文件内容输出到标准输出（而不是写入文件）。
 ### find
    - `*`是通配符 `.`不是
    - 按时间排序 `find . -type f -print0 | xargs -0 stat --format '%Y :%y %n' | sort -nr`
@@ -594,15 +636,7 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
       find . -type f -name "*.sh"|grep sh|xargs -i git add {}
 
 ### nl filename 带行号显示文件内容
-### ps
-- jps 显示java进程的
-- -p 
-- ps -ef/ aux/ -aux的区别
-   - link: 
-      - https://www.cnblogs.com/sexybear/p/Linux_ps.html
-      - 不同：https://blog.csdn.net/qq_36025814/article/details/122232571
-   - 显示的风格不同;aux会截断命令,如果后面配合grep可能会影响效果;
-   - 都显示全部的系统进程和用户进程，但是列不一样，-aux会显示cpu和mem占用信息
+
 ### linux 命令分割符 `;`/`&&`/`||`
     - 逻辑符
        `;` 命令会按顺序执行，即使中间命令使用方式不对，后续命令还会继续执行
@@ -630,7 +664,7 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
     - grep 怎么只搜索文件夹中的某个文件类型 -------------------------------------------------------no
     - grep 怎样直接从字符串中搜索，不用echo ------------------------------------------------------no
     - grep中的通配符是. *是匹配0次或者多次
-    - 
+    - grep -E "never\b" 搜索`never"` 而不搜索`nervers`
     - 引号的作用
       - 使用引号的形式可能会在处理一些特殊字符时更为安全。
       - grep "^kpi": 使用了双引号，这样做主要是为了防止 shell 解释 ^ 字符。在某些情况下，如果没有双引号，^ 可能会被 shell 解释为特殊字符。
@@ -726,6 +760,7 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
 ### [shell set](https://blog.csdn.net/t0nsha/article/details/8606886)
 	- man set
 	- [脚本前指定解释器加-e 可以自动判断每条指令的执行结果，如果非0，脚本就会自动退出](https://www.cnblogs.com/dakewei/p/9845970.html)
+   - set +e 用于禁用 set -e 的影响，而在需要再次启用 set -e 之前，可以执行可能会出错的命令 可以把set +e 写在会出错的命令前，然后在下一行用set -e 重新启用
     - shell 脚本是这样，别的不知道
     - 等价于 set -e
     - 有弊端， 比如先删除后新建的语句（如果删除的不存在会报错导致脚本退出）

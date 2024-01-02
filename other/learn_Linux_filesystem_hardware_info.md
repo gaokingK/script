@@ -2,10 +2,26 @@
 ## link：
 - 备份文件后扩展https://juejin.cn/post/6939387305119612935
 - 一些问题：https://juejin.cn/post/7185063214453882940
+- 硬件和软件都有：https://juejin.cn/post/7185063214453882940
 ## 一些概念
 - **索引节点，也就是 inode**，用来记录文件的元信息，比如 inode 编号、文件大小、访问权限、创建时间、修改时间、数据在磁盘的位置等等。索引节点是文件的唯一标识，它们之间一一对应，也同样都会被存储在硬盘中，所以索引节点同样占用磁盘空间。
 - **文件系统和分区** 文件系统和分区是两个紧密相关但并不相同的概念，他们是属于同一个层级的概念，一个分区只有一种文件系统；
 - 一块SCSI硬盘最大分区只能分三个主分区加一个扩展分区, 而扩展分区最多可分15个逻辑分区, 这是硬件限制，不能突破。
+### 逻辑分区和扩展分区
+
+在 Linux 系统中，逻辑分区（Logical Partitions）通常是在扩展分区（Extended Partition）中创建的。逻辑分区是用于进一步划分磁盘空间的分区类型。由于逻辑分区是在扩展分区中创建的，因此它们的设备名通常与物理分区有所区别。
+
+逻辑分区的设备名通常以 "sda5"、"sda6" 等形式命名，其中 "sda" 是磁盘标识，数字表示分区号。例如，"sda5" 表示磁盘上的第一个逻辑分区。
+
+如果你想从命名上区分逻辑分区，可以注意以下几点：
+
+分区号： 逻辑分区的分区号通常是 5 开始的整数。例如，"sda5"、"sda6"、"sda7" 等。
+
+设备名： 逻辑分区的设备名通常以磁盘标识和分区号组成，例如 "sda5"。与物理分区相比，逻辑分区的分区号往往较大。
+
+挂载点： 通过查看分区的挂载点（如果已经挂载），你可能能够推断出逻辑分区的用途。逻辑分区的挂载点可能包括 "/home"、"/var"、"/usr" 等。
+
+分区表信息： 使用命令如 fdisk -l 或 parted -l 查看分区表信息。逻辑分区通常位于扩展分区内。
 # 文件系统
 - link：
     - 一口气搞懂「文件系统」，就靠这 25 张图了：https://www.cnblogs.com/xiaolincoding/p/13499209.html
@@ -56,23 +72,27 @@ df --output=fstype,size,iused
 ## du 对文件和目录磁盘使用的空间的查看[link](https://www.cnblogs.com/wanng/p/linux-du-command.html)
 - -h ：以人们较易读的容量格式 (G/M) 显示；
 - -a 将文件的容量也列出来
-- -m/k 以 MBytes/KBytes 列出容量显示；
+- -m/k 以 MBytes/KBytes 列出容量显示；是整数
+- -k显示的是文件所占磁盘块的大小
 - -d 是 --max-depth=N 选项的简写，表示深入到第几层目录,超过指定层数目录则忽略
 - -c 显示几个文件或目录各自占用磁盘空间的大小，还统计它们的总和
 - -s: 显示目录总大小
+- `find . -type f -exec du -hm {} + | sort -r | head -n 5`
 ``` shell
 # 检查目录底下每个目录所占用的容量
 du -sm path
-du -h -d1 # 查看当前文件夹内各文件和文件夹的大小 # 有时命令会运行很久
+du -h -d1 # 查看当前文件夹内各文件和文件夹的总大小 # 有时命令会运行很久
 du -sh # 查看当前文件夹的总大小
 du -c log30.tar.gz log31.tar.gz
 ```
+
 
 ## fdisk是 Linux 的磁盘分区表操作工具。
 - link：https://linux.cn/article-10508-1.html
 - fdisk -l 可以查看所有物理磁盘的大小和该磁盘下的分区
 ```cs
 Disk /dev/sda: 30 GiB, 32212254720 bytes, 62914560 sectors //Disk /dev/sda: 这部分指示了磁盘的设备名。/dev/sda 是第一个磁盘。下面有第二个磁盘名/dev/sdb
+// hda一般是指IDE接口的硬盘，hda指第一块硬盘，hdb指第二块硬盘,等等；sda一般是指SATA接口的硬盘，sda指第一块硬盘，sdb指第二块硬盘，等等
 // 30 GiB, 32212254720 bytes, 62914560 sectors: 这是磁盘的容量信息，包括容量以 GiB 和字节表示，以及扇区数量。
 Units: sectors of 1 * 512 = 512 bytes //Units: 这里说明了扇区的大小。
 Sector size (logical/physical): 512 bytes / 512 bytes//Sector size (logical/physical): 这部分显示了逻辑扇区和物理扇区的大小。
@@ -112,7 +132,7 @@ I/O size (minimum/optimal): 512 bytes / 512 bytes
 >mount --bind test1 test2为例，当mount --bind命令执行后，Linux将会把被挂载目录的目录项（也就是该目录文件的block，记录了下级目录的信息）屏蔽，即test2的下级路径被隐藏起来了（注意，只是隐藏不是删除，数据都没有改变，只是访问不到了）。同时，内核将挂载目录（test1）的目录项记录在内存里的一个s_root对象里，在mount命令执行时，VFS会创建一个vfsmount对象，这个对象里包含了整个文件系统所有的mount信息，其中也会包括本次mount中的信息，这个对象是一个HASH值对应表（HASH值通过对路径字符串的计算得来），表里就有 /test1 到 /test2 两个目录的HASH值对应关系。
 命令执行完后，当访问 /test2下的文件时，系统会告知 /test2 的目录项被屏蔽掉了，自动转到内存里找VFS，通过vfsmount了解到 /test2 和 /test1 的对应关系，从而读取到 /test1 的inode，这样在 /test2 下读到的全是 /test1 目录下的文件。
 https://www.cnblogs.com/weihua2020/p/13872964.html
->
+
 
 
 ## lsblk 用于列出所有可用块设备的信息 查看的是磁盘分区 df -h 看到是文件系统 两个命令通过mount on 和mountpoint对应
@@ -134,11 +154,27 @@ nvme0n1     259:0    0 238.5G  0 disk
 ├─nvme0n1p6 259:6    0    14G  0 part /recovery #代表在根目录下ls中的recovery占用的空间是一个分区
 └─nvme0n1p7 259:7    0    11G  0 part [SWAP] # 交换空间
 ```
-</br>
+### lvm 逻辑卷管理
+- link: 
+    - https://juejin.cn/post/7080319811338633230
+    - 逻辑卷LVM和磁盘配额简述: https://juejin.cn/post/7260034286279508024
+    - LVM基本介绍与常用命令:https://www.cnblogs.com/jackruicao/p/6258812.html
+- LVM是linux对硬盘分区的管理机制，为我们提供逻辑磁盘的概念，使文件系统不在关注底层物理磁盘的概念
+- 物理卷（Physical Volume，PV）：就是真正的     物理硬盘     或      分区
+- 卷组（Volume Group，VG）：将多个物理卷合起来就组成了卷组。组成同一个卷组的物理卷可以是同一块硬盘的不同分区，也可以是不同硬盘上的不同分区。我们可以把卷组想象为一块逻辑硬盘。
+- 逻辑卷（Logical Volume，LV）：卷组是一块逻辑硬盘，硬盘必须分区之后才能使用，我们把这个分区称作逻辑卷。逻辑卷可以被格式化和写入数据。我们可以把逻辑卷想象为分区。
+- 物理扩展（Physical Extend，PE）：PE 是用来保存数据的最小单元，我们的数据实际上都是写入 PE 当中的。PE 的大小是可以配置的，默认是 4MB。
 
-## 一次简单的扩容硬盘未满（所有的分区未占满硬盘的空间），只是其中的某个分区满了
+### /dev/mapper
 - link:
-```cs
+    - https://blog.csdn.net/u011495642/article/details/80197155
+- /dev/mapper/Volume-lv_root的意思是说你有一个VG (volume group卷组)叫作Volume, 这个Volume里面有一个LV叫作lv_root。其实这个/dev/mapper/Volume-lv_root文件是一个连接文件，是连接到/dev/dm-0的，你可以用命令ll /dev/mapper/Volume-lv_root进行查看。
+- 其实在系统里/dev/Volume/lv_root 和 /dev/mapper/Volume-lv_root以及/dev/dm-0都是一个东西，都可当作一个分区来对待。
+## 一次简单的扩容硬盘未满（所有的分区未占满硬盘的空间），只是其中的某个分区满了
+- 别的办法: 
+    - https://juejin.cn/post/6939387305119612935
+    - PV、VG、LV介绍：https://juejin.cn/post/7273025938937774120?searchId=202310121707024E4EB30EBCBEEC4BE0CF
+```shell
 df -h 找出快满的文件系统，比如这里是/dev/vda1
 [root@root ~]# df -h
 Filesystem      Size  Used Avail Use% Mounted on
@@ -167,29 +203,45 @@ resize2fs /dev/vda1
 ### resize2fs /dev/centos/root 刷新分区时Couldn‘t find valid filesystem superblock.
 - 由于系统为centos7系统，文件格式为xfs
 - 所以需要使用以下命令刷新lv `xfs_growfs  /dev/centos/root`
+
 ### 文件被占用
 - 直接接触占用 fuser -km /home/
+
+### 如何使用dd命令生成一个大小为500M的文件？
+- dd if=/dev/zero of=/bigfile bs=1024k count=500
+
 # 硬件信息
+
 ## GPU查看 `lspci|grep -i vga`
     - link: https://blog.csdn.net/dcrmg/article/details/78146797
-## CPU `lscpu`
-    - aarch64 为ARM
-</br>
 
-## 内存 `lsmem`
-# 系统版本
+## CPU `lscpu`
+###  CPU 架构
+对此了解不全面，可能有错误
+- 一共有两种架构x86_64和Altarch(又叫ARM？)
+- ARM
+    - 标识为ARMv8 / ARM64 / aarch64
+- x86
+
+## 硬盘
+
+### HDD HHD SSD sata sas nvme
+- SSD是固态硬盘、HDD是机械硬盘、HHD是混合硬盘。
+- IDE、SATA和SAS分别是链接电脑主板的接口类型
+- IDE是之前的接口类型：https://blog.csdn.net/weixin_44395686/article/details/105228268
+- sas SAS是并行SCSI接口之后开发出的全新接口
+
+## 内存
+-  `lsmem` 查看硬件
+- free 查看内存大小
+    - -m 以M为单位
+
+# 系统版本 # uname
 ```
 uname -a
 ```
-</br>
 
-# CPU 架构
-对此了解不全面，可能有错误
-- 一共有两种架构x86_64和Altarch(又叫ARM？)
-- ## ARM
-    - 标识为ARMv8 / ARM64 / aarch64
-- ## x86
-</br>
+
 
 # Linux 发行版本
 ## - [查看linux内核版本和发行版本](https://blog.csdn.net/networken/article/details/79771212?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control)

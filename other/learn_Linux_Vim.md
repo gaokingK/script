@@ -2,7 +2,9 @@
 - vimtutor zh 打开中文的tutorials
 - 在vim 窗口中F1
 - vim操作命令大全: https://blog.csdn.net/weixin_37657720/article/details/80645991
-  
+- https://www.fprintf.net/vimCheatSheet.html
+## 命令
+
 ## 问题和注意
 - 如何将复制的内容复制到vim的命令输入中
   - 选中变量；进入命令行；先按ctrl+r 再按ctrl+w 命令行中粘贴
@@ -116,11 +118,20 @@
 - :tabn – 切换到下一个标签。Control + PageDown，也可以。
 - [n] gt – 切换到下一个标签。如果前面加了 n ， 就切换到第n个标签。第一个标签的序号就是1。
 
+### 打开文件目录树然后挑选一个文件来打开
+- 如果你正在编辑一个文件，然后又想同时打开另外一个文件，但是又不知道文件路径，所以不能用tabe来看，就可以用这个
+- :Explore #当前窗口下打开 缩写为`:E`
+- :Vexplore #竖直分割窗口打开 缩写为`:Ve`
+- :Sexplore #水平分割窗口打开 缩写为`:se`
+- 
+- i 切换文件视图
+
 #### 执行系统命令
 - [VIM中执行Shell命令](https://blog.csdn.net/bnxf00000/article/details/46618465/)
 - :!command
   - 某些命令返回-1
   - grep `pattern ()`返回-1 因为() 应该转义 使用`grep "pattern\(\)"`
+
 
   
 #### 查看vim输入过的历史命令
@@ -154,3 +165,10 @@
 #在正则表达式中使用和符号括起正则表达式,即可在后面使用\1,\2等变量来访问和中的内容,如下
 :s/\w\+\s\+\w\+/\2\t\1 # 将data1 data2修改为data2 data1
 ```
+
+### 问题
+- E212: Can't open file for writing
+    - 保存文件时出现这个，退出时出现138，解决玩138后这个错误也消失了
+- E138: Can't write viminfo file /Users/henrik/.viminfo!
+https://unix.stackexchange.com/questions/134500/vim-error-e138-cant-write-viminfo-file-home-viminfo
+解决办法是： rm -rf ~/.viminf*  # Remove them.

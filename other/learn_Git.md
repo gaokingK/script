@@ -49,6 +49,13 @@
 - git remote设置的是ssh地址，push 提示ssh: connect to host github.com port 22: Connection refused
    - link:https://zhuanlan.zhihu.com/p/521340971
    - windows也可以使用更改config文件修改22端口到443端口
+   ```cs
+   vim ~/.ssh/config
+   # Add section below to it
+   Host github.com
+      Hostname ssh.github.com
+      Port 443
+   ```
 - git clone https://github.com/derekparker/delve.git 报Failed to connect to github.com port 443
    - 采用ssh地址，看不到是因为github没有登陆账号
 - fatal: unable to access 'https://github.com/ScoopInstaller/Main.git/': Failed to connect to github.com port 443 after 21204 ms: Couldn't connect to server 

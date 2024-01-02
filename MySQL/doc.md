@@ -1,0 +1,1 @@
+- https://www.begtut.com/mysql/mysql-rank-function.html

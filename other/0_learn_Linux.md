@@ -2,6 +2,7 @@
   - https://www.thegeekstuff.com/2008/08/15-examples-to-master-linux-command-line-history/
   - https://linux.cn/article-10096-1.html
   - 鸟哥linux： https://wizardforcel.gitbooks.io/vbird-linux-basic-4e/content/150.html
+
 # 通识
 ### sudo和sudo su 和su之间有什么区别啊
 sudo 用于以当前用户的权限执行特定命令，提供了更细粒度的权限控制。输入当前用户的密码
@@ -80,7 +81,7 @@ su 命令的主要限制是，只有具有特殊权限的用户（通常是系�
     var="Children of Men - Chapter 1.pdf"
     rm "$var"
    ```
-### 查看用户信息
+### 查看用户信息 # whoami
    - link：https://blog.csdn.net/newdriver2783/article/details/8059368
    - w命令用于显示已经登录系统的用户的名称，以及他们正在做的事
    - who命令用于列举出当前已登录系统的用户名称。
@@ -128,7 +129,12 @@ fi
    d 只下载不安装
 
 ### 配置文件
-
+### 资源限制 # cgroups
+- link: https://juejin.cn/post/6921299245685276686
+- Linux cgroups 的全称是 Linux Control Groups，它是 Linux 内核的特性，主要作用是限制、记录和隔离进程组（process groups）使用的物理资源（cpu、memory、IO 等）。
+- ps -ef|grep mave 有进程id
+- cat 到/sys/fs/cgroup/memory/mave/tasks 发现里面的进程中有上面搜出来的进程
+   - 或许也不是这个路径 mave/task 可能是 systemctl status mave 中查看的cgroup的字段
 
 ### 行内for 循环
 ```shell
@@ -154,7 +160,7 @@ service sshd restart
 
 ### docker
 
-### service 文件 Linux添加自定义服务
+### service 文件 Linux添加自定义服务 # systemctl
 - link:
    - https://juejin.cn/post/7037000593839243301
 - Linux中.service文件是某项服务对应的配置文件，可用于systemd管理和控制的服务的设置。.service 文件通常包含3个模块，
@@ -167,7 +173,8 @@ service sshd restart
    - `/etc/systemd/system/` 一般系统管理员手工创建的单元文件建议存放在`/etc/systemd/system/`目录下面。
 - 可以对文件重命名，重命名后会提示systemctl daemon-reload 但知道原来的service服务stop前，原服务名仍能使用
 - 服务启动失败后可以使用journalctl -xe来查看日志
-- 
+- systemctl list-units --type=service --all 命令。这条命令会列出系统中所有服务的状态，包括正在运行的服务和已禁用的服务
+- systemctl list-unit-files 所有的服务配置文件
 ### proc 目录 根据pid显示进程信息
 - link: https://www.cnblogs.com/DswCnblog/p/5780389.html
 - ll /proc/<pid>

@@ -48,6 +48,8 @@ all: # 最上层的key，value是一个字典
     所有的key，value必须用双引号包括
 # pickle/cpickle
     cPickle是C语言写的，速度快，pickle是纯Python写的，速度慢
+# Python 使用 json.dump() 保存文件时中文会变成 Unicode。在打开写出文件时加入 encoding="utf8"，在dump时加入 ensure_ascii=False 即可解决。
+# Python报错UnicodeDecodeError: ‘gbk‘ codec can‘t decode byte 解决办法是将 with open(file) as f: 改成with open(file, ‘r’, encoding=‘utf-8’) as f:
 """
 import yaml
 

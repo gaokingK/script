@@ -13,14 +13,19 @@
       - `[[]]` 和 `[]` 相当于test
          - [ 2 -eq 2 ] && echo a || echo b
          - [[ 2 -eq 2 ]] && echo a || echo b
-
+      - 请使用一行linux代码帮我实现：条件A为真  则判断B，如果B为真 执行C，B为假执行D，A为假则什么也不执行
+      `[ conditionA ] && { [ conditionB ] && commandC || commandD; } || true`
 
   - https://www.cnblogs.com/kaishirenshi/p/9729800.html
+  - 文本 https://blog.csdn.net/Mr_LeeHY/article/details/76383091
 ### 注意
 - [] 一定要和中间的东西使用空格隔开
 - 判断命令的执行结果
    - https://www.jianshu.com/p/9097c60d8e8c
    ```cs
+   if ... fi 语句；
+   if ... else ... fi 语句；
+   if ... elif ... else ... fi 语句。
    # foo 是一个函数 但换成命令也是可以的
    if [ "$(foo 'NO')" == "It's not YES" ]; then
       echo "Match: NO"
@@ -89,6 +94,7 @@ fi
    - https://blog.csdn.net/Michaelwubo/article/details/81698307
 - 单对中括号，变量必须要加双引号, 双对不用加 `[ -n "$pid" ]; [[ -n $pid ]] `
 - 双括号中，不能使用 -a -o 对多个条件进行连接，`[[]]`内外都不行
+- ksh( Korn Shell) 只支持`[]`
 - 单括号中可以使用-a -o，但必须在括号内;
 - 单括号中可以使用`&&`和`||`,但必须在括号外
 
