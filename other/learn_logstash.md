@@ -1,6 +1,7 @@
 # TO: logstash
 ## link
 - 官方文档：https://www.elastic.co/guide/en/logstash/6.5/plugins-filters-translate.html
+- 中文:https://doc.yonyoucloud.com/doc/logstash-best-practice-cn/codec/json.html
 ### 主要分为三个部分：读取、过滤、输出。重点在过滤上面，可以丢弃消息，可以替换属性、可以新增属性
 ### mutate
 - mutate具有以下几个函数（sql用惯了）https://blog.csdn.net/wu2700222/article/details/89875092
@@ -26,6 +27,16 @@ if [kpi_name] != "value1"{
 if [kpi_name]{
     drop()
 }
+```
+### date
+- https://doc.yonyoucloud.com/doc/logstash-best-practice-cn/filter/date.html
+```
+date {
+        match => ["logdate", "ISO8601"]
+        traget => "log_time"
+    }
+logdate: 2024-11-09T09:34:22.553T
+经过处理后会生成log_time字段，值为
 ```
 ### output
 ```

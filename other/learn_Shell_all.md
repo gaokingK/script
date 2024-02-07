@@ -4,6 +4,11 @@
 set -o errexit #增加这句话，出错之后就会退出啦
 set -e #这句话和上一句是一样的，写一个就好了
 ```
+### 数学运算 # 算数运算
+- https://blog.csdn.net/google19890102/article/details/51063530
+- i=$[i+10] #20
+- (())等价于[]
+- i=`expr $i + 10` #20
 ### 命令执行结果赋值给变量 permission denied
 ```
 inventory_path2=echo "$inventory_path"|awk -F rootfs/ '{print $2}'

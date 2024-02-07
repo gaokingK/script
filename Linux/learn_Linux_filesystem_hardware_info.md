@@ -31,6 +31,8 @@
     - fdisk：用于磁盘分区
     - ls 只能查看文件的大小，但是不能查看文件夹的
 ## 软连接和硬链接
+- 以l开头的是软链接 , 相当于快捷方式；以-开头的是硬链接
+- 创建一个file的软链接 `ln -s  软链接` 创建一个file的硬链接 `ln hello 源文件 或 link hello 源文件 `
 - 硬链接是多个目录项中的「索引节点」指向一个文件，也就是指向同一个 inode，但是 inode 是不可能跨越文件系统的，每个文件系统都有各自的 inode 数据结构和列表，所以硬链接是不可用于跨文件系统的。由于多个目录项都是指向一个 inode，那么只有删除文件的所有硬链接以及源文件时，系统才会彻底删除该文件。所以源文件删除的时候，硬链接还是可以使用的
 - 目录下面的.和子目录下面的..都是指向目录的硬链接
 - 软连接是相当于重新创建一个文件，就是重新创建一个inode，但是这个文件的内容是被连接的文件的地址，所以访问软链接的时候，其实是访问另外一个文件；所以软链接可以指向目录并且可以跨越文件系统。源文件删除的时候，软链接并不会被删除，而会变成一个死连接
@@ -184,7 +186,7 @@ tmpfs           490M   50M  441M  11% /run
 tmpfs           490M     0  490M   0% /sys/fs/cgroup
 /dev/vda1        30G  2.8G   34G   9% / 
 tmpfs            98M     0   98M   0% /run/user/0
-# 通过lsblk来看硬盘是否有空间 发现还有1G
+# 通过lsblk来看硬盘是否有空间 发现还有1G (因为vda下面有两个vad1和vda2，40G-1023M-38G等于是还有1G)
 [root@root ~]# lsblk
 NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
 vda    253:0    0   40G  0 disk
@@ -199,10 +201,16 @@ sudo lvextend -L +1G /dev/vda1
 刷新分区:
 resize2fs /dev/vda1 
 ```
+## lvextend 
+- --resizefs # 加上这个后the filesystem type would have been automatically deduced, avoiding trying to use resize2fs in lieu of `xfs_growfs'.
 ## 问题
 ### resize2fs /dev/centos/root 刷新分区时Couldn‘t find valid filesystem superblock.
 - 由于系统为centos7系统，文件格式为xfs
 - 所以需要使用以下命令刷新lv `xfs_growfs  /dev/centos/root`
+
+### Couldn't create temporary archive name.
+- link：https://unix.stackexchange.com/questions/389539/lvm-couldnt-create-temporary-archive-name
+- lvextend -An -L+5G /dev/mapper/vg08_root # 禁用了元数据备份
 
 ### 文件被占用
 - 直接接触占用 fuser -km /home/
@@ -251,6 +259,8 @@ uname -a
 [root@agentX2 ~]# cat /etc/redhat-release
 CentOS Linux release 7.6.1810 (AltArch)
 ```
+## uname -r
+## cat /etc/issue
 # 权限 # 文件权限
 - 如果某个用户没有某个文件夹的权限，也是能够进去这个文件夹的，只是ll会提示没有permissions
 - user_a进入test，root删除root后重新创建test，把user_a的权限全部取消，user_a任然能ll，但是看不到文件了，重新进入后提示没有权限

@@ -77,22 +77,26 @@ True
 dict(zip('abc', [1, 2, 3]))
 dic = {i:2*i for i in range(3)} # {0: 0, 1: 2, 2: 4}
 ```
-
+## 表示正负无穷`float("inf") float("-inf")`
 ## formate 的罕见用法
 ```
 Executing task id {0.id}, args: {0.args!r} kwargs: {0.kwargs!r}'.format(self.request))
 ```
 
-## 集合和集合的运算
+## 集合和集合的运算 # set
 - link：https://blog.csdn.net/isoleo/article/details/13000975
-```
+```py
 # 交集
 a & b
 # 并集
 a | b
 # 差
 a - b # {1, 2} - {1, 3} 结果是2
+# 增加
+set_obj.add(a) # 只能单个元素
+set_obj.update([a,b,c]) # 可以多个元素
 ```
+
 ### from openpyxl import load_workbook 处理excle表格
 ### if 类的某个实例会调用哪个方法
 - https://pycoders-weekly-chinese.readthedocs.io/en/latest/issue6/a-guide-to-pythons-magic-methods.html

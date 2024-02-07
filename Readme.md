@@ -41,4 +41,5 @@
 - 每个概念性的东西中考虑是否建一个标题 如MySQL/learn_index.md/# ## 索引的一些名词 ##索引的一些语法
 - 在开头加上TO来对文件的内容summary
 - 学习新东西的时候把从哪里入手和简单的helloworld一定要写 或者搞出来xxx_hello_world.md
+- 社区链接，文档比较全的网站在learn_linux、learn_python或者在linux下新建一个文件如linux_doc.md
 

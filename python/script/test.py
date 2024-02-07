@@ -11,6 +11,11 @@
 # a = [None, False, True]
 # print(reduce(la, a))
 # print(reduce(exec_mode, a))
+a = []
+def test():
+    a = [3]
+    print(a)
+  
 
 def filter_num(num_list):
     b = [x for x in filter(lambda b: b != 2, num_list)]
@@ -19,4 +24,7 @@ def filter_num(num_list):
 
 
 if __name__ == '__main__':
-    filter_num([1, 2, 3, 4])
+    # filter_num([1, 2, 3, 4])
+    test()
+    print(a)
+

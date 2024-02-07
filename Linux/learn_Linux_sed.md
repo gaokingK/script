@@ -16,7 +16,7 @@ sed OPTIONS 'expression' input_file
 - `OPTIONS`：可以是一些选项标志，例如 `-i` 表示直接在输入文件中修改。
 - `'expression'`：是一个 `sed` 表达式，用于指定要执行的操作，包括文本匹配和替换等。
 - `input_file`：要处理的输入文件。
-
+- `echo aaa|sed 's/a/b/g'`
 
 #### 一些命令
 - 命令格式： 
@@ -32,6 +32,7 @@ sed OPTIONS 'expression' input_file
 - 一些匹配行的方式 
     - sed -i '/tar/i44' 在包括tar内容的行前面插入44
     - sed -i /^rule.*iles:$/ahhh prometheus-config.yaml ^匹配开头，$匹配结尾，.匹配任意字符，`*`匹配多次
+    - 直接输入`+{}()` 这些都会当成字符去匹配，如果要是使用正则的元字符匹配，需要加上反斜杠转义
 - sed -i '/^ *workers: *$/,/^ *$/{/10.0.5.89/d}' rootfs/deploy/inventory_dir/inventory_10.0.5.89.yaml
     - 在匹配到的行中操作
 - 替换连续的多行 
@@ -82,6 +83,7 @@ sed OPTIONS 'expression' input_file
     - 搜索元字符：
       - & 保存搜索字符用来替换其他字符，如s/love/&2/，love替换为love2;
     - -n或--quiet或--silent 仅显示script处理后的结果。
+      - `sed -n 's/hhh/aaa/p' filename` 这样才能只打印这一行 -n要配合p
 
 #### 动作
 - 多个命令使用;来分割
@@ -93,7 +95,7 @@ sed OPTIONS 'expression' input_file
 - $ 代表最后一行
 - 使用正则`echo "xxxxx"|sed "s/re_/substance/g`
 - a：新增
-```
+```cs
 sed -e 4a\ newLine testfile # 在第4行后添加
 ```
 - i：插入 `sed -e 4inewline` # 在第4行前添加
@@ -103,6 +105,9 @@ sed -e 4a\ newLine testfile # 在第4行后添加
 - w 写入，指定行内容重定向写入到指定文件
     - sed '/partten/w file_name' 处理的文件
     - 会清空后再写
+- d 删除
+    - 对匹配到的内容的行进行删除 `sed -i /匹配内容/d file` 
+    - !d 对没有匹配到的内容删除 `free -m | tr -s ' ' | sed '/^Mem/!d' | cut -d" " -f2-4`
 - s 替换 (是把匹配掉的替换，如果想替换整行就要匹配整行)
     -  `sed -i '1s/^/2hhh/' prometheus-config.yaml` 第一行开头增加2hhh 注意要使用用`/`结束
     - 匹配整行使用s/^$/sss/
@@ -168,7 +173,7 @@ sed -e 4a\ newLine testfile # 在第4行后添加
 ### 正则表达式基础
 在 `sed` 中，正则表达式用于匹配文本。下面是一些正则表达式的基本概念：
 
-- `.`：匹配任意一个字符。
+- `.`：匹配任意一个字符包括空格。
 - `*`：匹配前面的字符零次或多次。
 - `+`：匹配前面的字符一次或多次。
 - `?`：匹配前面的字符零次或一次。

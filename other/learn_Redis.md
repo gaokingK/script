@@ -1,6 +1,9 @@
 ## 帮助
 - [中文翻译](http://doc.redisfans.com/index.html)
 - [redis-py-cluster](https://redis-py-cluster.readthedocs.io/en/2.1.0/) python操作redis cluster
+## 概念
+- 6.0以后可以通过更改设置文件支持多线程
+- 每秒8万
 ## 名词
 - EYS
 - SMEMBERS
@@ -32,6 +35,7 @@
 ### 对键的命令
 - 上面的数据类型的是键 值 的形式，只不过值的类型不同
 - EXISTS key 检查给定 key 是否存在。
+- type key 查看key的类型，然后使用对应的命令查看值
 
 ### string
 - link
@@ -95,7 +99,7 @@
 - SCAN cursor [MATCH pattern] [COUNT count]
   - 返回一个包含两个元素的数组
   ```r
-  127.0.0.1:6379> scan 0 match k* count 10
+  127.0.0.1:6379> scan 0 match k* count 10 # 从0开始迭代键名以key开头的
   1) "11" # 这个元素是用于进行下一次迭代的新游标
   2) 1) "k8" # 这个第二个元素是一个数组, 包含了所有被迭代的元素
      1) "k11"
@@ -136,9 +140,6 @@
 
 -  并发执行多个迭代
   - 在同一时间， 可以有任意多个客户端对同一数据集进行迭代， 客户端每次执行迭代都需要传入一个游标， 并在迭代执行之后获得一个新的游标， 而这个游标就包含了迭代的所有状态， 因此， 服务器无须为迭代记录任何状态。
-
-
-
 
 
 ## other

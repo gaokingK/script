@@ -41,10 +41,20 @@ tmux source-file ~/.tmux.conf // 重新载入配置文件
 - pstree -p 同时列出每个进程的PID
 - -a 显示该行程的完整指令及参数, 如果是被记忆体置换出去的行程则会加上括号
 
-### 用户 # user
+### 用户管理 # user # useradd
 - linux 更改用户名密码、新增用户
 	- 新增用户`useradd name option`
+	- 添加用户并指定家目录  `useradd -d /home/test -m jc`
 	- 更改密码`passwd username` 
+- useradd
+    - -c comment 指定一段注释性描述。
+    - -d 目录 指定用户主目录，如果此目录不存在，则同时使用-m选项，可以创建主目录。
+    - -g 用户组 指定用户所属的用户组。
+    - -G 用户组，用户组 指定用户所属的附加组。
+    - -s Shell文件 指定用户的登录Shell。
+    - -u 用户号 指定用户的用户号，如果同时有-o选项，则可以重复使用其他用户的标识号。
+    - -m ：强制要建立使用者家目录
+- userdel 用户名 #删除用户名及主目录
 - 查看用户创建时间 https://www.jb51.net/article/139900.htm
 ### 命令补全 CentOS系统Tab补全功能
 =======
@@ -291,10 +301,43 @@ Ctrl+b z：当前窗格全屏显示，再使用一次会变回原来大小。
    - link：
       - https://www.runoob.com/linux/linux-comm-awk.html
    - `{print $NF}` 输出切割后的最后一项; `'{print $(NF-1)}` 倒数第二项
-   - 可以指定多个分隔符 `awk -F '[b,]' ` 先使用b，后使用，
+   - 可以指定多个分隔符 `awk -F '[b,]' ` 先使用`b`，后使用`,`;或者使用awk -F "abc" 指定abc作为分隔符 
    - length 方法获取字符串的长度 `echo ${str}|awk '{print length($0)'`
    - -F fs 指定输入文件折分隔符，fs是一个字符串或者是一个正则表达式，如-F:
      - echo "rootfs/deploy/a.txt"|awk -F/ '{print $2}'
+   - echo "aaa\"aaa" |awk -F "\\\"" '{print $1}' 输出aaa 注意反斜杠和冒号的转义
+
+### cut 只能指定单个分隔符
+   - link:
+       - https://www.cnblogs.com/yychuyu/p/13347444.html
+       - https://www.cnblogs.com/now-fighting/p/3537375.html
+   - -b ：以字节为单位进行分割（就不用搭配-d了）。这些字节位置将忽略多字节字符边界，除非也指定了 -n 标志
+   - -c ：以字符为单位进行分割。（就不用搭配-d了）
+   - -d 指定分隔符`cut -d: xxxx`默认为制表符。
+   - -f 根据-d指定的分隔符来分割，从1开始`cut -d: -f1 xxx`
+   - 注意
+       - 对于选项-b, -c, -f，只能在一个命令被指定其中的一项。
+       - 如果命令中没有指定FILE或者FILE是"-"，则默认是读取标准输入。
+   - --output-delimiter=STRING 使用STRING作为输出内容中的分隔符，而不是使用原来标准输入中的分隔符。
+   - 关于显示的内容（-f, -b, -c都可以使用，编号都是从1开始）
+       - N 显示第n个
+       - N- 从第N个到末尾都显示
+       - N-M 从第N个到第M个
+       - -M 从第一个到第M个
+   - 显示最后一个`echo'maps.google.com' | rev | cut -d'.' -f 1 | rev`
+   ```cs
+   其中，-b/-c/-f 后跟选取的字节/字符/片段，num 从 1 开始，格式如下：
+   num ： 选取第num个字节/字符/片段；
+   num1,num2,num3 : 选取第num1,num2,num3的字节/字符/片段
+   num- : 选取第num个字节/字符/片段一直到结尾；
+   num1-num2 : 选取第num1到num2的字节/字符/片段；
+   -num : 选取第1个到num个的字节/字符/片段；
+   ```
+### tr
+   - 命令用于转换或删除文件中的字符。
+   - -s, --squeeze-repeats：缩减连续重复的字符成指定的单个字符 
+   - 小写字母全部转换成大写字母`cat testfile |tr a-z A-Z `
+
 #### 命令
    - awk '/workers:/ {getline; print $1}' your_file.yaml
       - 我们使用 /workers:/ 来匹配包含 workers: 的行。然后使用 getline 命令读取下一行，并使用 print $1 来打印第一个字段，即 IP 地址。
@@ -337,6 +380,8 @@ more 命令类似 cat ，不过会以一页一页的形式显示，更方便使�
    - less 工具也是对文件或其它输出进行分页显示的工具，应该说是linux正统查看文件内容的工具，功能极其强大。less 的用法比起 more 更加的有弹性。
    - less file1 file2 `:n :p 切换文件（next/previous`
    - -N 显示每行的行号 :-N也可以
+   - f 向后翻一页
+   - u 向前滚动半页
 ### cat
    - -n 对输入行编号 也只能编号了
 
@@ -417,7 +462,12 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
    - `echo $(date +%y%m%d) ` m 是月 M 是分  中间的加号后面不能有空格 
    - `echo $(date +%ya_string%d) `  还可以这样替换，结果是2021a_string13
    
-### xargs 怎么只接受一次参数 ------------------------------------------------no
+### xargs
+- link: https://wangchujiang.com/linux-command/c/xargs.html
+- -i 依次传递
+- xargs -0 将 \0 作为定界符。
+- -i 或者是-I，这得看linux支持了，将xargs的每项名称，一般是一行一行赋值给 {}，可以用 {} 代替
+- xargs 怎么只接受一次参数 ------------------------------------------------no
 ### 文件时间 stat
 - 查看时间：
    - 最近访问时间（Access）:使用cat、less等查看文件后会被修改
@@ -488,17 +538,6 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
    - a+x test.bin给所有的用户添加执行test.bin 这个文件的权限
    - 文件权限为三种不同类别的用户分配权限访问权限：文件所有者、同一group、其他用户. 而root是超级用户，有最高权限不受这个限制
    - ![](https://pic1.zhimg.com/v2-1fc1a07155d057143718f8afe2d54884_r.jpg)
-### cut 
-   - -d 指定分隔符`cut -d: xxxx`
-   - -f 显示第几个，从1开始`cut -d: -f1 xxx`
-   ```cs
-   其中，-b/-c/-f 后跟选取的字节/字符/片段，num 从 1 开始，格式如下：
-   num ： 选取第num个字节/字符/片段；
-   num1,num2,num3 : 选取第num1,num2,num3的字节/字符/片段
-   num- : 选取第num个字节/字符/片段一直到结尾；
-   num1-num2 : 选取第num1到num2的字节/字符/片段；
-   -num : 选取第1个到num个的字节/字符/片段；
-   ```
 
 ### tar # zip # gzip 
    - [link](http://blog.chinaunix.net/uid-29132766-id-3862597.html)
@@ -679,14 +718,20 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
     - grep 如果只搜索文件夹a却不搜索a中的文件夹b
       - `grep -R --exclude-dir=/path/no/search/(可以有通配符) 'search pattern' /path/to/want/search`
       - des: `        agoods_btn_posb = 2\n` `grep ".*goods_btn_pos.*" -r tests/` 无结果 `grep ".*goods_btn_pos." -r tests/` 有结果 ---------------------no
-    - -d skip 跳过子文件夹
-    - -r 搜索子文件夹
-    - -l 表示仅列出符合条件的文件名，用来传给sed命令做操作
+    - `-d skip` 跳过子文件夹 skip还有别的内容
+    - -r 搜索子文件夹 
+    - 排除 如果只搜索一层文件夹或者文件名可以是不用带路径
+      - 排除特定目录：grep -r 'pattern' --exclude-dir='dirname' /path/to/search 
+      - 排除特定文件类型：grep -r 'pattern' --exclude='*.log' /path/to/search
+      - 排除特定文件：`grep -r 'pattern' --exclude='filename' /path/to/search` 
+    - -l 表示仅列出符合条件的文件名，用来传给sed命令做操作 或者在下一个命令进一步搜索别的内容
     - --include="*.txt" 表示仅查找txt文件 可以有多个`sed -i s/park/break/g `grep park -rl --include="*.java" --include="*.aidl"` 
     - 带符号时要转义， 要不搜索不出来`grep --help|grep '\-filename'`
       - grep "pattern\(\)"
     - -h -H 前者不显示文件名,后者显示
-    - --context=5 显示结果上下5行  
+    - -C --context=5 显示结果上下5行
+    - -A（After）：显示匹配行和之后的几行。
+    - -B（Before）：显示匹配行和之前的几行。
     - -c 显示结果符合的个数 如果结果为0 echo $?返回1
     - -v,–invert-match 参数显示不符合的总行数
     - -a --text 不忽略二进制数据（当匹配到`\000 NUL` 会认为文件是二进制文件）如果不加 会显示匹配到二进制文件xxx 而不显示文件中的内容
@@ -711,15 +756,15 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
       - grep -F step* 的*不是通配符了
     - -x 匹配整行
       - grep -x aaaa == grep '^aaaa$'
-    - -w 精确匹配 - Fx 完全匹配 
+    - -w 搜索单词 - Fx 完全匹配 
       ```
-      -w 只显示和搜索结果完全符合的行，就是行中不能有其他内容 可以使用正则 会忽略空格带来的不同
+      -w 应该是搜索两边是空格的 只显示和搜索结果完全符合的行，就是行中不能有其他内容 可以使用正则 会忽略空格带来的不同
+        - grep -w "mave" 搜索mave两边是空格或者结尾的，可以看作是查询单词
       -x 只显示和搜索结果完全符合的行，就是行中不能有其他内容 可以使用正则 不会忽略空格带来的不同
       -F 将样式视为固定字符串的列表。
       $ grep -Fx ls_recurse_enable=YES  /etc/vsftpd/vsftpd.conf
       ls_recurse_enable=YES
       ```
-   - -A 1 'add_workers:': 使用 -A 1 来获取包含 add_workers: 的行以及下一行。
     - -i 忽略大小写
     - 搜索这个或者那个 grep搜索多个字符串
       - grep “des_a\|des_b\|des_c” a.text # 当使用基本正则表达式时，需要使用\转义符为|管道符转义。
@@ -736,7 +781,9 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
     - 过滤重复的结果
       - cat  /home/qdam/qmarket*/*/*.log|grep topicid|grep -v topicid=300
       - cat  /home/qdam/qmarket*/*/*.log|grep -o "topicid=30[[:digit:]]"|uniq
-
+    - 从字符串 \"x\",345\"22\" 中提取出 x
+        - echo '\"x\",345\"22\"' | grep -oP '\"\\K[^"]+'
+        - 这个命令使用 grep 的 -o 选项来只输出匹配的部分，使用 Perl 正则表达式（-P）来使用 \K 来重置匹配的起点，然后匹配不包含双引号的字符。
    - pcre2grep或者pcregrep 不同的版本
       - -M 多行匹配，但仍需要写额外的换行符
       - pcre2grep -M 'xxx(\n|.)*xxx' file # 需要手动加入\n

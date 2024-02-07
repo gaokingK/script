@@ -2,9 +2,11 @@
 - link: https://zhuanlan.zhihu.com/p/269983875
 ```cs
 -u mysql的用户 可以用空格隔开，也可以不用
--p 后面可以跟密码
+-p 后面可以跟密码 也可以不跟，会提示输入,如果跟密码 -pywPT\!@34(1是要紧跟-p,2是!前要加转义) 
 -P 指定连接数据库的端口
 -h 指定数据库的ip地址
+- --databases 后面跟数据库名，也可以不用这个，直接把数据库名放在mysqldump后面，还可以用--database
+- --tables 后面跟表名，也可以用--table
 // 导出school数据库中指定表的数据和结构
 mysqldump -uroot -p school --tables sc_admin users > /tmp/school.sql
 mysqldump -u root -p -P3306 -h 10.240.5.194 --databases school --tables sc_admin > backup.sql

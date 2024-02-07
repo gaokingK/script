@@ -2,8 +2,13 @@
   - https://www.thegeekstuff.com/2008/08/15-examples-to-master-linux-command-line-history/
   - https://linux.cn/article-10096-1.html
   - 鸟哥linux： https://wizardforcel.gitbooks.io/vbird-linux-basic-4e/content/150.html
-
+    - https://linuxtoy.org/
+    - https://github.com/zq99299/linux-tutorial
+  - https://vmware.github.io/photon/docs-v4/troubleshooting-guide/troubleshooting-with-systemd/troubleshooting_systemd/
+  - https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/7
 # 通识
+### 用户态和内核态 
+### 持久化磁盘IO buffer io direct io
 ### sudo和sudo su 和su之间有什么区别啊
 sudo 用于以当前用户的权限执行特定命令，提供了更细粒度的权限控制。输入当前用户的密码
 sudo su 用于通过 sudo 切换到 root 用户，提供了安全性和权限隔离。输入当前用户的密码，根据配置来决定是否还要输入root的密码
@@ -27,6 +32,8 @@ su（Switch User）允许用户切换到其他用户账户，包括超级用户�
 su 命令的主要限制是，只有具有特殊权限的用户（通常是系统管理员）才能使用它来切换到 root 用户。
 ```
 - 有些命令不加sudo就没有输出
+### 判断系统命令存在不存在
+- command -v systemctl 判断是否有systemctl命令
 ### 更换内核 debian 
 - link：https://www.cnblogs.com/faberbeta/p/16339288.html
 - 搜索新内核 apt-cache search linux-image
@@ -163,6 +170,8 @@ service sshd restart
 ### service 文件 Linux添加自定义服务 # systemctl
 - link:
    - https://juejin.cn/post/7037000593839243301
+   - https://vmware.github.io/photon/docs-v4/troubleshooting-guide/troubleshooting-with-systemd/troubleshooting_systemd/
+   - https://cloud.tencent.com/developer/article/1516125
 - Linux中.service文件是某项服务对应的配置文件，可用于systemd管理和控制的服务的设置。.service 文件通常包含3个模块，
    - [Unit]控制单元，表示启动顺序和依赖关系；
    - [Service]服务，表示服务的定义；
@@ -174,7 +183,13 @@ service sshd restart
 - 可以对文件重命名，重命名后会提示systemctl daemon-reload 但知道原来的service服务stop前，原服务名仍能使用
 - 服务启动失败后可以使用journalctl -xe来查看日志
 - systemctl list-units --type=service --all 命令。这条命令会列出系统中所有服务的状态，包括正在运行的服务和已禁用的服务
-- systemctl list-unit-files 所有的服务配置文件
+- systemctl list-unit-files 所有的服务配置文件 这个比较全
+
+### 开机自启动 rc.local
+- https://vmware.github.io/photon/docs-v4/troubleshooting-guide/troubleshooting-with-systemd/troubleshooting_systemd/
+- 把需要自启动的命令放在这个文件里就可以了
+- 需要注意/etc/rc.local 是否是/etc/rc.d/rc.local文件的软连接
+- 
 ### proc 目录 根据pid显示进程信息
 - link: https://www.cnblogs.com/DswCnblog/p/5780389.html
 - ll /proc/<pid>

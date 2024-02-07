@@ -26,6 +26,8 @@ print(type(a.decode('utf-8')))
 # 这又是为什么呢？
 a = b"hello你好"  # SyntaxError: bytes can only contain ASCII literal characters.
 # 编码
+# python编码
+# 在文件开头添加 # coding:utf8
 # Python在内存中处理的字符串一般都是经过unicode编码的了的字符串
 
 # Python在物理存储、网络传输时，为节省空间（包括物理空间和时间空间），

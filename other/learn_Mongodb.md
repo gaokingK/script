@@ -1,4 +1,18 @@
-# TO： 关于mongodb监控指标的一些内容
+# TO： 关于mongodb监控指标的一些内容 & 其他的内容
+# 其他内容
+- 连接字符串：
+```cs
+mongodb://username:password@remotehost:27017/mydatabase
+# 多ip
+mongodb://host1:27017,host2:27017,host3:27017/mydatabase
+```
+- 使用命令行连接
+```cs
+bin/mongo -host 10.0.70.4 -port 27017 -u bizseer -p 8Qllyhy! --authenticationDatabase admin
+# -u 用户名
+# -p 密码
+# admin 数据库
+```
 # 一些概念
 ### "mongos instance"：这是指当前正在运行的 mongos 实例，是 MongoDB 分片集群中的路由器组件，用于处理客户端的查询请求。
 ###  CSRS 是 MongoDB 集群中用于存储集群配置信息的副本集

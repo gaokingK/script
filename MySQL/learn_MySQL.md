@@ -132,6 +132,7 @@ alter table tbl_name change old_name new_name 随便一个属性;
 ```
 - 新建列的时候添加外键`alter table task add video_id int(11) after video_duration ,add constraint video_id foreign key (video_id) references video(id) on delete cascade on update no action;`
 
+- 删除表`drop table tbl_name`
 # 共识
 - col_name (column name); tbl_name(table_name)\
 

@@ -44,7 +44,7 @@ all: # 最上层的key，value是一个字典
     load loads 区别: 前者读取文件/后者读字符串 可以把多的s 理解为 string(load string)
     dump dumps 区别: 前者存入文件/后者转为字符串
         - conf_str = json.dumps(conf, indent=4) 这样就是格式化的数据，不再是一整行
-    json文件 格式 必须有一个主节点，这个主节点，没有主节点的话必须使用{}把所有内容括起来
+    json文件 格式 必须有一个主节点，这个主节点，没有主节点的话必须使用[]把所有内容括起来,
     所有的key，value必须用双引号包括
 # pickle/cpickle
     cPickle是C语言写的，速度快，pickle是纯Python写的，速度慢

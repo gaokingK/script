@@ -1,0 +1,100 @@
+[
+    {
+        "level_change_rules": {
+          "level_change_enable": true,
+          "special_time_rule": {
+            "level_change_type": "inherit_global",
+            "rules": []
+          }
+        },
+        "service_id": "5f16b50c107d7c3d15b87466",
+        "name": "渠道服务整合（CSI）应用级监控",
+        "type": "top",
+        "alert_rules": [
+          [
+            {
+              "type": "alert_level",
+              "strategy": "minor"
+            },
+            {
+              "type": "anomaly_frequency",
+              "kpis": [
+                "kpi.aiops_APPID_CSI_tecSuccRate",
+                "kpi.aiops_APPID_CSI_transAvgProcTime",
+                "kpi.aiops_APPID_CSI_busTransCount"
+              ],
+              "kpi_min_thr": 1,
+              "duration": 600,
+              "frequency": 8
+            }
+          ],
+          [
+            {
+              "type": "alert_level",
+              "strategy": "major"
+            },
+            {
+              "type": "anomaly_frequency",
+              "kpis": [
+                "kpi.aiops_APPID_CSI_busTransCount",
+                "kpi.aiops_APPID_CSI_tecSuccRate",
+                "kpi.aiops_APPID_CSI_transAvgProcTime"
+              ],
+              "kpi_min_thr": 2,
+              "duration": 600,
+              "frequency": 8
+            }
+          ],
+          [
+            {
+              "type": "alert_level",
+              "strategy": "minor"
+            },
+            {
+              "type": "anomaly_frequency",
+              "kpis": [
+                "kpi.aiops_APPID|TRCID_ESB|CSI_busTransCount",
+                "kpi.aiops_APPID|TRCID_ESB|CSI_tecSuccRate",
+                "kpi.aiops_APPID|TRCID_ESB|CSI_transAvgProcTime"
+              ],
+              "kpi_min_thr": 1,
+              "duration": 600,
+              "frequency": 8
+            }
+          ],
+          [
+            {
+              "type": "alert_level",
+              "strategy": "major"
+            },
+            {
+              "type": "anomaly_frequency",
+              "kpis": [
+                "kpi.aiops_APPID|TRCID_ESB|CSI_busTransCount",
+                "kpi.aiops_APPID|TRCID_ESB|CSI_tecSuccRate",
+                "kpi.aiops_APPID|TRCID_ESB|CSI_transAvgProcTime"
+              ],
+              "kpi_min_thr": 2,
+              "duration": 600,
+              "frequency": 8
+            }
+          ],
+          [
+            {
+              "type": "alert_level",
+              "strategy": "minor"
+            },
+            {
+              "type": "lose_data",
+              "kpis": [
+                "kpi.aiops_APPID|TRCID_ESB|CSI_busTransCount",
+                "kpi.aiops_APPID|TRCID_ESB|CSI_tecSuccRate",
+                "kpi.aiops_APPID|TRCID_ESB|CSI_transAvgProcTime"
+              ],
+              "duration": 600
+            }
+          ]
+        ],
+        "created_time": 1595323660529
+      }
+]

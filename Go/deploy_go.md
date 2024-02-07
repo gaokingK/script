@@ -24,6 +24,7 @@ func main(){
 func main2(){
     fmt.Println("hello")
 }
+// go run main.go 会直接运行，并且也没有编译好的文件生成
 // go build main.go 会生成main.exe 在main.go的同级目录下使用./main.exe 执行
 // go install main.go 不管是否执行go mod init 都会在$GoPath/bin下找到main.exe 使用./path/to/main.exe执行
 ```

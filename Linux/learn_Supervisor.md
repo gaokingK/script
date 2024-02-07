@@ -8,10 +8,14 @@
 - 怎么知道改把某个程序的配置文件放在哪里呢？
     - supervisorctl status 查看所有的进程
     - find / -name "上面的某个进程名字" 2>/dev/null 这样就找到了
+## 启动supervisor
+    - supervisord 就只有这个命令
+    - 或者systemctl restart supervisor or service supervisor restart
 ## 命令 命令使用supervisorctl 关键字
 - supervisordctl status 查看所有进程运行状态 
 - supervisorctl update 更新（supervisor的配置和程序的配置）
 - supervisorctl start xxx 应用程序文件中的配置名不是配置文件的名字
+- supervisorctl tail -f xxx 显示该应用的日志（是tail 该应用配置文件中stdout_logfile的值）
 
 ## 应用程序配置文件解析
 ```cs
@@ -42,3 +46,6 @@ files = /path/to/file/*.ini /path/to/file/.conf  # 这样可以使用多个
 
 # 问题
 - supervisor.sock file missing TO：重启`systemctl restart supervisor or service supervisor restart`
+- supervisor.sock refused connection
+    - 是因为supervisor没启动成功
+    - supervisord 
