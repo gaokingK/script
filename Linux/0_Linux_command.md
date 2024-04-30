@@ -297,67 +297,18 @@ Ctrl+b z：当前窗格全屏显示，再使用一次会变回原来大小。
    dic=([key1]="value1" [key2]="value2" [key3]="value3")
    ```
    - $@ 获取所有参数(不包括$0), $0脚本的地址,
-### awk
-   - link：
-      - https://www.runoob.com/linux/linux-comm-awk.html
-   - `{print $NF}` 输出切割后的最后一项; `'{print $(NF-1)}` 倒数第二项
-   - 可以指定多个分隔符 `awk -F '[b,]' ` 先使用`b`，后使用`,`;或者使用awk -F "abc" 指定abc作为分隔符 
-   - length 方法获取字符串的长度 `echo ${str}|awk '{print length($0)'`
-   - -F fs 指定输入文件折分隔符，fs是一个字符串或者是一个正则表达式，如-F:
-     - echo "rootfs/deploy/a.txt"|awk -F/ '{print $2}'
-   - echo "aaa\"aaa" |awk -F "\\\"" '{print $1}' 输出aaa 注意反斜杠和冒号的转义
+### 端口连通性
+- link：https://www.jb51.net/LINUXjishu/558029.html
+- wget ip:port 如果存在会显示connetcing to xxx connected。
+- curl ip:port 如果远程主机开通了相应的端口，都会输出信息，如果没有开通相应的端口，则没有任何提示，需要CTRL+C断开
+- ssh -v -p port [username@]ip如果连接上了会有connected
+- telnet ip port 如果连上了会有connected to xxx \n Escape character is '^]' 可以使用timeout 5 telnet ip port 这样5秒后无论连接是否建立就会退出
+- 有种情况就是端口是能联通的，但是由于防火墙的原因会导致连接失败，这时如果有connected关键字就代表连接成功了
 
-### cut 只能指定单个分隔符
-   - link:
-       - https://www.cnblogs.com/yychuyu/p/13347444.html
-       - https://www.cnblogs.com/now-fighting/p/3537375.html
-   - -b ：以字节为单位进行分割（就不用搭配-d了）。这些字节位置将忽略多字节字符边界，除非也指定了 -n 标志
-   - -c ：以字符为单位进行分割。（就不用搭配-d了）
-   - -d 指定分隔符`cut -d: xxxx`默认为制表符。
-   - -f 根据-d指定的分隔符来分割，从1开始`cut -d: -f1 xxx`
-   - 注意
-       - 对于选项-b, -c, -f，只能在一个命令被指定其中的一项。
-       - 如果命令中没有指定FILE或者FILE是"-"，则默认是读取标准输入。
-   - --output-delimiter=STRING 使用STRING作为输出内容中的分隔符，而不是使用原来标准输入中的分隔符。
-   - 关于显示的内容（-f, -b, -c都可以使用，编号都是从1开始）
-       - N 显示第n个
-       - N- 从第N个到末尾都显示
-       - N-M 从第N个到第M个
-       - -M 从第一个到第M个
-   - 显示最后一个`echo'maps.google.com' | rev | cut -d'.' -f 1 | rev`
-   ```cs
-   其中，-b/-c/-f 后跟选取的字节/字符/片段，num 从 1 开始，格式如下：
-   num ： 选取第num个字节/字符/片段；
-   num1,num2,num3 : 选取第num1,num2,num3的字节/字符/片段
-   num- : 选取第num个字节/字符/片段一直到结尾；
-   num1-num2 : 选取第num1到num2的字节/字符/片段；
-   -num : 选取第1个到num个的字节/字符/片段；
-   ```
-### tr
-   - 命令用于转换或删除文件中的字符。
-   - -s, --squeeze-repeats：缩减连续重复的字符成指定的单个字符 
-   - 小写字母全部转换成大写字母`cat testfile |tr a-z A-Z `
+### sar Linux性能监控命令
+- link： https://blog.51cto.com/moerjinrong/2092371
+- 查看cpu利用率 cup -u
 
-#### 命令
-   - awk '/workers:/ {getline; print $1}' your_file.yaml
-      - 我们使用 /workers:/ 来匹配包含 workers: 的行。然后使用 getline 命令读取下一行，并使用 print $1 来打印第一个字段，即 IP 地址。
-   - 合并 workers 和 add_workers 到一个新的列表中
-      - awk '/workers:/ {workers=1; next} /add_workers:/ {workers=0} workers {print $0}' your_file.yaml
-   - awk '/add_workers:/ {getline; print}' RS='[- ]+' FS='\n' your_file.yaml
-      - /add_workers:/: 此处使用 /add_workers:/ 来匹配包含 add_workers: 的行。
-      - {getline; print}: 使用 getline 命令读取下一行，然后使用 print 命令输出该行内容。
-      - RS='[- ]+': 设置行分隔符为 [- ]+，即一个或多个连字符和空格。这样可以将 YAML 列表识别为单独的行。
-      - FS='\n': 设置字段分隔符为换行符，这样我们可以读取整个 IP 地址行。
-   - awk '/add_workers:/ {flag=1; next} /^ *$/ {flag=0} flag {print}' inventory_10.0.5.89.yaml
-      - /add_workers:/ {flag=1; next}: 当匹配到 add_workers: 行时，设置标志 flag 为 1，并跳过下面的处理。
-      - /^$/ {flag=0}: 当匹配到空行时，设置标志 flag 为 0，表示结束匹配 add_workers 区块。
-      - flag {print}: 当标志 flag 为 1 时，打印当前行。
-   - awk '/add_workers:/ {flag=1; next} /^[ a-zA-Z:]*$/ {flag=0} flag {print}' inventory_10.0.5.89.yaml
-   - awk -v ip="$new_ip" '/workers:/ {found=1} {print} END {if (found) print ip}' your_file.yaml > tmp_file.yaml
-      - -v ip="$new_ip": 使用-v参数，将Shell变量new_ip传递给awk中的变量ip。
-      - '/workers:/ {found=1}: 当遇到包含workers:的行时，设置变量found为1。
-      - {print}: 对于所有行，都打印输出。
-      - END {if (found) print ip}: 在文件末尾（END）判断是否找到了包含workers:的行（即found为1），如果找到，则打印变量ip（新的IP地址）。
 ### scp
    - scp 文件 `scp file_path target_file_path/target_dir_path`  如果要重命名， target_file_path 不存在也可以
    - 如果要放到文件夹中 `scp file_path target_dir_path/.` dir_path/. 要加 `/.`
@@ -406,6 +357,11 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
 ### uniq
    - 而uniq不能实现排序，只能去除相邻的重复行，所以要跟sort合并使用，先用sort排序，再用uniq去重
    - grep xxx|sort|uniq
+   - uniq -c 输出每个结果的个数 但前提是输入的数据必须是重复行都是相邻的，可以先用sort处理一下
+   - -d或--repeated 仅显示重复出现的行列。
+   - -f<栏位>或--skip-fields=<栏位> 忽略比较指定的栏位。
+   - -s<字符位置>或--skip-chars=<字符位置> 忽略比较指定的字符。
+   - -u或--unique 仅显示出一次的行列。
 ### Bash内建参数 和 bash 参数
     - -s 允许在调用交互式shell时设置位置变量, 可以将标准输入 作为命令 去使用参数
       > 因为你用bash -s...这个参数是如果有-s，或者选项处理之后没有别的参数，那么命令从标准输入读入。这个选项允许在调用交互式shell时设置位置变量
@@ -426,6 +382,13 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
       - link：https://blog.csdn.net/qq_39900031/article/details/123273907
       - touch -a： 修改文件的访问时间
       - touch -d： 同时修改文件的访问时间和修改时间，格式：touch -d “2021-01-02 09:32:21” 3.log
+   - -a: 修改访问时间，或 –time=atime 或 –time=access 或 –time=use
+   - -c: 或 –no-creat，如果文件不存在则不创建文件
+   - -d: 使用指定的日期时间，可以使用不同的格式
+   - -m: 或 –time=mtime 或 –time=modify，改变修改时间
+   - -r: 把指定的文件日期更设成和参考文档或目录日期相同的时间
+   - -t: 使用指定的日期时间，格式与 date 指令相同
+
 ### linux 特殊符号和通配符 
    ```shell 
    # https://www.cnblogs.com/0zcl/p/6821213.html
@@ -435,7 +398,7 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
    <     #输入重定向
    <<    #追加输入重定向
    ~     #当前用户家目录
-   `` $() #引用命令被执行后的结果
+   `` $() #引用命令被执行后的结果(使用$()语法通常被认为是更加现代和可读的方式，因为它可以更嵌套，并且在某些情况下（例如在$(( ))算术扩展中）避免了一些潜在的问题。因此，建议优先使用$()语法。)
    $     #以。。。结尾（正则）
    ^     #以。。。开头（正则）
    *     #匹配全部字符，通配符
@@ -459,9 +422,10 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
      - 后者既能用在mkdir上,又能用在rm上, 而前者只能用在rm上
 ### date 
    - [时间域](https://www.cnblogs.com/yy3b2007com/p/8098831.html)
+   - 格式化输出:https://blog.csdn.net/jk110333/article/details/8590746
    - `echo $(date +%y%m%d) ` m 是月 M 是分  中间的加号后面不能有空格 
    - `echo $(date +%ya_string%d) `  还可以这样替换，结果是2021a_string13
-   
+   - date "+%Y-%m-%d"
 ### xargs
 - link: https://wangchujiang.com/linux-command/c/xargs.html
 - -i 依次传递
@@ -568,6 +532,14 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
    - **gzip**
       - -c：将解压缩后的文件内容输出到标准输出（而不是写入文件）。
 ### find
+   - -o -a -not: 逻辑操作符可以结合选项使用 如-not -name "*xy"就能找出名字不包含xy的文件
+      -o 是或者的意思
+      -a 是而且的意思  
+      -not 是相反的意思
+      - 逻辑符只对前后紧挨的选项起作用 `find -type d \( -path "*xbox_screen_shot*" -o -path "*log*" \) -ctime +7` 不加 括号 -type d 就只对 第一个-path 有用
+   - [link](https://blog.csdn.net/earthchinagl/article/details/79501778) ---------------------------no
+   - [link](https://www.cnblogs.com/chuyiwang/p/12779417.html) ---------------------------no
+   - 如果使用通配符 必须使用""括起来，要不然没有效果
    - `*`是通配符 `.`不是
    - 按时间排序 `find . -type f -print0 | xargs -0 stat --format '%Y :%y %n' | sort -nr`
    - find 里面的选项可以加（）但必须注意空格，也需要把被包括的命令的全部参数给包括进去 比如`；`
@@ -593,13 +565,7 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
       find / -name "*ython3.*" 2 > invalid.txt 
       find / -name "*ython3.*" 1 > valid.txt
       ```
-   - -o -a -not: 
-      -o 是或者的意思
-      -a 是而且的意思  
-      -not 是相反的意思
-      - 逻辑符只对前后紧挨的选项起作用 `find -type d \( -path "*xbox_screen_shot*" -o -path "*log*" \) -ctime +7` 不加 括号 -type d 就只对 第一个-path 有用
-   - [link](https://blog.csdn.net/earthchinagl/article/details/79501778) ---------------------------no
-   - [link](https://www.cnblogs.com/chuyiwang/p/12779417.html) ---------------------------no
+
    - -regex 是从文件的全路径中调用正则匹配 -regextype 选择使用的正则格式
    - -path 模糊匹配路径 `find . -path '*20190326/access.log'` 如果查找的关键词没有从根路径开始那么前面的*是必要的如果
    - [linux find子目录，当前目录，指定（排除）目录查找文件](http://www.51gjie.com/linux/1025.html)
@@ -675,7 +641,8 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
       find . -type f -name "*.sh"|grep sh|xargs -i git add {}
 
 ### nl filename 带行号显示文件内容
-
+### rm 
+-i 删除前确认
 ### linux 命令分割符 `;`/`&&`/`||`
     - 逻辑符
        `;` 命令会按顺序执行，即使中间命令使用方式不对，后续命令还会继续执行
@@ -812,6 +779,7 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
     - 等价于 set -e
     - 有弊端， 比如先删除后新建的语句（如果删除的不存在会报错导致脚本退出）
     - set -e pipefail 返回从右往左第一个非零返回值，即ls的返回值1
+    - systemxxxx|tail -n 5 这样不会退出 echo $?还是0
     ```shell
 	# # test.sh
 	set -o pipefail

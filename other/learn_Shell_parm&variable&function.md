@@ -79,7 +79,7 @@ echo ${!var*} # var1 var2
 ### 变量替换 变量默认值
 - 主要用来检测变量是否有值，然后根据是否有值来决定要不要给其赋值
 - 假如var为空或者未定义返回string，否则返回var
-    - ${var:-string} return var if not var else string 但是只是返回， var 不被赋值
+    - ${var:-string} return var if not var else string 但是只是返回， var 不被赋值 所以要想修改要么用下一个，要么用一个变量来接受
 - {var:=string} var = var if not var else string ,var为空会被赋值
 - {var:+string} var = var if not var else string ,var 为null 时不会被赋值 `echo ${res:+"2223"}` res为空输出null， res不为null时输出2223
 - {var:?string} var = var if var else print string 若变量var为空，则把string输出到标准错误中，并从脚本中退出

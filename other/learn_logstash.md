@@ -35,8 +35,9 @@ date {
         match => ["logdate", "ISO8601"]
         traget => "log_time"
     }
-logdate: 2024-11-09T09:34:22.553T
-经过处理后会生成log_time字段，值为
+logdate: 2024-11-09T09:34:22.553Z
+经过处理后会生成log_time字段，值为2024-11-08T01:34:22.553Z比本地时间早8个小时
+
 ```
 ### output
 ```

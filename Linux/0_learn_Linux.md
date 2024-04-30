@@ -166,12 +166,36 @@ service sshd restart
 ```
 
 ### docker
-
+### kylin 
+- 信创国产操作系统(服务器)关系梳理 http://blog.silence.pink/p/about-server-os-cn/
+- 麒麟系统KylinV10SP系列内核版本与主流的redhat/centos内核版本有以下映射关系：
+    麒麟系统KylinV10SP1的内核版本对应的是Red Hat Enterprise Linux 7.6的内核版本。
+    麒麟系统KylinV10SP2的内核版本对应的是Red Hat Enterprise Linux 7.7的内核版本。
+    麒麟系统KylinV10SP3的内核版本对应的是Red Hat Enterprise Linux 7.8的内核版本。
 ### service 文件 Linux添加自定义服务 # systemctl
 - link:
+   - systemctl命令介绍和使用：https://segmentfault.com/a/1190000023029058
    - https://juejin.cn/post/7037000593839243301
    - https://vmware.github.io/photon/docs-v4/troubleshooting-guide/troubleshooting-with-systemd/troubleshooting_systemd/
    - https://cloud.tencent.com/developer/article/1516125
+```
+Systemd其实是Linux系统用来管理系统的一个程序，用来代替原来的init进程(用来管理启动系统其它的服务进程)，现在很多Linux发行版都已经自带Systemd程序了。
+systemctl命令是Systemd中最重要的一个命令，用于对服务进行启动，停止等操作，
+
+systemctl 是 Systemd 系统和服务管理工具，通常用于现代的 Linux 发行版。Systemd 是一个用于启动、管理和监视系统进程的系统和服务管理器。因此，大多数现代的主流 Linux 发行版都支持 systemctl。
+
+常见的支持 systemctl 的 Linux 发行版包括：
+Ubuntu： 从 Ubuntu 15.04 版本开始默认使用 Systemd，之前版本可能使用 Upstart。
+Debian： 从 Debian 8（Jessie）版本开始默认使用 Systemd。
+Fedora： 默认使用 Systemd，Fedora 15 版本及以后。
+CentOS： 从 CentOS 7 版本开始默认使用 Systemd。
+Arch Linux： 默认使用 Systemd。
+openSUSE： 默认使用 Systemd。
+RHEL 7 和更高版本：使用 Systemd，默认支持 systemctl。
+RHEL 6 及更早版本：使用 SysV init，默认不支持 systemctl。
+```
+- Linux 服务管理两种方式service(ubuntu)和systemctl,systemd是Linux系统最新的初始化系统(init)
+- 只有使用systemd作为系统和服务管理器的，才能使用systemctl命令
 - Linux中.service文件是某项服务对应的配置文件，可用于systemd管理和控制的服务的设置。.service 文件通常包含3个模块，
    - [Unit]控制单元，表示启动顺序和依赖关系；
    - [Service]服务，表示服务的定义；

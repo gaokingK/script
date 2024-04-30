@@ -86,13 +86,24 @@ else
 	echo "非root用户！"
 fi
 ```
-### expr 计算
-    ```
-    huawei ~/Desktop/smoke% expr 2 + 1
-    3
-    huawei ~/Desktop/smoke% 2 + 1     
-    cd:cd:2: too many arguments
-    ```
+- 查看所有用户 
+  - cat /etc/passwd
+  - getent passwd
+- 查看当前用户 w who whoami
+### expr # 计算 # 运算
+- https://www.cnblogs.com/chengmo/archive/2010/09/30/1839556.html
+- 整数运算 使用expr 或者 $(()) 对于除有区别
+```
+huawei ~/Desktop/smoke% expr 2 + 1
+3
+echo $((5*5+5-3/2)) 
+```
+### 浮点数计算 # bc
+- 浮点数 bash 不支持浮点运算，如果需要进行浮点运算，需要借助bc,awk 处理。
+- result=$(echo "scale=2; $num1 / $num2" | bc)
+- 可以连续计算 $(echo "scale=2; $num1*$num2/$num3)
+- 可以比较 `[[ echo "scale=2 0.3 > 0.4"|bc -eq 1 ]]` True 的结果为1 false的结果为0
+
 ### shell 数组 列表
    - [link](https://www.runoob.com/linux/linux-shell-array.html)
    ```shell 

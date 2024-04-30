@@ -1,4 +1,4 @@
-ne# sed(https://www.runoob.com/linux/linux-comm-sed.html）
+# sed(https://www.runoob.com/linux/linux-comm-sed.html）
 ## link:
     - [官方文档](https://www.gnu.org/software/sed/manual/html_node/sed-commands-list.html#sed-commands-list)
     - [详细](https://blog.csdn.net/hdyebd/article/details/83617292)
@@ -75,15 +75,16 @@ sed OPTIONS 'expression' input_file
         - 将文本块中的换行符替换为空格，从而将多行合并为一行。
 
 #### OPTIONS
-    - 可以使用sed [opt] 4a\ "str_append" filename # 这样来输入（防止字符串来转义）
-    - **命令应该使用单引号不应该使用双引号** 不加引号的话应该用\来分割`sed -e 1a\ hhhh\ sss change_pc_90.90.0.140.md`
-    - -i 直接修改文件
-      sed -ibakhhhh 'xxx' filename 上述命令将在原始文件上进行更改，并创建一个名为filename.bakhhhh的备份文件。
-    - -e<script>或--expression=<script> 以选项中指定的script来处理输入的文本文件。
-    - 搜索元字符：
-      - & 保存搜索字符用来替换其他字符，如s/love/&2/，love替换为love2;
-    - -n或--quiet或--silent 仅显示script处理后的结果。
-      - `sed -n 's/hhh/aaa/p' filename` 这样才能只打印这一行 -n要配合p
+- 可以使用sed [opt] 4a\ "str_append" filename # 这样来输入（防止字符串来转义）
+- **命令应该使用单引号不应该使用双引号** 不加引号的话应该用\来分割`sed -e 1a\ hhhh\ sss change_pc_90.90.0.140.md`
+- -i 直接修改文件
+  sed -ibakhhhh 'xxx' filename 上述命令将在原始文件上进行更改，并创建一个名为filename.bakhhhh的备份文件。
+- -e<script>或--expression=<script> 以选项中指定的script来处理输入的文本文件。是预览，不会真的操作
+  - 一条命令可以使用多个-e
+- 搜索元字符：
+  - & 保存搜索字符用来替换其他字符，如s/love/&2/，love替换为love2;
+- -n或--quiet或--silent 仅显示script处理后的结果。(相当于是预览，实际并未处理)
+  - `sed -n 's/hhh/aaa/p' filename` 这样才能只打印这一行 -n要配合p
 
 #### 动作
 - 多个命令使用;来分割
@@ -92,7 +93,8 @@ sed OPTIONS 'expression' input_file
     - {//!p}：这是在范围内执行的命令块（范围内的意思是不包括第一行和最后一行）。//!p 的意思是在范围内除了空行之外的所有行都会被打印出来。// 表示范围匹配的当前行，! 表示不匹配当前行，所以 {//!p} 表示打印不在范围内的行，即提取结果去除了范围内的第一行和最后一行。
 - 动作用双引号括起来也可以
 - 在匹配的行后面执行动作，匹配的条件可以是具体的行数，也可以是正则或者字符串
-- $ 代表最后一行
+- p 打印 `sed -n 's/hhh/aaa/p' filename` 这样才能只打印这一行 -n要配合p
+- $ 代表最后一行 `sed -e '$a\Hello World' example.txt`
 - 使用正则`echo "xxxxx"|sed "s/re_/substance/g`
 - a：新增
 ```cs
@@ -100,6 +102,8 @@ sed -e 4a\ newLine testfile # 在第4行后添加
 ```
 - i：插入 `sed -e 4inewline` # 在第4行前添加
     - sed -i '/proc_target/i4h' prometheus-config.yaml 在含有proc_target的哪一行
+    - 一条命令有多个插入动作时，可以使用多个-e来完成否则会把后面的动作表达式当成要插入的内容`sed -e "2i\ " -e "3i\ " file_name`
+    - 命令中有一些命令样例
 - ! ：表示后面的命令对所有没有被选定的行发生作用 `sed '1!d' input.in`
 - r 从文件读取内容追加 `sed -i '$r test.txt' prometheus-config.yaml`
 - w 写入，指定行内容重定向写入到指定文件

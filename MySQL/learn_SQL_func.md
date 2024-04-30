@@ -3,6 +3,41 @@
 - https://docs.aws.amazon.com/zh_cn/redshift/latest/dg/r_DATE_TRUNC.html
 - 如果某些函数的值会出现在结果列当中，可以使用As来为这个列重命名，如果没有AS，这个列名就是这个函数的语句
 - 函数分为标准SQL函数、特定数据库系统，例如 MySQL、PostgreSQL、Oracle 等，它们可能提供了自己的时间处理函数
+  
+# 日期函数
+### CURDATE() # NOW()
+- 要查询在今天凌晨后更新的数据，你可以使用MySQL的CURDATE()和NOW()函数来获取日期时间，并结合BETWEEN子句进行选择
+```sql
+SELECT *
+FROM your_table_name
+WHERE your_timestamp_column BETWEEN CURDATE() AND NOW();
+-- 这个查询会返回在今天凌晨00:00:00 之后和当前时间之前更新的所有记录。如果你只关心从凌晨到现在的记录，那么CURDATE()会返回当天的日期（没有时间部分），而NOW()则返回当前的精确时间。
+```
+### datediff() 
+- datediff(日期1, 日期2)：得到的结果是日期1与日期2相差的天数。如果日期1比日期2大，结果为正；如果日期1比日期2小，结果为负。
+### 同一月的时间可以直接加减，但上个月末是这个月月初的前一天，但差值不是1
+### TIMESTAMPDIFF和TIMESTAMPADD
+- https://blog.csdn.net/zmxiangde_88/article/details/8011661
+- 计算时间的
+- TIMESTAMPDIFF(interval,datetime_expr1,datetime_expr2)。 datetime_expr2 - datetime_expr1 结果的单位由interval 参数给出
+- select TIMESTAMPDIFF(day,'2012-08-24','2012-08-30'); // 1
+- select TIMESTAMPDIFF(day,from_date,to_date) from dept_manager; // 必须是日期格式的，且日期有效不能2012-08-32
+- select TIMESTAMPDIFF(day,'120831','2012-08-30'); 这样也是可以的
+
+### DATE_TRUNC
+- https://docs.aws.amazon.com/zh_cn/redshift/latest/dg/r_DATE_TRUNC.html 
+- 根据你指定的单位截断表达式
+- 如果传入的单位是year， 将输入时间戳截断至一年的第一天。 SELECT DATE_TRUNC('year', TIMESTAMP '20200430 04:05:06.789'); 2020-01-01 00:00:00	
+### date_add() date_sub() 
+date_add(x, num) 计算日期x加num天后的日期  
+date_sub()
+add_months()：月份相加，内是完整日期格式，不完整可以计算，但返回是完整日期格式的值
+month_between()
+```sql
+select update_time, date_add(update_time, 10) as calc_time from tbl_name
+update_time calc_time
+2023-10-24 14:56:83 2023-10-14 14:56:83
+```
 ### 查看变量 SELECT FLOOR(25.75);
 ### ifnull(value, b) 
 - 如果value不为null，返回value，否则返回b
@@ -31,6 +66,12 @@ SELECT SUM(Price * Quantity)
 FROM OrderDetails
 LEFT JOIN Products ON OrderDetails.ProductID = Products.ProductID;
 ```
+### floor 
+- 向下取整
+- `select floor(__time to minute), count(*) from tbl_name where xxx group by floor(__time to minute)`
+### keywhen
+### distinct
+- select distinct col_name from tbl_name
 ### count
 - link：https://www.w3schools.com/sql/sql_count.asp
 - 计算满足条件的行的数量
@@ -38,6 +79,7 @@ LEFT JOIN Products ON OrderDetails.ProductID = Products.ProductID;
 - 计算某列非空值的数量`select count(col_name) from tbl_name`
 - 计算某列不重复值的数量`select count(distinct col_name) from tbl_name`
 - 计算每个国家的客户数量`select count(Customer) from Order group by Country`
+
 ### case
 - link:https://www.w3schools.com/sql/sql_case.asp
 - 作用与行，每行都有结果
@@ -58,6 +100,8 @@ OrderID	Quantity	test
 10249	9	The quantity is under 30
 10249	40	The quantity is greater than 30
 ```
+
+
 ### dense_rank() over()和# rank() over() # row_number
 - 用来看排名 
 - rank 是跳次排序 1,1,1,4, dense_rank是不跳次排序1,1,1,2, row_number是顺序1,2,3,4
@@ -87,10 +131,10 @@ select score, rank() over(order by score desc) as "rank" from Scores; # 相同�
 | 3.65  | 4    |
 | 3.5   | 6    |
 ```
-### 窗口函数 #PARTITION BY 
+### 窗口函数 #PARTITION BY # 开窗函数
 - link:https://www.cnblogs.com/cjsblog/p/16743807.html
 - 一句话概述就是可以结合函数，然后把parttion子句写在over函数内来为每一个结果行添加一个列，列的值就是函数的值
-
+- 写在select后
 - 窗口函数对一组查询行执行类似聚合的操作。不同之处在于聚合操作将查询行分组到单个结果行，而窗口函数为每个查询行产生一个结果:
     - 函数求值发生的行称为当前行
     - 与发生函数求值的当前行相关的查询行组成了当前行的窗口
@@ -161,18 +205,6 @@ NTILE()
 PERCENT_RANK()
 RANK()
 ROW_NUMBER()
-### TIMESTAMPDIFF和TIMESTAMPADD
-- https://blog.csdn.net/zmxiangde_88/article/details/8011661
-- 计算时间的
-- TIMESTAMPDIFF(interval,datetime_expr1,datetime_expr2)。 结果的单位由interval 参数给出
-- select TIMESTAMPDIFF(day,'2012-08-24','2012-08-30');
-- select TIMESTAMPDIFF(day,from_date,to_date) from dept_manager; // 必须是日期格式的，且日期有效不能2012-08-32
-- select TIMESTAMPDIFF(day,'120831','2012-08-30'); 这样也是可以的
-
-### DATE_TRUNC
-- https://docs.aws.amazon.com/zh_cn/redshift/latest/dg/r_DATE_TRUNC.html 
-- 根据你指定的单位截断表达式
-- 如果传入的单位是year， 将输入时间戳截断至一年的第一天。 SELECT DATE_TRUNC('year', TIMESTAMP '20200430 04:05:06.789'); 2020-01-01 00:00:00	
 
 ### 存储过程
 - link:http://c.biancheng.net/view/2593.html

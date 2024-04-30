@@ -42,7 +42,7 @@ datetime.datetime(2023, 6, 5, 3, 4, 48, 740000, tzinfo=<UTC>)
 time.time() # 1642646490.798591
 ```
 
-### 将时间戳转换为日期格式
+### 将时间戳转换为日期格式字符串
 ```
 t = time.localtime(0)
 print(type(t)) # <class 'time.struct_time'>
@@ -70,6 +70,7 @@ datetime.datetime.strptime(t, "%Y-%m-%dT%H:%M:%S.%fZ")
 ### 操作时间 timedelta 
 ```python
 local_time = utc_date_obj + datetime.timedelta(hours=8)
+local_time = datetime.datetime.now() + datetime.timedelta(hours=8)
 ```
 ### 日期间计算
 ```python

@@ -25,10 +25,15 @@ NS 域名的 DNS 服务器地址，例如 ns3.dnsv2.com，推荐 DNSPod.
 # 域名解析
 - CNAME地址： http://hello.youwebcloud.com
 - 查看域名是否设置到ip上面可以使用 ping gaoking.top 来看是不是解析到了ip里
+# 域名
+- 服务商 https://my.noip.com/dynamic-dns 
+- 域名 gaoking.zapto.org
 # 帮助网站
+- 这个比较好
 - ping 检测 https://ping.chinaz.com/185.77.225.53
 - dns解析 https://www.boce.com/dns/www.gaoking.top
 - https://tools.ipip.net/newping.php
+- https://www.itdog.cn/
 ## rDNS(reverse DNS) 可逆DNS, 把ip地址解析到域名， http://ip 会跳到网站里
 ## 在freedom中设置DNS
 - Services -> My Domains 

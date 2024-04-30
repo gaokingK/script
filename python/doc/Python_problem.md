@@ -1,6 +1,11 @@
 # link
 - [How collections.deque works?](https://zhuanlan.zhihu.com/p/63502912) -------no
 # 通识
+### import 时出现 no moudle named xxx
+```
+import sys
+sys.path.append(os.dirname(os.getcwd()))
+```
 ### 这是为什么，为什么不幂等
 ```
 >>> [i for i in range(10) if i%2==0]
@@ -24,9 +29,13 @@ True
 ### list_type.append("xxx")返回是空 所以不能return list_a.append("xx")
 ### with open # open
     - open 操作符link: https://www.runoob.com/python/python-func-open.html
-        - r+ 读和追加写 文件不存在报错
-        - w+ 可读可写，但文件打开时就没有内容了
-        - a+ 读和追加写 可以用f.seed(0)这样就是从开头写了
+      - r：读
+      - w：覆盖写（从开头写）
+      - a：追加写（在末尾写）
+      - r+ == r+w（可读可写，文件若不存在就报错(IOError)）
+      - w+ == w+r（可读可写，文件若不存在就创建）
+      - a+ == a+r（可追加可写，文件若不存在就创建）
+      - 对应的，如果是二进制文件，就都加一个b就好啦：‘rb’　　‘wb’　　‘ab’　　‘rb+’　　‘wb+’　　‘ab+’
         - t是windows平台特有的所谓text mode(文本模式),区别在于会自动识别windows平台的换行符。
         - 类Unix平台的换行符是\n，而windows平台用的是\r\n两个ASCII字符来表示换行，python内部采用的是\n来表示换行符。
         - rt模式下，python在读取文本时会自动把\r\n转换成\n.
@@ -305,7 +314,7 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
 16. ##### (for else)/(while else)/(try else)
     for 如果正常结束 else中内容会执行 
     while 如果正常结束 else中内容会执行
-    try 是如果try中的内容正常执行了，执行else中内容
+    try 是如果try中的内容正常执行了，执行else中内容 但是try中如果有return 就不会走到else中；else中可以使用try中建的变量
     总的来说都是正常结束了，会执行else中内容
     最后一个循环break不会走else，最后一个循环continue会else, 因为continue也相当于是走完循环了啊
     for 中如果抛出异常被捕获了，也会走到else

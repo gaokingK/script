@@ -47,6 +47,9 @@
   - https://blog.csdn.net/wisgood/article/details/17316663
 - linux中df命令的输出清单的第1列是代表文件系统对应的设备文件的路径名（一般是硬盘上的分区）；第2列给出分区包含的数据块（1024字节）的数目；第3，4列分别表示已用的和可用的数据块数目。用户也许会感到奇怪的是，第3，4列块数之和不等于第2列中的块数。这是因为缺省的每个分区都留了少量空间供系统管理员使用。即使遇到普通用户空间已满的情况，管理员仍能登录和留有解决问题所需的工作空间。清单中Use% 列表示普通用户空间使用的百分比，即使这一数字达到100％，分区仍然留有系统管理员使用的空间。最后，Mounted on列表示文件系统的挂载点。
 - -h 以人们较易阅读的 GBytes, MBytes, KBytes 等格式自行显示；
+- df -Bsize 以size指定的单位来显示
+  - df -B10M 剩余空间以10M为单位，如果是-BM 结果中就会带一个M，前者不会带
+  - 可选的单位有K/M/G/T/P/E/Z/Y (power by 1024) 
 - -k/m 以 KBytes/MBytes  的容量显示各文件系统；
 ```
 [root@localhost huawei]# df -h
@@ -249,10 +252,14 @@ resize2fs /dev/vda1
 uname -a
 ```
 
-
-
 # Linux 发行版本
-## - [查看linux内核版本和发行版本](https://blog.csdn.net/networken/article/details/79771212?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control)
+- [查看linux内核版本和发行版本](https://blog.csdn.net/networken/article/details/79771212)
+- 各版本查看：https://linux.cn/article-9586-1.html
+```
+uanme -a
+cat /etc/os-release
+dmesg | grep "Linux"
+```
 ## centos
 - AltArch
 ```
@@ -302,3 +309,17 @@ CentOS Linux release 7.6.1810 (AltArch)
     - r增加的权限 增加写就是w
 - 文件删除后acl信息也会删除，新创建的同名的也不会是原来的
 - 应该是只有文件的属主才能对该文件执行setfacl命令
+
+# cpu数量
+- 一般情况，我们认为一颗cpu可以有多核，加上intel的超线程技术(HT), 可以在逻辑上把一个物理线程模拟出两个线程来使用，使得单个核心用起来像两个核一样，以充分发挥CPU的性能，
+- 常说的cpu个数是逻辑个数=物理cpu数量x每个cpu的core数量x每个core的超线程个数( 一般=2(如果支持并开启超线程)。)
+```cs
+# 查看物理CPU个数
+cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l
+
+# 查看每个物理CPU中core的个数(即核数)
+cat /proc/cpuinfo| grep "cpu cores"| uniq
+
+# 查看逻辑CPU的个数
+cat /proc/cpuinfo| grep "processor"| wc -l
+```

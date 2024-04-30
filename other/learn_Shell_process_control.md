@@ -46,7 +46,7 @@
        else
            echo "no searched"
        fi
-
+select c1 as ciCode, lower(c3) as Brand, lower(c4) as DeviceType,c5 as assetType,c6 as deployDb,c7 as '@sourceip',c8 as netDeviceCurr,c9 as netDeviceAdmin from tb_rich_table_2 where latest = 1;
    ```
 ### 选项
 - -n str 当串的长度大于0时为真(串非空)
@@ -59,14 +59,16 @@
   # 单括号中变量必须要加双引号； 双对中括号，变量不用加双引号
   ```
 - 取非 [ ! expr ] 注意空格 可以是带选项的
-- -z str 串的长度为0时为真
+- -z str 串的长度为0时为真 
 - [str] 串非空时为真 和 -n 有什么区别呢?--------------------no
+  - -z 检测字符串长度是否为零。如果字符串长度为零（即字符串是空的），则返回 true。
+  - -n 检测字符串长度是否非零。如果字符串长度非零（即字符串有内容），则返回 true。
 - -e file_name 文件或者文件夹是否存在
 - -x file　　　　　用户可执行为真 
 - -d 文件 判断文件是否存在，并且是否为目录文件
 - [] bash 的内部命令，[和test是等同的。如果-我们不用绝对路径指明，通常我们用的都是bash自带的命令。if/test结构中的左中括号是调用test的命令标识，右中括号是关闭条件判断的。这个命令把它的参数作为比较表达式或者作为文件测试，并且根据比较的结果来返回一个退出状态码。if/test结构中并不是必须右中括号，但是新版的Bash中要求必须这样。
 - true = 0 flase = 1 和python 刚好相反
-- -gt 大于 -lt 小于 -  -ge 大于等于 -le 小于等于
+- -gt 大于 -lt 小于 -  -ge 大于等于 -le 小于等于 -eq是等于 -ne是不等于
 ```
 if cat 111-tmp.txt | grep ting1
 then
@@ -90,6 +92,25 @@ fi
 [ ] && [ ] 用AND来合并两个条件
 ```
 - [ -t FD ] 如果文件描述符 FD （默认值为1）打开且指向一个终端则返回为真
+
+### 浮点数比较 # bc
+- 可以比较 `[[ echo "scale=2 0.3 > 0.4"|bc -eq 1 ]]` True 的结果为1 false的结果为0
+
+### 字符串比较
+- 利用字符串运算符 =~ 直接判断strA是否包含strB。
+```sh
+# 结果都是包含
+strA="helloworld"
+strB="low"
+if [[ $strA =~ $strB ]];then
+    echo "包含"
+fi
+if [[ $A == *$B* ]];then
+    echo "包含"
+fi
+
+```
+
 ### [] 和 [[]]
 - link:
    - https://blog.csdn.net/Michaelwubo/article/details/81698307
@@ -118,14 +139,12 @@ fi
 
 ### while
 ```sh
-while [ $a -le 5 ]
-do
-if [ $a -eq 3 ]
-then
-break
-fi
-echo "a=$a"
-a=$[$a+1]
+while [ $a -le 5 ];do
+    if [ $a -eq 3 ];then
+        break
+    fi
+    echo "a=$a"
+    a=$[$a+1]
 done
 ```
 

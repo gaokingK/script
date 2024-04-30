@@ -4,6 +4,10 @@
 set -o errexit #增加这句话，出错之后就会退出啦
 set -e #这句话和上一句是一样的，写一个就好了
 ```
+### 函数退出
+- return 返回到调用的地方，可以加一个状态码，默认是0
+- exit 退出整个shell脚本
+
 ### 数学运算 # 算数运算
 - https://blog.csdn.net/google19890102/article/details/51063530
 - i=$[i+10] #20

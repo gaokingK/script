@@ -77,28 +77,20 @@ go 里面，在实际程序运行的过程中，往往会有很多协程在执�
 - 队列
 但在实际中，读 chan 和写 chan 的协程都有一个队列来保存。 我们需要明确的一点事实是：队列中的协程会一个接一个执行，队列头的协程先执行，然后我们对 chan 的读写是按顺序来读写的，先取 chan 队列头的元素，然后下一个元素。
 
-# 变量
-- link
-    - https://www.topgoer.com/go%E5%9F%BA%E7%A1%80/%E5%8F%98%E9%87%8F%E5%92%8C%E5%B8%B8%E9%87%8F.html?h=%3A%3D
-- 变量必须先声明才能使用，使用var关键字声明 `var var_name var_type = var_value`
-- `:=` 快速声明变量，只能用在函数内部
-- 
-- 全局变量就是导出变量，定义的方式是首字母大写，另外在被导出的的结构体或者接口中，只有首字母大写的字段和方法才能被包外访问，而结构体中首字母小写的字段和方法不能被包外访问；
-- 函数内声明的变量只能在函数内部使用；函数内可以直接修改全局变量
-# 常量
-- const 内的 iota是golang语言的常量计数器,只能在常量的表达式中使用，，即const内。
-- iota在const关键字出现时将被重置为0(const内部的第一行之前)，const中每新增一行常量声明将使iota计数一次。
+
+
 # 运算符
 - 不同类型的值之间比较会报错
 - 在 Go 语言中，&& 和 || 是具有快捷性质的运算符，当运算符左边表达式的值已经能够决定整个表达式的值的时候（&& 左边的值为 false，|| 左边的值为 true），运算符右边的表达式将不会被执行。利用这个性质，如果你有多个条件判断，应当将计算过程较为复杂的表达式放在运算符的右侧以减少不必要的运算。
 - 取余运算符只能作用于整数：9 % 4 -> 1。
 - 同时，带有 ++ 和 -- 的只能作为语句，而非表达式，因此 n = i++ 这种写法是无效的
-# 输出
-- 格式化输出时，你可以使用 %t 来表示你要输出的值为布尔型
-- %d 数 
-  - %2d 长度为2，不足2位以空格填充,超过2位的就以实际长度显示
+  
+
 # defer
-- 先定义的后执行，因为执行了就销毁了，如果先前面的资源先释放了，后面的语句就没法执行了。
+- 在return 返回前执行
+- 如果有多个defer 先定义的后执行（按照栈的顺序），因为执行了就销毁了，如果先前面的资源先释放了，后面的语句就没法执行了。
+- defer un(trace("b")) 运行到这里的话会先执行trace("b")
+  
 # 函数
 - link：
     - https://www.topgoer.com/%E5%87%BD%E6%95%B0/%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89.html
@@ -118,6 +110,12 @@ func test(x, y int, s string) (int, string) {
 // 可能会偶尔遇到没有函数体的函数声明，这表示该函数不是以Go实现的。这样的声明定义了函数标识符。
 func Sin(x float64) float //implemented in assembly language
 ```
+### Go 语言规范定义了接口方法集的调用规则：
+
+- 类型 *T 的可调用方法集包含接受者为 *T 或 T 的所有方法集
+- 类型 T 的可调用方法集包含接受者为 T 的所有方法
+- 类型 T 的可调用方法集不包含接受者为 *T 的方法
+
 ### range  # 返回索引和内容
 ```
 for _, val := range sl
@@ -136,11 +134,16 @@ type struct_variable_type struct {
 // 初始化
 variable_name := structure_variable_type {value1, value2...valuen}
 // 或
-variable_name := structure_variable_type { key1: value1, key2: value2..., keyn: valuen}
+variable_name := structure_variable_type { key1: value1, keyn: valuen}
 // 或
 var Book2 Books        /* 声明 Book2 为 Books 类型 */
 Book1.title = "Go 语言"
-
+ms = struct1{10, 15.5, "Chris"}
+// 或
+book2:=new(Books)
+book2.value1=xxx
+//或
+ms := &struct1{10, 15.5, "Chris"}
 // s使用
 fmt.Printf( "Book title : %s\n", book.title)
 
@@ -165,27 +168,21 @@ func (person *Person) AddIncome(money int) int {
 // 使用
 name := person.GetName() // 获取该Person变量的Name字段的值
 ```
-# 数组
-- link：https://www.runoob.com/go/go-passing-arrays-to-functions.html
-- 是同一种数据类型的固定长度的序列。一旦定义，长度不能变。以往认知的数组有很大不同。
-- 数组是值类型，赋值和传参会复制整个数组，而不是指针。因此改变副本的值，不会改变本身的值。
-- 声明方式：
-```
-var variable_name [SIZE] variable_type
-# 可以把长度和类型写在等号右边
-var balance = [5]float32{1000.0, 2.0, 3.4, 7.0, 50.0}
-# 可以使用 ... 代替数组的长度，编译器会根据元素个数自行推断数组的长度 var b = [...]string{"hi"}
-# 也可以不写 var b = []string{"hi"}
-# 如果设置了数组的长度，我们还可以通过指定下标来初始化元素
-//  将索引为 1 和 3 的元素初始化
-balance := [5]float32{1:2.0,3:7.0}
-```
+
+
 # range
 - link：https://www.runoob.com/go/go-range.html
 - range 关键字用于 for 循环中迭代数组(array)、切片(slice)、通道(channel)或集合(map)的元素。在数组和切片中它返回元素的索引和索引对应的值，在集合中返回 key-value 对。
 - 可以省略key或者value
     - 果只想读取 key，格式如下：`for key := range oldMap`
     - 读取value `for _, value := range oldMap`
+- 如果只有一个接收者，会只返回索引
+```go
+a := [...]string{"a", "b", "c", "d"}
+for i := range a {
+    fmt.Println("Array item", i, "is", a[i])
+}
+```
 
 # 指针
 - link：http://c.biancheng.net/view/21.html
@@ -197,6 +194,7 @@ balance := [5]float32{1:2.0,3:7.0}
 - 和C语言一样，go中的指针无论什么类型占用的内存都是一样的，32位系统占用4个字节，64位的系统占用8个字节
 - 每个变量在运行时都拥有一个地址，这个地址代表变量在内存中的位置。Go语言中使用在变量名前面添加&操作符（前缀）来获取变量的内存地址（取地址操作），格式如下：`ptr := &v    // v 的类型为 T(代号)`
     - 其中 v 代表被取地址的变量，变量 v 的地址使用变量 ptr 进行接收，ptr 的类型为*T，称做 T 的指针类型，*代表指针。
+- 在指针类型前面加上 * 号（前缀）来获取指针所指向的内容，这里的 * 号是一个类型更改器
 - 变量、指针和地址三者的关系是，每个变量都拥有地址，指针的值就是地址。
 ### 使用指针获取指针指向的值 普通指针
 - 使用`&`取地址操作符对普通变量进行取地址操作可以得到变量的指针；对指针使用`*`取值操作符
@@ -254,6 +252,18 @@ import (
 - 照葫芦画瓢
 - 指针也是一种类型，和int一样，定义int是用`var v_name int = 3` 3是int类型；定义指针就是`var ptr *int = $var_names` *int就是类型 $var_names就是值
 
-# 格式化字符串
+# 输出 # prin
+- Print 只能输出字符串
+- Printf 可以将数字、变量、字符串格式化到第一个格式化字符串后输出
+- Println 和print一样，只不过后面会输出一个换行符
+
+## 格式化字符串
+- https://blog.csdn.net/TomorrowAndTuture/article/details/133680818
 - 输出变量类型 `fmt.Printf("%T\n", p)    // *int`
 - 输出地址`fmt.Printf("%p\n", &num) // 0xc0000ae008` 但参数需要是地址
+- 格式化输出时，你可以使用 %t 来表示你要输出的值为布尔型
+- %d 十进制表示 
+  - %2d 长度为2，不足2位以空格填充,超过2位的就以实际长度显示
+- %T     相应值的类型的Go语法表示
+- %v	值的默认格式表示
+- %s     字符串或切片的无解译字节

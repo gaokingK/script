@@ -18,6 +18,7 @@
 套接字：
     套接字可用于不同进程间的通信
 信号量
+    - link：https://python-parallel-programmning-cookbook.readthedocs.io/zh-cn/latest/chapter2/08_Thread_synchronization_with_semaphores.html
     信号量(S)是一个计数器，用于实现进程间的互斥与同步。而不是存储进程间通信数据；S是一个整数，与每次对信号量的PV操作值结合起来来控制并行数
     信号量是基于操作系统的PV操作，程序对信号量的操作时原子性的
     PV操作：[link](https://blog.csdn.net/strikedragon/article/details/82791450)

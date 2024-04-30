@@ -1,100 +1,104 @@
 [
     {
         "level_change_rules": {
-          "level_change_enable": true,
-          "special_time_rule": {
-            "level_change_type": "inherit_global",
-            "rules": []
-          }
+          "level_change_enable": false,
+          "special_time_rule": {}
         },
-        "service_id": "5f16b50c107d7c3d15b87466",
-        "name": "渠道服务整合（CSI）应用级监控",
+        "service_id": "5f16ad3f107d7c3d15b87225",
+        "name": "企业服务总线（ESB）应用级监控",
         "type": "top",
         "alert_rules": [
           [
             {
               "type": "alert_level",
-              "strategy": "minor"
+              "strategy": "default"
             },
             {
               "type": "anomaly_frequency",
               "kpis": [
-                "kpi.aiops_APPID_CSI_tecSuccRate",
-                "kpi.aiops_APPID_CSI_transAvgProcTime",
-                "kpi.aiops_APPID_CSI_busTransCount"
-              ],
-              "kpi_min_thr": 1,
-              "duration": 600,
-              "frequency": 8
-            }
-          ],
-          [
-            {
-              "type": "alert_level",
-              "strategy": "major"
-            },
-            {
-              "type": "anomaly_frequency",
-              "kpis": [
-                "kpi.aiops_APPID_CSI_busTransCount",
-                "kpi.aiops_APPID_CSI_tecSuccRate",
-                "kpi.aiops_APPID_CSI_transAvgProcTime"
+                "kpi.aiops_APPID_ESB_tecSuccRate",
+                "kpi.aiops_APPID_ESB_tecFailCount"
               ],
               "kpi_min_thr": 2,
               "duration": 600,
-              "frequency": 8
+              "frequency": 9
             }
           ],
           [
             {
               "type": "alert_level",
-              "strategy": "minor"
+              "strategy": "default"
             },
             {
-              "type": "anomaly_frequency",
+              "type": "level_frequency",
               "kpis": [
-                "kpi.aiops_APPID|TRCID_ESB|CSI_busTransCount",
-                "kpi.aiops_APPID|TRCID_ESB|CSI_tecSuccRate",
-                "kpi.aiops_APPID|TRCID_ESB|CSI_transAvgProcTime"
+                "kpi.aiops_APPID_ESB_transAvgProcTime"
               ],
               "kpi_min_thr": 1,
               "duration": 600,
-              "frequency": 8
+              "frequency": 5,
+              "values": [
+                5
+              ]
             }
-          ],
+          ]
+        ],
+        "created_time": 1595321663934
+      },
+      {
+        "level_change_rules": {
+          "level_change_enable": false,
+          "special_time_rule": {
+            "level_change_type": "no_alert",
+            "rules": [
+              {
+                "holiday_enable": false,
+                "time": [],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7
+                ]
+              }
+            ]
+          }
+        },
+        "service_id": "5f111a0e107d7c3d15b7486a",
+        "name": "新柜面（BBP）应用级监控",
+        "type": "top",
+        "alert_rules": [
           [
             {
               "type": "alert_level",
-              "strategy": "major"
-            },
-            {
-              "type": "anomaly_frequency",
-              "kpis": [
-                "kpi.aiops_APPID|TRCID_ESB|CSI_busTransCount",
-                "kpi.aiops_APPID|TRCID_ESB|CSI_tecSuccRate",
-                "kpi.aiops_APPID|TRCID_ESB|CSI_transAvgProcTime"
-              ],
-              "kpi_min_thr": 2,
-              "duration": 600,
-              "frequency": 8
-            }
-          ],
-          [
-            {
-              "type": "alert_level",
-              "strategy": "minor"
+              "strategy": "minor",
+              "special_time_rules": [
+                {
+                  "start_date": "",
+                  "end_date": "",
+                  "holiday_enable": false,
+                  "time": [
+                    {
+                      "start_time": 28800000,
+                      "end_time": 68400000
+                    }
+                  ],
+                  "days_of_week": []
+                }
+              ]
             },
             {
               "type": "lose_data",
               "kpis": [
-                "kpi.aiops_APPID|TRCID_ESB|CSI_busTransCount",
-                "kpi.aiops_APPID|TRCID_ESB|CSI_tecSuccRate",
-                "kpi.aiops_APPID|TRCID_ESB|CSI_transAvgProcTime"
+                "kpi.aiops_APPID_BBP_busTransCount"
               ],
-              "duration": 600
+              "duration": 300
             }
           ]
         ],
-        "created_time": 1595323660529
+        "created_time": 1594956302148
       }
 ]

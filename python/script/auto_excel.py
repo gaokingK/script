@@ -3,6 +3,8 @@
 author: lwx930245
 modify_records:
     - 2020.12.29, lwx930245, create this
+# link
+- Python 自动化操作Excel 看这一篇就够了 https://zhuanlan.zhihu.com/p/259583430
 """
 import xlrd
 import os

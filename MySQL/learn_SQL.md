@@ -43,15 +43,14 @@ limit offset
   - a. 从驱动表（左表）取出N条记录；
   - b. 拿着这N条记录，依次到被驱动表（右表）查找满足WHERE条件的记录；如果有满足条件的，就删除
 
-作者：😼吴腾跃
-链接：https://leetcode.cn/problems/delete-duplicate-emails/solutions/219860/dui-guan-fang-ti-jie-zhong-delete-he-de-jie-shi-by/
-来源：力扣（LeetCode）
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 ### insert
 - 插入行
 ```
 insert into #列名不需要加双引号
 ```
+- 将查询结果导入到表中(表存在且表结构相同)`INSERT INTO table2 SELECT * FROM table1 WHERE condition;`
+- 将查询结果导入到表中(表不存在) `CREATE TABLE school SELECT * FROM class`
+- 重新创建表`create table tbl_name like tbl_name;`
 ### delete
 DELETE FROM table_name WHERE condition;
 ### in # exists
@@ -137,9 +136,13 @@ select count(*) from dept_manager a join departments b on a.dept_no=b.dept_no; /
 select count(*) from dept_manager join departments; //返回216=9*24
 ```
 - JOIN 关键字用于表示连接操作。ON 关键字用于指定连接条件，即在两个表中相互匹配的列。连接条件通常是两个表之间的相等关系，但也可以是其他条件，具体取决于你的需求。通常是一起使用的但也可分开`SELECT * FROM table1 JOIN table2 USING (column_name);`
+
 ### 自连接
-- 把自己的表连接到直接的表
+- 把自己的表连接到自己的表
+- 自连接是指某张表通过某种逻辑关联他自己，通常通过在查询中多次引用同一张表，但是用不同的别名来实现自连接。自连接通常用于处理那些包含层次化或者有序数据的情况。
+- 连接的方式可以有左连接，右连接、内连接等等
 - `select a.name as "Employee"  from Employee as a join Employee as b on a.managerId = b.id where a.salary > b.salary`
+
 ### 连接 # join
 - 连接是SQL的核心
 - 全连接应该也属于外连接吧? -------------no
@@ -148,21 +151,23 @@ select count(*) from dept_manager join departments; //返回216=9*24
 - link
   - https://www.cnblogs.com/wanglijun/p/8916790.html
   - 圆圈代表表，一个圆圈全部有颜色代表所有行都在结果中，两个园圈重合的代表都满足连接条件的行，图中带颜色的表是代表该表在结果中出现, 而不是结果中相关表的内容是不是为空
+- MySQL（仅限MySQL）里面的CROSS JOIN可以用ON，结果跟INNER JOIN是一致的;JOIN 不加 ON 就是CROSS JOIN。JOIN 加ON 就是INNER JOIN, 用内连接，避免产生笛卡尔积，数据量大的时候，这种效率更高
 - cross join 笛卡尔积/ 交叉连接
-  ```
+  ```sql
   select * from tbl_A cross join tbl_B; # 显示的交叉连接
   select * from tbl_A, tbl_B;# 隐式的交叉连接, 没有关键字
   select * from tbl_A join tbl_B; ON为空时也是同样效果;
   ```
+  - cross join 也就是交叉连接，直接两个表求笛卡尔积，而在求笛卡尔积的基础上，又可以分为内连接 inner join/join 和外 outer join，内外连接都是先求笛卡尔积，然后在此基础上满足一定的条件，内连接是满足条件的那部分，而外连接则要加上不满足条件的那部分。
 - 内联接
-  - 取交集
+  - 取交集, 内连接是满足条件的那部分
   - 等价写法 inner join; straight_join; join; 还有where写法 
-  ```
+  ```sql
   select <select_list> from tableA [as] A] join/inner join/straight_join tblB B on condition;
   select xxx from tbl_name1, tbl_name2 where tbl_name1.col=tbl_name2.col
   ```
 - 外连接
-  - 取并集
+  - 取并集, 内连接是满足条件的那部分, 而外连接则要加上不满足条件的那部分
   - 分为左连接(左外连接)/(右连接(右外链接)/完整外连接(全连接) 三种
   - 左连接
     - 取左边的表的全部，右边的表按条件，符合的显示，不符合则显示null

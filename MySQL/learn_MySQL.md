@@ -30,6 +30,7 @@
 ```s
 MariaDB [(none)]> # none 是当前使用数据库的名字
 ```
+### 使用\s
 ### 寻找帮助
 - help contents 按目录查看
   - 全大写的是sql的关键字，小写的是变量名，可以根据情况替换为自己需要的
@@ -50,12 +51,16 @@ MariaDB [(none)]> # none 是当前使用数据库的名字
   - https://www.modb.pro/  
 - mysql数据库在线测试_5个免费在线 SQL 数据库环境
   - https://blog.csdn.net/weixin_32329059/article/details/114864041
+
 ### 管理MySQL
 - 查看信息：https://www.cnblogs.com/caoshousong/p/10845396.html
   - 查看当前连接数 show status like  'Threads%';
   Threads_connected ：这个数值指的是打开的连接数.
   Threads_running ：这个数值指的是激活的连接数，这个数值一般远低于connected数值.
   Threads_connected 跟show processlist结果相同，表示当前连接数。准确的来说，Threads_running是代表当前并发数
+  - show processlist如果是root帐号，你能看到所有用户的当前连接。如果是其它普通帐号，只能看到自己占用的连接。
+    - 等价与`select * from information_schema.processlist` 
+  - `\s` 并不是一个独立的 SQL 命令，而是 MySQL 命令行客户端的一个特殊命令，用于显示当前会话（session）的状态信息。
 - 允许通过远程链接
   - link: https://blog.csdn.net/weixin_52988911/article/details/120100574
   - 允许用户myuser从ip为192.168.1.6的主机连接到mysql服务器,使用mypassword作为密码`GRANT ALL PRIVILEGES ON *.* TO 'myuser'@'192.168.0.1' IDENTIFIED BY'mypassword' WITH GRANT OPTION;`
@@ -97,7 +102,7 @@ MariaDB [(none)]> # none 是当前使用数据库的名字
   - 当autocommit为ON的情况下，并且又手动开启了事务，那么mysql会把start transaction 与 commit之间的语句当做一次事务来处理，默认并不会帮用户提交需要手动提交，如果用户不提交便退出了，那么事务将回滚。
 
 # 表 
-- 查看表信息
+- ## 查看表信息
   - [descript|desc] tbl_name
   - SHOW [FULL] COLUMNS FROM tbl_name [FROM db_name] [like_or_where] 等价于`desc tbl_name`# 查看columns status
     - link:https://dev.mysql.com/doc/refman/8.0/en/show-columns.html
@@ -108,7 +113,7 @@ MariaDB [(none)]> # none 是当前使用数据库的名字
       - MUL：非唯一索引的第一列（允许出现重复值）
       - 如果一个列属于多个索引，按照PRI, UNI, MUL的优先级显示
  
-- 创建表 help create table;
+- ## 创建表 # create help create table;
 ```
 create table table_name
 (
@@ -119,8 +124,11 @@ column1 data_type[(data_length)],
 )
 # create table Person (Id int, age int, name varchar(255) );
 ```
-- 修改表 help alter table;
-```
+- 将查询结果导入到表中(表存在且表结构相同)`INSERT INTO table2 SELECT * FROM table1 WHERE condition;`
+- 将查询结果导入到表中(表不存在) `CREATE TABLE school SELECT * FROM class`
+- ## 重新创建表`create table tbl_name like tbl_name;`
+- ## 修改表 help alter table;
+```cs
 # 修改列属性使用modify
 alter table Person modify Id int not null auto_increment unique key comment 'id号'; 数据类型需要重新声明? 原本为空的设置为非空后会自动赋值
 # 修改列名 怎么只修改列名,而不传入属性-------------no
@@ -128,11 +136,13 @@ alter table tbl_name change old_name new_name 随便一个属性;
 
 # 自增, 自增属性必须为key, 且一个表中自增只有一个;
 # 删除自增属性, 其他的属性会消失吗?
- alter table Profession modify id int(11), drop primary key;
+alter table Profession modify id int(11), drop primary key;
+# 对表重命名
+ALTER  TABLE table_name RENAME TO new_table_name
 ```
-- 新建列的时候添加外键`alter table task add video_id int(11) after video_duration ,add constraint video_id foreign key (video_id) references video(id) on delete cascade on update no action;`
+- ## 新建列的时候添加外键`alter table task add video_id int(11) after video_duration ,add constraint video_id foreign key (video_id) references video(id) on delete cascade on update no action;`
 
-- 删除表`drop table tbl_name`
+- ## 删除表`drop table tbl_name`
 # 共识
 - col_name (column name); tbl_name(table_name)\
 
