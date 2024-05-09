@@ -48,7 +48,17 @@
    - 命令用于转换或删除文件中的字符。
    - -s, --squeeze-repeats：缩减连续重复的字符成指定的单个字符 
    - 小写字母全部转换成大写字母`cat testfile |tr a-z A-Z `
-
+# dd 用于读取，转换，并输出数据
+- if 指定读取的文件，默认是标准输入
+- of 输出文件名，默认为标准输出。
+- bs=bytes：同时设置读入/输出的块大小为bytes个字节。
+- count=blocks：仅拷贝blocks个块，块大小等于ibs指定的字节数。
+- 生成大文件 `dd if=/dev/zero of=res.txt bs=1M count=5` bs的单位可以是k M G
+  - /dev/zero是一个特殊的设备文件，它提供了无限的零字节（\0）
+- 将testfile文件中的所有英文字母转换为大写，然后转成为testfile_1文件 `dd if=testfile_2 of=testfile_1 conv=ucase `
+- 生成一个内容全是“hi”的5MB文件`yes "hi" | head -c 5242880 > file.txt`
+  - yes "hi": 这个命令会无限输出字符串"hi"和换行符。
+  - head -c 5242880: 这个命令会从管道中读取前5MB的内容（因为1MB=1048576字节，所以5MB就是5242880字节）然后停止。
 ### 命令
 ```sh
 # 打印文件中的特定列

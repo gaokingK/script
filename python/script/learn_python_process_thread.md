@@ -3,9 +3,14 @@
 ```py
 def func(arg1, arg2):
     pass
-target = threading.Thread(target=func, args=(arg1, arg2)) # 注意这里时func 不能写为func() 这样虽然也能运行，但是下面的语句就不会运行了
+target = threading.Thread(target=func, args=(arg1, arg2)) # 注意这里时func 不能写为func() 这样虽然也能运行，但是下面的语句就不会运行了 
+# 如果只有一个参数args=(arg1,) 因为传进去的是个元组
 target.start()
-target.join() # join的意思时主程序会等待进程结束后才结束
+target.join(timeout=10) # join的意思时主程序会等待进程结束后才结束 timeout如果有值，主进程会等待10s， 10s后会继续执行，如果没有其他代码，会等这个线程结束
+# 如果不join，主进程结束后子线程也会结束
+# 一个线程可以被join多次调用 ,结束了后也能join
+# start和join要放在两个循环里面，因为join会阻塞主进程，只有当前线程结束后才会继续运行
+# 在 Python 中，当你调用线程（threading.Thread 对象）的 join 方法时，调用这个方法的线程将会被阻塞，直到被 join 的线程终止。这允许程序等待线程完成其任务，确保线程有序和安全地退出。重要的是要理解 join 方法仅阻塞调用它的线程，而不会影响其他线程的执行。
 ```
 
 ## 注意

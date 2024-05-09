@@ -265,6 +265,7 @@ Ctrl+b z：当前窗格全屏显示，再使用一次会变回原来大小。
    # 更多见link
    ```
 ### 重定向
+   - `>log.file` 会清空文件
    - 进程替换 与 Here document 做区分?
    ```
    command > file	将输出重定向到 file。
@@ -276,6 +277,71 @@ Ctrl+b z：当前窗格全屏显示，再使用一次会变回原来大小。
    n <& m	将输入文件 m 和 n 合并。
    << tag	将开始标记 tag 和结束标记 tag 之间的内容作为输入。 EOF
    ```
+### 发送syslog
+- 在 Linux 系统中，要向指定的 IP 地址和端口发送 syslog 消息，通常使用 logger 命令。logger 是一个 shell 命令行工具，用于向系统日志从终端发送消息。你可以配合使用 syslog 服务，在远程服务器上监听来自 logger 的消息。
+- 首先，你需要确保远端 syslog 服务器配置为接受远程日志消息。在 /etc/syslog.conf 或 /etc/rsyslog.conf（取决于你使用的是 syslogd 还是 rsyslog）中，可能需要添加类似下面的配置以允许远程日志：
+```conf
+# Provides UDP syslog reception
+module(load="imudp")
+input(type="imudp" port="514")
+# Provides TCP syslog reception
+module(load="imtcp")
+input(type="imtcp" port="514")
+# 重启 syslog 服务：
+sudo systemctl restart rsyslog
+```
+- 在你的本地机器上，使用 logger 命令，指定远程服务器的 IP 地址和端口：`logger -n remote_ip_address -P remote_port -T -d --rfc3164 "Your syslog message"`
+参数说明：
+-n 指定接收 syslog 消息的远程服务器的 IP 地址。
+-P 指定远程服务器的端口，如果是默认的 SYSLOG 端口可以省略（514）。
+-T 表示使用 TCP 协议，去掉这个参数，则默认为 UDP。
+-d 指定使用数据报 (UDP) 而不是流 (TCP)。
+--rfc3164 使用 RFC 3164 格式的日志消息。如果不支持就取消
+- 在remote端`sudo tcpdump -i eth1 "port 514"` eth1是绑定remote_ip的网卡
+### 交互式 非交互式/批处理模式 
+- shell中的fork、source和exec总结（包括环境变量）：https://blog.csdn.net/lanxinju/article/details/6032368
+- Shell 子Shell与进程处理https://alisure.github.io/2018/03/01/Shell/Shell-12-process-subprocess/
+- 在 Shell 脚本中执行交互式命令通常比较复杂，因为 Shell 脚本被设计为自动执行命令而不需要用户交互。但有一些工具和方法可以帮助你执行需要交互的命令。
+这里有几种方法可以在 shell 脚本中执行交互式命令：
+- Expect 脚本
+expect 是一个用于自动化交互式应用程序，如 ssh、ftp、passwd、sftp 等命令行的工具。expect 可以模拟用户输入（如密码或任何其他输入）。下面是一个expect脚本的示例：
+```bash
+#!/usr/bin/expect
+# 这个脚本会启动 ssh 命令，当看到密码提示时会发送一个密码，然后转到交互模式。
+# 设置超时时间
+set timeout -1
+# 启动一个交互式命令
+spawn ssh user@hostname
+# 寻找提示符
+expect "password:"
+# 提供密码
+send "mypassword\r"
+# 交互模式
+interact
+```
+
+2. 使用 Here Documents
+Here Document 可以用来向交互式命令传递预期的输入。一个简单的例子是使用ftp命令：
+```bash
+#!/bin/bash
+# 这个脚本会打开一个 FTP 连接，登录，改变到指定目录，下载一个文件然后退出。
+
+ftp -n <<-EOF
+open hostname
+user username password
+cd /path/to/directory
+get file.txt
+bye
+EOF
+```
+3. 使用其他工具
+有些命令可能有自己的特定选项或标志，可以用来非交互式地执行原本需要交互的操作。例如，ssh和scp提供了选项用于非交互式的密钥认证，避免了输入密码的必要。
+
+### gdb
+   - gdb 有交互式和非交互式，`gdb /path/to/your/program -ex "break main" -ex "run" -ex "bt" -ex "quit"` 使用 -ex 参数在命令行中直接执行命令
+   - 也可以创建一个包含这些命令的文本文件，然后在 GDB 启动时使用 -x 参数执行它们
+   - 生成core文件 gdb -p 自己用户的pid 然后输入generate-core-file就可以生成core文件
+   - 当程序接收到以下信号时会产生 core 文件：https://www.jianshu.com/p/e38a3f1cf7f7
 ### 进程替换 与 Here document --------------no
    - 形如<(command)的写法叫做**process substitution**
    - [解释了底层怎样支持](https://www.oschina.net/question/113421_241288)

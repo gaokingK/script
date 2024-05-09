@@ -31,6 +31,7 @@ Fatal error in launcher: Unable to create process using '"d:\softwares\python 2.
 - 比如从[这里](https://github.com/Charmve)看到了cpp的图标以及一些常用的语言和框架、工具和环境
 - 语义化版本 就是版本的命名 https://semver.org/lang/zh-CN/
 
+
 # 数据库url："https://101.133.168.19:3306/qdam?user=qdam&password=123456"
 ### jsonpath: https://apifox.com/help/reference/json-path/
 
@@ -43,7 +44,11 @@ Fatal error in launcher: Unable to create process using '"d:\softwares\python 2.
 ### 一些部署方式
    - https://waline.js.org/guide/deploy/railway.html#%E5%A6%82%E4%BD%95%E9%83%A8%E7%BD%B2
 
-   
+### 带内ip和带外ip
+- 带内ip是指通过普通的网络连接，使用和数据传输相同的路径对设备进行管理
+- 带外ip使用专门的通道，利用不同于主要的网络连接和网络设备来连接和管理设备，如使用服务器的管理端口（如IPMI、iLO、DRAC等）通过管理网络进行设备连接。
+- 带外管理提供了一个备用路由，以保证管理员在主网络出现故障时仍能连接和控制关键基础设施。带内管理则是在设备运转正常时使用的一个便捷方法。
+
 ### 饿汉式加载与懒汉式加载
 - 饿汉式：声明的同时直接实例化。 特点：加载类时比较慢，但运行时获取对象的速度比较快，线程安全。
 - 懒汉式：声明的时候不实例化。 特点：加载类时比较快，但运行时获取对象的速度比较慢，线程不安全。

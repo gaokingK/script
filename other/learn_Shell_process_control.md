@@ -139,6 +139,7 @@ fi
 
 ### while
 ```sh
+while : 相当于其他语言的while True
 while [ $a -le 5 ];do
     if [ $a -eq 3 ];then
         break

@@ -17,6 +17,8 @@
    - PPID    父进程的进程ID（Parent Process id）
    - RSS 进程使用的驻留集大小或者是实际内存的大小，Kbytes字节。
 - -u user_name 显示user_name用户的进程
+  - 不过没有ps -aux |grep user_name显示的信息多 
+  - 不能使用 ps -u username -ax
 - uf
     - u：用户格式，显示与用户（owner）相关的信息，例如进程的所有者（USER）、用户ID（UID）、进程使用的CPU百分比（%CPU）、内存使用百分比（%MEM）等。
     - f：full-format，提供更详细的进程信息，包括进程之间的父子关系（PPID）、进程的启动时间、进程状态等。

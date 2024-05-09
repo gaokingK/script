@@ -7,6 +7,35 @@
   - https://vmware.github.io/photon/docs-v4/troubleshooting-guide/troubleshooting-with-systemd/troubleshooting_systemd/
   - https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/7
 # 通识
+### 结束进程
+```cs
+ctrl-c：发送 SIGINT 信号给前台进程组中的所有进程。常用于终止正在运行的程序；
+ctrl-z：发送 SIGTSTP信号给前台进程组中的所有进程，常用于挂起一个进程；
+ctrl-d：不是发送信号，而是表示一个特殊的二进制值，表示 EOF，作用相当于在终端中输入exit后回车；
+ctrl-\：发送 SIGQUIT 信号给前台进程组中的所有进程，终止前台进程并生成 core 文件；
+ctrl-s：中断控制台输出；
+ctrl-q：恢复控制台输出；
+ctrl-l：清屏
+其实，上述所有的控制字符都是可以通过stty命令更改的，可在终端中输入命令”stty -a”查看终端配置。
+```
+### shell中模拟ctrl+d
+```cs
+kill -SIGSTOP $pid # 相当于 ctrl-z
+kill -SIGCONT $pid # 相当于 fg
+kill -SIGINT $pid # 相当于 ctrl-c
+
+在脚本实现可以用
+echo -e ‘\00X’ 或 echo $’\00X’ #x表示十六进制数
+如：
+Ctrl-A 用 \001
+Ctrl-B 用 \002
+Ctrl-C 用 \003
+Ctrl-D 用 \004
+… …
+Ctrl-Z 用 \032
+
+如,要表示Ctrl-D,可以用
+```
 ### 用户态和内核态 
 ### 持久化磁盘IO buffer io direct io
 ### sudo和sudo su 和su之间有什么区别啊
@@ -32,6 +61,21 @@ su（Switch User）允许用户切换到其他用户账户，包括超级用户�
 su 命令的主要限制是，只有具有特殊权限的用户（通常是系统管理员）才能使用它来切换到 root 用户。
 ```
 - 有些命令不加sudo就没有输出
+### 日志切片 # logrotate
+- link：https://wsgzao.github.io/post/logrotate/
+- https://blog.csdn.net/m0_38004228/article/details/128284003
+```cs
+# /etc/logrotate.d/下创建配置文件如net_syslog
+/var/log/yum.log {
+    missingok
+    notifempty
+    size 30k
+    yearly
+    create 0600 root root
+}
+# 使用logrotate -f net_syslog启动 （只启动一次的那种）
+# 周期启动的话是看logrotate的定时任务来的（一般在/etc/cron.daily/logrotate
+```
 ### 判断系统命令存在不存在
 - command -v systemctl 判断是否有systemctl命令
 ### 更换内核 debian 
