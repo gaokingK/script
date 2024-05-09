@@ -43,6 +43,10 @@ Fatal error in launcher: Unable to create process using '"d:\softwares\python 2.
 ### Railway：免费容器托管平台
 ### 一些部署方式
    - https://waline.js.org/guide/deploy/railway.html#%E5%A6%82%E4%BD%95%E9%83%A8%E7%BD%B2
+### CRLF(\r\n) 与 LF(\n)
+- crlf 是windows的换行符格式，LF是Unix的
+- vscode 可以通过修改setting-设置--》用户设置--》文本编辑器--》文件--》eol--》
+设置为\n 但这样只能将新建的文件换行符设置为LF 而且要注意把user/ workspace/ folder都改掉
 
 ### 带内ip和带外ip
 - 带内ip是指通过普通的网络连接，使用和数据传输相同的路径对设备进行管理

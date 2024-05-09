@@ -127,8 +127,21 @@
    - 全系统的(/etc/gitconfig)<当前用户的(~/.gitconfig)<当前仓库的(/.git/config)
    - 某个配置在当前仓库的中的配置中取消,但查看还在的原因是用的上层的配置
    - `core.autocrlf` [link](https://www.jianshu.com/p/f13ef9e538e0)
+```
+core.autocrlf=true:      core.autocrlf=input:     core.autocrlf=false:
+
+     repository               repository               repository
+      ^      V                 ^      V                 ^      V
+     /        \               /        \               /        \
+crlf->lf    lf->crlf     crlf->lf       \             /          \
+   /            \           /            \           /            \
+```
    - `git config --global` 不加global只对当前仓库生效
    - `git config -l` 查看配置
+   - git config --system core.autocrlf false            # per-system solution
+   – git config --global core.autocrlf false            # per-user solution
+   – git config --local core.autocrlf false              # per-project solution
+   
    - git config --global user.name "bryan sun"
    - git config --global user.email "hitsjt@gmail.com"
 ### git checkout
