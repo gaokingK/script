@@ -78,7 +78,7 @@ def respective_attr():
     print("Dog.__dict__: {}".format(Dog.__dict__))
     print("Animal.__dict__: {}".format(Animal.__dict__))
     # 可以看到dog.__dict__中只有一个age属性，并没有fly属性
-    # Python 中对象的属性具有层次性（实例对象、类对象、基类对象），属性在哪个对象上定义，属性就会出现在哪个对象的__dict中
+    # Python 中对象的属性具有层次性（实例对象、类对象、基类对象），属性在哪个对象上定义，属性就会出现在哪个对象的__dict中, 类的__dict__和类对象的__dict__是不一样的
     # 但是如果赋值，就会有
     dog.fly = False
     print("dog.__dict__: {}".format(dog.__dict__))

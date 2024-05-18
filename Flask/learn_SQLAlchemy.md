@@ -167,6 +167,72 @@ This tutorial covers the well known SQLAlchemy ORM API that has been in use for 
 ```
 
 - Query 对象是完全生成的，**这意味着大多数方法调用都会返回一个新的 Query 对象，在该对象上可以添加更多条件。** 例如，要查询名为“ed”且全名为“Ed Jones”的用户，您可以调用 filter() 两次，它使用 AND 连接条件
+### 连接多个查询条件
+- 假设有种情况，请求中包含的过滤条件不固定，可以使用这种办法来根据到来的条件动态的拼接查询条件
+```py
+query = Book.query
+
+if title:
+	query = query.filter(Book.title.ilike(f"%{title}%"))
+
+if author:
+	query = query.filter(Book.author.ilike(f"%{author}%"))
+
+if genre:
+	query = query.filter(Book.genre.ilike(f"%{genre}%"))
+## 或许也可以这样
+parm = (Book.title.ilike(f"%{title}%"),Book.genre.ilike(f"%{genre}%") )
+query = query.filter(*parm)
+```
+- 进一步封装
+```py
+def build_query(base_query, conditions):
+    """
+    Build a dynamic query based on the given conditions.
+
+    Args:
+    - base_query: The base SQLAlchemy query object.
+    - conditions: A dictionary of conditions to filter the query.
+
+    Returns:
+    - The modified query object.
+    """
+    query = base_query
+
+    for field, value in conditions.items():
+        # Assuming 'ilike' for case-insensitive substring matching
+        query = query.filter(getattr(Book, field).ilike(f"%{value}%"))
+
+    return query
+
+# 在路由处理函数中
+def search_books():
+    title = request.args.get('title')
+    author = request.args.get('author')
+    genre = request.args.get('genre')
+
+    # 基础查询
+    base_query = Book.query
+
+    # 构建条件字典
+    conditions = {}
+    if title:
+        conditions['title'] = title
+    if author:
+        conditions['author'] = author
+    if genre:
+        conditions['genre'] = genre
+
+    # 使用 build_query 函数构建查询
+    query = build_query(base_query, conditions)
+
+    # 执行查询
+    result = query.all()
+
+    # 将查询结果转换为 JSON 响应
+    books = [{'title': book.title, 'author': book.author, 'genre': book.genre} for book in result]
+    return jsonify(books)	
+```
 
 ### [常用筛选器运算符](https://www.osgeo.cn/sqlalchemy/orm/tutorial.html#common-filter-operators)
 - like 呈现like运算符，它在某些后端不区分大小写，在其他后端区分大小写。对于保证不区分大小写的比较，请使用 ColumnOperators.ilike()

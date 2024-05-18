@@ -7,9 +7,146 @@
    - SELECT column_name(s) FROM table1; # 意思是可以选择一个列或者多个列
    - [Unique [key] 而不用 [unique [key]]
    - [COLUMN_FORMAT {FIXED|DYNAMIC|DEFAULT}] 带关键字参数的
+
+# windows
+### 可以设置为不同窗口使用不同的输入法，这样就不用来回切换中英文了
+- “开始”>“设置”>"设备">"输入">“高级键盘设置”；勾选“允许我为每个应用窗囗使用不同的输法”复选框即可。
+- link：https://zhuanlan.zhihu.com/p/82643303
+### 在命令行打开文件夹 explorer .
+### 注册表编辑器好像是全字匹配的
+### Registry Workshop 可以用来搜索替换windows中的路径https://blog.csdn.net/Melo_FengZhi/article/details/113919143
+### where 与 gcm
+- 获取可执行文件的路径， gcm也差不多
+- link: https://stackoverflow.com/questions/304319/is-there-an-equivalent-of-which-on-the-windows-command-line
+
+### 使用什么命令来查看cmd中输入的alias的完整路径呢
+```
+C:\Users\jw0013109>pip
+Fatal error in launcher: Unable to create process using '"d:\softwares\python 2.7.18_64\python.exe"  "D:\softwares\Python27\Scripts\pip.exe"
+# pip 应该是等于d:\softwares\python 2.7.18_64\python.exe D:\softwares\Python27\Scripts\pip.exe 
+# 这些用什么去看呢？ 又是如何设置的呢？
+```
+
+# other
+- 比如从[这里](https://github.com/Charmve)看到了cpp的图标以及一些常用的语言和框架、工具和环境
+- 语义化版本 就是版本的命名 https://semver.org/lang/zh-CN/
+
+
+# 数据库url："https://101.133.168.19:3306/qdam?user=qdam&password=123456"
+### jsonpath: https://apifox.com/help/reference/json-path/
+
+### GMT、UTC、DST、CST时区代表的意义
+- https://www.jianshu.com/p/735e8444cdda
+### linux 设置时区
+- link：https://blog.csdn.net/gezilan/article/details/79422864
+- sudo timedatectl set-timezone 'Asia/Shanghai'
+### Railway：免费容器托管平台
+### 一些部署方式
+   - https://waline.js.org/guide/deploy/railway.html#%E5%A6%82%E4%BD%95%E9%83%A8%E7%BD%B2
+### CRLF(\r\n) 与 LF(\n)
+- crlf 是windows的换行符格式，LF是Unix的
+- vscode 可以通过修改setting-设置--》用户设置--》文本编辑器--》文件--》eol--》
+设置为\n 但这样只能将新建的文件换行符设置为LF 而且要注意把user/ workspace/ folder都改掉
+
+### 带内ip和带外ip
+- 带内ip是指通过普通的网络连接，使用和数据传输相同的路径对设备进行管理
+- 带外ip使用专门的通道，利用不同于主要的网络连接和网络设备来连接和管理设备，如使用服务器的管理端口（如IPMI、iLO、DRAC等）通过管理网络进行设备连接。
+- 带外管理提供了一个备用路由，以保证管理员在主网络出现故障时仍能连接和控制关键基础设施。带内管理则是在设备运转正常时使用的一个便捷方法。
+
+### 饿汉式加载与懒汉式加载
+- 饿汉式：声明的同时直接实例化。 特点：加载类时比较慢，但运行时获取对象的速度比较快，线程安全。
+- 懒汉式：声明的时候不实例化。 特点：加载类时比较快，但运行时获取对象的速度比较慢，线程不安全。
+### geofile
+- ip和地理定位的关联信息，不是很精准
+### VMware vSphere
+  - VMware vSphere 不是特定的产品或软件。VMware vSphere是整个VMware套件的商业名称。
+### msys(microsoft sys)
+### NFS(Network File System)
+- NFS 是Network File System的缩写，即网络文件系统。一种使用于分散式文件系统的协定，由Sun公司开发，于1984年向外公布。功能是通过网络让不同的机器、不同的操作系统能够彼此分享个别的数据，让应用程序在客户端通过网络访问位于服务器磁盘中的数据，是在类Unix系统间实现磁盘文件共享的一种方法
+
+### 通用电子元器件的选用与检测
+- book name 
+- 103j 103 https://zhidao.baidu.com/question/145137526.html?qbl=relate_question_0K
+### 任务栏图标闪烁
+- link: https://blog.csdn.net/weixin_39631261/article/details/113504221
+### Shebang & Hashbang
+- 在计算领域中，Shebang（也称为Hashbang）是一个由井号和叹号构成的字符序列#!，其出现在文本文件的第一行的前两个字符。 在文件中存在Shebang的情况下，类Unix操作系统的程序载入器会分析Shebang后的内容，将这些内容作为解释器指令，并调用该指令，并将载有Shebang的文件路径作为该解释器的参数
+   - https://blog.csdn.net/weixin_44966641/article/details/120598561
+   - 后面必须指定的是绝对路径
+### 各國語言(語系)代碼表
+- https://hoohoo.top/blog/national-language-code-table-zh-tw-zh-cn-en-us-json-format/
+- zh-tw zh-cn
+
+### windows锁屏路径
+   - https://images.metmuseum.org/CRDImages/ep/original/DP-20613-001.jpg
+   - C:\Users\jw0013109\AppData\Local\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets
+   - ren * *.jpg
+### ELF文件
+- 可执行文件
+### MIME 类型字符串
+- MIME 类型，即 Multipurpose Internet Mail Extensions，称为多用途互联网邮件扩展类型，用来标识和记录文件的打开方式，一些常见的类型包括：
+   - text/plain：普通文本。
+   - text/html：HTML文本。
+   - application/pdf：PDF文档。
+   - application/msword：Word文档。
+   - image/png：PNG图片。
+   - mage/jpeg：JPEG图片。
+   - application/x-tar：TAR文件。
+   - application/x-gzip：GZIP文件。
 ### 为什么在终端里面或者使用urllib就下不了的东西在浏览器里就能直接下载呢？---------------no
 ### 线程安全
    - 意思是不需要自己加锁，就能在并行访问时保证数据完整性
+### cipher suite
+- 保证网络连接的算法集
+### 怎么阅读代码
+- 调试
+   - 在想看懂的地方打断点，看调用栈
+   - 如果不知道这个模块什么时候用的，就在这里打断点，看调用栈
+   - 看类的关系 ClassName.__mro__
+- 看代码结构，有哪些层（重写几次），方法是怎么调用的
+   - 比如Uniauto有wrapper层，有实际函数层还有dispath层
+### Etag和if-match
+- link：
+   - https://zh.m.wikipedia.org/zh-hans/HTTP_ETag
+   - https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/ETag
+- Etag是http协议提供的若干机制中的一种缓存验证机制。
+- 客户端第一次请求url时，服务器会使用摘要算法生成一个hash值存放在响应头的Etag字段当中，当客户端修改资源或者刷新资源时，会使用Etag字段来检测资源是否被修改，或者死否需求重新请求资源。
+- 当修改资源时，会if-match：Etag；包含在请求头当中，如果要修改的资源已经被别人修改了，服务器会返回412.
+- 当需要刷新资源时，会把if-none-match包含在请求头当中，如果资源没被修改，服务器会返回一个极短的响应，包含HTTP304（未修改）状态码，来告诉客户端说持有的资源是最新的，应该使用它。假如资源已经被修改，服务器会返回更新后的内容
+### SSO (Single Sign On)单点登录
+- 用户只需一次登录就可以访问所有相互信任的应用系统
+- 当用户第一次访问应用系统1的时候，因为还没有登录，会被引导到身份认证系统中进行登录；根据用户提供的登录信息，认证系统进行身份校验，如果通过校验，应该返回给用户一个认证的凭据－－ticket；用户再访问别的应用的时候就会将这个ticket带上，作为自己认证的凭据，应用系统接受到请求之后会把ticket送到认证系统进行校验，检查ticket的合法性。如果通过校验，用户就可以在不用再次登录的情况下访问应用系统2和应用系统3了。
+### 宏
+- 宏在编程语言中通常被定义为一种能够扩展语言语法或执行特定任务的特殊指令。然而，Python 的设计理念之一是“简洁胜于复杂”，它更倾向于通过其他方式（如装饰器、生成器等）来实现相似的功能。
+### smart（Self-Monitoring,Analysis and Reporting Technology）
+### ip Vip
+- VIP即Virtual IP Address，是实现HA（高可用）系统的一种方案，高可用的目的是通过技术手段避免因为系统出现故障而导致停止对外服务，一般实现方式是部署备用服务器，在主服务器出现故障时接管业务。 VIP用于向客户端提供一个固定的“虚拟”访问地址，以避免后端服务器发生切换时对客户端的影响
+- VIP虽然名字上叫虚拟IP，却是实打实存在的一个IP，这个IP同时绑定在负载均衡设备上和提供服务的Realserver上
+- 就是多台服务器对外暴漏的一个ip
+### smartctl
+- link: https://www.jianshu.com/p/d5389994fad1
+- smartctl是常用的磁盘检查工具
+- 查看磁盘是否支持`sudo smartctl -i /dev/sda1 `
+   - ```
+      # 最后两行 
+      SMART support is: Available - device has SMART capability.          
+      SMART support is: Enabled
+       ```
+- 手动开启支持smartctl `smartctl --smart=on --offlineauto=on --saveauto=on /dev/sda1`
+- 显示磁盘的属性值`sudo smartctl -A /dev/sdl1`
+   - VALUE：这是表格中最重要的信息之一，代表给定属性的标准化值，在1到253之间。253意味着最好情况，1意味着最坏情况。取决于属性和制造商，初始化VALUE可以被设置成100或200.
+
+### XOR (exclusive OR) 更严格的or运算
+- link: https://www.ruanyifeng.com/blog/2021/01/_xor.html
+- 运算规则 
+   ```
+   1 ^ 0 = 1
+   0 ^ 0 = 0
+   1 ^ 1 = 0
+   ```
+   - 任何值 与 0 xor 都为自身
+   - 自己和自己xor 结果为0
+- 妙用：一个数组包含 n-1 个成员，这些成员是 1 到 n 之间的整数，且没有重复，请找出缺少的那个数字。
 ### 内存地址也是需要空间的
    - 地址一般由 文件号+块号+块内偏移组成，大概10个字节
 ### 关于文件夹命名、文件命名
@@ -35,6 +172,12 @@
    - EL6 表示软件包可以在 Red Hat 6.x，CentOS 6.x，CloudLinux 6.x 进行安装
    - EL5 表示软件包可以在 Red Hat 5.x，CentOS 5.x，CloudLinux 5.x 进行安装
    - EL7 表示软件包可以在 Red Hat 7.x，CentOS 7.x，CloudLinux 7.x 进行安装
+### CentOS 与 RedHat 关系和区别
+   - https://blog.csdn.net/u013967628/article/details/79542541
+   - RedHat 发行版介绍
+      - Red Hat 7/8/9 普通发行版、在2003年停止了开发，它的项目有 Fedora Project 这个项目所取代，并以 Fedora Core 这个名字发行并提供普通用户免费使用
+      - Red Hat Enterprise Linux （RHEL）针对企业发行的版本
+   - CentOS 就是这样在 RHEL 发布的基础上克隆再现的一个 Linux 发行版本，因为Redhat的大多数软件包是基于GPL发布的，所以他必须公开自己的RedHat的源码，而其他人只要遵循GPL协议，均可以在原软件包的技术上在开发和发布，所以Centos就诞生了。
 # 名词
 - 状态机
 ```
@@ -145,7 +288,9 @@ Development code is only available in Git, and should never be used in productio
 # ovs
 
 # compass-ci
-
+### 32位与# 64位 # 0x
+- 内存在计算机中使用一堆箱子来表示（这也是人们在讲解它的时候的画法），这些箱子被称为 “字”。根据不同的处理器以及操作系统类型，所有的字都具有 32 位（4 字节）或 64 位（8 字节）的相同长度；所有的字都使用相关的内存地址来进行表示（以十六进制数表示）。
+- 在 0xf840000040 中，0x：表示这是一个十六进制数。f840000040：这是十六进制数的主体，它占用了 48 位（12 个字符）。在64位系统中，内存地址通常是 64 位长。
 ### 缩写
    - noop 没有操作
       no operate

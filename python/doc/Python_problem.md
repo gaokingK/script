@@ -1,6 +1,11 @@
 # link
 - [How collections.deque works?](https://zhuanlan.zhihu.com/p/63502912) -------no
 # 通识
+### import 时出现 no moudle named xxx
+```
+import sys
+sys.path.append(os.dirname(os.getcwd()))
+```
 ### 这是为什么，为什么不幂等
 ```
 >>> [i for i in range(10) if i%2==0]
@@ -21,6 +26,29 @@ True
 >>>
 
 ```
+### list_type.append("xxx")返回是空 所以不能return list_a.append("xx")
+### with open # open
+    - open 操作符link: https://www.runoob.com/python/python-func-open.html
+      - r：读
+      - w：覆盖写（从开头写）
+      - a：追加写（在末尾写）
+      - r+ == r+w（可读可写，文件若不存在就报错(IOError)）
+      - w+ == w+r（可读可写，文件若不存在就创建）
+      - a+ == a+r（可追加可写，文件若不存在就创建）
+      - 对应的，如果是二进制文件，就都加一个b就好啦：‘rb’　　‘wb’　　‘ab’　　‘rb+’　　‘wb+’　　‘ab+’
+        - t是windows平台特有的所谓text mode(文本模式),区别在于会自动识别windows平台的换行符。
+        - 类Unix平台的换行符是\n，而windows平台用的是\r\n两个ASCII字符来表示换行，python内部采用的是\n来表示换行符。
+        - rt模式下，python在读取文本时会自动把\r\n转换成\n.
+        - wt模式下，Python写文件时会用\r\n来表示换行。
+    - with open("./python/script/RESTFull_Api/res.json/aa") 打开目录下的aa文件
+    - with open("aa") 打开程序source path下的aa文件
+    - 打开utf-8编码的中文文件出现：UnicodeDecodeError: 'gbk' codec can't decode byte 0xff in position 0: illegal multibyte sequence
+    ```
+    #  with open(file_path, encoding="gbk", errors='ignore') as f: 改成下面这样就好了，好像是打开模式的原因
+    #  with open(file_path, "r", encoding="utf-8", errors='ignore') as f: 
+    ```
+    - Python 使用 json.dump() 保存文件时中文会变成 Unicode。在打开写出文件时加入 encoding="utf8"，在dump时加入 ensure_ascii=False 即可解决。
+    
 ### python 命令行中如果导入的方法修改了，需要重新导入，或者关闭命令行再重新打开，重新导入
 ### sort/sorted区别
     - sort 是应用在 list 上的方法，sorted 可以对所有可迭代的对象进行排序操作
@@ -31,6 +59,7 @@ True
         - 指定按迭代对象中的哪一个值排序 `sorted([[3,4], [3,2,7]], key=lambda x: x[1])`
         - 按字典的value排序 `sorted({"a": "4", "b": "1", "c": 1}.items(), key = lambda x: x[1])`
         - 若是想完成 “先按xx排序， 再按xxx排序”这种， 就把key=（xx, xxx）
+        - 还可以按照字典中没有的值来排序如 dir_list = sorted(dir_list,  key=lambda x: os.path.getmtime(os.path.join(file_path, x)))
 
 ### python -i -c 
     - -i -i其实就是执行文件内容或者执行命令后再进入交互模式。不会去读取$PYTHONSTARTUP这个配置文件。
@@ -106,8 +135,7 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
    - 其他进制转其他进制 先转为10进制 bin/oct/int/hex 
      - 如hex(int('10', 2)) 二进制转16进制
    - 使用format函数进行格式化数字操作
-### 格式化字符串
-    - f 格式化字符串中不能又反斜杠，只能用单引号
+
 ###  3>=2 <6
 ### 鸭子类型
    - 介绍？
@@ -143,56 +171,74 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
    - `f"{{}}"`
    - `hello = "HELLO"\n print(f"{{{hello.lower()}}}") # 输出{hello}`
 ### @overload ---------------------------------no
-### python中path相关的
-    - 环境变量：PATH和sys.path 以及PYTHONPATH
-      - PATH 是系统的环境变量
-      - sys.path 是python的搜索模块的路径集
-         - sys.path.insert(0, "path1") # 将path1加入搜索路径中, 2个必选参数
-         - import 相关：https://blog.csdn.net/weixin_38256474/article/details/81228492
-      - PYTHONPATH 是环境变量PATH中的一个值， 默认是空
-      - sys.path始化时默认包含了输入脚本所在的目录（python path/to/script, path/to 会在path中）， PYTHONPATH 和python安装目录
-      - 修改PYTHONATH影响sys.path
-        ```shell
-        huawei ~/Desktop/people/pc_kbox/pc_kbox% export PYTHONPATH="/5555555"
-        huawei ~/Desktop/people/pc_kbox/pc_kbox% python3
-        >>> import sys
-        >>> sys.path
-        ['', '/5555555', '/usr/lib/python37.zip', '/usr/lib/python3.7', '/usr/lib/python3.7/lib-dynload', '/home/huawei/.local/lib/python3.7/site-packages', '/usr/local/lib/python3.7/dist-packages', '/usr/lib/python3/dist-packages']
+### path pyth # 路径 python中path相关的
+- 环境变量：PATH和sys.path 以及PYTHONPATH
+    - PATH 是系统的环境变量
+    - sys.path 是python的搜索模块的路径集
+        - sys.path.insert(0, "path1") # 将path1加入搜索路径中, 2个必选参数
+        - import 相关：https://blog.csdn.net/weixin_38256474/article/details/81228492
+    - PYTHONPATH 是环境变量PATH中的一个值， 默认是空
+    - sys.path始化时默认包含了输入脚本所在的目录（python path/to/script, path/to 会在path中）， PYTHONPATH 和python安装目录
+    - 修改PYTHONATH影响sys.path
+    ```shell
+    huawei ~/Desktop/people/pc_kbox/pc_kbox% export PYTHONPATH="/5555555"
+    huawei ~/Desktop/people/pc_kbox/pc_kbox% python3
+    >>> import sys
+    >>> sys.path
+    ['', '/5555555', '/usr/lib/python37.zip', '/usr/lib/python3.7', '/usr/lib/python3.7/lib-dynload', '/home/huawei/.local/lib/python3.7/site-packages', '/usr/local/lib/python3.7/dist-packages', '/usr/lib/python3/dist-packages']
 
-        # 奇怪的是这种现象
-        huawei ~/Desktop/people/pc_kbox/pc_kbox% export PYTHONPATH="5555555"
-        huawei ~/Desktop/people/pc_kbox/pc_kbox% python3                     
-        >>> import sys
-        >>> sys.path
-        ['', '/home/huawei/Desktop/people/pc_kbox/pc_kbox/5555555', '/usr/lib/python37.zip', '/usr/lib/python3.7', '/usr/lib/python3.7/lib-dynload', '/home/huawei/.local/lib/python3.7/site-packages', '/usr/local/lib/python3.7/dist-packages', '/usr/lib/python3/dist-packages']
-        >>> 
-        ```
-   - 文件路径的操作封装在os.path里的方法, 此外，还有shutil该库为python内置库，是一个对文件及文件夹高级操作的库，可以与os库互补完成一些操作，如文件夹的整体复制，移动文件夹，对文件重命名等。
-        - link:
-            - [os.path()模块](https://www.runoob.com/python3/python3-os-path.html)
-            - [Python3 OS 文件/目录方法](https://www.runoob.com/python3/python3-os-file-methods.html)
-        ```
-        os.path.abspath("path") # path的绝对路径 最后一个/也会被去掉 os.path.abspath("/root/") # 输出/root
-        os.path.splittext(path)[-1] 获取后缀名
-        os.getcwd() # 返回当前工作目录
-        os.path.basename(path) # 文件名带格式 按格式判断
-        os.path.dirname(path) # 文件所在文件夹名 是按格式判断的
-        os.path.isdir(path) # path存在，且是文件夹、不是按格式判断的
-        os.path.isfile(path) # path存在，且是文件、不是按格式判断的
-        os.rmdir(path) # 删除文件夹，文件夹非空的话会报错
-        os.removedirs() # 递归删除目录
-            - os.removedirs("./test2/test1") # test1如果为null，就删除，然后删除test2
-        - os.walk() # 遍历文件夹下的所有文件
-        shutil.rmtree("path") # 空不空都能删除
-        - 复制文件：https://www.jb51.net/article/145522.htm
-            - https://www.jb51.net/article/145522.htm
-            - shutil.copyfile("file.txt","file_copy.txt")
+    # 奇怪的是这种现象
+    huawei ~/Desktop/people/pc_kbox/pc_kbox% export PYTHONPATH="5555555"
+    huawei ~/Desktop/people/pc_kbox/pc_kbox% python3                     
+    >>> import sys
+    >>> sys.path
+    ['', '/home/huawei/Desktop/people/pc_kbox/pc_kbox/5555555', '/usr/lib/python37.zip', '/usr/lib/python3.7', '/usr/lib/python3.7/lib-dynload', '/home/huawei/.local/lib/python3.7/site-packages', '/usr/local/lib/python3.7/dist-packages', '/usr/lib/python3/dist-packages']
+    >>> 
+    ```
+- 文件路径的操作封装在os.path里的方法, 此外，还有shutil该库为python内置库，是一个对文件及文件夹高级操作的库，可以与os库互补完成一些操作，如文件夹的整体复制，移动文件夹，对文件重命名等。
+    - link:
+        - [os.path()模块](https://www.runoob.com/python3/python3-os-path.html)
+        - [Python3 OS 文件/目录方法](https://www.runoob.com/python3/python3-os-file-methods.html)
+    - 如果文件打不开，先使用os.getcwd()看下工作目录是哪里
+    ```
+    # 如果目录名字为中文 需要转码处理
+        uPath = unicode(cPath,'utf-8')
+        for fileName in os.listdir(uPath) :
+            print fileName
+    # 获取文件时间
+        os.path.getmtime() 函数是获取文件最后修改时间
+        os.path.getctime() 函数是获取文件最后创建时间
+        获取的是时间戳 time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(1654914448.7850325))
+    # 按时间排序
+        dir_list = sorted(dir_list,  key=lambda x: os.path.getmtime(os.path.join(file_path, x)))
+        获取文件和时间的字典
+        file_dict = {key: value for key,value in zip(os.listdir(download_path), [time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(os.path.getmtime(os.path.join(download_path, file)))) for file in os.listdir(download_path)])}
+    os.path.abspath("path") # path的绝对路径 最后一个/也会被去掉 os.path.abspath("/root/") # 输出/root
+    os.path.splittext(path)[-1] 获取后缀名
+    os.getcwd() # 返回当前工作目录
+    os.path.join(path1[, path2[, ...]])	把目录和文件名合成一个路径
+    os.sep 系统的路径分隔符 win 为 "\\"; Unix 为 "/"
+    os.path.basename(path) # 文件名带格式 按格式判断
+    os.path.dirname(path) # 文件所在文件夹名 是按格式判断的
+    os.path.isdir(path) # path存在，且是文件夹、不是按格式判断的
+    os.path.isfile(path) # path存在，且是文件、不是按格式判断的
+    os.rmdir(path) # 删除文件夹，文件夹非空的话会报错
+    os.removedirs() # 递归删除目录
+        - os.removedirs("./test2/test1") # test1如果为null，就删除，然后删除test2
+    - os.walk() # 遍历文件夹下的所有文件
+    shutil.rmtree("path") # 空不空都能删除
+    - 复制文件：https://www.jb51.net/article/145522.htm
+        - https://www.jb51.net/article/145522.htm
+        - shutil.copyfile("file.txt","file_copy.txt")
 
-        ```
-        - 
+    ```
+- file
+    - w+ 读不到原本文件的内容了
+    - r+ 从开头读 如果文件不存在会报错
 ### python2.x和python3.x 中range的不同以及python2中xrange
     - python2 中的range返回一个list，python3中返回一个可迭代对象
     - python2 中xrange返回一个生成器
+    - python3 3/2=1.5 python2种3/2=1
 ### a = b 赋值时创建对象的顺序
     - 参照learn_python_namespace_scrope
 ### if condition1 and condition2 的执行顺序
@@ -202,14 +248,20 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
     - PYTHONPATH中的目录
     - Python默认的安装路径中
     - 实际上，解释器由 sys.path 变量指定的路径目录搜索模块，该变量初始化时默认包含了输入脚本（或者当前目录）， PYTHONPATH 和安装目录。这样就允许 Python程序了解如何修改或替换模块搜索目录。
+    - 竟然还能`from ..Host.HostBase import HostBase` 此语句所在的文件是在Host文件夹下，即HostBase.py和此文件在同一目录下
 ### list.pop/remote/del 区别
     - a.remove(value)  删除首个符合条件的元素;返回空
     - a.pop(index) 删除索引并且返回
     - del a[start[, end]] 删除下标, 可以是范围
     - 值必须都有效,否则会报错
-2. #### dict.setdefault(key, value)
-    - 字典中的value能为空和None
-    - 如果字典中a有值(即使为空或者None), 执行该方法后还是原样, 如果没有, 就等同于添加一个新键值对
+#### dict
+    - dict.setdefault(key, value)
+        - 字典中的value能为空和None
+        - 如果字典中a有值(即使为空或者None), 执行该方法后还是原样, 如果没有, 就等同于添加一个新键值对
+    - dict.pop("key") 
+        - 从字典中删除一个键，如果键不存在会报错
+        - 返回这个键的值
+    - dict.popitem() 返回并删除字典中的最后一对键和值。
 3. #### 类方法、静态方法、实例方法
 
 4. #### copy.copy 与 copy.deepcopy不同的原因
@@ -262,8 +314,10 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
 16. ##### (for else)/(while else)/(try else)
     for 如果正常结束 else中内容会执行 
     while 如果正常结束 else中内容会执行
-    try 是如果try中的内容正常执行了，执行else中内容
+    try 是如果try中的内容正常执行了，执行else中内容 但是try中如果有return 就不会走到else中；else中可以使用try中建的变量
     总的来说都是正常结束了，会执行else中内容
+    最后一个循环break不会走else，最后一个循环continue会else, 因为continue也相当于是走完循环了啊
+    for 中如果抛出异常被捕获了，也会走到else
 17. ##### 方法和函数的区别
     方法绑定在对象上面，通过对象调用; 方法被调用时,self会自动加到函数参数列表首位;method 就是封装了一个func和一个对象
     函数可以独立运行
@@ -370,6 +424,17 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
 1. 'str' object does not support item assignment 
     - 因为str类型的对象属于不可变类型
     - `'string'[1]='string'[2]`
+
+- TypeError: coercing to Unicode: need string or buffer, generator found
+```
+>>> [os.path.getmtime(os.path.join(download_path, file) for file in os.listdir(download_path))] # 这里的括号加错了，应该是这样
+>>> [os.path.getmtime(os.path.join(download_path, file)) for file in os.listdir(download_path)] 
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "d:\softwares\python27\lib\genericpath.py", line 62, in getmtime
+    return os.stat(filename).st_mtime
+TypeError: coercing to Unicode: need string or buffer, generator found
+```
 ### 语法糖
 1. `return (rv[0] if rv else None) if one else rv`
 2. 列表生成式

@@ -30,8 +30,16 @@
 ```s
 MariaDB [(none)]> # none 是当前使用数据库的名字
 ```
+### 使用\s
 ### 寻找帮助
 - help contents 按目录查看
+  - 全大写的是sql的关键字，小写的是变量名，可以根据情况替换为自己需要的
+  - | 代表或
+  - [] 中的是可选的，如果有多个的话，一个不要都行
+  - {} 中的是必须选择的参数 ADD {INDEX|KEY} 就说明add 后面必选跟INDEX或者KEY
+  - () 的意思是被括号包裹的变量在sql中也要被包裹
+  - (key_part,...)、(col_name,...)这种的意思就是可以出现多个
+ 
 - help create database;
 - Mycli 是一个 MySQL，MariaDB 和 Percona 命令行客户端，具有自动补全、智能补全、别名支持、页面调整和语法高亮功能。
 - 帮助网站
@@ -39,19 +47,35 @@ MariaDB [(none)]> # none 是当前使用数据库的名字
 	- http://www.jooq.org/doc/latest/manual/sql-building/sql-statements/select-statement/implicit-join/
   - [ourmysql](http://ourmysql.com/)
   - https://help.gnome.org/users/gda-browser/stable/virtual-connections.html.zh_CN
+- 技术网站
+  - https://www.modb.pro/  
+- mysql数据库在线测试_5个免费在线 SQL 数据库环境
+  - https://blog.csdn.net/weixin_32329059/article/details/114864041
+
 ### 管理MySQL
+- 查看信息：https://www.cnblogs.com/caoshousong/p/10845396.html
+  - 查看当前连接数 show status like  'Threads%';
+  Threads_connected ：这个数值指的是打开的连接数.
+  Threads_running ：这个数值指的是激活的连接数，这个数值一般远低于connected数值.
+  Threads_connected 跟show processlist结果相同，表示当前连接数。准确的来说，Threads_running是代表当前并发数
+  - show processlist如果是root帐号，你能看到所有用户的当前连接。如果是其它普通帐号，只能看到自己占用的连接。
+    - 等价与`select * from information_schema.processlist` 
+  - `\s` 并不是一个独立的 SQL 命令，而是 MySQL 命令行客户端的一个特殊命令，用于显示当前会话（session）的状态信息。
 - 允许通过远程链接
   - link: https://blog.csdn.net/weixin_52988911/article/details/120100574
   - 允许用户myuser从ip为192.168.1.6的主机连接到mysql服务器,使用mypassword作为密码`GRANT ALL PRIVILEGES ON *.* TO 'myuser'@'192.168.0.1' IDENTIFIED BY'mypassword' WITH GRANT OPTION;`
 - link: https://www.runoob.com/mysql/mysql-administration.html
-- show databases;
-  - information_schema/mysql以及 performance_schema是系统数据库
-- use database_name;
-- create database database_name;
-- drop database database_name;
+- show variables like "datadir"; # 数据库存放路径
+- 对数据库
+  - show databases;
+    - information_schema/mysql以及 performance_schema是系统数据库
+  - use database_name;
+  - create database database_name;
+  - drop database database_name;
+- 对表
+- select * from information_schema.tables where table_name=tbl_name 查看该表的一些信息
 - show tables; 使用该命令前需要使用 use 命令来选择要操作的数据库。
-  
-- show COLUMNS FROM 数据表:显示数据表的属性
+- show [FULL] COLUMNS FROM 数据表:显示数据表的属性
 - show INDEX FROM 数据表: 显示数据表的详细索引信息，包括PRIMARY KEY（主键）。
 - SHOW TABLE STATUS [FROM db_name] [LIKE 'pattern'] \G: 
   - 命令各项的意思可以 help show table status
@@ -60,7 +84,7 @@ MariaDB [(none)]> # none 是当前使用数据库的名字
   - 该命令将输出Mysql数据库管理系统的性能及统计信息。
   - \G;   # 加上 \G，查询结果按列打印
   ```s
-  mysql> SHOW TABLE STATUS  FROM RUNOOB;   # 显示数据库 RUNOOB 中所有表的信息
+  mysql> SHOW TABLE STATUS FROM RUNOOB;   # 显示数据库 RUNOOB 中所有表的信息
   mysql> SHOW TABLE STATUS from RUNOOB LIKE 'runoob%';     # 表名以runoob开头的表的信息
   mysql> SHOW TABLE STATUS from RUNOOB LIKE 'runoob%'\G;   # 加上 \G，查询结果按列打印
   ```
@@ -76,21 +100,20 @@ MariaDB [(none)]> # none 是当前使用数据库的名字
     - 设置当前会话 `set [session] autocommit=0`
     - 设置全局 `set global autocommit=0`
   - 当autocommit为ON的情况下，并且又手动开启了事务，那么mysql会把start transaction 与 commit之间的语句当做一次事务来处理，默认并不会帮用户提交需要手动提交，如果用户不提交便退出了，那么事务将回滚。
-# other 杂
-- MySQL的@与@@区别
-  - link： https://www.cnblogs.com/qlqwjy/p/8470722.html
-  - @x 是 用户自定义的变量  (User variables are written as @var_name)
-  - @@x 是 global或session变量  (@@global  @@session )
-  - 查看全局变量: `select @@var_name`
-  - 设置全局变量值:
-      `mysql> SET @t1=0, @t2=0, @t3=0;`
-      `mysql> SELECT @t1:=(@t2:=1)+@t3:=4,@t1,@t2,@t3;`
 
-- 查询的时候设置临时变量 tmp
-  - `mysql> SELECT @t1:=(@t2:=1)+@t3:=4,@t1,@t2,@t3;`# t2=1, t3=4, t1=t3+t4; 查询t1、t2、t3
-# 简单命令
 # 表 
-- 创建表 help create table;
+- ## 查看表信息
+  - [descript|desc] tbl_name
+  - SHOW [FULL] COLUMNS FROM tbl_name [FROM db_name] [like_or_where] 等价于`desc tbl_name`# 查看columns status
+    - link:https://dev.mysql.com/doc/refman/8.0/en/show-columns.html
+    - 关于Key值：
+      - empty：没有索引，或者作为覆盖索引或者非唯一索引的第二列
+      - PRI：主键索引或者属于多列主键索引
+      - UNI：唯一索引的第一列
+      - MUL：非唯一索引的第一列（允许出现重复值）
+      - 如果一个列属于多个索引，按照PRI, UNI, MUL的优先级显示
+ 
+- ## 创建表 # create help create table;
 ```
 create table table_name
 (
@@ -101,8 +124,11 @@ column1 data_type[(data_length)],
 )
 # create table Person (Id int, age int, name varchar(255) );
 ```
-- 修改表 help alter table;
-```
+- 将查询结果导入到表中(表存在且表结构相同)`INSERT INTO table2 SELECT * FROM table1 WHERE condition;`
+- 将查询结果导入到表中(表不存在) `CREATE TABLE school SELECT * FROM class`
+- ## 重新创建表`create table tbl_name like tbl_name;`
+- ## 修改表 help alter table;
+```cs
 # 修改列属性使用modify
 alter table Person modify Id int not null auto_increment unique key comment 'id号'; 数据类型需要重新声明? 原本为空的设置为非空后会自动赋值
 # 修改列名 怎么只修改列名,而不传入属性-------------no
@@ -110,78 +136,13 @@ alter table tbl_name change old_name new_name 随便一个属性;
 
 # 自增, 自增属性必须为key, 且一个表中自增只有一个;
 # 删除自增属性, 其他的属性会消失吗?
- alter table Profession modify id int(11), drop primary key;
+alter table Profession modify id int(11), drop primary key;
+# 对表重命名
+ALTER  TABLE table_name RENAME TO new_table_name
 ```
-- 新建列的时候添加外键`alter table task add video_id int(11) after video_duration ,add constraint video_id foreign key (video_id) references video(id) on delete cascade on update no action;`
-- SHOW [FULL] COLUMNS FROM tbl_name [FROM db_name] [like_or_where] 等价于desc tbl_name # 查看columns status
+- ## 新建列的时候添加外键`alter table task add video_id int(11) after video_duration ,add constraint video_id foreign key (video_id) references video(id) on delete cascade on update no action;`
 
-### 列子句
-- 排序规则 collate
-  - link
-    - https://www.cnblogs.com/binjoy/articles/2638708.html
-  - 使用
-    - `collate collation_name`
-      - `CityName nvarchar(10)collate chinese_prc_ci_as null`
-    - 参数collate_name是应用于表达式、列定义或数据库定义的排序规则的名称。collation_name 可以只是指定的 Windows_collation_name 或 SQL_collation_name。
-### sorted by 
-  - link: https://www.cnblogs.com/Guhongying/p/10541979.html
-  - SELECT * FROM stu ORDER BY Sno DESC; desc 只作用于前面的一个列， 降序排列； asc是升序，默认
-  - 
-### SQL中占位符拼接符（纯SQL语句中好像没有）
-- link：https://www.cnblogs.com/xdyixia/p/7844984.html
-- PreparedStatement是用来执行SQL查询语句的API之一, 用于执行参数化查询；这里会用到占位符和拼接符
-- #{}表示一个占位符号，通过#{}把parameterType 传入的内容通过preparedStatement向占位符中设置值，自动进行java类型和jdbc类型转换，#{}可以有效防止sql注入。
-
-### 比较操作符
-- =,>,>=,<,<=和between
-
-### top/limit
-```
-mysql 语法
-select * from tbl_name [limit 5 offset 4]前4个不要往后排5个
-```
-### like
-- 模糊查询 like not like
-- 占位符
-  - % 任意个字符
-  - _ 一个字符
-  - [abc] 字符a或者字符b或者字符c
-  - [!abc] 除字符a或者字符b或者字符c的任意字符
-  - `select * from user where name like ‘_[AB]%’` # 查找name第二个字符为A或者B的用户信息。
-### select
-- help select
-- select_expr
-  - 列或者表达式或者*; 有多表时可以 tbl_A.*
-  - 表达式 是mysql函数如 AVG/count : https://www.runoob.com/mysql/mysql-functions.html
-    - count() 返回查询的记录总数 `select id, count(*) as address_count from tbl_b group by id AS tbl_new;` 返回tbl_b的行数, 并生成一个两列名分别为id, address_count(表示tbl_b中id的个数)的新表, 新表名为tbl_new 用在查询中; 需要靠id分组, 要不只有一行
-### insert
-- 插入行
-```
-insert into #列名不需要加双引号
-```
-### union
-  - UNION 用于把来自多个 SELECT 语句的结果组合到一个结果集合中
-  - 多个 SELECT 语句中，对应的列应该具有相同的字段属性，且第一个 SELECT 语句中被使用的字段名称也被用于结果的字段名称
-  - 当使用 UNION 时，MySQL 会把结果集中重复的记录删掉; 而使用 UNION ALL ，MySQL 会把所有的记录返回，且效率高于 UNION
-
-# SQL
-- where 中带括号是什么意思:`select * from Person where id = 1;`
-- 子查询(表子查询)
-  - `select * from (select * from Person where age>10) as a;`
-  - 查询user对象, 以及每个id拥有的address个数
-    ```
-    SELECT users.*, adr_count.address_count FROM users LEFT OUTER JOIN
-    (SELECT user_id, count(*) AS address_count
-        FROM addresses GROUP BY user_id) AS adr_count
-    ON users.id=adr_count.user_id
-    ```
-- 这个[...]是什么意思? `INSERT INTO users (name, fullname, nickname) VALUES (?, ?, ?)[...] ('jack', 'Jack Bean', 'gjffdd')` # 有语法错误, 应该是省略的意思/可能是格式化字符串的?(不是) --------------no
-```
-MariaDB [test]> insert into Person(age, name) values (?, ?)[...](18, "haha");
-# syntax error
-insert into tbl_name(col_name, ...) 这种可以
-```
-
+- ## 删除表`drop table tbl_name`
 # 共识
 - col_name (column name); tbl_name(table_name)\
 
@@ -244,60 +205,6 @@ commit;
 
 - TEXT 长文本字段，能存储64kb
 - blob 长文本字段， 保存的是二进制，可以用来存储图片
-### 连接 join
-- 连接是SQL的核心
-- 全连接应该也属于外连接吧? -------------no
-![各种连接结果](https://www.runoob.com/wp-content/uploads/2019/01/sql-join.png)
-![连接分类](https://images2018.cnblogs.com/blog/592892/201804/592892-20180423145538091-1111373527.png)
-- link
-  - https://www.cnblogs.com/wanglijun/p/8916790.html
-  - 图中带颜色的表是代表在该表在结果中出现, 而不是结果中相关表的内容是不是为空
-- cross join 笛卡尔积/ 交叉连接
-  ```
-  select * from tbl_A cross join tbl_B; # 显示的交叉连接
-  select * from tbl_A, tbl_B;# 隐式的交叉连接, 没有关键字
-  select * from tbl_A join tbl_B; ON为空时也是同样效果;
-  ```
-- 内联接
-  - 取交集
-  - 等价写法 inner join; straight_join; join; 还有where写法
-  ```
-  select <select_list> from tableA [as] A] join/inner join/straight_join tblB B on condition;
-  ```
-- 外连接
-  - 取并集
-  - 分为左连接(左外连接)/(右连接(右外链接)/完整外连接(全连接) 三种
-  - 左连接
-    - 取左边的表的全部，右边的表按条件，符合的显示，不符合则显示null
-    - left outer join 与 left join 等价，一般写成left join
-    - 可以根据where 右表为空去排除交集 注意使用is 而不是=
-    `select * from tbl_A a left join tbl_B b on a.id=b.id where b.id is null(NULL)`
-    - 连接多个表
-    ```
-    select a.xx ... 
-    from a 
-    join b on xxx
-    join c on xxx
-    ```
-  
-  - 右连接
-    - 取右表的全部, 左表按条件, 符合的显示, 不符合显示NULL
-    - right outer join 与 right join等价，一般写成right join
-
-  - 全连接（Full outer join）
-    - 全外连接是在结果中除了显示满足连接的条件的行外，还显示了join两侧表中所有满足检索条件的行
-    - full outer join 等价 full join (oracle, DB2支持)
-    `select * from tbl_A full outer join tbl_B on a.id=b.id;`
-    - MySQL本身不支持full join（全连接），但可以通过union来实现
-    ```
-    select * from Person as a left join Profession as b on a.id=b.id 
-    union
-    select * from Person a right join Profession b on a.id=b.id;
-    # 排除交集应该在union的两表上都加那个条件
-    select * from Person as a left join Profession as b on a.id=b.id where a.id is null or b.id is null 
-    union 
-    select * from Person as a right join Profession b on a.id=b.id where a.id is null or b.id is null;
-    ```
 
 # 主键
 - 主键是唯一的索引
@@ -338,26 +245,9 @@ alter table issue_record add constraint fk_issue_user foreign key (uid) referenc
 # 问题
 - 外键一定要是主键吗？
 - SQL 中怎么会用到索引？
-- SQL 中主要关键字的执行顺序
+
 ```
-from
-on
-join
-where
-group by
-having
-select
-distinct
-union
-order by
-# 因此一个显而易见的SQL优化的方案是，当两张表的数据量比较大又需要连接查询时, 应该使用on, 而不是where, 因为后者会在内存中先生成一张数据量比较大的笛卡尔积表，增加了内存的开销。
-```
-- 有没有一个地方能看帮助中synatx的名词的意思?
-  - http://www.jooq.org/doc/3.1/manual/sql-building/sql-statements/select-statement/implicit-join/
-- `help select `的syntax中 为啥么是from table_references 而不是tbl_name
-  - 并不一定从已有表中查询, 当进行子查询,链接查询时, 就是从一个查询结果中去查询,这时就是reference
 - create database test-test;
-```
 MariaDB [ccnet-db]> create database test-test;
 ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '-test' at line 1
 # 为什么会报错呢?

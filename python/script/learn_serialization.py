@@ -9,13 +9,47 @@
 # yaml
 yaml 简单使用 link: https://www.cnblogs.com/klb561/p/9326677.html
 yaml 构造器、表示器、解析器 link：https://www.cnblogs.com/klb561/p/9326677.html
-
+### yaml 语法 
+- doc
+   - https://www.runoob.com/w3cnote/yaml-intro.html
+   - https://ruanyifeng.com/blog/2016/07/yaml.html
+- 变量被引用时如下，处于开头的位置时需要加上引号`"{{ nginx.conf80 }}"` 这个可能时ansible特有的内容
+- 只有列表的元素才带`-`, 字典的键和值都不带, 如果缩进是一样的，说明是同一级
+```
+---
+all: # 最上层的key，value是一个字典
+  vars: # value也是一个字典
+    cluster: "mylocal" 
+    appdir: "/apt"
+    logmounts: 
+      - /var/log
+      - /home
+    logs:
+      - name: qtrade # 这个-并不是name的，而是和name同一等级的
+        file: /home/qdam/qtrade*/*/*.log # file 和 name 的缩进是一样的，就是属于同一个字典
+        encoding: gbk
+{
+   all: {
+      var: {
+         "cluster": "mylocal",
+         "appdir": "/apt",
+         "logmounts": ["/var/log", "/home"]
+         "logs": [{"name": "qtrade", "file": "/home/qdam/qtrade*/*/*.log", "encoding": "gbk"}]
+      }
+   }
+}
+```
 # json
     json中load和loads区别: https://www.cnblogs.com/bigtreei/p/10466518.html
     load loads 区别: 前者读取文件/后者读字符串 可以把多的s 理解为 string(load string)
     dump dumps 区别: 前者存入文件/后者转为字符串
+        - conf_str = json.dumps(conf, indent=4) 这样就是格式化的数据，不再是一整行
+    json文件 格式 必须有一个主节点，这个主节点，没有主节点的话必须使用[]把所有内容括起来,
+    所有的key，value必须用双引号包括
 # pickle/cpickle
     cPickle是C语言写的，速度快，pickle是纯Python写的，速度慢
+# Python 使用 json.dump() 保存文件时中文会变成 Unicode。在打开写出文件时加入 encoding="utf8"，在dump时加入 ensure_ascii=False 即可解决。
+# Python报错UnicodeDecodeError: ‘gbk‘ codec can‘t decode byte 解决办法是将 with open(file) as f: 改成with open(file, ‘r’, encoding=‘utf-8’) as f:
 """
 import yaml
 

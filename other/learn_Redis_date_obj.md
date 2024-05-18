@@ -1,0 +1,63 @@
+
+## [数据类型](https://www.runoob.com/redis/redis-data-types.html)
+- string 指的是单个单个的键值对 `set get del`
+- hash 是键值对的集合 `hmset hash_name key1 value1 ...` `hget`
+- list 列表 里面的元素是字符串；按照插入顺序排序；支持使用索引来访问和修改，但不支持使用索引插入。
+- set  集合 里面的元素是字符串的无序集合；每个元素都是唯一的；实现方式是哈希表，所以实现查找的复杂度都是O(1)
+- zset 有序集合 也是字符串的集合；每个元素唯一；不过每个元素会关联一个double类型的权值（权值可以重复）、会根据此权值对元素进行从小到大排序
+
+### 对键的命令
+- 上面的数据类型的是键 值 的形式，只不过值的类型不同。 这里的键就相当于python里面的变量名，值就对应不同的类型，可以是字典、列表、字符串等
+- EXISTS key 检查给定 key 是否存在。
+
+### string
+- link
+  - https://blog.csdn.net/qq_40399646/article/details/108906116#t21
+- API
+  - get key_name
+    - 返回 key 的值，如果 key 不存在时，返回 nil。 如果 key 不是字符串类型，那么返回一个错误。
+  - setnx(Set if No eXist)
+    - setnx key_name value :成功返回1, 失败返回0
+  - setex key_name timeout value
+    - 为指定的key设置值(会覆盖), 并设置过期时间, 设置成功返回OK
+  - getrange key_name start end
+    - 切割指定key中字符串[start, end]
+  - mset/msetnx key1 value1 [key2 value2...]
+    - Msetnx 命令用于所有给定 key 都不存在时，同时设置一个或多个 key-value 对(原子操作)
+  - setbit key_name offset
+    - 对 key 所储存的字符串值，设置或清除指定偏移量上的位(bit)
+  - getbit key_name offset
+    - 对 key 所储存的字符串值，获取指定偏移量上的位(bit)
+    - 字符串值指定偏移量上的位(bit，0 或 1 )。当偏移量 OFFSET 比字符串值的长度大，或者 key 不存在时，返回 0 。
+  - decr/incr keyname; decrby/incrby key_name amount 
+    - 将 key 中储存的数字值减一/加一; 减去/加上amount。
+    - key不存在, 先初始化为0,再执行操作
+    - 值包含错误的类型,或者不能表示为数字, 返回错误
+    - 值限制在64位(bit)标识之内
+  - incrbyfloat key_name float_amout
+    - 为 key 中所储存的值加上指定的浮点数增量值. 没有decrbyfloat
+  - strlen key_name
+    - 字符串值的长度。 当 key 不存在时，返回 0, 数值也能返回 105返回3
+  - strrange key_name offset value 
+    - 对key的value, 从offset开始, 使用value覆盖
+  - append keyname new_value
+    - Redis Append 命令用于为指定的 key 追加值。如果 key 已经存在并且是一个字符串， APPEND 命令将 value 追加到 key 原来的值的末尾。
+  - mget
+    - 一个包含所有给定 key 的值的列表。
+- 应用场景
+  - 单值缓存
+    - 如商品库存 key=商品id, value=库存数量
+  - 对象缓存
+    - set 存储用户信息，key=user:id value=json格式数据, 某个属性, 并不是对象的数据
+    - mset 批量存取, 数据不断变化的应用场景
+  - 分布式锁
+    - setnx setex
+  - 计数器
+    - incr/decr; incrby/decrby; incrbyfloat
+  - 共享session
+    - 于负载均衡的考虑，分布式服务会将用户信息的访问均衡到不同服务器上. 如果服务器间的session是独立的话, 用户刷新一次访问可能会需要重新登录(如果到了另外一台服务器上时)，为避免这个问题可以用redis将用户session集中管理，在这种模式下只要保证redis的高可用和扩展性的，每次获取用户更新或查询登录信息都直接从redis中集中获取。
+  - 限速
+    - 可以限制获取某个数据的速度
+  - 分布式系统全局序列号
+    - 一般数据库表的主键用自增长序列号，假如系统压力大，后端做了分库分表，数据库自带的auto_increment就不适用了，可以使用redis的自增，由于Redis为单进程单线程模式， 采用队列模式将并发访问变成串行访问，且多客户端对Redis的连接并不存在竞争关系 
+      - incrby orderid 1000 让每个机器一次拿1000个,自己慢慢用,防止 incr order 这样redis压力大

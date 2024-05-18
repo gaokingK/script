@@ -1,3 +1,5 @@
+# 协议
+- httpdoc: https://developer.mozilla.org/zh-CN/docs/web/http/overview 
 # HTTP 
 ### 一些知识
 - HTTP协议定义Web客户端如何从Web服务器请求Web页面，以及服务器如何把Web页面传送给客户端。HTTP协议采用了请求/响应模型。客户端向服务器发送一个请求报文，请求报文包含请求的方法、URL、协议版本、请求头部和请求数据。服务器以一个状态行作为响应，响应的内容包括协议的版本、成功或者错误代码、服务器信息、响应头部和响应数据。
@@ -16,7 +18,7 @@
 ### http状态码
 - link
     - https://www.runoob.com/http/http-status-codes.html
-#### 总分类
+## 总分类
 1**	信息，服务器收到请求，需要请求者继续执行操作
 2**	成功，操作被成功接收并处理
 3**	重定向，需要进一步的操作以完成请求
@@ -42,3 +44,93 @@
     - https://www.ruanyifeng.com/blog/2011/09/restful.html
 - 最常见的一种设计错误，就是URI包含动词。因为"资源"表示一种实体，所以应该是名词，URI不应该有动词，动词应该放在HTTP协议中（GET、POST来表示）。
 - 另一个设计误区，就是在URI中加入版本号， 版本号应该放在HTTP请求头信息的Accept字段中进行区分
+# 网络问题
+- 内网穿透：https://blog.csdn.net/qq_45878803/article/details/121651477
+- ngrok
+- 不是从局域网访问，而是可以从公网访问 ngrok需要一直运行
+- 启动命令 ngrok http 8000
+
+### 开启端口允许外部访问 
+link:
+	- windows https://blog.csdn.net/lm_is_dc/article/details/118335869
+- 控制的维度不仅有端口、还有该端口使用的协议、该端口是入站还是出站、来源主机的ip、来源主机的用户、都可以设置
+### 网络访问不了 https://www.maketecheasier.com/fix-no-route-to-host-error-linux/
+- 先看dns有没有 /etc/resolv.conf
+
+# 常识
+- http 基于tcp协议
+# 套接字
+在网络通信中，"监听"和"非监听"套接字表示套接字（socket）的两种状态。
+
+## 监听套接字（Listening Socket）：
+
+当一个程序（通常是服务器程序）在某个特定的端口上等待来自其他程序的连接请求时，它会创建一个监听套接字。
+这个套接字处于"监听状态"，等待来自客户端的连接请求。
+服务器程序通过监听套接字接受客户端的连接，并创建一个新的套接字来处理该连接。这个新的套接字用于与客户端进行实际的数据通信。
+## 非监听套接字（Non-Listening Socket）：
+
+一旦连接建立，套接字进入"非监听状态"，也称为"已建立状态"。
+在已建立状态下，数据可以在客户端和服务器之间进行双向通信。
+对于客户端和服务器之间的每个连接，都会有一个对应的非监听套接字。
+示例：
+
+服务器端：服务器创建一个监听套接字用于接受连接请求。
+客户端：客户端连接到服务器的监听套接字，建立一个非监听套接字用于实际的数据传输。
+在 netstat -an 的输出中，你会看到一些套接字的状态。"LISTEN" 表示该套接字是一个监听套接字，而其他状态（例如 "ESTABLISHED"）表示已建立的非监听套接字，正在进行数据传输。
+
+
+# netstat 查看端口 # 端口管理 打开端口 # port
+   - 端口是否被占用`lsof -i 8080`
+     - link: https://www.runoob.com/w3cnote/linux-check-port-usage.html
+     - 应该用root来执行，否之看不到
+   - netstat -tunlp 用于显示 tcp，udp 的端口和进程等相关情况。`netstat -tunlp | grep 8000`
+     - link:https://zhuanlan.zhihu.com/p/367635200 
+     - -t (tcp) 仅显示tcp相关选项Administrator  
+     - -u (udp)仅显示udp相关选项
+     - -n 拒绝显示别名，能显示数字的全部转化为数字
+     - -l 仅列出在Listen(监听)的服务状态
+     - -p 显示建立相关链接的程序名
+     - -a：--all，显示所有非监听（已建立）和监听端口 netstat -an |grep 7788 显示有多少个连接在7788上
+     - -anp：显示系统端口使用情况
+   - 获取正在使用的端口 netstat -ntl |grep -v Active| grep -v Proto|awk '{print $4}'|awk -F: '{print $NF}' 
+   - 打开端口
+      - link：https://www.cnblogs.com/sxmny/p/11224842.html
+      - systemctl start firewalld 开启防火墙 
+      - firewall-cmd --zone=public --add-port=1935/tcp --permanent # 开放指定端口
+         - --zone #作用域
+         - --add-port=1935/tcp  #添加端口，格式为：端口/通讯协议
+         - --permanent  #永久生效，没有此参数重启后失效
+      - systemctl restart firewalld.service
+      -  firewall-cmd --reload 重启防火墙
+   - 测试端口连通性 https://www.cnblogs.com/lijinshan950823/p/9376085.html
+      - curl ip:port 如果远程主机开通了相应的端口，都会输出信息，如果没有开通相应的端口，则没有任何提示，需要CTRL+C断开。。
+      - wget ip:port
+      - telnet ip port 
+      - ip 也可以是域名 curl  https://cee6-140-206-192-11.ngrok-free.app 不用加端口
+   - firewall-cmd --zone=public --list-ports 查看开放的端口
+      - https://blog.csdn.net/s_frozen/article/details/120636667
+   - 查询指定端口是否已开启 firewall-cmd --query-port=3306/tcp 提示 yes，表示开启；no表示未开启。
+   - 端口不仅受防火墙控制，还受iptable规则控制
+# iptables
+- link: 
+   - 使用：https://www.cnblogs.com/wanstack/p/8351718.html
+   - 查看已有的规则：https://www.cnblogs.com/wanstack/p/8351209.html
+- iptables -L -n 查看规则
+- -L <链名> 查看链得规则，如果省略就看所有链得
+- -t 指定表名
+- -v选项，查看出更多的、更详细的信息
+   - pkts:对应规则匹配到的报文的个数。
+   - bytes:对应匹配到的报文包的大小总和。
+   - target:规则对应的target，往往表示规则对应的"动作"，即规则匹配成功后需要采取的措施。
+   - prot:表示规则对应的协议，是否只针对某些协议应用此规则。
+   - opt:表示规则对应的选项。
+   - in:表示数据包由哪个接口(网卡)流入，我们可以设置通过哪块网卡流入的报文需要匹配当前规则。
+   - out:表示数据包由哪个接口(网卡)流出，我们可以设置通过哪块网卡流出的报文需要匹配当前规则。
+   - source:表示规则对应的源头地址，可以是一个IP，也可以是一个网段。
+   - destination:表示规则对应的目标地址。可以是一个IP，也可以是一个网段。
+- 保存规则：
+   - centos6中，使用"service iptables save"
+   - centos7: iptables-save > /etc/sysconfig/iptables
+
+# 网段、子网掩码计算方法
+- https://blog.csdn.net/yzpbright/article/details/81384559

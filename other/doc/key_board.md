@@ -1,7 +1,9 @@
 # vscode
 - 移动当前行 alt + up/down
 - alt + shift + up/down 复制当前行
-- ctrl + shift +up/down 多行编辑，移动光标
+- ctrl + shift +up/down 多行编辑，移动光标 qq音乐会占用
+- ctrl + shift + p 输入setting.json打开json
+- ctrl + D 高亮选中的词，按enter能多点编辑
 - 配置颜色
     ```json
     // link: https://code.visualstudio.com/docs/getstarted/themes
@@ -17,16 +19,38 @@
 		}
 	}
     ```
+- 快捷键：
+	- 先后按ctr+r ctrl+k就会打开快捷键的描述文档，或者你用Help菜单中打开快捷指南
+- vscode配置：https://blog.csdn.net/wohu1104/article/details/111464778
+- vscode会搜索.vscode里面的launch.json文件来配置调试，如果换了一个语言，点击下拉箭头;最下面的三个选择分别为文件夹A添加配置、为文件夹B添加配置、为工作区添加配置。选择一个点击了，会自动帮你配置
+- 设置自动换行 设置里搜索wordwrap
+- 不用设置显示换行符，可以通过看行号来判断是不是同一行，vscode默认会显示行号的
 
 # pycharm 
+- 激活：IT资源工具分享17群被人投诉了 https://arcstack.top/tools/jetbrains/idea/jetbrains-error.html
+	- https://arcstack.top/?token=lwK1ex5yyjI=
+	- 【2022～Latest】 下载jetbrains-agent.jar 密码:ghqn
+
+- gittoolbox 插件 显示每一行修改历史
+- 书签
+	- link：https://www.cnblogs.com/gl1573/p/10234478.html
+	- Ctrl + F11 并选择一个数字或一个字母以创建带有助记符的书签 
+	- 上面这种可以 按快捷键 Ctrl + 书签编号就可以跳转到响应的书签了
+	- Shift + F11 打开“书签”对话框，就可以管理书签了。
+	- Alt + 2 可以打开书签和断点
+- 关闭通知 这样任务栏图标就不闪烁了
+	- https://www.imangodoc.com/195028.html
+	- setting>notify
 - pycharm 定位打开的文件(select opened file) 不显示成员
 	- 在旁边的设置中，取消选中show members
 - 创建文件时，自动生成文件头
 	- Files>Setting>Editor>File and Code Templates
 - 可以重命名project 和 directory
+- 一般是按ctrl 点击寻找定义，如果变量找不到可以按ctrl+alt
 - 按下Alt 点击close = 关闭all other 
 - inspections 一些检查项
 - ctrl + E 最近文件
+- ctrl + shift + E 最近记录
 - ctrl + F12 当前文件中的函数和变量概览
 - ctrl + N 搜索类、文件名、方法等
 - 可以从log 里看 仓库各个分支的提交log， 来判断动态（profess）
@@ -43,15 +67,27 @@
 - pycharm 统计代码行数
 	- 搜索安装Statistic插件
 	- pycharm状态栏中点击插件；点击refresh selected on；（要选中项目）
+- 包裹代码
+	- 选中代码，ctrl+Alt+T 但是这个只能加if这种
+	- 如果先要加函数的就先选中，再按括号，再跳到左边
+- 调试
+	- 看成员引用的时候 read 和 write过滤
+		- self.hosts[host['id']] = hostObj 会在读里面
+	- 运行到光标处时， 空的for循环会停下，但false的if不会停下 
+- 折叠代码
+	- 折叠/展开某一点：ctrl + -/+
+	- 所有代码折叠/展开： ctrl + alt + -/+
+
 # uos
 - ctrl + ; 剪贴板
    
-# linux
+# linux # bash快捷键
 - 终端 ctrl + Shift + / 快捷键信息
 - 怎么搜索历史命令 切换下一条?
 - 在终端中使用上次命令中的内容 ---------------------------no
 - [shell命令行 快捷键](https://www.cnblogs.com/betterquan/p/11456820.html)
 ```
 Alt + f, b ：按单词前移（右向）/后移（左向）
-
+Ctrl + u ：从光标处删除至命令行首
+Ctrl + k ：从光标处删除至命令行尾
 ```

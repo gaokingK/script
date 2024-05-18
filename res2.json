@@ -1,0 +1,4035 @@
+{
+    "status": 200,
+    "body": [
+        {
+            "id": "z8WiRsjzQ5GzM4m5PGBolw",
+            "current_master": false,
+            "name": "coordinate-zjiopsapp06",
+            "host": "10.239.64.18",
+            "heap": {
+                "max": "30gb",
+                "used": "14.8gb",
+                "percent": 49
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 210073481216,
+                "percent": 2
+            },
+            "cpu": {
+                "process": 0,
+                "os": 18,
+                "load": 15.66
+            },
+            "uptime": 47692599289,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": true,
+            "ingest": false,
+            "data": false
+        },
+        {
+            "id": "FdRoVAkbRFi398ZpYJP8ag",
+            "current_master": false,
+            "name": "warm5-zjiopsapp14",
+            "host": "10.239.64.44",
+            "heap": {
+                "max": "30gb",
+                "used": "17.3gb",
+                "percent": 57
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12448190988288,
+                "percent": 22
+            },
+            "cpu": {
+                "process": 0,
+                "os": 14,
+                "load": 23.36
+            },
+            "uptime": 18737294483,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "c2hEn3bvT5ueNdUlwVrMvQ",
+            "current_master": false,
+            "name": "warm4-zjiopsapp02",
+            "host": "10.239.64.14",
+            "heap": {
+                "max": "30gb",
+                "used": "15.5gb",
+                "percent": 51
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11731557662720,
+                "percent": 27
+            },
+            "cpu": {
+                "process": 3,
+                "os": 25,
+                "load": 14.78
+            },
+            "uptime": 47692620562,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "duoG67FGQMarVWHSYNOyvA",
+            "current_master": false,
+            "name": "coordinate-zjiopsapp11",
+            "host": "10.239.64.39",
+            "heap": {
+                "max": "30gb",
+                "used": "20.7gb",
+                "percent": 69
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 206212562944,
+                "percent": 4
+            },
+            "cpu": {
+                "process": 0,
+                "os": 22,
+                "load": 13.46
+            },
+            "uptime": 12785134019,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": true,
+            "ingest": false,
+            "data": false
+        },
+        {
+            "id": "GgkjfEh9RFuw6P4RJ_vFeQ",
+            "current_master": false,
+            "name": "coordinate-zjiopsapp09",
+            "host": "10.239.64.37",
+            "heap": {
+                "max": "30gb",
+                "used": "12.2gb",
+                "percent": 40
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 210042683392,
+                "percent": 2
+            },
+            "cpu": {
+                "process": 0,
+                "os": 28,
+                "load": 15.23
+            },
+            "uptime": 47692599196,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": true,
+            "ingest": false,
+            "data": false
+        },
+        {
+            "id": "gk8wVF_iROOSLQJllYaPOg",
+            "current_master": false,
+            "name": "warm5-zjiopsapp13",
+            "host": "10.239.64.43",
+            "heap": {
+                "max": "30gb",
+                "used": "12.7gb",
+                "percent": 42
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11929723330560,
+                "percent": 25
+            },
+            "cpu": {
+                "process": 5,
+                "os": 18,
+                "load": 36.72
+            },
+            "uptime": 18737736324,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "-n2H2J96TX2-pnYSsvrskw",
+            "current_master": false,
+            "name": "warm4-zjiopsapp16",
+            "host": "10.239.64.46",
+            "heap": {
+                "max": "30gb",
+                "used": "16.9gb",
+                "percent": 56
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11710234853376,
+                "percent": 27
+            },
+            "cpu": {
+                "process": 4,
+                "os": 16,
+                "load": 24.37
+            },
+            "uptime": 18737538713,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "EVkUwmc0Shi9LpKYTEsInw",
+            "current_master": false,
+            "name": "coordinate-zjiopsapp16",
+            "host": "10.239.64.46",
+            "heap": {
+                "max": "30gb",
+                "used": "13.9gb",
+                "percent": 46
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 210380935168,
+                "percent": 2
+            },
+            "cpu": {
+                "process": 0,
+                "os": 17,
+                "load": 24.37
+            },
+            "uptime": 18737558777,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": true,
+            "ingest": false,
+            "data": false
+        },
+        {
+            "id": "zc1_-nyTQFyQDNUssUwIiQ",
+            "current_master": false,
+            "name": "warm3-zjiopsapp13",
+            "host": "10.239.64.43",
+            "heap": {
+                "max": "30gb",
+                "used": "19.3gb",
+                "percent": 64
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11979663474688,
+                "percent": 25
+            },
+            "cpu": {
+                "process": 0,
+                "os": 18,
+                "load": 36.72
+            },
+            "uptime": 18737745904,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "VVbgT8bxQDORdbRGLt2HlQ",
+            "current_master": false,
+            "name": "warm5-zjiopsapp01",
+            "host": "10.239.64.13",
+            "heap": {
+                "max": "30gb",
+                "used": "6gb",
+                "percent": 20
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11484640247808,
+                "percent": 28
+            },
+            "cpu": {
+                "process": 3,
+                "os": 22,
+                "load": 12.07
+            },
+            "uptime": 47692616228,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "go31xyw1SAKVL8nHYeakKg",
+            "current_master": false,
+            "name": "warm6-zjiopsapp09",
+            "host": "10.239.64.37",
+            "heap": {
+                "max": "30gb",
+                "used": "11.6gb",
+                "percent": 38
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11760732524544,
+                "percent": 26
+            },
+            "cpu": {
+                "process": 6,
+                "os": 26,
+                "load": 15.23
+            },
+            "uptime": 47692611989,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "qh9mi5RkTaCKyhWKb-Oj3g",
+            "current_master": false,
+            "name": "warm6-zjiopsapp17",
+            "host": "10.239.64.47",
+            "heap": {
+                "max": "30gb",
+                "used": "18.4gb",
+                "percent": 61
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12773495193600,
+                "percent": 20
+            },
+            "cpu": {
+                "process": 0,
+                "os": 9,
+                "load": 12.44
+            },
+            "uptime": 18738023914,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "MIW3sYTHS_28ELaK8aQyTQ",
+            "current_master": false,
+            "name": "warm2-zjiopsapp13",
+            "host": "10.239.64.43",
+            "heap": {
+                "max": "30gb",
+                "used": "17.7gb",
+                "percent": 59
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12253170151424,
+                "percent": 23
+            },
+            "cpu": {
+                "process": 5,
+                "os": 23,
+                "load": 36.72
+            },
+            "uptime": 18737750166,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "abCcQAMkRX-eQFBPPMriYw",
+            "current_master": false,
+            "name": "warm5-zjiopsapp07",
+            "host": "10.239.64.19",
+            "heap": {
+                "max": "30gb",
+                "used": "18.6gb",
+                "percent": 62
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12039706976256,
+                "percent": 25
+            },
+            "cpu": {
+                "process": 1,
+                "os": 24,
+                "load": 18
+            },
+            "uptime": 47692616332,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "bDvHkAWqT5a7tWwVNw_8Tg",
+            "current_master": false,
+            "name": "ingest-zjiopsapp10",
+            "host": "10.239.64.38",
+            "heap": {
+                "max": "30gb",
+                "used": "19gb",
+                "percent": 63
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 209922232320,
+                "percent": 2
+            },
+            "cpu": {
+                "process": 0,
+                "os": 27,
+                "load": 19.07
+            },
+            "uptime": 47692370790,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": true,
+            "data": false
+        },
+        {
+            "id": "prTldYaYSpmQLtiKNw6buA",
+            "current_master": false,
+            "name": "warm1-zjiopsapp12",
+            "host": "10.239.64.42",
+            "heap": {
+                "max": "30gb",
+                "used": "17.1gb",
+                "percent": 57
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12644236136448,
+                "percent": 21
+            },
+            "cpu": {
+                "process": 0,
+                "os": 9,
+                "load": 13.09
+            },
+            "uptime": 18738176213,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "XzSWEy8cRuKAPG54ZjKxNg",
+            "current_master": false,
+            "name": "warm5-zjiopsapp11",
+            "host": "10.239.64.39",
+            "heap": {
+                "max": "30gb",
+                "used": "21gb",
+                "percent": 70
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11515638169600,
+                "percent": 28
+            },
+            "cpu": {
+                "process": 1,
+                "os": 21,
+                "load": 13.46
+            },
+            "uptime": 47691508888,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "NpCBQPRRSvebsnCTh5IUkw",
+            "current_master": false,
+            "name": "warm1-zjiopsapp01",
+            "host": "10.239.64.13",
+            "heap": {
+                "max": "30gb",
+                "used": "8.9gb",
+                "percent": 29
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11661093552128,
+                "percent": 27
+            },
+            "cpu": {
+                "process": 4,
+                "os": 23,
+                "load": 12.07
+            },
+            "uptime": 47692639290,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "XGRWwGEVTm2P36qgsM9t7w",
+            "current_master": false,
+            "name": "warm2-zjiopsapp06",
+            "host": "10.239.64.18",
+            "heap": {
+                "max": "30gb",
+                "used": "11gb",
+                "percent": 36
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12588167090176,
+                "percent": 21
+            },
+            "cpu": {
+                "process": 1,
+                "os": 18,
+                "load": 15.66
+            },
+            "uptime": 47692628180,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "fyP-FP36SayJAQFG-NZJ8A",
+            "current_master": false,
+            "name": "warm3-zjiopsapp06",
+            "host": "10.239.64.18",
+            "heap": {
+                "max": "30gb",
+                "used": "12.8gb",
+                "percent": 42
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12152539717632,
+                "percent": 24
+            },
+            "cpu": {
+                "process": 4,
+                "os": 23,
+                "load": 15.66
+            },
+            "uptime": 47692624721,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "q-KZKSN4RyerHW3bNsjsIA",
+            "current_master": false,
+            "name": "warm4-zjiopsapp08",
+            "host": "10.239.64.36",
+            "heap": {
+                "max": "30gb",
+                "used": "12.7gb",
+                "percent": 42
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12111904178176,
+                "percent": 24
+            },
+            "cpu": {
+                "process": 1,
+                "os": 23,
+                "load": 17.47
+            },
+            "uptime": 47692620414,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "FGxsUuMeT4mmngz9ojcZGQ",
+            "current_master": false,
+            "name": "warm4-zjiopsapp09",
+            "host": "10.239.64.37",
+            "heap": {
+                "max": "30gb",
+                "used": "15.9gb",
+                "percent": 53
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12580767399936,
+                "percent": 21
+            },
+            "cpu": {
+                "process": 1,
+                "os": 25,
+                "load": 15.23
+            },
+            "uptime": 47692620488,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "bv6U6XYeRaKEXfnivHkY2w",
+            "current_master": false,
+            "name": "warm2-zjiopsapp14",
+            "host": "10.239.64.44",
+            "heap": {
+                "max": "30gb",
+                "used": "15.2gb",
+                "percent": 50
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11632142004224,
+                "percent": 27
+            },
+            "cpu": {
+                "process": 4,
+                "os": 19,
+                "load": 23.36
+            },
+            "uptime": 18737310173,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "9oubbPdmRbWXCSxXqTc8Wg",
+            "current_master": false,
+            "name": "warm4-zjiopsapp15",
+            "host": "10.239.64.45",
+            "heap": {
+                "max": "30gb",
+                "used": "9.7gb",
+                "percent": 32
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11542178770944,
+                "percent": 28
+            },
+            "cpu": {
+                "process": 5,
+                "os": 18,
+                "load": 26.21
+            },
+            "uptime": 18737160194,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "h5U-IIHTSI62kg8smvS96w",
+            "current_master": false,
+            "name": "coordinate-zjiopsapp07",
+            "host": "10.239.64.19",
+            "heap": {
+                "max": "30gb",
+                "used": "18.1gb",
+                "percent": 60
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 210014363648,
+                "percent": 2
+            },
+            "cpu": {
+                "process": 0,
+                "os": 21,
+                "load": 18
+            },
+            "uptime": 47692599184,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": true,
+            "ingest": false,
+            "data": false
+        },
+        {
+            "id": "dIdiIsi0R4-xSFa2N3DtDA",
+            "current_master": false,
+            "name": "warm2-zjiopsapp03",
+            "host": "10.239.64.15",
+            "heap": {
+                "max": "30gb",
+                "used": "7.7gb",
+                "percent": 25
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12326770802688,
+                "percent": 23
+            },
+            "cpu": {
+                "process": 2,
+                "os": 21,
+                "load": 12.39
+            },
+            "uptime": 47692628069,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "7O3yNEaFQZaMNyo5U9jh7Q",
+            "current_master": false,
+            "name": "warm4-zjiopsapp05",
+            "host": "10.239.64.17",
+            "heap": {
+                "max": "30gb",
+                "used": "12.1gb",
+                "percent": 40
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11984132857856,
+                "percent": 25
+            },
+            "cpu": {
+                "process": 9,
+                "os": 35,
+                "load": 28.97
+            },
+            "uptime": 47692620496,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "B5A3jSIwT9qwYQVJ-nFXjQ",
+            "current_master": false,
+            "name": "warm1-zjiopsapp14",
+            "host": "10.239.64.44",
+            "heap": {
+                "max": "30gb",
+                "used": "12.4gb",
+                "percent": 41
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11244613398528,
+                "percent": 30
+            },
+            "cpu": {
+                "process": 1,
+                "os": 16,
+                "load": 23.36
+            },
+            "uptime": 18737315042,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "rck-kBJpR7SyB7JXGNo2Hg",
+            "current_master": false,
+            "name": "warm5-zjiopsapp10",
+            "host": "10.239.64.38",
+            "heap": {
+                "max": "30gb",
+                "used": "10.9gb",
+                "percent": 36
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11986734198784,
+                "percent": 25
+            },
+            "cpu": {
+                "process": 3,
+                "os": 27,
+                "load": 19.07
+            },
+            "uptime": 47692342711,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "cmmlH0RjRdalgFyNZgPPMA",
+            "current_master": false,
+            "name": "warm1-zjiopsapp08",
+            "host": "10.239.64.36",
+            "heap": {
+                "max": "30gb",
+                "used": "7.1gb",
+                "percent": 23
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11416185786368,
+                "percent": 29
+            },
+            "cpu": {
+                "process": 16,
+                "os": 32,
+                "load": 17.47
+            },
+            "uptime": 47692639272,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "2AM6X48PS8-EW7k3IkUiUA",
+            "current_master": false,
+            "name": "warm1-zjiopsapp03",
+            "host": "10.239.64.15",
+            "heap": {
+                "max": "30gb",
+                "used": "18.2gb",
+                "percent": 60
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12693949751296,
+                "percent": 21
+            },
+            "cpu": {
+                "process": 4,
+                "os": 16,
+                "load": 12.39
+            },
+            "uptime": 47692639269,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "zOOgzkkgSkq3IQn3vNL6KQ",
+            "current_master": false,
+            "name": "warm4-zjiopsapp12",
+            "host": "10.239.64.42",
+            "heap": {
+                "max": "30gb",
+                "used": "11.4gb",
+                "percent": 38
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12131923894272,
+                "percent": 24
+            },
+            "cpu": {
+                "process": 2,
+                "os": 8,
+                "load": 13.09
+            },
+            "uptime": 18738162549,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "Y9NUTFN5TlCBOnvLNT92Pg",
+            "current_master": false,
+            "name": "warm6-zjiopsapp05",
+            "host": "10.239.64.17",
+            "heap": {
+                "max": "30gb",
+                "used": "20.5gb",
+                "percent": 68
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12085396172800,
+                "percent": 24
+            },
+            "cpu": {
+                "process": 6,
+                "os": 35,
+                "load": 28.97
+            },
+            "uptime": 47692611931,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "JH9-RaE0QYyRFop02K8hAA",
+            "current_master": false,
+            "name": "warm4-zjiopsapp13",
+            "host": "10.239.64.43",
+            "heap": {
+                "max": "30gb",
+                "used": "15.4gb",
+                "percent": 51
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11682909315072,
+                "percent": 27
+            },
+            "cpu": {
+                "process": 3,
+                "os": 17,
+                "load": 36.72
+            },
+            "uptime": 18737741200,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "pPT8dUseR1yyDma7eROBLA",
+            "current_master": false,
+            "name": "warm2-zjiopsapp12",
+            "host": "10.239.64.42",
+            "heap": {
+                "max": "30gb",
+                "used": "18.8gb",
+                "percent": 62
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12677599268864,
+                "percent": 21
+            },
+            "cpu": {
+                "process": 1,
+                "os": 8,
+                "load": 13.09
+            },
+            "uptime": 18738171185,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "KOZyotnjRBej_BhbFeZvuA",
+            "current_master": false,
+            "name": "warm5-zjiopsapp02",
+            "host": "10.239.64.14",
+            "heap": {
+                "max": "30gb",
+                "used": "6.4gb",
+                "percent": 21
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12104123801600,
+                "percent": 24
+            },
+            "cpu": {
+                "process": 2,
+                "os": 20,
+                "load": 14.78
+            },
+            "uptime": 47692616303,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "BwHp-BTcTm6R80dIMMNX3g",
+            "current_master": false,
+            "name": "warm5-zjiopsapp17",
+            "host": "10.239.64.47",
+            "heap": {
+                "max": "30gb",
+                "used": "22.1gb",
+                "percent": 73
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12019764965376,
+                "percent": 25
+            },
+            "cpu": {
+                "process": 0,
+                "os": 13,
+                "load": 12.44
+            },
+            "uptime": 18738031694,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "_79R3xLFSPKzwSo0vTY-uQ",
+            "current_master": false,
+            "name": "warm1-zjiopsapp15",
+            "host": "10.239.64.45",
+            "heap": {
+                "max": "30gb",
+                "used": "10.7gb",
+                "percent": 35
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12393429905408,
+                "percent": 23
+            },
+            "cpu": {
+                "process": 0,
+                "os": 19,
+                "load": 26.21
+            },
+            "uptime": 18737173475,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "rG3ckFpNR5OMXT0V6MejzA",
+            "current_master": false,
+            "name": "warm1-zjiopsapp09",
+            "host": "10.239.64.37",
+            "heap": {
+                "max": "30gb",
+                "used": "8.8gb",
+                "percent": 29
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12110758174720,
+                "percent": 24
+            },
+            "cpu": {
+                "process": 5,
+                "os": 24,
+                "load": 15.23
+            },
+            "uptime": 26033269699,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "hDOJjcvbRHaO8d6ybIOnYg",
+            "current_master": false,
+            "name": "warm2-zjiopsapp04",
+            "host": "10.239.64.16",
+            "heap": {
+                "max": "30gb",
+                "used": "19.4gb",
+                "percent": 64
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12410863443968,
+                "percent": 22
+            },
+            "cpu": {
+                "process": 1,
+                "os": 22,
+                "load": 12.56
+            },
+            "uptime": 47692628144,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "eOB6kxDwR8eq8fy6fGak8g",
+            "current_master": false,
+            "name": "coordinate-zjiopsapp10",
+            "host": "10.239.64.38",
+            "heap": {
+                "max": "30gb",
+                "used": "7.1gb",
+                "percent": 23
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 209922232320,
+                "percent": 2
+            },
+            "cpu": {
+                "process": 0,
+                "os": 28,
+                "load": 19.07
+            },
+            "uptime": 47692365549,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": true,
+            "ingest": false,
+            "data": false
+        },
+        {
+            "id": "meYWVY9ATyOkZE1iXv0y8w",
+            "current_master": false,
+            "name": "coordinate-zjiopsapp02",
+            "host": "10.239.64.14",
+            "heap": {
+                "max": "30gb",
+                "used": "4gb",
+                "percent": 13
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 209745022976,
+                "percent": 2
+            },
+            "cpu": {
+                "process": 0,
+                "os": 23,
+                "load": 14.78
+            },
+            "uptime": 47692599240,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": true,
+            "ingest": false,
+            "data": false
+        },
+        {
+            "id": "FJZ1KsCFS-OmSHl6uNDOXg",
+            "current_master": false,
+            "name": "master-zjiopsapp01",
+            "host": "10.239.64.13",
+            "heap": {
+                "max": "30gb",
+                "used": "16.6gb",
+                "percent": 55
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 121792053248,
+                "percent": 43
+            },
+            "cpu": {
+                "process": 0,
+                "os": 22,
+                "load": 12.07
+            },
+            "uptime": 47692724982,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": true,
+            "coordinating": false,
+            "ingest": false,
+            "data": false
+        },
+        {
+            "id": "Q8FEbh-JSE6qICPTbYX1lw",
+            "current_master": false,
+            "name": "warm6-zjiopsapp10",
+            "host": "10.239.64.38",
+            "heap": {
+                "max": "30gb",
+                "used": "11.8gb",
+                "percent": 39
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11875379245056,
+                "percent": 26
+            },
+            "cpu": {
+                "process": 9,
+                "os": 27,
+                "load": 19.07
+            },
+            "uptime": 47692337872,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "k0mkqzuvSiy4IlpsU3rsag",
+            "current_master": false,
+            "name": "warm3-zjiopsapp04",
+            "host": "10.239.64.16",
+            "heap": {
+                "max": "30gb",
+                "used": "19.1gb",
+                "percent": 63
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11850492092416,
+                "percent": 26
+            },
+            "cpu": {
+                "process": 2,
+                "os": 23,
+                "load": 12.56
+            },
+            "uptime": 47692624739,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "aP5iiHeOT1OotqAKxr5pcA",
+            "current_master": false,
+            "name": "warm5-zjiopsapp15",
+            "host": "10.239.64.45",
+            "heap": {
+                "max": "30gb",
+                "used": "12.4gb",
+                "percent": 41
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11910339059712,
+                "percent": 26
+            },
+            "cpu": {
+                "process": 3,
+                "os": 20,
+                "load": 26.21
+            },
+            "uptime": 18737155787,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "hFMrLDkZR6mohz2uAAwRzg",
+            "current_master": false,
+            "name": "warm1-zjiopsapp05",
+            "host": "10.239.64.17",
+            "heap": {
+                "max": "30gb",
+                "used": "7.2gb",
+                "percent": 24
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12111450214400,
+                "percent": 24
+            },
+            "cpu": {
+                "process": 8,
+                "os": 35,
+                "load": 28.97
+            },
+            "uptime": 47692639243,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "HiBAvPzUQ9e7Lc4uktpZxA",
+            "current_master": false,
+            "name": "warm3-zjiopsapp05",
+            "host": "10.239.64.17",
+            "heap": {
+                "max": "30gb",
+                "used": "10.9gb",
+                "percent": 36
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11726948167680,
+                "percent": 27
+            },
+            "cpu": {
+                "process": 1,
+                "os": 36,
+                "load": 28.97
+            },
+            "uptime": 47692624763,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "eQQupujiQDeWu79cFMt9yg",
+            "current_master": false,
+            "name": "ingest-zjiopsapp06",
+            "host": "10.239.64.18",
+            "heap": {
+                "max": "30gb",
+                "used": "18.2gb",
+                "percent": 60
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 210073481216,
+                "percent": 2
+            },
+            "cpu": {
+                "process": 0,
+                "os": 18,
+                "load": 15.66
+            },
+            "uptime": 47692447029,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": true,
+            "data": false
+        },
+        {
+            "id": "KUQVgxPDTHCb6zNiUc-tPw",
+            "current_master": false,
+            "name": "warm5-zjiopsapp09",
+            "host": "10.239.64.37",
+            "heap": {
+                "max": "30gb",
+                "used": "22.1gb",
+                "percent": 73
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12094582710272,
+                "percent": 24
+            },
+            "cpu": {
+                "process": 2,
+                "os": 22,
+                "load": 15.23
+            },
+            "uptime": 47692615633,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "PYFyQwlMTnSyppBJ0YeGzw",
+            "current_master": false,
+            "name": "warm1-zjiopsapp02",
+            "host": "10.239.64.14",
+            "heap": {
+                "max": "30gb",
+                "used": "14.5gb",
+                "percent": 48
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12187965485056,
+                "percent": 24
+            },
+            "cpu": {
+                "process": 4,
+                "os": 22,
+                "load": 14.78
+            },
+            "uptime": 47692639294,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "IgtdBsioRAqPejTaDW97ew",
+            "current_master": false,
+            "name": "warm1-zjiopsapp11",
+            "host": "10.239.64.39",
+            "heap": {
+                "max": "30gb",
+                "used": "12.5gb",
+                "percent": 41
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11868752994304,
+                "percent": 26
+            },
+            "cpu": {
+                "process": 3,
+                "os": 21,
+                "load": 13.46
+            },
+            "uptime": 47691524919,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "ZnEEOjt7TqCK6vM7_-M6Zg",
+            "current_master": false,
+            "name": "coordinate-zjiopsapp05",
+            "host": "10.239.64.17",
+            "heap": {
+                "max": "30gb",
+                "used": "21.1gb",
+                "percent": 70
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 209986293760,
+                "percent": 2
+            },
+            "cpu": {
+                "process": 0,
+                "os": 34,
+                "load": 28.97
+            },
+            "uptime": 47692599347,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": true,
+            "ingest": false,
+            "data": false
+        },
+        {
+            "id": "HkQGM6s6Q0efI509raCahg",
+            "current_master": false,
+            "name": "warm3-zjiopsapp08",
+            "host": "10.239.64.36",
+            "heap": {
+                "max": "30gb",
+                "used": "6.6gb",
+                "percent": 22
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12435885109248,
+                "percent": 22
+            },
+            "cpu": {
+                "process": 2,
+                "os": 30,
+                "load": 17.47
+            },
+            "uptime": 47692624757,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "fa2LNe_HRzONkCs5PTGRqg",
+            "current_master": false,
+            "name": "warm6-zjiopsapp14",
+            "host": "10.239.64.44",
+            "heap": {
+                "max": "30gb",
+                "used": "7.9gb",
+                "percent": 26
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11491554234368,
+                "percent": 28
+            },
+            "cpu": {
+                "process": 3,
+                "os": 18,
+                "load": 23.36
+            },
+            "uptime": 18737289653,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "3A3OwXQETEiHyfmZDP3lRw",
+            "current_master": false,
+            "name": "coordinate-zjiopsapp03",
+            "host": "10.239.64.15",
+            "heap": {
+                "max": "30gb",
+                "used": "18.9gb",
+                "percent": 63
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 209750331392,
+                "percent": 2
+            },
+            "cpu": {
+                "process": 0,
+                "os": 13,
+                "load": 12.39
+            },
+            "uptime": 47692598308,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": true,
+            "ingest": false,
+            "data": false
+        },
+        {
+            "id": "0Rypk_oYQMW9f-HwLc8qiQ",
+            "current_master": false,
+            "name": "warm4-zjiopsapp04",
+            "host": "10.239.64.16",
+            "heap": {
+                "max": "30gb",
+                "used": "5.5gb",
+                "percent": 18
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12411229298688,
+                "percent": 22
+            },
+            "cpu": {
+                "process": 0,
+                "os": 22,
+                "load": 12.56
+            },
+            "uptime": 47692620523,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "tPpdHwKDSZKBuXLe8nLYfA",
+            "current_master": false,
+            "name": "ingest-zjiopsapp04",
+            "host": "10.239.64.16",
+            "heap": {
+                "max": "30gb",
+                "used": "20.1gb",
+                "percent": 67
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 208338432000,
+                "percent": 3
+            },
+            "cpu": {
+                "process": 0,
+                "os": 20,
+                "load": 12.56
+            },
+            "uptime": 47692447044,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": true,
+            "data": false
+        },
+        {
+            "id": "uG3On6a5THOOGTU45XG06g",
+            "current_master": false,
+            "name": "warm4-zjiopsapp10",
+            "host": "10.239.64.38",
+            "heap": {
+                "max": "30gb",
+                "used": "16.8gb",
+                "percent": 56
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12176924069888,
+                "percent": 24
+            },
+            "cpu": {
+                "process": 2,
+                "os": 27,
+                "load": 19.07
+            },
+            "uptime": 47692347297,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "Ym2ot9r0RD2rK8NB2LYWow",
+            "current_master": false,
+            "name": "coordinate-zjiopsapp08",
+            "host": "10.239.64.36",
+            "heap": {
+                "max": "30gb",
+                "used": "13.8gb",
+                "percent": 46
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 210027958272,
+                "percent": 2
+            },
+            "cpu": {
+                "process": 0,
+                "os": 23,
+                "load": 17.47
+            },
+            "uptime": 47692599112,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": true,
+            "ingest": false,
+            "data": false
+        },
+        {
+            "id": "Dfr4cUueSBeMFQwUkdnzcA",
+            "current_master": false,
+            "name": "coordinate-zjiopsapp15",
+            "host": "10.239.64.45",
+            "heap": {
+                "max": "30gb",
+                "used": "22.2gb",
+                "percent": 74
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 210298544128,
+                "percent": 2
+            },
+            "cpu": {
+                "process": 0,
+                "os": 19,
+                "load": 26.21
+            },
+            "uptime": 18737178144,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": true,
+            "ingest": false,
+            "data": false
+        },
+        {
+            "id": "6OusWEc7Toy-AbIWtrXsrw",
+            "current_master": false,
+            "name": "warm4-zjiopsapp11",
+            "host": "10.239.64.39",
+            "heap": {
+                "max": "30gb",
+                "used": "19.1gb",
+                "percent": 63
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12610898763776,
+                "percent": 21
+            },
+            "cpu": {
+                "process": 1,
+                "os": 22,
+                "load": 13.46
+            },
+            "uptime": 47691513648,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "9-mEJQDVRcmOE_CSEIcBiA",
+            "current_master": false,
+            "name": "warm4-zjiopsapp01",
+            "host": "10.239.64.13",
+            "heap": {
+                "max": "30gb",
+                "used": "22gb",
+                "percent": 73
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12225956802560,
+                "percent": 24
+            },
+            "cpu": {
+                "process": 3,
+                "os": 22,
+                "load": 12.07
+            },
+            "uptime": 47692620555,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "8nP_Jqd0TZ2XIfZ_OQZESA",
+            "current_master": false,
+            "name": "warm4-zjiopsapp17",
+            "host": "10.239.64.47",
+            "heap": {
+                "max": "30gb",
+                "used": "16.2gb",
+                "percent": 54
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12615513202688,
+                "percent": 21
+            },
+            "cpu": {
+                "process": 1,
+                "os": 7,
+                "load": 12.44
+            },
+            "uptime": 18738036837,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "Li4UwGqdTHC4SmYOQdV1jA",
+            "current_master": false,
+            "name": "warm2-zjiopsapp01",
+            "host": "10.239.64.13",
+            "heap": {
+                "max": "30gb",
+                "used": "10.9gb",
+                "percent": 36
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12267880693760,
+                "percent": 23
+            },
+            "cpu": {
+                "process": 3,
+                "os": 22,
+                "load": 12.07
+            },
+            "uptime": 47692628142,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "eAVi2oOMQc-Oc21cfWkm5g",
+            "current_master": false,
+            "name": "warm6-zjiopsapp04",
+            "host": "10.239.64.16",
+            "heap": {
+                "max": "30gb",
+                "used": "14.2gb",
+                "percent": 47
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12234584985600,
+                "percent": 24
+            },
+            "cpu": {
+                "process": 1,
+                "os": 20,
+                "load": 12.56
+            },
+            "uptime": 47692611799,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "bPFx0VYCRieU7K1180MAVg",
+            "current_master": false,
+            "name": "warm5-zjiopsapp04",
+            "host": "10.239.64.16",
+            "heap": {
+                "max": "30gb",
+                "used": "17.4gb",
+                "percent": 58
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12252451188736,
+                "percent": 23
+            },
+            "cpu": {
+                "process": 6,
+                "os": 20,
+                "load": 12.56
+            },
+            "uptime": 47692616313,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "LEs2gpU5SkezioM6YIhxhQ",
+            "current_master": false,
+            "name": "warm6-zjiopsapp16",
+            "host": "10.239.64.46",
+            "heap": {
+                "max": "30gb",
+                "used": "15.1gb",
+                "percent": 50
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12387980427264,
+                "percent": 23
+            },
+            "cpu": {
+                "process": 2,
+                "os": 18,
+                "load": 24.37
+            },
+            "uptime": 18737527924,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "Opzsr9wyTlqT4MCMc6WNtA",
+            "current_master": false,
+            "name": "ingest-zjiopsapp08",
+            "host": "10.239.64.36",
+            "heap": {
+                "max": "30gb",
+                "used": "19.7gb",
+                "percent": 65
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 210027958272,
+                "percent": 2
+            },
+            "cpu": {
+                "process": 0,
+                "os": 26,
+                "load": 17.47
+            },
+            "uptime": 47692447024,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": true,
+            "data": false
+        },
+        {
+            "id": "v8Mo0MX2TbSxvK8bGC9dzQ",
+            "current_master": false,
+            "name": "warm1-zjiopsapp04",
+            "host": "10.239.64.16",
+            "heap": {
+                "max": "30gb",
+                "used": "16.1gb",
+                "percent": 53
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11532701364224,
+                "percent": 28
+            },
+            "cpu": {
+                "process": 7,
+                "os": 19,
+                "load": 12.56
+            },
+            "uptime": 47692639289,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "iXTD1gOORO-eX9t6ZUpbeA",
+            "current_master": false,
+            "name": "warm3-zjiopsapp09",
+            "host": "10.239.64.37",
+            "heap": {
+                "max": "30gb",
+                "used": "7.4gb",
+                "percent": 24
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12062627913728,
+                "percent": 25
+            },
+            "cpu": {
+                "process": 0,
+                "os": 27,
+                "load": 15.23
+            },
+            "uptime": 47692624643,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "EyI9UnV9Q1eU7oviIe-SGA",
+            "current_master": false,
+            "name": "warm6-zjiopsapp07",
+            "host": "10.239.64.19",
+            "heap": {
+                "max": "30gb",
+                "used": "14gb",
+                "percent": 46
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11620749291520,
+                "percent": 27
+            },
+            "cpu": {
+                "process": 1,
+                "os": 22,
+                "load": 18
+            },
+            "uptime": 47692611958,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "pMyK9E2PRu2ZmQYOIMHl-w",
+            "current_master": false,
+            "name": "warm6-zjiopsapp01",
+            "host": "10.239.64.13",
+            "heap": {
+                "max": "30gb",
+                "used": "18.6gb",
+                "percent": 62
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 7905393451008,
+                "percent": 51
+            },
+            "cpu": {
+                "process": 0,
+                "os": 19,
+                "load": 12.07
+            },
+            "uptime": 1561379022,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "9irk38tBRuutcv314Mqnlg",
+            "current_master": false,
+            "name": "coordinate-zjiopsapp04",
+            "host": "10.239.64.16",
+            "heap": {
+                "max": "30gb",
+                "used": "13.1gb",
+                "percent": 43
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 208338432000,
+                "percent": 3
+            },
+            "cpu": {
+                "process": 0,
+                "os": 19,
+                "load": 12.56
+            },
+            "uptime": 47692599113,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": true,
+            "ingest": false,
+            "data": false
+        },
+        {
+            "id": "vDmrZBJ1R4qWxcLNMkFhig",
+            "current_master": false,
+            "name": "ingest-zjiopsapp05",
+            "host": "10.239.64.17",
+            "heap": {
+                "max": "30gb",
+                "used": "15gb",
+                "percent": 50
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 209986293760,
+                "percent": 2
+            },
+            "cpu": {
+                "process": 0,
+                "os": 34,
+                "load": 28.97
+            },
+            "uptime": 47692447031,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": true,
+            "data": false
+        },
+        {
+            "id": "GiWATh3uQk2PCA82Hncy0w",
+            "current_master": false,
+            "name": "warm6-zjiopsapp15",
+            "host": "10.239.64.45",
+            "heap": {
+                "max": "30gb",
+                "used": "9.8gb",
+                "percent": 32
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12171234103296,
+                "percent": 24
+            },
+            "cpu": {
+                "process": 3,
+                "os": 20,
+                "load": 26.21
+            },
+            "uptime": 18737151233,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "wlZyZQkbRoqqNDhe9Ee5Sg",
+            "current_master": false,
+            "name": "warm4-zjiopsapp07",
+            "host": "10.239.64.19",
+            "heap": {
+                "max": "30gb",
+                "used": "21.4gb",
+                "percent": 71
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11960431095808,
+                "percent": 25
+            },
+            "cpu": {
+                "process": 1,
+                "os": 21,
+                "load": 18
+            },
+            "uptime": 47692620530,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "BpEc1z6cQb-B6fH42tHZ7Q",
+            "current_master": false,
+            "name": "ingest-zjiopsapp09",
+            "host": "10.239.64.37",
+            "heap": {
+                "max": "30gb",
+                "used": "15.8gb",
+                "percent": 52
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 210042683392,
+                "percent": 2
+            },
+            "cpu": {
+                "process": 0,
+                "os": 27,
+                "load": 15.23
+            },
+            "uptime": 47692447033,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": true,
+            "data": false
+        },
+        {
+            "id": "oJN5VwuCR8uK_9yEgYfpjA",
+            "current_master": false,
+            "name": "warm3-zjiopsapp15",
+            "host": "10.239.64.45",
+            "heap": {
+                "max": "30gb",
+                "used": "9.7gb",
+                "percent": 32
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12174099505152,
+                "percent": 24
+            },
+            "cpu": {
+                "process": 2,
+                "os": 18,
+                "load": 26.21
+            },
+            "uptime": 18737164214,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "bfK97bVbRkiN_kd_u2wqsA",
+            "current_master": false,
+            "name": "ingest-zjiopsapp07",
+            "host": "10.239.64.19",
+            "heap": {
+                "max": "30gb",
+                "used": "16.8gb",
+                "percent": 56
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 210014363648,
+                "percent": 2
+            },
+            "cpu": {
+                "process": 0,
+                "os": 21,
+                "load": 18
+            },
+            "uptime": 47692447041,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": true,
+            "data": false
+        },
+        {
+            "id": "QL90moF2S16Z_2Mvs0poLw",
+            "current_master": false,
+            "name": "warm6-zjiopsapp03",
+            "host": "10.239.64.15",
+            "heap": {
+                "max": "30gb",
+                "used": "9.6gb",
+                "percent": 32
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12290071244800,
+                "percent": 23
+            },
+            "cpu": {
+                "process": 1,
+                "os": 14,
+                "load": 12.39
+            },
+            "uptime": 47692611522,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "-BAo6gGcSx6ZzfCVjJJQcg",
+            "current_master": false,
+            "name": "master-zjiopsapp03",
+            "host": "10.239.64.15",
+            "heap": {
+                "max": "30gb",
+                "used": "14.6gb",
+                "percent": 48
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 209750331392,
+                "percent": 2
+            },
+            "cpu": {
+                "process": 0,
+                "os": 16,
+                "load": 12.39
+            },
+            "uptime": 47692707710,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": true,
+            "coordinating": false,
+            "ingest": false,
+            "data": false
+        },
+        {
+            "id": "jJ4pn0NDS1CHt_SeSeBYjQ",
+            "current_master": false,
+            "name": "warm6-zjiopsapp06",
+            "host": "10.239.64.18",
+            "heap": {
+                "max": "30gb",
+                "used": "4.6gb",
+                "percent": 15
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12688019161088,
+                "percent": 21
+            },
+            "cpu": {
+                "process": 0,
+                "os": 18,
+                "load": 15.66
+            },
+            "uptime": 47692611960,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "Wkq0P6f2SK-p_SuRAE8A_w",
+            "current_master": false,
+            "name": "warm2-zjiopsapp05",
+            "host": "10.239.64.17",
+            "heap": {
+                "max": "30gb",
+                "used": "21.6gb",
+                "percent": 72
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11069394821120,
+                "percent": 31
+            },
+            "cpu": {
+                "process": 7,
+                "os": 38,
+                "load": 28.97
+            },
+            "uptime": 47692628171,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "vKriPL2LTVm-2r2o8N9ANA",
+            "current_master": false,
+            "name": "warm3-zjiopsapp12",
+            "host": "10.239.64.42",
+            "heap": {
+                "max": "30gb",
+                "used": "17.6gb",
+                "percent": 58
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12541518102528,
+                "percent": 22
+            },
+            "cpu": {
+                "process": 0,
+                "os": 8,
+                "load": 13.09
+            },
+            "uptime": 18738166957,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "VSuVVdsjRNCyLKa4Of0MBg",
+            "current_master": false,
+            "name": "warm2-zjiopsapp11",
+            "host": "10.239.64.39",
+            "heap": {
+                "max": "30gb",
+                "used": "6.9gb",
+                "percent": 23
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12031700037632,
+                "percent": 25
+            },
+            "cpu": {
+                "process": 8,
+                "os": 29,
+                "load": 13.46
+            },
+            "uptime": 47691521561,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "0R4cwBGbSv2QSkoeMGxKeA",
+            "current_master": false,
+            "name": "warm2-zjiopsapp17",
+            "host": "10.239.64.47",
+            "heap": {
+                "max": "30gb",
+                "used": "16.6gb",
+                "percent": 55
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 10107320258560,
+                "percent": 37
+            },
+            "cpu": {
+                "process": 0,
+                "os": 9,
+                "load": 12.44
+            },
+            "uptime": 18738047956,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "aBk-FlR4SsGC2_4D7bbn9Q",
+            "current_master": false,
+            "name": "warm3-zjiopsapp11",
+            "host": "10.239.64.39",
+            "heap": {
+                "max": "30gb",
+                "used": "20.9gb",
+                "percent": 69
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12541187010560,
+                "percent": 22
+            },
+            "cpu": {
+                "process": 2,
+                "os": 24,
+                "load": 13.46
+            },
+            "uptime": 47691517039,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "0EXSefxcTDKwhTDMFO_asg",
+            "current_master": false,
+            "name": "warm6-zjiopsapp13",
+            "host": "10.239.64.43",
+            "heap": {
+                "max": "30gb",
+                "used": "13.8gb",
+                "percent": 46
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12266699476992,
+                "percent": 23
+            },
+            "cpu": {
+                "process": 0,
+                "os": 19,
+                "load": 36.72
+            },
+            "uptime": 18737729936,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "ahMhw5ItSGq7VGJiEnVFaQ",
+            "current_master": false,
+            "name": "warm1-zjiopsapp13",
+            "host": "10.239.64.43",
+            "heap": {
+                "max": "30gb",
+                "used": "15.9gb",
+                "percent": 53
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11793568407552,
+                "percent": 26
+            },
+            "cpu": {
+                "process": 1,
+                "os": 22,
+                "load": 36.72
+            },
+            "uptime": 18737754293,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "NrCpl0aOQJu6dXTliy2spA",
+            "current_master": false,
+            "name": "coordinate-zjiopsapp17",
+            "host": "10.239.64.47",
+            "heap": {
+                "max": "30gb",
+                "used": "10.7gb",
+                "percent": 35
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 210462806016,
+                "percent": 2
+            },
+            "cpu": {
+                "process": 0,
+                "os": 13,
+                "load": 12.44
+            },
+            "uptime": 18738058796,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": true,
+            "ingest": false,
+            "data": false
+        },
+        {
+            "id": "BYE854RKQYO_oxszkgXI6w",
+            "current_master": false,
+            "name": "coordinate-zjiopsapp14",
+            "host": "10.239.64.44",
+            "heap": {
+                "max": "30gb",
+                "used": "9.6gb",
+                "percent": 32
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 210246582272,
+                "percent": 2
+            },
+            "cpu": {
+                "process": 0,
+                "os": 16,
+                "load": 23.36
+            },
+            "uptime": 18737321618,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": true,
+            "ingest": false,
+            "data": false
+        },
+        {
+            "id": "ZeCvyKJ-Q-Cjpcey9ygKyQ",
+            "current_master": false,
+            "name": "coordinate-zjiopsapp01",
+            "host": "10.239.64.13",
+            "heap": {
+                "max": "30gb",
+                "used": "15.6gb",
+                "percent": 52
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 121792053248,
+                "percent": 43
+            },
+            "cpu": {
+                "process": 0,
+                "os": 18,
+                "load": 11.9
+            },
+            "uptime": 16261299126,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": true,
+            "ingest": false,
+            "data": false
+        },
+        {
+            "id": "_zD968PjQvOt2EDziZPn2w",
+            "current_master": false,
+            "name": "coordinate-zjiopsapp13",
+            "host": "10.239.64.43",
+            "heap": {
+                "max": "30gb",
+                "used": "6.3gb",
+                "percent": 21
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 210207404032,
+                "percent": 2
+            },
+            "cpu": {
+                "process": 0,
+                "os": 17,
+                "load": 36.72
+            },
+            "uptime": 18737759005,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": true,
+            "ingest": false,
+            "data": false
+        },
+        {
+            "id": "ZiVk-vaOSYuKUu2H_rzM_Q",
+            "current_master": false,
+            "name": "warm1-zjiopsapp16",
+            "host": "10.239.64.46",
+            "heap": {
+                "max": "30gb",
+                "used": "10.9gb",
+                "percent": 36
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12080829861888,
+                "percent": 24
+            },
+            "cpu": {
+                "process": 2,
+                "os": 15,
+                "load": 24.37
+            },
+            "uptime": 18737552184,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "fGylzjEqQb2QqaiRDgcOQA",
+            "current_master": false,
+            "name": "warm6-zjiopsapp02",
+            "host": "10.239.64.14",
+            "heap": {
+                "max": "30gb",
+                "used": "8.9gb",
+                "percent": 29
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11971404718080,
+                "percent": 25
+            },
+            "cpu": {
+                "process": 1,
+                "os": 20,
+                "load": 14.78
+            },
+            "uptime": 47692611649,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "apSlNVOPRT-fdjpcpkZa0w",
+            "current_master": false,
+            "name": "warm3-zjiopsapp01",
+            "host": "10.239.64.13",
+            "heap": {
+                "max": "30gb",
+                "used": "7.7gb",
+                "percent": 25
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 10174227091456,
+                "percent": 36
+            },
+            "cpu": {
+                "process": 5,
+                "os": 20,
+                "load": 12.07
+            },
+            "uptime": 47692624781,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "XXkvxbbuRnexXqkj2KTRhQ",
+            "current_master": false,
+            "name": "warm4-zjiopsapp06",
+            "host": "10.239.64.18",
+            "heap": {
+                "max": "30gb",
+                "used": "21.3gb",
+                "percent": 71
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12190560321536,
+                "percent": 24
+            },
+            "cpu": {
+                "process": 2,
+                "os": 17,
+                "load": 15.66
+            },
+            "uptime": 47692620522,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "fne8kox9TtW7y8KQeuASXg",
+            "current_master": false,
+            "name": "warm6-zjiopsapp11",
+            "host": "10.239.64.39",
+            "heap": {
+                "max": "30gb",
+                "used": "22.1gb",
+                "percent": 73
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12388860633088,
+                "percent": 23
+            },
+            "cpu": {
+                "process": 2,
+                "os": 21,
+                "load": 13.46
+            },
+            "uptime": 47691503953,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "Yqf8nG3pQ42FYkg53-r3yw",
+            "current_master": false,
+            "name": "warm1-zjiopsapp10",
+            "host": "10.239.64.38",
+            "heap": {
+                "max": "30gb",
+                "used": "21.2gb",
+                "percent": 70
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12104089108480,
+                "percent": 24
+            },
+            "cpu": {
+                "process": 4,
+                "os": 26,
+                "load": 19.07
+            },
+            "uptime": 47692358156,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "czXbnDjjSWOfEi-tfxridg",
+            "current_master": false,
+            "name": "warm3-zjiopsapp10",
+            "host": "10.239.64.38",
+            "heap": {
+                "max": "30gb",
+                "used": "16.3gb",
+                "percent": 54
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12122515537920,
+                "percent": 24
+            },
+            "cpu": {
+                "process": 2,
+                "os": 27,
+                "load": 19.07
+            },
+            "uptime": 47692350678,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "MgVRdCGjRXWgGWyOUn-ZAw",
+            "current_master": false,
+            "name": "warm5-zjiopsapp16",
+            "host": "10.239.64.46",
+            "heap": {
+                "max": "30gb",
+                "used": "9.9gb",
+                "percent": 33
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12210527375360,
+                "percent": 24
+            },
+            "cpu": {
+                "process": 1,
+                "os": 18,
+                "load": 24.37
+            },
+            "uptime": 18737534477,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "xNgIz6U1QveX7sr-raB6yw",
+            "current_master": false,
+            "name": "warm5-zjiopsapp08",
+            "host": "10.239.64.36",
+            "heap": {
+                "max": "30gb",
+                "used": "13.6gb",
+                "percent": 45
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11769461587968,
+                "percent": 26
+            },
+            "cpu": {
+                "process": 0,
+                "os": 23,
+                "load": 17.47
+            },
+            "uptime": 47692616304,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "9Whj1i2jSQKWayJ7ww9olg",
+            "current_master": false,
+            "name": "warm4-zjiopsapp14",
+            "host": "10.239.64.44",
+            "heap": {
+                "max": "30gb",
+                "used": "16.4gb",
+                "percent": 54
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12742338387968,
+                "percent": 20
+            },
+            "cpu": {
+                "process": 2,
+                "os": 19,
+                "load": 23.36
+            },
+            "uptime": 18737300179,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "tKQbQrcTRzSisvB7UON2Gg",
+            "current_master": true,
+            "name": "master-zjiopsapp02",
+            "host": "10.239.64.14",
+            "heap": {
+                "max": "30gb",
+                "used": "19gb",
+                "percent": 63
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 209745022976,
+                "percent": 2
+            },
+            "cpu": {
+                "process": 0,
+                "os": 21,
+                "load": 14.78
+            },
+            "uptime": 47692714957,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": true,
+            "coordinating": false,
+            "ingest": false,
+            "data": false
+        },
+        {
+            "id": "9nK9Q8THR2SY3iNO_4K9Bw",
+            "current_master": false,
+            "name": "warm3-zjiopsapp07",
+            "host": "10.239.64.19",
+            "heap": {
+                "max": "30gb",
+                "used": "5.5gb",
+                "percent": 18
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11873227239424,
+                "percent": 26
+            },
+            "cpu": {
+                "process": 6,
+                "os": 21,
+                "load": 18
+            },
+            "uptime": 47692624695,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "Pg6wB3v8QmeX6eaZOZNIgg",
+            "current_master": false,
+            "name": "warm3-zjiopsapp17",
+            "host": "10.239.64.47",
+            "heap": {
+                "max": "30gb",
+                "used": "15.6gb",
+                "percent": 52
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12590175137792,
+                "percent": 21
+            },
+            "cpu": {
+                "process": 2,
+                "os": 9,
+                "load": 12.44
+            },
+            "uptime": 18738043143,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "0cjg4HPxSPqZI8dsvDR6bA",
+            "current_master": false,
+            "name": "warm4-zjiopsapp03",
+            "host": "10.239.64.15",
+            "heap": {
+                "max": "30gb",
+                "used": "20.1gb",
+                "percent": 67
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12367504183296,
+                "percent": 23
+            },
+            "cpu": {
+                "process": 2,
+                "os": 14,
+                "load": 12.39
+            },
+            "uptime": 47692620498,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "l_N_52OcRvCfXBL_d9yJFQ",
+            "current_master": false,
+            "name": "warm6-zjiopsapp12",
+            "host": "10.239.64.42",
+            "heap": {
+                "max": "30gb",
+                "used": "11.1gb",
+                "percent": 37
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11884366782464,
+                "percent": 26
+            },
+            "cpu": {
+                "process": 2,
+                "os": 8,
+                "load": 13.09
+            },
+            "uptime": 18738152596,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "Sqe10vKKTUagNqtz5XrIuw",
+            "current_master": false,
+            "name": "warm3-zjiopsapp16",
+            "host": "10.239.64.46",
+            "heap": {
+                "max": "30gb",
+                "used": "20.4gb",
+                "percent": 68
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12376321835008,
+                "percent": 23
+            },
+            "cpu": {
+                "process": 1,
+                "os": 17,
+                "load": 24.37
+            },
+            "uptime": 18737543353,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "thPRk0rXRuG8ehtCqyrktQ",
+            "current_master": false,
+            "name": "warm1-zjiopsapp17",
+            "host": "10.239.64.47",
+            "heap": {
+                "max": "30gb",
+                "used": "13.7gb",
+                "percent": 45
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12285067091968,
+                "percent": 23
+            },
+            "cpu": {
+                "process": 2,
+                "os": 10,
+                "load": 12.44
+            },
+            "uptime": 18738053251,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "O9l5CHSLQKm7GgYEtI8-Xg",
+            "current_master": false,
+            "name": "warm3-zjiopsapp03",
+            "host": "10.239.64.15",
+            "heap": {
+                "max": "30gb",
+                "used": "21.2gb",
+                "percent": 70
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12157232984064,
+                "percent": 24
+            },
+            "cpu": {
+                "process": 1,
+                "os": 14,
+                "load": 12.39
+            },
+            "uptime": 47692624789,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "F4ve2cxCTP2XLLonG87R9w",
+            "current_master": false,
+            "name": "warm2-zjiopsapp02",
+            "host": "10.239.64.14",
+            "heap": {
+                "max": "30gb",
+                "used": "13.1gb",
+                "percent": 43
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12641231511552,
+                "percent": 21
+            },
+            "cpu": {
+                "process": 2,
+                "os": 25,
+                "load": 14.78
+            },
+            "uptime": 47692628127,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "_OWR0LlGQ2-pzV-s5xJJrQ",
+            "current_master": false,
+            "name": "warm5-zjiopsapp06",
+            "host": "10.239.64.18",
+            "heap": {
+                "max": "30gb",
+                "used": "12.7gb",
+                "percent": 42
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11744338796544,
+                "percent": 27
+            },
+            "cpu": {
+                "process": 4,
+                "os": 17,
+                "load": 14.5
+            },
+            "uptime": 47692615351,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "9lNflU6PRiuGQ05HtLnqfg",
+            "current_master": false,
+            "name": "warm5-zjiopsapp03",
+            "host": "10.239.64.15",
+            "heap": {
+                "max": "30gb",
+                "used": "13.7gb",
+                "percent": 45
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12562583674880,
+                "percent": 21
+            },
+            "cpu": {
+                "process": 2,
+                "os": 22,
+                "load": 12.39
+            },
+            "uptime": 47692616248,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "SXim5iX9SM2CmNH5ifBbbQ",
+            "current_master": false,
+            "name": "warm1-zjiopsapp07",
+            "host": "10.239.64.19",
+            "heap": {
+                "max": "30gb",
+                "used": "20.6gb",
+                "percent": 68
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11963599106048,
+                "percent": 25
+            },
+            "cpu": {
+                "process": 6,
+                "os": 23,
+                "load": 18
+            },
+            "uptime": 47692639242,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "XDDshIQVQ_iTL1we_PVpOA",
+            "current_master": false,
+            "name": "warm3-zjiopsapp14",
+            "host": "10.239.64.44",
+            "heap": {
+                "max": "30gb",
+                "used": "19.8gb",
+                "percent": 66
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12272224837632,
+                "percent": 23
+            },
+            "cpu": {
+                "process": 4,
+                "os": 19,
+                "load": 23.36
+            },
+            "uptime": 18737304721,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "LFzitet8Q4yxffEnnXqK6A",
+            "current_master": false,
+            "name": "warm2-zjiopsapp16",
+            "host": "10.239.64.46",
+            "heap": {
+                "max": "30gb",
+                "used": "13.8gb",
+                "percent": 46
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12734945173504,
+                "percent": 20
+            },
+            "cpu": {
+                "process": 3,
+                "os": 18,
+                "load": 24.37
+            },
+            "uptime": 18737547403,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "ipvBzQkeSrGcIj27r-cu9Q",
+            "current_master": false,
+            "name": "coordinate-zjiopsapp12",
+            "host": "10.239.64.42",
+            "heap": {
+                "max": "30gb",
+                "used": "14.1gb",
+                "percent": 47
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 210453217280,
+                "percent": 2
+            },
+            "cpu": {
+                "process": 0,
+                "os": 8,
+                "load": 13.09
+            },
+            "uptime": 18738182801,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": true,
+            "ingest": false,
+            "data": false
+        },
+        {
+            "id": "ZT9oOLiXRyiUm8X4aCBuMg",
+            "current_master": false,
+            "name": "ingest-zjiopsapp11",
+            "host": "10.239.64.39",
+            "heap": {
+                "max": "30gb",
+                "used": "14.8gb",
+                "percent": 49
+            },
+            "disk": {
+                "total": 214643507200,
+                "available": 206212562944,
+                "percent": 4
+            },
+            "cpu": {
+                "process": 0,
+                "os": 30,
+                "load": 13.46
+            },
+            "uptime": 12785125558,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": true,
+            "data": false
+        },
+        {
+            "id": "Jx4oI9z9T1WWk0w-Lsl1cA",
+            "current_master": false,
+            "name": "warm2-zjiopsapp08",
+            "host": "10.239.64.36",
+            "heap": {
+                "max": "30gb",
+                "used": "6.1gb",
+                "percent": 20
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11924448632832,
+                "percent": 25
+            },
+            "cpu": {
+                "process": 4,
+                "os": 28,
+                "load": 17.47
+            },
+            "uptime": 47692628125,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "ZVhS52Q9TTuSGFgRRmotAA",
+            "current_master": false,
+            "name": "warm2-zjiopsapp10",
+            "host": "10.239.64.38",
+            "heap": {
+                "max": "30gb",
+                "used": "13.4gb",
+                "percent": 44
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12119035682816,
+                "percent": 24
+            },
+            "cpu": {
+                "process": 2,
+                "os": 32,
+                "load": 19.07
+            },
+            "uptime": 47692354477,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "qRb0j89UQECmg81YVofLjA",
+            "current_master": false,
+            "name": "warm3-zjiopsapp02",
+            "host": "10.239.64.14",
+            "heap": {
+                "max": "30gb",
+                "used": "18.6gb",
+                "percent": 62
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11522831593472,
+                "percent": 28
+            },
+            "cpu": {
+                "process": 6,
+                "os": 22,
+                "load": 14.78
+            },
+            "uptime": 47692624726,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "KUWRWWI0SCKEb3PHl_4TGg",
+            "current_master": false,
+            "name": "warm2-zjiopsapp09",
+            "host": "10.239.64.37",
+            "heap": {
+                "max": "30gb",
+                "used": "16.7gb",
+                "percent": 55
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11771078602752,
+                "percent": 26
+            },
+            "cpu": {
+                "process": 2,
+                "os": 25,
+                "load": 15.23
+            },
+            "uptime": 47692628177,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "Zw9sGNzcRBKzForFvx3ZWQ",
+            "current_master": false,
+            "name": "warm5-zjiopsapp12",
+            "host": "10.239.64.42",
+            "heap": {
+                "max": "30gb",
+                "used": "10.3gb",
+                "percent": 34
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11804869287936,
+                "percent": 26
+            },
+            "cpu": {
+                "process": 0,
+                "os": 11,
+                "load": 13.09
+            },
+            "uptime": 18738157456,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "Vvt_5R4IQUCyaYNyhTnUpQ",
+            "current_master": false,
+            "name": "warm2-zjiopsapp07",
+            "host": "10.239.64.19",
+            "heap": {
+                "max": "30gb",
+                "used": "14.8gb",
+                "percent": 49
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11561577107456,
+                "percent": 28
+            },
+            "cpu": {
+                "process": 2,
+                "os": 21,
+                "load": 18
+            },
+            "uptime": 47692628146,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "wCFpcEEHSRKmUgZbpOzE0g",
+            "current_master": false,
+            "name": "warm2-zjiopsapp15",
+            "host": "10.239.64.45",
+            "heap": {
+                "max": "30gb",
+                "used": "13.4gb",
+                "percent": 44
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12155159396352,
+                "percent": 24
+            },
+            "cpu": {
+                "process": 2,
+                "os": 18,
+                "load": 26.21
+            },
+            "uptime": 18737168700,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "Zy0HAWp3S1qZ0L_xQf0KEg",
+            "current_master": false,
+            "name": "warm6-zjiopsapp08",
+            "host": "10.239.64.36",
+            "heap": {
+                "max": "30gb",
+                "used": "16.1gb",
+                "percent": 53
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 11792371920896,
+                "percent": 26
+            },
+            "cpu": {
+                "process": 4,
+                "os": 22,
+                "load": 17.47
+            },
+            "uptime": 47692611916,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "NLdf6a00QcSF3Gmk5Wgxjg",
+            "current_master": false,
+            "name": "warm5-zjiopsapp05",
+            "host": "10.239.64.17",
+            "heap": {
+                "max": "30gb",
+                "used": "11.1gb",
+                "percent": 37
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12180220481536,
+                "percent": 24
+            },
+            "cpu": {
+                "process": 2,
+                "os": 35,
+                "load": 28.97
+            },
+            "uptime": 47692616243,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        },
+        {
+            "id": "mpfc47uuQxul1aCv3l30sg",
+            "current_master": false,
+            "name": "warm1-zjiopsapp06",
+            "host": "10.239.64.18",
+            "heap": {
+                "max": "30gb",
+                "used": "6.8gb",
+                "percent": 22
+            },
+            "disk": {
+                "total": 15998852448256,
+                "available": 12513144164352,
+                "percent": 22
+            },
+            "cpu": {
+                "process": 5,
+                "os": 25,
+                "load": 15.66
+            },
+            "uptime": 47692639272,
+            "jvm": "18.0.2",
+            "attributes": {
+                "ml.max_jvm_size": "32212254720"
+            },
+            "version": "7.17.6",
+            "master": false,
+            "coordinating": false,
+            "ingest": false,
+            "data": true
+        }
+    ]
+}

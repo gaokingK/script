@@ -6,6 +6,7 @@
         - 略
     - [更详细的一篇文章](https://blog.csdn.net/lilong117194/article/details/82852054)
         - 主要参考这个来了解logging模块， 具体的使用看别的
+        - 格式字符串的值
     - [配置日志的几种方式](https://www.cnblogs.com/yyds/p/6885182.html)
     - [logging.handlers.TimedRotatingFileHandler()使用](https://www.codingdict.com/sources/py/logging.handlers/9083.html)
 ## 问题
@@ -29,7 +30,7 @@
 ## logging 简介
     - logging里定义了五个日志级别， 从低到高分别是debug<info<warning<error<critacal, 也可以自己定义日志级别，但不推荐，因为会对别人带来影响
 ## logging模块的使用方式介绍
-    - 第一种方式是使用logging提供的模块级别的函数
+    - 第一种方式是使用logging提供的模块级别的函数 快速使用
     - 第二种方式是使用Logging日志系统的四大组件
     - 其实，logging所提供的模块级别的日志记录函数也是对logging日志系统相关类的封装而已。
 ## 使用logging提供的模块级别的函数记录日志
@@ -54,7 +55,7 @@
         - extra： 这是一个字典（dict）参数，它可以用来自定义消息格式中所包含的字段，但是它的key不能与logging模块定义的字段冲突。
     - Logger.exception() 创建一个类似于Logger.error()的日志消息
         - Logger.exception()与Logger.error()的区别在于：Logger.exception()将会输出堆栈追踪信息，另外通常只是在一个exception handler中调用该方法。
-## logging模块日志流处理流程
+## logging模块日志流处理流程 ---------- -----------------------------------------------------------看这个
 在介绍logging模块的高级用法之前，很有必要对logging模块所包含的重要组件以及其工作流程做个全面、简要的介绍，这有助于我们更好的理解我们所写的代码（将会触发什么样的操作）。
     - logging日志模块四大组件
         - 日志器(对应类名：Logger)：提供了应用程序可一直使用的接口
@@ -76,7 +77,7 @@
 ## 配置日志的几种方式
     - 有三种方式来配置
         - 使用Python代码显式的创建loggers, handlers和formatters并分别调用它们的配置函数；
-            - logging.basicConfig()也就是这种方式
+            - logging.basicConfig()也就是这种方式 见To:
             - 略
         - 创建一个日志配置文件，然后使用fileConfig()函数来读取该文件的内容；
         - 创建一个包含配置信息的dict，然后把它传递个dictConfig()函数；
@@ -144,7 +145,53 @@ def logging_by_dict_yaml():
     logger.warning('warn message')
     logger.error('error message')
     logger.critical('critical message')
+"""
+TO:同时输出到控制台和文件
+link:https://blog.csdn.net/summer089089/article/details/125297582
 
+"""
+def get_logger(log_filename, level=logging.INFO, when='D', back_count=0):
+    """
+    :brief  日志记录
+    :param log_filename: 日志名称
+    :param level: 日志等级
+    :param when: 间隔时间:
+        S:秒
+        M:分
+        H:小时
+        D:天
+        W:每星期（interval==0时代表星期一）
+        midnight: 每天凌晨
+    :param back_count: 备份文件的个数，若超过该值，就会自动删除
+    :return: logger
+    """
+    # 创建一个日志器。提供了应用程序接口
+    logger = logging.getLogger(log_filename)
+    # 设置日志输出的最低等级,低于当前等级则会被忽略
+    logger.setLevel(level)
+    # 创建日志输出路径
+    log_path = os.path.join(LOG_ROOT, "logs")
+    if not os.path.exists(log_path):
+        os.mkdir(log_path)
+    log_file_path = os.path.join(log_path, log_filename)
+    # 创建格式器
+    formatter = logging.Formatter('%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s')
+    # 创建处理器：ch为控制台处理器，fh为文件处理器
+    ch = logging.StreamHandler()
+    ch.setLevel(level)
+    # 输出到文件
+    fh = logging.handlers.TimedRotatingFileHandler(
+        filename=log_file_path,
+        when=when,
+        backupCount=back_count,
+        encoding='utf-8')
+    fh.setLevel(level)
+    # 设置日志输出格式
+    fh.setFormatter(formatter)
+    ch.setFormatter(formatter)
+    # 将处理器，添加至日志器中
+    logger.addHandler(fh)
+    logger.addHandler(ch)
 
 """
 To: 一个实际的配置
@@ -179,7 +226,29 @@ To: 一个实际的配置
 #
 # logging.config.dictConfig(conf.get("log"))
 # logger = logging.getLogger()
+"""
+To: 通过代码配置
+# 方法1
+LOG_FORMAT = "%(asctime)s - %(filename)s - %(funcName)s(%(lineno)d) - %(levelname)s: %(message)s"
+logging.basicConfig(filename='book_car.log', level=logging.DEBUG, format=LOG_FORMAT)
+logging.info("hi")
+# 2 使用中文  与3的区别就是添加hadler的方式
+LOG_FORMAT = "%(asctime)s - %(filename)s - %(funcName)s(%(lineno)d) - %(levelname)s: %(message)s"
+fh = logging.FileHandler("book_car.log", encoding='utf-8')
+fh.setLevel(logging.DEBUG) level和format可以在basicCofig中设置
+fh.setFormatter(logging.Formatter("%(asctime)s - %(filename)s - %(funcName)s() - %(levelname)s: %(message)s")) # 必须是一个formater对象
+logging.basicConfig(handlers=[fh], level=logging.DEBUG, format=LOG_FORMAT) # 如果有不一样的，比如format不一样，会用fh的
 
+# 3 或者这样添加handler
+logger = logging.getLogger("log")
+logger.addHandler(fh)
+"""
+"""
+TO: hello_world
+import logging
+logging.basicConfig(level=logging.DEBUG)// 默认是error
+logging.info（）就可以用了
+"""
 if __name__ == '__main__':
     # logging_by_conf()
     logging_by_dict_yaml()

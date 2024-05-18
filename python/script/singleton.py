@@ -69,7 +69,7 @@ def debug_del_singleton():
     del a
     b = A()
     print("b id is {}".format(id(b)))
-    # 会发现两个id一样, 这是因为del的实例还在单例装饰器中的字典中被存在, 而这种引用是强引用, 所以实例说指向的数据对象不会被回收
+    # 会发现两个id一样, 这是因为del的实例还在单例装饰器中的字典中被存在, 而这种引用是强引用, 所以实例所指向的数据对象不会被回收
     # 可以借助弱引用来实现丢弃此处的引用来达到真正销毁的效果 即将字典变成WeakValueDictionary()来实现
     c = [x for x in range(10)]
     print(id(c))

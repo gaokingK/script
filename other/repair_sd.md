@@ -1,0 +1,3 @@
+- https://zh-cn.aiseesoft.com/how-to/fix-damaged-sd-card.html
+- 那款逻辑分析仪来分析SD卡或者一体U盘的点位引脚定义的 https://www.intohard.com/forum.php?mod=viewthread&tid=356991&highlight=sd
+- SD卡数据恢复图 https://www.intohard.com/forum.php?mod=viewthread&tid=268346&highlight=sd

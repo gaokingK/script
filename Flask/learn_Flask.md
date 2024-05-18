@@ -141,6 +141,9 @@ uid = g.get("uid", None)
     |Cookies|保存cookie名称和值的一个字典对象|
     |files|与上传文件有关的一个数据|
     |method|当前请求方法|
+### 获取图片 处理图片流
+- file = request.files["img"]
+- 再程序中处理图像：https://blog.csdn.net/weixin_43508499/article/details/117770382 使用pil
 ### Form 属性
     Form 属性包含表单参数和值的键值对
     ```html

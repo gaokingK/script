@@ -26,11 +26,13 @@ huawei@huawei-PC:~/Desktop/autotest$ python3 find_author.py kbox_result_20211020
 huawei@huawei-PC:~/Desktop/autotest$ 
 # 调试这个错误时, 应该直接把命令打出来
 ```
-
+### 我没改完，我没验证完
+### 清空日志 `cat /dev/null > /var/log/RemoteSyslog/syslog.log`
 ### learn_structure_tree find_child_tree
    -  while 后不要跟不会变的变量,会死循环
 ### 方法注释中参数的类型应该怎么写
 
+### 使用这种方法来解决拼接路径导入os `self.download_path = self.bmcweb.download_dir + "\\video_osreset.rep"`
 # 巧合问题
 - "Identifier name '<bound method ? of <class 'common.model.test2_model.Child'>>_ibfk_1' is too long") 使用声明系统创建一个表时表名太长。 
 ```
@@ -61,3 +63,7 @@ class Child(Base):
 # 分析流程，和其他的对比没有对比出来出错原因，后来采用重写方案，把源代码给复制过来，发现能好，又对比了一波，还没对比出来，后来用”compare with clipbord“ 也费了好久才发现是__tablename__写成了__tablename_
 # 影响：1. 发现不了就重写，这样能把不易发现的错误给避免。2. 没错的东西应该相信没错，不要再对比了3. 类似对比__tablename__的过程中，对比了好几次，不应该忽略tablename此外的东西,包括__这些符号
 ```
+# 重构注意
+### 注意参数类型的变化
+    - 原来a是一个列表中的某一项，后来把a换成了列表，但方法中却没改变，就出错了
+    - 字符串匹配之类是注意空格

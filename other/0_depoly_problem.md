@@ -1,7 +1,8 @@
 # 记录工具使用、部署、运行
 # 通识
 - 文件编译安装在/usr/local下
-- 创建命令软链接 `ln -s /usr/local/redis/bin/redis-cli /usr/bin/redis`
+# 网络问题看learn_network.md
+
 # 问题
 - 搜索时可以完全贴上
   - `build/temp.linux-aarch64-3.6/_sodium.c:57:20: fatal error: Python.h: No such`
@@ -37,6 +38,38 @@
 # npm 与 node.js
 - npm 是 Node.js 的包管理工具，用来安装各种 Node.js 的扩展。 npm 是 JavaScript 的包管理工具，也是世界上最大的软件注册表。有超过 60 万个 JavaScript 代码集
 - node.js怎么安`yum install -y nodejs`
+# windows 下的工具
+- 报错先看是不是管理员权限打开的命令行
+- 环境变量在用户还是系统的path添加都行，添加完记得重启终端，如果有windows Termianal 要把这个程序重启
+
+## windows terminal
+- 向里面添加gitbash 设置以便能打开gitbash：https://zhuanlan.zhihu.com/p/418321777
+- 其实很容易把 PowerShell 和 Windows Terminal 混淆，它们是两个不同的软件。可以这么理解，PowerShell 是命令行程序，真正执行指令的程序，而 Windows Terminal 则是管理各种命令行的工具。单独使用 PowerShell 就行了，为什么还要 Windows Terminal 呢？那是因为 Windows 下不仅可以安装 CMD，还可以安装 PowerShell 5.1、PowerShell 7、WSL、Azure Cloud Shell等，它需要一个工具集中管理，它就是 Windows Terminal
+- 安装与美化：https://zhuanlan.zhihu.com/p/352882990
+## winget
+- 可以输入中文
+```
+PS C:\Users\Quantdo> winget install plink
+找不到与输入条件匹配的程序包。
+PS C:\Users\Quantdo> winget search plink
+名称   ID               版本   源
+--------------------------------------
+pp直连 bshuzhang.PPLink 11.0.2 winget
+PS C:\Users\Quantdo> winget search PPֱ�� #输入的是pp直连，按完enter后就是这样子 
+名称   ID               版本   源
+--------------------------------------
+pp直连 bshuzhang.PPLink 11.0.2 winget
+PS C:\Users\Quantdo> winget install  PPֱ��
+已找到 pp直连 [bshuzhang.PPLink] 版本 11.0.2
+此应用程序由其所有者授权给你。
+Microsoft 对第三方程序包概不负责，也不向第三方程序包授予任何许可证。
+正在下载 https://www.ppzhilian.com/download/win/pp直连 Setup 11.0.2.exe
+  ██████████████████████████████   105 MB /  105 MB
+已成功验证安装程序哈希
+正在启动程序包安装...
+已成功安装
+```
+
 # make 
 ## 编译安装的流程
 ```
@@ -67,13 +100,17 @@ make clean # 如果出错了需要重新make时
 		# 解压
 		unrar  x   file.rar #
 		```
-# linux 更改用户名密码、新增用户
-	- 新增用户`useradd name option`
-	- 更改密码`passwd username`
-# rpm(redhat package manager)
+# 包管理工具
+- Debian/Ubuntu 使用apt
+- Fedora/Centos/RHEL使用yum
+
+### 不同系统，不同架构适配
+	- arm架构的源用CentOS-AltArch，CentOS-AltArch的镜像地址为：https://repo.huaweicloud.com/centos-altarch/
+	- centos6请移步至centos-vault镜像, 配置方法与centos一致.
+### rpm(redhat package manager)
 	- 原本是 Red Hat Linux 发行版专门用来管理 Linux 各项套件的程序，由于它遵循 GPL 规则且功能强大方便，因而广受欢迎。所以逐渐受到其他发行版的采用。RPM 套件管理方式的出现，让 Linux 易于安装，升级，间接提升了 Linux 的适用度
 	- 如果系统的默认程序列表中不带,可以使用其他的包管理去安装
-# apt(Advanced Packaging Tool)
+### apt(Advanced Packaging Tool)
     - 更换源之前需要备份源
     ```shell
 	cp source.list{,.bak}
@@ -88,9 +125,11 @@ sudo apt-get update
     - [apt-cache apt-get](https://linux.cn/article-4933-1.html)
       - apt-get和apt-cache是Ubuntu Linux中的命令行下的包管理工具
 
-# yum 
+### yum & rpm
 - RPM-based Linux (RedHat Enterprise Linux, CentOS, Fedora, openSUSE) yum 适用的系统
 - yum provides semanage # 查询semanage 这个命令是哪个包提供的，或者查询libcrypto.so.6在那个包中，然后再安装这个包
+- rpm -ql ipmitool 查看ipmitool这个安装包是否安装（可以看出ipmitool未安装）
+- rpm -qa ipmitool 检测ipmitool是否安装成功
 - 更换源
     ```
 	# 备份配置文件：
@@ -101,9 +140,9 @@ sudo apt-get update
 	yum clean all
 	# 执行yum makecache（刷新缓存）或者yum repolist all（查看所有配置可以使用的文件，会自动刷新缓存）。
 	```
-- 不同系统，不同架构适配
-	- arm架构的源用CentOS-AltArch，CentOS-AltArch的镜像地址为：https://repo.huaweicloud.com/centos-altarch/
-	- centos6请移步至centos-vault镜像, 配置方法与centos一致.
+- yum groupinstall 它安装一个安装包，这个安装包包涵了很多单个软件，以及单个软件的依赖关系。
+- yum install 它安装单个软件，以及这个软件的依赖关系
+### 问题
 - 问题一
     ```
 	[root@localhost huawei]# yum install python-dev --nogpgcheck
@@ -122,7 +161,7 @@ sudo apt-get update
 	https://repo.huaweicloud.com/centos/7/os/aarch64/repodata/repomd.xml: [Errno 14] HTTPS Error 404 - Not Found
 	# 先wget -O /tmp/a.xml https://xxxxx 试一下能不能wget， 然后在浏览器里试一下
 	```
-- 问题一
+- 问题
 	```
 	curl#6 - “Could not resolve host: mirror.lzu.edu.cn； Unknown error“ 及telnet安装
 	同上 先试下网络通不通ping mirror.lzu.edu.cn
@@ -159,7 +198,7 @@ sudo apt-get update
 - 如何判断给定 wheel 包是否能够安装？
   - 通常判断依赖的时候，需要看下是否符合最低版本。不过 pip 判断给定 wheel 包的 abi 兼容的做法与此有些许差异。pip 的做法是，计算出一个支持的 abi tag 集合，然后判断目标 abi tag 是否在这个集合里。这个计算过程跟在打包时是一样的。这意味着，打包拓展的 CPython 需要跟安装的机器上的 CPython 版本是一致的，否则就装不了。对于“永远的2.7”来说，这不是什么问题；不过如果用的是 Python 3，又不能控制具体的 CPython 版本，对于 C 拓展还是现场编译安装比较靠谱。
   - 如何查看abi呢？
-  ```
+  ```cs
   # 最靠谱的方法：
   搜索pep425tags.py的位置，然后导入（这个环境是装的ancoada
   (yolov5) [root@localhost test]# find / -name "pep425tags.py" 2>/dev/null
@@ -182,22 +221,33 @@ sudo apt-get update
 	- pip 离线安装 whl
 		- 下的慢的话可以直接在浏览器里下载
 		- `pip install /path/to/xxx.whl`
-    - ~/.pip/pip.conf 配置文件 
+	- pip 配置文件位置
+    	- linux： ~/.pip/pip.conf 配置文件 
+		- windows : 如果两个都存在，会优先使用appdata下面的
+			- C:\Users\Quantdo\pip
+			- C:\Users\Quantdo\AppData\Roaming\pip\pip.ini
+		- https://blog.csdn.net/weixin_50679163/article/details/122392249
 	- pip --no-cache-dir disable the cache
 	- rm -rf ~/.cache/pip 删除cache
 	- --default-timeout=1000 或者卸载配置文件里timeout=1000
 	- -f url： fetch： 增加一个源， 但不替换原来的源（如下） 
 	- 某些版本找不到可能时因为没有对应架构的包，并不是没有版本
-		```
+		```cs
 		(yolov5) [root@localhost ~]# pip3 install 'torch==1.10.1+cpu' -f https://download.pytorch.org/whl/cpu/torch_stable.html --trusted-host=download.pytorch.org
 		Looking in indexes: https://repo.huaweicloud.com/repository/pypi/simple
 		Looking in links: https://download.pytorch.org/whl/cpu/torch_stable.html
 		ERROR: Could not find a version that satisfies the requirement torch==1.10.1+cpu (from versions: 1.8.0, 1.8.1, 1.9.0, 1.10.0, 1.10.1)
 		是因为1.10.1没有arm64的包
 		```
+	- pip._vendor.urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='127.0.0.1', port=10809): Read timed out.
+		- 重新运行pip install 命令解决
 	- ssl 问题 
 		- 可以尝试--trusted-host: `pip install lightgbm -i http://pypi.douban.com/simple --trusted-host pypi.douban.com`
 		- 也可以尝试更换版本，我pip不行，pip3就好了
+	- urllib3.exceptions.ProxyError: ('Unable to connect to proxy', SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:1125)')))
+		- urllib3 版本问题 安装pip install urllib3==1.25.11 这个版本试试
+		- link：https://zhuanlan.zhihu.com/p/350015032
+		- 原因是以前 urllib3 其实并不支持 https 代理，也就是说代理服务器的地址虽然大家配置的是 https，但是一直都是悄无声息地就按照 http 连接的，刚好代理服务器确实也只支持 http，所以皆大欢喜。现在 urllib3 要支持 https 代理了，那么既然配置代理是 https 就尝试用 https 的方式去连接，但是由于代理服务器其实只支持 http，所以没法处理请求，ssl 握手阶段就出错了。注意，这里的 https 是指代理服务器自己的，和我们要访问的目标网站无关。
     - pip 编译安装失败： xxx.h 缺失
         ```
 		  build/temp.linux-aarch64-3.6/_sodium.c:57:20: fatal error: Python.h: No such file or directory
@@ -235,6 +285,8 @@ sudo apt-get update
         - python-dev的包在centos的yum中不叫python-dev，而是python-devel.
         - 有多个版本的话， 为什么只安装了2.7的python-dev
             - python3 安装使用`yum install python3-devel`
+## python vscode配置
+- 安装python environment就可以使用虚拟环境了
 ## python 运行问题
 - 只有远程执行python 脚本时才会报错：ImportError: DLL load failed: %1 不是有效的 Win32 应用程序。
     - 前提：win ssh 到 centos， 又连接到win， 执行命令 python Record_back_1204_001_可用版本.py
@@ -260,6 +312,13 @@ sudo apt-get update
 - centos7 Python3终端中敲击方向键显示「^[[C^[[D」
 	- link：https://www.linuxidc.com/Linux/2015-02/112891.htm
 	- 查找得知，是由于系统缺少了readline相关模块。CentOS 5.8默认只安装了readline模块而没有安装readline-devel模块，所以只要安装下，然后重新编译
+
+- Windows: TclError: Can't find a usable init.tcl in the following directories:
+	- link:https://stackoverflow.com/questions/29320039/python-tkinter-throwing-tcl-error
+	- 解决方法：
+		- where python # 找到python路径
+		- 复制D:\softwares\Python27\tcl 到D:\softwares\Python27\Lib  （好像只复制tk8.5）也可以
+		- 然后重启pycharm
 # redis安装和运行
 - redhat 可以通过apt安装
 ```
@@ -326,6 +385,10 @@ WantedBy=multi-user.target
 	- [Linux下virtualenv与virtualenvwrapper详解 ](https://www.cnblogs.com/fengqiang626/p/11788200.html)
 	- mkvirtualenv --help # 虽然指令中有些virtualenv关键字,但是不用写,写了会报错
 - ## 问题
+	- win 安装后运行./activate 提升因为在此系统上禁止运行脚本
+		- https://www.jianshu.com/p/4eaad2163567
+		- 使用管理员打开powershell 输入`set-executionpolicy remotesigned`
+	- 使用workon project 没有反应，因为默认终端时powershell，好像哪里有问题，切换到cmd
 	- 安装后创建环境时virtualenvwrapper could not find /home/huawei in your path
 		- 环境变量里没有virtualenvwrapper
 		```

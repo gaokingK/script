@@ -1,11 +1,13 @@
 """
 打包(封装）、解包（解构）、序列解包的高级用法
-打包：  定义 函数的时候用
-    * 在函数定义中，收集所有的 位置参数到一个新的元组，并将这个元组赋值给变量args
-    ** 在函数定义中，收集所有的 关键字参数传递给一个字典，并将这个字典赋值给变量kwargs
+打包：  定义 函数的时候用 
+    * 在函数定义中，收集所有的 位置参数到一个新的元组，并将这个元组赋值给变量args 如下main的func中
+    ** 在函数定义中，收集所有的 关键字参数传递给一个字典，并将这个字典赋值给变量kwargs 如下面的func中
 解包：  调用 函数的时候使用
-    * 在函数调用中，* 能够将元组或者列表解包成一个一个的 参数
+    * 在函数调用中，* 能够将元组或者列表解包成一个一个的 参数 
+        - 比如使用func_args(*[1,2,3]) 这里*会将这个列表变量解包为三个变量；就相当于func_args(1,2,3)
     ** 在函数调用中， ** 会以键/值的形式解包一个字典，使其成为一个一个的 关键字参数
+        - 比如使用func_kw(**{"a": "aa", "b": "bb"}) 就相当于func_kw(a="aa", b="bb")
 
 序列解包： https://blog.csdn.net/yilovexing/article/details/80576788
 """
@@ -17,6 +19,11 @@ def func(*args, **kwargs):
     kwargs.clear()
     print(f"关键字参数: {kwargs}, type is {type(kwargs)}") if kwargs else ""
 
+def func_args(a,b,c):
+    pass
+
+def func_kw(a=None, b=None):
+    pass
 
 def debug_unpack():
     # * 的使用方法
