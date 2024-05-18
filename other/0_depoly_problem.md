@@ -34,7 +34,9 @@
 	# 进入so.N所在的目录中，新建一个软连接，使其链接到已有的so文件
 	[huawei@localhost redis-6.2.0]$ sudo ln -s /usr/lib64/libatomic.so.1 /usr/lib64/libatomic.so
 	```
-
+# npm 与 node.js
+- npm 是 Node.js 的包管理工具，用来安装各种 Node.js 的扩展。 npm 是 JavaScript 的包管理工具，也是世界上最大的软件注册表。有超过 60 万个 JavaScript 代码集
+- node.js怎么安`yum install -y nodejs`
 # make 
 ## 编译安装的流程
 ```

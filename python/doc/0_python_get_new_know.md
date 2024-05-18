@@ -1,4 +1,18 @@
-## counter类
+### chain
+- link: https://blog.csdn.net/smart_liu8/article/details/81708620
+- 作用是把多个可迭代对象给融合起来方便迭代
+```
+from itertools import chain
+a = {5, 6}
+b = [1, 2, 3]
+c = ["a", "b"]
+d = {"e": "g", "d": "h"}
+for i in chain(a, b, c, d):
+    print(i)
+# 结果输出 5, 6, 1, 2, 3, a, b, e, g
+```
+
+### counter类
 - link: https://www.cnblogs.com/zhenwei66/p/6593395.html
 - 计算值出现的次数, 并能做一些运算
 
@@ -7,6 +21,7 @@
 - endwith 以什么结尾 `test_str.endwith("dog")`
 
 ### python 函数中显示声明参数类型也不能强制转换
+
 ```
 def func(b: int):
     print(b)

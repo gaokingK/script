@@ -49,6 +49,11 @@
   - https://github.com/ylx2016/Linux-NetSpeed
   - https://www.v2ray-agent.com
 
+# 管理服务
+- cloudcone 上运行工具会乱码，使用xshell登入
+- 安装完上面的八合一脚本后，install.sh会删除，vasma 即可打开服务
+- 选择1xray-core
+
 # v2ray、xray
 - [区别](http://www.vjsun.com/656.html)
 ## 数据传输协议
@@ -59,3 +64,12 @@
 # 其他
 - [gooreplacer](https://github.com/jiacai2050/gooreplacer/)
   - 资源拦截替换, 把请求的某些资源重置到别的地方获取，这样资源就能加载了
+
+### 手机共享vpn
+- 打开终端输入route print
+- 将路由表中的192.168.136.245填入设置->代理中的地址输入框中
+```cs
+网络目标        网络掩码          网关       接口   跃点数
+0.0.0.0          0.0.0.0  192.168.136.245  192.168.136.213     55
+```
+- 保持v2rayN关闭，就可以使用vpn了，如果想要更新v2rayN中的一些内容，需要将V2rayN中的代理设置改为不改变系统代理

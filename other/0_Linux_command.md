@@ -62,7 +62,19 @@
    - [进程替换](https://www.runoob.com/w3cnote/shell-process-substitution.html) ---------no
    - [Here document使用方法总结](https://blog.csdn.net/liumiaocn/article/details/86715953) -------------no
    - 可以把<(...)整体当做一个文件名，这个文件的内容就是()中脚本的执行结果，这样第二条命令简化为`bash -s stable <tmp.sh`
-### top ---------------------------no
+### top
+- link: 
+   - [top结果解释](https://blog.csdn.net/lydms/article/details/101368670)
+   - [linux 10个top工具](https://www.11meigui.com/2020/linux-all-top-command.html)
+   - [Linux top命令详解](https://www.cnblogs.com/baichunyu/p/15356162.html)
+- top 命令结果列
+   - PR:优先级
+   - NI:nice值。负值表示高优先级，正值表示低优先级
+   - PID:进程id
+   - PPID:父进程id
+- 控制显示的列
+   - 按f 上下键选中 使用空格键控制是否显示  esc退出就看到了
+- htop 需要安装，比较好看
 ### strings
    - link: https://blog.csdn.net/test1280/article/details/80978717
    - string 工具可以对任何文件的内容进行分析，并输出可打印字符长度不小于4的串。
