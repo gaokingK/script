@@ -39,7 +39,14 @@
 def func(b: int):
     print(b)
 func("b") # 照样可以正常运行
-
+ 
+```
+### strip(parm) 将字符串的左右两端的parm去掉
+- 默认移除空格
+```py
+txt = ",,,,,rrttgg.....banana....rrr"
+x = txt.strip(",.grt")
+print(x) # banana
 ```
 ### 有序字典 orderdict
 - link:https://blog.csdn.net/weixin_42307036/article/details/99294242

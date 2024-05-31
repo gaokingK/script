@@ -35,6 +35,10 @@ sed OPTIONS 'expression' input_file
     - 直接输入`+{}()` 这些都会当成字符去匹配，如果要是使用正则的元字符匹配，需要加上反斜杠转义
 - sed -i '/^ *workers: *$/,/^ *$/{/10.0.5.89/d}' rootfs/deploy/inventory_dir/inventory_10.0.5.89.yaml
     - 在匹配到的行中操作
+    - 如果你的 start_pattern 和 end_pattern 在文件中有多个匹配，该命令会对每一处匹配都打印出指定范围内的行。
+    - 如果 start_pattern 在 end_pattern 之前找到，sed 会从 start_pattern 找到的行打印到下一个 end_pattern 找到的行。
+    - 如果 start_pattern 没有找到，sed 不会打印任何行。
+    - 如果只找到了 start_pattern 而没有找到 end_pattern，sed 会打印从 start_pattern 开始到文件结尾的所有行。
 - 替换连续的多行 
     - `sed '/start_pattern/,/end_pattern/c\aaa' input_file`
     - c\aaa 是替换命令，用于将整个多行范围替换为 "aaa"。

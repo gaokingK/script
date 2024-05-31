@@ -46,8 +46,8 @@
        else
            echo "no searched"
        fi
-select c1 as ciCode, lower(c3) as Brand, lower(c4) as DeviceType,c5 as assetType,c6 as deployDb,c7 as '@sourceip',c8 as netDeviceCurr,c9 as netDeviceAdmin from tb_rich_table_2 where latest = 1;
-   ```
+    select c1 as ciCode, lower(c3) as Brand, lower(c4) as DeviceType,c5 as assetType,c6 as deployDb,c7 as '@sourceip',c8 as netDeviceCurr,c9 as netDeviceAdmin from tb_rich_table_2 where latest = 1;
+    ```
 ### 选项
 - -n str 当串的长度大于0时为真(串非空)
   ```shell
@@ -69,7 +69,7 @@ select c1 as ciCode, lower(c3) as Brand, lower(c4) as DeviceType,c5 as assetType
 - [] bash 的内部命令，[和test是等同的。如果-我们不用绝对路径指明，通常我们用的都是bash自带的命令。if/test结构中的左中括号是调用test的命令标识，右中括号是关闭条件判断的。这个命令把它的参数作为比较表达式或者作为文件测试，并且根据比较的结果来返回一个退出状态码。if/test结构中并不是必须右中括号，但是新版的Bash中要求必须这样。
 - true = 0 flase = 1 和python 刚好相反
 - -gt 大于 -lt 小于 -  -ge 大于等于 -le 小于等于 -eq是等于 -ne是不等于
-```
+```sh
 if cat 111-tmp.txt | grep ting1
 then
     echo found
@@ -175,4 +175,6 @@ done
 ### 单行命令
 ```shell
 [5 -eq 6] && echo equal || no equal
+[[ expr ]] && { [[ expr ]] && expr1 || expr2; }
+[[ expr ]] && { expr1;expr2 } || { expr3; expr4 }
 ```

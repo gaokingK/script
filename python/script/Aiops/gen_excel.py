@@ -18,8 +18,9 @@ def fun3_8_2():
     # wb.save()
     # 从已有的表
     wb = load_workbook('test3.xlsx')
+    wb.create_sheet("test5")
     print(wb.sheetnames)
-    work_sheet = wb["test"]
+    work_sheet = wb["test5"] 
     # work_sheet.append([3,4,5,6])
     # work_sheet2.insert_rows(7) # 在第7行前面插入一个空行 行数从1开始
     # work_sheet.insert_rows(3,2)  # 在第3行前面插入两个空行 如果行数小于7行，不插入

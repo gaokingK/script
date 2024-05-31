@@ -1,0 +1,6862 @@
+[
+    {
+      "level_change_rules": {
+        "level_change_enable": false,
+        "special_time_rule": {
+          "level_change_type": "no_alert",
+          "rules": [
+            {
+              "holiday_enable": false,
+              "time": [],
+              "days_of_week": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7
+              ]
+            }
+          ]
+        }
+      },
+      "service_id": "5f111a0e107d7c3d15b7486a",
+      "name": "新柜面（BBP）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 64800000
+                  }
+                ],
+                "days_of_week": []
+              }
+            ]
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_BBP_busTransCount"
+            ],
+            "duration": 300
+          }
+        ]
+      ],
+      "created_time": 1594956302148
+    },
+    {
+      "level_change_rules": {
+        "special_time_rule": {}
+      },
+      "service_id": "5f169675107d7c3d15b86d5c",
+      "name": "信用卡核心（CBCS）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CBCS_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 10
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CBCS_busSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 10,
+            "values": [
+              3,
+              4,
+              5
+            ]
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CBCS_busTransCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 10,
+            "values": [
+              2,
+              3,
+              4,
+              5
+            ]
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_value",
+            "kpi": "kpi.aiops_APPID_CBCS_busTransCount",
+            "duration": 180,
+            "frequency": 3,
+            "op": "lt",
+            "value": 2
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "single_value",
+            "kpi": "kpi.aiops_APPID_CBCS_tecSuccRate",
+            "op": "lt",
+            "value": 0.95
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CBCS_transAvgProcTime",
+              "kpi.aiops_APPID_CBCS_tecFailCount",
+              "kpi.aiops_APPID_CBCS_busTransCount",
+              "kpi.aiops_APPID_CBCS_tecSuccRate"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 300,
+            "frequency": 5
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_CBCS_busTransCount"
+            ],
+            "duration": 300
+          }
+        ]
+      ],
+      "created_time": 1595315829499
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": false,
+        "special_time_rule": {
+          "level_change_type": "no_alert",
+          "rules": [
+            {
+              "start_date": 1608048000000,
+              "end_date": 1608307200000,
+              "holiday_enable": false,
+              "time": [
+                {
+                  "start_time": 0,
+                  "end_time": 86399000
+                }
+              ],
+              "days_of_week": []
+            }
+          ]
+        }
+      },
+      "service_id": "5f16a6ac107d7c3d15b8708d",
+      "name": "核心业务系统（CBS）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CBS_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CBS_tecFailCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 300,
+            "frequency": 5
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CBS_tecSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 300,
+            "frequency": 5
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CBS_tecFailCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 60,
+            "frequency": 1
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CBS_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 60,
+            "frequency": 1
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CBS_busSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9,
+            "values": [
+              4,
+              5
+            ]
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_CBS_busTransCount"
+            ],
+            "duration": 300
+          }
+        ]
+      ],
+      "created_time": 1595319980672
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": false,
+        "special_time_rule": {}
+      },
+      "service_id": "5f16ad3f107d7c3d15b87225",
+      "name": "企业服务总线（ESB）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_ESB_tecSuccRate",
+              "kpi.aiops_APPID_ESB_tecFailCount"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_ESB_transAvgProcTime",
+              "kpi.aiops_APPID_ESB_busTransCount",
+              "kpi.aiops_APPID_ESB_busSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 5,
+            "values": [
+              5
+            ]
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_ESB_busTransCount"
+            ],
+            "duration": 600
+          }
+        ]
+      ],
+      "created_time": 1595321663934
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global",
+          "rules": []
+        }
+      },
+      "service_id": "5f16b50c107d7c3d15b87466",
+      "name": "渠道服务整合（CSI）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CSI_tecSuccRate",
+              "kpi.aiops_APPID_CSI_transAvgProcTime",
+              "kpi.aiops_APPID_CSI_busTransCount",
+              "kpi.aiops_APPID_CSI_busSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 8
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CSI_busTransCount",
+              "kpi.aiops_APPID_CSI_tecSuccRate",
+              "kpi.aiops_APPID_CSI_transAvgProcTime",
+              "kpi.aiops_APPID_CSI_busSuccRate"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 8
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID|TRCID_ESB|CSI_busTransCount",
+              "kpi.aiops_APPID|TRCID_ESB|CSI_tecSuccRate",
+              "kpi.aiops_APPID|TRCID_ESB|CSI_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 8
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID|TRCID_ESB|CSI_busTransCount",
+              "kpi.aiops_APPID|TRCID_ESB|CSI_tecSuccRate",
+              "kpi.aiops_APPID|TRCID_ESB|CSI_transAvgProcTime"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 8
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID|TRCID_ESB|CSI_busTransCount",
+              "kpi.aiops_APPID|TRCID_ESB|CSI_tecSuccRate",
+              "kpi.aiops_APPID|TRCID_ESB|CSI_transAvgProcTime",
+              "kpi.aiops_APPID_CSI_busSuccRate"
+            ],
+            "duration": 600
+          }
+        ]
+      ],
+      "created_time": 1595323660529
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": false,
+        "special_time_rule": {
+          "level_change_type": "no_alert",
+          "rules": [
+            {
+              "start_date": 1596729600000,
+              "end_date": 1597075200000,
+              "holiday_enable": false,
+              "time": [
+                {
+                  "start_time": 1160000,
+                  "end_time": 15560000
+                }
+              ],
+              "days_of_week": []
+            }
+          ]
+        }
+      },
+      "service_id": "5f16bbd6107d7c3d15b875b2",
+      "name": "企业网银（EIB）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_EIB_tecSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 10
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_EIB_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ]
+      ],
+      "created_time": 1595325398200
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": false,
+        "special_time_rule": {
+          "level_change_type": "no_alert",
+          "rules": []
+        }
+      },
+      "service_id": "5f1789b5107d7c3d15b8a065",
+      "name": "个人网银（PIB）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_PIB_tecSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 8
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_PIB_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_PIB_busTransCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 1200,
+            "frequency": 18,
+            "values": [
+              3,
+              4,
+              5
+            ]
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "anomaly_value",
+            "kpi": "kpi.aiops_APPID_PIB_busTransCount",
+            "duration": 1700,
+            "frequency": 23,
+            "op": "lt",
+            "value": 1
+          }
+        ]
+      ],
+      "created_time": 1595378101228
+    },
+    {
+      "level_change_rules": {
+        "special_time_rule": {}
+      },
+      "service_id": "5f178b54107d7c3d15b8a0b2",
+      "name": "客户信息管理（ECIF）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_ECIF_tecSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_ECIF_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9,
+            "values": [
+              3,
+              4,
+              5
+            ]
+          },
+          {
+            "type": "single_value",
+            "kpi": "kpi.aiops_APPID_ECIF_tecSuccRate",
+            "op": "lt",
+            "value": 0.99
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_ECIF_busTransCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_ECIF_busTransCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9,
+            "values": [
+              3,
+              4,
+              5
+            ]
+          }
+        ]
+      ],
+      "created_time": 1595378516416
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "no_alert",
+          "rules": [
+            {
+              "start_date": 1697212800000,
+              "end_date": 1697817600000,
+              "holiday_enable": false,
+              "time": [],
+              "days_of_week": [
+                1
+              ]
+            }
+          ]
+        }
+      },
+      "service_id": "5f178ca1107d7c3d15b8a0f5",
+      "name": "互联网银行核心（CBIB）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CBIB_busTransCount",
+              "kpi.aiops_APPID_CBIB_tecFailCount",
+              "kpi.aiops_APPID_CBIB_tecSuccRate",
+              "kpi.aiops_APPID_CBIB_transAvgProcTime"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 3
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CBIB_tecSuccRate",
+              "kpi.aiops_APPID_CBIB_transAvgProcTime",
+              "kpi.aiops_APPID_CBIB_busTransCount",
+              "kpi.aiops_APPID_CBIB_tecFailCount"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 5
+          }
+        ]
+      ],
+      "created_time": 1595378849686
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "no_alert",
+          "rules": [
+            {
+              "start_date": 1711209600000,
+              "end_date": 1711209600000,
+              "holiday_enable": false,
+              "time": [
+                {
+                  "start_time": 3600000,
+                  "end_time": 21600000
+                }
+              ],
+              "days_of_week": []
+            }
+          ]
+        }
+      },
+      "service_id": "5f178e8b107d7c3d15b8a152",
+      "name": "自动汇路（IPS.IPWS）_往账_应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_IPS.IPWS_busTransCount",
+              "kpi.aiops_APPID_IPS.IPWS_tecFailCount",
+              "kpi.aiops_APPID_IPS.IPWS_tecSuccRate",
+              "kpi.aiops_APPID_IPS.IPWS_transAvgProcTime"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 8
+          }
+        ]
+      ],
+      "created_time": 1595379339833
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": false,
+        "special_time_rule": {
+          "level_change_type": "no_alert",
+          "rules": []
+        }
+      },
+      "service_id": "5f178f4f107d7c3d15b8a24e",
+      "name": "互联网金融服务（IFSP）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_IFS_busTransCount",
+              "kpi.aiops_APPID_IFS_tecFailCount",
+              "kpi.aiops_APPID_IFS_tecSuccRate",
+              "kpi.aiops_APPID_IFS_transAvgProcTime"
+            ],
+            "kpi_min_thr": 3,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_IFS_busTransCount",
+              "kpi.aiops_APPID_IFS_tecFailCount",
+              "kpi.aiops_APPID_IFS_tecSuccRate",
+              "kpi.aiops_APPID_IFS_transAvgProcTime"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 9
+          }
+        ]
+      ],
+      "created_time": 1595379535955
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "no_alert",
+          "rules": [
+            {
+              "holiday_enable": false,
+              "time": [],
+              "days_of_week": [
+                1,
+                7,
+                2,
+                3,
+                4,
+                5,
+                6
+              ]
+            }
+          ]
+        }
+      },
+      "service_id": "5f179142107d7c3d15b8a2c4",
+      "name": "零售信贷管理（PRMS）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_PRMS_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 8
+          }
+        ]
+      ],
+      "created_time": 1595380034883
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": false,
+        "special_time_rule": {
+          "level_change_type": "inherit_global",
+          "rules": []
+        }
+      },
+      "service_id": "5f2a641a107d7c3d15bc73e6",
+      "name": "银证转账（BSFT）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 32400000,
+                    "end_time": 57600000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_BSFT_transAvgProcTime",
+              "kpi.aiops_APPID_BSFT_tecSuccRate",
+              "kpi.aiops_APPID_BSFT_tecFailCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 300,
+            "frequency": 6
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 32400000,
+                    "end_time": 57600000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_BSFT_tecFailCount",
+              "kpi.aiops_APPID_BSFT_tecSuccRate",
+              "kpi.aiops_APPID_BSFT_transAvgProcTime",
+              "kpi.aiops_APPID_BSFT_busTransCount"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 300,
+            "frequency": 4
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 32400000,
+                    "end_time": 57600000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_BSFT_busTransCount"
+            ],
+            "duration": 300
+          }
+        ]
+      ],
+      "created_time": 1596613658993
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "5f4f0b95107d7c3d15c340e5",
+      "name": "银联通讯网关（CUTP.CGW）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CUTP.CGW_transAvgProcTime",
+              "kpi.aiops_APPID_CUTP.CGW_tecSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ]
+      ],
+      "created_time": 1599015829424
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": false,
+        "special_time_rule": {
+          "level_change_type": "inherit_global",
+          "rules": [
+            {
+              "start_date": 1640534400000,
+              "end_date": 1643299200000,
+              "holiday_enable": false,
+              "time": [],
+              "days_of_week": []
+            }
+          ]
+        }
+      },
+      "service_id": "5f50a5d4107d7c3d15c39097",
+      "name": "美团外联通讯网关（CBCS.MCG）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CBCS.MCG_tecSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CBCS.MCG_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 180,
+            "frequency": 2,
+            "values": [
+              4,
+              5
+            ]
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CBCS.MCG_transAvgProcTime",
+              "kpi.aiops_APPID_CBCS.MCG_tecSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CBCS.MCG_transAvgProcTime",
+              "kpi.aiops_APPID_CBCS.MCG_tecSuccRate"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_CBCS.MCG_busTransCount"
+            ],
+            "duration": 600
+          }
+        ]
+      ],
+      "created_time": 1599120852737
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "no_alert",
+          "rules": [
+            {
+              "holiday_enable": false,
+              "time": [
+                {
+                  "start_time": 0,
+                  "end_time": 27000000
+                }
+              ],
+              "days_of_week": [
+                1,
+                7,
+                2,
+                3,
+                4,
+                5,
+                6
+              ]
+            },
+            {
+              "holiday_enable": false,
+              "time": [
+                {
+                  "start_time": 81000000,
+                  "end_time": 86399000
+                }
+              ],
+              "days_of_week": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7
+              ]
+            }
+          ]
+        }
+      },
+      "service_id": "5fb5de69107d7c9c20f67b3a",
+      "name": "短信平台（SMS）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default",
+            "special_time_rules": []
+          },
+          {
+            "type": "single_value",
+            "kpi": "kpi.aiops_APPID_SMS.UMP_busTransCount",
+            "op": "lt",
+            "value": 50
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_SMS.PRE_busTransCount"
+            ],
+            "duration": 600
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_SMS.UMP_busTransCount"
+            ],
+            "duration": 600
+          }
+        ]
+      ],
+      "created_time": 1605754473752
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global",
+          "rules": []
+        }
+      },
+      "service_id": "5fc84b39107d7c9c20fa641b",
+      "name": "批量支付重要客户监控",
+      "type": "top",
+      "alert_rules": [],
+      "created_time": 1606961977574
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": false,
+        "special_time_rule": {
+          "level_change_type": "no_alert",
+          "rules": [
+            {
+              "holiday_enable": false,
+              "time": [],
+              "days_of_week": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                7,
+                6
+              ]
+            }
+          ]
+        }
+      },
+      "service_id": "5fe97d76107d7c9c20028afe",
+      "name": "理财销售（WMBP）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_WMBP_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          },
+          {
+            "type": "single_value",
+            "kpi": "kpi.aiops_APPID_WMBP_tecSuccRate",
+            "op": "lte",
+            "value": 0.9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_WMBP_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          },
+          {
+            "type": "single_value",
+            "kpi": "kpi.aiops_APPID_WMBP_tecSuccRate",
+            "op": "lte",
+            "value": 0.9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 29650000,
+                    "end_time": 80050000
+                  }
+                ],
+                "days_of_week": []
+              }
+            ]
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_WMBP_busTransCount"
+            ],
+            "duration": 300
+          }
+        ]
+      ],
+      "created_time": 1609137526142
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "605db477107d7c9c201ea3d1",
+      "name": "统一支付（IPS）应用级监控",
+      "type": "top",
+      "alert_rules": [],
+      "created_time": 1616753783453
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": false,
+        "special_time_rule": {
+          "level_change_type": "no_alert",
+          "rules": [
+            {
+              "holiday_enable": false,
+              "time": [],
+              "days_of_week": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7
+              ]
+            }
+          ]
+        }
+      },
+      "service_id": "60632c64107d7c9c202122f3",
+      "name": "银联前置（CUTP）（来帐）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID|CGF_CUTP.CGW|1_resRate_10sec",
+              "kpi.aiops_APPID|CGF_CUTP.CGW|1_tecFailCount_10sec",
+              "kpi.aiops_APPID|CGF_CUTP.CGW|1_tecSuccRate_10sec",
+              "kpi.aiops_APPID|CGF_CUTP.CGW|1_transAvgProcTime_10sec"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 180,
+            "frequency": 4
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID|CGF_CUTP.CGW|1_resRate_10sec",
+              "kpi.aiops_APPID|CGF_CUTP.CGW|1_tecFailCount_10sec",
+              "kpi.aiops_APPID|CGF_CUTP.CGW|1_tecSuccRate_10sec",
+              "kpi.aiops_APPID|CGF_CUTP.CGW|1_transAvgProcTime_10sec"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 180,
+            "frequency": 8
+          }
+        ]
+      ],
+      "created_time": 1617112164568
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "60651f37107d7c9c2021d2c8",
+      "name": "网联交易清算（NUCP）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID|CGF_NUCP.CGW|1_resRate_10sec",
+              "kpi.aiops_APPID|CGF_NUCP.CGW|1_transAvgProcTime_10sec",
+              "kpi.aiops_APPID|CGF_NUCP.CGW|1_tecFailCount_10sec",
+              "kpi.aiops_APPID|CGF_NUCP.CGW|1_tecSuccRate_10sec"
+            ],
+            "kpi_min_thr": 3,
+            "duration": 60,
+            "frequency": 3
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID|CGF_NUCP.CGW|1_busTransCount_10sec"
+            ],
+            "duration": 300
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID|CGF_NUCP.CGW|1_busSuccRate_10sec",
+              "kpi.aiops_APPID|CGF_NUCP.CGW|1_transAvgProcTime_10sec"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 180,
+            "frequency": 10,
+            "values": [
+              3,
+              4,
+              5
+            ]
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID|CGF_NUCP.CGW|1_resRate_10sec",
+              "kpi.aiops_APPID|CGF_NUCP.CGW|1_transAvgProcTime_10sec",
+              "kpi.aiops_APPID|CGF_NUCP.CGW|1_tecFailCount_10sec",
+              "kpi.aiops_APPID|CGF_NUCP.CGW|1_tecSuccRate_10sec"
+            ],
+            "kpi_min_thr": 4,
+            "duration": 20,
+            "frequency": 1,
+            "values": [
+              4,
+              5
+            ]
+          },
+          {
+            "type": "single_value",
+            "kpi": "kpi.aiops_APPID|CGF_NUCP.CGW|1_tecFailCount_10sec",
+            "op": "gt",
+            "value": 500
+          }
+        ]
+      ],
+      "created_time": 1617239863242
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "no_alert",
+          "rules": [
+            {
+              "start_date": 1697817600000,
+              "end_date": 1698163200000,
+              "holiday_enable": false,
+              "time": [],
+              "days_of_week": []
+            }
+          ]
+        }
+      },
+      "service_id": "60ed3bc0107d7c25109551d8",
+      "name": "基金代销（FSB）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_FSB_resRate",
+              "kpi.aiops_APPID_FSB_tecSuccRate",
+              "kpi.aiops_APPID_FSB_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_FSB_busTransCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9,
+            "values": [
+              4,
+              5
+            ]
+          }
+        ]
+      ],
+      "created_time": 1626160064435
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "6110cec8107d7c25109e5621",
+      "name": "银企互联（BCE）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 75600000
+                  }
+                ],
+                "days_of_week": []
+              },
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_BCE_transAvgProcTime",
+              "kpi.aiops_APPID_BCE_tecSuccRate",
+              "kpi.aiops_APPID_BCE_busTransCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 1200,
+            "frequency": 18
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 75600000
+                  }
+                ],
+                "days_of_week": []
+              },
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_BCE_transAvgProcTime",
+              "kpi.aiops_APPID_BCE_tecSuccRate",
+              "kpi.aiops_APPID_BCE_busTransCount"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 75600000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_BCE_busTransCount"
+            ],
+            "duration": 480
+          }
+        ]
+      ],
+      "created_time": 1628491464555
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "6110cfab107d7c25109e565a",
+      "name": "商业汇票（CDBP）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CDBP_transAvgProcTime",
+              "kpi.aiops_APPID_CDBP_busTransCount",
+              "kpi.aiops_APPID_CDBP_busSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 8
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 72000000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_CDBP_busTransCount"
+            ],
+            "duration": 300
+          }
+        ]
+      ],
+      "created_time": 1628491691988
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "611cc177107d7c2510a1a021",
+      "name": "零售贷款核心（RLCS）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_RLCS.DCN_busTransCount",
+              "kpi.aiops_APPID_RLCS.DCN_transAvgProcTime",
+              "kpi.aiops_APPID_RLCS.DCN_tecSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_RLCS.DCN_busTransCount",
+              "kpi.aiops_APPID_RLCS.DCN_transAvgProcTime",
+              "kpi.aiops_APPID_RLCS.DCN_tecSuccRate"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 75600000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_RLCS.DCN_busTransCount"
+            ],
+            "duration": 300
+          }
+        ]
+      ],
+      "created_time": 1629274487036
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "613ef372107d7c2510b043c5",
+      "name": "掌上行（IOPS）应用健康度评分监控",
+      "type": "top",
+      "alert_rules": null,
+      "created_time": 1631515506714
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "6141972a107d7c2510b15734",
+      "name": "运维大数据性能监控",
+      "type": "top",
+      "alert_rules": [],
+      "created_time": 1631688490660
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "614a999d107d7c2510b46a9a",
+      "name": "美好生活（PMB.GDLF）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_PMB.GDLF_busTransCount",
+              "kpi.aiops_APPID_PMB.GDLF_transAvgProcTime",
+              "kpi.aiops_APPID_PMB.GDLF_tecSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_PMB.GDLF_busTransCount",
+              "kpi.aiops_APPID_PMB.GDLF_transAvgProcTime",
+              "kpi.aiops_APPID_PMB.GDLF_tecSuccRate"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_PMB.GDLF_busTransCount"
+            ],
+            "duration": 600
+          }
+        ]
+      ],
+      "created_time": 1632278941223
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "614adef2107d7c2510b480fa",
+      "name": "人脸识别（UBI）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_UBI_busTransCount",
+              "kpi.aiops_APPID_UBI_tecSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_UBI_busTransCount",
+              "kpi.aiops_APPID_UBI_tecSuccRate"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_UBI_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9,
+            "values": [
+              3,
+              4,
+              5
+            ]
+          }
+        ]
+      ],
+      "created_time": 1632296690512
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "6188d408107d7c2510c8693d",
+      "name": "加密平台（ESSC）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 27954000,
+                    "end_time": 85559000
+                  }
+                ],
+                "days_of_week": []
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_ESSC_tecFailCount",
+              "kpi.aiops_APPID_ESSC_tecSuccRate",
+              "kpi.aiops_APPID_ESSC_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 300,
+            "frequency": 3
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 24368000,
+                    "end_time": 85602000
+                  }
+                ],
+                "days_of_week": []
+              }
+            ]
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_ESSC_tecFailCount",
+              "kpi.aiops_APPID_ESSC_tecSuccRate",
+              "kpi.aiops_APPID_ESSC_transAvgProcTime",
+              "kpi.aiops_APPID_ESSC_busTransCount"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 300,
+            "frequency": 3,
+            "values": [
+              3,
+              4,
+              5
+            ]
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 27982000,
+                    "end_time": 86362000
+                  }
+                ],
+                "days_of_week": []
+              }
+            ]
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_ESSC_busTransCount",
+              "kpi.aiops_APPID_ESSC_transAvgProcTime",
+              "kpi.aiops_APPID_ESSC_tecSuccRate"
+            ],
+            "duration": 600
+          }
+        ]
+      ],
+      "created_time": 1636357128443
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global",
+          "rules": []
+        }
+      },
+      "service_id": "618ba493107d7c2510c98f3e",
+      "name": "金融服务开放平台（OPENAPI）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_OPENAPI_tecSuccRate",
+              "kpi.aiops_APPID_OPENAPI_transAvgProcTime",
+              "kpi.aiops_APPID_OPENAPI_tecFailCount"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_OPENAPI_busSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9,
+            "values": [
+              4,
+              5
+            ]
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_OPENAPI_busTransCount"
+            ],
+            "duration": 600
+          }
+        ]
+      ],
+      "created_time": 1636541587586
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "618cc21f107d7c2510ca01ff",
+      "name": "上行企业银行（EMBS.SEBS）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 79200000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_EMBS.SEBS_busTransCount",
+              "kpi.aiops_APPID_EMBS.SEBS_tecSuccRate",
+              "kpi.aiops_APPID_EMBS.SEBS_transAvgProcTime"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 79200000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_EMBS.SEBS_busTransCount",
+              "kpi.aiops_APPID_EMBS.SEBS_tecSuccRate",
+              "kpi.aiops_APPID_EMBS.SEBS_transAvgProcTime"
+            ],
+            "duration": 300
+          }
+        ]
+      ],
+      "created_time": 1636614687981
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "618cc22e107d7c2510ca0204",
+      "name": "基础服务中台（BSMP）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_BSMP_busTransCount",
+              "kpi.aiops_APPID_BSMP_tecSuccRate",
+              "kpi.aiops_APPID_BSMP_transAvgProcTime"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 12
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_BSMP_tecSuccRate",
+              "kpi.aiops_APPID_BSMP_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ]
+      ],
+      "created_time": 1636614702856
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": false,
+        "special_time_rule": {
+          "level_change_type": "no_alert",
+          "rules": [
+            {
+              "holiday_enable": false,
+              "time": [],
+              "days_of_week": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7
+              ]
+            }
+          ]
+        }
+      },
+      "service_id": "618cc47a107d7c2510ca028f",
+      "name": "信用卡综合业务管理（CBMS）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 25200000,
+                    "end_time": 82799000
+                  }
+                ],
+                "days_of_week": [
+                  7,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CBMS_busTransCount",
+              "kpi.aiops_APPID_CBMS_tecSuccRate",
+              "kpi.aiops_APPID_CBMS_transAvgProcTime"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 900,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 25200000,
+                    "end_time": 82799000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  7,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CBMS_busTransCount",
+              "kpi.aiops_APPID_CBMS_tecSuccRate",
+              "kpi.aiops_APPID_CBMS_transAvgProcTime"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 900,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 0,
+                    "end_time": 25200000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CBMS_busTransCount",
+              "kpi.aiops_APPID_CBMS_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 3600,
+            "frequency": 57
+          }
+        ]
+      ],
+      "created_time": 1636615290986
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "no_alert",
+          "rules": [
+            {
+              "holiday_enable": false,
+              "time": [],
+              "days_of_week": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                7,
+                6
+              ]
+            }
+          ]
+        }
+      },
+      "service_id": "61c046e2107d7c06d48ee205",
+      "name": "机器指标-端口使用率",
+      "type": "top",
+      "alert_rules": [],
+      "created_time": 1639991010657
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "61cc08d7107d7c06d491b951",
+      "name": "数字货币间联城银清（DCPS）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency_ignore_lose_data",
+            "kpis": [
+              "kpi.aiops_APPID|SAPPID|CGF_IPS|IPS.DCPS|1_busTransCount",
+              "kpi.aiops_APPID|SAPPID|CGF_IPS|IPS.DCPS|1_tecFailCount",
+              "kpi.aiops_APPID|SAPPID|CGF_IPS|IPS.DCPS|1_tecSuccRate",
+              "kpi.aiops_APPID|SAPPID|CGF_IPS|IPS.DCPS|1_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "frequency": 6
+          }
+        ]
+      ],
+      "created_time": 1640761559324
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "61d65b5b107d7c06d4c614e8",
+      "name": "银联无卡交易清算（NUCP.UPOP）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_NUCP.UPOP_tecSuccRate",
+              "kpi.aiops_APPID_NUCP.UPOP_transAvgProcTime",
+              "kpi.aiops_APPID_NUCP.UPOP_tecFailCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_NUCP.UPOP_busTransCount"
+            ],
+            "duration": 600
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_NUCP.UPOP_busSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9,
+            "values": [
+              3,
+              4,
+              5
+            ]
+          }
+        ]
+      ],
+      "created_time": 1641438043370
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "61dfcde4107d7c06d4c94ed8",
+      "name": "自助柜员机处理（ATMP）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 25200000,
+                    "end_time": 82800000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_ATMP_transAvgProcTime",
+              "kpi.aiops_APPID_ATMP_tecSuccRate",
+              "kpi.aiops_APPID_ATMP_tecFailRate",
+              "kpi.aiops_APPID_ATMP_tecFailCount",
+              "kpi.aiops_APPID_ATMP_busTransCount",
+              "kpi.aiops_APPID_ATMP_tecSuccCount",
+              "kpi.aiops_APPID|TICID_CSI|ATMP_busSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 10
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 0,
+                    "end_time": 25200000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_ATMP_transAvgProcTime",
+              "kpi.aiops_APPID_ATMP_tecSuccRate",
+              "kpi.aiops_APPID_ATMP_tecFailCount",
+              "kpi.aiops_APPID_ATMP_tecFailRate",
+              "kpi.aiops_APPID_ATMP_tecSuccCount",
+              "kpi.aiops_APPID_ATMP_busTransCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 1200,
+            "frequency": 20
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_ATMP_busTransCount"
+            ],
+            "duration": 3600
+          }
+        ]
+      ],
+      "created_time": 1642057188885
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": false,
+        "special_time_rule": {
+          "level_change_type": "inherit_global",
+          "rules": []
+        }
+      },
+      "service_id": "61e4d10c107d7c06d4cb18b6",
+      "name": "手机银行8.0（PMB）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_PMB7.0_transAvgProcTime",
+              "kpi.aiops_APPID_PMB7.0_tecSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 8
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_PMB7.0_transAvgProcTime",
+              "kpi.aiops_APPID_PMB7.0_tecSuccRate"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 8
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "single_value",
+            "kpi": "kpi.aiops_APPID_PMB7.0_transAvgProcTime",
+            "op": "gt",
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "single_value",
+            "kpi": "kpi.aiops_APPID_PMB7.0_tecSuccRate",
+            "op": "lt",
+            "value": 0.95
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_PMB7.0_busTransCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 8,
+            "values": [
+              3,
+              4,
+              5
+            ]
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_PMB7.0_busTransCount"
+            ],
+            "duration": 600
+          }
+        ]
+      ],
+      "created_time": 1642385676180
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "625fade7107d7c35d2c4636e",
+      "name": "互联网核心账户余额（CBIB.IACCT）应用级监控",
+      "type": "top",
+      "alert_rules": [],
+      "created_time": 1650437607627
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "62625250107d7c35d2c5a8c5",
+      "name": "明细数据查询（HDQ）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_HDQ_tecSuccRate",
+              "kpi.aiops_APPID_HDQ_tecFailCount",
+              "kpi.aiops_APPID|TTID_HDQ|phds.CreditBillOutQuery_tecSuccRate",
+              "kpi.aiops_APPID|TTID_HDQ|phds.T24QueryInfo_tecSuccRate",
+              "kpi.aiops_APPID|TTID_HDQ|phds.T24QueryInfo_tecFailCount",
+              "kpi.aiops_APPID|TTID_HDQ|phds.CreditBillOutQuery_tecFailCount"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_HDQ_busTransCount",
+              "kpi.aiops_APPID|TTID_HDQ|phds.T24QueryInfo_busTransCount",
+              "kpi.aiops_APPID|TTID_HDQ|phds.CreditBillOutQuery_busTransCount"
+            ],
+            "duration": 1200
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_HDQ_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_HDQ|phds.CreditBillOutQuery_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_HDQ|phds.T24QueryInfo_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9,
+            "values": [
+              4,
+              5
+            ]
+          }
+        ]
+      ],
+      "created_time": 1650610768722
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "626bd5e9107d7c2ae857979b",
+      "name": "机器指标-CPU使用率",
+      "type": "top",
+      "alert_rules": [],
+      "created_time": 1651234281989
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "626bfae8107d7c2ae857c6d3",
+      "name": "机器指标-CPU使用率_2",
+      "type": "top",
+      "alert_rules": [],
+      "created_time": 1651243752268
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "6273839c107d7c2ae85b5b3d",
+      "name": "中间件指标-Nginx",
+      "type": "top",
+      "alert_rules": [],
+      "created_time": 1651737500135
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": false,
+        "special_time_rule": {
+          "level_change_type": "no_alert",
+          "rules": [
+            {
+              "holiday_enable": false,
+              "time": [],
+              "days_of_week": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            }
+          ]
+        }
+      },
+      "service_id": "6286fbbe107d7c2ae86488b0",
+      "name": "跨境业务管理（CBBM）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": []
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CBBM_busTransCount",
+              "kpi.aiops_APPID_CBBM_tecSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CBBM_busTransCount",
+              "kpi.aiops_APPID_CBBM_tecSuccRate"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 32400000,
+                    "end_time": 75600000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_CBBM_busTransCount"
+            ],
+            "duration": 1200
+          }
+        ]
+      ],
+      "created_time": 1653013438369
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "628a4534107d7c2ae8660cdd",
+      "name": "机器指标-CPU使用率_3",
+      "type": "top",
+      "alert_rules": [],
+      "created_time": 1653228852103
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "628de5c4107d7c2ae86805a0",
+      "name": "苏州数字人民币（IPS.ECNY-SC）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID|TDCID_IPS.ECNY-SC|IPS.ECNY-SC_busTransCount",
+              "kpi.aiops_APPID|TDCID_IPS.ECNY-SC|IPS.ECNY-SC_tecFailCount",
+              "kpi.aiops_APPID|TDCID_IPS.ECNY-SC|IPS.ECNY-SC_tecSuccRate",
+              "kpi.aiops_APPID|TDCID_IPS.ECNY-SC|IPS.ECNY-SC_transAvgProcTime"
+            ],
+            "kpi_min_thr": 3,
+            "duration": 600,
+            "frequency": 8,
+            "values": [
+              4,
+              5
+            ]
+          }
+        ]
+      ],
+      "created_time": 1653466564033
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "629d62a5107d7c2ae875063e",
+      "name": "网点集中作业处理（BBCP）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 29700000,
+                    "end_time": 64800000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_BBCP_busTransCount",
+              "kpi.aiops_APPID_BBCP_tecSuccRate",
+              "kpi.aiops_APPID_BBCP_transAvgProcTime"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 3
+          }
+        ]
+      ],
+      "created_time": 1654481573275
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global",
+          "rules": []
+        }
+      },
+      "service_id": "62a1c138107d7c2ae877440b",
+      "name": "贷款组合服务（CCS）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CCS_busTransCount",
+              "kpi.aiops_APPID_CCS_tecSuccRate",
+              "kpi.aiops_APPID_CCS_transAvgProcTime"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major",
+            "special_time_rules": []
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_CCS_busTransCount"
+            ],
+            "duration": 1800
+          }
+        ]
+      ],
+      "created_time": 1654767928000
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "62a1c14d107d7c2ae877441b",
+      "name": "交易银行（TXBK）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_TXBK_busTransCount",
+              "kpi.aiops_APPID_TXBK_transAvgProcTime",
+              "kpi.aiops_APPID_TXBK_tecSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 12
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_TXBK_busTransCount",
+              "kpi.aiops_APPID_TXBK_transAvgProcTime",
+              "kpi.aiops_APPID_TXBK_tecSuccRate"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 72000000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_TXBK_busTransCount"
+            ],
+            "duration": 300
+          }
+        ]
+      ],
+      "created_time": 1654767949558
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": false,
+        "special_time_rule": {
+          "level_change_type": "inherit_global",
+          "rules": [
+            {
+              "holiday_enable": false,
+              "time": [],
+              "days_of_week": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7
+              ]
+            }
+          ]
+        }
+      },
+      "service_id": "62aa8a07107d7c2ae87c7e19",
+      "name": "数据服务管理（BDAS.DSM）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 23400000,
+                    "end_time": 81000000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  7,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_BDAS.DSM_tecFailCount",
+              "kpi.aiops_APPID_BDAS.DSM_tecSuccRate",
+              "kpi.aiops_APPID_BDAS.DSM_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 900,
+            "frequency": 12
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_BDAS.DSM_busTransCount"
+            ],
+            "duration": 300
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 27101000,
+                    "end_time": 79601000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID|TTID_BDAS.DSM|card_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_BhTxFqzf_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_BhTxHyfx_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_BhTxHyzr_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_BhMt_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_ShdataSwhy_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_ZgySxzx_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_ZgyXzxf_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_ZgySsxx_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_ZszhQyfr_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_ZgySxzx_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_ZgySxzx_002_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_ZgySxzx_002_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_ZgyXzxf_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_ZgyXzxf_002_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_ZgyXzxf_002_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_ZgySsxx_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_ZgySsxx_002_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_ZgySsxx_002_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_ZszhQyfr_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_ZszhTzrz_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_Car300_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_Car300_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|EDM_TyzxSys_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|EDM_TyzxSys_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|br_tsmd_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|br_tsmd_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|br_als_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|br_als_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|fhfk_gjz_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|fhfk_xq_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|fhfk_gjz_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|fhfk_xq_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|fhfk_ls_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|fhfk_ls_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|hsfd_suz_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|hsfd_sh_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|hsfd_suz_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|hsfd_sh_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|sl_zdgj_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|sl_zdgj_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|ybx_finanical_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|ybx_finanical_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|ws_rkcx_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|ws_rkcx_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|gssyr_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|gssyr_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|gsskr_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|sl_zdgj2_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|gsskr_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|br_qzpc_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|sl_zdgj2_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|br_qzpc_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|wzsy_prl_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|wzsy_prl_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|hsfd_hz2_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|hsfd_hz2_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|pyzx_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|pyzx_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|hsfd_suzyq_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|hsfd_suzyq_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|gszj2_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|gszj2_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|ssxx_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|ssxx_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|bhzx_grzx_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|bhzx_grzx_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|bhzx_tbgzmd_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|bhzx_tbgzmd_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|bhzx_fqz_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|bhzx_fqz_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|qkdsj_ydjz_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|qkdsj_ydjz_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|qkdsj_sys_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|qkdsj_sys_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|qkdsj_cywz_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|qkdsj_cywz_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|qkdsj_ecfh_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|qkdsj_ecfh_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|yltq_qypf_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|yltq_qypf_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|bjpf_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|bjpf_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|dxm_zzyz_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|dxm_zzyz_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|jbx_workhy_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|jbx_workhy_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|jbx_ljmonth_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|jbx_ljmonth_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|jbx_jfhy_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|jbx_jfhy_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|jbx_credit_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|jbx_credit_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|tyzx_rwsc_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|tyzx_rwsc_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|tyzx_zwzt_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|tyzx_sys_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|tyzx_zwzt_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|tyzx_sys_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|qkdsj_sbqdx_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|qkdsj_sbqdx_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|baidu_dlbm_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|baidu_dlbm_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|br_cust_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|br_cust_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_BhTxHyzr_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_BhTxHyfx_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_BhTxFqzf_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_Lhzxbg_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_Lhzxbg_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_Lhzxsj_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_Lhzxsj_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CsjCoAuthAddQuery_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CsjCoAuthAddQuery_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CsjQueryCoAuthQuery_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CsjQueryCoAuthQuery_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CsjQueryCoExistQuery_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CsjQueryCoExistQuery_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_YlfkJjmyFc_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_BlackListOfCust_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_PbcHouFundPre_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_PbcZzXypfQuery_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_PbcHouFundPre_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_BlackListOfCust_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_YlfkJjmyFc_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_PbcZzXypfQuery_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|pbcec_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|pbcec_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_PRMSBD|pbcpc_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_PRMSBD|pbcpc_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|mtlmk_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|mtlmk_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|loan_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|loan_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|cddw_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|cddw_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|loan_pt_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|saving_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|loan_pt_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|card_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|saving_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_ShdataSwhy_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_BhMt_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|EDM_Bjsb_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|EDM_Bjsb_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|EDM_JrjXdzjlx_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_JrjXdzjlx_002_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|EDM_JrjXdzjlx_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_JrjXdzjlx_002_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|EDM_JrjFyjgdtjd_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_JrjFyjgdtjd_002_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|EDM_JrjFyjgdtjd_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_JrjFyjgdtjd_002_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_JrjFyjgdtjdHd_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_JrjFyjgdtjdHd_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|EDM_JrjXdzczlxj_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|EDM_JrjXdzczlxj_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_JrjXdzczlxj_002_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_JrjXdzczlxj_002_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_JrjXdzczlxjHd_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_JrjXdzczlxjHd_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|EDM_JrjQyzcqk_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|EDM_JrjQyzcqk_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_JrjQyzcqkHd_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_JrjQyzcqkHd_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|EDM_JrjQyjyhd_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|EDM_JrjQyjyhd_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_RbwEpCustLabel_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_RbwEpCustLabel_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_MyBankBcardModelF_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_MyBankBcardModelF_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_HuaBeiBcardModelF_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_HuaBeiBcardModelF_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CredItApplyAds_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CredItApplyAds_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CredItAppLyByStagesAds_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CredItAppLyByStagesAds_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CustoMerAds_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CustoMerAds_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CredItCust_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CredItCust_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_InfRbwBCsDetcrdTransInfo_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_InfRbwBCsDetcrdTransInfo_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_InfERcaCardCbInfo_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_InfERcaIndivLoanInfo_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_InfERcaCardCbInfo_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_InfERcaIndivLoanInfo_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_InfERcaTaLoanInfo_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_InfERcaTaLoanInfo_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_C147CustMonRankLev_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_C147CustMonRankLev_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_C046CustAssInfoInq_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_C046CustSignInfoInq_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_C046CustSignInfoInq_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_C046CustAssInfoInq_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CustRealTimeQuery_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CustRealTimeQuery_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_C147CimMonExInq_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_C147CimMonExInq_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CrspdCashConcentration_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CrspdCashConcentration_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_IndivOtherBiz_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_IndivOtherBiz_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_IndivLoanScoreCrd_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_IndivLoanScoreCrd_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CustCreditStat_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CustCreditStat_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CreditAcctStat_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CreditAcctStat_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_C151CustInInq_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_C151CustInInq_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_C147AcctNoInfoInq_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_C147AcctNoInfoInq_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CrspdBsContInfo_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CrspdBsContInfo_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CrspdLcInfo_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CrspdLcInfo_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_EchaPmbsFincProdSum_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_EchaPmbsFincProdSum_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_EPrmFraudBlklistRlg_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_EPrmFraudBlklistRlg_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_DepositAcct_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_DepositAcct_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_ExchgBillInfo_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_ExchgBillInfo_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_BizBillInfo_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_BizBillInfo_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_AccpBillInfo_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_AccpBillInfo_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_BnkGuarInfo_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_BnkGuarInfo_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_GuarInfo_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_GuarInfo_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_TrustLoanDtll_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_TrustLoanDtll_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CnclAcc_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_CnclAcc_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_LoanAcctBalDtl_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_LoanAcctBalDtl_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_BnkDep_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_BnkDep_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_IncomeExpense_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_IncomeExpense_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_AcctHisBal_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_AcctHisBal_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_C147CashManHisInq_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_C147CashManHisInq_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_C147AcctNoBalInq_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_C147AcctNoBalInq_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_C147AcctHisAmtInq_001_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_C147AcctHisAmtInq_001_tecSuccRate",
+              "kpi.aiops_APPID|TTID_BDAS.DSM|DSM_ZszhTzrz_001_tecSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 900,
+            "frequency": 12
+          }
+        ]
+      ],
+      "created_time": 1655343623741
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "62ba635c107d7cec1e60e494",
+      "name": "权益平台（CRC）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CRC_tecSuccRate",
+              "kpi.aiops_APPID_CRC_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 8
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_CRC_busTransCount"
+            ],
+            "duration": 600
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CRC_busTransCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 8,
+            "values": [
+              2,
+              3,
+              4,
+              5
+            ]
+          }
+        ]
+      ],
+      "created_time": 1656382300542
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "62bc1226107d7cec1e61f71b",
+      "name": "电子验印（DSR）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 30940000,
+                    "end_time": 61240000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_DSR_busTransCount",
+              "kpi.aiops_APPID_DSR_tecSuccRate",
+              "kpi.aiops_APPID_DSR_transAvgProcTime"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 3
+          }
+        ]
+      ],
+      "created_time": 1656492582924
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "62c25853107d7cec1e65cc7d",
+      "name": "黑名单管理（BLIM）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_BLIM_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 10
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_BLIM_tecFailCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 300,
+            "frequency": 10
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_BLIM_tecSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 300,
+            "frequency": 10
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_BLIM_tecFailCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 300,
+            "frequency": 10
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_BLIM_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 300,
+            "frequency": 10
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_BLIM_tecFailCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 480,
+            "frequency": 10,
+            "values": [
+              3,
+              4,
+              5
+            ]
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 25200000,
+                    "end_time": 82800000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7
+                ]
+              }
+            ]
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_BLIM_busTransCount"
+            ],
+            "duration": 300
+          }
+        ]
+      ],
+      "created_time": 1656903763299
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "62d10744107d7cec1e6ec66f",
+      "name": "机器指标-CPU使用率_4",
+      "type": "top",
+      "alert_rules": [],
+      "created_time": 1657866052987
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "62f36614107d7cec1e851637",
+      "name": "业务集成服务（IBS）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default",
+            "special_time_rules": []
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_IBS_tecSuccRate",
+              "kpi.aiops_APPID_IBS_tecFailCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_IBS_busTransCount"
+            ],
+            "duration": 1200
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_IBS_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9,
+            "values": [
+              4,
+              5
+            ]
+          }
+        ]
+      ],
+      "created_time": 1660118548075
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "no_alert",
+          "rules": [
+            {
+              "holiday_enable": false,
+              "time": [],
+              "days_of_week": [
+                1,
+                7,
+                2,
+                3,
+                4,
+                6,
+                5
+              ]
+            }
+          ]
+        }
+      },
+      "service_id": "62f45bde107d7cec1e85b5bb",
+      "name": "客户关系管理（CRM）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 64800000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  7,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CRM_tecSuccRate",
+              "kpi.aiops_APPID_CRM_transAvgProcTime",
+              "kpi.aiops_APPID_CRM_busTransCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 180,
+            "frequency": 3
+          }
+        ]
+      ],
+      "created_time": 1660181470462
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "62fc3adb107d7cec1e8ac612",
+      "name": "企业信贷管理（CRMS）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 64800000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CRMS_busTransCount",
+              "kpi.aiops_APPID_CRMS_tecSuccRate",
+              "kpi.aiops_APPID_CRMS_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 180,
+            "frequency": 3
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 64800000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency_ignore_lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_CRMS_tecFailCount"
+            ],
+            "kpi_min_thr": 1,
+            "frequency": 10
+          }
+        ]
+      ],
+      "created_time": 1660697307352
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "62fd9bec107d7cec1e8bab4b",
+      "name": "柜员指纹验证（TFPV）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_TFPV_busTransCount",
+              "kpi.aiops_APPID_TFPV_tecSuccRate",
+              "kpi.aiops_APPID_TFPV_busSuccRate",
+              "kpi.aiops_APPID_TFPV_transAvgProcTime",
+              "kpi.aiops_APPID_TFPV_tecFailCount"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 6
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 63000000
+                  }
+                ],
+                "days_of_week": []
+              }
+            ]
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_TFPV_busTransCount"
+            ],
+            "duration": 300
+          }
+        ]
+      ],
+      "created_time": 1660787692717
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global",
+          "rules": [
+            {
+              "start_date": 1713283200000,
+              "end_date": 1715270400000,
+              "holiday_enable": false,
+              "time": [],
+              "days_of_week": []
+            }
+          ]
+        }
+      },
+      "service_id": "62fda990107d7cec1e8bb47c",
+      "name": "投行业务管理（IBBM）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_IBBM_tecSuccRate",
+              "kpi.aiops_APPID_IBBM_busTransCount",
+              "kpi.aiops_APPID_IBBM_transAvgProcTime"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 8
+          }
+        ]
+      ],
+      "created_time": 1660791184531
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "62fdd3bd107d7cec1e8bd007",
+      "name": "账户监管协查（CFB.ASI）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CFB.ASI_transAvgProcTime",
+              "kpi.aiops_APPID_CFB.ASI_tecSuccRate",
+              "kpi.aiops_APPID_CFB.ASI_tecFailCount"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 86399000
+                  }
+                ],
+                "days_of_week": []
+              }
+            ]
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_CFB.ASI_busTransCount"
+            ],
+            "duration": 3600
+          }
+        ]
+      ],
+      "created_time": 1660801981860
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "62fde7be107d7cec1e8bdda5",
+      "name": "微信银行（WCB）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_WCB_tecSuccRate",
+              "kpi.aiops_APPID_WCB_busSuccRate",
+              "kpi.aiops_APPID_WCB_transAvgProcTime"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 8
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_WCB_busTransCount"
+            ],
+            "duration": 600
+          }
+        ]
+      ],
+      "created_time": 1660807102208
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "6302cf90107d7cec1e8f2b5a",
+      "name": "PMB_8.0瑶光网关",
+      "type": "top",
+      "alert_rules": [],
+      "created_time": 1661128592306
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global",
+          "rules": [
+            {
+              "holiday_enable": false,
+              "time": [],
+              "days_of_week": [
+                1,
+                7,
+                2,
+                3,
+                4,
+                6,
+                5
+              ]
+            }
+          ]
+        }
+      },
+      "service_id": "6343c7b0107d7cec1ebca014",
+      "name": "智能营销kafka（IMS）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_imsKafka|TOPIC_imsKafka|ITM_BAT_sumCurrConsumeLagCount",
+              "kpi.aiops_imsKafka|TOPIC_imsKafka|ITM_sumCurrConsumeLagCount",
+              "kpi.aiops_imsKafka|TOPIC_imsKafka|PSMS_BAT_sumCurrConsumeLagCount",
+              "kpi.aiops_imsKafka|TOPIC_imsKafka|PMBS_BAT_sumCurrConsumeLagCount",
+              "kpi.aiops_imsKafka|TOPIC_imsKafka|PMBS_sumCurrConsumeLagCount",
+              "kpi.aiops_imsKafka|TOPIC_imsKafka|GETUI_BAT_sumCurrConsumeLagCount",
+              "kpi.aiops_imsKafka|TOPIC_imsKafka|GETUI_sumCurrConsumeLagCount",
+              "kpi.aiops_imsKafka|TOPIC_imsKafka|PMCS_BAT_sumCurrConsumeLagCount",
+              "kpi.aiops_imsKafka|TOPIC_imsKafka|PMCS_sumCurrConsumeLagCount",
+              "kpi.aiops_imsKafka|TOPIC_imsKafka|CRM_BAT_sumCurrConsumeLagCount",
+              "kpi.aiops_imsKafka|TOPIC_imsKafka|CRM_sumCurrConsumeLagCount"
+            ],
+            "kpi_min_thr": 3,
+            "duration": 900,
+            "frequency": 5
+          }
+        ]
+      ],
+      "created_time": 1665386416974
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "63bbc724107d7cd3c9496149",
+      "name": "机器指标-内存使用率",
+      "type": "top",
+      "alert_rules": [],
+      "created_time": 1673250596106
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "no_alert",
+          "rules": [
+            {
+              "holiday_enable": false,
+              "time": [],
+              "days_of_week": [
+                1,
+                7,
+                2,
+                3,
+                4,
+                5,
+                6
+              ]
+            }
+          ]
+        }
+      },
+      "service_id": "63bd2fa9107d7cd3c94a8482",
+      "name": "告警源告警数统计监控（IOPS.IM）",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID|ALARMID|ETL_IOPS.IM|AIOPS_busTransCount"
+            ],
+            "duration": 86400
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID|ALARMID|ETL_IOPS.IM|JP1_busTransCount"
+            ],
+            "duration": 86400
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID|ALARMID|ETL_IOPS.IM|K8S_busTransCount"
+            ],
+            "duration": 86400
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID|ALARMID|ETL_IOPS.IM|MPAAS_busTransCount"
+            ],
+            "duration": 129600
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID|ALARMID|ETL_IOPS.IM|TIDB_busTransCount"
+            ],
+            "duration": 86400
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID|ALARMID|ETL_IOPS.IM|WGPT_busTransCount"
+            ],
+            "duration": 86400
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID|ALARMID|ETL_IOPS.IM|XGPT_busTransCount"
+            ],
+            "duration": 259200
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID|ALARMID|ETL_IOPS.IM|ZABBIX_busTransCount"
+            ],
+            "duration": 43200
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID|ALARMID|ETL_IOPS.IM|CHITU_busTransCount"
+            ],
+            "duration": 1209600
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID|ALARMID|ETL_IOPS.IM|ZABBIX.BDO_busTransCount"
+            ],
+            "duration": 86400
+          }
+        ]
+      ],
+      "created_time": 1673342889917
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "6407ed09107d7cd3c984b1b1",
+      "name": "瑶光网关（MSB）",
+      "type": "top",
+      "alert_rules": [],
+      "created_time": 1678241033765
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": false,
+        "special_time_rule": {
+          "level_change_type": "no_alert",
+          "rules": []
+        }
+      },
+      "service_id": "6409a0e4107d7cd3c986067b",
+      "name": "智能机具3.0（ITMP）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_ITMP3.0_busTransCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9,
+            "values": [
+              2,
+              3,
+              4,
+              5
+            ]
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_ITMP3.0_tecFailCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 300,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_ITMP3.0_tecSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_ITMP3.0_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID|TTID_ITMP3.0|ITM0001_busTransCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID|TTID_ITMP3.0|ITM0001_tecFailCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID|TTID_ITMP3.0|ITM0001_tecSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID|TTID_ITMP3.0|ITM0001_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID|TTID_ITMP3.0|ITM0007_busTransCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9,
+            "values": [
+              2,
+              3,
+              4,
+              5
+            ]
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID|TTID_ITMP3.0|ITM0007_tecFailCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID|TTID_ITMP3.0|ITM0007_tecSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID|TTID_ITMP3.0|ITM0007_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID|TTID_ITMP3.0|ITM0025_busTransCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID|TTID_ITMP3.0|ITM0025_tecFailCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID|TTID_ITMP3.0|ITM0025_tecSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID|TTID_ITMP3.0|ITM0025_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ]
+      ],
+      "created_time": 1678352612654
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "641c57ba107d7cd3c9943966",
+      "name": "额度管控中心（RCMP.LMC）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 79200000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  7,
+                  3,
+                  5,
+                  6,
+                  4
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_RCMP_busTransCount",
+              "kpi.aiops_APPID_RCMP_tecSuccRate",
+              "kpi.aiops_APPID_RCMP_transAvgProcTime",
+              "kpi.aiops_APPID_RCMP.RSC_transAvgProcTime"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 9
+          }
+        ]
+      ],
+      "created_time": 1679579066729
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "6423d225107d7cd3c999e8f4",
+      "name": "统一影像管理（UIM）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 30617000,
+                    "end_time": 73097000
+                  }
+                ],
+                "days_of_week": []
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_UIM_busSuccRate",
+              "kpi.aiops_APPID_UIM_busTransCount",
+              "kpi.aiops_APPID_UIM_tecSuccRate",
+              "kpi.aiops_APPID_UIM_tecFailCount",
+              "kpi.aiops_APPID_UIM_transAvgProcTime"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 7
+          }
+        ]
+      ],
+      "created_time": 1680069157783
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": false,
+        "special_time_rule": {
+          "level_change_type": "no_alert",
+          "rules": []
+        }
+      },
+      "service_id": "6448d79e107d7cd3c9b6bad2",
+      "name": "动态密码（OTP）",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_OTP.SND_busTransCount",
+              "kpi.aiops_APPID_OTP.SND_tecSuccRate",
+              "kpi.aiops_APPID_OTP.SND_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 8
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_OTP.SND_busTransCount"
+            ],
+            "duration": 600
+          }
+        ]
+      ],
+      "created_time": 1682495390118
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "645c7844107d7cd3c9c51f4e",
+      "name": "核算引擎（UAC）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_UAC.AEGL_tecFailCount",
+              "kpi.aiops_APPID_UAC.AEGL_tecSuccRate"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_UAC.AEGL_transAvgProcTime",
+              "kpi.aiops_APPID_UAC.AEGL_busSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9,
+            "values": [
+              4,
+              5
+            ]
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_UAC.AEGL_busTransCount"
+            ],
+            "duration": 600
+          }
+        ]
+      ],
+      "created_time": 1683781700778
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "64812572107d7cd3c9de9fa0",
+      "name": "普惠信贷管理（IRMS）",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 72000000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_PRMS.IRMS_transAvgProcTime",
+              "kpi.aiops_APPID_PRMS.IRMS_busTransCount",
+              "kpi.aiops_APPID_PRMS.IRMS_busSuccRate",
+              "kpi.aiops_APPID_PRMS.IRMS_tecSuccRate"
+            ],
+            "kpi_min_thr": 3,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 72000000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_PRMS.IRMS_transAvgProcTime",
+              "kpi.aiops_APPID_PRMS.IRMS_busTransCount",
+              "kpi.aiops_APPID_PRMS.IRMS_busSuccRate",
+              "kpi.aiops_APPID_PRMS.IRMS_tecSuccRate"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 72000000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_PRMS.IRMS_busTransCount"
+            ],
+            "duration": 300
+          }
+        ]
+      ],
+      "created_time": 1686185330333
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "64867033107d7cd3c9e24057",
+      "name": "贷后风险预警处理（RCMP.PLS）",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 32400000,
+                    "end_time": 72000000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID|SAPPID_RCMP|RCMP.PLS_busTransCount",
+              "kpi.aiops_APPID|SAPPID_RCMP|RCMP.PLS_transAvgProcTime",
+              "kpi.aiops_APPID|SAPPID_RCMP|RCMP.PLS_tecSuccRate"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 9
+          }
+        ]
+      ],
+      "created_time": 1686532147834
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "64867289107d7cd3c9e241ef",
+      "name": "风控策略中心（RCMP.RSC）",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_RCMP.RSC_busTransCount",
+              "kpi.aiops_APPID_RCMP.RSC_transAvgProcTime",
+              "kpi.aiops_APPID_RCMP.RSC_tecSuccRate"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 9
+          }
+        ]
+      ],
+      "created_time": 1686532745810
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "648672c4107d7cd3c9e24221",
+      "name": "财资服务公共平台（PDMP.FPS）",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 72000000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_PDMP.FPS_transAvgProcTime",
+              "kpi.aiops_APPID_PDMP.FPS_tecSuccRate",
+              "kpi.aiops_APPID_PDMP.FPS_busTransCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 72000000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_PDMP.FPS_transAvgProcTime",
+              "kpi.aiops_APPID_PDMP.FPS_tecSuccRate",
+              "kpi.aiops_APPID_PDMP.FPS_busTransCount"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 72000000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_PDMP.FPS_busTransCount"
+            ],
+            "duration": 1200
+          }
+        ]
+      ],
+      "created_time": 1686532804990
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "6486796c107d7cd3c9e246d6",
+      "name": "远程柜员处理（BBP.RTP）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 31200000,
+                    "end_time": 61200000
+                  }
+                ],
+                "days_of_week": []
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_BBP.RTP_tecSuccRate",
+              "kpi.aiops_APPID_BBP.RTP_transAvgProcTime",
+              "kpi.aiops_APPID_BBP.RTP_busTransCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 300,
+            "frequency": 5
+          }
+        ]
+      ],
+      "created_time": 1686534508298
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "649d7649107d7cd3c9f1f627",
+      "name": "互金-企业移动支付（IFS）",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID|TTID_IFS.QP|.IFS.QP.nucc-service.identityAuthentication_busSuccRate",
+              "kpi.aiops_APPID|TTID_IFS.QP|.IFS.QP.nucc-service.identityAuthentication_busTransCount",
+              "kpi.aiops_APPID|TTID_IFS.QP|.IFS.QP.nucc-service.identityAuthentication_tecFailCount",
+              "kpi.aiops_APPID|TTID_IFS.QP|.IFS.QP.nucc-service.identityAuthentication_tecSuccRate",
+              "kpi.aiops_APPID|TTID_IFS.QP|.IFS.QP.nucc-service.identityAuthentication_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_IFS.QP|.IFS.QP.union-service.c2bConsumeReversal_busSuccRate",
+              "kpi.aiops_APPID|TTID_IFS.QP|.IFS.QP.union-service.c2bConsumeReversal_busTransCount",
+              "kpi.aiops_APPID|TTID_IFS.QP|.IFS.QP.union-service.c2bConsumeReversal_tecFailCount",
+              "kpi.aiops_APPID|TTID_IFS.QP|.IFS.QP.union-service.c2bConsumeReversal_tecSuccRate",
+              "kpi.aiops_APPID|TTID_IFS.QP|.IFS.QP.union-service.c2bConsumeReversal_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_IFS.QP|.IFS.QP.union-service.c2bConsume_tecFailCount",
+              "kpi.aiops_APPID|TTID_IFS.QP|.IFS.QP.union-service.c2bConsume_transAvgProcTime",
+              "kpi.aiops_APPID|TTID_IFS.QP|.IFS.QP.union-service.c2bConsume_tecSuccRate",
+              "kpi.aiops_APPID|TTID_IFS.QP|.IFS.QP.union-service.c2bConsume_busSuccRate",
+              "kpi.aiops_APPID|TTID_IFS.QP|.IFS.QP.union-service.c2bConsume_busTransCount"
+            ],
+            "kpi_min_thr": 4,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID|TTID_IFS.QP|.IFS.QP.nucc-service.identityAuthentication_busTransCount",
+              "kpi.aiops_APPID|TTID_IFS.QP|.IFS.QP.union-service.c2bConsumeReversal_busTransCount",
+              "kpi.aiops_APPID|TTID_IFS.QP|.IFS.QP.union-service.c2bConsume_busTransCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9,
+            "values": [
+              3,
+              4,
+              5
+            ]
+          }
+        ]
+      ],
+      "created_time": 1688041033162
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "64a40070107d7cd3c9f66757",
+      "name": "Oracle数据库_活动会话数",
+      "type": "top",
+      "alert_rules": [],
+      "created_time": 1688469616309
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "64a7ca21107d7c81f0945d02",
+      "name": "在线影像处理（UIM.OIP）",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_UIM.OIP_busSuccRate",
+              "kpi.aiops_APPID_UIM.OIP_busTransCount",
+              "kpi.aiops_APPID_UIM.OIP_tecFailCount",
+              "kpi.aiops_APPID_UIM.OIP_tecSuccRate",
+              "kpi.aiops_APPID_UIM.OIP_transAvgProcTime"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 8
+          }
+        ]
+      ],
+      "created_time": 1688717857100
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "64b5e479107d7c81f095bc42",
+      "name": "统一影像识别（UIR）",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 79200000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  5,
+                  6,
+                  7
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_UIR_busTransCount",
+              "kpi.aiops_APPID_UIR_tecSuccRate",
+              "kpi.aiops_APPID_UIR_transAvgProcTime",
+              "kpi.aiops_APPID_UIR_tecFailCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 450,
+            "frequency": 10
+          }
+        ]
+      ],
+      "created_time": 1689642105425
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "64d3408a107d7c81f098e2cd",
+      "name": "统一认证（IAM）",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_IAM_ssoCount",
+              "kpi.aiops_APPID_IAM_ssoRate",
+              "kpi.aiops_APPID_IAM_unifiedLoginCount"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 9
+          }
+        ]
+      ],
+      "created_time": 1691566218245
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global",
+          "rules": []
+        }
+      },
+      "service_id": "64dae0bf107d7c81f09a3891",
+      "name": "记账式债券（BEB）",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID|TRCID_ESB|BEB_transAvgProcTime",
+              "kpi.aiops_APPID|TRCID_ESB|BEB_busSuccRate",
+              "kpi.aiops_APPID|TRCID_ESB|BEB_busTransCount"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 8
+          }
+        ]
+      ],
+      "created_time": 1692065983119
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "no_alert",
+          "rules": [
+            {
+              "start_date": 1707235200000,
+              "end_date": 1708099200000,
+              "holiday_enable": false,
+              "time": [],
+              "days_of_week": []
+            }
+          ]
+        }
+      },
+      "service_id": "64f03044107d7c81f0a91dee",
+      "name": "上行E事通（EMOP）交易级监控",
+      "type": "top",
+      "alert_rules": [],
+      "created_time": 1693462596522
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "64f144fb107d7c81f0a9e356",
+      "name": "产品交付中台（PDMP）",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_PDMP_busSuccRate",
+              "kpi.aiops_APPID_PDMP_tecSuccRate",
+              "kpi.aiops_APPID_PDMP_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ]
+      ],
+      "created_time": 1693533435704
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "64f7c53c107d7c81f0ae6789",
+      "name": "运通无卡交易清算（NUCP.AOP）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_NUCP.AOP_tecFailCount",
+              "kpi.aiops_APPID_NUCP.AOP_tecSuccRate",
+              "kpi.aiops_APPID_NUCP.AOP_transAvgProcTime"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_NUCP.AOP_busSuccRate",
+              "kpi.aiops_APPID_NUCP.AOP_busTransCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9,
+            "values": [
+              3,
+              4,
+              5
+            ]
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 86399000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  7,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6
+                ]
+              }
+            ]
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_NUCP.AOP_busTransCount"
+            ],
+            "duration": 3600
+          }
+        ]
+      ],
+      "created_time": 1693959484820
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "650a5edf107d7c81f0bb55b4",
+      "name": "交易风险监控（TRM）应用及监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_TRM_tecSuccRate",
+              "kpi.aiops_APPID_TRM_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 12
+          }
+        ]
+      ],
+      "created_time": 1695178463185
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": false,
+        "special_time_rule": {
+          "level_change_type": "inherit_global",
+          "rules": []
+        }
+      },
+      "service_id": "654ae09d107d7c81f0e88bd3",
+      "name": "运通交易清算 （CUTP.AMTP）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID|TICID_CBCS|CUTP.AMTP_busTransCount"
+            ],
+            "duration": 43200
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "single_value",
+            "kpi": "kpi.aiops_APPID|TICID_CBCS|CUTP.AMTP_tecSuccRate",
+            "op": "lt",
+            "value": 0.1
+          },
+          {
+            "type": "single_value",
+            "kpi": "kpi.aiops_APPID|TICID_CBCS|CUTP.AMTP_tecFailCount",
+            "op": "gt",
+            "value": 5
+          }
+        ]
+      ],
+      "created_time": 1699405981346
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": false,
+        "special_time_rule": {
+          "level_change_type": "inherit_global",
+          "rules": []
+        }
+      },
+      "service_id": "654ae834107d7c81f0e891c1",
+      "name": "金库运营管理（TSOM）交易级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 72000000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_TSOM_busTransCount"
+            ],
+            "duration": 1800
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 72000000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_TSOM_busTransCount",
+              "kpi.aiops_APPID_TSOM_transAvgProcTime",
+              "kpi.aiops_APPID_TSOM_tecSuccRate",
+              "kpi.aiops_APPID_TSOM_tecFailCount",
+              "kpi.aiops_APPID_TSOM_tecFailRate"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 8
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 72000000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_TSOM_busTransCount",
+              "kpi.aiops_APPID_TSOM_tecSuccRate",
+              "kpi.aiops_APPID_TSOM_transAvgProcTime",
+              "kpi.aiops_APPID_TSOM_tecFailRate",
+              "kpi.aiops_APPID_TSOM_tecFailCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 8
+          }
+        ]
+      ],
+      "created_time": 1699407924137
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "654f61b0107d7c81f0ebab5d",
+      "name": "企业网银（EIB）3.0",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 25200000,
+                    "end_time": 79200000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_EIB_busSuccRate",
+              "kpi.aiops_APPID_EIB_tecSuccRate",
+              "kpi.aiops_APPID_EIB_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 19800000,
+                    "end_time": 86353000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7
+                ]
+              }
+            ]
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_EIB_busTransCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "values": [
+              3,
+              4,
+              5
+            ],
+            "frequency": 6
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 21600000,
+                    "end_time": 82850000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7
+                ]
+              }
+            ]
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_EIB_busTransCount"
+            ],
+            "duration": 600
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 85910000,
+                    "end_time": 31910000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7
+                ]
+              }
+            ]
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_EIB_busTransCount"
+            ],
+            "duration": 1200
+          }
+        ]
+      ],
+      "created_time": 1699701168745
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "655c4803107d7c81f0f4a937",
+      "name": "银商通（BCBI）应用监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28800000,
+                    "end_time": 72000000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_BCBI_busTransCount",
+              "kpi.aiops_APPID_BCBI_transAvgProcTime",
+              "kpi.aiops_APPID_BCBI_tecSuccRate"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 900,
+            "frequency": 9
+          }
+        ]
+      ],
+      "created_time": 1700546563072
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "65bcaf0d107d7c81f038f5f9",
+      "name": "EIB企业网银瑶光网关",
+      "type": "top",
+      "alert_rules": [],
+      "created_time": 1706864397142
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "65d1d2a5107d7c81f049f3c1",
+      "name": "Mysql数据库_活动会话数",
+      "type": "top",
+      "alert_rules": [],
+      "created_time": 1708249765704
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "65df5c3b107d7cc9cd457c51",
+      "name": "快捷支付字节（IFS.QP）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_IFS.QP_tecSuccRate",
+              "kpi.aiops_APPID_IFS.QP_transAvgProcTime",
+              "kpi.aiops_APPID_IFS.QP_busTransCount",
+              "kpi.aiops_APPID_IFS.QP_tecFailCount"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 8
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 25200000,
+                    "end_time": 82800000
+                  }
+                ],
+                "days_of_week": []
+              }
+            ]
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_IFS.QP_busTransCount"
+            ],
+            "duration": 600
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 82800000,
+                    "end_time": 38373000
+                  }
+                ],
+                "days_of_week": []
+              }
+            ]
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_IFS.QP_busTransCount"
+            ],
+            "duration": 3600
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_IFS.QP_transAvgProcTime",
+              "kpi.aiops_APPID_IFS.QP_busSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9,
+            "values": [
+              4,
+              5
+            ]
+          }
+        ]
+      ],
+      "created_time": 1709136955208
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "65e52294107d7cc9cd4a26de",
+      "name": "快捷支付瑶光网关",
+      "type": "top",
+      "alert_rules": [],
+      "created_time": 1709515412099
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "65e562eb107d7cc9cd4a5b83",
+      "name": "PDMP产品交付中台瑶光网关",
+      "type": "top",
+      "alert_rules": [],
+      "created_time": 1709531883885
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "no_alert",
+          "rules": [
+            {
+              "holiday_enable": false,
+              "time": [
+                {
+                  "start_time": 0,
+                  "end_time": 86399000
+                }
+              ],
+              "days_of_week": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7
+              ]
+            }
+          ]
+        }
+      },
+      "service_id": "66173c44107d7cc9cd74bef5",
+      "name": "个人金融小程序（WCB.PFA）应用级监控",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "major"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_WCB.PFA_busTransCount",
+              "kpi.aiops_APPID_WCB.PFA_transAvgProcTime",
+              "kpi.aiops_APPID_WCB.PFA_tecSuccRate",
+              "kpi.aiops_APPID_WCB.PFA_busSuccRate",
+              "kpi.aiops_APPID_WCB.PFA_tecFailCount"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 8
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_WCB.PFA_busTransCount",
+              "kpi.aiops_APPID_WCB.PFA_transAvgProcTime"
+            ],
+            "duration": 3000
+          }
+        ]
+      ],
+      "created_time": 1712798788394
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "661742fe107d7cc9cd74c490",
+      "name": "个人养老金（CFB.PPS）应用级监控",
+      "type": "top",
+      "alert_rules": [],
+      "created_time": 1712800510124
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global",
+          "rules": []
+        }
+      },
+      "service_id": "6619403f107d7cc9cd76823a",
+      "name": "收单业务处理（CBRP）",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CBRP_busTransCount",
+              "kpi.aiops_APPID_CBRP_tecSuccCount",
+              "kpi.aiops_APPID_CBRP_tecSuccRate",
+              "kpi.aiops_APPID_CBRP_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 5
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 28854000,
+                    "end_time": 64800000
+                  }
+                ],
+                "days_of_week": []
+              }
+            ]
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_CBRP_busTransCount"
+            ],
+            "duration": 600
+          }
+        ]
+      ],
+      "created_time": 1712930879245
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "no_alert",
+          "rules": [
+            {
+              "holiday_enable": false,
+              "time": [],
+              "days_of_week": [
+                1,
+                2,
+                4,
+                3,
+                5,
+                6,
+                7
+              ]
+            }
+          ]
+        }
+      },
+      "service_id": "661a620a107d7cc9cd776f63",
+      "name": "SIM卡认证识别（AIA.SCAI）",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_AIA.SCAI_busTransCount"
+            ],
+            "duration": 600
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_AIA.SCAI_tecSuccRate",
+              "kpi.aiops_APPID_AIA.SCAI_tecFailCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 8
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_AIA.SCAI_transAvgProcTime",
+              "kpi.aiops_APPID_AIA.SCAI_busSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9,
+            "values": [
+              4,
+              5
+            ]
+          }
+        ]
+      ],
+      "created_time": 1713005066702
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "661de5f0107d7cc9cd7a3d2f",
+      "name": "魔镜（MMM）",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_MMM_transAvgProcTime",
+              "kpi.aiops_APPID_MMM_tecSuccRate",
+              "kpi.aiops_APPID_MMM_busTransCount",
+              "kpi.aiops_APPID_MMM_busSuccRate"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 900,
+            "frequency": 12
+          }
+        ]
+      ],
+      "created_time": 1713235440819
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "661f8aeb107d7cc9cd7b9556",
+      "name": "渠道服务能力中心（PDMP.EUC）",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_PDMP.EUC_tecSuccRate",
+              "kpi.aiops_APPID_PDMP.EUC_busSuccRate",
+              "kpi.aiops_APPID_PDMP.EUC_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_PDMP.EUC_tecFailCount",
+              "kpi.aiops_APPID_PDMP.EUC_busSuccRate",
+              "kpi.aiops_APPID_PDMP.EUC_tecSuccRate"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 6
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "level_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_PDMP.EUC_busTransCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9,
+            "values": [
+              3,
+              4,
+              5
+            ]
+          }
+        ]
+      ],
+      "created_time": 1713343211202
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "66207c96107d7cc9cd7c5e08",
+      "name": "对公业务场景服务（PDMP.EBSS）",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_PDMP.EBSS_busSuccRate",
+              "kpi.aiops_APPID_PDMP.EBSS_tecSuccRate",
+              "kpi.aiops_APPID_PDMP.EBSS_transAvgProcTime"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_PDMP.EBSS_tecFailCount",
+              "kpi.aiops_APPID_PDMP.EBSS_busTransCount",
+              "kpi.aiops_APPID_PDMP.EBSS_tecSuccRate"
+            ],
+            "kpi_min_thr": 2,
+            "duration": 600,
+            "frequency": 6
+          }
+        ],
+        [
+          {
+            "type": "alert_level",
+            "strategy": "default"
+          },
+          {
+            "type": "anomaly_frequency_ignore_lose_data",
+            "kpis": [
+              "kpi.aiops_APPID_PDMP.EBSS_busTransCount"
+            ],
+            "kpi_min_thr": 1,
+            "frequency": 9
+          }
+        ]
+      ],
+      "created_time": 1713405078127
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "6625c163107d7cc9cd80eb71",
+      "name": "门户网站(EPW)",
+      "type": "top",
+      "alert_rules": [],
+      "created_time": 1713750371933
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "66264c3e107d7cc9cd815b5a",
+      "name": "合作方特色业务-社保卡（CFBP.NSC）",
+      "type": "top",
+      "alert_rules": [],
+      "created_time": 1713785918711
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "66264ff9107d7cc9cd815e4f",
+      "name": "合作方特色业务（CFB）",
+      "type": "top",
+      "alert_rules": [],
+      "created_time": 1713786873175
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "662652ce107d7cc9cd816082",
+      "name": "国库清算（CFB.NTC）",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 30600000,
+                    "end_time": 68400000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_CFB.NTC_busTransCount",
+              "kpi.aiops_APPID_CFB.NTC_tecFailCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ]
+      ],
+      "created_time": 1713787598256
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "6626542a107d7cc9cd81619b",
+      "name": "资产托管（ACP）",
+      "type": "top",
+      "alert_rules": [
+        [
+          {
+            "type": "alert_level",
+            "strategy": "minor",
+            "special_time_rules": [
+              {
+                "start_date": "",
+                "end_date": "",
+                "holiday_enable": false,
+                "time": [
+                  {
+                    "start_time": 30600000,
+                    "end_time": 68400000
+                  }
+                ],
+                "days_of_week": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "type": "anomaly_frequency",
+            "kpis": [
+              "kpi.aiops_APPID_ACP_busTransCount",
+              "kpi.aiops_APPID_ACP_tecFailCount"
+            ],
+            "kpi_min_thr": 1,
+            "duration": 600,
+            "frequency": 9
+          }
+        ]
+      ],
+      "created_time": 1713787946407
+    },
+    {
+      "level_change_rules": {
+        "level_change_enable": true,
+        "special_time_rule": {
+          "level_change_type": "inherit_global"
+        }
+      },
+      "service_id": "66265773107d7cc9cd816437",
+      "name": "内部即时通讯（IIM）",
+      "type": "top",
+      "alert_rules": [],
+      "created_time": 1713788787999
+    }
+  ]

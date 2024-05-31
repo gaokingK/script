@@ -40,6 +40,7 @@
 - 拉取指定版本的镜像`docker pull ubuntu:17.10 # 不指定版本就拉取最新的`
 - 查看本地的所有镜像`docker images`
 - 以指定版本的镜像启动一个容器`docker run image[:version] # 如果目标镜像没有，就会去dockerhub拉取，就像最初运行hello-world一样`
+
 ## 单行命令
 - 批量删除命令 `docker ps -a|tail -n +2|head -n 1|awk '{print $1}'|xargs -i docker rm {}`
 - 删除所有的exited的container `docker ps -a|grep -w Exited|awk '{print $1}'|xargs -i docker rm {}`
@@ -54,11 +55,16 @@ runoob@runoob:~$ docker create  --name myrunoob  nginx:latest
 # 创建完成后可以通过docker ps -a 查看，状态为created
 ```
 ## 容器操作
+- docker start 和docker container start 没有任何区别，前者是早期的命令，后者是后来引入的命令，旨在让docker的命令的结构更加清晰易懂，docker container 包含了所有和docker 容器相关的操作命令如start、stop、run、ps等，现在二者都能一直使用
 - docker ps -a 查看所有状态的容器
 - docker start/stop/restart [OPTIONS] CONTAINER [CONTAINER...] 启动/停止/重启容器
 - run和start的区别
     - docker run 只在第一次运行时使用 ，将镜像放到容器中，以后再次启动这个容器时，只需要使用命令docker start 展开
-
+- docker ps -a 查看某个容器的port列的内容是8080/tcp, 0.0.0.0:2376->2376/tcp, 50000/tcp 请问这代表什么意思呢
+  - 8080/tcp 这意味着容器内的 8080 端口已经开放，允许通过 TCP 协议进行访问。但是，这个端口没有映射到 Docker 主机上的任何端口，所以不能从 Docker 主机外部直接访问这个端口。
+  - 0.0.0.0:2376->2376/tcp 这代表容器内的 2376 端口被映射到了 Docker 主机的 2376 端口。0.0.0.0:2376 表明 Docker 主机上的 2376 端口将绑定到所有的网络接口，这样容器的 2376 端口就可以从任何远程地址访问。
+  - ->2376/tcp 指的是所有发送到 Docker 主机的 2376 端口的 TCP 流量都会被转发到容器的 2376 端口。
+  - 50000/tcp 表示容器打开了 50000 端口，使用的是 TCP 协议，但同样没有进行端口映射，所以它只能在 Docker 主机或者 Docker 网络内部其他容器访问，不能从外部访问。
 ## 镜像
 - Simple Tags and Shared Tags [link](https://github.com/docker-library/faq#whats-the-difference-between-shared-and-simple-tags)
 - 删除镜像 `docker rmi hello-world`

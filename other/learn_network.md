@@ -65,11 +65,11 @@ link:
      - link:https://zhuanlan.zhihu.com/p/367635200 
      - -t (tcp) 仅显示tcp相关选项Administrator  
      - -u (udp)仅显示udp相关选项
-     - -n 拒绝显示别名，能显示数字的全部转化为数字
      - -l 仅列出在Listen(监听)的服务状态
-     - -p 显示建立相关链接的程序名
-     - -a：--all，显示所有非监听（已建立）和监听端口 netstat -an |grep 7788 显示有多少个连接在7788上
      - -anp：显示系统端口使用情况
+     - -n（--numeric）: 显示网络地址和端口号为数字形式，而不是尝试将它们解析为主机名、服务名称等。这可以提高显示速度，避免查询 DNS 服务器。
+     - -a（--all）: 显示所有选项，默认情况下，netstat 命令不显示监听（LISTEN）状态的套接字信息。使用 -a 选项，可以显示所有活动的和非活动（监听状态）的连接和监听端口。netstat -an |grep 7788 显示有多少个连接在7788上
+     - -p（--program）: 显示每个套接字关联的进程标识号 (PID) 和程序名称。这对于确定哪个程序建立了哪个连接或监听了哪个端口非常有用。 因为 -p 参数需要访问进程信息，因此在大多数系统上，你需要以 root 用户执行 netstat -nap 命令来查看所有进程的相关信息。
    - 获取正在使用的端口 netstat -ntl |grep -v Active| grep -v Proto|awk '{print $4}'|awk -F: '{print $NF}' 
    - 打开端口
       - link：https://www.cnblogs.com/sxmny/p/11224842.html

@@ -2,7 +2,10 @@
 # 通识
 - 文件编译安装在/usr/local下
 # 网络问题看learn_network.md
-
+# chrome
+- 调试时禁止跳转窗口
+- 选中开发者工具偏上方的Preserve log，保留跳转前的相关记录
+- https://blog.csdn.net/u010071211/article/details/89390854
 # 问题
 - 搜索时可以完全贴上
   - `build/temp.linux-aarch64-3.6/_sodium.c:57:20: fatal error: Python.h: No such`

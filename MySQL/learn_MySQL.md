@@ -13,7 +13,10 @@
   - 存储引擎
     - MySQL的存储引擎有MyISAM、InnoDB
     - MyISAM是MySQL的默认数据库引擎（5.5版之前），由早期的ISAM所改良。虽然性能极佳，但却不支持事务处理
-    - 
+    - `show engines` # 看你的mysql现在已提供什么存储引擎
+    - 修改表引擎方法`alter table table_name engine=innodb;`
+    - 看你的mysql当前默认的存储引擎: `show variables like '%storage_engine%';`
+    - 看某个表用了什么引擎`show create table 表名;`
 ### 连接服务器
 - 添加用户:
   - link:https://www.runoob.com/mysql/mysql-administration.html
@@ -128,7 +131,11 @@ column1 data_type[(data_length)],
 - 将查询结果导入到表中(表不存在) `CREATE TABLE school SELECT * FROM class`
 - ## 重新创建表`create table tbl_name like tbl_name;`
 - ## 修改表 help alter table;
-```cs
+- mysql modify 和change区别 
+  - 相同点是change和modify都可以修改表的定义，不同的是change后面需要写两次列名，不方便，但可以修改列名称。modify则不能修改列名称。
+  - AlTER TABLE tablename MODIFY[COLUMN] column_definition [FIRST|AFTER colname]
+  -  alter table test1 change ename ename1 int(4);
+```sql
 # 修改列属性使用modify
 alter table Person modify Id int not null auto_increment unique key comment 'id号'; 数据类型需要重新声明? 原本为空的设置为非空后会自动赋值
 # 修改列名 怎么只修改列名,而不传入属性-------------no

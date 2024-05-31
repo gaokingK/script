@@ -38,8 +38,66 @@ select update_time, date_add(update_time, 10) as calc_time from tbl_name
 update_time calc_time
 2023-10-24 14:56:83 2023-10-14 14:56:83
 ```
+### 转换时间戳 UNIX_TIMESTAMP
+`SELECT UNIX_TIMESTAMP(STR_TO_DATE(log_date, '%d-%m-%Y %H:%i:%s')) FROM your_table;`
+`SELECT UNIX_TIMESTAMP(STR_TO_DATE('2023-11-03T17:07:00.000Z', '%Y-%m-%dT%H:%i:%s.%fZ'));`
 ### 查看变量 SELECT FLOOR(25.75);
-### ifnull(value, b) 
+### simple case和searched case
+```sql
+# simple case case后面的值value分别和每个when子句后面的值compare_value进行相等比较
+# 如果和所有when子句后面的值都不相等，则返回else子句后面的值；如果没有else部分则返回null。
+CASE  value
+    WHEN  [compare_value] THEN  result
+    [WHEN [compare_value] THEN  result ...] 
+    [ELSE  result]  END
+select userid,case salary                                             
+    -> when 1000 then 'low'
+    -> when 2000 then 'med'
+    -> when 3000 then 'high'
+    -> else '无效值' end salary_grade
+    -> from salary_tab;
++--------+--------------+
+| userid | salary_grade |
++--------+--------------+
+|      1 | low          |
+|      2 | med          |
+|      3 | high         |
+|      4 | 无效值        |
+|      5 | low          |
++--------+--------------+
+# searched  case的语法结构：
+mysql> select userid,case
+    -> when salary<=1000 then 'low'
+    -> when salary=2000 then 'med'
+    -> when salary>=3000 then 'high'
+    -> else '无效值' end salary_grade
+    -> from salary_tab;
++--------+--------------+
+| userid | salary_grade |
++--------+--------------+
+|      1 | low          |
+|      2 | med          |
+|      3 | high         |
+|      4 | 无效值        |
+|      5 | low          |
++--------+--------------+
+```
+### if-else
+```
+IF condition1 THEN
+   {...statements to execute when condition1 is TRUE...}
+[ ELSEIF condition2 THEN
+   {...statements to execute when condition2 is TRUE...} ]
+[ ELSE
+   {...statements to execute when both condition1 and condition2 are FALSE...} ]
+END IF;
+```
+### IF( expr1 , expr2 , expr3 )
+- expr1 的值为 TRUE，则返回值为 expr2 ，expr1 的值为FALSE，则返回值为 expr3
+### NULLIF(expr1,expr2)
+- 如果两个参数相等则返回NULL，否则返回第一个参数的值expr1
+- select nullif(1,1),nullif(123,321);
+### ifnull(value, b) 两个参数都可以是表达式
 - 如果value不为null，返回value，否则返回b
 - `select ifnull((select max(b) from tbl_name), 222 )` # 如果是一个表达式，应该是一个子查询的形式，，并且只能返回一行一列
 ### round

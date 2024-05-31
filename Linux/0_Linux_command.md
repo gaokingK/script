@@ -4,6 +4,7 @@
    - https://linuxpip.org/ 问题
    - 搜索用法就搜 man手册参数详细解释
    - Linux 系统的介绍linux各种命令：https://docs.oracle.com/cd/E56344_01/html/E54075/ksh-1.html
+   - https://getiot.tech/zh/linux-command/timeout/
 # other
 ### 改变工作目录 cd xxxx; other command
 
@@ -370,7 +371,9 @@ EOF
 - ssh -v -p port [username@]ip如果连接上了会有connected
 - telnet ip port 如果连上了会有connected to xxx \n Escape character is '^]' 可以使用timeout 5 telnet ip port 这样5秒后无论连接是否建立就会退出
 - 有种情况就是端口是能联通的，但是由于防火墙的原因会导致连接失败，这时如果有connected关键字就代表连接成功了
-
+### timeout
+- (timeout [时限] command1 || true) | command2 | command3 # 这样可以保证后面的命令不会因为超时而不执行
+- 
 ### sar Linux性能监控命令
 - link： https://blog.51cto.com/moerjinrong/2092371
 - 查看cpu利用率 cup -u
@@ -530,6 +533,7 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
    - ls 多种类型的文件
       - `ls /path/to/search/*.{conf,ini}`
       - 使用-R选项来递归地搜索子目录。 `ls -R /path/to/search/*.{conf,ini}`
+   - ls 文件时不报错`ls /path/to/your/file_or_directory 2>/dev/null || true` 加上true不会让脚本因为set -e的情况下会退出
 ### 符号 linux中单引号‘ ,双引号“, 反引号 ` `, $, $(), ${}与变量；shell中各种括号的作用()、(())、[]、[[]]、{}
    - [shell中各种括号的作用()、(())、[]、[[]]、{}](https://blog.csdn.net/taiyang1987912/article/details/39551385?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link) -------------------------------------------no
    - [linux 单引号‘ ,双引号“, 反引号 ` `, $, $(), ${}与变量](https://blog.csdn.net/qq_40491569/article/details/83688652)
@@ -573,6 +577,7 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
    - [link](http://blog.chinaunix.net/uid-29132766-id-3862597.html)
    - 从标准输入读取文件解压 `gunzip -c s.mave-5.0.6.0-l-20230926.AIX.6.1.0.0_64.tar.gz|tar -xvf -`
    - 如果a/中有b,c,d文件, 然后在a的父文件中tar .... a/ 那么解压出来 也会有个a/ 就不必在创建a/然后在-C a/了,那样就有两层；而是直接在目录D下`tar -zxvf file.tar.gz` 这下目录D下就会有a/了
+   - tar 压缩时避免使用绝对路径，因为会将绝对路径的前面斜杠给去掉，就会导致绝对路径变成一层一层的文件夹，比如tar -zcvf python.tar.gz /bigdata/python 压缩的包解压出来就会变成 bigdata/python 里
    - -z 通过gzip指令处理备份文件
    - -v 显示处理信息
    - -f file 指定文件

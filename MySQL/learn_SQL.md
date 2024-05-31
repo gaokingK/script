@@ -36,6 +36,7 @@ limit offset
     - count() 返回查询的记录总数 `select id, count(*) as address_count from tbl_b group by id AS tbl_new;` 返回tbl_b的行数, 并生成一个两列名分别为id, address_count(表示tbl_b中id的个数)的新表, 新表名为tbl_new 用在查询中; 需要靠id分组, 要不只有一行
 
 ### update
+- 在原来的基础上加1`update tbl_name set col=col+1`
 - 更新一个值：`UPDATE coupon_pool SET serialno = '20170319010010'  WHERE id = 10;`
 - 更新多个值:`UPDATE coupon_pool SET serialno = '20170319010010' , name = '名字10'  WHERE id = 10;`
 - delete 不能来自删除来自同一个表的,你需要一个子表 :可以这样写 DELETE FROM Person WHERE id NOT IN ( select *from (SELECT MIN(id) as id FROM Person GROUP BY email ) as a )
@@ -243,4 +244,24 @@ select a.name as "Employee"  from Employee as a join Employee as b on a.managerI
 MariaDB [test]> insert into Person(age, name) values (?, ?)[...](18, "haha");
 # syntax error
 insert into tbl_name(col_name, ...) 这种可以
+```
+```sql
+select ip, count(ip) from cond_cap_sys_db_oracle_instance_f where __time >='2024-05-23' GROUP by ip
+-- select __time,tx_index_contention_avg_wait_time ,ip from cond_cap_sys_db_oracle_instance_f where __time >='2024-05-23' and tx_index_contention_avg_wait_time_count= '1'
+
+-- select __time ,thread_wait_count,insname,inst_name  from cond_cap_sys_db_oracle_instance_f 
+-- where __time >='2024-05-23'  and ip = '10.231.1.83' and inst_name='ccshis2' and thread_wait_count_count ='1'
+-- group by __time ,thread_wait_count,insname,inst_name
+-- HAVING count(*) >= 1
+-- 10.231.1.83
+SELECT __time ,ip,session_blocked_count,inst_name,  from cond_cap_sys_db_oracle_db_f where __time >'2024-05-23' and session_blocked_count_count ='1'
+group by __time,ip ,session_blocked_count,inst_name
+HAVING count(*) >2
+
+SELECT delta_scn  from cond_cap_sys_db_oracle_db_f 
+-- where __time >='2024-05-23T02:25:00.000Z' and  __time < '2024-05-23T02:26:00.000Z'
+where __time >='2024-05-23T16:25:00.000Z' and  __time < '2024-05-23T16:26:00.000Z'
+and ip= '10.231.65.11'
+and delta_scn_count  ='1'
+
 ```

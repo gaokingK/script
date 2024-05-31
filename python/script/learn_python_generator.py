@@ -1,5 +1,5 @@
 """
-了解协程的yield实现方式时，对yield语句有疑问，进一步了解下生成器（generator）
+TO：了解协程的yield实现方式时，对yield语句有疑问，进一步了解下生成器（generator）
 """
 
 # 参考：https://www.liaoxuefeng.com/wiki/1016959663602400/1017318207388128
@@ -51,7 +51,11 @@ def yield_return(num=0):
         print("y: {}".format(y))
 
 
-# send associate
+"""
+TO: send() 和next() 的区别
+- 都可以调用生成器运行一次 
+- send()可以向生成器发送给一个值，这个值被yield 语句等号左边的值接受，next() 其实是send(None)
+"""
 def simple_generator_send(num=2):
     while True:
         num *= 2
@@ -71,6 +75,28 @@ def simple_generator_send(num=2):
         # yield num  # 这样使用send(parm) 发送的参数不会影响next()的结果, 即无效
         num = yield num  # 这样有效
 
+"""
+TO: yield from obj 这个obj必须是iterable对象，不能是普通对象，作用和yield一样的
+简化了生成器的嵌套，如果没有yield 只能通过for循环来一次次调用子生成器；yield from 可以将外部调用者send()过来的值转到子生成器中，并且调用者和子生成器之间的通信也会变得复杂
+协程中最好使用yield from 这样不仅可以使用语句提供的双向通道，可以随心所欲的在进程中传递数据，而不用关系数据是否可以被yield
+"""
+def subgen():
+    while True:
+        # 这种写法必须send(1)后调用next()一次
+        x = yield 
+        yield x+1
+        # 这种写法不用 但x的定义有问题
+        # x = yield x+1
+
+def gen():
+    yield from subgen()
+
+def main_3():
+    g = gen()
+    next(g)                # 驱动生成器g开始执行到第一个 yield
+    retval = g.send(1)     # 看似向生成器 gen() 发送数据
+    print(retval)          # 返回2
+    g.throw(StopIteration) 
 
 if __name__ == '__main__':
     # simple_generator()
@@ -98,5 +124,9 @@ if __name__ == '__main__':
     # print(next(a))
 
     # 了解send的作用
-    s = simple_generator_send()
-    print(s.send(None))
+    # s = simple_generator_send()
+    # print(s.send(None))
+
+    # yield from
+    main_3()
+    pass

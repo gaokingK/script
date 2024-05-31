@@ -5,6 +5,7 @@ import os, sys,time
 import requests
 import logging
 import logging.handlers
+from datetime import datetime
 #!/aiops/python/python-3.8.13/bin/python3.8
 
 def init_logger(name, count=10):
@@ -14,7 +15,7 @@ def init_logger(name, count=10):
     log_path = os.getcwd()
     if not os.path.exists(log_path):
         os.mkdir(log_path)
-    log_name = log_path + "\\" + name + '.log'
+    log_name = log_path + "\\" + name + "_" + datetime.now().strftime("%Y%m%d") + '.log'
     print("日志保存在%s" % log_name)
     ###
     ch_handler = logging.StreamHandler()
@@ -122,18 +123,40 @@ if __name__ == '__main__':
     os.chdir(os.path.dirname(__file__))
     sys.path.append(os.path.dirname(__file__))
     logger = init_logger(os.path.basename(__file__).strip('.py'))
+    paso = ["CB","CBC", "PDMP.ECMP", "CMO.POF", "IST"]
+    env1 = ["PI1", "PI2", "UAT1", "UAT2", "UAT3", "UAT4", "PL1", "PL2", "SIT1", "SIT2", "SIT3", "KFLT1", "KFLT2"]
+    env2 = ["PI1", "PI2", "SFYL1", "UAT1", "UAT2", "UAT3", "UAT4", "SIT1", "SIT2"]
+    topic_d = {
+    "CB": env1,
+    "ECMP": env1,
+    "CMO.POF": env1,
+    "IST": env1,
+    "CBC": env2
+    }
+    # 测试
+    # conf=gen_conf("APP_test_TRACELOG_SOURCE_test")
+    # create_jax(conf)
+    # create_analysis(conf)
+    # create_storage(conf)
+    # exit()
+    for paso in topic_d:
+        logging.info(f"创建{paso}的")
+        for env in topic_d[paso]:
+            topic = f"APP_{paso}_TRACELOG_SOURCE_{env}"
+            logging.info(topic)
+    exit()
     # host = "http://10.251.52.102:7680"
     host = "http://10.251.52.102:18080"
     # host = "http://10.251.52.102:7680"
     # host = "http://10.240.99.200:7680"
-    cookie="UA=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJkdXJhdGlvbiI6MzYwMDAwMCwibGFzdExvZ2luIjoxNzE0NDQ0NTUxOTQ4LCJuYW1lcyI6IltcImpheFwiLFwibG9nQW5hbHlzaXNcIixcImxvZ1NwZWVkXCIsXCJyZWZpbmVyXCJdIiwic2luZ2xlU2lnbk9uIjpmYWxzZSwid2l0aFNlcnZpY2VBdXRoIjoie1wiamF4XCI6dHJ1ZSxcImdhdWdlXCI6dHJ1ZSxcInZpc2lvblwiOnRydWUsXCJkYXRhTW9kZXJuaXphdGlvblwiOnRydWUsXCJkZWFsQW5hbHlzaXNcIjp0cnVlLFwiY21kYlwiOnRydWUsXCJsb2dBbmFseXNpc1wiOnRydWUsXCJsb2dTcGVlZFwiOnRydWUsXCJyZWZpbmVyXCI6dHJ1ZSxcIkFJT3BzXCI6dHJ1ZX0iLCJzZXNzaW9uSWQiOjU0MjAwODEyMTU4MzMwODgsInVzZXJOYW1lIjoiYWRtaW4iLCJ1c2VySWQiOiJjWit4ekdpUVBSZWpISW1OZUlKK1FGV2t3Uk9PcTFEelVZZ0FuWmtycTN4dDhzZkMrOGgzK3hLbEpDMmdPb3VqYlZCdTNna29mVUFzYk1aZGpxdEFMNTRzaG5VdThMdkRGa2VSemhJb3VSZWowOGRvSTRsVE5Ud3FoQnF2c2dIeVFmNFY0VzM5UmMzMHkxeUxKVVVBNlRDbTNkN2JuMEw0MVpxQjhTWEJVNE09IiwicHJvZHVjdHMiOiJ7fSJ9.gkjt16TdvNUDBCFk1Tz5D5UcTVXBXGuKk4snuPSew0r5DUA1wuVAsAprLF5EjAB-SePIfi33I5A2D-aaP9H4gw"
+    cookie="UA=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJkdXJhdGlvbiI6MzYwMDAwMCwibGFzdExvZ2luIjoxNzE1Mzg5NzA3Mzk4LCJuYW1lcyI6IltcImpheFwiLFwibG9nQW5hbHlzaXNcIixcImxvZ1NwZWVkXCIsXCJyZWZpbmVyXCJdIiwic2luZ2xlU2lnbk9uIjpmYWxzZSwid2l0aFNlcnZpY2VBdXRoIjoie1wiamF4XCI6dHJ1ZSxcImdhdWdlXCI6dHJ1ZSxcInZpc2lvblwiOnRydWUsXCJkYXRhTW9kZXJuaXphdGlvblwiOnRydWUsXCJkZWFsQW5hbHlzaXNcIjp0cnVlLFwiY21kYlwiOnRydWUsXCJsb2dBbmFseXNpc1wiOnRydWUsXCJsb2dTcGVlZFwiOnRydWUsXCJyZWZpbmVyXCI6dHJ1ZSxcIkFJT3BzXCI6dHJ1ZX0iLCJzZXNzaW9uSWQiOjU0NTEwNTIwNjk2MTg2ODgsInVzZXJOYW1lIjoiYWRtaW4iLCJ1c2VySWQiOiJjWit4ekdpUVBSZWpISW1OZUlKK1FGV2t3Uk9PcTFEelVZZ0FuWmtycTN4dDhzZkMrOGgzK3hLbEpDMmdPb3VqYlZCdTNna29mVUFzYk1aZGpxdEFMNTRzaG5VdThMdkRGa2VSemhJb3VSZWowOGRvSTRsVE5Ud3FoQnF2c2dIeVFmNFY0VzM5UmMzMHkxeUxKVVVBNlRDbTNkN2JuMEw0MVpxQjhTWEJVNE09IiwicHJvZHVjdHMiOiJ7fSJ9.2kjby48DtbcAuEayUkUSq4veVcEz-4fzpuA2piAlUP4eq-__UBPcgwj656q4cr7kT2LE3eyJhNBVEZE3MasRxw"
 
     # if len(sys.argv) > 1:
         # all_ip = sys.argv[1]
         # all_ip = parse_ip(all_ip)
     # 10.232.49.85
     if True:
-        all_ip = parse_ip_from_file("./已下线的ip.txt")
+        all_ip = parse_ip_from_file("./下线ip_0511.txt")
         batch_count=50
         for i in range(math.ceil(len(all_ip)/batch_count)):
             current_ip_list = all_ip[i*batch_count: (i+1)*batch_count]

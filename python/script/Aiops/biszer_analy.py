@@ -2,17 +2,35 @@ import json
 import os
 import requests
 import logging
-from openpyxl import Workbook
+import logging.handlers
+from openpyxl import Workbook, load_workbook
 from openpyxl.styles import Font  
+from datetime import datetime
 import re
 
 
-LOG_FORMAT = "%(filename)s-:%(message)s"
-fh = logging.FileHandler("./python/script/Aiops/biszer2.log", encoding='utf-8')
-fh.setLevel(logging.ERROR) #level和format可以在basicCofig中设置
-fh.setFormatter(logging.Formatter("%(filename)s-:%(message)s")) # 必须是一个formater对象
-logging.basicConfig(handlers=[fh], level=logging.ERROR, format=LOG_FORMAT) 
-logging.error("hi")
+def init_logger(name, count=10):
+    logger = logging.getLogger()
+    log_level = logging.DEBUG
+    formatter = logging.Formatter("[%(asctime)s] %(levelname)s (%(filename)s:%(lineno)d) %(message)s")
+    log_path = os.getcwd()
+    if not os.path.exists(log_path):
+        os.mkdir(log_path)
+    log_name = log_path + "\\" + name + "_" + datetime.now().strftime("%Y%m%d") + '.log'
+    print("日志保存在%s" % log_name)
+    ###
+    ch_handler = logging.StreamHandler()
+    ch_handler.setLevel(log_level)
+    ch_handler.setFormatter(formatter)
+    time_handler = logging.handlers.TimedRotatingFileHandler(log_name, when="midnight", interval=1,
+                                                             encoding='utf-8', backupCount=count)
+    time_handler.setLevel(log_level)
+    time_handler.setFormatter(formatter)
+    ###
+    logger.setLevel(log_level)
+    logger.addHandler(time_handler)
+    logger.addHandler(ch_handler)
+    return logger
 
 all_index_type_set = set() # 指标的类型 {'top'} 
 alert_rule1_all_keys_set = set() # 告警规则所有key集合 {'frequency', 'values', 'kpi', 'kpi_min_thr', 'kpis', 'type', 'duration', 'op', 'value'}
@@ -45,7 +63,7 @@ alert_op = {
 
 def gen_rule_str(rule_list):
     if not rule_list[0]:
-        logging.error("没有配置告警规则")
+        logger.error("没有配置告警规则")
         return
     #         gen_rule_str(data["alert_rules"])
     def join(rule):
@@ -70,7 +88,7 @@ def gen_rule_str(rule_list):
         rule_str = join(rule)
         if rule.get("add_alert_rule"):
             rule_str += f"且 {join(rule.get('add_alert_rule'))}"
-        logging.error(rule_str)
+        logger.error(rule_str)
     return rule_str
 
 def get_child_rule(service_id, type):
@@ -82,8 +100,9 @@ def get_child_rule(service_id, type):
         "type": type
     }
     headers = {
-        "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJmdWxsX25hbWUiOiJ5d3B0IiwiZXhwIjoxNzA5Nzc4NjYyLCJ1c2VybmFtZSI6Inl3cHQiLCJyb2xlcyI6WyI1ZjE2YTUzNTEwN2Q3YzNkMTViODZmZjkiLCI2MDY1MjU1MDEwN2Q3YzljMjAyMWQ0ZWEiXX0.ImbcDZtxqRF-qTc1dI1PhzIvZMyJE8mlMr5Q00XgzuTc6RmUYB_z98eT0OR6YvxM774wKkBwHO40u549rQ1OIg",
-        "Username": "ywpt",
+        # "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJmdWxsX25hbWUiOiJzdXBlcmFkbWluIiwiZXhwIjoxNzE2ODkwMjg2LCJ1c2VybmFtZSI6ImFpb3BzIiwicm9sZXMiOltdfQ.kxiFjFMgOSYDyjHNfrOm8mjPWP-qUQ1KkLmfNEK6a6GCbRYETM728LRGNrSVMXDXZWBtdRW10dNrfyrCJAc50g",
+        # "Username": "ywpt",
+        "Authorization": "RYZ2TmkPPfiBcmWI713hWhiE4AQfAdcF",
         "content-type": "application/json"
     }
 
@@ -92,7 +111,7 @@ def get_child_rule(service_id, type):
     if res.get("data"):
         formate_data(res["data"])
     else:
-        logging.error(res.get("msg"))
+        logger.error(res.get("msg"))
     # for item in res2:
     #     gen_rule_str(item["alert_rules"])
 # 15-17
@@ -101,9 +120,9 @@ def formate_data(all_data):
     all_res = []
     for item in all_data:
         # if item["service_id"] == '5f179561107d7c3d15b8a384':
-        #     logging.error(item)
+        #     logger.error(item)
         # if item["service_id"] == '5fc84b39107d7c9c20fa641b':
-        #     logging.error(item) 
+        #     logger.error(item) 
         # all_index_type_set.add(item.get("type"))
         data = {}
         rule_data = []
@@ -132,7 +151,7 @@ def formate_data(all_data):
                 res["add_alert_rule"] = rule[2]
                 res["add_alert_rule"]["strategy"] = rule[0].get("strategy")
             data["alert_rules"].append(res)
-            logging.error(f"{data['name']}\n")
+            logger.error(f"{data['name']}\n")
             rule_data.append(gen_rule_str([res]))
 
             if rule[0].get("strategy") != rule[1].get("strategy"):
@@ -141,7 +160,7 @@ def formate_data(all_data):
         rules_list.append(rule_data)
         all_res.append(data)
         # 写在前面，一次次解析
-        # logging.error(f"{data['name']}\n")
+        # logger.error(f"{data['name']}\n")
         # gen_rule_str(data["alert_rules"])
         if data["floor"] == "top":
             # current_dimension = ""
@@ -150,7 +169,7 @@ def formate_data(all_data):
             # current_dimension = data["name"]
             res = get_child_rule(data["service_id"], "third_level")
         # else:
-        #     logging.error("ok")
+        #     logger.error("ok")
     return all_res
 
 
@@ -177,16 +196,34 @@ def gen_dimension(rule):
         return "主机维度"
     return "应用"
         
+def filter_paso(conf):
+    res = []
+    for item in conf:
+        if any([paso for paso in need_paso if paso in item.get("name")]):
+            res.append(item)
+            continue
+        conf.remove(item)
+    return res
 
 if __name__ == "__main__":
-    # logging.error(os.getcwd())
-    with open("./python/script/Aiops/biszer2.json", "r", encoding='utf-8') as f:
+    logger = init_logger(os.path.basename(__file__).strip('.py'))
+    # conf = gen_conf(topic)
+    # logger.info(conf)
+    # create_analysis(conf)
+    # create_storage(conf)
+
+
+    # logger.error(os.getcwd())
+    with open(os.path.join(os.path.dirname(__file__), "biszer_analy.json"), "r", encoding='utf-8') as f:
     # all_data = json.load("./Aiops/biszer.json", data.decode('utf-8')) 
         all_data = json.load(f)
-    res_file = os.path.join(os.path.dirname(__file__), "test4.xlsx")
-    
+    res_file = os.path.join(os.path.dirname(__file__), "biszer_rule.xlsx")
+    # need_paso = ['CBC', 'CAM', 'FSAIM', 'BSMP', 'PDMP', 'CBEC', 'FSTA', 'FSDSR', 'CBDSR', 'ACP', 'BEB', 'DSR', 'EPS', 'RLCS', 'FAM', 'NCFD', 'ESSC', 'IACP', 'FACP', 'CIFW', 'PMT', 'WMBP', 'RLBP', 'CBIB', 'CBCS', 'CBS', 'ECIF', 'BCBI', 'CSI']
+    # all_data = filter_paso(all_data)
+
     # 多
     wb = Workbook()
+    # wb = load_workbook(res_file)
     for app in all_data:
         global current_dimension
         current_dimension = "应用级"
@@ -217,5 +254,5 @@ if __name__ == "__main__":
     # 单
     # formate_data(all_data)  
     # gen_excel(rules_list, res_file)
-    logging.error("ok")
+    logger.error("ok")
     print("ok")

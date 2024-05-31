@@ -35,6 +35,7 @@ True
       - r+ == r+w（可读可写，文件若不存在就报错(IOError)）
       - w+ == w+r（可读可写，文件若不存在就创建）
       - a+ == a+r（可追加可写，文件若不存在就创建）
+      - newline 参数，指定换行符，默认是\n 如果newline=" " 会认为空格是换行符
       - 对应的，如果是二进制文件，就都加一个b就好啦：‘rb’　　‘wb’　　‘ab’　　‘rb+’　　‘wb+’　　‘ab+’
         - t是windows平台特有的所谓text mode(文本模式),区别在于会自动识别windows平台的换行符。
         - 类Unix平台的换行符是\n，而windows平台用的是\r\n两个ASCII字符来表示换行，python内部采用的是\n来表示换行符。
@@ -254,6 +255,45 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
     - a.pop(index) 删除索引并且返回
     - del a[start[, end]] 删除下标, 可以是范围
     - 值必须都有效,否则会报错
+    - clear()：删除列表所有元素
+    - 不能在for循环中删除迭代对象的值，虽然for循环会自动处理删除后迭代的索引值，但这样会跳过一些值
+```py
+a=[x for x in range(10)]
+for i in range(len(a)):
+    print(a[i])
+    if a[i]%2== 0:
+        continue
+    a.remove(a[i])
+print(a)
+exit()
+0
+1
+3
+5
+7
+9
+Traceback (most recent call last):
+  File "c:/Users/Farben/Desktop/People/script/python/script/Aiops/biszer_analy.py", line 198, in <module>
+    print(a[i])
+IndexError: list index out of range
+
+    a=[x for x in range(10)]
+    for i in a:
+        print(i)
+        if i%2== 0:
+            continue
+        a.remove(i)
+    print(a)
+    exit()
+# 应该便利所有的
+0
+1
+3
+5
+7
+9
+[0, 2, 4, 6, 8]
+```
 #### dict
     - dict.setdefault(key, value)
         - 字典中的value能为空和None
@@ -354,7 +394,7 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
     print("hell" + "o" is s2)  # True
     #因为"hell" + "o"在编译时已经变成了"hello"，而s1+"o"因为s1是一个变量，他们会在运行时进行拼接，所以没有被intern
     ```
-23. ##### [Python 中 is 和 == 的不同]https://blog.csdn.net/qq_34152244/article/details/100639985)
+23. ##### [Python 中 is和== 的不同]https://blog.csdn.net/qq_34152244/article/details/100639985)
     python 中没有===比较符，只有is 和==
     比较对象无非是比较对象的两个东西，对象的值和对象在内存中的地址(id(obj))
     is是二者都比较，`==` 只比较对象的值
@@ -438,7 +478,12 @@ TypeError: coercing to Unicode: need string or buffer, generator found
 ### 语法糖
 1. `return (rv[0] if rv else None) if one else rv`
 2. 列表生成式
-    ```python
-    [int(x) for x in range(5)]
-    [x+y for x,y in zip(1,2)]
-    ```
+```python
+[int(x) for x in range(5)]
+[x+y for x,y in zip(1,2)]
+[i for i in range(k) if condition]  # 此时if起条件判断作用，满足条件的，将被返回成为最终生成的列表的一员。
+# 
+[i if condition else exp for exp]  # 此时if...else被用来赋值，满足条件的i以及else被用来生成最终的列表
+# [i if i == 0 else 100 for i in range(10)] 
+[0, 100, 100, 100, 100, 100, 100, 100, 100, 100]
+```

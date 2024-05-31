@@ -36,7 +36,8 @@
 - 上面的数据类型的是键 值 的形式，只不过值的类型不同
 - EXISTS key 检查给定 key 是否存在。
 - type key 查看key的类型，然后使用对应的命令查看值
-
+### 使用
+- redis-cli.exe -h 127.0.0.1 -p 6379
 ### string
 - link
   - https://blog.csdn.net/qq_40399646/article/details/108906116#t21
