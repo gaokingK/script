@@ -101,6 +101,21 @@ async def change_it_without_lock(n):
 
 
 
+def isPalindrome(x: int) -> bool:
+    if x < 0:
+        return False
+    elif x == 0:
+        return True
+    else:
+        import math
+        length = int(math.log(x, 10)) + 1
+        L = length - 1
+        for i in range(length // 2):
+            if x // 10 ** L != x % 10:
+                return False
+            x = (x % 10 ** L) // 10
+            L -= 2
+        return True
 
 if __name__ == '__main__':
     b_time=time.time()

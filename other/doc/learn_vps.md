@@ -88,6 +88,11 @@ NS 域名的 DNS 服务器地址，例如 ns3.dnsv2.com，推荐 DNSPod.
     - 如果使用域名改变direct，配置是`domain:erebor.douban.com `而不是`erebor.douban.com` 写在规则里面有example的那个direct规则列表中就行，不用新建了
 - 输入 vasma 查看账号
 
+# 管理服务
+- cloudcone 上运行工具会乱码，使用xshell登入
+- 安装完上面的八合一脚本后，install.sh会删除，vasma 即可打开服务
+- 选择1xray-core
+
 # 问题
 ### io: read/write on closed pipe
 - 先看下域名是否失效
@@ -102,6 +107,15 @@ NS 域名的 DNS 服务器地址，例如 ns3.dnsv2.com，推荐 DNSPod.
 # 其他
 - [gooreplacer](https://github.com/jiacai2050/gooreplacer/)
   - 资源拦截替换, 把请求的某些资源重置到别的地方获取，这样资源就能加载了
+
+### 手机共享vpn
+- 打开终端输入route print
+- 将路由表中的192.168.136.245填入设置->代理中的地址输入框中
+```cs
+网络目标        网络掩码          网关       接口   跃点数
+0.0.0.0          0.0.0.0  192.168.136.245  192.168.136.213     55
+```
+- 保持v2rayN关闭，就可以使用vpn了，如果想要更新v2rayN中的一些内容，需要将V2rayN中的代理设置改为不改变系统代理
 - sms-activate.org 网站注册一个虚拟号
   - link：https://juejin.cn/post/7199657558834692157
 # 一些代理
@@ -124,3 +138,4 @@ CheckNetIsolation.exe loopbackexempt -d -p=S-1-15-2-1609473798-1231923017-684268
 - 然后还是没有用，把网络适配器删掉了，然后重新配置，打开代理又好了，真奇怪
 
 - 后面通过设置v2ray解决，设置-解除UWP应用回环代理设置 然后在新窗口中勾选全部的点击保存就可以了 每次重启后都要重新设置的
+

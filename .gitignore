@@ -3,6 +3,12 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# customize
+*.swp
+.change_pc_90.90.0.140.md.swp
+.vscode/
+temp.*
+
 # C extensions
 *.so
 # project letter
