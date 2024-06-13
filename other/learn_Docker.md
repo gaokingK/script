@@ -60,6 +60,7 @@ runoob@runoob:~$ docker create  --name myrunoob  nginx:latest
 - docker start/stop/restart [OPTIONS] CONTAINER [CONTAINER...] 启动/停止/重启容器
 - run和start的区别
     - docker run 只在第一次运行时使用 ，将镜像放到容器中，以后再次启动这个容器时，只需要使用命令docker start 展开
+# 端口映射
 - docker ps -a 查看某个容器的port列的内容是8080/tcp, 0.0.0.0:2376->2376/tcp, 50000/tcp 请问这代表什么意思呢
   - 8080/tcp 这意味着容器内的 8080 端口已经开放，允许通过 TCP 协议进行访问。但是，这个端口没有映射到 Docker 主机上的任何端口，所以不能从 Docker 主机外部直接访问这个端口。
   - 0.0.0.0:2376->2376/tcp 这代表容器内的 2376 端口被映射到了 Docker 主机的 2376 端口。0.0.0.0:2376 表明 Docker 主机上的 2376 端口将绑定到所有的网络接口，这样容器的 2376 端口就可以从任何远程地址访问。

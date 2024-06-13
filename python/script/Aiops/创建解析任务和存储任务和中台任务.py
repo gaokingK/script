@@ -66,22 +66,22 @@ def create_storage(conf_dict):
         "topologyId": None,
         "store": [
             {
-            "centerId": 183106926206976,
-            "centerName": "数据中心",
-            "storageId": 182841604730880,
-            "timestamp": "@collectiontime",
+            "centerId": conf_dict["centerId"],
+            "centerName": conf_dict["centerName"],
+            "storageId": conf_dict["storageId"],
+            "timestamp": "@timestamp",
             "cycleType": 0,
             "timeInterval": None,
             "dayData": 10,
             "numPartitions": 1,
             "isDefaultAddress": True,
             "storageTime": "",
-            "jaxCluster": "Yarn",
+            "jaxCluster": conf_dict["jaxCluster"],
             "groupId": None,
             "offset": "earliest",
             "instanceNum": 1,
             "maxPollSize": 5000,
-            "repeatCheck": 1,
+            "repeatCheck": 0,
             "taskManagerMemory": 512,
             "yarnSlots": 1,
             "checkPointInterval": 0,
@@ -102,7 +102,7 @@ def create_storage(conf_dict):
 def create_analysis(conf_dict):
     payload={
         "inputChannel": "others",
-        "inputStorageId": 182839312752640,
+        "inputStorageId": conf_dict.get("inputStorageId"),
         "inputTopic": conf_dict.get("anly_in_topic"),
         "outputChannel": "local",
         "outputStorageId": None,
@@ -127,9 +127,9 @@ def create_analysis(conf_dict):
             "partitionType": "ROUND_ROBIN",
             "partitionType": "ROUND_ROBIN",
             "checkPointInterval": 0,
-            "centerId": 183106926206976,
-            "centerName": "数据中心",
-            "jaxCluster": "Yarn",
+            "centerId": conf_dict["centerId"],
+            "centerName": conf_dict["centerName"],
+            "jaxCluster": conf_dict["jaxCluster"],
             "inDataSetIds": []
             }
         ],
@@ -142,43 +142,85 @@ def create_analysis(conf_dict):
         "serviceId": "",
         "serviceName": "",
         "topologyId": None,
-        "centerId": 183106926206976,
+        "centerId": conf_dict["centerId"],
         "filter": {
-        "filterGroup": {
-        "filtersJson": [
-            {
-                "condition": "",
-                "_showCondition": False,
-                "data": [
+            "filterGroup": {
+                "filtersJson": [
+                {
+                    "condition": "",
+                    "_showCondition": False,
+                    "data": [
                     {
-                    "field": "timeStamp",
-                    "format": "yyyy-MM-dd HH:mm:ss",
-                    "timezone": "Asia/Shanghai",
-                    "locale": ""
-                    },
-                    {
-                    "field": "timeStamp",
-                    "format": "UNIX_MS",
-                    "timezone": "Asia/Shanghai",
-                    "locale": ""
+                        "field": "@timestamp",
+                        "fieldValue": "${timeStamp}",
+                        "fieldType": "String"
                     }
+                    ],
+                    "enable": 1,
+                    "ruleName": "Add",
+                    "_showRule": True
+                },
+                {
+                    "condition": "",
+                    "_showCondition": False,
+                    "data": [
+                    {
+                        "field": "@timestamp",
+                        "format": "UNIX_MS",
+                        "timezone": "Asia/Shanghai",
+                        "locale": ""
+                    }
+                    ],
+                    "enable": 1,
+                    "ruleName": "Date",
+                    "_showRule": True
+                },
+                {
+                    "condition": "",
+                    "_showCondition": False,
+                    "data": [
+                    {
+                        "result": "@rownumber",
+                        "target": "",
+                        "type": "DATE",
+                        "fieldInfo": "",
+                        "express": "(${@timestamp})/500",
+                        "format": "ms"
+                    }
+                    ],
+                    "enable": 1,
+                    "ruleName": "Arithmetic",
+                    "_showRule": True
+                },
+                {
+                    "condition": "",
+                    "_showCondition": False,
+                    "data": [
+                    {
+                        "result": "@message",
+                        "target": "",
+                        "type": "STRING",
+                        "fieldInfo": "",
+                        "express": "${message}"
+                    }
+                    ],
+                    "enable": 1,
+                    "ruleName": "Arithmetic",
+                    "_showRule": True
+                }
                 ],
-                "enable": 1,
-                "ruleName": "Date",
-                "_showRule": True
+                "sampleDataLists": [
+                {
+                    "data": {},
+                    "_editTitle": False,
+                    "isCheck": 1,
+                    "title": "样本1"
+                }
+                ],
+                "customizeScript": [],
+                "_fieldsList": []
             }
-        ],
-        "sampleDataLists": [
-        {
-            "data": {},
-            "_editTitle": False,
-            "isCheck": 1,
-            "title": "样本1"
-        }
-        ],
-            "customizeScript": [],
-            "_fieldsList": []
-            }
+    
         }
     }
     headers = {
@@ -205,17 +247,13 @@ def create_jax(conf_dict):
     "jobConfig": {
     "offsetMode": "group",
     "topics": [
-    conf_dict["jax_input_topic"]
-    #"APP_PDMP_TRACELOG_ETL"
+        conf_dict["jax_input_topic"]
+        #"APP_PDMP_TRACELOG_ETL"
     ],
     "commitOffsetOnCheckPoint": True,
     "rebalancePartition": True,
     "groupId": conf_dict["jax_group_id"], #"APP_PDMP_TRACELOG_ETL222",
-    "bootstrapServers": [
-    "10.240.245.31:9092",
-    "10.240.245.32:9092",
-    "10.240.245.33:9092"
-    ],
+    "bootstrapServers": conf_dict["bootstrapServers"],
     "byteArrayFieldName": "bytes",
     "autoCreateTopic": False
     },
@@ -231,18 +269,15 @@ def create_jax(conf_dict):
     "jobId": conf_dict["jax_kafka_out_job_id"],#"KafkaSinkJob171592633328590053",
     "jobName": "com.eoi.jax.flink.job.sink.KafkaSinkJob",
     "jobConfig": {
-    "autoCreateTopic": True,
-    "autoCreateTopicPartitions": 3,
-    "autoCreateTopicReplicationFactor": 2,
-    "topic": conf_dict["jax_output_topic"], #"APP_PDMP_TRACELOG_ETL_3333",
-    "bootstrapServers": [
-    "10.240.245.31:9092",
-    "10.240.245.32:9092"
-    ],
-    "semantic": "AT_LEAST_ONCE",
-    "logFailuresOnly": True,
-    "writeTimestampToKafka": False,
-    "kafkaPartitionType": "ROUND_ROBIN"
+        "autoCreateTopic": True,
+        "autoCreateTopicPartitions": 3,
+        "autoCreateTopicReplicationFactor": 2,
+        "topic": conf_dict["jax_output_topic"], #"APP_PDMP_TRACELOG_ETL_3333",
+        "bootstrapServers": conf_dict["bootstrapServers"],
+        "semantic": "AT_LEAST_ONCE",
+        "logFailuresOnly": True,
+        "writeTimestampToKafka": False,
+        "kafkaPartitionType": "ROUND_ROBIN"
     },
     "jobOpts": {}
     }
@@ -270,7 +305,7 @@ def create_jax(conf_dict):
     "opts": {}
     },
     "pipeDescription": None,
-    "clusterName": None,
+    "clusterName": conf_dict["clusterName"],
     "pipelineUi": {
     conf_dict["jax_kafka_in_job_id"]: {
     "display": "Kafka数据源接入_1.9",
@@ -308,22 +343,56 @@ def create_jax(conf_dict):
     else:
         logger.error(f"创建{conf['jax_task_name']}中台任务执行失败：{res.get('retMsg')}")
 
-def gen_conf(topic):
+def gen_conf(topic, env=None):
+    # 原始应用日志：APP_$PASO_APPLOG_SOURCE
+
+    # 分割符处理后应用日志：APP_$PASO_APPLOG_ETL
+
+    # 入ES应用日志：APP_$PASO_DLMT_APPLOG_ETL
+    # APP_ECMP_TRACELOG_SOURCE
+
     # 中台任务输入topic 原始topic名 APP_{p}_TRACELOG_SOURCE_{e}
     # 解析任务输入topic、中台任务输出topic 去掉source APP_{p}_TRACELOG_{e}
     # 解析任务输出topic、存储任务输入topic source换成ETL APP_{p}_TRACELOG_ETL_{e}
     if topic != topic.upper():
         logger.error(f"topic:{topic}不是全大写")
-
+    id_conf = {
+        "zj": {
+            "bootstrapServers":[
+                "10.239.2.76:9092","10.239.2.77:9092","10.239.2.78:9092","10.239.2.79:9092","10.239.2.80:9092"],
+            "clusterName": "SQYarn",
+            "inputStorageId": 754273169113088, # 张江kafka地址 
+            "centerId": 754275092074496, # 张江数据中心 
+            "centerName": "张江数据中心",
+            "jaxCluster": "ZJYarn",
+            "storageId": 754274834120704,# 存储数据中心
+        },
+        "sq": {
+           "bootstrapServers":[
+                "10.207.64.27:9092","10.207.64.28:9092","10.207.64.29:9092"],
+            "clusterName": "SQYarn",
+            "inputStorageId": 756369794883584, # 石泉kafka地址 
+            "centerId": 764284838682624, # 石泉数据中心 
+            "centerName": "石泉数据中心",
+            "jaxCluster": "SQYarn",
+            "storageId": 122005221953536,# 存储数据中心
+        },
+        "dev": {
+            "bootstrapServers":[
+                "10.240.245.31:9092",
+                "10.240.245.32:9092",
+                "10.240.245.33:9092"],
+            "clusterName": "Yarn",
+            "inputStorageId": 182839312752640, # 张江kafka地址
+            "centerId": 183106926206976,
+            "centerName": "数据中心",
+            "jaxCluster": "Yarn",
+            "storageId": 182841604730880,
+        }
+    }
     conf = {}
+    conf.update(id_conf[env])
     prefix = str(int(time.time() * 100000000))
-
-
-    # jax_topic名_sq/zj，topic名【除前面的itm/app/等，以及后面的source/etl】。比如nginx这个，就是jax_nginx_errorlog_zj
-    conf["jax_task_name"] = f"jax_{topic.replace('APP_', '').replace('ITM_', '').replace('_SOURCE', '').replace('_ETL', '')}"
-    conf["jax_input_topic"] = topic # 原始topic名 APP_{p}_TRACELOG_SOURCE_{e}
-    conf["jax_output_topic"] = topic.replace("_SOURCE", "")
-    conf["jax_group_id"] = f"{topic}_jax"
 
     # KafkaByteSourceJob171592622504733080
     conf["jax_kafka_in_job_id"] = f"KafkaByteSourceJob{prefix}"
@@ -331,18 +400,42 @@ def gen_conf(topic):
     conf["jax_decoder_job_id"] = f"YaoLogDecoderJob{prefix}"
     conf["jax_kafka_out_job_id"] = f"KafkaSinkJob{prefix}" #"KafkaSinkJob171592633328590053",
 
-    conf["anly_in_topic"] = [topic.replace("_SOURCE", "")]
-    conf["anly_out_topic"] = topic.replace("SOURCE", "ETL")
-    conf["anlysis_task_name"] = f"解析-{topic}"
-    conf["storage_task_name"] = f"存储-{topic}"
-    conf["data_set_name"] = topic.replace("SOURCE", "ETL").lower()# 数据集名称 子paso是点
+    # jax_topic名_sq/zj，topic名【除前面的itm/app/等，以及后面的source/etl】。比如nginx这个，就是jax_nginx_errorlog_zj
+    conf["jax_task_name"] = f"jax_{topic.replace('APP_', '').replace('ITM_', '').replace('_SOURCE', '').replace('_ETL', '')}{'_' + env if not env == 'dev' else ''}"
+    conf["jax_input_topic"] = topic # 原始topic名 APP_{p}_TRACELOG_SOURCE_{e}
+    conf["jax_group_id"] = f"{topic}_jax"
+
+    if env == "dev":
+        conf["jax_output_topic"] = topic.replace("_SOURCE", "")
+
+        conf["anly_in_topic"] = [topic.replace("_SOURCE", "")]
+        conf["anly_out_topic"] = topic.replace("SOURCE", "ETL")
+        conf["anlysis_task_name"] = f"解析-{topic}"
+        conf["storage_task_name"] = f"存储-{topic}"
+        conf["data_set_name"] = topic.replace("SOURCE", "ETL").lower()# 数据集名称 子paso是点
+    else:
+        conf["jax_output_topic"] = topic.replace("SOURCE", "ETL")
+
+        conf["anly_in_topic"] = [topic.replace("SOURCE", "ETL")]
+        anly_out_topic = topic.replace("SOURCE", "ETL").split("_")
+        anly_out_topic.insert(-2, "DLMT")
+        conf["anly_out_topic"] = "_".join(anly_out_topic)
+
+        conf["anlysis_task_name"] = f"解析-{'张江' if env.lower() == 'zj' else '石泉'}-{topic}"
+        conf["storage_task_name"] = f"存储-{'张江' if env.lower() == 'zj' else '石泉'}-{topic}"
+        conf["data_set_name"] = f"{conf['anly_out_topic'].lower()}_{env.lower()}"
     return conf
 
 
 if __name__ == "__main__":
     logger = init_logger(os.path.basename(__file__).strip('.py'))
-    host = "http://10.240.246.138:8080"
-    cookie = ""
+    env = "sq"
+    host = {
+        "sq": "http://10.251.52.102:18080",
+        "zj": "http://10.251.52.102:18080",
+        "dev":"http://10.240.246.138:8080"
+        }.get(env)
+    cookie = "UA=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJkdXJhdGlvbiI6MzYwMDAwMCwibGFzdExvZ2luIjoxNzE4MDY4MzI2MjYzLCJuYW1lcyI6IltcImpheFwiLFwibG9nQW5hbHlzaXNcIixcImxvZ1NwZWVkXCIsXCJyZWZpbmVyXCJdIiwic2luZ2xlU2lnbk9uIjpmYWxzZSwid2l0aFNlcnZpY2VBdXRoIjoie1wiamF4XCI6dHJ1ZSxcImdhdWdlXCI6dHJ1ZSxcInZpc2lvblwiOnRydWUsXCJkYXRhTW9kZXJuaXphdGlvblwiOnRydWUsXCJkZWFsQW5hbHlzaXNcIjp0cnVlLFwiY21kYlwiOnRydWUsXCJsb2dBbmFseXNpc1wiOnRydWUsXCJsb2dTcGVlZFwiOnRydWUsXCJyZWZpbmVyXCI6dHJ1ZSxcIkFJT3BzXCI6dHJ1ZX0iLCJzZXNzaW9uSWQiOjU1Mzg4MjUwNTI1ODcwMDgsInVzZXJOYW1lIjoiYWRtaW4iLCJ1c2VySWQiOiJjWit4ekdpUVBSZWpISW1OZUlKK1FGV2t3Uk9PcTFEelVZZ0FuWmtycTN4dDhzZkMrOGgzK3hLbEpDMmdPb3VqYlZCdTNna29mVUFzYk1aZGpxdEFMNTRzaG5VdThMdkRGa2VSemhJb3VSZWowOGRvSTRsVE5Ud3FoQnF2c2dIeVFmNFY0VzM5UmMzMHkxeUxKVVVBNlRDbTNkN2JuMEw0MVpxQjhTWEJVNE09IiwicHJvZHVjdHMiOiJ7fSJ9.tcZU7-KHGbrP4tDt0ra2NS9WbCRSFA-lOIDA8pr7JdID7YvHz-dWDOwCDssSVNYd84xoFU07KcZHheCDxGTa1g"
 
     paso = ["CB","CBC", "PDMP.ECMP", "CMO.POF", "IST"]
     env1 = ["PI1", "PI2", "UAT1", "UAT2", "UAT3", "UAT4", "PL1", "PL2", "SIT1", "SIT2", "SIT3", "KFLT1", "KFLT2"]
@@ -355,11 +448,15 @@ if __name__ == "__main__":
     "CBC": env2
     }
     # 测试
-    # conf=gen_conf("APP_test_TRACELOG_SOURCE_test")
-    # create_jax(conf)
-    # create_analysis(conf)
-    # create_storage(conf)
-    # exit()
+    # for i in ["sq", "zj"]:
+        # APP_ECMP_TRACELOG_SOURCE
+    for i in ["zj"]:
+    
+        conf=gen_conf("APP_ESB_TRACELOG_SOURCE", i)
+        create_jax(conf)
+        create_analysis(conf)
+        create_storage(conf)
+    exit()
 
     # APP_CBC_TRANSLOG_SOURCE_PI1
     # APP_CBC_TRACELOG_SOURCE_PI1

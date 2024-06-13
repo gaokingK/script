@@ -83,14 +83,17 @@ def test_1():
         fl.append(g(i))
     return fl
 
-
+"""
+# To: 使用父函数的变量
+下面的test2中你试图修改外部函数 test_2 的局部变量 var1，但没有使用 nonlocal 关键字来声明它。这会导致 UnboundLocalError，因为 Python 会认为你在 wrapper2 中定义了一个新的局部变量 var1，而不是使用外部函数的变量。
+"""
 def test_2():
-    # To: 使用父函数的变量
-    var = 1
-    def wrapper():
-        print("partent var is %s"%var)
-        var+=1
-    wrapper()
+    
+    var1 = 1
+    def wrapper2():
+        print("partent var is %s" % var1)
+        var1 ="2"
+    wrapper2()
 
 
 """
@@ -194,6 +197,7 @@ def comment(func):
 
 
 if __name__ == '__main__':
+    # 创建闭包
     test_2()
     # debug_simple_decorater("b")  # comment(inner)("b") == inner("b")
 

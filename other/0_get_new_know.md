@@ -30,7 +30,9 @@ Fatal error in launcher: Unable to create process using '"d:\softwares\python 2.
 # other
 - 比如从[这里](https://github.com/Charmve)看到了cpp的图标以及一些常用的语言和框架、工具和环境
 - 语义化版本 就是版本的命名 https://semver.org/lang/zh-CN/
-
+# docker-bind 是一个基于 BIND 与 Webmin 构建的 DNS 服务镜像
+BIND 是实现互联网域名系统 （DNS） 协议的开源软件，用于搭建 DNS 服务。
+Webmin 是一款开源的Web界面管理工具，用于浏览器远程管理服务器
 # Hyper-V 和 WSL 2 是两个不同的微软虚拟化技术，它们提供的具体功能和用途大相径庭。下面我们详细探讨一下这两者的区别：
 
 ### Hyper-V
@@ -155,8 +157,6 @@ Fatal error in launcher: Unable to create process using '"d:\softwares\python 2.
    - application/x-tar：TAR文件。
    - application/x-gzip：GZIP文件。
 ### 为什么在终端里面或者使用urllib就下不了的东西在浏览器里就能直接下载呢？---------------no
-### 线程安全
-   - 意思是不需要自己加锁，就能在并行访问时保证数据完整性
 ### cipher suite
 - 保证网络连接的算法集
 ### 怎么阅读代码
@@ -390,7 +390,7 @@ Development code is only available in Git, and should never be used in productio
 ### 程序运行时依赖的内存结构, 命名空间 ------------------------------------------未
    - 堆栈里放的帧
 ### 二进制安全
-    redsi的string是二进制安全的，是指其可以包含任何数据（任何二进制的数据吧？），如jpg图片或者序列化的对象
+    redsi的string是二进制安全的，是指其可以包含任何数据，如jpg图片或者序列化的对象
 ### 幂等
     多次执行后结果一致
 ### 正则表达式

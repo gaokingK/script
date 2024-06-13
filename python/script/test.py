@@ -116,16 +116,90 @@ def isPalindrome(x: int) -> bool:
             x = (x % 10 ** L) // 10
             L -= 2
         return True
+    
+"""
+
+"""
+import threading
+import queue
+import time
+import random
+from concurrent import futures
+import concurrent
+
+# 创建一个共享的队列
+q = queue.Queue()
+end_event = threading.Event()
+def producer():
+    for i in range(1050):
+        item = random.randint(1, 50)
+        q.put(item)
+        print(f'生产者生产了项目: {item}')
+        # time.sleep(1)  # 模拟生产时间
+    end_event.set()
+
+def consumer(consumer_id):
+    while not end_event.is_set() or not q.empty():
+        try:
+            item = q.get(timeout=1)
+            print(f'消费者{consumer_id}消费了项目: {item}')
+            q.task_done()
+            time.sleep(2)  # 模拟消费时间
+        except queue.Empty:
+            print("queue为空")
+            continue
+    print(f"消费者{consumer_id}结束了")
+
+
+def task_done(future):
+    print(f"任务结果: {future.result()}")
+    # 任务完成后，立即提交一个新任务
+    new_task = executor.submit(consumer, future.result())
+    new_task.add_done_callback(task_done)
+
+
 
 if __name__ == '__main__':
     b_time=time.time()
 
-    a = [{"3":2}, {"4":5}]
-    for item in a:
-        item.update({"7":9})
-    print(a)
-    # loop = asyncio.get_event_loop()  
 
+    producer_thread = threading.Thread(target=producer)
+    thread_list=[]
+    producer_thread.start()
+    producer_thread.join()
+
+    # 不用线程池
+    # for i in range(100):
+    #     consumer_thread = threading.Thread(target=consumer, args=(i,))
+    #     consumer_thread.start()
+    #     thread_list.append(consumer_thread)
+
+    # for t in thread_list:
+    #     t.join()
+
+    # 使用线程池
+    # 创建消费者线程池
+    # with concurrent.futures.ThreadPoolExecutor(max_workers=100) as executor:
+    #     # 为每个消费者提交任务到线程池
+    #     futures = [executor.submit(consumer, i) for i in range(100)]
+    #     # 等待所有消费者任务完成
+    #     concurrent.futures.wait(futures)
+
+    # 创建线程池
+    with concurrent.futures.ThreadPoolExecutor(max_workers=100) as executor:
+        # 提交初始任务
+        futures = [executor.submit(consumer, n) for n in range(100)]
+        # 为每个初始任务添加完成后的回调函数
+        for future in futures:
+            future.add_done_callback(task_done)
+
+
+    # a = [{"3":2}, {"4":5}]
+    # for item in a:
+    #     item.update({"7":9})
+    # print(a)
+
+    # loop = asyncio.get_event_loop()  
     # res = loop.run_until_complete(  
     #     asyncio.gather(change_it_without_lock(10), change_it_without_lock(8),  
     #                 change_it_without_lock(2), change_it_without_lock(7)))  

@@ -215,6 +215,7 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
         获取文件和时间的字典
         file_dict = {key: value for key,value in zip(os.listdir(download_path), [time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(os.path.getmtime(os.path.join(download_path, file)))) for file in os.listdir(download_path)])}
     os.path.abspath("path") # path的绝对路径 最后一个/也会被去掉 os.path.abspath("/root/") # 输出/root
+    __file__当前文件 os.path.abspath(__file__) 当前文件的绝对路径
     os.path.splittext(path)[-1] 获取后缀名
     os.getcwd() # 返回当前工作目录
     os.path.join(path1[, path2[, ...]])	把目录和文件名合成一个路径

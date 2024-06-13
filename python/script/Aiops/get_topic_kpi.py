@@ -52,7 +52,13 @@ def do_request(method, url, queryparm):
     if res:
         return res.json()
     
-
+# select total_kafka_bytes_received_rate_across_kafka_broker_topics 
+# total_kafka_bytes_fetched_rate_across_kafka_broker_topics
+# total_kafka_bytes_rejected_rate_across_kafka_broker_topics 
+# total_kafka_messages_received_rate_across_kafka_broker_topics 
+# total_kafka_rejected_message_batches_rate_across_kafka_broker_topics 
+# total_kafka_fetch_request_failures_rate_across_kafka_broker_topics 
+# total_kafka_bytes_fetched_rate_across_kafka_brokers 
 def get_topic_max_byte(topic):
     querystring = {
         "queries":f'[{{\"tsquery\":\"SELECT total_kafka_bytes_received_rate_across_kafka_broker_topics WHERE entityName = \\\"kafka:{topic}\\\" AND category = KAFKA_TOPIC\",\"histogramCutPoints\":null,\"densityPlotNumSlices\":null,\"sliceIndexToContinueFrom\":null,\"pipelineType\":null}}]',

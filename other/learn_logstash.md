@@ -51,3 +51,7 @@ output{
     }
 }
 ```
+# logstash 日志
+- 默认配置：https://github.com/elastic/logstash/blob/main/config/log4j2.properties
+- 有一个自己的处理日志，关于这个日志是使用log4j实现的
+- 只有当前生成的日志超过了`appender.deprecation_rolling.policies.size.size = 100MB`所指定的大小是才会进行日志的删除操作

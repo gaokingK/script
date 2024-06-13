@@ -107,6 +107,11 @@ link:
       - wget ip:port
       - telnet ip port 
       - ip 也可以是域名 curl  https://cee6-140-206-192-11.ngrok-free.app 不用加端口
+      - echo > /dev/tcp/10.240.99.200/7788  连接成功无输出，命令直接返回
+      - echo > /dev/tcp/10.240.99.200/7789  联不通的输出如下
+
+      - -bash: connect: Connection refused
+      - -bash: /dev/tcp/10.240.99.200/7789: Connection refused
    - firewall-cmd --zone=public --list-ports 查看开放的端口
       - https://blog.csdn.net/s_frozen/article/details/120636667
    - 查询指定端口是否已开启 firewall-cmd --query-port=3306/tcp 提示 yes，表示开启；no表示未开启。

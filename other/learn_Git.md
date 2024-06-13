@@ -226,6 +226,7 @@ Date:   Wed Sep 15 09:20:45 2021 +0800
          解决办法： git checkout xxxxx-fixbug 切换到当前分支上， 然后再 进行 git push --delete origin origin/xxxxx-fixbug
    - `git branch -d Chapater8 `可以删除本地分支（在主分支中）
    - `git fetch -p` 清理本地无效分支(远程已删除本地没删除的分支): 
+   - git branch -M main 重命名当前分支为main
 #### 使用分支合并
    - git pull git_url
    - git checkout -b branch_name origin/branch_name # 远程已经新建了branch_name

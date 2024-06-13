@@ -423,7 +423,7 @@ more 命令类似 cat ，不过会以一页一页的形式显示，更方便使�
 ```
 sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分割结果的第二列来排序
 ```
-### uniq
+### uniq # 去重 # 计数
    - 而uniq不能实现排序，只能去除相邻的重复行，所以要跟sort合并使用，先用sort排序，再用uniq去重
    - grep xxx|sort|uniq
    - uniq -c 输出每个结果的个数 但前提是输入的数据必须是重复行都是相邻的，可以先用sort处理一下
@@ -756,12 +756,13 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
     - grep 如果只搜索文件夹a却不搜索a中的文件夹b
       - `grep -R --exclude-dir=/path/no/search/(可以有通配符) 'search pattern' /path/to/want/search`
       - des: `        agoods_btn_posb = 2\n` `grep ".*goods_btn_pos.*" -r tests/` 无结果 `grep ".*goods_btn_pos." -r tests/` 有结果 ---------------------no
-    - `-d skip` 跳过子文件夹 skip还有别的内容
+    - `-d skip` 跳过子文件夹 skip还有别的内容 `grep "parttn" -r * -d skip`
     - -r 搜索子文件夹 
     - 排除 如果只搜索一层文件夹或者文件名可以是不用带路径
       - 排除特定目录：grep -r 'pattern' --exclude-dir='dirname' /path/to/search 
       - 排除特定文件类型：grep -r 'pattern' --exclude='*.log' /path/to/search
       - 排除特定文件：`grep -r 'pattern' --exclude='filename' /path/to/search` 
+    - --max-depth=1  GNU grep 支持
     - -l 表示仅列出符合条件的文件名，用来传给sed命令做操作 或者在下一个命令进一步搜索别的内容
     - --include="*.txt" 表示仅查找txt文件 可以有多个`sed -i s/park/break/g `grep park -rl --include="*.java" --include="*.aidl"` 
     - 带符号时要转义， 要不搜索不出来`grep --help|grep '\-filename'`
