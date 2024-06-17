@@ -102,9 +102,17 @@ def byte2str():
     str.encode("utf-8") # 报错UnicodeDecodeError: 'ascii' codec can't decode byte 0xe6 in position 0: ordinal not in range(128)
 
 """
-### 格式化字符串
+### f格式化字符串
     - f 格式化字符串中不能又反斜杠，只能用单引号
     - df[col].map(lambda x: f'{x:0>6}') 如果 x 少于 6 位，这意味着对于 x 的任何值右对齐前填充零:
+    - f"{num:xxx}"
+    其中xxx的格式如下
+        格式	说明
+        width	整数width指定宽度
+        0width	整数width指定宽度，0表示最高位用0补足宽度
+        width.precision	整数width指定宽度，整数precision表示精度（保留小数点后几位小数）
+    - 使用<>^可以靠左， 靠右，居中显示，另外可以配合填充
+    - f{a:.3f} 带f表示保留3位小数
 ### % 格式化
 - link: https://www.cnblogs.com/nutix/p/4504899.html
 - %d格式化符: 将任何Python对象转化为整数，如果转化失败，则报错。

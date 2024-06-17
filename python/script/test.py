@@ -131,8 +131,8 @@ import concurrent
 q = queue.Queue()
 end_event = threading.Event()
 def producer():
-    for i in range(1050):
-        item = random.randint(1, 50)
+    for i in range(100):
+        item = i
         q.put(item)
         print(f'生产者生产了项目: {item}')
         # time.sleep(1)  # 模拟生产时间
@@ -150,6 +150,9 @@ def consumer(consumer_id):
             continue
     print(f"消费者{consumer_id}结束了")
 
+def consumer2(data):
+    print(f"处理数据{data}")
+    time.sleep(random.randint(1,10))
 
 def task_done(future):
     print(f"任务结果: {future.result()}")
@@ -169,7 +172,7 @@ if __name__ == '__main__':
     producer_thread.join()
 
     # 不用线程池
-    # for i in range(100):
+    # for i in range(50):
     #     consumer_thread = threading.Thread(target=consumer, args=(i,))
     #     consumer_thread.start()
     #     thread_list.append(consumer_thread)
@@ -179,19 +182,29 @@ if __name__ == '__main__':
 
     # 使用线程池
     # 创建消费者线程池
-    # with concurrent.futures.ThreadPoolExecutor(max_workers=100) as executor:
-    #     # 为每个消费者提交任务到线程池
-    #     futures = [executor.submit(consumer, i) for i in range(100)]
-    #     # 等待所有消费者任务完成
-    #     concurrent.futures.wait(futures)
+    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+        # 使用字典来存储提交的任务Future对象，以便获取返回值
+        future_to_url = {executor.submit(consumer2, i):i for i in range(100)}
+        
+        # 动态地等待任务完成并处理返回值
+        for future in concurrent.futures.as_completed(future_to_url):
+            url = future_to_url[future]
+            try:
+                # 获取任务返回值
+                result = future.result()
+                print(f"{result[0]} - Status: {result[1]}")
+            except Exception as exc:
+                print(f"{url} generated an exception: {exc}")
 
-    # 创建线程池
-    with concurrent.futures.ThreadPoolExecutor(max_workers=100) as executor:
-        # 提交初始任务
-        futures = [executor.submit(consumer, n) for n in range(100)]
-        # 为每个初始任务添加完成后的回调函数
-        for future in futures:
-            future.add_done_callback(task_done)
+        print("All tasks have been completed.")
+
+    # # 创建线程池
+    # with concurrent.futures.ThreadPoolExecutor(max_workers=30) as executor:
+    #     # 提交初始任务
+    #     futures = [executor.submit(consumer, n) for n in range(30)]
+    #     # 为每个初始任务添加完成后的回调函数
+    #     for future in futures:
+    #         future.add_done_callback(task_done)
 
 
     # a = [{"3":2}, {"4":5}]

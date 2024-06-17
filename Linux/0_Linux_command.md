@@ -495,6 +495,14 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
    - `echo $(date +%y%m%d) ` m 是月 M 是分  中间的加号后面不能有空格 
    - `echo $(date +%ya_string%d) `  还可以这样替换，结果是2021a_string13
    - date "+%Y-%m-%d"
+   - 修改时间(https://blog.csdn.net/xiaosongbk/article/details/71516161)
+   - date -s 时间字符串
+     - 只改系统的日期，不改时间       date -s 2012-08-02
+     - 只改时间不改日期 date -s 10:08:00
+     - 同时修改日期和时间   date -s "2012-05-18 04:53:00"
+     - 注意：由于日期和时间之间有空格，所以必须用引号引起来，否则命令会报错。
+
+                        
 ### xargs
 - link: https://wangchujiang.com/linux-command/c/xargs.html
 - -i 依次传递
