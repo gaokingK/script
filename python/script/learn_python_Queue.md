@@ -24,12 +24,24 @@ Queue.qsize() 返回队列的大小
 Queue.empty() 如果队列为空，返回True,反之False
 Queue.full() 如果队列满了，返回True,反之False，Queue.full 与 maxsize 大小对应
 Queue.get([block[, timeout]])获取队列，timeout等待时间
-Queue.get_nowait() 相当于Queue.get(False)，非阻塞方法
+Queue.get_nowait() 相当于Queue.get(False)，非阻塞方法，为空就报错
 Queue.put(item) 写入队列，timeout等待时间
-Queue.task_done() 
+Queue.put_nowait()
+Queue.task_done()
 每当执行一次put操作，unfinished_tasks就加一，可理解为put代表增加了一个任务；
 每执行一次task_done操作，unfinished_tasks就减一，可以把task_done放在get操作之后，当get成功执行后，再执行task_done使得unfinished_tasks减一，代表完成了一个任务；
 
 而join则通过判断unfinished_tasks是否为零执行wait操作；
 Queue.join() 实际上意味着等到队列为空，再执行别的操作
+```
+
+# TO: 多线程中其他的东西
+- event 可以用来判断某个事件是否结束，相当于flag
+```py
+end_event=threading.Event()
+
+# 线程1结束后
+end_event.set()
+# 线程2
+while not self.end_event.is_set() or not self.need_dns_url.empty():
 ```

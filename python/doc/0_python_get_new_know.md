@@ -107,7 +107,34 @@ True
 dict(zip('abc', [1, 2, 3]))
 dic = {i:2*i for i in range(3)} # {0: 0, 1: 2, 2: 4}
 ```
+## 如果有一个函数定义是def function2(pathname, *, parm2=False):我调用它的时候该怎么传参数呢
+在 Python 中，当函数定义使用了 * 符号作为参数的一部分时，这意味着其后的参数（在这个例子中是 parm2）需要明确地使用关键字参数（keyword argument）的方式来传递。这种设计强制使代码的可读性和清晰性更高，因为调用者需要明确指定哪些参数被赋予了值。
+对于你给出的函数定义：
+```python
+def function2(pathname, *, parm2=False):
+    # 函数体
+```
+当你调用这个函数时，可以按以下方式进行：
+只传递pathname参数：由于parm2有默认值False，所以如果你不需要修改parm2，可以只传递pathname参数。
+```python
+function2('your/pathname/here')
+同时传递pathname和parm2参数：如果你需要修改parm2的值，你需要明确地指定parm2为关键字参数。
+function2('your/pathname/here', parm2=True)
+```
+
+这里要注意的主要点是，由于使用了*，所以parm2（及之后的任何参数）必须以关键字参数的形式传入，不能仅仅依赖参数的位置。这是 Python 为了提高函数调用的清晰度所提供的一个功能。
+- 如果函数定义中没有使用 * 来分隔位置参数和关键字参数，那么即使是设定为接受关键字的参数，也可以通过位置来传递。这是因为 Python 在函数调用时，默认是支持位置参数的，除非特别通过 * 来指定某个点之后的参数必须以关键字参数的形式出现。
+
 ## 表示正负无穷`float("inf") float("-inf")`
+## float
+- round对小数的精确度采用了四舍六入五成双的方式。
+直接使用四舍五入，最后的结果可能会偏高。所以需要使用奇进偶舍的处理方法。
+例如对于一个小数a.bcd，需要精确到小数点后两位，那么就要看小数点后第三位:   如果d小于5，直接舍去；如果d大于5，直接进位；
+如果d等于5：d后面没有数据，且c为偶数，那么不进位，保留c。d后面没有数据，且c为奇数，那么进位，c变成(c + 1)
+python中的decimal模块可以解决上面的烦恼 
+decimal模块中，可以通过整数，字符串或原则构建decimal.Decimal对象。如果是浮点数，特别注意因为浮点数本身存在误差，需要先将浮点数转化为字符串。
+                        
+原文链接：https://blog.csdn.net/sinat_37967865/article/details/98086969
 ## formate 的罕见用法
 ```
 Executing task id {0.id}, args: {0.args!r} kwargs: {0.kwargs!r}'.format(self.request))

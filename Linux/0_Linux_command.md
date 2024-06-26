@@ -454,7 +454,7 @@ sort -n -k 2 -t : facebook.txt # 对facebook的内容先以：来分割，按分
    - -a: 修改访问时间，或 –time=atime 或 –time=access 或 –time=use
    - -c: 或 –no-creat，如果文件不存在则不创建文件
    - -d: 使用指定的日期时间，可以使用不同的格式
-   - -m: 或 –time=mtime 或 –time=modify，改变修改时间
+   - -mt: 或 –time=mtime 或 –time=modify，改变修改时间 `touch -mt YYYYMMDDhhmm filename`
    - -r: 把指定的文件日期更设成和参考文档或目录日期相同的时间
    - -t: 使用指定的日期时间，格式与 date 指令相同
 

@@ -45,6 +45,7 @@ def learn_semaphore():
 
 """
 #TO 线程锁
+acquire 等价于 acquire_lock release等价于release_lock方法，但尽量还是使用acquire
 lock = threading.Lock()
 def thread_safe_function():
     lock.acquire()
@@ -55,6 +56,7 @@ def thread_safe_function():
 for i in range(5):
     thread = threading.Thread(target=thread_safe_function)
     thread.start()
+- acquire 方法还可以接受一个可选的 blocking 参数。如果 blocking 设置为 False，当锁不可用时，acquire 方法会立即返回 False 而不是等待，表示无法获取锁；如果是默认值或设置为 True，则会阻塞等待锁释放。
 """
 
 

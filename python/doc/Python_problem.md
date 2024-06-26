@@ -227,13 +227,24 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
     os.rmdir(path) # 删除文件夹，文件夹非空的话会报错
     os.removedirs() # 递归删除目录
         - os.removedirs("./test2/test1") # test1如果为null，就删除，然后删除test2
-    - os.walk() # 遍历文件夹下的所有文件
+    - os.walk() 参数为文件夹路径，返回3个内容：绝对路径、子文件夹、文件名。 此方法可以遍历文件夹下的所有文件、子文件及内的所有文件：
+    - os.listdir：参数为文件夹路径，可以返回文件夹下的所有子文件夹、文件名称。不能返回子文件夹下的文件，并且仅返回名称。
     shutil.rmtree("path") # 空不空都能删除
     - 复制文件：https://www.jb51.net/article/145522.htm
         - https://www.jb51.net/article/145522.htm
         - shutil.copyfile("file.txt","file_copy.txt")
 
     ```
+- 使用glob模块，可以设置文件过滤
+```PY
+import glob
+for filename in glob.glob(r'c:\windows\*.exe', ".py"):
+    print(filename)
+# glob.glob(pathname, *, root_dir=None, dir_fd=None, recursive=False, include_hidden=False)¶
+# https://docs.python.org/3/library/glob.html
+# pathname 可以是绝对路径like /usr/src/Python-1.5/Makefile) or relative (like ../../Tools/*/*.gif)
+# 
+```
 - file
     - w+ 读不到原本文件的内容了
     - r+ 从开头读 如果文件不存在会报错
