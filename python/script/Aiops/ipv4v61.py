@@ -341,8 +341,11 @@ if __name__ == '__main__':
         conf = json.load(f)
     l_t = time.time()
     urls = conf["urls"]
-    res = {base_url:[] for base_url in urls}
-    urls_info = {url:url for url in urls}
+    # res = {base_url:[] for base_url in urls}
+    # urls_info = {url:url for url in urls} # value是index
+
+    res = {",".join(urls):[]}
+    urls_info = {url:",".join(urls) for url in urls} # value是index
     depth = conf["depth"]
     mysql_conf = conf["PARAM_FOR_MYSQL_test"]
     mysql_conn = MysqlHandler(mysql_conf)

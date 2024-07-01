@@ -11,9 +11,14 @@
 mysqldump -uroot -p school --tables sc_admin users > /tmp/school.sql
 mysqldump -u root -p -P3306 -h 10.240.5.194 --databases school --tables sc_admin > backup.sql
 
+mysqldump -u 用户名 -p 数据库名 users --where="id < 100" > users_partial.sql
+//你可以使用 --no-create-info 参数来做到这一点，这样可以避免生成重建表结构的 SQL 语句
+mysqldump -u 用户名 -p --no-create-info 数据库名 表名 --where="条件" > 数据备份.sql
 //恢复 只恢复表的时候数据库一定要存在
 mysql -u root -p --database db_name
 source /path/to/backup.sql
+//使用 INSERT IGNORE 替换 INSERT，这样可以避免因为重复而导致的错误，但是它会忽略所有错误，包括非重复相关的错误。
+//使用 ON DUPLICATE KEY UPDATE 语法，这样当遇到重复的键时，你可以选择更新特定的字段。这个选项允许更细粒度的控制，比如你可以更新已有行的某个非关键数据列。
 ```
 # 使用命令行导出表数据为 CSV 文件
 - https://www.navicat.com.cn/company/aboutus/blog/497-%E5%B0%86-mysql-%E8%A1%A8%E5%AF%BC%E5%87%BA%E5%88%B0-csv
