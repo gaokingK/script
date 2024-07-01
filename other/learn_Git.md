@@ -96,17 +96,65 @@
    公共分支回滚用revert
    错的太远了直接将代码全部删掉，用正确代码替代
 ### git reset
-   ```
-   # commit id A
-   This is test
-   # 修改为：
-   This is test2
-   # commit
-   # 修改为 This is test3
-   # reset --soft A 文件内容会变为如下，不会冲突
-   # This is test3 # 然后本行有改动的颜色标识，就像直接修改一样
-   ```
-### 冲突
+```
+# commit id A
+This is test
+# 修改为：
+This is test2
+# commit
+# 修改为 This is test3
+# reset --soft A 文件内容会变为如下，不会冲突
+# This is test3 # 然后本行有改动的颜色标识，就像直接修改一样
+```
+执行 `git reset --hard` 命令会对你的 Git 仓库产生三方面的影响：
+
+1. **HEAD 移动到指定的提交**：
+   - `git reset --hard` 命令会把当前分支的 HEAD（也就是当前分支的指针）移动到你指定的提交上。如果你没有指定提交，默认是当前分支的最新提交。这意味着所有该提交之后的修改都会被“抛弃”。
+
+2. **工作区（Working Directory）的更改**：
+   - 这个命令会更新你的工作区（Working Directory），使其内容与 HEAD 指向的提交完全一致。这意味着在工作区的所有本地修改（无论是已暂存的还是未暂存的更改）都会被删除。仓库会恢复到执行该命令指定的那个提交状态。
+
+3. **暂存区（Staging Area）的更改**：
+   - 该命令还会清除暂存区（Staging Area）中的所有更改，使其与 HEAD 指向的提交完全一致。实际上，执行 `git reset --hard` 后，你的工作区和暂存区会和你使用该命令指定的那个提交一模一样。
+
+使用 `git reset --hard` 命令时需要非常谨慎，因为它会丢弃所有未提交的更改，并且这个操作是无法撤销的。如果你删除了还未推送（push）到远程仓库的提交，这些提交可能会永久丢失。
+
+如果你不确定，或者想保留对文件所做的更改，可以考虑使用 `git reset --soft` 或 `git reset --mixed`：
+
+- `git reset --soft`：会保留工作区和暂存区的更改，只移动 HEAD 指针。
+- `git reset --mixed`（这是默认选项）：会保留工作区的更改，但清空暂存区，也会移动 HEAD 指针。
+
+在使用 `git reset --hard` 之前，确保你真的不需要那些更改，或者你已经做了足够的备份。另外，如果你在执行这个命令之后意识到了错误，并且你的某些更改尚未被 git 垃圾收集（garbage collected），你可能还能通过 `git reflog` 和 `git reset` 命令找回一些“丢失”的提交。
+
+## 恢复使用 `git reset --hard` 丢失的更改可能会有些复杂，但并非完全不可能。下面是一些可能帮助你恢复丢失更改的方法：
+
+### 1. 使用 `git reflog`
+
+1. **检查引用日志（Reflog）**:
+   - 执行 `git reflog` 可以查看你本地仓库的历史操作记录（包括提交、重置等）。每条记录都关联着一个 HEAD@{n} 引用和一个提交哈希值。
+   - 找到你想回到的状态对应的提交哈希值。这可能是一个丢失的提交，或者是使用 `git reset --hard` 之前的状态。
+
+2. **切换到该状态**:
+   - 使用 `git reset --hard HEAD@{n}` 命令（其中，`n` 是你从 reflog 中找到的索引号），你可以将当前分支的 HEAD 指针重置到那个状态，从而恢复到 `git reset --hard` 执行之前的状态。
+
+### 2. 如果你有未推送的提交
+
+如果你执行了 `git reset --hard`，但实际上有一些更改已经提交但未推送到远程仓库，那么你可以看看远程仓库的状态是否有帮助：
+
+1. **检查远程分支的状态**:
+   - 使用 `git log origin/<branch_name>` 查看远程分支的提交历史（这里 `<branch_name>` 是你的远程分支名）。如果你在重置之前已经将更改提交到了本地仓库，但没有推送，可以通过远程仓库中的提交记录找到线索。
+
+2. **如果更改已经推送**:
+   - 如果你的更改已经推送到远程仓库，你可以使用 `git fetch` 更新本地仓库的远程跟踪分支，然后使用 `git reset --hard origin/<branch_name>` 将本地分支重置到远程分支的当前状态。
+
+### 注意：
+
+- `git reflog` 是根据你的本地操作记录来的，所以它可能包含那些还没有推送到远程仓库的提交。这使得它成为恢复因硬重置而丢失的本地更改的有效手段。
+- 使用 `git reset` 时要非常小心，尤其是加上 `--hard` 选项，因为它可以将你的更改（包括未提交的更改）彻底清除。
+
+记住，如果你的更改还未曾被提交过，那么 `git reset --hard` 后这些更改很可能会被彻底丢失，除非这些更改有备份。因此，恢复操作主要针对那些已被提交但后来由于操作失误而丢失的情况。
+
+# 冲突
    - 什么情况下会有冲突
       - user a 修改file_a 10行, commit and push, user b 已另一种内容修改file_a 10行, commit and push, 会发现push 被拒绝, 然后push -f, 这时usera 再pull 就需要merge 这种情况的解决办法:
          - 可以user b reset --hard 然后 pull push
@@ -146,6 +194,38 @@ crlf->lf    lf->crlf     crlf->lf       \             /          \
    - git config --global user.email "hitsjt@gmail.com"
 ### git checkout
    - `git checkout branch_name high_quality/dingding/function/.` 即使这个要检出的文件在现在的分支上不存在也可以检出的
+在Git中，如果你想将某个文件恢复到某个特定的版本（也称为提交或者commit），你可以使用以下命令：
+
+1. 首先，找到你想恢复到的那个版本的提交ID。你可以使用 `git log` 命令来查看提交历史，并找到对应的提交ID。提交ID是一个长串的哈希值，但通常只需要前几个字符就足够区分不同的提交了。
+
+   ```sh
+   git log
+   ```
+   
+   或者，如果你知道文件的名称，可以使用 `git log` 加上文件路径来获取该文件的提交历史：
+
+   ```sh
+   git log -- path/to/your/file
+   ```
+
+2. 一旦你找到了想要回滚到的那个提交的ID（比如 `commitID`），使用以下命令将文件回滚到那个版本：
+
+   ```sh
+   git checkout commitID -- path/to/your/file
+   ```
+
+   这里 `commitID` 是你在步骤1中找到的提交ID，`path/to/your/file` 是你想要恢复的文件路径。
+
+3. 此时，该文件在你的工作区已经是那个历史版本的内容了。如果你想将这个变更保存到你的仓库中，就需要像平常提交代码一样，先使用 `git add` 将其暂存，然后使用 `git commit` 创建一个新的提交。
+
+   ```sh
+   git add path/to/your/file
+   git commit -m "Restore path/to/your/file to its state as of commitID"
+   ```
+
+   这个步骤会在你的提交历史中创建一个新的提交，其内容是你指定的那个历史版本的文件。
+
+请注意，使用这种方法恢复文件到特定版本会影响你的工作区和暂存区的状态，但不会修改你的提交历史（除了你最后创建的那个新提交）。确保在执行这些操作之前，你的工作区是干净的（没有未提交的更改），否则你可能会遇到冲突。
 ### 这张图里怎么把code从repo checkout到workspace
       ![git fetch和git pull的概念](http://kmknkk.oss-cn-beijing.aliyuncs.com/image/git.jpg)
 ### [git fetch](https://www.cnblogs.com/runnerjack/p/9342362.html) -----------------------------no
