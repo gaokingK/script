@@ -66,6 +66,7 @@ class UrlDnsRes(Model):
 
     id = AutoField(help_text='自增ID')
     base_url = CharField(max_length=256, help_text='该条url是在哪个主页爬取到的')
+    find_in_depth = IntegerField(help_text="在第几层爬取的结果")
     domain_count = IntegerField(help_text="门户页下的域名数量")
     ipv6_count = IntegerField(help_text="门户页下的ipv6域名数量")
     ipv4_count = IntegerField(help_text="门户页下的ipv4域名数量")
@@ -89,6 +90,7 @@ class UrlDnsResDetail(Model):
 
     id = AutoField(help_text='自增ID')
     base_url = CharField(max_length=256, help_text='该条url是在哪个主页爬取到的')
+    find_in_depth = IntegerField(help_text="在第几层爬取到的该url")
     url = CharField(max_length=256, help_text='爬取到的url')
     domain = CharField(max_length=256, help_text='爬取到的url的域名')
     is_ipv6 = IntegerField(help_text="是否支持ipv6 是的话就是1")
@@ -227,7 +229,7 @@ class SpeedSpider:
     def extract_urls_from_page(self, url_info):
         """提取所请求url下的所有url列表"""
         url = url_info[0]
-        index = url_info[1] # 从那个主页进来的
+        index = url_info[1][0] # 从那个主页进来的
         href_all = {}
         # 发送HTTP请求
         try:
@@ -280,7 +282,7 @@ class SpeedSpider:
             urls_info = {}
             for url, index in ex_urls.items():
                 if url in self.need_spider_url:
-                    urls_info.update({url:index})
+                    urls_info.update({url:[index,i+1]})
 
             logger.info(f"提取出的bosc_urls共{len(set(ex_urls.keys()))}个, 准备爬取{self.need_spider_url}")
             
@@ -296,21 +298,28 @@ class SpeedSpider:
             logger.info(f"剩余未爬取的url:{self.need_spider_url}")
 
     def calculate_ipv4v6(self):
-        for url,index in self.spidered_url_info.items():
+        for url,url_info in self.spidered_url_info.items():
             domain = urlparse(url).hostname
             ipv6 = self.dnsed_domain_info.get(domain)
-            res[index].append({"index": index, "url": url, "domain": domain, "ipv6": ipv6})
+            index = url_info[0]
+            depth = url_info[1]
+            
+            res[index][depth].append({"index": index, "url": url, "domain": domain, "ipv6": ipv6, "depth": depth})
 
-        for base_url,info in res.items():
-            all_domain = set([item.get("domain") for item in info])
-            ipv6_domain = set([item.get("domain") for item in info if item.get("ipv6")])
-            ipv6_precent = f"{len(ipv6_domain) / len(all_domain) * 100:.2f}"
-            ipv4_count = len(all_domain) - len(ipv6_domain)
-            logger.info(f"{base_url}共探测到{len(info)}个地址, 共{len(all_domain)}个域名， 其中ipv6有{len(ipv6_domain)}个, ipv6的浓度为: {ipv6_precent}%")
-            mysql_conn.record_url_dns_res([[base_url, len(all_domain), len(ipv6_domain), len(all_domain)- len(ipv6_domain), ipv6_precent]])
-            for item in info:
-                is_ipv6 = 1 if item.get("ipv6") else 0
-                mysql_conn.record_url_dns_res_detail([[item.get("index"), item.get("url"), item.get("domain"), is_ipv6, item.get("ipv6"), ipv6_precent]])
+        for base_url,all_depth_res in res.items():
+            for current_depth, info in all_depth_res.items():
+                all_domain = set([item.get("domain") for item in info])
+                ipv6_domain = set([item.get("domain") for item in info if item.get("ipv6")])
+                if len(all_domain):
+                    ipv6_precent = f"{len(ipv6_domain) / len(all_domain) * 100:.2f}"
+                else:
+                    ipv6_precent = "0"
+                ipv4_count = len(all_domain) - len(ipv6_domain)
+                logger.info(f"{base_url}在第{current_depth}层共探测到{len(info)}个地址, 共{len(all_domain)}个域名， 其中ipv6有{len(ipv6_domain)}个, ipv6的浓度为: {ipv6_precent}%")
+                mysql_conn.record_url_dns_res([[base_url, current_depth, len(all_domain), len(ipv6_domain), len(all_domain)- len(ipv6_domain), ipv6_precent]])
+                for item in info:
+                    is_ipv6 = 1 if item.get("ipv6") else 0
+                    mysql_conn.record_url_dns_res_detail([[item.get("index"), current_depth, item.get("url"), item.get("domain"), is_ipv6, item.get("ipv6"), ipv6_precent]])
 
         # logger.info(f"ipv4的地址列表: {self.ipv4_domain}")
         # logger.info(f"ipv6的地址列表: {self.ipv6_domain}")
@@ -319,20 +328,24 @@ class SpeedSpider:
 # 239.12.98
 # 张天天
 def main():
-    ss = SpeedSpider()
-    producer_thread = threading.Thread(target=ss.multi_depth_extract_urls, args=(urls_info, depth))
-    producer_thread.start()
+    for url in urls:
+        global res,urls_info
+        res = {base_url:{dep+1: [] for dep in range(depth)} for base_url in urls}
+        urls_info = {url:[url,1]}
+        ss = SpeedSpider()
+        producer_thread = threading.Thread(target=ss.multi_depth_extract_urls, args=(urls_info, depth))
+        producer_thread.start()
 
-    con_threads = []
-    for i in range(4):
-        consumer_thread = threading.Thread(target=ss.ipv6_access_check)
-        consumer_thread.start()
-        con_threads.append(consumer_thread)
-    producer_thread.join()
-    ss.end_event.set()
-    for t in con_threads:
-        t.join()
-    ss.calculate_ipv4v6()
+        con_threads = []
+        for i in range(4):
+            consumer_thread = threading.Thread(target=ss.ipv6_access_check)
+            consumer_thread.start()
+            con_threads.append(consumer_thread)
+        producer_thread.join()
+        ss.end_event.set()
+        for t in con_threads:
+            t.join()
+        ss.calculate_ipv4v6()
     mysql_conn.close()
 
 if __name__ == '__main__':
@@ -341,14 +354,14 @@ if __name__ == '__main__':
         conf = json.load(f)
     l_t = time.time()
     urls = conf["urls"]
-    # res = {base_url:[] for base_url in urls}
-    # urls_info = {url:url for url in urls} # value是index
-
-    res = {",".join(urls):[]}
-    urls_info = {url:",".join(urls) for url in urls} # value是index
     depth = conf["depth"]
     mysql_conf = conf["PARAM_FOR_MYSQL_test"]
     mysql_conn = MysqlHandler(mysql_conf)
+    # value是index
+
+    # res = {",".join(urls):[]}
+    # urls_info = {url:",".join(urls) for url in urls} # value是index
+
 
     # schedule.every().day.at(conf["start_time"]).do(main)
     # while True:

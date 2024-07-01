@@ -101,7 +101,7 @@ if __name__ == "__main__":
     calc_es_index()
     for key,value in size_res.items():
         size = value/1024/1024/1024
-        logger.info(f"{key}的张江和石泉索引大小是{.2fsize}G") 
+        logger.info(f"{key}的张江和石泉索引大小是{size}G") 
 
     # for item in all_data:
     #     name = item.get("name", "")
