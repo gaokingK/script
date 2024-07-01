@@ -1,8 +1,24 @@
 def combinationSum4(nums, target: int) -> int:
     n = []
     r = 0
+    step=[]
+    # @cache
+    def dfs(n,i):
+        # nonlocal r
+        r=0
 
-    def dfs(t,i):
+        if n==0:
+            return 1
+        for j in range(i):
+            #step.append(nums[j
+            if nums[j]<= n:
+                r+=dfs(n-nums[j],i)
+                continue
+        # r = sum(dfs(n-nums[j],i) for j in range(i) if nums[j] <= n)
+        return r
+
+
+    def dfs2(t,i):
         nonlocal r
         if t < 0 or i < 0:
             # print(t,i, 0)
@@ -51,3 +67,5 @@ if __name__ == "__main__":
 
 
 """
+
+
