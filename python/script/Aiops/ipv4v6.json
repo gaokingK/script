@@ -1,6 +1,7 @@
 {
-    "urls": ["https://ebanks.bankofshanghai.com","https://www.bosc.cn/zh","https://ibank.bankofshanghai.com/eweb/vx_zh_CN/login.html?LoginType=R&_locale=zh_CN#/$1"],
-    "depth": 4,
+    "urls": ["https://www.bosc.cn/zh","https://ebanks.bankofshanghai.com","https://ibank.bankofshanghai.com/eweb/vx_zh_CN/login.html?LoginType=R&_locale=zh_CN#/$1"],
+    "urlssss":["https://ebanks.bankofshanghai.com","https://ibank.bankofshanghai.com/eweb/vx_zh_CN/login.html?LoginType=R&_locale=zh_CN#/$1"],
+    "depth": 3,
     "start_time": "16:00",
     "PARAM_FOR_MYSQL": {
         "database": "filesystem_prophet",
@@ -10,12 +11,12 @@
         "password": "ywPT!@34",
         "charset": "utf8mb4"
         },
-        "PARAM_FOR_MYSQL_test": {
-            "database": "test",
-            "host": "127.0.0.1",
-            "port": 3306,
-            "user": "root",
-            "password": "root",
-            "charset": "utf8mb4"
-            }
+    "PARAM_FOR_MYSQL_test": {
+        "database": "test",
+        "host": "127.0.0.1",
+        "port": 3306,
+        "user": "root",
+        "password": "root",
+        "charset": "utf8mb4"
+        }
 }

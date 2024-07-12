@@ -38,6 +38,7 @@ def do_request(method, url, headers, payload):
         res = res.json()
         return res
     except Exception as e:
+        logger.error(f"reason{res.reason}")
         logger.exception(e)
     return False
 
@@ -73,19 +74,19 @@ def create_storage(conf_dict):
             "cycleType": 0,
             "timeInterval": None,
             "dayData": 10,
-            "numPartitions": 1,
+            "numPartitions": resource_conf["partitions"],
             "isDefaultAddress": True,
             "storageTime": "",
             "jaxCluster": conf_dict["jaxCluster"],
             "groupId": None,
             "offset": "earliest",
-            "instanceNum": 1,
+            "instanceNum": resource_conf["parall_num"],
             "maxPollSize": 5000,
             "repeatCheck": 0,
-            "taskManagerMemory": 512,
-            "yarnSlots": 1,
+            "taskManagerMemory": resource_conf["task_manager_memory"],
+            "yarnSlots": resource_conf["yarnslots"],
             "checkPointInterval": 0,
-            "esTemplate": "{\n \"order\": \"200\",\n \"index_patterns\": [\n \"" + conf_dict["data_set_name"] + "_*\"\n ],\n \"settings\": {\n \"index\": {\n \"codec\": \"best_compression\",\n \"refresh_interval\": \"10s\",\n \"number_of_shards\": \"1\",\n \"number_of_replicas\": \"1\",\n \"translog\": {\n \"sync_interval\": \"60s\",\n \"durability\": \"async\"\n },\n \"merge\": {\n \"scheduler\": {\n \"max_thread_count\": \"1\"\n },\n \"policy\": {\n \"max_merged_segment\": \"100m\"\n }\n },\n \"unassigned\": {\n \"node_left\": {\n \"delayed_timeout\": \"15m\"\n }\n }\n }\n },\n \"mappings\": {\n \"dynamic\": true,\n \"dynamic_templates\": [\n {\n \"message_field\": {\n \"path_match\": \"@message\",\n \"mapping\": {\n \"norms\": false,\n \"type\": \"text\"\n },\n \"match_mapping_type\": \"string\"\n }\n },\n {\n \"string_fields\": {\n \"mapping\": {\n \"type\": \"keyword\"\n },\n \"match_mapping_type\": \"string\",\n \"match\": \"*\"\n }\n }\n ],\n \"properties\": {\n \"@timestamp\": {\n \"type\": \"date\"\n }\n }\n },\n \"aliases\": {}\n}"
+            "esTemplate": "{\n \"order\": \"200\",\n \"index_patterns\": [\n \"" + conf_dict["data_set_name"] + "_*\"\n ],\n \"settings\": {\n \"index\": {\n \"codec\": \"best_compression\",\n \"refresh_interval\": \"10s\",\n \"number_of_shards\": \"" + str(resource_conf["number_of_shards"]) + "\",\n \"number_of_replicas\": \"1\",\n \"translog\": {\n \"sync_interval\": \"60s\",\n \"durability\": \"async\"\n },\n \"merge\": {\n \"scheduler\": {\n \"max_thread_count\": \"1\"\n },\n \"policy\": {\n \"max_merged_segment\": \"100m\"\n }\n },\n \"unassigned\": {\n \"node_left\": {\n \"delayed_timeout\": \"15m\"\n }\n }\n }\n },\n \"mappings\": {\n \"dynamic\": true,\n \"dynamic_templates\": [\n {\n \"message_field\": {\n \"path_match\": \"@message\",\n \"mapping\": {\n \"norms\": false,\n \"type\": \"text\"\n },\n \"match_mapping_type\": \"string\"\n }\n },\n {\n \"string_fields\": {\n \"mapping\": {\n \"type\": \"keyword\"\n },\n \"match_mapping_type\": \"string\",\n \"match\": \"*\"\n }\n }\n ],\n \"properties\": {\n \"@timestamp\": {\n \"type\": \"date\"\n }\n }\n },\n \"aliases\": {}\n}"
             }
         ]
     }
@@ -110,20 +111,20 @@ def create_analysis(conf_dict):
         "dataSetName": conf_dict.get("anlysis_task_name"),
         "sourceType": "analysis",
         "dayData": 10,
-        "numPartitions": 3, # 分区数
+        "numPartitions": resource_conf["partitions"], # 分区数
         "remark": "",
         "groupId": "",
         "advanceConfig": [
             {
             "groupId": "",
-            "numReplications": 2,
+            "numReplications": resource_conf["topic_replication_factor"],
             "maxMessageSize": 1,
             "maxPullMessageSize": 500,
-            "instanceNum": 3, # 并发数
+            "instanceNum": resource_conf["parall_num"], # 并发数
             "offset": "earliest",
             "commitInterval": 10,
-            "taskManagerMemory": 1536, # 内存
-            "yarnSlots": 1, # yarnslot数
+            "taskManagerMemory": resource_conf["task_manager_memory"], # 内存
+            "yarnSlots": resource_conf["yarnslots"], # yarnslot数
             "partitionType": "ROUND_ROBIN",
             "partitionType": "ROUND_ROBIN",
             "checkPointInterval": 0,
@@ -270,8 +271,8 @@ def create_jax(conf_dict):
     "jobName": "com.eoi.jax.flink.job.sink.KafkaSinkJob",
     "jobConfig": {
         "autoCreateTopic": True,
-        "autoCreateTopicPartitions": 3,
-        "autoCreateTopicReplicationFactor": 2,
+        "autoCreateTopicPartitions": resource_conf["partitions"],
+        "autoCreateTopicReplicationFactor": resource_conf["topic_replication_factor"],
         "topic": conf_dict["jax_output_topic"], #"APP_PDMP_TRACELOG_ETL_3333",
         "bootstrapServers": conf_dict["bootstrapServers"],
         "semantic": "AT_LEAST_ONCE",
@@ -401,7 +402,7 @@ def gen_conf(topic, env=None):
     conf["jax_kafka_out_job_id"] = f"KafkaSinkJob{prefix}" #"KafkaSinkJob171592633328590053",
 
     # jax_topic名_sq/zj，topic名【除前面的itm/app/等，以及后面的source/etl】。比如nginx这个，就是jax_nginx_errorlog_zj
-    conf["jax_task_name"] = f"jax_{topic.replace('APP_', '').replace('ITM_', '').replace('_SOURCE', '').replace('_ETL', '')}{'_' + env if not env == 'dev' else ''}"
+    conf["jax_task_name"] = f"jax_{topic.replace('APP_', '').replace('ITM_', '').replace('_SOURCE', '').replace('_ETL', '').replace('.','-')}{'_' + env if not env == 'dev' else ''}"
     conf["jax_input_topic"] = topic # 原始topic名 APP_{p}_TRACELOG_SOURCE_{e}
     conf["jax_group_id"] = f"{topic}_jax"
 
@@ -435,7 +436,15 @@ if __name__ == "__main__":
         "zj": "http://10.251.52.102:18080",
         "dev":"http://10.240.246.138:8080"
         }.get(env)
-    cookie = "UA=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJkdXJhdGlvbiI6MzYwMDAwMCwibGFzdExvZ2luIjoxNzE4MDY4MzI2MjYzLCJuYW1lcyI6IltcImpheFwiLFwibG9nQW5hbHlzaXNcIixcImxvZ1NwZWVkXCIsXCJyZWZpbmVyXCJdIiwic2luZ2xlU2lnbk9uIjpmYWxzZSwid2l0aFNlcnZpY2VBdXRoIjoie1wiamF4XCI6dHJ1ZSxcImdhdWdlXCI6dHJ1ZSxcInZpc2lvblwiOnRydWUsXCJkYXRhTW9kZXJuaXphdGlvblwiOnRydWUsXCJkZWFsQW5hbHlzaXNcIjp0cnVlLFwiY21kYlwiOnRydWUsXCJsb2dBbmFseXNpc1wiOnRydWUsXCJsb2dTcGVlZFwiOnRydWUsXCJyZWZpbmVyXCI6dHJ1ZSxcIkFJT3BzXCI6dHJ1ZX0iLCJzZXNzaW9uSWQiOjU1Mzg4MjUwNTI1ODcwMDgsInVzZXJOYW1lIjoiYWRtaW4iLCJ1c2VySWQiOiJjWit4ekdpUVBSZWpISW1OZUlKK1FGV2t3Uk9PcTFEelVZZ0FuWmtycTN4dDhzZkMrOGgzK3hLbEpDMmdPb3VqYlZCdTNna29mVUFzYk1aZGpxdEFMNTRzaG5VdThMdkRGa2VSemhJb3VSZWowOGRvSTRsVE5Ud3FoQnF2c2dIeVFmNFY0VzM5UmMzMHkxeUxKVVVBNlRDbTNkN2JuMEw0MVpxQjhTWEJVNE09IiwicHJvZHVjdHMiOiJ7fSJ9.tcZU7-KHGbrP4tDt0ra2NS9WbCRSFA-lOIDA8pr7JdID7YvHz-dWDOwCDssSVNYd84xoFU07KcZHheCDxGTa1g"
+    cookie = "UA=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJkdXJhdGlvbiI6MzYwMDAwMCwibGFzdExvZ2luIjoxNzIwNTk4NDU4OTk1LCJuYW1lcyI6IltcImpheFwiLFwibG9nQW5hbHlzaXNcIixcImxvZ1NwZWVkXCIsXCJyZWZpbmVyXCJdIiwic2luZ2xlU2lnbk9uIjpmYWxzZSwid2l0aFNlcnZpY2VBdXRoIjoie1wiamF4XCI6dHJ1ZSxcImdhdWdlXCI6dHJ1ZSxcInZpc2lvblwiOnRydWUsXCJkYXRhTW9kZXJuaXphdGlvblwiOnRydWUsXCJkZWFsQW5hbHlzaXNcIjp0cnVlLFwiY21kYlwiOnRydWUsXCJsb2dBbmFseXNpc1wiOnRydWUsXCJsb2dTcGVlZFwiOnRydWUsXCJyZWZpbmVyXCI6dHJ1ZSxcIkFJT3BzXCI6dHJ1ZX0iLCJzZXNzaW9uSWQiOjU2MjE3MzI0NDE5NDkxODQsInVzZXJOYW1lIjoiYWRtaW4iLCJ1c2VySWQiOiJjWit4ekdpUVBSZWpISW1OZUlKK1FGV2t3Uk9PcTFEelVZZ0FuWmtycTN4dDhzZkMrOGgzK3hLbEpDMmdPb3VqYlZCdTNna29mVUFzYk1aZGpxdEFMNTRzaG5VdThMdkRGa2VSemhJb3VSZWowOGRvSTRsVE5Ud3FoQnF2c2dIeVFmNFY0VzM5UmMzMHkxeUxKVVVBNlRDbTNkN2JuMEw0MVpxQjhTWEJVNE09IiwicHJvZHVjdHMiOiJ7fSJ9.mFgkkKbdIbNse9pdPp3eTjSSL49570KptuvXwrOTZPS-F0kmqXK3IESikpzeueCeIHl41lWzC0FVTwlj1TAhcQ"
+    resource_conf = {
+        "yarnslots":1,
+        "task_manager_memory":1024,
+        "partitions":3,
+        "parall_num":3,
+        "topic_replication_factor":3,
+        "number_of_shards":3
+    }
 
     paso = ["CB","CBC", "PDMP.ECMP", "CMO.POF", "IST"]
     env1 = ["PI1", "PI2", "UAT1", "UAT2", "UAT3", "UAT4", "PL1", "PL2", "SIT1", "SIT2", "SIT3", "KFLT1", "KFLT2"]
@@ -448,11 +457,13 @@ if __name__ == "__main__":
     "CBC": env2
     }
     # 测试
-    # for i in ["sq", "zj"]:
-        # APP_ECMP_TRACELOG_SOURCE
-    for i in ["zj"]:
-    
-        conf=gen_conf("APP_ESB_TRACELOG_SOURCE", i)
+    # APP_ECMP_TRACELOG_SOURCE APP_MSB.ALP_TRACELOG_SOURCE 
+    # APP_OCS.OPS_APPLOG_SOURCE APP_OCS.OPS_TRACELOG_SOURCE
+
+    for i in ["sq", "zj"]:
+    # for i in ["zj"]:
+        conf=gen_conf("APP_OCS.OPS_TRACELOG_SOURCE", i)
+
         create_jax(conf)
         create_analysis(conf)
         create_storage(conf)

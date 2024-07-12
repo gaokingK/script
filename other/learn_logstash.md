@@ -104,3 +104,14 @@ appender.rolling.strategy.delete.ifLastModified.type = IfLastModified
 appender.rolling.strategy.delete.ifLastModified.age = 30d
 ```
 
+### 输出到有密码的elasticsearch中
+```
+output {
+  elasticsearch {
+    hosts => ["http://localhost:9200"]
+    index => "my-index"
+    user => "your-username"
+    password => "your-password"
+  }
+}
+```

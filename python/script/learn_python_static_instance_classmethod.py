@@ -20,6 +20,7 @@ class A:
         self.color = "5"
 
     def print_color(self):
+        print(self.name)
         print(self.color)
 
     @classmethod
@@ -66,7 +67,7 @@ def debug_classInstanceCounter():
 
 if __name__ == '__main__':
     a = A()
-    # a.print_color()
+    a.print_color()
     # A.print_color()
 
     # a.print_name()
@@ -75,7 +76,7 @@ if __name__ == '__main__':
     # a.print_nothing()
     # A.print_nothing()
 
-    A.print_cls_name()
+    # A.print_cls_name()
 
-    debug_classInstanceCounte()
+    # debug_classInstanceCounte()
     print("ok")

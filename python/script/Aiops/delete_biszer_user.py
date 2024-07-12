@@ -83,7 +83,7 @@ def add_user(user_info):
         logger.error(f"新建用户{user_info.get('username')}失败，msg:{res.get('msg')}")
 
 if __name__ == "__main__":
-    Authorization = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJmdWxsX25hbWUiOiJzdXBlcmFkbWluIiwiZXhwIjoxNzE5NTYzNjg2LCJ1c2VybmFtZSI6ImFpb3BzIiwicm9sZXMiOltdfQ.PN_yGC4oW7_eSgnrUYUqVQtIRU0o3bSKDXNEl0VsUOE4mqDXBi1bOl95E4szdM-OMqAtScvnNSAjFwheLem59w"
+    Authorization = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJmdWxsX25hbWUiOiJzdXBlcmFkbWluIiwiZXhwIjoxNzIxMTI0ODMyLCJ1c2VybmFtZSI6ImFpb3BzIiwicm9sZXMiOltdfQ.M5tvJcsF5PhE8TkkvbEGU-MHgoMoEbA5HTioRM3MkO9iEdfZY-KKK6We07f3GKaf_9EpmTZYqu90_DoK5huCvg"
     # delete_user_l = {'tongx', 'chendy', 'cuilq', 'zhuw', 'yuanm', 'yaoyf', 'wuqy', 'tangyy', 'wangjr', 'lull', 'jiangkx', 'mayx', 'zhangxu', 'netquery', 'xtquery', 'daiwt', 'guql', 'zhangyy', 'fangdq', 'shaozhoury', 'lily', 'pengwl', 'panjun', 'wuhx', 'baochj', 'yyai', 'liwh', 'hujie', 'liuy', 'sgbquery', 'lichf', 'fandh', 'chenxj', 'xiali', 'huangjm', 'xtadmin', 'jingych', 'zhaoshuai'}
     # for user in delete_user_l:
     #     delete_user(user)
@@ -97,9 +97,11 @@ if __name__ == "__main__":
     # exit()
     # role1_name = ['301178', '301190', '301211', '302286', '303061', '301845', '303074', '303939', '304106', '304349', '304766', '305364', '302935', '304076', '305411', '305434', '306454', '306456', '306451', '306457', 'W00059', 'W00063', 'W00124', '304088', '306448', '306418', '305062', '300765', '310258', '319833', '300320', '300333', '300342', '319907', '301855', '303077', '303457', '303488', '303490', '303777', '303938', '304109', '304040', '305333', '306186', '306452', '306453']
     # role1_name_zh = ['邵周若宇', '王颉蓉', '郑子熠', '潘骏', '赵帅', '童俊超', '朱雯', '包晨杰', '高世宇', '彭望龙', '江康熙', '韩健伟', '徐淼', '李超峰', '樊丁皓', '景奕辰', '方丹青', '沈小愉', '李蓉受', '周屹彬', '韩怀柱', '梁鸿波', '姚一飞', '许致立', '王硕邦', '宁寰', '潘明杰', '王明杰', '王成', '邱旻骏', '孙明昊', '周敏超', '贾天婧', '倪捷', '黄亮', '张旭', '肖坤', '王立', '朱俊杰', '欧阳晖', '龙汉良', '冯亦磊', '沈健', '孙帅', '王恩泽', '万琪', '王晨懿']
-    role1_name = ['300673', '313146', '319573', '315367', '319699', '300329', '301252', '302549', '319910', '303489', '304066', '304103', '305389', '306458', '306803', '305354', '306455', '303929', '303497', '303953']
-    role1_name_zh = ['金斯', '白翔', '卫廉', '王靓', '余飞', '高丰韡', '王明辉', '李涛', '徐昱昊', '卞荣坤', '戎奕豪', '肖雁冰', '张天天', '张蓉', '陈凡', '史金易', 
-'杨中金', '胡红青', '金杨', '崔立群']
+#     role1_name = ['300673', '313146', '319573', '315367', '319699', '300329', '301252', '302549', '319910', '303489', '304066', '304103', '305389', '306458', '306803', '305354', '306455', '303929', '303497', '303953']
+#     role1_name_zh = ['金斯', '白翔', '卫廉', '王靓', '余飞', '高丰韡', '王明辉', '李涛', '徐昱昊', '卞荣坤', '戎奕豪', '肖雁冰', '张天天', '张蓉', '陈凡', '史金易', 
+# '杨中金', '胡红青', '金杨', '崔立群']
+    role1_name = ['305891', '303469', '302368', '303081', '303055', '304084', '302851']
+    role1_name_zh = ['陈晓剑', '宁静艳', '郑建丽', '蔡根根', '邱迪佩', '夏煜彬', '李佳媛']
     for name,name_zh in zip(role1_name, role1_name_zh):
         user_info = {"username": name, "username_zh":name_zh, "role":1}
         add_user(user_info)

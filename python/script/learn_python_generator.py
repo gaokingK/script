@@ -70,6 +70,8 @@ def simple_generator_send(num=2):
         # It is done to 'start' the generator. It is just something that needs to be done.
         # It makes some sense when you think about it since the first time you call send() the generator has not
         # reached the keyword yield yet.
+        # 当你第一次调用生成器时，它还没有开始执行，因此没有挂起的 yield 表达式可以接收发送的值。
+        # 第一次调用生成器时，使用 send(None) 启动生成器并使其运行到第一个 yield 表达式处。
 
         # send(None) 和 next()的作用是一样的
         # yield num  # 这样使用send(parm) 发送的参数不会影响next()的结果, 即无效

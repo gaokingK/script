@@ -1,6 +1,7 @@
 # IPC(inter process communication) 进程间通信
 [link](https://blog.csdn.net/zhaohong_bo/article/details/89552188)
 - https://juejin.cn/post/7028373895249920036
+- https://docs.python.org/3/library/multiprocessing.html#exchanging-objects-between-processes
 ## 为什么需要通信
 - 数据传输
 - 资源共享
@@ -30,6 +31,25 @@
     有两种实现机制：内存映射、共享内存机制
     - 常常和其他IPC机制如信号量配合使用来实现进程间的通信和同步
   - 是通过multiprocess内置的Value和Array实现 
+```py
+from multiprocessing import Process, Value, Array
+
+def f(n, a):
+    n.value = 3.1415927
+    for i in range(len(a)):
+        a[i] = -a[i]
+
+if __name__ == '__main__':
+    num = Value('d', 0.0) # 这里的d、i是代表变量类型的意思
+    arr = Array('i', range(10))
+
+    p = Process(target=f, args=(num, arr))
+    p.start()
+    p.join()
+
+    print(num.value)
+    print(arr[:])
+```
 - server process 通过Manger使用 可以跨进程只要是同一网络中的，但是比共享内存慢
 ```py
 from multiprocessing import Process, Manager
@@ -57,7 +77,7 @@ num = Value('d', 0.0)
 
 ```
 套接字：
-    套接字可用于不同进程间的通信
+    套接字可用于不同进程间的通信(不是多线程模块内置的通信方式，而是将套接字用在了这里)
 信号量
     - link：https://python-parallel-programmning-cookbook.readthedocs.io/zh-cn/latest/chapter2/08_Thread_synchronization_with_semaphores.html
     - 常作为一种锁机制，实现进程间的同步

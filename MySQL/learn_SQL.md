@@ -105,7 +105,7 @@ select count(dept_no) as a from dept_manager group by dept_no having a>2
 select email from Person group by email having count(email) > 1;
 ```
 ### sorted by 
-  - link: https://www.cnblogs.com/Guhongying/p/10541979.html
+  - link: https://ww        w.cnblogs.com/Guhongying/p/10541979.html
   - SELECT * FROM stu ORDER BY Sno DESC; desc 只作用于前面的一个列， 降序排列； asc是升序，默认
   - 
 

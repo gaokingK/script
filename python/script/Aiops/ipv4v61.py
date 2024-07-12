@@ -18,7 +18,7 @@ import json
 from inspect import isclass
 from playhouse.shortcuts import model_to_dict
 from peewee import Model, DatabaseProxy, SQL,  chunked, \
-    AutoField, CharField, IntegerField, DoubleField, DateTimeField,MySQLDatabase
+    AutoField, CharField, IntegerField, DoubleField, DateTimeField,MySQLDatabase,BooleanField
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 def init_logger(name, count=10):
@@ -64,14 +64,14 @@ class UrlDnsRes(Model):
         database = proxy_db
         table_name = 't_url_dns_res'
 
-    id = AutoField(help_text='自增ID')
+    id = AutoField(help_text='主键ID')
     base_url = CharField(max_length=256, help_text='该条url是在哪个主页爬取到的')
     find_in_depth = IntegerField(help_text="在第几层爬取的结果")
-    domain_count = IntegerField(help_text="门户页下的域名数量")
-    ipv6_count = IntegerField(help_text="门户页下的ipv6域名数量")
-    ipv4_count = IntegerField(help_text="门户页下的ipv4域名数量")
+    domain_count = IntegerField(help_text="域名数量")
+    ipv6_count = IntegerField(help_text="ipv6域名数量")
+    ipv4_count = IntegerField(help_text="ipv4域名数量")
     ipv6_precent = CharField(help_text="该主页的ipv6浓度")
-    create_time = DateTimeField(default=datetime.datetime.now(), help_text='创建时间')
+    create_time = DateTimeField(default=datetime.datetime.now(), help_text='插入时间')
 
 
 # 明细表 t_url_dns_res_detail
@@ -89,15 +89,14 @@ class UrlDnsResDetail(Model):
         table_name = 't_url_dns_res_detail'
 
     id = AutoField(help_text='自增ID')
-    base_url = CharField(max_length=256, help_text='该条url是在哪个主页爬取到的')
+    base_url = CharField(max_length=256, help_text='爬取主页url')
     find_in_depth = IntegerField(help_text="在第几层爬取到的该url")
     url = CharField(max_length=256, help_text='爬取到的url')
     domain = CharField(max_length=256, help_text='爬取到的url的域名')
-    is_ipv6 = IntegerField(help_text="是否支持ipv6 是的话就是1")
+    is_ipv6 = BooleanField(help_text="是否支持ipv6")  # 是的话就是1
     ipv6 = CharField(max_length=256, help_text='域名的ipv6地址，如果没有则为空')
     ipv6_precent = CharField(help_text="该主页的ipv6浓度")
     create_time = DateTimeField(default=datetime.datetime.now(), help_text='创建时间')
-
 
 
 class MysqlHandler:
@@ -265,10 +264,10 @@ class SpeedSpider:
     def multi_depth_extract_urls(self, urls_info, depth=1):
         """下钻多层url"""
         self.need_spider_url.update(urls_info.keys())
+        self.spidered_url_info.update(urls_info)
 
         for i in range(depth):
             logger.info(f"开始提取第{i+1}层")
-            self.spidered_url_info.update(urls_info)
 
             # ex_urls = self.thread_pool(self.extract_urls_from_page, self.need_spider_url)[0]
             res = self.thread_pool(self.extract_urls_from_page, urls_info)
@@ -284,6 +283,7 @@ class SpeedSpider:
                 if url in self.need_spider_url:
                     urls_info.update({url:[index,i+1]})
 
+            self.spidered_url_info.update(urls_info)
             logger.info(f"提取出的bosc_urls共{len(set(ex_urls.keys()))}个, 准备爬取{self.need_spider_url}")
             
             for item in ex_urls.items():
@@ -307,19 +307,32 @@ class SpeedSpider:
             res[index][depth].append({"index": index, "url": url, "domain": domain, "ipv6": ipv6, "depth": depth})
 
         for base_url,all_depth_res in res.items():
+            all_domain = set()
+            ipv6_domain = set()
+            url_count = 0
             for current_depth, info in all_depth_res.items():
-                all_domain = set([item.get("domain") for item in info])
-                ipv6_domain = set([item.get("domain") for item in info if item.get("ipv6")])
-                if len(all_domain):
-                    ipv6_precent = f"{len(ipv6_domain) / len(all_domain) * 100:.2f}"
+                current_depth_domain = set([item.get("domain") for item in info])
+                all_domain = current_depth_domain | all_domain
+                current_depth_ipv6_domain = set([item.get("domain") for item in info if item.get("ipv6")])
+                ipv6_domain = current_depth_ipv6_domain|ipv6_domain
+                if len(current_depth_domain):
+                    ipv6_precent = f"{len(current_depth_ipv6_domain) / len(current_depth_domain) * 100:.2f}"
                 else:
                     ipv6_precent = "0"
-                ipv4_count = len(all_domain) - len(ipv6_domain)
-                logger.info(f"{base_url}在第{current_depth}层共探测到{len(info)}个地址, 共{len(all_domain)}个域名， 其中ipv6有{len(ipv6_domain)}个, ipv6的浓度为: {ipv6_precent}%")
-                mysql_conn.record_url_dns_res([[base_url, current_depth, len(all_domain), len(ipv6_domain), len(all_domain)- len(ipv6_domain), ipv6_precent]])
+                ipv4_count = len(current_depth_domain) - len(current_depth_ipv6_domain)
+                logger.info(f"{base_url}在第{current_depth}层共探测到{len(info)}个地址, 共{len(current_depth_domain)}个域名， 其中ipv6有{len(current_depth_ipv6_domain)}个, ipv6的浓度为: {ipv6_precent}%")
+                mysql_conn.record_url_dns_res([[base_url, current_depth, len(current_depth_domain), len(current_depth_ipv6_domain), len(current_depth_domain)- len(current_depth_ipv6_domain), ipv6_precent]])
                 for item in info:
                     is_ipv6 = 1 if item.get("ipv6") else 0
                     mysql_conn.record_url_dns_res_detail([[item.get("index"), current_depth, item.get("url"), item.get("domain"), is_ipv6, item.get("ipv6"), ipv6_precent]])
+                url_count += len(info)
+            if len(all_domain):
+                ipv6_precent = f"{len(ipv6_domain) / len(all_domain) * 100:.2f}"
+            else:
+                ipv6_precent = "0"
+            logger.info(f"{base_url}爬取{depth}层后共探测到{url_count}个地址, 共{len(all_domain)}个域名， 其中ipv6有{len(ipv6_domain)}个, ipv6的浓度为: {ipv6_precent}%")
+
+            mysql_conn.record_url_dns_res([[base_url, 0, len(all_domain), len(ipv6_domain), len(all_domain)- len(ipv6_domain), ipv6_precent]])
 
         # logger.info(f"ipv4的地址列表: {self.ipv4_domain}")
         # logger.info(f"ipv6的地址列表: {self.ipv6_domain}")
@@ -330,14 +343,15 @@ class SpeedSpider:
 def main():
     for url in urls:
         global res,urls_info
-        res = {base_url:{dep+1: [] for dep in range(depth)} for base_url in urls}
+        res = {base_url:{dep+1: [] for dep in range(depth)} for base_url in [url]}
         urls_info = {url:[url,1]}
+        logger.info(f"开始探测{urls_info}")
         ss = SpeedSpider()
         producer_thread = threading.Thread(target=ss.multi_depth_extract_urls, args=(urls_info, depth))
         producer_thread.start()
 
         con_threads = []
-        for i in range(4):
+        for i in range(5):
             consumer_thread = threading.Thread(target=ss.ipv6_access_check)
             consumer_thread.start()
             con_threads.append(consumer_thread)

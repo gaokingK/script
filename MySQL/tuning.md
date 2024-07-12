@@ -32,3 +32,12 @@
 
 ### 加索引
 - 从1400万条数据中检索耗时从4.27s提高到0.01s ![](../../imgs/tunning_add_index_01.png)
+
+# sql调优
+- 不用select * ，减少取出来的数据的大小，需要什么取什么
+- 不对数据进行计算，会导致全表扫秒，即使该字段有索引
+```sql
+select name from user where FROM_UNIXTIME(create_time) < CURDATE();
+// 应该修改为
+select name from user where create_time < FROM_UNIXTIME(CURDATE());
+```

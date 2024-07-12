@@ -1,3 +1,48 @@
+### 偏函数
+- 偏函数是一种把正常函数参数固定后得到的函数对象，通过function.partial创建
+- 有利于代码的阅读，尤其是函数参数比较多的情况下
+- 便于维护和修改，如果一个函数的参数被调用很多次但是参数只有几种，就可以创建几个不同的偏函数，如果要修改，只有修改偏函数
+- 在future对象上添加回调函数时，由于规定回调参数只接受一个future类型的参数，可以使用偏函数将其他参数固定住
+```py
+from functools import partial
+
+def power(base, exponent):
+    return base ** exponent
+
+# 创建一个新的偏函数，固定 exponent 参数为 2
+square = partial(power, exponent=2)
+
+# 现在可以直接调用 square 函数，只传递 base 参数
+print(square(4))  # 输出: 16
+print(square(5))  # 输出: 25
+
+import asyncio
+import functools
+ 
+ 
+def callback(future, n):
+    print('{}: future done: {}'.format(n, future.result()))
+ 
+ 
+async def register_callbacks(all_done):
+    print('registering callbacks on future')
+    all_done.add_done_callback(functools.partial(callback, n=1))
+    all_done.add_done_callback(functools.partial(callback, n=2))
+ 
+ 
+async def main(all_done):
+    await register_callbacks(all_done)
+    print('setting result of future')
+    all_done.set_result('the result')
+ 
+ 
+event_loop = asyncio.get_event_loop()
+try:
+    all_done = asyncio.Future()
+    event_loop.run_until_complete(main(all_done))
+finally:
+    event_loop.close()
+```
 ### chain
 - link: https://blog.csdn.net/smart_liu8/article/details/81708620
 - 作用是把多个可迭代对象给融合起来方便迭代

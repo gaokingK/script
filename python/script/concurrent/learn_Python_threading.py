@@ -1,4 +1,5 @@
 import threading
+import functools
 import time
 from concurrent.futures import ThreadPoolExecutor,wait,FIRST_COMPLETED, as_completed
 """
@@ -38,6 +39,7 @@ funture 对象：https://docs.python.org/zh-cn/3/library/asyncio-future.html
     - submit(fn, p)  fn是函数，p作为函数的参数 
         - submit 返回的是一个 future 对象，它是一个未来可期的对象，通过它可以获取某一个线程执行的状态或者某一个任务执行的状态及返回值：
         - submit过程是不阻塞的，即使[t_pool.submit(some_func, p,) for p in parm_list] param_list 大于线程池中线程个数，也会立即返回（submit只是一个提交动作，提交后由内部对象调度运行这些待运行的任务到线程池中）
+        - 即使后面没有获取结果，也会等到所有子线程运行完后才结束
     - map(fn, *iterables, timeout=None) 对iterables中的每个元素使用fn方法，然后按iterables的顺序返回fn完成后的返回值，这个过程时阻塞的，
 - 获取结果的方式
     - submit提交的
@@ -55,7 +57,7 @@ funture 对象：https://docs.python.org/zh-cn/3/library/asyncio-future.html
         - yield任务的时候返回的是future对象
 - 添加回调函数
     - future.add_done_callback(callback, *, context=None)
-    - 调用 callback 时，Future 对象是它的唯一参数。
+    - 调用 callback 时，Future 对象是它的唯一参数。如果该回调函数有多个参数，可以传入用其他参数生成的偏函数
 """
 def some_func(param1):
     print(f"start with {param1}")
@@ -63,8 +65,8 @@ def some_func(param1):
     print(f"complete with {param1}")
     return param1
 
-def callback(future):
-    print(f"回调函数：函数执行结果{future.result()}")
+def callback(future,arg1):
+    print(f"回调函数：函数{arg1}执行结果{future.result()}")
 
 """
 TO: 多线程写
@@ -96,8 +98,8 @@ if __name__ == '__main__':
         #     pass
 
         # 使用submit
-        # all_task=[t_pool.submit(some_func, p,) for p in parm_list[::-1]] # submit后就开始执行了 会全部提交
-        # time.sleep(5)# 已经提交的子线程仍然在执行
+        all_task=[t_pool.submit(some_func, p,) for p in parm_list[::-1]] # submit后就开始执行了 会全部提交
+        time.sleep(10)# 已经提交的子线程仍然后台并行在执行
         # results = [f.result() for f in all_task] # 使用future对象获取返回
         # wait(all_task,timeout=10, return_when=FIRST_COMPLETED)
 
@@ -105,7 +107,9 @@ if __name__ == '__main__':
         #     print(f.result())
 
         # 添加回调函数
-        all_task=[t_pool.submit(some_func, p,) for p in parm_list[::-1]]
-        for f in all_task:
-            f.add_done_callback(callback)
+        # all_task=[t_pool.submit(some_func, p,) for p in parm_list[::-1]]
+        # for f in all_task:
+        #     # f.add_done_callback(callback)
+        #     f.add_done_callback(functools.partial(callback,arg1=2))
         pass
+    print("主进程结束")

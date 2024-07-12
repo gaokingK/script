@@ -1,0 +1,6 @@
+[2024-07-02 16:31:44,056] DEBUG (connectionpool.py:244) Starting new HTTP connection (1): 10.251.52.102:18080
+[2024-07-02 16:31:44,423] DEBUG (connectionpool.py:546) http://10.251.52.102:18080 "POST /jax/api/v1/pipeline/jax_ECMP_TRACELOG_sq/stage HTTP/1.1" 200 None
+[2024-07-02 16:31:44,432] ERROR (创建解析任务和存储任务和中台任务.py:344) 创建jax_ECMP_TRACELOG_sq中台任务执行失败：Pipeline已存在
+[2024-07-02 16:31:44,432] DEBUG (connectionpool.py:244) Starting new HTTP connection (1): 10.251.52.102:18080
+[2024-07-02 16:31:44,597] DEBUG (connectionpool.py:546) http://10.251.52.102:18080 "POST /logAnalysis/api/itoa/dataset/stream HTTP/1.1" 200 None
+[2024-07-02 16:31:44,612] ERROR (创建解析任务和存储任务和中台任务.py:236) 创建['APP_ECMP_TRACELOG_ETL']解析任务执行失败：名称[解析-石泉-APP_ECMP_TRACELOG_SOURCE]已存在！
