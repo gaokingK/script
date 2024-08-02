@@ -24,7 +24,15 @@ def get_attm():
     }
     header = {"content-type": "application/json"}
     res = do_request("POST", url, header, payload)
-    pass
+    return res
+
+def d_file(info):
+    req = requests.get(f"http://10.232.97.191:8888/oss{info['key']}")
+    file_name = ".".join(info['name'].split('.')[:2])
+    with open(info['name'], "wb") as f:
+        f.write(req.content)
 
 if __name__ == "__main__":
-    get_attm()
+    attms = get_attm()
+    for attms_info in attms.get("resultValue").get("0b063873016b4482a530296ee5ad35eb-fieldAttachment"):
+        d_file(attms_info)

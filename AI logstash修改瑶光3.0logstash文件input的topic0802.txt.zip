@@ -1,0 +1,25 @@
+﻿一、变更目的
+    AI logstash修改瑶光3.0logstash文件input的topic
+二、备份步骤
+    cd /iops/opt/logstash/config/conf.d/
+    cp from_kafka.conf backup/from_kafka.conf.bak-20240624
+三、变更步骤
+
+    1. 停止logstash进程
+    supervisorctl stop logstash-from_kafka
+
+    2. 上传conf文件到conf.d目录，或修改原conf文件
+    cd /iops/opt/logstash/config/conf.d/
+    vi from_kafka.conf
+    
+    3. 重启项目：
+    supervisorctl update
+    supervisorctl start logstash-from_kafka
+四、变更验证
+    重启supervisor后，必示查看数据是否正常接入
+
+五、变更回退
+    rm from_kafka.conf
+    cp backup/from_kafka.conf.bak-20240624  from_kafka.conf
+
+    supervisorctl restart logstash-from_kafka
