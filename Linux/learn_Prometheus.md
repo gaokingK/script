@@ -4,9 +4,11 @@
 - 定义自己的告警计算周期
 - 告警的配置文件位置和现有的告警可以在ip:9090/alerts里面看
 - 告警规则在ip:9090/页面上的status-> rules里看
+### 默认端口9090
+
 ### 文档
 - 中文文档：https://hulining.gitbook.io/prometheus/guides/go-application
-
+- 添加exporter： https://developer.aliyun.com/article/1265374
 # 指标、样本和时间序列
 - https://www.prometheus.wang/promql/what-is-prometheus-metrics-and-labels.html
 

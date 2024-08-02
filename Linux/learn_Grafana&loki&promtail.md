@@ -4,6 +4,9 @@
   - 官方文档：https://grafana.com/docs/grafana/latest/
 ### 官方例子：https://play.grafana.org/d/000000029/prometheus-demo-dashboard?orgId=1&refresh=5m&editview=templating
 
+### 可以添加一个模板
+- https://opster.com/guides/elasticsearch/how-tos/elasticsearch-monitoring-with-grafana-prometheus/
+- https://grafana.com/oss/prometheus/exporters/elasticsearch-exporter/?tab=dashboards
 ### Grafana变量及panel links中的变量使用
 - link: https://juejin.cn/post/7098581066927046669
 - grafana绘图配置查询变量+多级变量联动:https://blog.csdn.net/CleverCode/article/details/104324039

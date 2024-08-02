@@ -1,0 +1,36 @@
+[2024-07-10 16:01:24,541] DEBUG (connectionpool.py:244) Starting new HTTP connection (1): 10.251.52.102:18080
+[2024-07-10 16:01:24,674] DEBUG (connectionpool.py:546) http://10.251.52.102:18080 "POST /jax/api/v1/pipeline/jax_OCS-OPS_APPLOG_sq/stage HTTP/1.1" 200 None
+[2024-07-10 16:01:24,674] INFO (创建解析任务和存储任务和中台任务.py:343) 创建jax_OCS-OPS_APPLOG_sq中台任务成功：成功
+[2024-07-10 16:01:24,685] DEBUG (connectionpool.py:244) Starting new HTTP connection (1): 10.251.52.102:18080
+[2024-07-10 16:01:24,840] DEBUG (connectionpool.py:546) http://10.251.52.102:18080 "POST /logAnalysis/api/itoa/dataset/stream HTTP/1.1" 200 None
+[2024-07-10 16:01:24,841] INFO (创建解析任务和存储任务和中台任务.py:234) 创建['APP_OCS.OPS_APPLOG_ETL']解析任务成功：success, task_id:314848382697472
+[2024-07-10 16:01:24,841] DEBUG (connectionpool.py:244) Starting new HTTP connection (1): 10.251.52.102:18080
+[2024-07-10 16:01:53,216] DEBUG (connectionpool.py:546) http://10.251.52.102:18080 "POST /logAnalysis/api/itoa/dataset/storageOutPut HTTP/1.1" 200 None
+[2024-07-10 16:01:53,216] INFO (创建解析任务和存储任务和中台任务.py:99) 创建['APP_OCS.OPS_APPLOG_ETL']存储任务成功：添加成功
+[2024-07-10 16:01:53,231] DEBUG (connectionpool.py:244) Starting new HTTP connection (1): 10.251.52.102:18080
+[2024-07-10 16:01:53,384] DEBUG (connectionpool.py:546) http://10.251.52.102:18080 "POST /jax/api/v1/pipeline/jax_OCS-OPS_APPLOG_zj/stage HTTP/1.1" 200 None
+[2024-07-10 16:01:53,384] INFO (创建解析任务和存储任务和中台任务.py:343) 创建jax_OCS-OPS_APPLOG_zj中台任务成功：成功
+[2024-07-10 16:01:53,384] DEBUG (connectionpool.py:244) Starting new HTTP connection (1): 10.251.52.102:18080
+[2024-07-10 16:01:53,899] DEBUG (connectionpool.py:546) http://10.251.52.102:18080 "POST /logAnalysis/api/itoa/dataset/stream HTTP/1.1" 200 None
+[2024-07-10 16:01:54,034] INFO (创建解析任务和存储任务和中台任务.py:234) 创建['APP_OCS.OPS_APPLOG_ETL']解析任务成功：success, task_id:314848501141504
+[2024-07-10 16:01:54,034] DEBUG (connectionpool.py:244) Starting new HTTP connection (1): 10.251.52.102:18080
+[2024-07-10 16:02:01,671] DEBUG (connectionpool.py:546) http://10.251.52.102:18080 "POST /logAnalysis/api/itoa/dataset/storageOutPut HTTP/1.1" 200 None
+[2024-07-10 16:02:01,671] INFO (创建解析任务和存储任务和中台任务.py:99) 创建['APP_OCS.OPS_APPLOG_ETL']存储任务成功：添加成功
+[2024-07-10 16:02:23,209] DEBUG (connectionpool.py:244) Starting new HTTP connection (1): 10.251.52.102:18080
+[2024-07-10 16:02:23,375] DEBUG (connectionpool.py:546) http://10.251.52.102:18080 "POST /jax/api/v1/pipeline/jax_OCS-OPS_TRACELOG_sq/stage HTTP/1.1" 200 None
+[2024-07-10 16:02:23,375] INFO (创建解析任务和存储任务和中台任务.py:343) 创建jax_OCS-OPS_TRACELOG_sq中台任务成功：成功
+[2024-07-10 16:02:23,375] DEBUG (connectionpool.py:244) Starting new HTTP connection (1): 10.251.52.102:18080
+[2024-07-10 16:02:23,510] DEBUG (connectionpool.py:546) http://10.251.52.102:18080 "POST /logAnalysis/api/itoa/dataset/stream HTTP/1.1" 200 None
+[2024-07-10 16:02:23,510] INFO (创建解析任务和存储任务和中台任务.py:234) 创建['APP_OCS.OPS_TRACELOG_ETL']解析任务成功：success, task_id:314848623005696
+[2024-07-10 16:02:23,510] DEBUG (connectionpool.py:244) Starting new HTTP connection (1): 10.251.52.102:18080
+[2024-07-10 16:02:47,142] DEBUG (connectionpool.py:546) http://10.251.52.102:18080 "POST /logAnalysis/api/itoa/dataset/storageOutPut HTTP/1.1" 200 None
+[2024-07-10 16:02:47,142] INFO (创建解析任务和存储任务和中台任务.py:99) 创建['APP_OCS.OPS_TRACELOG_ETL']存储任务成功：添加成功
+[2024-07-10 16:02:47,142] DEBUG (connectionpool.py:244) Starting new HTTP connection (1): 10.251.52.102:18080
+[2024-07-10 16:02:47,236] DEBUG (connectionpool.py:546) http://10.251.52.102:18080 "POST /jax/api/v1/pipeline/jax_OCS-OPS_TRACELOG_zj/stage HTTP/1.1" 200 None
+[2024-07-10 16:02:47,239] INFO (创建解析任务和存储任务和中台任务.py:343) 创建jax_OCS-OPS_TRACELOG_zj中台任务成功：成功
+[2024-07-10 16:02:47,241] DEBUG (connectionpool.py:244) Starting new HTTP connection (1): 10.251.52.102:18080
+[2024-07-10 16:02:47,346] DEBUG (connectionpool.py:546) http://10.251.52.102:18080 "POST /logAnalysis/api/itoa/dataset/stream HTTP/1.1" 200 None
+[2024-07-10 16:02:47,347] INFO (创建解析任务和存储任务和中台任务.py:234) 创建['APP_OCS.OPS_TRACELOG_ETL']解析任务成功：success, task_id:314848720752640
+[2024-07-10 16:02:47,348] DEBUG (connectionpool.py:244) Starting new HTTP connection (1): 10.251.52.102:18080
+[2024-07-10 16:02:50,580] DEBUG (connectionpool.py:546) http://10.251.52.102:18080 "POST /logAnalysis/api/itoa/dataset/storageOutPut HTTP/1.1" 200 None
+[2024-07-10 16:02:50,596] INFO (创建解析任务和存储任务和中台任务.py:99) 创建['APP_OCS.OPS_TRACELOG_ETL']存储任务成功：添加成功

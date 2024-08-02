@@ -7,16 +7,18 @@ from openpyxl import Workbook, load_workbook
 from openpyxl.styles import Font  
 from datetime import datetime
 import re
+from openpyxl import load_workbook, Workbook
+
 
 
 def init_logger(name, count=10):
     logger = logging.getLogger()
     log_level = logging.DEBUG
     formatter = logging.Formatter("[%(asctime)s] %(levelname)s (%(filename)s:%(lineno)d) %(message)s")
-    log_path = os.getcwd()
+    log_path = os.path.dirname(os.path.abspath(__file__))
     if not os.path.exists(log_path):
         os.mkdir(log_path)
-    log_name = log_path + "\\" + name + "_" + datetime.now().strftime("%Y%m%d") + '.log'
+    log_name = log_path + os.sep + 'logs' + os.sep + name + '.log'
     print("日志保存在%s" % log_name)
     ###
     ch_handler = logging.StreamHandler()

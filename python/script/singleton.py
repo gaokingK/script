@@ -53,6 +53,7 @@ def singleton(cls,):
 删除单例
 如何彻底删除单例, 可以借助weakValueDictionary(), 这是一个弱引用类型
 link: https://blog.csdn.net/qq_41967784/article/details/119351353
+# 弱引用类型里用到的变量不会对引用计数机制产生影响
 """
 
 

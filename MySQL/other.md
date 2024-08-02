@@ -1,13 +1,23 @@
 - 从磁盘取数据是最影响性能的
 - 一般的应用系统，读写比例在10:1左右，而且插入操作和一般的更新操作很少出现性能问题，在生产环境中，我们遇到最多的，也是最容易出问题的，还是一些复杂的查询操作，因此对查询语句的优化显然是重中之重
-
 ### 细微的
 - 从磁盘取数据是最影响性能的
 - 一般的应用系统，读写比例在10:1左右，而且插入操作和一般的更新操作很少出现性能问题，在生产环境中，我们遇到最多的，也是最容易出问题的，还是一些复杂的查询操作，因此对查询语句的优化显然是重中之重
+### =和:=的区别
+- link：https://blog.csdn.net/u014305426/article/details/123778448
+- :=在任何情况下都会被当作是赋值操作，因此，如果你确实想要进行赋值操作，那就大胆使用:=就好了；
+- 在以下两种情况下，=和:=是等效，都会被当作赋值操作：
+    - 在使用SET操作符进行赋值时；
+    - 如: SET @param = 1 与 SET @param := 1的效果是一样的，都是将1赋给@param
+    - 在UPDATE语句的SET语句中；
+    - 如 UPDATE t_user SET phone_num = ‘13888888888’ WHERE user_name = ‘蔡徐坤’;
+- 在其他的任何条件下，=都会被当作比较操作。
+- 
 ### MySQL的@与@@区别
   - link： https://www.cnblogs.com/qlqwjy/p/8470722.html
   - @x 是 用户自定义的变量  (User variables are written as @var_name)
   - @@x 是 global或session变量  (@@global  @@session )
+  - @符号用于引用会话级别的自定义变量，而@@符号用于引用全局级别的系统变量
   - 查看全局变量: `select @@var_name`
   - 设置全局变量值:
       `mysql> SET @t1=0, @t2=0, @t3=0;`
@@ -115,4 +125,7 @@ declare i int default 0;
 - 关闭连接，释放资源
 ### 对索引的理解
 - learn_index 什么是索引
-### 
+### DDL和DML和其他
+- https://www.geeksforgeeks.org/sql-ddl-dql-dml-dcl-tcl-commands/#ddl-data-definition-language
+- DDL：Data Definition Language 比如创建表
+- DML：Data Manipulation Language 比如插入、更新、删除数据

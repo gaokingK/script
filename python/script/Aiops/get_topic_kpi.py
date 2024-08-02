@@ -16,7 +16,7 @@ def init_logger(name, count=10):
     log_path = os.path.dirname(__file__)
     if not os.path.exists(log_path):
         os.mkdir(log_path)
-    log_name = log_path + "/" + name + "_" + datetime.now().strftime("%Y%m%d") + '.log'
+    log_name = log_path + os.sep + 'logs' + os.sep + name + '.log'
     print("日志保存在%s" % log_name)
     ###
     ch_handler = logging.StreamHandler()

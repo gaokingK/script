@@ -1,0 +1,359 @@
+[2024-06-17 14:52:21,985] INFO (2044) (ipv4v61.py:multi_depth_extract_urls:166) 开始提取第1层
+[2024-06-17 14:52:21,998] DEBUG (20128) (connectionpool.py:_new_conn:1052) Starting new HTTPS connection (1): www.bosc-hk.com:443
+[2024-06-17 14:52:21,998] DEBUG (26596) (connectionpool.py:_new_conn:1052) Starting new HTTPS connection (1): www.bosc.cn:443
+[2024-06-17 14:52:22,029] ERROR (20128) (ipv4v61.py:extract_urls_from_page:154) 爬取出错https://www.bosc-hk.com/
+[2024-06-17 14:52:22,030] ERROR (26596) (ipv4v61.py:extract_urls_from_page:154) 爬取出错https://www.bosc.cn/zh/
+[2024-06-17 14:52:22,030] ERROR (20128) (ipv4v61.py:extract_urls_from_page:155) HTTPSConnectionPool(host='www.bosc-hk.com', port=443): Max retries exceeded with url: / (Caused by ProxyError('Unable to connect to proxy', FileNotFoundError(2, 'No such file or directory')))
+Traceback (most recent call last):
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connectionpool.py", line 776, in urlopen
+    self._prepare_proxy(conn)
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connectionpool.py", line 1045, in _prepare_proxy
+    conn.connect()
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connection.py", line 619, in connect
+    self.sock = sock = self._connect_tls_proxy(self.host, sock)
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connection.py", line 675, in _connect_tls_proxy
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connection.py", line 782, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\util\ssl_.py", line 470, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\util\ssl_.py", line 514, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\ssl.py", line 500, in wrap_socket
+    return self.sslsocket_class._create(
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\ssl.py", line 1040, in _create
+    self.do_handshake()
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\ssl.py", line 1309, in do_handshake
+    self._sslobj.do_handshake()
+FileNotFoundError: [Errno 2] No such file or directory
+
+The above exception was the direct cause of the following exception:
+
+urllib3.exceptions.ProxyError: ('Unable to connect to proxy', FileNotFoundError(2, 'No such file or directory'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='www.bosc-hk.com', port=443): Max retries exceeded with url: / (Caused by ProxyError('Unable to connect to proxy', FileNotFoundError(2, 'No such file or directory')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "e:/Deskop/People/script/python/script/Aiops/ipv4v61.py", line 135, in extract_urls_from_page
+    response = requests.get(url, headers=self.headers, timeout=10, verify=False,allow_redirects=True)
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\adapters.py", line 513, in send
+    raise ProxyError(e, request=request)
+requests.exceptions.ProxyError: HTTPSConnectionPool(host='www.bosc-hk.com', port=443): Max retries exceeded with url: / (Caused by ProxyError('Unable to connect to proxy', FileNotFoundError(2, 'No such file or directory')))
+[2024-06-17 14:52:22,030] ERROR (26596) (ipv4v61.py:extract_urls_from_page:155) HTTPSConnectionPool(host='www.bosc.cn', port=443): Max retries exceeded with url: /zh/ (Caused by ProxyError('Unable to connect to proxy', FileNotFoundError(2, 'No such file or directory')))
+Traceback (most recent call last):
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connectionpool.py", line 776, in urlopen
+    self._prepare_proxy(conn)
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connectionpool.py", line 1045, in _prepare_proxy
+    conn.connect()
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connection.py", line 619, in connect
+    self.sock = sock = self._connect_tls_proxy(self.host, sock)
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connection.py", line 675, in _connect_tls_proxy
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connection.py", line 782, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\util\ssl_.py", line 470, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\util\ssl_.py", line 514, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\ssl.py", line 500, in wrap_socket
+    return self.sslsocket_class._create(
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\ssl.py", line 1040, in _create
+    self.do_handshake()
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\ssl.py", line 1309, in do_handshake
+    self._sslobj.do_handshake()
+FileNotFoundError: [Errno 2] No such file or directory
+
+The above exception was the direct cause of the following exception:
+
+urllib3.exceptions.ProxyError: ('Unable to connect to proxy', FileNotFoundError(2, 'No such file or directory'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='www.bosc.cn', port=443): Max retries exceeded with url: /zh/ (Caused by ProxyError('Unable to connect to proxy', FileNotFoundError(2, 'No such file or directory')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "e:/Deskop/People/script/python/script/Aiops/ipv4v61.py", line 135, in extract_urls_from_page
+    response = requests.get(url, headers=self.headers, timeout=10, verify=False,allow_redirects=True)
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\adapters.py", line 513, in send
+    raise ProxyError(e, request=request)
+requests.exceptions.ProxyError: HTTPSConnectionPool(host='www.bosc.cn', port=443): Max retries exceeded with url: /zh/ (Caused by ProxyError('Unable to connect to proxy', FileNotFoundError(2, 'No such file or directory')))
+[2024-06-17 14:52:22,113] INFO (2044) (ipv4v61.py:multi_depth_extract_urls:174) 提取出的bosc_urls共0个, 准备爬取set()
+[2024-06-17 14:52:22,114] WARNING (2044) (ipv4v61.py:multi_depth_extract_urls:181) 没有要爬取的url了
+[2024-06-17 14:52:26,997] INFO (25756) (ipv4v61.py:multi_thread_ipv6_access_check:118) 待dns的url为空
+[2024-06-17 14:52:26,998] INFO (25592) (ipv4v61.py:calculate_ipv4v6:187) ipv4的地址列表: set()
+[2024-06-17 14:52:26,998] INFO (25592) (ipv4v61.py:calculate_ipv4v6:188) ipv6的地址列表: set()
+[2024-06-17 14:52:26,999] INFO (25592) (ipv4v61.py:calculate_ipv4v6:189) 探测到的域名为set()
+[2024-06-17 18:23:39,080] INFO (12508) (ipv4v61.py:multi_depth_extract_urls:293) 开始提取第1层
+[2024-06-17 18:23:39,101] DEBUG (22064) (connectionpool.py:_new_conn:1052) Starting new HTTPS connection (1): www.bosc.cn:443
+[2024-06-17 18:23:39,104] DEBUG (23992) (connectionpool.py:_new_conn:1052) Starting new HTTPS connection (1): www.bosc-hk.com:443
+[2024-06-17 18:23:39,124] ERROR (22064) (ipv4v61.py:extract_urls_from_page:281) 爬取出错https://www.bosc.cn/zh/
+[2024-06-17 18:23:39,124] ERROR (23992) (ipv4v61.py:extract_urls_from_page:281) 爬取出错https://www.bosc-hk.com/
+[2024-06-17 18:23:39,124] ERROR (22064) (ipv4v61.py:extract_urls_from_page:282) HTTPSConnectionPool(host='www.bosc.cn', port=443): Max retries exceeded with url: /zh/ (Caused by ProxyError('Unable to connect to proxy', FileNotFoundError(2, 'No such file or directory')))
+Traceback (most recent call last):
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connectionpool.py", line 776, in urlopen
+    self._prepare_proxy(conn)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connectionpool.py", line 1045, in _prepare_proxy
+    conn.connect()
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connection.py", line 619, in connect
+    self.sock = sock = self._connect_tls_proxy(self.host, sock)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connection.py", line 675, in _connect_tls_proxy
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connection.py", line 782, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\util\ssl_.py", line 470, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\util\ssl_.py", line 514, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\ssl.py", line 500, in wrap_socket
+    return self.sslsocket_class._create(
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\ssl.py", line 1040, in _create
+    self.do_handshake()
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\ssl.py", line 1309, in do_handshake
+    self._sslobj.do_handshake()
+FileNotFoundError: [Errno 2] No such file or directory
+
+The above exception was the direct cause of the following exception:
+
+urllib3.exceptions.ProxyError: ('Unable to connect to proxy', FileNotFoundError(2, 'No such file or directory'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='www.bosc.cn', port=443): Max retries exceeded with url: /zh/ (Caused by ProxyError('Unable to connect to proxy', FileNotFoundError(2, 'No such file or directory')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "e:\Deskop\People\script\python\script\Aiops\ipv4v61.py", line 262, in extract_urls_from_page
+    response = requests.get(url, headers=self.headers, timeout=10, verify=False,allow_redirects=True)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\adapters.py", line 513, in send
+    raise ProxyError(e, request=request)
+requests.exceptions.ProxyError: HTTPSConnectionPool(host='www.bosc.cn', port=443): Max retries exceeded with url: /zh/ (Caused by ProxyError('Unable to connect to proxy', FileNotFoundError(2, 'No such file or directory')))
+[2024-06-17 18:23:39,125] ERROR (23992) (ipv4v61.py:extract_urls_from_page:282) HTTPSConnectionPool(host='www.bosc-hk.com', port=443): Max retries exceeded with url: / (Caused by ProxyError('Unable to connect to proxy', FileNotFoundError(2, 'No such file or directory')))
+Traceback (most recent call last):
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connectionpool.py", line 776, in urlopen
+    self._prepare_proxy(conn)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connectionpool.py", line 1045, in _prepare_proxy
+    conn.connect()
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connection.py", line 619, in connect
+    self.sock = sock = self._connect_tls_proxy(self.host, sock)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connection.py", line 675, in _connect_tls_proxy
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connection.py", line 782, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\util\ssl_.py", line 470, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\util\ssl_.py", line 514, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\ssl.py", line 500, in wrap_socket
+    return self.sslsocket_class._create(
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\ssl.py", line 1040, in _create
+    self.do_handshake()
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\ssl.py", line 1309, in do_handshake
+    self._sslobj.do_handshake()
+FileNotFoundError: [Errno 2] No such file or directory
+
+The above exception was the direct cause of the following exception:
+
+urllib3.exceptions.ProxyError: ('Unable to connect to proxy', FileNotFoundError(2, 'No such file or directory'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='www.bosc-hk.com', port=443): Max retries exceeded with url: / (Caused by ProxyError('Unable to connect to proxy', FileNotFoundError(2, 'No such file or directory')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "e:\Deskop\People\script\python\script\Aiops\ipv4v61.py", line 262, in extract_urls_from_page
+    response = requests.get(url, headers=self.headers, timeout=10, verify=False,allow_redirects=True)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\adapters.py", line 513, in send
+    raise ProxyError(e, request=request)
+requests.exceptions.ProxyError: HTTPSConnectionPool(host='www.bosc-hk.com', port=443): Max retries exceeded with url: / (Caused by ProxyError('Unable to connect to proxy', FileNotFoundError(2, 'No such file or directory')))
+[2024-06-17 18:23:39,132] INFO (12508) (ipv4v61.py:multi_depth_extract_urls:301) 提取出的bosc_urls共0个, 准备爬取set()
+[2024-06-17 18:23:39,132] WARNING (12508) (ipv4v61.py:multi_depth_extract_urls:308) 待爬取的url为空
+[2024-06-17 18:23:44,089] INFO (24816) (ipv4v61.py:ipv6_access_check:230) 待dns的url为空
+[2024-06-17 18:23:44,090] INFO (16092) (ipv4v61.py:calculate_ipv4v6:314) ipv4的地址列表: set()
+[2024-06-17 18:23:44,090] INFO (16092) (ipv4v61.py:calculate_ipv4v6:315) ipv6的地址列表: set()
+[2024-06-17 18:23:44,091] INFO (16092) (ipv4v61.py:calculate_ipv4v6:316) 探测到的域名为set()
+[2024-06-17 18:23:57,333] INFO (24840) (ipv4v61.py:multi_depth_extract_urls:293) 开始提取第1层
+[2024-06-17 18:23:57,350] DEBUG (11504) (connectionpool.py:_new_conn:1052) Starting new HTTPS connection (1): www.bosc.cn:443
+[2024-06-17 18:23:57,354] DEBUG (17992) (connectionpool.py:_new_conn:1052) Starting new HTTPS connection (1): www.bosc-hk.com:443
+[2024-06-17 18:23:57,384] ERROR (17992) (ipv4v61.py:extract_urls_from_page:281) 爬取出错https://www.bosc-hk.com/
+[2024-06-17 18:23:57,385] ERROR (11504) (ipv4v61.py:extract_urls_from_page:281) 爬取出错https://www.bosc.cn/zh/
+[2024-06-17 18:23:57,386] ERROR (17992) (ipv4v61.py:extract_urls_from_page:282) HTTPSConnectionPool(host='www.bosc-hk.com', port=443): Max retries exceeded with url: / (Caused by ProxyError('Unable to connect to proxy', FileNotFoundError(2, 'No such file or directory')))
+Traceback (most recent call last):
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connectionpool.py", line 776, in urlopen
+    self._prepare_proxy(conn)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connectionpool.py", line 1045, in _prepare_proxy
+    conn.connect()
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connection.py", line 619, in connect
+    self.sock = sock = self._connect_tls_proxy(self.host, sock)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connection.py", line 675, in _connect_tls_proxy
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connection.py", line 782, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\util\ssl_.py", line 470, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\util\ssl_.py", line 514, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\ssl.py", line 500, in wrap_socket
+    return self.sslsocket_class._create(
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\ssl.py", line 1040, in _create
+    self.do_handshake()
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\ssl.py", line 1309, in do_handshake
+    self._sslobj.do_handshake()
+FileNotFoundError: [Errno 2] No such file or directory
+
+The above exception was the direct cause of the following exception:
+
+urllib3.exceptions.ProxyError: ('Unable to connect to proxy', FileNotFoundError(2, 'No such file or directory'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='www.bosc-hk.com', port=443): Max retries exceeded with url: / (Caused by ProxyError('Unable to connect to proxy', FileNotFoundError(2, 'No such file or directory')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "e:\Deskop\People\script\python\script\Aiops\ipv4v61.py", line 262, in extract_urls_from_page
+    response = requests.get(url, headers=self.headers, timeout=10, verify=False,allow_redirects=True)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\adapters.py", line 513, in send
+    raise ProxyError(e, request=request)
+requests.exceptions.ProxyError: HTTPSConnectionPool(host='www.bosc-hk.com', port=443): Max retries exceeded with url: / (Caused by ProxyError('Unable to connect to proxy', FileNotFoundError(2, 'No such file or directory')))
+[2024-06-17 18:23:57,387] ERROR (11504) (ipv4v61.py:extract_urls_from_page:282) HTTPSConnectionPool(host='www.bosc.cn', port=443): Max retries exceeded with url: /zh/ (Caused by ProxyError('Unable to connect to proxy', FileNotFoundError(2, 'No such file or directory')))
+Traceback (most recent call last):
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connectionpool.py", line 776, in urlopen
+    self._prepare_proxy(conn)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connectionpool.py", line 1045, in _prepare_proxy
+    conn.connect()
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connection.py", line 619, in connect
+    self.sock = sock = self._connect_tls_proxy(self.host, sock)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connection.py", line 675, in _connect_tls_proxy
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connection.py", line 782, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\util\ssl_.py", line 470, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\util\ssl_.py", line 514, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\ssl.py", line 500, in wrap_socket
+    return self.sslsocket_class._create(
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\ssl.py", line 1040, in _create
+    self.do_handshake()
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\ssl.py", line 1309, in do_handshake
+    self._sslobj.do_handshake()
+FileNotFoundError: [Errno 2] No such file or directory
+
+The above exception was the direct cause of the following exception:
+
+urllib3.exceptions.ProxyError: ('Unable to connect to proxy', FileNotFoundError(2, 'No such file or directory'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='www.bosc.cn', port=443): Max retries exceeded with url: /zh/ (Caused by ProxyError('Unable to connect to proxy', FileNotFoundError(2, 'No such file or directory')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "e:\Deskop\People\script\python\script\Aiops\ipv4v61.py", line 262, in extract_urls_from_page
+    response = requests.get(url, headers=self.headers, timeout=10, verify=False,allow_redirects=True)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\adapters.py", line 513, in send
+    raise ProxyError(e, request=request)
+requests.exceptions.ProxyError: HTTPSConnectionPool(host='www.bosc.cn', port=443): Max retries exceeded with url: /zh/ (Caused by ProxyError('Unable to connect to proxy', FileNotFoundError(2, 'No such file or directory')))
+[2024-06-17 18:23:57,401] INFO (24840) (ipv4v61.py:multi_depth_extract_urls:301) 提取出的bosc_urls共0个, 准备爬取set()
+[2024-06-17 18:23:57,401] WARNING (24840) (ipv4v61.py:multi_depth_extract_urls:308) 待爬取的url为空

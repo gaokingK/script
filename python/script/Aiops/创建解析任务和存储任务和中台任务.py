@@ -15,7 +15,7 @@ def init_logger(name, count=10):
     log_path = os.path.dirname(__file__)
     if not os.path.exists(log_path):
         os.mkdir(log_path)
-    log_name = log_path + "\\" + name + '.log'
+    log_name = log_path + os.sep + 'logs' + os.sep + name + '.log'
     print("日志保存在%s" % log_name)
     ###
     time_handler = logging.handlers.TimedRotatingFileHandler(log_name, when="midnight", interval=1, encoding='utf-8', backupCount=count)
@@ -70,20 +70,20 @@ def create_storage(conf_dict):
             "centerId": conf_dict["centerId"],
             "centerName": conf_dict["centerName"],
             "storageId": conf_dict["storageId"],
-            "timestamp": "@timestamp",
+            "timestamp": "@parsingTime",
             "cycleType": 0,
             "timeInterval": None,
             "dayData": 10,
-            "numPartitions": resource_conf["partitions"],
+            "numPartitions": resource_conf["number_of_shards"],
             "isDefaultAddress": True,
             "storageTime": "",
             "jaxCluster": conf_dict["jaxCluster"],
-            "groupId": None,
-            "offset": "earliest",
-            "instanceNum": resource_conf["parall_num"],
+            "groupId": conf_dict.get("store_groupid"),
+            "offset": resource_conf["offset_mode"],
+            "instanceNum": resource_conf["stor_parall_num"],
             "maxPollSize": 5000,
             "repeatCheck": 0,
-            "taskManagerMemory": resource_conf["task_manager_memory"],
+            "taskManagerMemory": resource_conf["stor_task_manager_memory"],
             "yarnSlots": resource_conf["yarnslots"],
             "checkPointInterval": 0,
             "esTemplate": "{\n \"order\": \"200\",\n \"index_patterns\": [\n \"" + conf_dict["data_set_name"] + "_*\"\n ],\n \"settings\": {\n \"index\": {\n \"codec\": \"best_compression\",\n \"refresh_interval\": \"10s\",\n \"number_of_shards\": \"" + str(resource_conf["number_of_shards"]) + "\",\n \"number_of_replicas\": \"1\",\n \"translog\": {\n \"sync_interval\": \"60s\",\n \"durability\": \"async\"\n },\n \"merge\": {\n \"scheduler\": {\n \"max_thread_count\": \"1\"\n },\n \"policy\": {\n \"max_merged_segment\": \"100m\"\n }\n },\n \"unassigned\": {\n \"node_left\": {\n \"delayed_timeout\": \"15m\"\n }\n }\n }\n },\n \"mappings\": {\n \"dynamic\": true,\n \"dynamic_templates\": [\n {\n \"message_field\": {\n \"path_match\": \"@message\",\n \"mapping\": {\n \"norms\": false,\n \"type\": \"text\"\n },\n \"match_mapping_type\": \"string\"\n }\n },\n {\n \"string_fields\": {\n \"mapping\": {\n \"type\": \"keyword\"\n },\n \"match_mapping_type\": \"string\",\n \"match\": \"*\"\n }\n }\n ],\n \"properties\": {\n \"@timestamp\": {\n \"type\": \"date\"\n }\n }\n },\n \"aliases\": {}\n}"
@@ -111,19 +111,19 @@ def create_analysis(conf_dict):
         "dataSetName": conf_dict.get("anlysis_task_name"),
         "sourceType": "analysis",
         "dayData": 10,
-        "numPartitions": resource_conf["partitions"], # 分区数
+        "numPartitions": resource_conf["anly_partitions"], # 分区数
         "remark": "",
         "groupId": "",
         "advanceConfig": [
             {
-            "groupId": "",
+            "groupId": conf_dict.get("anly_groupid"),
             "numReplications": resource_conf["topic_replication_factor"],
             "maxMessageSize": 1,
             "maxPullMessageSize": 500,
-            "instanceNum": resource_conf["parall_num"], # 并发数
-            "offset": "earliest",
+            "instanceNum": resource_conf["anly_parall_num"], # 并发数
+            "offset": resource_conf["offset_mode"],
             "commitInterval": 10,
-            "taskManagerMemory": resource_conf["task_manager_memory"], # 内存
+            "taskManagerMemory": resource_conf["anly_task_manager_memory"], # 内存
             "yarnSlots": resource_conf["yarnslots"], # yarnslot数
             "partitionType": "ROUND_ROBIN",
             "partitionType": "ROUND_ROBIN",
@@ -247,6 +247,7 @@ def create_jax(conf_dict):
     "jobName": "com.eoi.jax.flink.job.source.KafkaByteSourceJob",
     "jobConfig": {
     "offsetMode": "group",
+    "kafkaConsumerProperties":{"auto.offset.reset":resource_conf["auto.offset.reset"]},
     "topics": [
         conf_dict["jax_input_topic"]
         #"APP_PDMP_TRACELOG_ETL"
@@ -271,7 +272,7 @@ def create_jax(conf_dict):
     "jobName": "com.eoi.jax.flink.job.sink.KafkaSinkJob",
     "jobConfig": {
         "autoCreateTopic": True,
-        "autoCreateTopicPartitions": resource_conf["partitions"],
+        "autoCreateTopicPartitions": resource_conf["jax_partitions"],
         "autoCreateTopicReplicationFactor": resource_conf["topic_replication_factor"],
         "topic": conf_dict["jax_output_topic"], #"APP_PDMP_TRACELOG_ETL_3333",
         "bootstrapServers": conf_dict["bootstrapServers"],
@@ -303,7 +304,10 @@ def create_jax(conf_dict):
     "enableMock": None
     }
     ],
-    "opts": {}
+    "opts": {
+        "parallelism": resource_conf["jax_parallelism"], 
+        "yarnTaskManagerMemory": resource_conf["jax_yarnTaskManagerMemory"]
+        }
     },
     "pipeDescription": None,
     "clusterName": conf_dict["clusterName"],
@@ -402,9 +406,14 @@ def gen_conf(topic, env=None):
     conf["jax_kafka_out_job_id"] = f"KafkaSinkJob{prefix}" #"KafkaSinkJob171592633328590053",
 
     # jax_topic名_sq/zj，topic名【除前面的itm/app/等，以及后面的source/etl】。比如nginx这个，就是jax_nginx_errorlog_zj
-    conf["jax_task_name"] = f"jax_{topic.replace('APP_', '').replace('ITM_', '').replace('_SOURCE', '').replace('_ETL', '').replace('.','-')}{'_' + env if not env == 'dev' else ''}"
+    # conf["jax_task_name"] = f"jax_{topic.replace('APP_', '').replace('ITM_', '').replace('_SOURCE', '').replace('_ETL', '').replace('.','-')}{'_' + env if not env == 'dev' else ''}"
+    # 修改jax任务名，好搜索20240716
+    conf["jax_task_name"] = f"jax_{topic.replace('.','-')}{'_' + env if not env == 'dev' else ''}"
     conf["jax_input_topic"] = topic # 原始topic名 APP_{p}_TRACELOG_SOURCE_{e}
     conf["jax_group_id"] = f"{topic}_jax"
+
+    conf["anly_groupid"] = f"{topic}_anly"
+    conf["store_groupid"] = f"{topic}_stor"
 
     if env == "dev":
         conf["jax_output_topic"] = topic.replace("_SOURCE", "")
@@ -436,14 +445,24 @@ if __name__ == "__main__":
         "zj": "http://10.251.52.102:18080",
         "dev":"http://10.240.246.138:8080"
         }.get(env)
-    cookie = "UA=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJkdXJhdGlvbiI6MzYwMDAwMCwibGFzdExvZ2luIjoxNzIwNTk4NDU4OTk1LCJuYW1lcyI6IltcImpheFwiLFwibG9nQW5hbHlzaXNcIixcImxvZ1NwZWVkXCIsXCJyZWZpbmVyXCJdIiwic2luZ2xlU2lnbk9uIjpmYWxzZSwid2l0aFNlcnZpY2VBdXRoIjoie1wiamF4XCI6dHJ1ZSxcImdhdWdlXCI6dHJ1ZSxcInZpc2lvblwiOnRydWUsXCJkYXRhTW9kZXJuaXphdGlvblwiOnRydWUsXCJkZWFsQW5hbHlzaXNcIjp0cnVlLFwiY21kYlwiOnRydWUsXCJsb2dBbmFseXNpc1wiOnRydWUsXCJsb2dTcGVlZFwiOnRydWUsXCJyZWZpbmVyXCI6dHJ1ZSxcIkFJT3BzXCI6dHJ1ZX0iLCJzZXNzaW9uSWQiOjU2MjE3MzI0NDE5NDkxODQsInVzZXJOYW1lIjoiYWRtaW4iLCJ1c2VySWQiOiJjWit4ekdpUVBSZWpISW1OZUlKK1FGV2t3Uk9PcTFEelVZZ0FuWmtycTN4dDhzZkMrOGgzK3hLbEpDMmdPb3VqYlZCdTNna29mVUFzYk1aZGpxdEFMNTRzaG5VdThMdkRGa2VSemhJb3VSZWowOGRvSTRsVE5Ud3FoQnF2c2dIeVFmNFY0VzM5UmMzMHkxeUxKVVVBNlRDbTNkN2JuMEw0MVpxQjhTWEJVNE09IiwicHJvZHVjdHMiOiJ7fSJ9.mFgkkKbdIbNse9pdPp3eTjSSL49570KptuvXwrOTZPS-F0kmqXK3IESikpzeueCeIHl41lWzC0FVTwlj1TAhcQ"
+    cookie = "UA=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJkdXJhdGlvbiI6MzYwMDAwMCwibGFzdExvZ2luIjoxNzIxMTA4NTEwNDIwLCJuYW1lcyI6IltcImpheFwiLFwibG9nQW5hbHlzaXNcIixcImxvZ1NwZWVkXCIsXCJyZWZpbmVyXCJdIiwic2luZ2xlU2lnbk9uIjpmYWxzZSwid2l0aFNlcnZpY2VBdXRoIjoie1wiamF4XCI6dHJ1ZSxcImdhdWdlXCI6dHJ1ZSxcInZpc2lvblwiOnRydWUsXCJkYXRhTW9kZXJuaXphdGlvblwiOnRydWUsXCJkZWFsQW5hbHlzaXNcIjp0cnVlLFwiY21kYlwiOnRydWUsXCJsb2dBbmFseXNpc1wiOnRydWUsXCJsb2dTcGVlZFwiOnRydWUsXCJyZWZpbmVyXCI6dHJ1ZSxcIkFJT3BzXCI6dHJ1ZX0iLCJzZXNzaW9uSWQiOjU2Mzg0NDU4MDcwNDM1ODQsInVzZXJOYW1lIjoiYWRtaW4iLCJ1c2VySWQiOiJjWit4ekdpUVBSZWpISW1OZUlKK1FGV2t3Uk9PcTFEelVZZ0FuWmtycTN4dDhzZkMrOGgzK3hLbEpDMmdPb3VqYlZCdTNna29mVUFzYk1aZGpxdEFMNTRzaG5VdThMdkRGa2VSemhJb3VSZWowOGRvSTRsVE5Ud3FoQnF2c2dIeVFmNFY0VzM5UmMzMHkxeUxKVVVBNlRDbTNkN2JuMEw0MVpxQjhTWEJVNE09IiwicHJvZHVjdHMiOiJ7fSJ9.L3AJDfe6k-wkwrVPPqKe_18Zkp2slpf9B7vvOd5zoXcQ1_NSqyYbsOAxnABxzeeQI7bN7je0rqDZDzWuya3pDw"
     resource_conf = {
         "yarnslots":1,
-        "task_manager_memory":1024,
-        "partitions":3,
-        "parall_num":3,
-        "topic_replication_factor":3,
-        "number_of_shards":3
+        "offset_mode": "earliest", # 解析任务存储任务
+        "auto.offset.reset": "earliest", # jax任务
+        "topic_replication_factor":3, # 副本数量
+
+        "anly_task_manager_memory":512,
+        "anly_parall_num":10, # 并行度
+        "anly_partitions":20, # kafka分区
+
+        "stor_task_manager_memory":512,
+        "stor_parall_num":20, # 并行度
+        "number_of_shards":20, # es索引分片
+
+        "jax_parallelism":1,
+        "jax_yarnTaskManagerMemory": 1024,
+        "jax_partitions": 1, # jax输入topic分区数
     }
 
     paso = ["CB","CBC", "PDMP.ECMP", "CMO.POF", "IST"]
@@ -459,10 +478,10 @@ if __name__ == "__main__":
     # 测试
     # APP_ECMP_TRACELOG_SOURCE APP_MSB.ALP_TRACELOG_SOURCE 
     # APP_OCS.OPS_APPLOG_SOURCE APP_OCS.OPS_TRACELOG_SOURCE
-
-    for i in ["sq", "zj"]:
-    # for i in ["zj"]:
-        conf=gen_conf("APP_OCS.OPS_TRACELOG_SOURCE", i)
+    # APP_ESB_DIRECT_APPLOG_SOURCE
+    # for i in ["sq", "zj"]:
+    for i in ["sq"]:
+        conf=gen_conf("APP_ESB_APPLOG_SOURCE", i)
 
         create_jax(conf)
         create_analysis(conf)

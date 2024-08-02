@@ -1,9 +1,0 @@
-[2024-06-11 10:59:15,544] DEBUG (connectionpool.py:244) Starting new HTTP connection (1): 10.251.52.102:18080
-[2024-06-11 10:59:16,793] DEBUG (connectionpool.py:546) http://10.251.52.102:18080 "POST /jax/api/v1/pipeline/jax_ESB_TRACELOG_zj/stage HTTP/1.1" 200 None
-[2024-06-11 10:59:18,356] INFO (创建解析任务和存储任务和中台任务.py:342) 创建jax_ESB_TRACELOG_zj中台任务成功：成功
-[2024-06-11 10:59:18,356] DEBUG (connectionpool.py:244) Starting new HTTP connection (1): 10.251.52.102:18080
-[2024-06-11 10:59:19,569] DEBUG (connectionpool.py:546) http://10.251.52.102:18080 "POST /logAnalysis/api/itoa/dataset/stream HTTP/1.1" 200 None
-[2024-06-11 10:59:19,577] INFO (创建解析任务和存储任务和中台任务.py:233) 创建['APP_ESB_TRACELOG_ETL']解析任务成功：success, task_id:304511212113920
-[2024-06-11 10:59:19,583] DEBUG (connectionpool.py:244) Starting new HTTP connection (1): 10.251.52.102:18080
-[2024-06-11 10:59:23,748] DEBUG (connectionpool.py:546) http://10.251.52.102:18080 "POST /logAnalysis/api/itoa/dataset/storageOutPut HTTP/1.1" 200 None
-[2024-06-11 10:59:23,771] INFO (创建解析任务和存储任务和中台任务.py:98) 创建['APP_ESB_TRACELOG_ETL']存储任务成功：添加成功

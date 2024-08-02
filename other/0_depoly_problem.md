@@ -381,13 +381,16 @@ WantedBy=multi-user.target
 - link：
   - https://www.rabbitmq.com/install-rpm.html
 
-# virtualenv
+# virtualenv virtualenvwrapper
 - ## link：
     - [看这个 virtualenv，virtualenvwrapper安装及使用 ](https://www.cnblogs.com/zixinyu/p/11308659.html)
+    - windows virtualenvwrapper https://www.cnblogs.com/ag-chen/p/15822679.html
 	- [windows virtualenv 使用](https://www.cnblogs.com/cwp-bg/p/python.html)
 	- [Linux下virtualenv与virtualenvwrapper详解 ](https://www.cnblogs.com/fengqiang626/p/11788200.html)
 	- mkvirtualenv --help # 虽然指令中有些virtualenv关键字,但是不用写,写了会报错
 - ## 问题
+    - virtualenv安装后会将一些mkvirtualenv、workon已bat脚本的形式添加到python安装目录下的scripts下，而调用virtualenv命令实际就是使用这里的bat脚本
+    - 添加环境变量后运行workon没用，windows上需要在cmd上运行，不能再git bash上运行
 	- win 安装后运行./activate 提升因为在此系统上禁止运行脚本
 		- https://www.jianshu.com/p/4eaad2163567
 		- 使用管理员打开powershell 输入`set-executionpolicy remotesigned`

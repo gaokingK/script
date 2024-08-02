@@ -1,0 +1,124 @@
+[2024-07-25 12:47:16,596] DEBUG (connectionpool.py:244) Starting new HTTP connection (1): 10.251.52.102:18080
+[2024-07-25 12:47:17,638] DEBUG (connectionpool.py:546) http://10.251.52.102:18080 "POST /cerebro/overview HTTP/1.1" 200 1128956
+[2024-07-25 12:47:23,627] DEBUG (api.py:439) Encoding detection: ascii is most likely the one.
+[2024-07-25 12:47:52,086] DEBUG (api.py:439) Encoding detection: ascii is most likely the one.
+[2024-07-25 15:12:36,090] DEBUG (api.py:439) Encoding detection: ascii is most likely the one.
+[2024-07-25 15:27:32,158] DEBUG (connectionpool.py:244) Starting new HTTP connection (1): 10.251.52.102:18080
+[2024-07-25 15:27:33,459] DEBUG (connectionpool.py:546) http://10.251.52.102:18080 "POST /cerebro/overview HTTP/1.1" 200 1129035
+[2024-07-25 15:27:39,217] DEBUG (api.py:439) Encoding detection: ascii is most likely the one.
+[2024-07-25 15:27:45,463] DEBUG (api.py:439) Encoding detection: ascii is most likely the one.
+[2024-07-25 15:28:37,940] DEBUG (connectionpool.py:244) Starting new HTTP connection (1): 10.251.52.102:18080
+[2024-07-25 15:28:39,661] DEBUG (connectionpool.py:546) http://10.251.52.102:18080 "POST /cerebro/overview HTTP/1.1" 200 1129061
+[2024-07-25 15:28:57,715] DEBUG (api.py:439) Encoding detection: ascii is most likely the one.
+[2024-07-25 15:29:11,561] DEBUG (api.py:439) Encoding detection: ascii is most likely the one.
+[2024-07-25 15:29:16,202] DEBUG (api.py:439) Encoding detection: ascii is most likely the one.
+[2024-07-25 15:29:43,689] DEBUG (api.py:439) Encoding detection: ascii is most likely the one.
+[2024-07-25 15:31:19,127] DEBUG (api.py:439) Encoding detection: ascii is most likely the one.
+[2024-07-25 15:31:45,431] DEBUG (connectionpool.py:244) Starting new HTTP connection (1): 10.251.52.102:18080
+[2024-07-25 15:31:46,699] DEBUG (connectionpool.py:546) http://10.251.52.102:18080 "POST /cerebro/overview HTTP/1.1" 200 1128720
+[2024-07-25 15:39:48,710] DEBUG (connectionpool.py:244) Starting new HTTP connection (1): 10.251.52.102:18080
+[2024-07-25 15:39:50,198] DEBUG (connectionpool.py:546) http://10.251.52.102:18080 "POST /cerebro/overview HTTP/1.1" 200 1128754
+[2024-07-25 16:14:37,565] DEBUG (connectionpool.py:244) Starting new HTTP connection (1): 10.251.52.102:18080
+[2024-07-25 16:14:38,753] DEBUG (connectionpool.py:546) http://10.251.52.102:18080 "POST /cerebro/overview HTTP/1.1" 200 1128391
+[2024-07-25 16:18:24,834] DEBUG (connectionpool.py:244) Starting new HTTP connection (1): 10.251.52.102:18080
+[2024-07-25 16:18:26,056] DEBUG (connectionpool.py:546) http://10.251.52.102:18080 "POST /cerebro/overview HTTP/1.1" 200 1128214
+[2024-07-25 16:18:52,239] DEBUG (connectionpool.py:244) Starting new HTTP connection (1): 10.251.52.102:18080
+[2024-07-25 16:18:54,376] DEBUG (connectionpool.py:546) http://10.251.52.102:18080 "POST /cerebro/overview HTTP/1.1" 200 2370086
+[2024-07-25 18:54:14,794] INFO (delete_es_index.py:189) iops_itoa_jaxlog的张江和石泉索引大小是1.0914123514667153G
+[2024-07-25 18:54:14,794] INFO (delete_es_index.py:189) app_promethues.transfer_log的张江和石泉索引大小是0.0725325345993042G
+[2024-07-25 18:54:14,794] INFO (delete_es_index.py:189) iops_refiner_alert_source_count的张江和石泉索引大小是0.0010587302967905998G
+[2024-07-25 18:54:14,795] INFO (delete_es_index.py:189) itm_nginx_errorlog_source的张江和石泉索引大小是4.876222332008183G
+[2024-07-25 18:54:14,795] INFO (delete_es_index.py:189) itm_nginx_accesslog_source的张江和石泉索引大小是44.33048858307302G
+[2024-07-25 18:54:14,795] INFO (delete_es_index.py:189) itm_redis_redislog_source的张江和石泉索引大小是1.854198849759996G
+[2024-07-25 18:54:14,795] INFO (delete_es_index.py:189) itm_redis_sentinellog_source的张江和石泉索引大小是0.0006149252876639366G
+[2024-07-25 18:54:14,795] INFO (delete_es_index.py:189) iops_itoa_uqplus_log的张江和石泉索引大小是13.041040612384677G
+[2024-07-25 18:54:14,795] INFO (delete_es_index.py:189) itm_aiops_applog_source的张江和石泉索引大小是178.04444844461977G
+[2024-07-25 18:54:14,796] INFO (delete_es_index.py:189) itm_kafka_serverlog_source的张江和石泉索引大小是0.20646974444389343G
+[2024-07-25 18:54:14,796] INFO (delete_es_index.py:189) itm_kafka_statechangelog_source的张江和石泉索引大小是0.22017973195761442G
+[2024-07-25 18:54:14,796] INFO (delete_es_index.py:189) itm_kafka_controllerlog_source的张江和石泉索引大小是0.6524680992588401G
+[2024-07-25 18:54:14,796] INFO (delete_es_index.py:189) itm_tomcat_catalinalog_source的张江和石泉索引大小是760.5800283206627G
+[2024-07-25 18:54:14,796] INFO (delete_es_index.py:189) itm_tomcat_accesslog_source的张江和石泉索引大小是220.37424156162888G
+[2024-07-25 18:54:14,797] INFO (delete_es_index.py:189) itm_zk_serverlog_source的张江和石泉索引大小是0.5040351850911975G
+[2024-07-25 18:54:14,797] INFO (delete_es_index.py:189) itm_bes_iastoolslog_source的张江和石泉索引大小是0.004434855654835701G
+[2024-07-25 18:54:14,797] INFO (delete_es_index.py:189) itm_bes_serverlog_source的张江和石泉索引大小是0.3729889038950205G
+[2024-07-25 18:54:14,797] INFO (delete_es_index.py:189) app_txbk_applog_source的张江和石泉索引大小是2137.2179678855464G
+[2024-07-25 18:54:14,797] INFO (delete_es_index.py:189) app_csi_applog_source的张江和石泉索引大小是17955.084730308503G
+[2024-07-25 18:54:14,797] INFO (delete_es_index.py:189) app_eib_applog_source的张江和石泉索引大小是705.4900176869705G
+[2024-07-25 18:54:14,797] INFO (delete_es_index.py:189) app_pib_applog_source的张江和石泉索引大小是667.2654921431094G
+[2024-07-25 18:54:14,798] INFO (delete_es_index.py:189) app_pmb_applog_source的张江和石泉索引大小是84862.25275817141G
+[2024-07-25 18:54:14,798] INFO (delete_es_index.py:189) app_pmb.golf_applog_source的张江和石泉索引大小是33.042066091671586G
+[2024-07-25 18:54:14,798] INFO (delete_es_index.py:189) itm_windows_syseventlog_source的张江和石泉索引大小是1.7760517206043005G
+[2024-07-25 18:54:14,798] INFO (delete_es_index.py:189) itm_windows_seceventlog_source的张江和石泉索引大小是6418.656100029126G
+[2024-07-25 18:54:14,798] INFO (delete_es_index.py:189) itm_windows_appeventlog_source的张江和石泉索引大小是9.883458769880235G
+[2024-07-25 18:54:14,798] INFO (delete_es_index.py:189) app_rlcs_applog_source的张江和石泉索引大小是2437.675308025442G
+[2024-07-25 18:54:14,798] INFO (delete_es_index.py:189) app_msb_applog_source的张江和石泉索引大小是15162.19736842718G
+[2024-07-25 18:54:14,798] INFO (delete_es_index.py:189) app_cbib_applog_source的张江和石泉索引大小是970.8164980160072G
+[2024-07-25 18:54:14,799] INFO (delete_es_index.py:189) app_esb_applog_source的张江和石泉索引大小是93308.79137512483G
+[2024-07-25 18:54:14,799] INFO (delete_es_index.py:189) itm_rabbitmq_log_source的张江和石泉索引大小是0.24243091605603695G
+[2024-07-25 18:54:14,799] INFO (delete_es_index.py:189) app_wmbp_applog_source的张江和石泉索引大小是9535.104734652676G
+[2024-07-25 18:54:14,799] INFO (delete_es_index.py:189) app_ips_applog_source的张江和石泉索引大小是25950.0007709926G
+[2024-07-25 18:54:14,799] INFO (delete_es_index.py:189) itm_httpd_accesslog_source的张江和石泉索引大小是383.89601000119G
+[2024-07-25 18:54:14,799] INFO (delete_es_index.py:189) itm_httpd_errorlog_source的张江和石泉索引大小是1.645415456034243G
+[2024-07-25 18:54:14,800] INFO (delete_es_index.py:189) app_otp.snd_applog_source的张江和石泉索引大小是55.14654046483338G
+[2024-07-25 18:54:14,800] INFO (delete_es_index.py:189) app_embs_applog_source的张江和石泉索引大小是2414.3803055332974G
+[2024-07-25 18:54:14,800] INFO (delete_es_index.py:189) app_bce_applog_source的张江和石泉索引大小是886.9272764874622G
+[2024-07-25 18:54:14,800] INFO (delete_es_index.py:189) app_bbp_applog_source的张江和石泉索引大小是1180.7217513192445G
+[2024-07-25 18:54:14,800] INFO (delete_es_index.py:189) app_cbbm_applog_source的张江和石泉索引大小是711.6675706990063G
+[2024-07-25 18:54:14,801] INFO (delete_es_index.py:189) app_sms_applog_source的张江和石泉索引大小是202.73937889933586G
+[2024-07-25 18:54:14,801] INFO (delete_es_index.py:189) app_pdmp.fps_applog_source的张江和石泉索引大小是8.488741140812635G
+[2024-07-25 18:54:14,801] INFO (delete_es_index.py:189) app_prms.irms_applog_source的张江和石泉索引大小是12748.029135261662G
+[2024-07-25 18:54:14,801] INFO (delete_es_index.py:189) app_picp_applog_source的张江和石泉索引大小是417.6962273065001G
+[2024-07-25 18:54:14,801] INFO (delete_es_index.py:189) app_tfpv_applog_source的张江和石泉索引大小是0.8678064271807671G
+[2024-07-25 18:54:14,801] INFO (delete_es_index.py:189) app_uim_applog_source的张江和石泉索引大小是461.3564784573391G
+[2024-07-25 18:54:14,802] INFO (delete_es_index.py:189) app_crm_applog_source的张江和石泉索引大小是1265.7703372342512G
+[2024-07-25 18:54:14,802] INFO (delete_es_index.py:189) app_bsft_applog_source的张江和石泉索引大小是31.77210834529251G
+[2024-07-25 18:54:14,802] INFO (delete_es_index.py:189) app_cpt_applog_source的张江和石泉索引大小是1.599639654159546e-05G
+[2024-07-25 18:54:14,802] INFO (delete_es_index.py:189) app_edb.dbes_applog_source的张江和石泉索引大小是25.787872954271734G
+[2024-07-25 18:54:14,802] INFO (delete_es_index.py:189) app_blim_applog_source的张江和石泉索引大小是468.92514350730926G
+[2024-07-25 18:54:14,802] INFO (delete_es_index.py:189) app_rcmp.pls_applog_source的张江和石泉索引大小是5.554638863541186G
+[2024-07-25 18:54:14,802] INFO (delete_es_index.py:189) app_pdmp.efm_applog_source的张江和石泉索引大小是214.4540287060663G
+[2024-07-25 18:54:14,803] INFO (delete_es_index.py:189) app_rcmp.lmc_applog_source的张江和石泉索引大小是9833.965079412796G
+[2024-07-25 18:54:14,803] INFO (delete_es_index.py:189) app_rcmp.rsc_applog_source的张江和石泉索引大小是5676.833558077924G
+[2024-07-25 18:54:14,803] INFO (delete_es_index.py:189) app_nucp.upop_applog_source的张江和石泉索引大小是217.4513307576999G
+[2024-07-25 18:54:14,803] INFO (delete_es_index.py:189) app_nucp.aop_applog_source的张江和石泉索引大小是29.94136432930827G
+[2024-07-25 18:54:14,803] INFO (delete_es_index.py:189) app_nucp_applog_source的张江和石泉索引大小是12611.507352807559G
+[2024-07-25 18:54:14,803] INFO (delete_es_index.py:189) app_atmp_applog_source的张江和石泉索引大小是542.7899793982506G
+[2024-07-25 18:54:14,803] INFO (delete_es_index.py:189) itm_cbs_celllog_source的张江和石泉索引大小是1028.023630627431G
+[2024-07-25 18:54:14,803] INFO (delete_es_index.py:189) app_cdbp_applog_source的张江和石泉索引大小是122.82870746962726G
+[2024-07-25 18:54:14,804] INFO (delete_es_index.py:189) app_epay_applog_source的张江和石泉索引大小是205.16948479507118G
+[2024-07-25 18:54:14,804] INFO (delete_es_index.py:189) itm_cbs_log_source的张江和石泉索引大小是134.6398167675361G
+[2024-07-25 18:54:14,804] INFO (delete_es_index.py:189) itm_cfs_log_source的张江和石泉索引大小是1.7415563147515059G
+[2024-07-25 18:54:14,804] INFO (delete_es_index.py:189) itm_csp_log_source的张江和石泉索引大小是0.6447076676413417G
+[2024-07-25 18:54:14,804] INFO (delete_es_index.py:189) itm_dcgw_log_source的张江和石泉索引大小是21.754310574382544G
+[2024-07-25 18:54:14,804] INFO (delete_es_index.py:189) itm_es_log_source的张江和石泉索引大小是0.9359492063522339G
+[2024-07-25 18:54:14,805] INFO (delete_es_index.py:189) itm_hdfs_log_source的张江和石泉索引大小是1.473352313041687e-06G
+[2024-07-25 18:54:14,805] INFO (delete_es_index.py:189) itm_imagestage_log_source的张江和石泉索引大小是1.2628734111785889e-06G
+[2024-07-25 18:54:14,805] INFO (delete_es_index.py:189) itm_metedata_log_source的张江和石泉索引大小是1.2628734111785889e-06G
+[2024-07-25 18:54:14,805] INFO (delete_es_index.py:189) itm_natgw_log_source的张江和石泉索引大小是89.61806430760771G
+[2024-07-25 18:54:14,805] INFO (delete_es_index.py:189) itm_ocloud_log_source的张江和石泉索引大小是0.15457087568938732G
+[2024-07-25 18:54:14,805] INFO (delete_es_index.py:189) itm_overlay_log_source的张江和石泉索引大小是904.6220434941351G
+[2024-07-25 18:54:14,805] INFO (delete_es_index.py:189) itm_snap_log_source的张江和石泉索引大小是73.08524900488555G
+[2024-07-25 18:54:14,806] INFO (delete_es_index.py:189) itm_sxgw_log_source的张江和石泉索引大小是0.2306714430451393G
+[2024-07-25 18:54:14,806] INFO (delete_es_index.py:189) itm_tcloud_log_source的张江和石泉索引大小是0.17782374378293753G
+[2024-07-25 18:54:14,806] INFO (delete_es_index.py:189) itm_vpc_log_source的张江和石泉索引大小是1.2628734111785889e-06G
+[2024-07-25 18:54:14,806] INFO (delete_es_index.py:189) itm_vpcdns_log_source的张江和石泉索引大小是0.00010972470045089722G
+[2024-07-25 18:54:14,806] INFO (delete_es_index.py:189) itm_vpcgw_log_source的张江和石泉索引大小是0.5660165529698133G
+[2024-07-25 18:54:14,807] INFO (delete_es_index.py:189) itm_xgw_log_source的张江和石泉索引大小是0.6773255877196789G
+[2024-07-25 18:54:14,807] INFO (delete_es_index.py:189) itm_tdsql_log_source的张江和石泉索引大小是5033.452346607111G
+[2024-07-25 18:54:14,807] INFO (delete_es_index.py:189) itm_tgw_log_source的张江和石泉索引大小是332.36587554682046G
+[2024-07-25 18:54:14,807] INFO (delete_es_index.py:189) itm_tke_log_source的张江和石泉索引大小是1.2628734111785889e-06G
+[2024-07-25 18:54:14,807] INFO (delete_es_index.py:189) itm_underlay_log_source的张江和石泉索引大小是684.4128203643486G
+[2024-07-25 18:54:14,807] INFO (delete_es_index.py:189) itm_zk_log_source的张江和石泉索引大小是26.950466053560376G
+[2024-07-25 18:54:14,807] INFO (delete_es_index.py:189) itm_upsql_log_source的张江和石泉索引大小是2359.576005078852G
+[2024-07-25 18:54:14,807] INFO (delete_es_index.py:189) itm_redis_log_source的张江和石泉索引大小是204.1274240249768G
+[2024-07-25 18:54:14,808] INFO (delete_es_index.py:189) app_resb_applog_source的张江和石泉索引大小是26.505472550168633G
+[2024-07-25 18:54:14,808] INFO (delete_es_index.py:189) app_dsr_translog_source的张江和石泉索引大小是0.29497670009732246G
+[2024-07-25 18:54:14,808] INFO (delete_es_index.py:189) itm_erm_stagingdlog_source的张江和石泉索引大小是1.6838312149047852e-06G
+[2024-07-25 18:54:14,808] INFO (delete_es_index.py:189) net_syslog_h3c_switch的张江和石泉索引大小是1.3179752826690674G
+[2024-07-25 18:54:14,808] INFO (delete_es_index.py:189) s.app.jp1.joblog的张江和石泉索引大小是0.027731548994779587G
+[2024-07-25 18:54:14,808] INFO (delete_es_index.py:189) net-pro的张江和石泉索引大小是1.2628734111785889e-06G
+[2024-07-25 18:54:14,808] INFO (delete_es_index.py:189) s.aiops.refiner.recovery.event的张江和石泉索引大小是0.1461248556151986G
+[2024-07-25 18:54:14,809] INFO (delete_es_index.py:189) s.net.alarm.filter.out的张江和石泉索引大小是1.2628734111785889e-06G
+[2024-07-25 18:54:14,809] INFO (delete_es_index.py:189) s.aiops.refiner.event.output的张江和石泉索引大小是0.6216457672417164G
+[2024-07-25 18:54:14,809] INFO (delete_es_index.py:189) s.itsm.log的张江和石泉索引大小是3.0517449602484703G
+[2024-07-25 18:54:14,809] INFO (delete_es_index.py:189) s.app.cnv.applog的张江和石泉索引大小是0.07090913504362106G

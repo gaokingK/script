@@ -8,7 +8,7 @@
 - --databases 后面跟数据库名，也可以不用这个，直接把数据库名放在mysqldump后面，还可以用--database
 - --tables 后面跟表名，也可以用--table
 // 导出school数据库中指定表的数据和结构
-mysqldump -uroot -p school --tables sc_admin users > /tmp/school.sql
+mysqldump -uroot -p school --tables t_url_dns_res  t_url_dns_res_detail > /tmp/url_dns_res_20240712.sql
 mysqldump -u root -p -P3306 -h 10.240.5.194 --databases school --tables sc_admin > backup.sql
 
 mysqldump -u 用户名 -p 数据库名 users --where="id < 100" > users_partial.sql

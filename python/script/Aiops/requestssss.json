@@ -1,0 +1,161 @@
+
+[{
+    "url":"http://10.232.97.191:8888/api/v1/base-oss/attachments",
+    "method":"POST",
+    "payload":{
+        "vuId": "437d68e2b84547bea893bd129f9e1515",
+        "fieldIds": [
+            "0b063873016b4482a530296ee5ad35eb-fieldAttachment"
+        ]
+    },
+    "header": {"Cookie": "JSESSIONID=36DAD01D416BD2B1D7F22C8B2F594BBF"},
+    "res":{
+        "result": 0,
+        "resultValue": {
+          "0b063873016b4482a530296ee5ad35eb-fieldAttachment": [
+            {
+              "id": "e145684533cf4d27ad41ec82361c2627",
+              "ossSourceType": "VU",
+              "vuId": "437d68e2b84547bea893bd129f9e1515",
+              "attachmentFieldName": "附件",
+              "username": "cs7224@bosc.cn",
+              "orgId": "0b063873016b4482a530296ee5ad35eb",
+              "name": "创建解析任务和存储任务和中台任务.py.zip",
+              "size": 20805,
+              "key": "/attachment/9236db58-0302-4e8e-89d4-aff387b0a1f3.zip",
+              "created": 1721787191040,
+              "additional": {
+                "uploaderName": "蒋金伟",
+                "signedUrl": "http://10.232.97.191:8888/oss//attachment/9236db58-0302-4e8e-89d4-aff387b0a1f3.zip"
+              },
+              "tag": "AgileanOss"
+            },
+            {
+              "id": "70d5148d817d422d850d0eae669b9d60",
+              "ossSourceType": "VU",
+              "vuId": "437d68e2b84547bea893bd129f9e1515",
+              "attachmentFieldName": "附件",
+              "username": "cs7224@bosc.cn",
+              "orgId": "0b063873016b4482a530296ee5ad35eb",
+              "name": "日志平台任务修改.zip",
+              "size": 5881,
+              "key": "/attachment/c2850100-3731-4159-9e10-57614cdcfe25.zip",
+              "created": 1721805304805,
+              "additional": {
+                "uploaderName": "蒋金伟",
+                "signedUrl": "http://10.232.97.191:8888/oss//attachment/c2850100-3731-4159-9e10-57614cdcfe25.zip"
+              },
+              "tag": "AgileanOss"
+            },
+            {
+              "id": "09fa4116293f41a184c265fc57daf2ce",
+              "ossSourceType": "VU",
+              "vuId": "437d68e2b84547bea893bd129f9e1515",
+              "attachmentFieldName": "附件",
+              "username": "cs7224@bosc.cn",
+              "orgId": "0b063873016b4482a530296ee5ad35eb",
+              "name": "elasticsearch_exporter-1.7.0.linux-386.tar.gz",
+              "size": 4652283,
+              "key": "/attachment/fef008bb-02c4-4032-8961-9266507f98f8.gz",
+              "created": 1721978548271,
+              "additional": {
+                "uploaderName": "蒋金伟",
+                "signedUrl": "http://10.232.97.191:8888/oss//attachment/fef008bb-02c4-4032-8961-9266507f98f8.gz"
+              },
+              "tag": "AgileanOss"
+            },
+            {
+              "id": "1d713c6bd2cc4f00b7473979c0b368c6",
+              "ossSourceType": "VU",
+              "vuId": "437d68e2b84547bea893bd129f9e1515",
+              "attachmentFieldName": "附件",
+              "username": "cs7224@bosc.cn",
+              "orgId": "0b063873016b4482a530296ee5ad35eb",
+              "name": "14191_rev1.json.zip",
+              "size": 164648,
+              "key": "/attachment/1e7e9dda-8b48-4739-bc90-65000fe917d5.zip",
+              "created": 1721981644844,
+              "additional": {
+                "uploaderName": "蒋金伟",
+                "signedUrl": "http://10.232.97.191:8888/oss//attachment/1e7e9dda-8b48-4739-bc90-65000fe917d5.zip"
+              },
+              "tag": "AgileanOss"
+            },
+            {
+              "id": "fd7f06b6aeed455891dc2e5ad6607e92",
+              "ossSourceType": "VU",
+              "vuId": "437d68e2b84547bea893bd129f9e1515",
+              "attachmentFieldName": "附件",
+              "username": "cs7224@bosc.cn",
+              "orgId": "0b063873016b4482a530296ee5ad35eb",
+              "name": "dev_es_info.json.zip",
+              "size": 10875965,
+              "key": "/attachment/92503198-a418-430d-8f16-e7b612cda46c.zip",
+              "created": 1722495880720,
+              "additional": {
+                "uploaderName": "蒋金伟",
+                "signedUrl": "http://10.232.97.191:8888/oss//attachment/92503198-a418-430d-8f16-e7b612cda46c.zip"
+              },
+              "tag": "AgileanOss"
+            },
+            {
+              "id": "c4b3d7c5534445b2ad38a1aa5023d228",
+              "ossSourceType": "VU",
+              "vuId": "437d68e2b84547bea893bd129f9e1515",
+              "attachmentFieldName": "附件",
+              "username": "cs7224@bosc.cn",
+              "orgId": "0b063873016b4482a530296ee5ad35eb",
+              "name": "AI logstash修改瑶光3.0logstash文件input的topic0802.txt.zip",
+              "size": 771,
+              "key": "/attachment/5b741127-951f-4752-8254-ce985abd25ee.zip",
+              "created": 1722586432678,
+              "additional": {
+                "uploaderName": "蒋金伟",
+                "signedUrl": "http://10.232.97.191:8888/oss//attachment/5b741127-951f-4752-8254-ce985abd25ee.zip"
+              },
+              "tag": "AgileanOss"
+            }
+          ]
+        }
+    }
+},{
+    "url":"http://10.232.97.191:8888/oss/attachment/1e7e9dda-8b48-4739-bc90-65000fe917d5.zip.encrypt?filename=14191_rev1.json_DRM.zip&signature=MTQxOTFfcmV2MS5qc29uX0RSTS56aXA6MTcyMjYwMzMxNQ==",
+    "method":"GET",
+    "payload":{
+        "vuId": "437d68e2b84547bea893bd129f9e1515",
+        "fieldIds": [
+            "0b063873016b4482a530296ee5ad35eb-fieldAttachment"
+        ]
+    },
+    "header": {"Cookie": "JSESSIONID=36DAD01D416BD2B1D7F22C8B2F594BBF"},
+    "res":"file"
+},{
+    "url": "http://10.232.97.191:8888/api/v1/base-oss/attachment/batch",
+    "method": "POST",
+    "payload": {
+        "vuId": "437d68e2b84547bea893bd129f9e1515",
+        "fieldId": "0b063873016b4482a530296ee5ad35eb-fieldAttachment",
+        "files": "(二进制)"
+        },
+    "header": {"Cookie": "JSESSIONID=36DAD01D416BD2B1D7F22C8B2F594BBF"},
+    "res":{
+        "result": 0,
+        "resultValue": [
+          {
+            "id": "9530f2232979430ca49d7f66b960ed1d",
+            "ossSourceType": "VU",
+            "vuId": "437d68e2b84547bea893bd129f9e1515",
+            "attachmentFieldId": "0b063873016b4482a530296ee5ad35eb-fieldAttachment",
+            "attachmentFieldName": "附件",
+            "username": "cs7224@bosc.cn",
+            "orgId": "0b063873016b4482a530296ee5ad35eb",
+            "name": "14191_rev1.json_DRM.zip",
+            "size": 168752,
+            "key": "/attachment/459a7ed3-d852-44be-aeb0-8e370f62571b.zip",
+            "created": 1722607109091,
+            "additional": {},
+            "tag": "AgileanOss"
+          }
+        ]
+    }
+}]

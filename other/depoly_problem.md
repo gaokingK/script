@@ -21,6 +21,23 @@ fi
 
 ```
 # python
+### 官方文档 https://packaging.python.org/en/latest/tutorials/installing-packages/
+### pip 安装离线包
+```shell
+pip install /path/to/xxx.whl
+或
+解压whl包到/path/to/python/lib/sit-packegs
+```
+### ./pip3 运行报错-bash:./pip3.8:/iops/python/python-3.8.13/bin/python3.8:bad interpreter:No such file or directory
+- 这是因为linux下的pip是一个python脚本，会在第一行声明python解释器的地址，所以把这个地址改了就可以了
+### whl 包命名规范
+- whl 包是编译好的python包，可以安装后直接在没有编译条件的机器上使用
+- link: https://blog.csdn.net/weixin_49114503/article/details/139326651
+### 查看支持的whl的包的命名格式 ERROR: pocketsphinx-0.1.15-pp37-pypy37_pp73-win32.whl is not a supported wheel on this platform.
+- 出现这个问题的原因是whl文件的命名问题
+- pip 20.0等版本上可用的命令：pip debug --verbose
+### pip install xxx.whl 包成功倒是导入报错
+- 有可能是编译whl包的环境和你本地的环境不一致，比如openssl版本不一致
 ### pip 安装三方包时缺少visual c++ 
 ```
 error: Microsoft Visual C++ 9.0 is required. Get it from http://aka.ms/vcpython27
@@ -78,3 +95,6 @@ Fatal error in launcher: Unable to create process using '"d:\softwares\python 2.
     activators BashActivator,BatchActivator,FishActivator,NushellActivator,PowerShellActivator,PythonActivator
 
   ```
+### 从源码安装 解压requests-2.32.3.tar.gz `python setup.py install`
+### TypeError: canonicalize_version() got an unexpected keyword argument 'strip_trailing_zero
+- 将setuptools降级到70.x.x版本

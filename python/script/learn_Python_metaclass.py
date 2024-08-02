@@ -137,9 +137,27 @@ class ObjectCreater2():
 class Chird(ObjectCreater2, ObjectCreater):
     pass
 
+"""
+TO: 元类和继承
+"""
+class MyMeta(type):
+    def __new__(cls, name, bases, dct):
+        dct['my_method'] = lambda self: "Hello"
+        return super().__new__(cls, name, bases, dct)
+
+class MyClass(metaclass=MyMeta):
+    pass
+
+class MyClass2(MyMeta):
+    pass
+
+
 
 if __name__ == '__main__':
     c = Chird()
     # debug_class_creator()
     # debug_show_metaclass()
     print("ok")
+    
+    MyClass()
+    MyClass2()

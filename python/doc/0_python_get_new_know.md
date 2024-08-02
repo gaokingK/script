@@ -1,3 +1,6 @@
+### doc
+- https://fasionchan.com/python-source/memory/refcnt-drawback/
+- https://ebook-python-study.readthedocs.io/zh-cn/latest/python%E8%BF%9B%E9%98%B618%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6GC.html
 ### 偏函数
 - 偏函数是一种把正常函数参数固定后得到的函数对象，通过function.partial创建
 - 有利于代码的阅读，尤其是函数参数比较多的情况下
@@ -43,7 +46,7 @@ try:
 finally:
     event_loop.close()
 ```
-### chain
+### chain #join
 - link: https://blog.csdn.net/smart_liu8/article/details/81708620
 - 作用是把多个可迭代对象给融合起来方便迭代
 ```

@@ -32,8 +32,8 @@ True
       - r：读
       - w：覆盖写（从开头写）
       - a：追加写（在末尾写）
-      - r+ == r+w（可读可写，文件若不存在就报错(IOError)）
-      - w+ == w+r（可读可写，文件若不存在就创建）
+      - r+ == r+w（可读可写，文件若不存在就报错(IOError)） 打开后文件内容不会被清空，可以被读出来，是追加写的，可以结合seek(0)
+      - w+ == w+r（可读可写，文件若不存在就创建）打开后文件内容会被清空
       - a+ == a+r（可追加可写，文件若不存在就创建）
       - newline 参数，指定换行符，默认是\n 如果newline=" " 会认为空格是换行符
       - 对应的，如果是二进制文件，就都加一个b就好啦：‘rb’　　‘wb’　　‘ab’　　‘rb+’　　‘wb+’　　‘ab+’
@@ -51,7 +51,7 @@ True
     - Python 使用 json.dump() 保存文件时中文会变成 Unicode。在打开写出文件时加入 encoding="utf8"，在dump时加入 ensure_ascii=False 即可解决。
     
 ### python 命令行中如果导入的方法修改了，需要重新导入，或者关闭命令行再重新打开，重新导入
-### sort/sorted区别
+### sort # sorted区别
     - sort 是应用在 list 上的方法，sorted 可以对所有可迭代的对象进行排序操作
     - sort是在原来的list上操作， sorted 返回一个新的
     - sorted(iterable, key=None, reverse=False)
@@ -59,8 +59,14 @@ True
         - 取相反数排序 `sorted([5,3,4,1,7,9], key=lambda x: x*-1)`
         - 指定按迭代对象中的哪一个值排序 `sorted([[3,4], [3,2,7]], key=lambda x: x[1])`
         - 按字典的value排序 `sorted({"a": "4", "b": "1", "c": 1}.items(), key = lambda x: x[1])`
+          - 返回一个元组
+          - 返回一个字典dict(sorted(dict.items()))
+        - sorted(b) 返回按键排序的一个列表
         - 若是想完成 “先按xx排序， 再按xxx排序”这种， 就把key=（xx, xxx）
         - 还可以按照字典中没有的值来排序如 dir_list = sorted(dir_list,  key=lambda x: os.path.getmtime(os.path.join(file_path, x)))
+        - a = {'b': [{'a': 2}, {'a': 3}]}
+        - sorted(a.get("b"), key=lambda x:x.get("a"))
+        - >[{'a': 1}, {'a': 2}]
 
 ### python -i -c 
     - -i -i其实就是执行文件内容或者执行命令后再进入交互模式。不会去读取$PYTHONSTARTUP这个配置文件。
@@ -219,7 +225,7 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
     os.path.splittext(path)[-1] 获取后缀名
     os.getcwd() # 返回当前工作目录
     os.path.join(path1[, path2[, ...]])	把目录和文件名合成一个路径
-    os.sep 系统的路径分隔符 win 为 "\\"; Unix 为 "/"
+    os.sep 系统的路径分隔符 win 为 "\\"; Unix 为 "/" 不是方法
     os.path.basename(path) # 文件名带格式 按格式判断
     os.path.dirname(path) # 文件所在文件夹名 是按格式判断的
     os.path.isdir(path) # path存在，且是文件夹、不是按格式判断的

@@ -54,6 +54,8 @@
 
 #### 搜索
 - [关于在vim中的查找和替换](https://www.cnblogs.com/huxinga/p/7942194.html)
+- https://learnku.com/articles/28191?
+- set hlsearch 设置搜索高亮
 - / and ? 前者是从上往下搜索，后者是从下往上搜索.
 - n and N 前者是下一个结果，后者是上一个结果
 - #向上找到文件头，在找到自己； *向下找到文件尾，再找到当前位置

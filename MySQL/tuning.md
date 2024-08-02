@@ -41,3 +41,7 @@ select name from user where FROM_UNIXTIME(create_time) < CURDATE();
 // 应该修改为
 select name from user where create_time < FROM_UNIXTIME(CURDATE());
 ```
+
+# 如何正确得给线上表加字段
+- http://www.jinyazhou.com/16656511239302.html#more
+- `ALTER TABLE `user` ADD `age` int NOT NULL DEFAULT '0' COMMENT '年龄';` 执行这条sql的时候，会自动给表加上表锁，而且是写锁 会阻塞后续的所有读写请求，造成非常严重的后果，整个服务都有宕机的风险

@@ -12,7 +12,7 @@ def init_logger(name, count=10):
     log_path = os.path.dirname(__file__)
     if not os.path.exists(log_path):
         os.mkdir(log_path)
-    log_name = log_path + "/" + name + "_" + datetime.now().strftime("%Y%m%d") + '.log'
+    log_name = log_path + os.sep + 'logs' + os.sep + name + '.log'
     print("日志保存在%s" % log_name)
     ###
     ch_handler = logging.StreamHandler()
@@ -59,7 +59,9 @@ def calc_es_index():
             if index in item.get("name"):
                 size_res[index] = size_res.get(index, 0) + item.get("size_in_bytes")
 
-def filter(index):
+
+
+def filter_index(index):
     if not index:
         return False
     
@@ -92,7 +94,12 @@ def calc_es_index():
             if index in item.get("name"):
                 size_res[index] = size_res.get(index, 0) + item.get("size_in_bytes")
 
+
+
 if __name__ == "__main__":
+
+    # dump_es_info({"test2":2})
+    # exit()245.202
     with open(os.path.join(os.path.dirname(__file__), "es_index.json"), "r", encoding='utf-8') as f:
         all_data = json.load(f)
 

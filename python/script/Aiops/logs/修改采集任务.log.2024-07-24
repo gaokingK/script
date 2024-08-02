@@ -1,0 +1,63 @@
+[2024-07-24 16:19:51,671] ERROR (修改采集任务.py:55) HTTPConnectionPool(host='10.240.246.138', port=8080): Max retries exceeded with url: /logAnalysis/api/itoa/dataset/senior?dataSetName=%E9%87%87%E9%9B%86-SYS_TDSQL_OVERLAY_APPLOG_SOURCE&page=0&from=0&size=500 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0D4C28F8>: Failed to establish a new connection: [WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。'))
+Traceback (most recent call last):
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+TimeoutError: [WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connection.py", line 395, in request
+    self.endheaders()
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\http\client.py", line 1225, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\http\client.py", line 1004, in _send_output
+    self.send(msg)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\http\client.py", line 944, in send
+    self.connect()
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connection.py", line 243, in connect
+    self.sock = self._new_conn()
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connection.py", line 218, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x0D4C28F8>: Failed to establish a new connection: [WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='10.240.246.138', port=8080): Max retries exceeded with url: /logAnalysis/api/itoa/dataset/senior?dataSetName=%E9%87%87%E9%9B%86-SYS_TDSQL_OVERLAY_APPLOG_SOURCE&page=0&from=0&size=500 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0D4C28F8>: Failed to establish a new connection: [WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "e:\Deskop\People\script\python\script\Aiops\修改采集任务.py", line 51, in do_request
+    res = requests.request(method, url=url, headers=headers, json=payload)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "c:\Users\Farben\AppData\Local\Programs\Python\Python38-32\lib\site-packages\requests\adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='10.240.246.138', port=8080): Max retries exceeded with url: /logAnalysis/api/itoa/dataset/senior?dataSetName=%E9%87%87%E9%9B%86-SYS_TDSQL_OVERLAY_APPLOG_SOURCE&page=0&from=0&size=500 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0D4C28F8>: Failed to establish a new connection: [WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。'))
+[2024-07-24 16:21:48,211] ERROR (修改采集任务.py:71) 获取所有采集任务失败：None
+[2024-07-24 16:23:19,172] INFO (修改采集任务.py:68) 获取所有采集任务成功：成功
+[2024-07-24 16:24:22,809] INFO (修改采集任务.py:68) 获取所有采集任务成功：成功
+[2024-07-24 16:31:08,185] INFO (修改采集任务.py:68) 获取所有采集任务成功：成功
+[2024-07-24 16:31:09,304] INFO (修改采集任务.py:81) 获取任务拓扑成功：success
+[2024-07-24 16:31:53,958] INFO (修改采集任务.py:68) 获取所有采集任务成功：成功
+[2024-07-24 16:32:14,088] INFO (修改采集任务.py:81) 获取任务拓扑成功：success

@@ -16,7 +16,7 @@ def init_logger(name, count=10):
 
     if not os.path.exists(log_path):
         os.mkdir(log_path)
-    log_name = log_path + "\\" + name + '.log'
+    log_name = log_path + os.sep + 'logs' + os.sep + name + '.log'
     print("日志保存在%s" % log_name)
     ###
     time_handler = logging.handlers.TimedRotatingFileHandler(log_name, when="midnight", interval=1, encoding='utf-8', backupCount=count)
