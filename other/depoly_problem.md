@@ -95,6 +95,10 @@ Fatal error in launcher: Unable to create process using '"d:\softwares\python 2.
     activators BashActivator,BatchActivator,FishActivator,NushellActivator,PowerShellActivator,PythonActivator
 
   ```
-### 从源码安装 解压requests-2.32.3.tar.gz `python setup.py install`
+### 从源码安装 
+- link:https://packaging.python.org/en/latest/tutorials/installing-packages/
+- 方法1. 解压requests-2.32.3.tar.gz `python setup.py install`
+- 方法2. 解压，cd，pip install -e .   -i https://pypi.mirrors.ustc.edu.cn/simple -i用来下载依赖
 ### TypeError: canonicalize_version() got an unexpected keyword argument 'strip_trailing_zero
 - 将setuptools降级到70.x.x版本
+- link:https://github.com/pypa/setuptools/issues/4483

@@ -39,7 +39,7 @@ all: # 最上层的key，value是一个字典
    }
 }
 ```
-# json
+# json dump的文件不是一整行
     json中load和loads区别: https://www.cnblogs.com/bigtreei/p/10466518.html
     load loads 区别: 前者读取文件/后者读字符串 可以把多的s 理解为 string(load string)
     dump dumps 区别: 前者存入文件/后者转为字符串

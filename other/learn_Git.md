@@ -80,6 +80,7 @@
 -- git clone --recursive
 -- git clone --recurse-submodules递归克隆子项目 https://blog.csdn.net/Mark_md/article/details/121640755 如果直接clone，子模块的代码为空
 - clone http配置免密 git config --global credential.helper store 只需要输入一次密码就可以
+- 直接输入密码 git clone http://username:password@10.xxxx/path/to/repo.git
 ### git stash
 - link:
    - https://www.cnblogs.com/zndxall/p/9586088.html
@@ -357,3 +358,10 @@ Date:   Wed Sep 15 09:20:45 2021 +0800
 在iSource上有个功能叫fork，可以将别人的项目复制到自己账号下。这个功能很方便，但其有一个缺点是：当主库（源项目）更新后，fork库并不会一起更新，需要自己手动去更新。
 
 **方法：**通过线下更新fork库的代码（可以使用Git bash、TortoiseGit两种工具）
+
+# git 初始化仓库时添加多个已经存在的仓库，从本地文件添加
+- git init repo;cd repo
+- git submodule add /path/to/already_repo
+- 使用 Git 子模块的方式可以保留并查看每个子模块（即现有仓库）的提交历史。每个子模块实际上是一个独立的 Git 仓库，保留了它自己的提交记录、分支和标签。但是需要进入仓库看
+### git submodule 时git submodule add fatal: transport 'file' not allowed
+-  git config --global protocol.file.allow always

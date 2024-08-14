@@ -234,6 +234,7 @@ drwxr-xr-x  7 huawei huawei   99 Jan 14 09:55 web_api
     os.removedirs() # 递归删除目录
         - os.removedirs("./test2/test1") # test1如果为null，就删除，然后删除test2
     - os.walk() 参数为文件夹路径，返回3个内容：绝对路径、子文件夹、文件名。 此方法可以遍历文件夹下的所有文件、子文件及内的所有文件：
+        - 绝对路径是遍历的文件夹，子文件夹是当前文件夹下的文件夹、文件名是绝对路径下的文件
     - os.listdir：参数为文件夹路径，可以返回文件夹下的所有子文件夹、文件名称。不能返回子文件夹下的文件，并且仅返回名称。
     shutil.rmtree("path") # 空不空都能删除
     - 复制文件：https://www.jb51.net/article/145522.htm

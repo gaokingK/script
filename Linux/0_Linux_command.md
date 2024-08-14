@@ -55,8 +55,13 @@ tmux source-file ~/.tmux.conf // 重新载入配置文件
     - -s Shell文件 指定用户的登录Shell。
     - -u 用户号 指定用户的用户号，如果同时有-o选项，则可以重复使用其他用户的标识号。
     - -m ：强制要建立使用者家目录
+- 
 - userdel 用户名 #删除用户名及主目录
 - 查看用户创建时间 https://www.jb51.net/article/139900.htm
+
+### 查看是否有用户 # id
+- id pw # 查看是否有id用户
+
 ### 命令补全 CentOS系统Tab补全功能
 =======
 - 新建窗口： ctrl + b, c
@@ -733,14 +738,25 @@ du -sh -- */ | sort -h
        `&` 并行执行
        `$`
 
-### cp # mv 
+### cp # mv # rename
    - 移动和复制文件夹时复制隐藏文件
       - `mv a/* a/.[^.]* target`
    - cp 和 mv 可以使用这样的方法 mv source_file1 source_file2 ... target_path; cp 多个文件
    - cp -r dir /path/to/target 会在target内有一个dir文件夹
    - cp -r dir/* /path/to/target/ 会把dir内的文件放在target下面
    - 即使添加了 -rf 参数强制覆盖复制时,系统仍然会提示让你一个个的手工输入 y 确认复制,所添加的rf参数是不起作用的，因为cp命令被系统设置了别名，相当于cp=‘cp -i’。解决方法是使用原生的cp命令 `/bin/cp -rf xxxx`
+   - 文件重命名 `mv "$file" "${file%.zip}"` # 将python-3.8.31.zip.063.zip去掉最后一个zip
+     - ${file%.zip}：这是 bash 的字符串处理语法，用于删除文件名中的最后一个 .zip。
+- `rename 's/\.zip$//' python-3.8.31.zip.063.zip`
+  - `s/\.zip$//`：表示替换文件名中以 .zip 结尾的部分为空，即删除最后的 .zip。
+- 在所有的文件名后面加上后缀`find . -type f -exec rename 's/([^\/]+)$/$1.zip/' {} +`
 
+### cpio 
+- `find . -type d | cpio -pdum /destination/directory` # 复制目录结构
+  - -p：表示将文件复制到指定目录。
+  - -d：创建必要的目录。
+  - -u：即使目标文件存在也更新。
+  - -m：保留文件的修改时间。
 ### ln 软连接与硬链接
     - ln target linkname 创建指向target 的linkname
     - 软连接是ln -s 硬链接是ln 不加s

@@ -82,6 +82,10 @@
 - ctrl + ; 剪贴板
    
 # linux # bash快捷键
+- link:
+  - https://linuxtoy.org/archives/bash-shortcuts.html
+  - 光标移动：https://blog.csdn.net/FlushHip/article/details/81807026
+  - 删除：https://blog.csdn.net/FlushHip/article/details/81808431
 - 终端 ctrl + Shift + / 快捷键信息
 - 怎么搜索历史命令 切换下一条?
 - 在终端中使用上次命令中的内容 ---------------------------no
@@ -90,4 +94,5 @@
 Alt + f, b ：按单词前移（右向）/后移（左向）
 Ctrl + u ：从光标处删除至命令行首
 Ctrl + k ：从光标处删除至命令行尾
+Ctrl + _：撤销命令行中删除的字符
 ```

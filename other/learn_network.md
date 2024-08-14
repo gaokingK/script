@@ -79,10 +79,12 @@ link:
 在 netstat -an 的输出中，你会看到一些套接字的状态。"LISTEN" 表示该套接字是一个监听套接字，而其他状态（例如 "ESTABLISHED"）表示已建立的非监听套接字，正在进行数据传输。
 
 
-# netstat 查看端口 # 端口管理 打开端口 # port
+# netstat 查看端口 # 端口管理 打开端口 # port # ss
    - 端口是否被占用`lsof -i 8080`
+     - 
      - link: https://www.runoob.com/w3cnote/linux-check-port-usage.html
      - 应该用root来执行，否之看不到
+   - 或者使用`ss -tnlp sport = 7788|grep 7788` 
    - netstat -tunlp 用于显示 tcp，udp 的端口和进程等相关情况。`netstat -tunlp | grep 8000`
      - link:https://zhuanlan.zhihu.com/p/367635200 
      - -t (tcp) 仅显示tcp相关选项Administrator  

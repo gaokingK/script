@@ -91,7 +91,18 @@ du -h -d1 # 查看当前文件夹内各文件和文件夹的总大小 # 有时�
 du -sh # 查看当前文件夹的总大小
 du -c log30.tar.gz log31.tar.gz
 du -sh -- */ | sort -h # */：表示只匹配目录，排除文件。 要将所有文件夹按大小排序
-
+du -sh .[!.]* *  # 包括隐藏文件 否则会出现du -sh a/ 显示的总大小和我cd a;du -sh * 得到的总和不相等呢
+# 一个目录下可能有别的文件系统挂载在这里 比如/目录下有/run、/dev等，怎么之查看/dev/mapper/centos-root这个文件系统里每个文件夹的大小呢，排除（/dev /run等其他文件系统的）
+[root@localhost huawei]# df -h
+Filesystem               Size  Used Avail Use% Mounted on
+devtmpfs                  16G     0   16G   0% /dev
+tmpfs                     16G     0   16G   0% /dev/shm
+tmpfs                     16G   50M   16G   1% /run
+tmpfs                     16G     0   16G   0% /sys/fs/cgroup
+/dev/mapper/centos-root   92G   11G   77G  13% /
+/dev/sda2                922M   97M  762M  12% /boot
+# 使用du -xh --max-depth=1 -x /
+- -x 选项用于限制 du 只计算指定文件系统内的文件和目录大小，而不会跨越到其他文件系统。这在你有多个文件系统挂载在不同的目录时特别有用
 ```
 
 

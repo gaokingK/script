@@ -45,3 +45,20 @@ select name from user where create_time < FROM_UNIXTIME(CURDATE());
 # 如何正确得给线上表加字段
 - http://www.jinyazhou.com/16656511239302.html#more
 - `ALTER TABLE `user` ADD `age` int NOT NULL DEFAULT '0' COMMENT '年龄';` 执行这条sql的时候，会自动给表加上表锁，而且是写锁 会阻塞后续的所有读写请求，造成非常严重的后果，整个服务都有宕机的风险
+
+# 删除大批量数据有规律时会好一点
+
+### 慢日志
+- link: https://blog.csdn.net/weixin_46575363/article/details/119779018
+- 记录分析（mysqldumpslow）
+  - mysqldumpslow -s t -t 10 -g ‘log’ mysql_slow.log # 显示前10条按耗时排序的记录
+  - -s : 按照哪种规则排序
+  - -t: 显示前几个记录
+    - c: 访问计数
+    - l: 锁定时间
+    - r: 返回记录
+    - t: 查询时间
+    - al:平均锁定时间
+    - ar:平均返回记录数
+    - at:平均查询时间
+  - -g : 有点像grep， 后跟正则

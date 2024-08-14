@@ -6,8 +6,9 @@
     "configurations": [
         {
             "name": "Python: Current File",
-            "type": "python",
-            "args": ["ss"],
+            "type": "debugpy",
+            "args": [ 
+                "E:\\Deskop\\新建文件夹"],
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",

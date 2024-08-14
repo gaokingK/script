@@ -101,7 +101,9 @@
 
   - 要将vim某个粘贴板里的内容粘贴进来，需要退出编辑模式，在正常模式按`"Np`，其中N为粘贴板号(不要忘记冒号`"`)，如上所述，可以按`"5p`将5号粘贴板里的内容粘贴进来，也可以按`"+p`将系统全局粘贴板里的内容粘贴进来。
   - 只有vim.gtk或vim.gnome才能使用系统全局粘贴板，默认的vim.basic看不到+号寄存器 这时可以在normal模式下直接粘贴
-
+### 编码
+- https://blog.csdn.net/sodaslay/article/details/75069475
+- 1.在Vim中可以直接查看文件编码 :set fileencoding
 ### 块编辑
 - Visual Line模式（就像光标选中那样）
   - 按v进入
@@ -125,8 +127,13 @@
 - :Explore #当前窗口下打开 缩写为`:E`
 - :Vexplore #竖直分割窗口打开 缩写为`:Ve`
 - :Sexplore #水平分割窗口打开 缩写为`:se`
-- 
 - i 切换文件视图
+- 打开文件夹，打开某个文件后如何返回到文件夹视图呢：
+  - 您可以使用返回到最后一个缓冲区:b#。 如果你只是打开一个文件，那么它会带你回到目录浏览。
+  - :Rex[plore]：返回到资源管理器vimdoc.sourceforge
+  - :Ex：打开资源管理器，但不一定是相同的。见vim.wikia
+  - :b#：返回到“先前编辑的缓冲区”。见vim.wikia
+  - Ctrl- O：跳回到先前（较旧）的位置，不一定是缓冲区。见vim.wikia
 
 #### 执行系统命令
 - [VIM中执行Shell命令](https://blog.csdn.net/bnxf00000/article/details/46618465/)
