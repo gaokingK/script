@@ -288,6 +288,28 @@ sudo apt-get update
         - python-dev的包在centos的yum中不叫python-dev，而是python-devel.
         - 有多个版本的话， 为什么只安装了2.7的python-dev
             - python3 安装使用`yum install python3-devel`
+wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda-3.9.1-Linux-x86_64.sh --no-check-certificate
+## openssl
+- 有的是缺失，有的是版本低
+```py
+>>> import ssl # 如果确实回导入失败
+>>> print(ssl.OPENSSL_VERSION)
+OpenSSL 1.0.2k-fips  26 Jan 2017
+```
+## 安装openssl问题
+- Can't locate IPC/Cmd.pm in @INC (@INC contains: /appli/tmp/o...
+  - https://stackoverflow.com/questions/70464585/error-when-installing-openssl-3-0-1-cant-locate-ipc-cmd-pm-in-inc
+```py
+
+```
+- openssl: error while loading shared libraries: libssl.so.3
+  - link：https://stackoverflow.com/questions/54124906/openssl-error-while-loading-shared-libraries-libssl-so-3
+```
+./Configure
+make
+make install
+ldconfig /usr/local/lib64/
+```
 ## python vscode配置
 - 安装python environment就可以使用虚拟环境了
 ## python 运行问题
@@ -323,6 +345,10 @@ sudo apt-get update
 		- 复制D:\softwares\Python27\tcl 到D:\softwares\Python27\Lib  （好像只复制tk8.5）也可以
 		- 然后重启pycharm
 # redis安装和运行
+### windows 安装
+- https://blog.csdn.net/weixin_44893902/article/details/123087435
+- 有直接编译好的msi包
+### unix
 - redhat 可以通过apt安装
 ```
 $ curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
@@ -388,6 +414,25 @@ WantedBy=multi-user.target
 	- [windows virtualenv 使用](https://www.cnblogs.com/cwp-bg/p/python.html)
 	- [Linux下virtualenv与virtualenvwrapper详解 ](https://www.cnblogs.com/fengqiang626/p/11788200.html)
 	- mkvirtualenv --help # 虽然指令中有些virtualenv关键字,但是不用写,写了会报错
+## git bash 使用virtualenv(默认只能在powershell中使用)
+- https://www.cnblogs.com/persisit/p/13972354.html
+```
+二、在gitbash下使用：
+pip install virutalenvwrapper
+# 习惯在类unix环境下的shell使用，即使用这种方式
+export WORKON_HOME='/d/venvs'  # 设定虚拟环境的文件存放的位置
+source /d/Programs/Python/Python39/Scripts/virtualenvwrapper.sh 
+# 若只是在终端执行上述两条命令的话，只是对当前的窗口有效果，退出即失效
+# 通过在c/users/x-xxxx/添加.bash_profile 文件即可实现每次开启gitbash的窗口，即加载一次
+# 分析gitbash的启动过程，发现在安装目录D:\Program Files\Git\etc\profile.d中有bash_profile.sh文件
+# 将执行命令放置在这里也行
+
+export HOME=/d
+VIRTUALENVWRAPPER_PYTHON="C:\Users\CN-jinweijiangOD\AppData\Local\Programs\Python\Python39\python.exe" 
+export WORKON_HOME=$HOME/venvs
+source /d/Programs/Python/Python39/Scripts/virtualenvwrapper.sh
+```
+
 - ## 问题
     - virtualenv安装后会将一些mkvirtualenv、workon已bat脚本的形式添加到python安装目录下的scripts下，而调用virtualenv命令实际就是使用这里的bat脚本
     - 添加环境变量后运行workon没用，windows上需要在cmd上运行，不能再git bash上运行

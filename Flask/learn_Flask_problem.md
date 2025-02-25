@@ -7,8 +7,26 @@
 ller.py][line 26] - {'username': 'adm2in', 'password': '111111'}                                       │Successfully installed Werkzeug-1.0.1
 
 ```
+### 查看动态地获取某个 URL 对应的处理函数
+```py
+# 获取 URL 规则和 endpoint 名称
+url_rule, endpoint = app.url_map.bind('/').match(return_rule=True)
+
+# 获取 endpoint 对应的处理函数
+view_func = app.view_functions[endpoint]
+```
+### 解决循环导入的问题
+```py
+with app.app_context():
+    # 注册蓝图
+
+    from .store.views import store_bp
+    api_bp.register_blueprint(store_bp, url_prefix='/stores')
+```
 # flask 路由模糊匹配
 - [Python Flask详解正则匹配路由](https://blog.csdn.net/weixin_42008209/article/details/80368492)
+
+
 # falsk 自带服务器启动
 - 所有都能访问 `app.run(host="0.0.0.0", port=5010, debug=True)`
   - `2022-02-19 16:53:27,103 - INFO -  * Running on http://7.249.232.144:5010/ (Press CTRL+C to quit)`
@@ -80,3 +98,30 @@ r.raise_for_status()             #失败请求(非200响应)抛出异常
 [关于flask线程安全的简单研究](https://www.cnblogs.com/fengff/p/9087660.html)
 简单结论：处理应用的server并非只有一种类型，如果在实例化server的时候如果指定threaded参数就会启动一个ThreadedWSGIServer，而ThreadedWSGIServer是ThreadingMixIn和BaseWSGIServer的子类，ThreadingMixIn的实例以多线程的方式去处理每一个请求
 只有在启动app的时候将threded参数设置为True，flask才会真正以多线程的方式去处理每一个请求。
+
+
+### 项目结构
+my_flask_app/
+│
+├── app/
+│   ├── __init__.py
+│   ├── routes/
+│   │   ├── __init__.py
+│   │   ├── main.py
+│   │   └── auth.py
+│   ├── models/
+│   │   ├── __init__.py
+│   │   └── user.py
+│   ├── templates/
+│   │   ├── layout.html
+│   │   └── home.html
+│   └── static/
+│       ├── css/
+│       └── js/
+│
+├── config.py
+├── requirements.txt
+├── migrations/
+└── run.py
+### 自定义异常
+- https://www.cnblogs.com/se7enjean/p/12955417.html

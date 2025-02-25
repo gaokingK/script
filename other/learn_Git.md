@@ -91,6 +91,24 @@
 ### 删除未跟踪
    - link: https://blog.csdn.net/uhippo/article/details/46365737
    - git clean -nf 看那些会被删除
+```sh
+# 删除 untracked files
+git clean -f
+ 
+# 连 untracked 的目录也一起删掉
+git clean -fd
+ 
+# 连 gitignore 的untrack 文件/目录也一起删掉 （慎用，一般这个是用来删掉编译出来的 .o之类的文件用的）
+git clean -xfd
+ 
+# 在用上述 git clean 前，墙裂建议加上 -n 参数来先看看会删掉哪些文件，防止重要文件被误删
+git clean -nxfd
+git clean -nf
+git clean -nfd
+
+uhippo
+关注
+```
 ### 远程分支回滚的三种方法：
    link :https://www.cnblogs.com/Super-scarlett/p/8183348.html
    自己的分支回滚直接用reset
@@ -156,11 +174,13 @@ This is test2
 记住，如果你的更改还未曾被提交过，那么 `git reset --hard` 后这些更改很可能会被彻底丢失，除非这些更改有备份。因此，恢复操作主要针对那些已被提交但后来由于操作失误而丢失的情况。
 
 # 冲突
+   - 冲突的原因
+     - 无论是branchA合并到branchB还是branchB合并到branchA 只要有某个文件的改动前内容不一致就会冲突（branchA从内容A改到内容B 如果branchB有改动 只要branchA的内容A和branchB的内容A不一样就会产生冲突）
    - 什么情况下会有冲突
       - user a 修改file_a 10行, commit and push, user b 已另一种内容修改file_a 10行, commit and push, 会发现push 被拒绝, 然后push -f, 这时usera 再pull 就需要merge 这种情况的解决办法:
          - 可以user b reset --hard 然后 pull push
          - user a add . /commit 这时log 会不对(其实也是对的), reset hard 到 双方都提交之前的那个commit ,然后在pull ,这时库上是b的改动(想想也合理)
-         - 
+
 ### 强制更新是什么意思
    ```
    huawei ~/Desktop/jjw% git pull
@@ -287,13 +307,13 @@ Date:   Wed Sep 15 09:20:45 2021 +0800
    - 一共有三个格，you version 其实是服务器上pull下来的、result你操作后文件的真实结果，from server代表是你stash的 就是你本地的
 ### git cherry-pick 来将A分支的部分提交合并到B分支上
    - 如果需要多个commitid `git cherry-pick commitid_a commitid_b commitid_c` 只合并这三个
-   - 先合并a, 如果有冲突就结局, 然后git cherry-pick --continue 完成后就把a给搞好了; 然后合并b,如果有冲突, 解决,然后git cherry-pick --continue....
+   - 先合并a, 如果有冲突就解决然后git add ., 然后git cherry-pick --continue 完成后就把a给搞好了; 然后合并b,如果有冲突, 解决,然后git cherry-pick --continue....
 ### [把同一个分支里的提交放到其他的分支里](https://github.com/k88hudson/git-flight-rules/blob/master/README_zh-CN.md#rebasing-%E5%92%8C%E5%90%88%E5%B9%B6merging)
    - git log commitid1, commitid2, commit3
    - git reset --hard commit3
    - git checkout -b new_branch
    - git cherry-pick commid1 # 即使commitid 在git log中看不到了, 已经reset-hard了,仍然能找到这个commit
-### git branch
+### branch
    - [git branch 命令查看分支、删除远程分支、本地分支](https://blog.csdn.net/duxing_langzi/article/details/80295573)
    - 在新建分支上切换到master之前, 要留意你的工作目录和暂存区里那些还没有被提交的修改， 它可能会和你即将检出的分支产生冲突从而阻止 Git 切换到该分支。 最好的方法是，在你切换分支之前，保持好一个干净的状态。 有一些方法可以绕过这个问题（即，暂存（stashing） 和 修补提交（commit amending））
    - 当你切换分支的时候，Git 会重置你的工作目录，使其看起来像回到了你在那个分支上**最后一次提交**的样子
@@ -301,6 +321,7 @@ Date:   Wed Sep 15 09:20:45 2021 +0800
    - `git branch -vv `查看本地分支关联（跟踪）的远程分支之间的对应关系
    - `git branch -a `查看所有分支 remote/origin/master表示的是远程分支
    - `git push origin --delete Chapater6` 可以删除远程分支Chapater6 在删除远程分支时，同名的本地分支并不会被删除，所以还需要单独删除本地同名分支
+      - for branch in $(git branch -a|grep new_branch|awk -F"/" '{print $NF}');do git push origin --delete $branch;done
       - 如果发生以下错误:
          error: unable to delete ‘origin/xxxxxxxx-fixbug’: remote ref does not exist
          error: failed to push some refs to ‘git@github.com:xxxxxxxx/xxxxxxxxxx.git’
@@ -320,7 +341,10 @@ Date:   Wed Sep 15 09:20:45 2021 +0800
    - push时设置：git push -u origin test
    - branch设置：git branch --set-upstream-to=origin/jw0013109  or git branch -u origin/test
    - 取消设置：git branch --unset-upstream [<branchname>]
-### git log -p filename /git log filename
+### git log
+- git log -p filename /git log filename
+- git log branch_name 查看某个分支的log
+- git log 查看当前分支的提交历史
 ### git rebase
    - git rebase 是干什么的
    - ##### 使用 git rebase -i commits 来修改已经提交的commit
@@ -343,7 +367,6 @@ Date:   Wed Sep 15 09:20:45 2021 +0800
     git add .
     git commit -m 'update .gitignore'
     ```
-### git add -e 好像是用来编辑改变的，就还是编辑删除了什么内容，添加的什么内容的那个显示
 ### 忽略git 文件 .gitignore 会上传到库变成公共的
     `git update-index --assume-unchanged /path/to/file`
     `git update-index --no-assume-unchanged /path/to/file`
@@ -365,3 +388,9 @@ Date:   Wed Sep 15 09:20:45 2021 +0800
 - 使用 Git 子模块的方式可以保留并查看每个子模块（即现有仓库）的提交历史。每个子模块实际上是一个独立的 Git 仓库，保留了它自己的提交记录、分支和标签。但是需要进入仓库看
 ### git submodule 时git submodule add fatal: transport 'file' not allowed
 -  git config --global protocol.file.allow always
+
+# git add 
+### git add -e 好像是用来编辑改变的，就还是编辑删除了什么内容，添加的什么内容的那个显示
+### 将除了a.txt 外的文件都添加到
+- git add . -- :!a.txt
+- git add .; git reset a.txt

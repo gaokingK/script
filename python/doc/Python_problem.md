@@ -1,6 +1,15 @@
 # link
 - [How collections.deque works?](https://zhuanlan.zhihu.com/p/63502912) -------no
 # 通识
+### 可以自己添加自己啊
+```py
+a.append(a)
+a
+[3, [...]]
+
+```
+### try except
+- 如果有多个异常，except Exception as xxx 应该放到最后，否则遇到这个就会结束了
 ### import 时出现 no moudle named xxx
 ```
 import sys
@@ -309,11 +318,13 @@ IndexError: list index out of range
 1
 3
 5
-7
+7   
 9
 [0, 2, 4, 6, 8]
 ```
 #### dict
+    - CPython 3.7 之前的字典的无序是，这意味着字典中的键值对没有固定的顺序。当你迭代一个字典时，元素出现的顺序是不确定的，可能会在不同的程序运行中有所不同。或者是当插入新元素后，会改变之前元素的顺序
+    - 
     - dict.setdefault(key, value)
         - 字典中的value能为空和None
         - 如果字典中a有值(即使为空或者None), 执行该方法后还是原样, 如果没有, 就等同于添加一个新键值对
@@ -321,9 +332,35 @@ IndexError: list index out of range
         - 从字典中删除一个键，如果键不存在会报错
         - 返回这个键的值
     - dict.popitem() 返回并删除字典中的最后一对键和值。
-3. #### 类方法、静态方法、实例方法
+    -  for key, value in tags_dict.items(): 不能用for key, value in tags_dict
+    -  format_tags(data["tags"]) 这样不会改变data 要这样data["tags"] = format_tags(data["tags"])
+    - for item in dic_obj: item[0] item是第一个key的值
+- 在 Python 中，函数内部对传入的可变对象（如字典、列表等）的修改会影响到函数外部的变量，因为在传递这些可变对象时，传递的是对象的引用，而不是对象的副本。然而，有一些情况下，函数内部的修改不会影响外部变量，具体情况取决于你如何操作这些对象。
+```py
+# 重新赋值对象
+# 当在函数内部对传入的可变对象进行重新赋值（即将其指向一个新的对象），这种修改不会改变函数外部的变量，因为你改变了引用，而不是修改对象的内容。
+def modify_list(lst):
+    lst = [1, 2, 3]  # 重新赋值为一个新的列表
+my_list = [4, 5, 6]
+modify_list(my_list)
+print(my_list)  # 输出: [4, 5, 6]，外部列表没有被修改
+# 在这个例子中，lst = [1, 2, 3] 将 lst 绑定到一个新的列表对象，因此外部的 my_list 不会受到影响。
 
-4. #### copy.copy 与 copy.deepcopy不同的原因
+# 对对象的局部修改
+如果你对传入的可变对象（如列表或字典）进行的是局部修改（例如增加、删除元素，或者修改某个字段），这些修改会影响外部对象，因为你没有改变对象的引用，只是修改了对象内部的内容。
+def modify_list(lst):
+    lst.append(7)  # 修改列表的内容
+my_list = [4, 5, 6]
+modify_list(my_list)
+print(my_list)  # 输出: [4, 5, 6, 7]，外部列表被修改
+# 在这个例子中，append 方法修改了列表内容，影响了外部的 my_list，因为列表 lst 和 my_list 指向的是同一个对象。
+
+# 对于不可变类型的操作
+# 如果传入的对象是不可变类型（如整数、字符串、元组等），函数内部的修改不会改变外部变量，因为这些类型的值不能被修改。任何尝试修改的操作都会创建一个新的对象。
+```        
+1. #### 类方法、静态方法、实例方法
+
+2. #### copy.copy 与 copy.deepcopy不同的原因
     [link](https://blog.csdn.net/u010712012/article/details/79754132)
     与其他的OOP语言存储变量不同，Python中为变量赋值，并不是将值赋给变量，而是将对值的引用复制给变量
     ```
@@ -333,63 +370,63 @@ IndexError: list index out of range
     ```
     简单的object，copy与deepcopy没有区别，而复杂的object(对象中嵌套对象的)，copy与deepcopy在是引用还是复制其子对象（如嵌套在里面的list）就有所
 
-5. #### 单例模式的几种实现方法
+3. #### 单例模式的几种实现方法
     [link](https://www.cnblogs.com/huchong/p/8244279.html)
     某些类我们希望在程序运行期间只有一个实例存在，比如读取配置信息的appconfig类
-6. #### 实现单例的几种方法
+4. #### 实现单例的几种方法
     ##### 通过模块
     python的模块就是一个天然的单例模式，模块在第一次导入时会生成.pyc文件，在以后import的时候，会直接加载.pyc文件，而不会再重新执行模块代码
 
-7. #### 关于对数据的称呼 如变量和数据对象的理解 如a = 1
+5. #### 关于对数据的称呼 如变量和数据对象的理解 如a = 1
     - 1 就是数据对象, a就是变量
     - 变量三要素 标识/类型/值 其中的值就是数据对象 标识是内存中的地址, 但这个地址存的是数据还是这个变量呢? 即数据对象和变量究竟对等不对等
     - 变量就是对象的别名, 我们可以通过变量找到对象,进而操纵对象
     - 标识是数据对象在内存中的地址
     - 在python总, 数据对象并不是只指向内存地址, 地址中存放值, 数据对象是一个结构体,当中有数据的值, 还有辅助的变量如维护引用计数的值
   
-8.  #### 绝对导入absolute_import和unicode_literals 与相对导入, python3 默认是绝对导入
+6.  #### 绝对导入absolute_import和unicode_literals 与相对导入, python3 默认是绝对导入
     - 前者是为了解决自定义文件名和包名冲突的情况 如果自定义了一个string.py 会和库中的string冲突
     - 后者是为了解决编码问题,由于python2 是assic编码,导入此模块后,当前文件下的编码就是unicode
-9.  #### python传参的时候还是值引用还是地址引用[link](https://www.cnblogs.com/loleina/p/5276918.html)
+7.  #### python传参的时候还是值引用还是地址引用[link](https://www.cnblogs.com/loleina/p/5276918.html)
     - 参数 形参做为函数内部的局部变量开辟内存空间
     - 值引用 形参存储的是实参的值，实际上是实参的一个副本
     - 地址引用 形参存储的是实参的地址
     - python中不支持指定 地址引用或者值引用。python中是传对象引用，如果传入的是可变对象，那么实参就不会改变，如果传入的是可变对象，那么就会改变
     - c支持选择地址引用还是值引用[link](https://www.cnblogs.com/hahahakc/p/14241166.html)
 
-10. ##### python 理解赋值 [link](https://blog.csdn.net/dta0502/article/details/80827359)
+8.  ##### python 理解赋值 [link](https://blog.csdn.net/dta0502/article/details/80827359)
     - a = xxx 将对象xxx赋值给变量a
     - 赋值语句总是建立对象的引用，而不是复制对象
-11. ##### b=a 是普通复制，copy是顶层复制，deepcopy是全部复制
+9.  ##### b=a 是普通复制，copy是顶层复制，deepcopy是全部复制
     - 对于列表 list[:] 效果和copy一样
-12. ##### 建议代码中避免出现魔数,即0, 1这样数字, 应用true/false或自定义可读性高的变量代替, 提高代码可读性可维护性
-13. ##### 建议使用logging模块或者traceback来记录异常。
-14. ##### 返回None无意义可以删除，函数不写return，默认返回值即为None
-15. ##### eval 的灵活性和危险性
+10. ##### 建议代码中避免出现魔数,即0, 1这样数字, 应用true/false或自定义可读性高的变量代替, 提高代码可读性可维护性
+11. ##### 建议使用logging模块或者traceback来记录异常。
+12. ##### 返回None无意义可以删除，函数不写return，默认返回值即为None
+13. ##### eval 的灵活性和危险性
     [link](https://blog.csdn.net/liuchunming033/article/details/87643041)
     返回传入字符串格式的表达式的结果，变量赋值时，把等号右边的表达式写成字符串的格式，将这个字符串作为eval的参数
     eval 也可以被用来执行系统命令 如`eval("__import__('os').system('ls /Users/chunming.liu/Downloads/')")` 所以很危险
 
-16. ##### (for else)/(while else)/(try else)
+14. ##### (for else)/(while else)/(try else)
     for 如果正常结束 else中内容会执行 
     while 如果正常结束 else中内容会执行
     try 是如果try中的内容正常执行了，执行else中内容 但是try中如果有return 就不会走到else中；else中可以使用try中建的变量
     总的来说都是正常结束了，会执行else中内容
     最后一个循环break不会走else，最后一个循环continue会else, 因为continue也相当于是走完循环了啊
     for 中如果抛出异常被捕获了，也会走到else
-17. ##### 方法和函数的区别
+15. ##### 方法和函数的区别
     方法绑定在对象上面，通过对象调用; 方法被调用时,self会自动加到函数参数列表首位;method 就是封装了一个func和一个对象
     函数可以独立运行
-18. ##### 通过变量引用的方式创建变量
-19. ##### 获取函数信息
+16. ##### 通过变量引用的方式创建变量
+17. ##### 获取函数信息
     func.__code__ 对象
     inspect.stack()， inspect.signature()， sys._getframe()等api应该可以获取调用my_super的函数的第一个参数
     [异常信息](https://www.cnblogs.com/oddcat/articles/11362961.html) 
 
-20. ##### timeit 
+18. ##### timeit 
     只能在ipython的交互式命令行中直接使用
     其他版本的python命令行中也能使用
-21. ##### python 中空和None的区别
+19. ##### python 中空和None的区别
     [link](https://blog.csdn.net/qq_34152244/article/details/100639985)
     None 是一个单例对象
     空值只代表这个对象的值是空的，'' [] {} 他们之间也并不相等
@@ -397,7 +434,7 @@ IndexError: list index out of range
     如果__eq__方法没被重载过，'' [] 等空值 == None 的结果也是False，并且使用== 和None比较也是不符合PEP8规范的。
     is 比 == 快很多
 
-22. ##### 字符串连接时编译和运行
+20. ##### 字符串连接时编译和运行
     ```python
     >>> s1 = "hell"
     >>> s1 + "o" is s2
@@ -413,7 +450,7 @@ IndexError: list index out of range
     print("hell" + "o" is s2)  # True
     #因为"hell" + "o"在编译时已经变成了"hello"，而s1+"o"因为s1是一个变量，他们会在运行时进行拼接，所以没有被intern
     ```
-23. ##### [Python 中 is和== 的不同]https://blog.csdn.net/qq_34152244/article/details/100639985)
+21. ##### [Python 中 is和== 的不同]https://blog.csdn.net/qq_34152244/article/details/100639985)
     python 中没有===比较符，只有is 和==
     比较对象无非是比较对象的两个东西，对象的值和对象在内存中的地址(id(obj))
     is是二者都比较，`==` 只比较对象的值
@@ -422,7 +459,7 @@ IndexError: list index out of range
     - ###### a == b 所调用的是a的__eq__方法，这个方法是可以被重载的
     - ###### 类的实例即使值一样，== 也是返回false
     - ###### 注意小整数池和字符串池的影响
-24. ##### python 解释器中的小整数池机制和关于字符串的intern 机制（字符串驻留）
+22. ##### python 解释器中的小整数池机制和关于字符串的intern 机制（字符串驻留）
     [link](https://blog.csdn.net/qq_26442553/article/details/82195061)
     小整数池机制是对于[-5, 256] 范围内的整数，一旦被创建出来就不会被回收掉，存在于整个生命周期内。（还有一种说法是这些小整数对象直接在内存中创建了一份，后面使用时直接从小整数对象池中引用）
     关于字符串的intern机制简单来说就是维护一个字典， 这个字典维护字符串的值（为key）和内存中的地址（为value）每次创建字符串对象的时候都会现在这个字典中进行比较，如果存在相同的值就会返回地址，没有就会创建。相当于python对于字符串也采用了**对象池**机制
@@ -433,20 +470,20 @@ IndexError: list index out of range
         在python文件中 内容相同就相同
         在命令行中，同一个代码块中内容相同就相同
 
-25. ##### 代码块 不确定
+23. ##### 代码块 不确定
     Python程序由代码块组成，
     确定： 缩进不一样的
     不确定：代码块作为程序的一个最小执行单位来执行，一个模块，一个类，一个函数，交互式命令行中的一行代码，都是一个代码块
-26. ##### step out、step into、step into mycode run to cursor 
+24. ##### step out、step into、step into mycode run to cursor 
     对语法糖没有用
     step out  是跳出当前执行的子函数 
     step into 是进入子函数（如print就不会进入，yaml.load_all()就会进入）
     step into mycode 是进入自己子函数中
-27. ##### [UnicodeDecodeError 这个是编码问题](https://blog.csdn.net/qq284489030/article/details/80561963)
+25. ##### [UnicodeDecodeError 这个是编码问题](https://blog.csdn.net/qq284489030/article/details/80561963)
     `UnicodeDecodeError: 'gbk' codec can't decode byte 0xab in position 234: illegal multibyte sequence`
     在使用yaml从文件load时遇到这样的问题，还以为是里面的中文不符合yaml的格式
     出错行`    special_letter: "line 含有特殊字符的加单引号后相当于r"xxx"'`
-28. ##### [CPython、IPython等不同的python解释器](https://blog.csdn.net/xyisv/article/details/79389626)
+26. ##### [CPython、IPython等不同的python解释器](https://blog.csdn.net/xyisv/article/details/79389626)
     他们是指不同实现方式的python解释器
     CPython
         - 是指用C语言实现的Python解释器，是官方版本的解释器，也是世界上最流行的Python解释器
@@ -455,29 +492,29 @@ IndexError: list index out of range
         - 绝大多数的代码都可以在PyPy下运行，但执行结果可能和CPython解释器有些不同
     Jython
         - 运行在Java平台下的解释器，把python代码编译成Java字节码
-29. ##### [Java中字节码和机器指令、JIT技术](https://blog.csdn.net/TheLudlows/article/details/87568456)
+27. ##### [Java中字节码和机器指令、JIT技术](https://blog.csdn.net/TheLudlows/article/details/87568456)
     - 字节码不可以被机器直接运行，而是经过JVM翻译成对应的机器指令，逐条读入，逐条翻译解释才能运行
-30. ##### # python 只有6种数据类型，里面没有float，python中是怎么保存浮点数呢
+28. ##### # python 只有6种数据类型，里面没有float，python中是怎么保存浮点数呢
     python中有6中标准数据类型，数字（不只是int，还包括float、复数等） 字符串 元组 等。。
     除此之外还有别的数据类型，bool 日期等
-31. ##### 可变类型与不可变类型
+29. ##### 可变类型与不可变类型
     重新赋值后id()都会变的
     一个变量如果是不可变类型的变量，并不是说他不能被修改
     但是从内存地址来说，如果这个地址存储的是可变类型变量，那么如果变量改变了，他还存在这里
     如果一个不可变类型被改变了，那地址也会更改
     不可变：int str tuple 元组的内容是不可变的，但是其中如果嵌套的有列表这些可变数据类型a，那么可以通过改变这个a的值来改变元组的值，这是元组对已经绑定的可变对象的绑定关系是不可变的，就是元组里的索引一旦绑定了一个对象，就不能修改这个绑定，不能再将这个索引绑定到其它对象。但是如果元组的元素包含可变对象，那元组的内容是可以改变的，因为可变对象的值可以改变
-32. ##### `python -m venv` -m参数的含义 相当于import,叫做当做模块来启动，不同的加载py文件的方式，主要是影响——sys.path 这个属性。sys.path 就相当于liunx中的PATH。
-33. ##### 使用python3的venv来创建虚拟环境
+30. ##### `python -m venv` -m参数的含义 相当于import,叫做当做模块来启动，不同的加载py文件的方式，主要是影响——sys.path 这个属性。sys.path 就相当于liunx中的PATH。
+31. ##### 使用python3的venv来创建虚拟环境
     ```python
     python3 -m venv venv_name
     . venv_name/bin/activate
     # 然后终端提示符前面出现了你的venv_name
     ```
-34. ##### python 模块和包
+32. ##### python 模块和包
     模块是单个的文件(*.py), 包是一组模块
-35. ##### pop(key[,default]) 
+33. ##### pop(key[,default]) 
     从低点对象中移除key，并且返回该key的value，如果default给的话就返回default，如果key不存在会raise KeyError
-36. ##### __init__的作用
+34. ##### __init__的作用
     
 ### 异常
 1. 'str' object does not support item assignment 
@@ -496,8 +533,12 @@ TypeError: coercing to Unicode: need string or buffer, generator found
 ```
 ### 语法糖
 1. `return (rv[0] if rv else None) if one else rv`
-2. 列表生成式
+2. `a= 1 if 3>4 else 2 if 3> 4 else 3 if 3>2 else 4`
+3. 列表生成式
 ```python
+a=[[1,2,3],[4,5,6]]
+[c for b in a for c in b]
+# 
 [int(x) for x in range(5)]
 [x+y for x,y in zip(1,2)]
 [i for i in range(k) if condition]  # 此时if起条件判断作用，满足条件的，将被返回成为最终生成的列表的一员。

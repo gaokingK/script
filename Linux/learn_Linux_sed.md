@@ -119,6 +119,7 @@ sed -e 4a\ newLine testfile # 在第4行后添加
 - s 替换 (是把匹配掉的替换，如果想替换整行就要匹配整行)
     -  `sed -i '1s/^/2hhh/' prometheus-config.yaml` 第一行开头增加2hhh 注意要使用用`/`结束
     - 匹配整行使用s/^$/sss/
+    - 替换为空格 sed s/parten/' '/ 不能sed s/parten/ /
     - 对某一行中的部分进行替换
         - sed -n '/http.*10.0.5.89/s/10.0.5.89/ddd/p' /apt/promtail/opt/promtail-config.yaml
     - sed -i "s/add_workers:/add_work/" inventory_10.0.5.89.yaml

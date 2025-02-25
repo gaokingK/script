@@ -1,6 +1,54 @@
 ### doc
 - https://fasionchan.com/python-source/memory/refcnt-drawback/
 - https://ebook-python-study.readthedocs.io/zh-cn/latest/python%E8%BF%9B%E9%98%B618%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6GC.html
+
+{"level":"error","ts":1737449894.9944735,"caller":"git/git.go:54","msg":"Error running git [fetch --recurse-submodules=yes --depth=1 origin --update-head-ok --force 22211589f8a68cc3fad0b556078fb10e2d5b95ce]: exit status 128\nerror: Server does not allow request for unadvertised object 22211589f8a68cc3fad0b556078fb10e2d5b95ce\n","stacktrace":"github.com/tektoncd/pipeline/pkg/git.run\n\tgithub.com/tektoncd/pipeline/pkg/git/git.go:54\ngithub.com/tektoncd/pipeline/pkg/git.Fetch\n\tgithub.com/tektoncd/pipeline/pkg/git/git.go:149\nmain.main\n\tgithub.com/tektoncd/pipeline/cmd/git-init/main.go:53\nruntime.main\n\truntime/proc.go:204"}{"level":"fatal","ts":1737449894.994577,"caller":"git-init/main.go:54","msg":"Error fetching git repository: failed to fetch [22211589f8a68cc3fad0b556078fb10e2d5b95ce]: exit status 128","stacktrace":"main.main\n\tgithub.com/tektoncd/pipeline/cmd/git-init/main.go:54\nruntime.main\n\truntime/proc.go:204"}
+
+
+### 重载
+- a,b = [1, 2, 3] 会报错
+- a,b = [1, 2] 不会报错
+### python中的异常有两类，一类是编译时错误（像包缺失）等会直接退出，一种是运行异常，这种不会退出
+### 解释器运行起来的时候导入一个包，后面把包卸载了，解释器只要不重启，还是能正常运行的
+### @dataclass
+- @dataclass 是一个装饰器，用于装饰类以自动生成特殊方法，如 __init__()、__repr__()、__eq__() 等，以及管理类属性的初始化。这个装饰器是由 dataclasses 模块提供的，该模块从 Python 3.7 版本开始引入。
+- 使用 @dataclass 可以简化数据存储类（data storage classes）的编写，这些类主要用于存储数据，而不包含业务逻辑。@dataclass 会自动为你生成初始化方法和其他一些实用的魔术方法。
+```py
+
+@dataclass
+class Point:
+    x: int
+    y: int
+# 创建 Point 类的实例
+p = Point(1, 2)
+
+# 访问属性
+print(p.x)  # 输出: 1
+print(p.y)  # 输出: 2
+# 打印对象，自动生成的 __repr__ 方法
+print(p)  # 输出: Point(x=1, y=2)
+```
+### for循环的一些问题
+```py
+# 内部更改循环
+for i in range(3):
+    i = 3
+    print(i)
+# 还是循环3次
+
+# 还是5次
+b = 5
+for i in range(b):
+    b=2
+    print(i)
+
+#  结果是1，3
+b = [1,2,3,4]
+for i in b:
+    b.remove(i)
+    print(i)
+# 应该是可变对象去迭代，这个对象改变后循环的次数也会改变
+```
 ### 偏函数
 - 偏函数是一种把正常函数参数固定后得到的函数对象，通过function.partial创建
 - 有利于代码的阅读，尤其是函数参数比较多的情况下
@@ -199,6 +247,12 @@ Executing task id {0.id}, args: {0.args!r} kwargs: {0.kwargs!r}'.format(self.req
 
 ## 集合和集合的运算 # set
 - link：https://blog.csdn.net/isoleo/article/details/13000975
+- set()会把字符串切割
+```py
+>>> set("34")
+{'3', '4'}
+```
+- 不支持用索引取值 set("34")[0]会报错
 ```py
 # 交集
 a & b
@@ -209,8 +263,21 @@ a - b # {1, 2} - {1, 3} 结果是2
 # 增加
 set_obj.add(a) # 只能单个元素
 set_obj.update([a,b,c]) # 可以多个元素
+# S^T或 s . symmetric _ difference _ update ( T )	补集。返回一个新集合,包括集合 S 和 T 中的元素,但不包括同时在其中的元素
+# s <= T 或 S . issubset ( T )	子集测试。如果 S 与 T 相同或 S 是 T 的子集,返回 True ,否则返回 False 。可以用 S < T 判断 S 是否是 T 的真子集
+# S >=Т或 S . issuperset (T)	超集测试。如果 S 与 T 相同或 S 是 T 的超集,返回 True ,否则返回 False 。可以用 S > T 判断 S 是否是 T 的真超集
+s == t  # 判断集合相等
+#  检查元素是否在集合中
+print(1 in my_set)  # 输出：True
+print(6 in my_set)  # 输出：False
+# 但是不能这样
+my_set in ["a", "b"] 这样怎样都是false
+my_set in set(["a", "b"]) 这样怎样都是false
 ```
-
+### filter(function, iterable)
+- 保留function为true的
+- 结果是个可迭代对象
+- 即使可迭代对象为空，bool() 也是True， 要bool(list(filter())) 才能判断结果有没有值
 ### from openpyxl import load_workbook 处理excle表格
 ### if 类的某个实例会调用哪个方法
 - https://pycoders-weekly-chinese.readthedocs.io/en/latest/issue6/a-guide-to-pythons-magic-methods.html

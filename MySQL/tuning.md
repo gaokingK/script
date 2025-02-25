@@ -62,3 +62,34 @@ select name from user where create_time < FROM_UNIXTIME(CURDATE());
     - ar:平均返回记录数
     - at:平均查询时间
   - -g : 有点像grep， 后跟正则
+
+### 编写规范
+- 尽量保持JOIN子句的简洁，只包含必要的关联条件。
+- 使用WHERE子句来过滤记录，这样可以提高查询的灵活性和可读性。
+- 考虑性能，确保使用索引优化过滤条件。
+```sql
+-- sql1
+SELECT * FROM ticket
+JOIN server_config_release_ticket_data ON server_config_release_ticket_data.ticket_id = ticket.id
+JOIN server_config_release_data ON server_config_release_data.ticket_id = ticket.id AND server_config_release_data.is_activate = 1
+WHERE ticket.is_deleted = 0
+-- sql2
+SELECT * FROM ticket
+JOIN server_config_release_ticket_data ON server_config_release_ticket_data.ticket_id = ticket.id
+JOIN server_config_release_data ON server_config_release_data.ticket_id = ticket.id
+WHERE ticket.is_deleted = 0 AND server_config_release_data.is_activate = 1
+-- 比较sql2更好
+-- SQL2更好，因为它遵循了清晰的逻辑分离原则。将过滤条件放在WHERE子句中，使得查询的意图更加明确，易于理解和维护。
+-- 性能：在某些数据库系统中，将过滤条件放在JOIN子句中可能会影响查询性能，因为数据库可能无法在连接过程中有效地使用索引。将过滤条件放在WHERE子句中有助于数据库优化器更好地进行查询优化。
+-- 可读性：SQL2的可读性更好，因为它遵循了常见的SQL编写习惯，即先连接表，然后过滤记录。
+-- 通用性：SQL2更通用，因为它允许你在不影响连接逻辑的情况下，更容易地添加或修改过滤条件。
+-- 注意
+-- 有个问题就是前者是只过滤server_config_release_data表中的数据，后者是过滤结果中的数据，如果是左连接的话，那么后者可能不会出现server_config_release_data为空的数据
+-- 不过要是这样的话更推荐连接子查询
+LEFT OUTER JOIN server_config_release_ticket_data ON server_config_release_ticket_data.ticket_id = ticket.id 
+LEFT OUTER JOIN (select * from server_config_release_data where server_config_release_data.is_deleted = 0 AND server_config_release_data.is_activate = 1) as server_config_release_data ON server_config_release_data.ticket_id = ticket.id 
+WHERE ticket.is_deleted = 0 AND server_config_release_ticket_data.is_deleted = 0
+```
+
+
+

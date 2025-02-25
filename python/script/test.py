@@ -161,42 +161,47 @@ def task_done(future):
     new_task.add_done_callback(task_done)
 
 # 命名管道
-import os, time
+# import os, time
 
-read_path = "/tmp/pipe.in"
-write_path = "/tmp/pipe.out"
+# read_path = "/tmp/pipe.in"
+# write_path = "/tmp/pipe.out"
 
-if os.path.exists(read_path):
-    os.remove(read_path)
-if os.path.exists(write_path):
-    os.remove(write_path)
+# if os.path.exists(read_path):
+#     os.remove(read_path)
+# if os.path.exists(write_path):
+#     os.remove(write_path)
 
-os.mkfifo(write_path)
-os.mkfifo(read_path)
+# os.mkfifo(write_path)
+# os.mkfifo(read_path)
 
-rf = os.open(read_path, os.O_RDONLY)
-wf = os.open(write_path, os.O_SYNC | os.O_CREAT | os.O_RDWR)
+# rf = os.open(read_path, os.O_RDONLY)
+# wf = os.open(write_path, os.O_SYNC | os.O_CREAT | os.O_RDWR)
 
-while True:
-    s = os.read(rf, 1024)
-    print("received msg: %s" % s)
-    if len(s) == 0:
-        time.sleep(1)
-        continue
+# while True:
+#     s = os.read(rf, 1024)
+#     print("received msg: %s" % s)
+#     if len(s) == 0:
+#         time.sleep(1)
+#         continue
 
-    if "exit" in s:
-        break
+#     if "exit" in s:
+#         break
 
-    os.write(wf, s)
+#     os.write(wf, s)
 
-os.close(rf)
-os.close(wf)
+# os.close(rf)
+# os.close(wf)
 
 
 if __name__ == '__main__':
     b_time=time.time()
+    b = [1,2,3,4]
+    for i in b:
+        b.remove(i)
+        print(i)
 
-
+ 
+    exit(0)
     producer_thread = threading.Thread(target=producer)
     thread_list=[]
     producer_thread.start()

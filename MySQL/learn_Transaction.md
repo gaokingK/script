@@ -85,15 +85,17 @@ DELIMITER ;
 - 幻读：事务A两次查询中查到的数据条数不同（不可重复读是某条数据的内容不同，这个是个数不同）， 第一次读了5条，然后事务B又插入了两条，A第二次读就会读到7条。
 
 ## 事务的隔离级别
-- 读未提交
-- 读已提交：允许读取并发事务已提交的数据
-- 可重复读：对同一字段的多次读取结果是一致的，除非是事务本身修改的数据。但不能避免幻读。（可能是只允许读取并发事务新插入的？）
-- 可串行化：最高隔离级别，所有事务之间依次逐个执行
+- 读未提交READ UNCOMMITTED
+- 读已提交READ COMMITTED：允许读取并发事务已提交的数据
+- 可重复读REPEATABLE READ：保证同一事务中多次读取的数据一致，除非是事务本身修改的数据。但不能避免幻读。（可能是只允许读取并发事务新插入的？）(读不到别的事务提交的内容) 对于sqlalchemy来说当前会话commit后 事务就结束了，就会开始一个新的事务，这样就能读取到别的事务已经修改的内容了
+- 可串行化SERIALIZABLE：最高隔离级别，所有事务之间依次逐个执行
 
 - mysql 默认采用的 可从复读 隔离级别；
 - 查看隔离级别：
   - `select @@tx_isolation;` # 当前事务
   - `select @@global.tx_isolation;` # 全局
+  - `SELECT @@session.transaction_isolation;`
+  - `SELECT @@global.transaction_isolation;`
 - 设置隔离级别
   - `set [session] transaction isolation level read committed;`# 当前事务
   - `set global transaction isolation level read committed;`# 全局
@@ -105,18 +107,27 @@ DELIMITER ;
   - 其中并发调度使用的是MVVC（多版本并发控制），通过保存修改的旧版本信息来支持并发一致性读和回滚等特性。
   - 事务的隔离级别越低， 事务请求的锁就越少；但InnoDB默认的REPEATABLE-READ并不会在性能上有任何损失
 - InnoDB存储引擎在 分布式事务 的情况下一般会用到SERIALIZABLE(可串行化)隔离级别。
-
+## 终止线程
+- 可以通过 KILL 命令终止与事务相关的线程：`KILL thread_id;` sql
 ## 查询正在进行的事务
 - link：
   - https://blog.csdn.net/ffzhihua/article/details/103703497
 ```
 # 查看引擎的相关信息
-show engine innodb status;
+show engine innodb status; TRANSACTIONS 部分：列出了当前正在运行的事务，包括事务的锁信息、等待状态等。
 # 查看锁表
 select * from information_schema.innodb_locks;
 查看事务相关信息
 SELECT * FROM INFORMATION_SCHEMA.INNODB_TRX; # 这个只能查询此刻正在进行中的事务，已经完成的是查不到的
-
+- trx_wait_started: 事务进入等待状态的时间。
+SHOW PROCESSLIST 
+# 可以列出所有连接，包括事务中运行的 SQL 查询：
+- Id: 线程 ID。
+- User: 运行事务的用户。
+- Host: 客户端连接的主机。
+- Command: 当前命令状态（如 Query 或 Sleep）。
+- Time: 查询运行的时长。
+- Info: 正在运行的 SQL 语句。
 # mysql 5.6，查看更具体的信息：
 SELECT a.trx_id, a.trx_state, a.trx_started, a.trx_query, b.ID, b.USER, b.DB, b.COMMAND, b.TIME, b.STATE, b.INFO, c.PROCESSLIST_USER, c.PROCESSLIST_HOST, c.PROCESSLIST_DB, d.SQL_TEXT FROM information_schema.INNODB_TRX a LEFT JOIN information_schema.PROCESSLIST b ON a.trx_mysql_thread_id = b.id AND b.COMMAND = 'Sleep' LEFT JOIN PERFORMANCE_SCHEMA.threads c ON b.id = c.PROCESSLIST_ID LEFT JOIN PERFORMANCE_SCHEMA.events_statements_current d ON d.THREAD_ID = c.THREAD_ID;
 

@@ -17,6 +17,7 @@
 `print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))`
 
 # 时区
+- "%Y-%m-%dT%H:%M:%S.%fZ" 中，Z 代表 UTC（协调世界时）时区。这个格式通常用于表示 ISO 8601 标准格式的日期时间字符串，其中 Z 是 UTC 的一种表示方式，等同于 +00:00 时区。
 - astimezone: 改变时区
     - 如果对tzinfo属性的日期来修改时区的话也会修改时间，例如 utc 时间 为 2021/04/15 17:00:00 改为 北京时间后，则变为 2021/04/16 01:00:00；如果原本没有时区属性，也会修改
 - replace 方法用于操作模块datetime的datetime类的对象。 replace(tzinfo = new_timezone_info) 替换时区, 时间数值不会发生变化，例如 utc 时间为 2021/04/15 17:00:00 改为 北京时间 2021/04/15 17:00:00 ， 或者 没有timezone 的 datetime实例 可以通过这个函数附上 timezone
@@ -35,6 +36,21 @@ s_time.astimezone(shanghai_tz) //根据的是本地时区向utc转换的
 datetime.datetime(2023, 6, 5, 3, 4, 48, 740000, tzinfo=<DstTzInfo 'Asia/Shanghai' CST+8:00:00 STD>)
 s_time.replace(tzinfo=utc_tz).astimezone(utc_tz) # 应该这样
 datetime.datetime(2023, 6, 5, 3, 4, 48, 740000, tzinfo=<UTC>)
+
+# 获取当前时间（UTC 时间）
+utc_now = datetime.now(pytz.utc)
+print("Current UTC time:", utc_now)
+
+# 转换为其他时区（例如，纽约时区）
+new_york_tz = pytz.timezone("America/New_York")
+new_york_time = utc_now.astimezone(new_york_tz)
+print("New York time:", new_york_time)
+
+# 转换为北京时间
+beijing_tz = pytz.timezone("Asia/Shanghai")
+beijing_time = utc_now.astimezone(beijing_tz)
+print("Beijing time:", beijing_time)
+
 ```
 # time 
 ### 时间戳 time.time() # 获取从1970年1月1日到现在的时间秒数 timestamp
@@ -60,6 +76,7 @@ print(x.strftime("%Y-%m-%d")) #%Y-%m-%d %H:%M:%S
 ```
 ### 字符串转换为datetime对象: strptime()
 ```py
+datetime.strptime(item.get("created_at"),"%Y-%m-%dT%H:%M:%S.%fZ", ).strftime("%Y-%m-%d %H:%M:%S")
 t = "2022-01-16 16:00:00"
 ft = datetime.datetime.strptime(t, "%Y-%m-%d %H:%M:%S") # 因该能看的出来吧，源字符串中有-，format—str里也写"-"
 print(type(ft)) # <class 'datetime.datetime'>
@@ -81,7 +98,7 @@ print(c-a)  # 1 day, 13:00:00
 # 但是(c-a).seconds只会输出小于一天的秒数 (c-a).seconds和(c-b).seconds的结果一样
 ```
 
-### 日期转换为时间戳
+### 日期 时间戳 转换
 ```py
 import datetime
 import time
@@ -89,7 +106,7 @@ import time
 dtime = datetime.datetime.now()
 un_time = time.mktime(dtime.timetuple())
 print(un_time)
-# 将unix时间戳转换为“当前时间”格式
+# 将unix时间戳转换为“当前时间”格式  1739786400
 times = datetime.datetime.fromtimestamp(un_time)
 print(times)
 

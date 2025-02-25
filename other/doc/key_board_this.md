@@ -4,6 +4,19 @@
 - ctrl + shift +up/down 多行编辑，移动光标 qq音乐会占用
 - ctrl + shift + p 输入setting.json打开json
 - ctrl + D 高亮选中的词，按enter能多点编辑
+- 折叠
+```cs
+要操作光标所在文件中的所有代码块：
+
+折叠所有 Ctrl+K+0
+展开所有 Ctrl+K+J
+仅仅操作光标所处代码块内的代码：
+
+折叠 Ctrl+Shift+[
+展开 Ctrl+Shift+] 
+
+unfold选中的到最大程度   Ctrl+Shift+]  选中或者光标放到那里
+```
 - 配置颜色
     ```json
     // link: https://code.visualstudio.com/docs/getstarted/themes
@@ -25,6 +38,15 @@
 - vscode会搜索.vscode里面的launch.json文件来配置调试，如果换了一个语言，点击下拉箭头;最下面的三个选择分别为文件夹A添加配置、为文件夹B添加配置、为工作区添加配置。选择一个点击了，会自动帮你配置
 - 设置自动换行 设置里搜索wordwrap
 - 不用设置显示换行符，可以通过看行号来判断是不是同一行，vscode默认会显示行号的
+### markdown直接粘贴图片
+- https://zhuanlan.zhihu.com/p/646461159
+- ctrl + shift + p 输入 open user setting.json
+- 粘贴
+```cs
+"markdown.copyFiles.destination": {
+    "**/*": "${documentDirName}/imgs/${documentBaseName}.${fileName/(.*)\\\\.(.*)/$2/}"
+},
+```
 
 # pycharm 
 - 激活：IT资源工具分享17群被人投诉了 https://arcstack.top/tools/jetbrains/idea/jetbrains-error.html

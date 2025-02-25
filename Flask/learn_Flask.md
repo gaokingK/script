@@ -25,6 +25,10 @@
                 - @app.route("/record/<any(a,b):an>") 后一个参数的值只能是a或者b
                 - 访问的时候url只能是/record/a 或者 record/b 
 
+    - user_bp = Blueprint('users2', __name__)
+    - _app.register_blueprint(user_bp)
+    -  class="sidebar-link sidebar-title link-nav" href="{{url_for('users2.skip_userrole')}}">
+
 ## 钩子函数
 - link
   - https://zhuanlan.zhihu.com/p/48141683

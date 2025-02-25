@@ -28,6 +28,8 @@ NS 域名的 DNS 服务器地址，例如 ns3.dnsv2.com，推荐 DNSPod.
 # 域名
 - 服务商 https://my.noip.com/dynamic-dns 
 - 域名 gaoking.zapto.org
+
+
 # 帮助网站
 - 这个比较好
 - ping 检测 https://ping.chinaz.com/185.77.225.53
@@ -80,7 +82,7 @@ NS 域名的 DNS 服务器地址，例如 ns3.dnsv2.com，推荐 DNSPod.
 - 参看core的版本`vasma 16->1>会显示版本`
 # 使用
 - win V2rayN:
-  - 下载:https://kgithub.com/2dust/v2rayN
+  - 下载:https://kgithub.com/2dust/v2rayN -> https://github.com/2dust/v2rayN/releases/tag/6.55
   - 配置：
     - https://v2rayn.org/
     - 代理方式选择“自动配置系统代理”， 路由方式选择“绕过大陆”。

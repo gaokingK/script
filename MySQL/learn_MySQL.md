@@ -130,24 +130,75 @@ column1 data_type[(data_length)],
 - 将查询结果导入到表中(表存在且表结构相同)`INSERT INTO table2 SELECT * FROM table1 WHERE condition;`
 - 将查询结果导入到表中(表不存在) `CREATE TABLE school SELECT * FROM class`
 - ## 重新创建表`create table tbl_name like tbl_name;`
-- ## 修改表 help alter table;
-- mysql modify 和change区别 
+  
+- ## 修改表 help # alter table;
+- ### mysql modify 和change区别 
   - 相同点是change和modify都可以修改表的定义，不同的是change后面需要写两次列名，不方便，但可以修改列名称。modify则不能修改列名称。
-  - AlTER TABLE tablename MODIFY[COLUMN] column_definition [FIRST|AFTER colname]
-  -  alter table test1 change ename ename1 int(4);
+  -  MySQL 中使用 MODIFY和CHANGE 语句修改列属性（如默认值、NULL 约束等）时，字段的类型必须重新定义。MySQL 不允许只修改列的部分属性而省略数据类型。
+  - AlTER TABLE tablename MODIFY[COLUMN] column_definition [FIRST|AFTER colname] alter table test1 change ename ename1 int(4);
+  - ALTER TABLE table_name
+    CHANGE old_column_name new_column_name column_type DEFAULT default_value;
 ```sql
-# 修改列属性使用modify
-alter table Person modify Id int not null auto_increment unique key comment 'id号'; 数据类型需要重新声明? 原本为空的设置为非空后会自动赋值
-# 修改列名 怎么只修改列名,而不传入属性-------------no
+-- 修改列属性使用modify
+alter table Person MODIFY Id int not null auto_increment unique key comment 'id号'; --数据类型需要重新声明 原本为空的设置为非空后会自动赋值
+ALTER TABLE users MODIFY COLUMN phone_number VARCHAR(20) NOT NULL DEFAULT '';
+# 同时修改多个， 但这样其他属性就消失了 必须重新指定其他属性
+alter table acl_rule modify source_port varchar(512),  modify dest_port varchar(512); 
+-- 修改列名 怎么只修改列名,而不传入属性-------------no
 alter table tbl_name change old_name new_name 随便一个属性;
 
-# 自增, 自增属性必须为key, 且一个表中自增只有一个;
-# 删除自增属性, 其他的属性会消失吗?
+-- 自增, 自增属性必须为key, 且一个表中自增只有一个;
+-- 删除自增属性, 其他的属性会消失吗?
 alter table Profession modify id int(11), drop primary key;
-# 对表重命名
+-- 对表重命名
 ALTER  TABLE table_name RENAME TO new_table_name
+-- 删除某列
+ALTER TABLE users DROP COLUMN phone_number;
+-- 新建列的时候添加外键
+alter table task add video_id int(11) after video_duration ,add constraint video_id foreign key (video_id) references video(id) on delete cascade on update no action;
+
+-- 新建列时建立普通索引
+-- 普通索引：ADD INDEX
+-- 唯一索引：ADD UNIQUE INDEX
+-- 全文索引：ADD FULLTEXT INDEX
+-- 空间索引：ADD SPATIAL INDEX（适用于 GEOMETRY 类型）
+alter table 
 ```
-- ## 新建列的时候添加外键`alter table task add video_id int(11) after video_duration ,add constraint video_id foreign key (video_id) references video(id) on delete cascade on update no action;`
+- ### json 列
+```sql
+-- 新增列
+alter table tbl_name add column col_name json;
+-- 插入数据
+INSERT INTO products (name, tags)
+VALUES ('Product1', '{"color": ["red", "blue"], "size": ["S", "M"], "brand": ["BrandA"]}');
+-- 查询数据
+SELECT JSON_EXTRACT(tags, '$.color') AS color_tags
+FROM products
+WHERE id = 1;
+-- or 
+SELECT tags->'$.color' AS color_tags
+FROM products
+WHERE id = 1;
+-- 查询不为空的数据
+SELECT * FROM your_table WHERE JSON_LENGTH(json_column) > 0;
+-- 修改数据
+UPDATE products
+SET tags = JSON_SET(tags, '$.color', '["green"]')
+WHERE id = 1;
+-- 如果要在原有的标签值中添加新的值
+UPDATE products
+SET tags = JSON_ARRAY_APPEND(tags, '$.color', 'blue')
+WHERE id = 1;
+
+-- 更新现有 JSON 对象	
+UPDATE products SET tags = '{"color": ["red", "blue"], "size": ["S", "M"], "brand": ["BrandA"]}' WHERE id = 1
+
+-- 更新标签的值	
+UPDATE products SET tags = JSON_SET(tags, '$.size[0]', 'L') WHERE id = 1
+-- 删除标签	
+UPDATE products SET tags = JSON_REMOVE(tags, '$.brand') WHERE id = 1
+
+```
 
 - ## 删除表`drop table tbl_name`
 # 共识
@@ -190,28 +241,6 @@ commit;
     - 一个表的行格式决定了它的物理存储,进而会影响查询和DML(Data Manipulation Language 数据操作语言)操作的性能
 
 
-### 数据类型
-- help create table 中data type中查看所有的
-- 整型 bigint、int、mediumint、smallint 和 tinyint的取值范围
-  - link: https://www.cnblogs.com/wayne173/p/3747477.html
-  - 从小到大是 tinyint/smallint/mediumint/int/bight
-
-- decimal
-  - 据类型最多可存储 38 个数字，所有数字都能够放到小数点的右边。
-  - decimal(10, 4) 一共能存10位数字，小数部分最多有4位。（多的化会四舍五入后把多出来的扔掉）
-  - 定义了zerofill后，插入负数会报错
-- datetime
-  - 不能为空
-    ``` 
-    mysql> update autotest set kass_pro_date="" where id =3;
-    ERROR 1292 (22007): Incorrect datetime value: '' for column 'kass_pro_date' at row 1
-    ```
-- varchar(128)可以存多少汉字
-  - 4.0版本以下，varchar(50)，指的是50字节，如果存放UTF8汉字时，只能存16个（每个汉字3字节） 
-  - 5.0版本以上，varchar(50)，指的是50字符，无论存放的是数字、字母还是UTF8汉字（每个汉字3字节），都可以存放50个
-
-- TEXT 长文本字段，能存储64kb
-- blob 长文本字段， 保存的是二进制，可以用来存储图片
 
 # 主键
 - 主键是唯一的索引
@@ -249,6 +278,15 @@ alter table issue_record add constraint fk_issue_user foreign key (uid) referenc
   - 主键产生唯一的聚集索引，唯一索引产生唯一的非聚集索引
 - 索引的特点
   - 索引可以提高查询的速度。
+```
+- 一个列可以又多个名字的普通索引
+- 查看索引
+SHOW INDEX FROM table_name;
+- 添加索引  如果不添加自定义名字，默认是列名
+alter table store_info add index [idx_cluster_id] (cluster_id); 
+- 删除索引
+alter table store_info drop index cluster_id;
+```
 # 问题
 - 外键一定要是主键吗？
 - SQL 中怎么会用到索引？

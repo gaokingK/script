@@ -137,7 +137,16 @@ LEFT JOIN Products ON OrderDetails.ProductID = Products.ProductID;
 - 计算某列非空值的数量`select count(col_name) from tbl_name`
 - 计算某列不重复值的数量`select count(distinct col_name) from tbl_name`
 - 计算每个国家的客户数量`select count(Customer) from Order group by Country`
-
+- 注意在分组后`count(*)` 和`count(col_name)`是不同的；`count(*)`统计所有行(包含列为空的)count(col_name)只统计col_name不为空的行
+```sql
+SELECT count(DISTINCT store_info.market_city_name_cn) AS market_count, count(store_info.cluster_id) AS store_count, anon_1.id, anon_1.cluster_name, anon_1.env, anon_1.domain, anon_1.tags, anon_1.created_at, anon_1.sku, anon_1.rancher_cluster_id 
+FROM 
+	(SELECT store_cluster.id AS id, store_cluster.cluster_name AS cluster_name, store_cluster.env AS env, store_cluster.domain AS domain, store_cluster.tags AS tags, store_cluster.created_at AS created_at, store_cluster.sku AS sku, store_cluster.rancher_cluster_id AS rancher_cluster_id 
+	FROM store_cluster 
+	) AS anon_1 
+	left outer JOIN store_info ON store_info.cluster_id = anon_1.id and store_info.is_deleted = 0
+ GROUP BY anon_1.id;
+```
 ### case
 - link:https://www.w3schools.com/sql/sql_case.asp
 - 作用与行，每行都有结果
@@ -157,8 +166,19 @@ OrderID	Quantity	test
 10248	5	The quantity is under 30
 10249	9	The quantity is under 30
 10249	40	The quantity is greater than 30
-```
 
+```
+- 用在更新时
+```sql
+update endpoint
+set version=case 
+	when id % 4 = 0 then "202408210859"
+	when id % 4 = 1 then "202408210900"
+	when id % 4 = 2 then "202408210901"
+	else version
+end
+where id < 10
+```
 
 ### dense_rank() over()和# rank() over() # row_number
 - 用来看排名 

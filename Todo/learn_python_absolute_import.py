@@ -16,8 +16,12 @@ from __future__ import absolute_import 引入了绝对导入这个特性
     import string 导入bulti-in string; from pkg import string导入自定义的string
 
 绝对导入和相对导入
-    从上面这个例子可以看到, import xx 这种特性是绝对引入,  from pkg import xxx 是相对导入
-    相对导入只能在包（package）中执行
+    - 从上面这个例子可以看到, import xx 这种特性是绝对引入,  from pkg import xxx 是相对导入
+    相对导入只能在包（package）中执行 错误的
+    - 绝对导入，即从项目的根目录开始寻找模块。绝对导入的路径是基于项目结构的根目录，直接指定要导入的模块或包的路径。
+    - 相对导入，相对导入的基础是当前模块所在的包的相对位置，适合在同一个包内的模块之间导入。
+        - 一般导入语句前面加上 . 时（单个 .：表示当前目录。两个 ..：表示上一级目录，以此类推。）
+    - 如果不是在根目录下，使用相对导入要加上.符号 因为如果project/module_a/a.py里使用from b import B导入了B, 直接运行a是可以运行的，但是project/module_c/c.py里面导入了a，会报错
 
 # link:
 - link(https://docs.python.org/3/reference/import.html)

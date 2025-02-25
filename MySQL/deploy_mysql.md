@@ -7,7 +7,7 @@
     - regsvr32 MSVCP140.dll 提示仍然找不到，进入C:\Windows\SysWOW64 发现MSVCP140.dll是小写
     - 没改名，重启好了如果还不行可以尝试把小写的dll文件改为大写的
 
-- 运行mysqld --initialize --user=root --console提示data创建不成功时的路径合my.ini中配置的文件路径不一样
+- 运行`mysqld --initialize --user=root --console`提示data创建不成功时的路径合my.ini中配置的文件路径不一样
 ```
 这是因为ini中的D:\softwares中的\s被转义了， 解决方法时把安装目录换到了D:\mysql-8.0.24-winx64 或者D:\\soft （）
 ```
@@ -17,7 +17,7 @@
 - 在添加环境变量的时候是把bin目录添加到系统变量里面
 - 修改密码的语句是alter user user() identified by "XXX"; 把想设置的密码放到双引号里
 - 带debug-test的是带测试用例的好像是
-
+- 如果那一步出错了，可以直接把data目录删了，然后重新`mysqld --initialize --user=root --console`
 ### 测试表
 - https://blog.csdn.net/HeyShHeyou/article/details/109852762
 - 

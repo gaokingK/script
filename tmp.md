@@ -1,54 +1,106 @@
-1. string.contains(${systemCode},'01') || string.contains(${systemCode},'05') 删除数据
-2. ${eventInfo}==nil 删除
-3. ${systemCode}=='09' 将  eventGroup 替换为 应用支持部2组
-4. ${systemCode}=='11' 将  eventGroup 替换为 北京分行
-5. ${systemCode}=='12' 将  eventGroup 替换为 南京分行
-6. ${systemCode}=='13' 将  eventGroup 替换为 天津分行
-7. ${systemCode}=='14' 将  eventGroup 替换为 宁波分行
-8. ${systemCode}=='15' 苏州分行
-9. ${systemCode}=='16' 成都分行
-10. ${systemCode}=='17' 深圳分行
-11. ${systemCode}=='18' 杭州分行
-12. ${systemCode}=='02' 将 alarmValue 替换为 ${eventName}
-13. firstTime . -
-14. eventGroup MG-NET 网络通讯部
-15. eventGroup null 
-16. eventStatus PROBLEM 1 
-17. eventStatus RESOLVED 2
-18. eventLevel CRITICAL P1 MAJOR P2 Average P3 Information P5 Warning   P4
-19. eventGroup MG-SYS 系统设备部
-20. lastTime . - 
-21. systemName 02  系管平台
-22. ${systemCode}=='04' ipAddress  全部替换为空 alarmValue 全部替换为 ${eventName}
-23. indexKey 保留99个 indexValue 保留49个 alarmValue  保留49个 
-24. ${systemCode}=='04' 新增pasoCode ${objectName}
-25. eventName 保留254个
-
-
-
-{
-	"alarmValue": "",
-	"configItem": "Used memory (percentage)",
-	"eventCount": "",
-	"eventGroup": "",
-	"eventInfo": "Windows memory used on zjfacpapp07 > 95%",
-	"eventLevel": "CRITICAL",
-	"eventName": "High memory utilization (over 95%)",
-	"eventSerialno": "95150894",
-	"eventStatus": "PROBLEM",
-	"eventUrlInfo": "",
-	"firstTime": "2022.11.23 23:38:00",
-	"hostName": "zjfacpapp07",
-	"indexKey": "MEMUsage",
-	"indexType": "MEM",
-	"indexValue": "96.41%",
-	"insName": "",
-	"ipAddress": "10.251.50.11",
-	"lastTime": "2022.11.23 23:38:02",
-	"objectCate": "OS",
-	"objectID": "",
-	"objectName": "10.251.50.11",
-	"searchId": "OS.NODENEW",
-	"systemCode": "01", 
-	"systemName": "ZABBIX"
-}
+name: base
+channels:
+  - defaults
+dependencies:
+  - _libgcc_mutex=0.1=main
+  - _openmp_mutex=5.1=1_gnu
+  - anaconda-anon-usage=0.4.4=py39hfc0e8ea_100
+  - archspec=0.2.3=pyhd3eb1b0_0
+  - boltons=23.0.0=py39h06a4308_0
+  - brotli-python=1.0.9=py39h6a678d5_7
+  - bzip2=1.0.8=h5eee18b_5
+  - c-ares=1.19.1=h5eee18b_0
+  - ca-certificates=2024.3.11=h06a4308_0
+  - certifi=2024.2.2=py39h06a4308_0
+  - cffi=1.16.0=py39h5eee18b_0
+  - charset-normalizer=2.0.4=pyhd3eb1b0_0
+  - conda=24.5.0=py39h06a4308_0
+  - conda-content-trust=0.2.0=py39h06a4308_0
+  - conda-libmamba-solver=24.1.0=pyhd3eb1b0_0
+  - conda-package-handling=2.2.0=py39h06a4308_0
+  - conda-package-streaming=0.9.0=py39h06a4308_0
+  - cryptography=42.0.5=py39hdda0065_0
+  - distro=1.8.0=py39h06a4308_0
+  - fmt=9.1.0=hdb19cb5_0
+  - frozendict=2.4.2=py39h5eee18b_0
+  - icu=73.1=h6a678d5_0
+  - idna=3.4=py39h06a4308_0
+  - jansson=2.14=h5eee18b_1
+  - jsonpatch=1.33=py39h06a4308_0
+  - jsonpointer=2.1=pyhd3eb1b0_0
+  - krb5=1.20.1=h143b758_1
+  - ld_impl_linux-64=2.38=h1181459_1
+  - libarchive=3.6.2=h6ac8c49_2
+  - libcurl=8.5.0=h251f7ec_0
+  - libedit=3.1.20230828=h5eee18b_0
+  - libev=4.33=h7f8727e_1
+  - libffi=3.4.4=h6a678d5_0
+  - libgcc-ng=11.2.0=h1234567_1
+  - libgomp=11.2.0=h1234567_1
+  - libmamba=1.5.8=hfe524e5_1
+  - libmambapy=1.5.8=py39h2dafd23_1
+  - libnghttp2=1.57.0=h2d74bed_0
+  - libsolv=0.7.24=he621ea3_0
+  - libssh2=1.10.0=hdbd6064_2
+  - libstdcxx-ng=11.2.0=h1234567_1
+  - libuuid=1.41.5=h5eee18b_0
+  - libxml2=2.10.4=hf1b16e4_1
+  - lz4-c=1.9.4=h6a678d5_0
+  - menuinst=2.0.2=py39h06a4308_0
+  - ncurses=6.4=h6a678d5_0
+  - openssl=3.0.13=h7f8727e_2
+  - packaging=23.2=py39h06a4308_0
+  - pcre=8.45=h295c915_0
+  - pcre2=10.42=hebb0a14_0
+  - pip=23.3.1=py39h06a4308_0
+  - platformdirs=3.10.0=py39h06a4308_0
+  - pluggy=1.0.0=py39h06a4308_1
+  - pybind11-abi=4=hd3eb1b0_1
+  - pycosat=0.6.6=py39h5eee18b_0
+  - pycparser=2.21=pyhd3eb1b0_0
+  - pysocks=1.7.1=py39h06a4308_0
+  - python=3.9.19=h955ad1f_0
+  - readline=8.2=h5eee18b_0
+  - reproc=14.2.4=h295c915_1
+  - reproc-cpp=14.2.4=h295c915_1
+  - requests=2.31.0=py39h06a4308_1
+  - ruamel.yaml=0.17.21=py39h5eee18b_0
+  - ruamel.yaml.clib=0.2.6=py39h5eee18b_1
+  - setuptools=68.2.2=py39h06a4308_0
+  - sqlite=3.41.2=h5eee18b_0
+  - tk=8.6.12=h1ccaba5_0
+  - tqdm=4.65.0=py39hb070fc8_0
+  - tzdata=2024a=h04d1e81_0
+  - urllib3=2.1.0=py39h06a4308_1
+  - wheel=0.41.2=py39h06a4308_0
+  - xz=5.4.6=h5eee18b_0
+  - yaml=0.2.5=h7b6447c_0
+  - yaml-cpp=0.8.0=h6a678d5_0
+  - zlib=1.2.13=h5eee18b_0
+  - zstandard=0.19.0=py39h5eee18b_0
+  - zstd=1.5.5=hc292b87_0
+  - pip:
+      - blinker==1.8.2
+      - click==8.1.7
+      - flask==3.0.3
+      - flask-login==0.6.3
+      - flask-sqlalchemy==3.1.1
+      - flask-swagger==0.2.14
+      - flask-swagger-ui==4.11.1
+      - greenlet==3.0.3
+      - gunicorn==19.7.1
+      - httplib2==0.19.0
+      - importlib-metadata==7.1.0
+      - itsdangerous==2.2.0
+      - jinja2==3.1.4
+      - markupsafe==2.1.5
+      - pymysql==1.1.1
+      - pyparsing==2.4.7
+      - pyproject==1.3.1
+      - pyyaml==6.0.1
+      - sqlalchemy==2.0.30
+      - supervisor==4.2.5
+      - typing-extensions==4.12.0
+      - werkzeug==3.0.3
+      - zipp==3.19.0
+prefix: /home/opsuser/miniconda3

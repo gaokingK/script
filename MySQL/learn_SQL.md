@@ -3,6 +3,7 @@
 - 空有两种，一种是null，一种是字符串的空
   - 判空 要用is null 不能用=null
   - trim(column)=''
+- sql 使用or查询的时候，如果某行结果能匹配这两个查询条件，这行结果只会出现一次
 ### 子查询
 - link：https://blog.csdn.net/qq_44111805/article/details/124680208
 - ` select * from emp where sal>(select sal from emp where empno=100013) ;` 查看比100013号员工工资高的行
@@ -48,6 +49,9 @@ limit offset
 - 插入行
 ```
 insert into #列名不需要加双引号
+# INSERT INTO approval_process_nodes
+# process_id, node_name, approval_role, node_order, node_description)
+# VALUES(1, '测试审批', 3, 2, '新版本在测试环境中验证通过');
 ```
 - 将查询结果导入到表中(表存在且表结构相同)`INSERT INTO table2 SELECT * FROM table1 WHERE condition;`
 - 将查询结果导入到表中(表不存在) `CREATE TABLE school SELECT * FROM class`
@@ -84,7 +88,15 @@ select sal,deptno from emp group by sal;
 ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'go.emp.deptno' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
 ```
 - select sum(dept_no) from dept_manager group by dept_no; 结果列中全为0，因为通过dept_no分组后的列中就没有dept_no了，但是可以count(dept_no)
-
+- 聚合函数中也能使用其他关键字
+```sql
+select cluster_id, count(DISTINCT market_city_name_cn), count(*)  from store_info group by cluster_id;
+```
+### GROUP_CONCAT(column) 将多行数据合并为一个字符串
+```sql
+select cluster_id, count(DISTINCT market_city_name_cn), GROUP_CONCAT(DISTINCT market_city_name_cn) as b, count(*)  from store_info group by cluster_id;
+-- 上海,上海市,江西省,苏州市,长沙市 结果里某行中b的值
+```
 ### having
 - https://www.runoob.com/sql/sql-having.html
 - where子句中无法使用聚合函数，having子句可以让我们筛选分组后的数据
@@ -152,11 +164,23 @@ select count(*) from dept_manager join departments; //返回216=9*24
 - link
   - https://www.cnblogs.com/wanglijun/p/8916790.html
   - 圆圈代表表，一个圆圈全部有颜色代表所有行都在结果中，两个园圈重合的代表都满足连接条件的行，图中带颜色的表是代表该表在结果中出现, 而不是结果中相关表的内容是不是为空
+- 左连接时如果要过滤右表中的内容在连接前过滤，不要再连接后过滤，如果再连接后过滤会导致左表中部分字段消失（比如左表有值右表为空的行就会因为过滤条件被过滤掉）
+```sql
+SELECT count(DISTINCT store_info.market_city_name_cn) AS market_count, count(*) AS store_count, anon_1.id, anon_1.cluster_name, anon_1.env, anon_1.domain, anon_1.tags, anon_1.created_at, anon_1.sku, anon_1.rancher_cluster_id 
+FROM 
+	(SELECT store_cluster.id AS id, store_cluster.cluster_name AS cluster_name, store_cluster.env AS env, store_cluster.domain AS domain, store_cluster.tags AS tags, store_cluster.created_at AS created_at, store_cluster.sku AS sku, store_cluster.rancher_cluster_id AS rancher_cluster_id 
+	FROM store_cluster 
+	) AS anon_1 
+	left outer JOIN store_info ON store_info.cluster_id = anon_1.id and store_info.is_deleted = 0
+ GROUP BY anon_1.id
+
+
+```
 - MySQL（仅限MySQL）里面的CROSS JOIN可以用ON，结果跟INNER JOIN是一致的;JOIN 不加 ON 就是CROSS JOIN。JOIN 加ON 就是INNER JOIN, 用内连接，避免产生笛卡尔积，数据量大的时候，这种效率更高
 - cross join 笛卡尔积/ 交叉连接
   ```sql
   select * from tbl_A cross join tbl_B; # 显示的交叉连接
-  select * from tbl_A, tbl_B;# 隐式的交叉连接, 没有关键字
+  select * from tbl_A, tbl_B;# 隐式的交叉连接, 没有关键字是笛卡尔积
   select * from tbl_A join tbl_B; ON为空时也是同样效果;
   ```
   - cross join 也就是交叉连接，直接两个表求笛卡尔积，而在求笛卡尔积的基础上，又可以分为内连接 inner join/join 和外 outer join，内外连接都是先求笛卡尔积，然后在此基础上满足一定的条件，内连接是满足条件的那部分，而外连接则要加上不满足条件的那部分。

@@ -7,6 +7,7 @@
 - sqlalchemy.exc.ArgumentError: Mapper mapped class Record->record could not assemble any primary key columns for mapped table 'record'
   - 是因为这个record model 里没有声明主键
 # 声明基类
+
 - 如果所有的表都有的字段比如create_time 可以放在基类中，这样子类不用声明就会有这个字段
 - 主文档中已经简单介绍了声明一个映射类的方式, 但某些场景下, 可能还需要一些其他的方式, SQLAlchemy也提供了相应的方法
 - link

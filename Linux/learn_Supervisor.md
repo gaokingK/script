@@ -16,6 +16,9 @@
 - supervisorctl update 更新（supervisor的配置和程序的配置）
 - supervisorctl start xxx 应用程序文件中的配置名不是配置文件的名字
 - supervisorctl tail -f xxx 显示该应用的日志（是tail 该应用配置文件中stdout_logfile的值）
+## 错误
+- 错误分为supervisorctl的错误（比如配置文件错误等）和程序错误
+- 配置文件错误可以通过supervisorctl status 查看 考虑日志权限错误，是不是配置文件中user指定的用户没有相关日志文件的权限呢
 
 ## 应用程序配置文件解析
 ```cs
@@ -48,4 +51,16 @@ files = /path/to/file/*.ini /path/to/file/.conf  # 这样可以使用多个
 - supervisor.sock file missing TO：重启`systemctl restart supervisor or service supervisor restart`
 - supervisor.sock refused connection
     - 是因为supervisor没启动成功
-    - supervisord 
+    - supervisord -c /etc/supervisord.conf
+
+- supervisor: couldn't setuid to 0: Can't drop privilege as nonroot user
+  - 由于启动supervisor的用户和program配置的用户不是同一个用户导致，将两个用户配置成相同用户即可。
+
+- supervisor项目配置文件中的错误日志中打印：
+    supervisor: couldn't setuid to 0: Can't drop privilege as nonroot user
+    supervisor: child process was not spawned
+    - https://blog.csdn.net/qq_31493927/article/details/110231174
+    - 由于启动supervisor的用户和program配置的用户不是同一个用户导致，将两个用户配置成相同用户即可
+
+- 启动报错supervisord -c /etc/supervisord.conf     Error: Cannot open an HTTP server: socket.error reported errno.EACCES (13)
+  - sock文件权限问题

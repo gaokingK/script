@@ -86,7 +86,7 @@ Get-NetFirewallRule -Name *ssh* # OpenSSH-Server-In-TCP这个状态是 enabled
     - 将已经生成的公钥私钥对id_rsa.pub发送到其他的服务器上。这样登录到其他服务器上时就不用输入密码了
     ```shell
     # 命令
-    ssh-copy-id -i /root/.ssh/id_rsa.pub 192.168.137.129 
+    ssh-copy-id -i /root/.ssh/id_rsa.pub 192.168.137.129 # 需要指定用户，root@192.168.137.129 否则会把当前主机的用户
     # 或者手动
     ssh root@web-2 cat ~/.ssh/id_dsa.pub >> ~/.ssh/authorized_keys
     ```

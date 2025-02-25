@@ -747,6 +747,7 @@ du -sh -- */ | sort -h
    - 即使添加了 -rf 参数强制覆盖复制时,系统仍然会提示让你一个个的手工输入 y 确认复制,所添加的rf参数是不起作用的，因为cp命令被系统设置了别名，相当于cp=‘cp -i’。解决方法是使用原生的cp命令 `/bin/cp -rf xxxx`
    - 文件重命名 `mv "$file" "${file%.zip}"` # 将python-3.8.31.zip.063.zip去掉最后一个zip
      - ${file%.zip}：这是 bash 的字符串处理语法，用于删除文件名中的最后一个 .zip。
+     - 
 - `rename 's/\.zip$//' python-3.8.31.zip.063.zip`
   - `s/\.zip$//`：表示替换文件名中以 .zip 结尾的部分为空，即删除最后的 .zip。
 - 在所有的文件名后面加上后缀`find . -type f -exec rename 's/([^\/]+)$/$1.zip/' {} +`

@@ -115,3 +115,119 @@ abcDEF
 $ echo ${test,,}
 abcdef
 ```
+# ${}中可以进行的其他操作
+在 Bash 中，`${file%.zip}` 是一种参数扩展的语法，它用于从字符串变量（如文件名）中删除指定的后缀或前缀。Bash 提供了多种字符串操作的方式，以下是一些常见的用法：
+
+### 1. **删除文件名的后缀**
+
+- **`${file%.zip}`**：删除字符串中最右侧匹配的 `.zip` 后缀。
+  ```bash
+  file="example.zip"
+  echo "${file%.zip}"  # 输出 "example"
+  ```
+- **`${file%%.zip}`**：删除字符串中最左侧匹配的 `.zip` 后缀（如果字符串包含多个 `.zip`，则删除最左边的一个及其右边的所有内容）。
+
+  ```bash
+  file="example.zip.123.zip"
+  echo "${file%%.zip}"  # 输出 "example"
+  ```
+
+### 2. **删除文件名的前缀**
+
+- **`${file#prefix}`**：删除字符串中最左侧匹配的 `prefix` 前缀。
+
+  ```bash
+  file="prefix_example.txt"
+  echo "${file#prefix_}"  # 输出 "example.txt"
+  ```
+
+- **`${file##prefix}`**：删除字符串中最右侧匹配的 `prefix` 前缀（如果字符串包含多个 `prefix`，则删除最右边的一个及其左边的所有内容）。
+
+  ```bash
+  file="prefix_prefix_example.txt"
+  echo "${file##prefix_}"  # 输出 "example.txt"
+  ```
+
+### 3. **替换字符串中的内容**
+
+- **`${file/old/new}`**：替换字符串中的第一个匹配 `old` 的部分为 `new`。
+
+  ```bash
+  file="example.txt"
+  echo "${file/.txt/.md}"  # 输出 "example.md"
+  ```
+
+- **`${file//old/new}`**：替换字符串中所有匹配 `old` 的部分为 `new`。
+
+  ```bash
+  file="example.txt.txt"
+  echo "${file//.txt/.md}"  # 输出 "example.md.md"
+  ```
+
+### 4. **获取文件的路径、文件名和扩展名**
+
+- **获取文件的路径**（去掉文件名部分）：
+
+  ```bash
+  filepath="/home/user/example.txt"
+  echo "${filepath%/*}"  # 输出 "/home/user"
+  ```
+
+- **获取文件的文件名**（去掉路径部分）：
+
+  ```bash
+  echo "${filepath##*/}"  # 输出 "example.txt"
+  ```
+
+- **获取文件的扩展名**：
+
+  ```bash
+  echo "${filepath##*.}"  # 输出 "txt"
+  ```
+
+- **获取文件名不带扩展名**：
+
+  ```bash
+  filename="example.txt"
+  echo "${filename%.*}"  # 输出 "example"
+  ```
+
+### 5. **默认值和替代值**
+
+- **`${var:-default}`**：如果 `var` 未设置或为空，则使用 `default` 作为替代值。
+
+  ```bash
+  echo "${name:-John}"  # 如果 $name 未定义或为空，则输出 "John"
+  ```
+
+- **`${var:=default}`**：如果 `var` 未设置或为空，则将其设置为 `default` 并返回 `default`。
+
+  ```bash
+  echo "${name:=John}"  # 如果 $name 未定义或为空，则设置并输出 "John"
+  ```
+
+- **`${var:+alternate}`**：如果 `var` 已设置且非空，则使用 `alternate`，否则返回空值。
+
+  ```bash
+  name="Alice"
+  echo "${name:+Bob}"  # 输出 "Bob"
+  ```
+
+- **`${var:?error_message}`**：如果 `var` 未设置或为空，则显示 `error_message` 并退出脚本。
+
+  ```bash
+  echo "${name:?Variable not set}"  # 如果 $name 未定义或为空，则输出错误信息并退出
+  ```
+
+### 6. **获取字符串长度**
+
+- **`${#var}`**：获取字符串的长度。
+
+  ```bash
+  name="Alice"
+  echo "${#name}"  # 输出 "5"
+  ```
+
+### 总结
+
+Bash 的参数扩展提供了强大的字符串操作功能，特别适用于处理文件路径、文件名、前缀、后缀等操作。通过熟练掌握这些语法，你可以更高效地编写脚本来处理文件和目录操作。

@@ -84,6 +84,8 @@
             - 更加灵活，因为我们可把很多的数据转换成字典。
 ## TimedRotatingFileHandler
 - when: midnight [取值](https://docs.python.org/2/library/logging.handlers.html#logging.handlers.TimedRotatingFileHandler)
+## 查看所有的logger和禁用某个logger
+- 可以获取所有的日志记录器然后禁用
 
 ## 一个实际的配置
 """
@@ -194,6 +196,11 @@ def get_logger(log_filename, level=logging.INFO, when='D', back_count=0):
     logger.addHandler(fh)
     logger.addHandler(ch)
 
+
+
+
+
+
 """
 To: 一个实际的配置
 生产中会把很多配置写在一个文件里
@@ -250,6 +257,20 @@ import logging
 logging.basicConfig(level=logging.DEBUG)// 默认是error
 logging.info（）就可以用了
 """
+
+"""
+TO: 查看所有的logger和禁用某个logger
+"""
+def print_all_logger():
+    loggers = logging.Logger.manager.loggerDict
+
+    for name in loggers.keys():
+        print(name) # 输出的是logger的名字，只有模块加载了才会有这个logger
+    
+    # 禁用某个logger
+    log = logging.getLogger('werkzeug')
+    log.disabled = True
+
 if __name__ == '__main__':
     # logging_by_conf()
     logging_by_dict_yaml()

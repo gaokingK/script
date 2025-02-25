@@ -112,6 +112,9 @@ class UpperAttrMetaClass(type):
 当该类被调用的时候，python会做如下事情来先创建这个类
 1）如果这个类中有__metaclass__这个属性，Python会通过这个属性在内存中创建一个类对象
 2）如果没有__metaclass__这个属性，Python会在父类中寻找，找不到就在模块层次中寻找，如果都找不到，就用type来创建这个类对象
+注意：
+- 并不是需要创建后才能知道类的属性都有什么，而是文件初始化后就知道了，然后再拿这些属性去用元类建一个类对象
+- 类属性 类能访问到的资源包括：所有方法和类变量
 """
 class Foo(metaclass=UpperAttrMetaClass):
     bar = "bip"
@@ -138,15 +141,24 @@ class Chird(ObjectCreater2, ObjectCreater):
     pass
 
 """
-TO: 元类和继承
+TO: 元类和继承 
+python在执行时，会先初始化一下文件中定义的类，初始完后，就知道了这个类有哪些方法等其他属性，这时，会用这些知道的属性在元类中重新建一个类出来
 """
 class MyMeta(type):
     def __new__(cls, name, bases, dct):
+        print("__new__")
         dct['my_method'] = lambda self: "Hello"
         return super().__new__(cls, name, bases, dct)
 
 class MyClass(metaclass=MyMeta):
-    pass
+    bar = 5
+    def __init__(self):
+        self.bar = "hhh"
+        print("start init")
+
+    def my_method(self):
+        print(self.bar)
+        return "Hello   xxxxxx"
 
 class MyClass2(MyMeta):
     pass
@@ -154,10 +166,10 @@ class MyClass2(MyMeta):
 
 
 if __name__ == '__main__':
-    c = Chird()
+    # c = Chird()
     # debug_class_creator()
     # debug_show_metaclass()
     print("ok")
-    
-    MyClass()
-    MyClass2()
+    obj2 = MyClass()
+    print(obj2.my_method())
+    # print(MyClass2().my_method())
