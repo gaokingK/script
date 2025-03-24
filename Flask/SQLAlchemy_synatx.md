@@ -64,6 +64,14 @@ query = session.query(User.name, Post.id.label('post_id')) \
     .select_from(User) \
     .join(Post, User.id == Post.user_id)
 ```
+- 分页查询
+```py
+query_obj = query_obj.order_by(Ticket.id.desc())
+count = query_obj.count()
+paginated_query = query_obj.limit(page_size).offset((page - 1) * page_size)
+
+res = paginated_query.all()
+```
 - 如果查询两个表，那么每个元素是个元组，元组中是每个表对象
 - all()返回结果是一个列表, 每个元素是每行的查询结果可以使用.col_name或者[0]来访问（不管是查全表还是查某些列都可以）
 ```
@@ -215,6 +223,7 @@ version_list = db.query(module.version).group_by(module.version).order_by(module
 ### 函数
 ```py
 from sqlalchemy.sql import func
+from sqlalchemy import func, or_
 session.query(func.max(Article.read_num).scalar()
 # 计数
 db.session().query(StoreInfo.cluster_id, func.count(distinct(StoreInfo.market_city_name_cn)), func.count()).group_by(StoreInfo.cluster_id).all()

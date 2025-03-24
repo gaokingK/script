@@ -39,3 +39,28 @@
 - 由于多种原因，变量可以长期存在，例如传播性异常或模块自省可以使变量引用计数大于0。而且，变量可以是引用循环的一部分—启用垃圾回收的CPython大部分(但不是全部)中断此类循环，甚至只是周期性地中断
     - https://blog.csdn.net/weixin_39724009/article/details/110785744
 # 未读完link: https://blog.csdn.net/weixin_39724009/article/details/110785744?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_title~default-1.no_search_link&spm=1001.2101.3001.4242
+
+### 循环引用
+```py
+a = {"x": "1"}
+a={"a": a}
+# 这样会发生循环引用吗
+```
+- 不会，因为发生在创建对象的时候，而创建对象时，在 a = {"a": a} 这一行，a 并没有直接或间接引用自己，它只是创建了一个新的字典，将原来的 a 作为值。
+- 也就是说，原来的 a（即 {"x": "1"}）只是被包含在新的 a 里，它们是两个不同的对象。
+```py
+import gc
+print(gc.get_referrers(a))
+```
+![alt text](imgs/learn_python_GC.image.png)
+- 让字典的某个键指向自己，才会发生循环引用
+```py
+
+a = {}
+a["a"] = a  # 让 a["a"] 指向 a 自身
+print(gc.get_referrers(a))
+# 循环引用 会报错
+json.dumps(a)
+RecursionError: maximum recursion depth exceeded
+```
+![alt text](imgs/learn_python_GC.image-1.png)

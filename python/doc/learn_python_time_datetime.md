@@ -110,4 +110,9 @@ print(un_time)
 times = datetime.datetime.fromtimestamp(un_time)
 print(times)
 
+
+# 日期字符串转为时间戳
+timeArray = time.strptime("2024-01-01 16:00:00", "%Y-%m-%d %H:%M:%S")
+timeStamp = int(time.mktime(timeArray))
+print(timeStamp)
 ```

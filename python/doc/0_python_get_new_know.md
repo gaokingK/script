@@ -48,6 +48,14 @@ for i in b:
     b.remove(i)
     print(i)
 # 应该是可变对象去迭代，这个对象改变后循环的次数也会改变
+
+
+res2 = [3,2]
+for i in res2:
+    res2.append(i)
+Evaluating: res2 = [3,2]
+for i in res2:
+    res2.append(i) did not finish after 3.00 seconds.
 ```
 ### 偏函数
 - 偏函数是一种把正常函数参数固定后得到的函数对象，通过function.partial创建

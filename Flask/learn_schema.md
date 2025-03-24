@@ -19,6 +19,36 @@ def preprocess_data(self, data, **kwargs):
     if 'name' in data:
         data['name'] = data['name'].strip()  # 去除名字两端的空格
     return data
+
+class SomeSchem(Schema)
+    ob_ip = fields.String(required=True, validate=check_ob_ip)
+    ob_vip = fields.String(required=True, validate=validate_ip)
+
+    @pre_load
+    def add_env(self, data, **kwargs):
+        data["tags"] = list(filter(lambda d: d.get("value"), data["tags"]))
+        data["ob_ip"] = data["ob_ip"].replace(" ", "")
+        data["k8s_ip"] = data["k8s_ip"].replace(" ", "")
+        self.context = data
+        return data
+```
+### 当校验函数需要传递参数时
+```py
+# 1 从外部导入的函数可以使用偏函数或者lambda
+from functools import partial
+
+def check_ob_ip(ip, parm1):
+    pass
+
+ob_ip = fields.String(required=True, validate=partial(check_ob_ip, param1="value1")
+
+ob_ip = fields.String(required=True, validate=lambda x: check_ob_ip(x, param1="value1")
+
+# 可以再class里定义
+class SomeSchem(Schema)
+    ob_ip = fields.String(required=True)
+    def check_ob_ip(self, ip, parm1="value1"):
+        pass
 ```
 
 ### 限定字段可选值
@@ -113,7 +143,7 @@ class ServerGroupChangeTicketStartSchema(Schema):
 - 在Marshmallow中，exclude参数不会直接受到模型定义中字段是否必须（nullable=False）或者是否有默认值的影响。exclude参数的作用是在序列化和反序列化过程中明确排除某些字段，无论这些字段在模型中是否是必须的或者是否有默认值。
 - 使用only时 会受影响，即使字段没有出现在only中，但如果模型中该字段是不能为空的，并且没有默认值的，如果带校验对象中未出现该字段，仍会报错，可以通过load(partial=True) 但这样only中定义的字段确实了也不会报错
 
-## self.context 通常用于访问当前上下文的数据，但它默认并不会自动包含所有字段的值。要确保能够在验证过程中访问其他字段的值你可以在 load() 方法调用时显式地传递上下文。
+## self.context 通常用于访问当前上下文的数据，但它默认并不会自动包含所有字段的值。要确保能够在验证过程中访问其他字段的值你可以在 load() 方法调用时显式地传递上下文。或者写在pre_load里（见上面）
 ```py
 validated_data = schema.load(data, context=data)
 class RangeSchema(Schema):
@@ -126,6 +156,7 @@ class RangeSchema(Schema):
         min_value = self.context.get('min_value')
         if min_value is not None and max_value < min_value:
             raise ValidationError("max_value must be greater than or equal to min_value.")
+
 
 ```
 ## 校验两个参数的大小关系

@@ -130,7 +130,8 @@ column1 data_type[(data_length)],
 - 将查询结果导入到表中(表存在且表结构相同)`INSERT INTO table2 SELECT * FROM table1 WHERE condition;`
 - 将查询结果导入到表中(表不存在) `CREATE TABLE school SELECT * FROM class`
 - ## 重新创建表`create table tbl_name like tbl_name;`
-  
+- ## 删除表`drop table tbl_name`
+
 - ## 修改表 help # alter table;
 - ### mysql modify 和change区别 
   - 相同点是change和modify都可以修改表的定义，不同的是change后面需要写两次列名，不方便，但可以修改列名称。modify则不能修改列名称。
@@ -200,7 +201,6 @@ UPDATE products SET tags = JSON_REMOVE(tags, '$.brand') WHERE id = 1
 
 ```
 
-- ## 删除表`drop table tbl_name`
 # 共识
 - col_name (column name); tbl_name(table_name)\
 

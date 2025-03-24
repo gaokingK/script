@@ -1,4 +1,5 @@
 # vscode
+- 打开快捷键设置 ctrl+shift+p 输入shortcuts
 - 移动当前行 alt + up/down
 - alt + shift + up/down 复制当前行
 - ctrl + shift +up/down 多行编辑，移动光标 qq音乐会占用
