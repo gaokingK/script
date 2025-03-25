@@ -1,0 +1,10 @@
+1. 拉代码 git clone  https://gitlab-ex.mcd.com.cn/cn-jinweijiangod/networkconfserv.git
+2. 创建python虚拟环境
+cd /home/opsuser/full-trace-visualization-api/
+ 
+使用标准的虚拟环境 python3 -m venv  venv
+ 
+激活  source venv/bin/activate
+3. 安装python项目依赖
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+4. 启动项目 nohup python manager.py &
