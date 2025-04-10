@@ -1,3 +1,13 @@
+### 初始表
+```py
+from sqlalchemy.ext.declarative import declarative_base
+Base = declarative_base()
+engine = create_engine(app_config.SQLALCHEMY_DATABASE_URI, **app_config.SQLALCHEMY_ENGINE_OPTIONS)
+
+def init_db():
+    Base.metadata.create_all(engine)
+# 只能新建表，不能新建数据库，没有数据库会报错
+```
 ### 查看查询语句
 ```py
 # 获取编译后的查询 "literal_binds": True会将查询参数的值拼接到查询语句中
@@ -16,7 +26,9 @@ db.session.query(Note).filter(Note.title=='测试').delete()
 session.commit()
 ```
 # 插入 # 新增
-```
+```py
+db.add(price_obj) # add后不会有id，只能commit或者flush()后才有
+db.commit() 
 # 使用多的值插入或更新会报错吗 会的，初始化的时候就会报错 
 b=ServerClusterCreateTicketData(**new_data)
 Traceback (most recent call last):
@@ -36,10 +48,10 @@ sqlalchemy.exc.CompileError: Unconsumed column names: user_name
 ```py
 # 一般更新
 user_obj = db_session.query(User).filter(User.id == 179074001).update({"name":"XXX"})
-#  方法二
+#  方法二 
 ticket_data_obj = self.db.query(ServerClusterCreateTicketData).filter(ServerClusterCreateTicketData.ticket_id == ticket_id)
 new_data = server_cluster_patch_ticket_schema.dump(payload)
-ticket_data_obj.update(new_data)
+ticket_data_obj.update(new_data) # 注意ticket_data_obj是查询对象，不是ServerClusterCreateTicketData对象
 new_data = server_cluster_patch_ticket_schema.dump(payload)
 ticket_data_obj.update(new_data)
 # 方法三 引用更新，在原有的基础上更新

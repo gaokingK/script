@@ -48,10 +48,23 @@ limit offset
 ### insert
 - 插入行
 ```
+INSERT INTO users (name, email, age)
+VALUES 
+    ('张三', 'zhangsan@example.com', 25),
+    ('李四', 'lisi@example.com', 30)
+ON DUPLICATE KEY UPDATE age = VALUES(age);
+
 insert into #列名不需要加双引号
 # INSERT INTO approval_process_nodes
 # process_id, node_name, approval_role, node_order, node_description)
 # VALUES(1, '测试审批', 3, 2, '新版本在测试环境中验证通过');
+```
+- INSERT IGNORE 
+- ON DUPLICATE KEY UPDATE。如果有冲突（即数据已存在），执行 UPDATE 操作，更新指定的列。
+```sql
+INSERT INTO 表名 (列1, 列2, ...)
+VALUES (值1, 值2, ...)
+ON DUPLICATE KEY UPDATE 列1 = 新值1, 列2 = 新值2, ...;
 ```
 - 将查询结果导入到表中(表存在且表结构相同)`INSERT INTO table2 SELECT * FROM table1 WHERE condition;`
 - 将查询结果导入到表中(表不存在) `CREATE TABLE school SELECT * FROM class`
