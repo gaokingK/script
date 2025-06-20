@@ -63,6 +63,37 @@ def func2():
     # 当程序执行到上一行, 在命名空间中创建key b, 然后计算右边, 发现变量,然后按照变量查找顺序,在局部变量总找到b, 但是这个b只有key, 这种现象就是unboundnameerror
     # 所以原因就是和 a = a 是一样的
 
+"""
+# nonlocal 和 # global的使用
+global 用在函数内部 语法为global var_name 作为为修改全局变量vm_name（注意不加global也可以访问到全局变量只是不能修改，不能修改特指不可变类型，可变类型也可以修改）
+还有就是无论global var_name 中var_name是否在全局定义过都可以使用global var_name
+x = 10
+def change():
+    global x
+    x = 20
+change()
+print(x)  # 输出：20
+
+# 如果定义一个新的全局变量
+    global cmdb_vm_data
+    cmdb_vm_data = {}
+    
+你在嵌套函数中，想要修改外层函数（而非全局）里的变量，使用 nonlocal。
+nonlocal 只能用于“包住当前函数”的局部作用域中定义的变量。
+"""
+
+def outer():
+    x = 10
+    def inner():
+        nonlocal x
+        # 如果不加 nonlocal，那么 x = 20 也只是创建了 inner 局部作用域的 x。
+        x = 20
+    inner()
+    print(x)  # 输出：20
+
+def foo():
+    nonlocal x  # ❌ 报错：x 不是上层作用域变量
+    x = 1
 
 if __name__ == '__main__':
     func2()

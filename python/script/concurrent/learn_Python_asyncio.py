@@ -84,6 +84,12 @@ def async_copy(func):
         return generator
     return warpper
 
+"""
+TO: 在async函数中运行
+# 在异步环境中运行同步函数又不想阻塞主线程，可以用线程池包装：
+
+resp = await asyncio.to_thread(client.DescribeInstanceTypeConfigs, req)
+"""
 if __name__ == "__main__":
     b_time=time.time()
 

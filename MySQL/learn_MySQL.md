@@ -155,6 +155,7 @@ alter table Profession modify id int(11), drop primary key;
 ALTER  TABLE table_name RENAME TO new_table_name
 -- 删除某列
 ALTER TABLE users DROP COLUMN phone_number;
+ALTER TABLE user_info DROP COLUMN age, DROP COLUMN address;
 -- 新建列的时候添加外键
 alter table task add video_id int(11) after video_duration ,add constraint video_id foreign key (video_id) references video(id) on delete cascade on update no action;
 
@@ -318,3 +319,6 @@ use database_name 时可以不用加
   ```
   select a.name, b.name from Person a, Profession b where a.id=b.id;
   ```
+
+### 视图
+- 视图不存储数据，只是存储查询定义，视图通常是多个表的部分字段的一个查询定义，当你查询这个视图时，数据库会执行这个查询，并返回结果。视图的性能通常与直接查询表相当，但对于复杂查询，视图可能会提高性能。

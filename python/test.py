@@ -91,18 +91,33 @@ def test():
         a = 11111 * 1111
     return a
 
+def test2(payload={}):
+    if payload.get("a"):
+        print(payload["a"])
+
+def TestNotLineInit():
+    """测试没有下划线的init"""
+    def init(self):
+        self.a = "hhh"
+    
 if __name__ == "__main__":
-    u = User(id=12345, name='Michael', email='test@orm.org', password='my-pwd')
-    print(u.id)
-    from  multiprocessing import Process
-    p_list = []
-    for i in range(3):
-        p = Process(target=test, args=())
-        p_list.append(p)
-        p.start()
-    for p in p_list:
-        # p.start()
-        p.join()
+    testobj1 = TestNotLineInit()
+    payload={"a":1}
+    test2(payload)
+    payload={}
+    test2()
+    exit(0)
+    # u = User(id=12345, name='Michael', email='test@orm.org', password='my-pwd')
+    # print(u.id)
+    # from  multiprocessing import Process
+    # p_list = []
+    # for i in range(3):
+    #     p = Process(target=test, args=())
+    #     p_list.append(p)
+    #     p.start()
+    # for p in p_list:
+    #     # p.start()
+    #     p.join()
     
     # 创建MyList实例并调用add方法
     # l = MyList(3)

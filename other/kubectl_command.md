@@ -6,7 +6,13 @@ kubectl -n foundation get deployments | grep casea
 
 kubectl -n foundation edit deployment <deployment-name>
 或者 kubectl -n foundation apply -f deploy-manifest_dev.yaml
-
+### 修改同步脚本pod
+```sh
+# 查看所有的定时任务
+kubectl -n dc-cloud get cronjobs
+# 查看某个脚本的pod的yaml
+kubectl -n dc-cloud get cronjobs sync-virtual-machine -o yaml 
+```
 ### 重启 
 - 直接删除
 - kubectl -n foundation get pod |grep casea
@@ -37,7 +43,13 @@ MSYS_NO_PATHCONV=1 kubectl exec -it devops-cmdbserv-v0-78f6954fd6-r4sdh -n found
 export MSYS_NO_PATHCONV=1
 kubectl exec -it devops-cmdbserv-v0-78f6954fd6-r4sdh -n foundation -- /bin/bash
 ```
-
+### 推送镜像
+- 1 网页登录harbor
+- 2 docker login https://harbor.mcdchina.net/ 
+- 按提示输入用户名 密码是网站上查看出来的密码
+- docker push image-name
+- 假如新build时镜像名称保持一致， pod里有同名称的镜像缓存时就不会更新 也和imagePullPolicy: IfNotPresent有关系，改为always
+  
 ### 问题
 - error: error loading config file "C:/Users/d1806/.kube/devops-cmdbserv-v0.yaml": no kind "Deployment" is registered for version "apps/v1" in scheme "k8s.io/client-go/tools/clientcmd/api/latest/latest.go:50"
 export KUBECONFIG=~/.kube/devops-cmdbserv-v0.yaml 导入的文件格式不正确

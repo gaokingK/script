@@ -1,16 +1,272 @@
-### 0402
-- 详情页 虚拟机 网络设备
-- 资源概览
-- 数据采集 中间件 数据库 k8s 技术
-- 关联 虚拟机 物理机 ip子网 技术
+### TODO
+- office-vc 变成office
+- other改成未知
+- 集群分配优先根据满的
+- 实例规格加载速度
+- 0418
+- 资源概览首页内存/cpu/磁盘增加单位
+- 资源概览首页虚拟机维度为什么还有office-vc
+- 资源概览虚拟机创建时间散点图 改为所属账户
+- 0421
+- 改为redis和kafka的费用预估
+- 服务器预估修改
+- 0530
+- 把虚拟机Aws换成全大写的
+- 把虚拟机关机换成已关机
+
+### 0616-0629
+- 修改  redis 增加port字段   
+- 修改  redis 增加owner解析逻辑
+- 优化  审计日志访问ip获取逻辑
+- 修改  redis 中Qcloud改为Tencent Cloud
+
+- 发版sql整理
+- 优化虚拟机 ip 取数逻辑 解决某些虚拟机因 该IP地址无归属IP子网， 请添加包含该IP地址的IP子网并重新同步云账号 导致ip为空的问题
+- 需求  IP子网搜索字段定义
+
+- 修改 外部接口接口定义
+- 需求 网络设备详细信息接口定义
+
 - 
+- 404的原因是没有resourcce_uid
+- 需求 网络设备增加env/business_area字段
+- acl 接口 端口连接信息接口 问网络
+- 需求 门店集群信息接口改
+- 优化 虚拟机resource_uid获取逻辑，解决虚拟机详情404
+- 优化 Redis 可用区 Aws转为全大写
+### 0603-0615
+- 支持 手动新建一个字段不全的集群
+- 需求 新增网络设备获取可选值接口
+- 发版 发版提sql
+- 支持 修改一个云上集群属性
+- 联调 网络设备列表页联调
+
+- 需求变更
+Location 选择Putuo/Hedan 填写字段不变 去除sku 和OB IP 和K8s IP的数量校验
+Location 选择Ali/AWS 只去掉k8s IP输入框，新增LB ID 和K8s ID （两个都是必填的），并由K8s ID获取k8s IP
+- 排查门店信息通知case A 数据不同步问题 原因是门店修改集群里未添加
+- 支持 新建cn-wukong-pt-ack.mcd.cloud DNS解析工单
+- 优化 优化do_request公共方法异常处理
+- 需求 case A集群新增根据k8s_id获取k8s_ip功能；编辑工单时支持根据k8s_id重新获取k8s_ip
+- 需求 网络设备的我的功能
+- 测试发现 某些请求返回体太大导致审计日志报错，优化日志并修改表字段属性
+- 修改 修改网络设备owner取值逻辑，将u位为0的改为-1
+- 优化 owner筛选时改为大小写不敏感
+- 修改 网络设备增加出厂日期 u位为0改为-1
+- 修改 更新网络设备 设备类型映射
+- 修改 网络设备修改制造商取数逻辑
+- 需求 虚拟机中cloud=Qcloud的改为Tencent Cloud
+- 优化 删除网络设备无用代码
+- 优化 修改使用字符集搜索大小写改为使用ilike
+- 问题排查 排查虚拟机数据不是最新的 发现是镜像不是最新的
+- 修改 网络设备增加出厂日期字段
+- 需求 扩展腾讯云香港云服务器可选实例规格
+- 需求 云费用预估修改：     1. 将现有规格更换为最新一代规格族     2. 修改前端显示human_name
+- 需求 PAAS查询集群接口返回增加id/k8s_id/lb_id新字段
+- 需求 修复编辑工单时支持根据k8s_id未重新获取k8s_ip中bug
+
+完整性 
+对象存储 网络设备 项目 详情页
+
+
+### 0519-0601
+
+- 支持  pass接口优化，增加集群其他信息返回
+- 修复  修复虚拟机cloud取值为office的计算逻辑
+- 优化  虚拟机数据采集，修复存储容量/owner字段采集逻辑
+- 需求  新增审计日志接口定义
+- 支持  门店信息修改时，hd和prod的集群可以互相改
+- 测试发现 腾讯云rds实例规格无法获取
+- 优化  优化虚拟机数据采集中多次创建cmp链接
+- 测试发现 去除阿里云rds mssql 停售实例规格
+- 测试发现 阿里云rds mssql 某些实例不支持当前版本，修改默认版本并修复
+- 需求 新增rds/redis/ecs费用预估每种规格费用明细
+- 优化 优化cmdb全局异常处理
+- 需求 修改审计日志接口校验
+- 需求 审计日志 获取用户名
+- 需求 审计日志 增加自定义记录url 
+- 测试发现 运费预估 ecs镜像名称重复 增加去重
+- 优化 云服务器镜像关联实例规格
+- 需求 新增虚拟机筛选/导出接口
+- 需求 新增网络设备列表查询/筛选/导出接口
+- 需求 新增虚拟机字段可选值接口
+- 优化 虚拟机采集将状态改为中文
+- 优化 虚拟机采集将计费方式改为中文，云上资源宿主机应为空
+- 优化 修改虚拟机/网络设备参数校验模型
+- 支持 由于zone00网络设备调整，需要变更下生产boss平台zone00集群的vip地址  
+- 优化 云服务器费用预估返回接口数据名修改;云服务器规格按cpu/memory排序后返回
+- 优化 定价策略添加时去除空格
+- eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IjFtZlRzSjlZVmE1a2tRLXk5cmFJa1dZd1V0MCJ9.eyJhdWQiOiI4ZWJmOTRkZi1mMDA4LTQwZmMtODU3OS1mMWUyYTVjOTMzZTEiLCJpc3MiOiJodHRwczovL2xvZ2luLnBhcnRuZXIubWljcm9zb2Z0b25saW5lLmNuLzJiYmRkZjFkLTQwZDctNDBlMC1hZjQ3LTc5NTk1N2FiMGUwOS92Mi4wIiwiaWF0IjoxNzQ4MjI2Mzc1LCJuYmYiOjE3NDgyMjYzNzUsImV4cCI6MTc0ODI2OTg3NSwiYWlvIjoiQVZRQXEvOFBBQUFBc0lPZHhab2pqY0J0bVRGZnhkdVJBK3BXejdUbVkwcTRhVHlEazAreHk0VGxva0NzWWo5c2oralh2NjYrR1JqSklSVGJLYzFnNmJ6bElSSUhLUnNhaXdrR1A4bUZDcEpMbXhXbVZvWDBiMWM9IiwiYXpwIjoiOGViZjk0ZGYtZjAwOC00MGZjLTg1NzktZjFlMmE1YzkzM2UxIiwiYXpwYWNyIjoiMCIsImluX2NvcnAiOiJ0cnVlIiwiaXBhZGRyIjoiNTguMzguNDcuMTkwIiwibmFtZSI6ImppbndlaSBqaWFuZyIsIm9pZCI6ImE5OGU1YjlkLTFjYTAtNGY5Yy05ZWIxLWY1YTQxM2UzYTU0ZCIsInByZWZlcnJlZF91c2VybmFtZSI6ImppbndlaS5qaWFuZ29kQGNuLm1jZC5jb20iLCJyaCI6IjAuREFVQUhkLTlLOWRBNEVDdlIzbFpWNnNPQ2QtVXY0NEk4UHhBaFhueDRxWEpNLUVCQUdRLiIsInNjcCI6ImFjY2Vzc19hc191c2VyIiwic2lkIjoiMDA1MDRhYzktZDZmOC02OTUwLWY2YzctNWE4YTQ4MDcxYWVlIiwic3ViIjoiakxGZWZaVUdlc3RPVUgyei1HMGVKam5hNmcxaVlacWtIQmY1dXY2SzVhMCIsInRpZCI6IjJiYmRkZjFkLTQwZDctNDBlMC1hZjQ3LTc5NTk1N2FiMGUwOSIsInV0aSI6ImRmZE9iakt6QlV5WEktMVB6M01vQUEiLCJ2ZXIiOiIyLjAiLCJlbXBsb3llZU51bWJlciI6IlAwMDA4NTAwIiwiZW1wbG95ZWVUeXBlIjoiVmVuZG9yIn0.ZWRUlHdAb_SpR8kYtzb72_RcWJqeGXVBye9wv1galnjizLIHpr6kvxlVXfFUtY8iIGZxa8LLmzdPzXlGdbL-ldZkLOq4IB20CnLCF8AaiedLxpJ1iYJvqooXBL1NbRZL-0NRvabMkky51JjTM3t2QUkFGvcnSATG3xc8bjlgU76dzkXkyQV7kaC0leH0qAGo4t_I05Owt17Ov2rLleutUTD5y8kZkVwkJrHfFYXjrup2D0D2t-f-5Pbsw3qkW45CXSapC5gT8fGTE8BjBzt8A0yT2tq1IZoWaik_4X8QQSRc4usd0iuB3q-7uvHYNywGNiMt3nhJchjycnsB58GdHA.TWNELUJPU1M7UEM
+- 
+eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjbi1qaW53ZWlqaWFuZ29kIiwibmlja25hbWUiOiLokosq5LyfIiwiZWlkIjoiIiwiZW1wbG95ZWVOdW1iZXIiOiIxODgzNzI1NTM1MCIsInNpdGUiOiJNY0QtQk9TUyIsInRlcm1pbmFsIjoiUEMiLCJsb2dpblRpbWUiOiIyMDI1LTA1LTI2IDEwOjA4OjUxIiwidXNlclR5cGUiOiIxIiwiZXhwIjoxNzQ4MjMyNTMxfQ.Bxlnya2wtEg6O8xzpTWCJVANUz7rWjr5QbZXVVIQeQkv_bfUHW3N5UyryZMlpdbugh8il5X-uC_7cEcDtFX8xQ
+### 0506 - 0518
+- 一些问题
+  - 需求预估准确的问题
+  - 修改的内容涉及到别人做过需求的问题 （通知人）
+  - 记录 阿里云各种资源共用的接口数据结构差别不大 方法基本可以复用 但腾讯云每个资源都有单独的接口 数据结构上有很大的差别 而且在获取当前的默认参数比如售卖区 是否有默认的版本上也有很大的差别 
+  - 周末加班
+  - 数据结构和接口需要综合考虑两朵云的四种数据比较耗时
+  - 要看参数有哪些取值，是什么意思 哪些是自己需要的
+- 修复 虚拟机详情中磁盘挂载和状态字段计算逻辑
+- 修改 默认模糊查询逻辑修改
+- 修改 虚拟机详情接口数据名 更新虚拟机数据采集逻辑
+- 修复 cmp连不上导致主程序启动失败 修改cmp初始化
+- 修改 增加虚拟机关联关系数据，并移除宿主机中其他虚拟机的数据
+- 修改 虚拟机详情数据结构和资源检索一致
+- 需求  新增虚拟机详情信息获取接口安全组/磁盘
+- 需求 更新虚拟机详情查询接口
+- 修改 更新虚拟机运行状态映射
+- 优化 腾讯云rds实例规格获取接口 按human_name排序
+- 优化 阿里云rds实例规格获取接口，去重同class_group规格，并按human_name排序
+- 优化 阿里云ecs费用预估异常处理
+- 需求 新增腾讯云rds mariadb费用预估
+- 需求 新增腾讯云rds pgsql费用预估
+- 需求 新增腾讯云rds sqlserver费用预估
+- 优化 优化阿里云rds mysql资源规格获取， 只按照cpu/memory去重
+- 优化 优化阿里云rds资源规格显示名称
+- 优化 优化阿里云rds资源规格获取过滤
+- 优化 优化阿里云rds参数获取逻辑
+- 修改 修改rds费用预估时前端数据为json格式
+- 需求 新增腾讯rds mysql规格参数获取/可用zone获取/价格预估接口
+- 修改 修改rds询价数据结构
+- 测试发现 阿里云ecs ecs.xn4.small不支持ESSD云盘 修复
+- 测试发现 阿里云ecsecs.c8y.small指定image报错 修复
+- 优化 cmp 连接失败会阻塞程序 修复
+- 协作 secret_key 加密
+- 修改 修改返回信息和资源检索一样数据结构
+- 优化 某些属性为null会校验失败 修复
+- 优化 虚拟机多种状态映射中文
+- 问题 生产虚拟机采集数据失败的问题
+- 需求 阿里云rds费用预估pgsql/mssql/mariadb费用预估
+- 需求 阿里云mysql规格参数获取
+- 需求 阿里云mysql费用预估
+- 需求 腾讯云mysql规格参数获取
+- 需求 腾讯云mysql费用预估
+- 优化 测试发现腾讯云mysql费用预估时使用默认zone和默认版本出错频率太多 改为动态查询可用zone和支持verison 
+- 修改 虚拟机和物理机的关联关系不完美
+- 需求 阿里云RDS定价
+  - https://next.api.aliyun.com/api/Rds/2014-08-15/DescribePrice?spm=api-workbench.api_explorer.0.0.22e45f24aEoFjJ
+  - 地区（上海和香港）
+  - 购买时长 1个月
+  - zone (不暴露 查询未售空的接口)
+  - 资源类型（MySQL SQLServer PostgreSQL MariaDB)
+  - 实例类型（主实例/只读实例；maria DB只有主实例）需要获取两次
+  - 系列（集群版/高可用版/基础版）mariaDB只有高可用 SQL server只有基础版
+  - 实例规格 由上面三个参数确定可选的实例规格列表 映射成类似 2C8GB（独享套餐）mssql.x4.medium.s1 的里列表
+  - 数据库版本 因为SQLServer的会影响价格
+  - 存储类型（不暴漏）
+  - 存储容量（20-64000）步长5
+- 阿里云RDS定价最终
+  - 地区（上海和香港）
+  - 资源类型（MySQL SQLServer PostgreSQL MariaDB)
+  - 实例类型（主实例/只读实例；maria DB只有主实例）
+  - 系列（集群版/高可用版/基础版）mariaDB只有高可用 SQL server只有基础版
+  - 实例规格 类似 类似2C8G/4C16G的列表
+  - 数据库版本 因为SQLServer的会影响价格
+  - 存储容量（20-64000）步长10
+
+- 腾讯云RDS定价
+- 腾讯云RDS定价最终
+  - 地区（上海和香港）
+  - 资源类型（MySQL SQLServer PostgreSQL MariaDB)
+  - 实例规格 类似 类似2C8G/4C16G的列表
+  - 存储容量（25-3000）步长10 
+
+- mysql
+  - 地域
+  - zone(不暴露 查询未售空的接口)
+  - 购买时长 1个月
+  - 内存 cpu（需要动态获取）类似2C8G/4C16G的组合列表 不同的组合可能对应单节点/双节点/三节点 无法通过接口分辨
+  - 存储容量（25-3000）步长5 最大值和最小值与机器型号有关
+  - 磁盘类型 不同的实例规格支持的类型不一样 不暴露
+- PostgreSQL
+  - 地域
+  - 购买时长 1个月
+  - 购买数量
+  - 架构（只有双机高可用）
+  - zone(不暴露 查询未售空的接口)
+  - 内存cpu 类似2C8G/4C16G的组合列表
+  - 存储容量 （10-8000）步长10 最大值与机器型号有关
+- SQLServer
+  - 地域
+  - 购买时长 1个月
+  - 购买数量
+  - 类型（只有独享型）
+  - zone(不暴露 查询未售空的接口)
+  - 内存cpu 类似2C8G/4C16G的组合列表
+  - 存储容量 （10-8000）步长10 最大值与机器型号有关
+- MariaDB（无询价接口，提供了计价规则）
+  - 地域
+  - 购买时长 1个月
+  - 购买数量
+  - 内存大小 
+  - 存储空间大小
+- 相同参数
+  - 地区（上海和香港）
+  - 资源类型（MySQL SQLServer PostgreSQL MariaDB)
+  - 实例规格 类似 类似2C8G/4C16G的列表
+  - 存储容量（20-64000）步长10
+  - 实例数量
+
+- 阿里云RDS独有参数
+  - 实例类型（主实例/只读实例；maria DB只有主实例）
+  - 系列（集群版/高可用版/基础版）mariaDB只有高可用 SQL server只有基础版
+  - 数据库版本 因为SQLServer的会影响价格
+
+### 0421-0430
+- 排查 域名采集是不是只采集A记录和CNAME的 
+- SELECT SUM(cnt) FROM ( SELECT COUNT(*) AS cnt  FROM third_domain td   GROUP BY td.dns_value   HAVING COUNT(*) > 1) AS sub; 
+- 集群新增ob_user_name属性
+- alter table server_cluster_create_ticket_data add column ob_user_name varchar(128) not null default "";
+- alter table store_cluster  add column ob_user_name varchar(128) not null default "";
+- 再次整理腾讯云和阿里云常用主机
+- {'ecs.c6.8xlarge': 99, 'ecs.c6.4xlarge': 35, 'ecs.c7.xlarge': 23, 'ecs.g6.8xlarge': 10, 'ecs.g7.8xlarge': 6, 'ecs.g6.4xlarge': 5, 'ecs.c7.8xlarge': 3, 'ecs.c6.large': 3, 'ecs.c6.2xlarge': 2, 'ecs.c8y.small': 2, 'ecs.g6.xlarge': 2, 'ecs.gn7i-c8g1.2xlarge': 2, 'ecs.c6.xlarge': 2, 'ecs.gn7i-c16g1.4xlarge': 1, 'ecs.s6-c1m2.small': 1, 'ecs.c7.large': 1, 'GN10Xp.2XLARGE40': 1, 'ecs.xn4.small': 1, 'ecs.g7.16xlarge': 1, 'ecs.g5.16xlarge': 1, 'ecs.c5.large': 1, 'ecs.s6-c1m1.small': 1}
+- {'S5.LARGE8': 173, 'S5.4XLARGE32': 141, 'S6.8XLARGE64': 88, 'S5.2XLARGE16': 88, 'S5.8XLARGE64': 82, 'S5.MEDIUM4': 78, 'S6.LARGE8': 41, 'S5.4XLARGE64': 28, 'S4.LARGE8': 19, 'S5.LARGE16': 19, 'S5.2XLARGE32': 17, 'S4.4XLARGE32': 15, 'D2.4XLARGE64': 13, 'S6.2XLARGE16': 12, 'IT5.21XLARGE320': 11, 'S4.MEDIUM4': 11, 'S6.4XLARGE32': 10, 'S4.2XLARGE32': 10, 'IT3.8XLARGE128': 10, 'S3.MEDIUM4': 8, 'S5.MEDIUM2': 7, 'M5.LARGE32': 7, 'SA3.4XLARGE64': 6, 'S4.2XLARGE16': 6, 'IT5.16XLARGE256': 6, 'S5.8XLARGE128': 5, 'S4.LARGE16': 5, 'SA3.8XLARGE64': 4, 'S3.LARGE8': 4, 'S3.3XLARGE24': 3, 'SA2.4XLARGE64': 3, 'S5.MEDIUM8': 3, 'MA2.LARGE32': 3, 'IT5.8XLARGE128': 3, 'IT5.4XLARGE64': 3, 'S4.SMALL2': 3, 'M4.2XLARGE64': 3, 'S6.2XLARGE32': 2, 'SA3.4XLARGE32': 2, 'S3.2XLARGE16': 2, 'S5.SMALL2': 2, 'S3.MEDIUM8': 2, 'S6.MEDIUM4': 1, 'S4.SMALL1': 1, '实例规格': 1, 'ITA5.16XLARGE256': 1, 'GN7.2XLARGE32': 1, 'S5.16XLARGE256': 1, 'M6.31MEDIUM470': 1, 'GN10X.2XLARGE40': 1, 'S3.16XLARGE256': 1, 'S2.MEDIUM2': 1, 'S3.4XLARGE32': 1}
+- 修改 集群管理图表页标识分配了集群却没有市场的门店
+- 修改 云服务器接口改为异步加速
+- 需求 云服务器region_id 修改为可变
+- 整理实例对应的cpu内存
+{'S4.2XLARGE32': '8C32G (S4.2XLARGE32)', 'S6.2XLARGE32': '8C32G (S6.2XLARGE32)', 'S5.MEDIUM8': '2C8G (S5.MEDIUM8)', 'MA2.LARGE32': '4C32G (MA2.LARGE32)', 'S5.8XLARGE64': '32C64G (S5.8XLARGE64)', 'S5.8XLARGE128': '32C128G (S5.8XLARGE128)', 'SA2.4XLARGE64': '16C64G (SA2.4XLARGE64)', 'S5.2XLARGE32': '8C32G (S5.2XLARGE32)', 'S5.MEDIUM2': '2C2G (S5.MEDIUM2)', 'S6.8XLARGE64': '32C64G (S6.8XLARGE64)', 'S5.SMALL2': '1C2G (S5.SMALL2)', 'ITA5.16XLARGE256': '64C256G (ITA5.16XLARGE256)', 'S4.4XLARGE32': '16C32G (S4.4XLARGE32)', 'IT5.21XLARGE320': '84C320G (IT5.21XLARGE320)', 'S4.MEDIUM4': '2C4G (S4.MEDIUM4)', 'GN10X.2XLARGE40': '8C40G (GN10X.2XLARGE40)', 'GN7.2XLARGE32': '8C32G (GN7.2XLARGE32)', 'S6.2XLARGE16': '8C16G (S6.2XLARGE16)', 'IT5.16XLARGE256': '64C256G (IT5.16XLARGE256)', 'IT5.8XLARGE128': '32C128G (IT5.8XLARGE128)', 'S3.2XLARGE16': '8C16G (S3.2XLARGE16)', 'S3.3XLARGE24': '12C24G (S3.3XLARGE24)', 'S3.MEDIUM4': '2C4G (S3.MEDIUM4)', 'S6.4XLARGE32': '16C32G (S6.4XLARGE32)', 'S6.MEDIUM4': '2C4G (S6.MEDIUM4)', 'S4.LARGE16': '4C16G (S4.LARGE16)', 'S3.4XLARGE32': '16C32G (S3.4XLARGE32)', 'GN10Xp.2XLARGE40': '10C40G (GN10Xp.2XLARGE40)', 'S3.MEDIUM8': '2C8G (S3.MEDIUM8)', 'S4.LARGE8': '4C8G (S4.LARGE8)', 'S5.MEDIUM4': '2C4G (S5.MEDIUM4)', 'S3.LARGE8': '4C8G (S3.LARGE8)', 'S5.4XLARGE64': '16C64G (S5.4XLARGE64)', 'M4.2XLARGE64': '8C64G (M4.2XLARGE64)', 'S5.4XLARGE32': '16C32G (S5.4XLARGE32)', 'S5.16XLARGE256': '64C256G (S5.16XLARGE256)', 'S4.2XLARGE16': '8C16G (S4.2XLARGE16)', 'S5.LARGE16': '4C16G (S5.LARGE16)', 'S5.LARGE8': '4C8G (S5.LARGE8)', 'S6.LARGE8': '4C8G (S6.LARGE8)', 'S3.16XLARGE256': '64C256G (S3.16XLARGE256)', 'SA3.4XLARGE32': '16C32G (SA3.4XLARGE32)', 'S4.SMALL2': '1C2G (S4.SMALL2)', 'M6.31MEDIUM470': '62C470G (M6.31MEDIUM470)', 'S2.MEDIUM2': '2C2G (S2.MEDIUM2)', 'SA3.4XLARGE64': '16C64G (SA3.4XLARGE64)', 'IT5.4XLARGE64': '16C64G (IT5.4XLARGE64)', 'S4.SMALL1': '1C1G (S4.SMALL1)', 'M5.LARGE32': '4C32G (M5.LARGE32)', 'S5.2XLARGE16': '8C16G (S5.2XLARGE16)', 'SA3.8XLARGE64': '32C64G (SA3.8XLARGE64)'}
+{'ecs.c7.8xlarge': '32C64G (ecs.c7.8xlarge)', 'ecs.c7.large': '2C4G (ecs.c7.large)', 'ecs.c6.4xlarge': '16C32G (ecs.c6.4xlarge)', 'ecs.s6-c1m2.small': '1C2G (ecs.s6-c1m2.small)', 'ecs.s6-c1m1.small': '1C1G (ecs.s6-c1m1.small)', 'ecs.c7.xlarge': '4C8G (ecs.c7.xlarge)', 'ecs.c6.xlarge': '4C8G (ecs.c6.xlarge)', 'ecs.c6.8xlarge': '32C64G (ecs.c6.8xlarge)', 'ecs.c5.large': '2C4G (ecs.c5.large)', 'ecs.c6.large': '2C4G (ecs.c6.large)', 'ecs.g6.4xlarge': '16C64G (ecs.g6.4xlarge)', 'ecs.g5.16xlarge': '64C256G (ecs.g5.16xlarge)', 'ecs.c6.2xlarge': '8C16G (ecs.c6.2xlarge)', 'ecs.c8y.small': '1C2G (ecs.c8y.small)', 'ecs.g6.8xlarge': '32C128G (ecs.g6.8xlarge)', 'ecs.g7.8xlarge': '32C128G (ecs.g7.8xlarge)', 'ecs.gn7i-c16g1.4xlarge': '16C60G (ecs.gn7i-c16g1.4xlarge)', 'ecs.g6.xlarge': '4C16G (ecs.g6.xlarge)', 'ecs.gn7i-c8g1.2xlarge': '8C30G (ecs.gn7i-c8g1.2xlarge)', 'ecs.g7.16xlarge': '64C256G (ecs.g7.16xlarge)', 'ecs.xn4.small': '1C1G (ecs.xn4.small)'}
+- 阿里
+['16C32G (ecs.c6.4xlarge) 35', '16C60G (ecs.gn7i-c16g1.4xlarge) 1', '16C64G (ecs.g6.4xlarge) 5', '1C1G (ecs.s6-c1m1.small) 1', '1C1G (ecs.xn4.small) 1', '1C2G (ecs.c8y.small) 2', '1C2G (ecs.s6-c1m2.small) 1', '2C4G (ecs.c5.large) 1', '2C4G (ecs.c6.large) 3', '2C4G (ecs.c7.large) 1', '32C128G (ecs.g6.8xlarge) 10', '32C128G (ecs.g7.8xlarge) 6', '32C64G (ecs.c6.8xlarge) 99', '32C64G (ecs.c7.8xlarge) 3', '4C16G (ecs.g6.xlarge) 2', '4C8G (ecs.c6.xlarge) 2', '4C8G (ecs.c7.xlarge) 23', '64C256G (ecs.g5.16xlarge) 1', '64C256G (ecs.g7.16xlarge) 1', '8C16G (ecs.c6.2xlarge) 2', '8C30G (ecs.gn7i-c8g1.2xlarge) 2']
+- 腾讯
+['10C40G (GN10Xp.2XLARGE40) None', '12C24G (S3.3XLARGE24) 3', '16C32G (S3.4XLARGE32) 1', '16C32G (S4.4XLARGE32) 15', '16C32G (S5.4XLARGE32) 141', '16C32G (S6.4XLARGE32) 10', '16C32G (SA3.4XLARGE32) 2', '16C64G (IT5.4XLARGE64) 3', '16C64G (S5.4XLARGE64) 28', '16C64G (SA2.4XLARGE64) 3', '16C64G (SA3.4XLARGE64) 6', '1C1G (S4.SMALL1) 1', '1C2G (S4.SMALL2) 3', '1C2G (S5.SMALL2) 2', '2C2G (S2.MEDIUM2) 1', '2C2G (S5.MEDIUM2) 7', '2C4G (S3.MEDIUM4) 8', '2C4G (S4.MEDIUM4) 11', '2C4G (S5.MEDIUM4) 78', '2C4G (S6.MEDIUM4) 1', '2C8G (S3.MEDIUM8) 2', '2C8G (S5.MEDIUM8) 3', '32C128G (IT5.8XLARGE128) 3', '32C128G (S5.8XLARGE128) 5', '32C64G (S5.8XLARGE64) 82', '32C64G (S6.8XLARGE64) 88', '32C64G (SA3.8XLARGE64) 4', '4C16G (S4.LARGE16) 5', '4C16G (S5.LARGE16) 19', '4C32G (M5.LARGE32) 7', '4C32G (MA2.LARGE32) 3', '4C8G (S3.LARGE8) 4', '4C8G (S4.LARGE8) 19', '4C8G (S5.LARGE8) 173', '4C8G (S6.LARGE8) 41', '62C470G (M6.31MEDIUM470) 1', '64C256G (IT5.16XLARGE256) 6', '64C256G (ITA5.16XLARGE256) 1', '64C256G (S3.16XLARGE256) 1', '64C256G (S5.16XLARGE256) 1', '84C320G (IT5.21XLARGE320) 11', '8C16G (S3.2XLARGE16) 2', '8C16G (S4.2XLARGE16) 6', '8C16G (S5.2XLARGE16) 88', '8C16G (S6.2XLARGE16) 12', '8C32G (GN7.2XLARGE32) 1', '8C32G (S4.2XLARGE32) 10', '8C32G (S5.2XLARGE32) 17', '8C32G (S6.2XLARGE32) 2', '8C40G (GN10X.2XLARGE40) 1', '8C64G (M4.2XLARGE64) 3']
+- 支持 rancher检查集群失败告警支持
+- 需求 阿里云redis预估时需要将参数转为不同的实例规格id
+- 需求 阿里云redis参数枚举
+- 需求 prod环境：新增修改能选择范围[3+3,5+3,9+6];dev/ut/pt/sit/hd新增时能选择[3+3,5+3],修改时能选择[3+3,5+3]其中之前是9+6的话可以改成9+6，
+### 0407-0420
+- 修改 资源概览首页虚拟机维度修改，去掉office-vc
+- 联调 云服务器询价
+- 修改 修改云服务器数据结构
+- 测试发现 云服务询价 某些实例规格不支持高效云盘 修复
+- 测试发现 云服务询价 磁盘大小无效会请求失败 修复
+- 测试发现 阿里云某些可用区可用实例类型 获取不准确导致请求失败 修复
+- 测试发现 腾讯云image接口获取到的有重复的image，修复
+- 修改 腾讯云接口不返回磁盘单价，了解磁盘定价规则并自定义计算
+- 修改 向井伟要数据 云服务器镜像和实例规格，过滤不需要的类型
+- 修改 资源定价新增时增加资源类型/环境/宿主环境/云/idc重复校验
+- 修改 资源定价新增时增加资源字段小写和单位大写的校验
+- 修改 费用预估 费用为0的不回显
+- 需求 新增虚拟机概览接口
+- 需求 Redis 采集/查询/单元测试
+- 需求 LB费用预估
+- 
+- 修改 虚拟机采集解析逻辑虚拟机cloud_account为office-vc 将cloud映射为office 
+- 修改 腾讯云磁盘价格计算逻辑 接口不反回磁盘单价 自定义
+- 修改 网络设备缺失数据 修改网络设备解析逻辑适配云账户字段变更
+- 支持 给iaas新建aws集群
+- 修改 删除虚拟机data_center\machine_room字段 
+- 修改 新增虚拟机、网络设备、项目、域名同步脚本
+- 修改 格式化项目标签字符串
+- 整理和讨论 从cmp上拉取负载均衡往期数据 编写脚本进行数据清洗和分析 整理出价格分布的图表
 
 ### 问题记录
 - 检查生产门店分配集群的数据
 - 更换wukong chardet包为支持许可证的开源软件
 - 处理puppet配置修改工单申请权限的bug
 
-- 给iaas新建aws集群
 - 项目表字段清洗，去掉多余的字符 
 - 如果有异常的事务未回滚，会影响别的请求吗
 

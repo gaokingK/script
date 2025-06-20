@@ -17,6 +17,7 @@ Quad/duallit/solo sabre auto board
 ## 准备
 ### win
 - 下载 https://github.com/Genymobile/scrcpy/blob/master/README.md#prerequisites
+- 是下载release文件 不是clone库
 - 解压文件，打开open_a_terminal_here.bat
 - 打开usb调试，输入scrapy.exe，手机上的弹窗点击同意
 - 投屏就出现了
@@ -31,6 +32,7 @@ Quad/duallit/solo sabre auto board
 - 鼠标右键打开屏幕
 - Ctrl + P 电源键
 - scrcpy.exe -S --prefer-text -m 800
+-  scrcpy --keyboard=uhid -S -m 800 可以输入中文 -S让手机屏幕熄灭
 
 ## 问题
 - Device unauthorized

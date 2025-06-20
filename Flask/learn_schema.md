@@ -67,12 +67,14 @@ class MySchema(Schema):
 class ServerClusterPatchTicketSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = ServerClusterCreateTicketData
+        unknown = RAISE # 默认值 
     user_name = fields.String(required=True)
 server_cluster_patch_ticket_schema = ServerClusterPatchTicketSchema()
 # 获取数据 也是字典格式
 payload = request.get_json()
 data = server_cluster_patch_ticket_schema.load(payload)
-# 如果有字段定义required=true 但是payload里没有该字段会报错，如果payload有校验类中没有定义的字段也会报错
+# 如果有字段定义required=true 但是payload里没有该字段会报错，
+# 如果payload有校验类中没有定义的字段也会报错(unknown=EXCLUDE就不会报错)
 
 序列化
 data = {"xxx": "xxx", ...}
@@ -97,6 +99,9 @@ class PuppetSslDeleteTicketCreateSchema(SQLAlchemyAutoSchema):
     process_name = fields.String(required=True) 
     user_name = fields.String(required=True)
     # 表中的列-exclude+这里声明的就是允许出现的，如果出现其他的就会报错
+    # 如果表中的列不必填这里就不用另外声明了
+    id = fields.String()  # id是StoreServerTicketData的列，那么这行代码就是多余的，写不写就一个样子
+
 class ClusterCreateTicketSchema(SQLAlchemyAutoSchema):
     class Meta:
         # 如果是从模型为基础生成的校验类，那么在meta中就完成了对模型字段的修改， 外面的字段应该和表没关系
@@ -183,5 +188,12 @@ class MySchema(Schema):
         })
     ))
     
+```
+
+### 自定义校验错误提示和字段名
+```py
+if sku == "5+3":
+    if len(ip_list) != 5:
+        raise ValidationError(message={"k8s_ip": "sku为5+3时，k8s_ip应包含使用英文逗号分隔的5个不同ip"})
 ```
 

@@ -7,6 +7,13 @@
 - 学习新东西时先记下来，再理解。先小等到后面再补充，刚开始就像了解的差不多有点浪费时间
 - 最开始接触新东西时会遇到一个难以理解的东西，但理解了后又不会体现在文档里，比如git虽然是版本管理工具，但不会记录每个修改，只会记录已经commit的
 - 想搜索看车机怎么将蓝牙作为接收端的，最后发现搜安卓蓝牙协议栈可以，这种关键字模式可以用在其他地方
+### 日志的打印不应该阻塞主程序，防止取值错误什么的让主要逻辑已经成功的函数失败
+```py
+capex_tips_parts = f"\n\t虚拟机：\n\t\tcpu/内存：{res['cpu_mem']['price']}\n\t\t存储：{res['storage']['price']}\n\t\t网络设备：{res['network_device']['price']}"
+
+f"\n\t\t网络设备：{res['network_device']['price']}",KeyError: 'price'
+```
+### 常量应该建立一个map 防止前端显示变得话后端还要改（比如hd前端对应得可能是carry)，还应该把这个映射放到config中(防止往里新加一个环境)
 ### 快捷键都有哪些可以在帮助里面看
 ### 假如一个变量要在两个地方用，两个地方有冲突的地方，比如这里一个地方只能判断是不是空，而没有定义就会报错，另一个地方只能判断是否定义
 - 实际上都是判断这个变量是否有效，就可以把该变量复制一下，一个地方判断是不是空，一个地方判读是不是有值
@@ -16,6 +23,7 @@
 - 要知道怎么部署环境，工作目录的结构是怎样的，包怎么安的这种
 
 ### 排错
+- 接口出现不对一定要看是不是参数/url出错了没有
 - shell 脚本出错看看是不是换行符
 - 认真看日志，是不是看错了导致认为出错的地方没错
 - 排除不可能的地方，剩下的地方就是可疑的，以为用#注释了py文件，但是其实这个py文件先用jinjia解析了一遍，所以#号注释是无效 的，要用jinjia的注释方式    
@@ -32,6 +40,60 @@
 - celery启动不起来，启动命令是从run.sh中找的，没有想到看可能是window和linux的架构不一样导致的
 - mysql连接不上不报错也会使请求无响应
   - 关闭一些会话 不知道为啥就好了
+- 新增加一个值的话，也会新增一个取数的逻辑对吧，但你会考虑如果取不到数的情况吗
+```py
+if payload.get("data_disk_size"):
+    total_s = sum(payload["data_disk_size"])
+    res["data_disk"] = {
+        "discount": 100, # 20.0代表2折
+        "origin_price": total_s * 1 * ins_num, # 原价
+        "discount_price": total_s * 1 * ins_num
+    }
+    res["instance"]["discount_price"] -= res["data_disk"]["discount_price"]
+else:
+    res["data_disk"] = {
+        "discount": 100, # 20.0代表2折
+        "origin_price": 0, # 原价
+        "discount_price": 0
+    }
+server_price["data_disk"] = server_price.get("data_disk", 0) + price["data_disk"]["discount_price"]
+
+```
+- 你能看出来哪里出错了吗
+```py
+class CloudResourcePrice:
+    def get_rds_params(self, payload):
+        pass
+# view.py
+def get_rds_params(payload: RdsParamsGetSchema, db: Session = Depends(get_db)):
+    res = CloudResourcPrice.get_rds_params(payload)
+File "d:\Desktop\work\dccloud-finopsserv\app\cost\views.py", line 52, in get_rds_params
+    res = CloudResourcPrice.get_rds_params(payload)
+TypeError: get_rds_params() missing 1 required positional argument: 'payload'
+```
+### 遇到报错时要将已经正确处理的数据返回吗
+```py
+
+    def get_vm_layer2_network(self, vm_obj: VirtualMachine):
+        """根据cmp id查询虚拟机关联的二层网络"""
+        res = []
+        try:
+            id = vm_obj.cmp_id
+            network_res, total = cmp_api.get_network_info(id)
+            if network_res:
+                for item in network_res:
+                    network_id = item.get("network_id")
+                    if network_id:
+                        layer_two_network = cmp_api.get_layer_two_network_info(network_id)
+                        if layer_two_network:
+                            res.append(layer_two_network.wire)
+            return ",".join(res)
+        except Exception as e:
+            logger.exception(e)
+            return ",".join([]) # 还是return ",".join(res)
+            # 不容易感知到错误
+
+```
 ### 
 - 总是采用不擅长的方式
 - 查阅文档的东西总是想一下学完
@@ -43,7 +105,7 @@
 - 交接过程中有些细节没有宣导到位
 一百万5分钟以内
 
-
+### 接口分开会导致代码重复，会导致代码重复执行，增加IO/计算成本 
 ### 运维
 - 应用要和用户绑定，有些用户能执行的应用，换个用户就执行不了
 - 要考虑涉及到的多台机器环境不一定一样的情况，比如某些命令会没有，某些包没有，架构不同不好安装，甚至python版本或者bash版本 不一样

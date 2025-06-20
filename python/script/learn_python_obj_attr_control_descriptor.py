@@ -30,7 +30,12 @@ __getattr__、__setattr__、__delattr__来实现属性查找、设置、删除�
 绑定行为：在属性的访问、赋值、删除时还绑定发生了其他的事情，就是包括__getattribute__在内的属性三剑客所做的事情一样
 托管属性： 描述符就是创建托管属性的一种方法，通过描述符去托管另一个类的相关属性，或者说是类属性的一个代理
 """
-
+"""
+没有@getattr @setattr方法
+名称	         用途	              应用方式	              调用时机
+__getattr__	当属性不存在时，动态提供值	定义在类中（魔法方法）	访问不存在的属性时触发
+__setattr__	拦截所有属性赋值	定义在类中（魔法方法）	设置任何属性时调用
+"""
 
 # 实际上这个名字应该是weight这种名字，因为他只代理一种属性
 class RevealAccess:
@@ -74,6 +79,98 @@ class MyClass:
         """
         # self.r = r
         pass
+
+"""
+TO: 学习@property
+用于把一个方法变成属性访问，可选配合 @<name>.setter / @<name>.deleter。
+"""
+class Person:
+    def __init__(self, name):
+        self._name = name
+
+    @property
+    def name(self):  # 调用 p.name 实际会调用这个方法
+        return self._name
+
+    @name.setter
+    def name(self, value):  # 设置 p.name = xxx 会调用这个方法
+        self._name = value
+
+"""
+TO: __getattr__  __setattr__
+是拦截所有属性赋值的魔法方法。
+是 Python 的魔法方法，当你访问的属性不存在时，它会被自动调用。
+
+"""
+class Demo:
+    def __getattr__(self, name):
+        print(f"{name} 不存在，动态返回默认值")
+        return 42
+
+# d = Demo()
+# print(d.abc)  # abc 不存在，会调用 __getattr__
+class Demo:
+    def __setattr__(self, name, value):
+        print(f"设置 {name} = {value}")
+        super().__setattr__(name, value)  # 必须这样设置，否则递归调用死循环
+
+# d = Demo()
+# d.x = 10  # 会触发 __setattr__
+
+
+"""
+TO：创建只读属性 方法1 使用 @property 创建只读属性
+@property 定义了只读的 getter；
+
+不提供 @name.setter 方法，赋值时会报错：
+"""
+class Person:
+    def __init__(self, name):
+        self._name = name  # 私有变量
+
+    @property
+    def name(self):  # 只定义 getter，没有 setter
+        return self._name
+
+    # 或者这样在@property里设置
+    # def __init__(self):
+    #     self._client = ""
+
+    # @property
+    # def client(self):
+    #     try:
+    #         if self._client:
+    #             return self._client
+    #         self._client = get_client()
+    #         return self._client
+    #     except Exception as e:
+    #         logger.error("cpm 初始化失败")
+    #         logger.exception(e)
+
+# p = Person("Alice")
+# print(p.name)     # ✅ 输出 "Alice"
+# p.name = "Bob"    # ❌ 抛出 AttributeError，因为没有 setter
+
+"""
+TO：创建只读属性 方法2 使用 __getattr__ + __setattr__ 控制写入行为
+更通用但复杂，不推荐用于简单场景：
+"""
+class Config:
+    def __init__(self):
+        self._readonly_fields = {"version"}
+        self.version = "1.0"
+        self.name = "test"
+
+    def __setattr__(self, name, value):
+        if hasattr(self, "_readonly_fields") and name in self._readonly_fields:
+            raise AttributeError(f"{name} is read-only")
+        super().__setattr__(name, value)
+
+# c = Config()
+# print(c.version)     # ✅
+# c.name = "demo"      # ✅
+# c.version = "2.0"    # ❌ AttributeError: version is read-only
+
 
 
 def debug_descriptor():

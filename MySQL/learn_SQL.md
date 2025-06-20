@@ -37,9 +37,17 @@ limit offset
     - count() 返回查询的记录总数 `select id, count(*) as address_count from tbl_b group by id AS tbl_new;` 返回tbl_b的行数, 并生成一个两列名分别为id, address_count(表示tbl_b中id的个数)的新表, 新表名为tbl_new 用在查询中; 需要靠id分组, 要不只有一行
 
 ### update
+
+```cs
+update virtual_machine vm set cloud = case 
+	when cloud_account like "%Office-VC%" then "Office"
+	else cloud
+end
+where id =80;
+```
 - 在原来的基础上加1`update tbl_name set col=col+1`
-- 更新一个值：`UPDATE coupon_pool SET serialno = '20170319010010'  WHERE id = 10;`
-- 更新多个值:`UPDATE coupon_pool SET serialno = '20170319010010' , name = '名字10'  WHERE id = 10;`
+- 更新一个列：`UPDATE coupon_pool SET serialno = '20170319010010'  WHERE id = 10;`
+- 更新多个列:`UPDATE coupon_pool SET serialno = '20170319010010' , name = '名字10'  WHERE id = 10;`
 - delete 不能来自删除来自同一个表的,你需要一个子表 :可以这样写 DELETE FROM Person WHERE id NOT IN ( select *from (SELECT MIN(id) as id FROM Person GROUP BY email ) as a )
 - DELETE p1 FROM Person p1, Person p2 WHERE p1.Email = p2.Email AND p1.Id > p2.Id
   - a. 从驱动表（左表）取出N条记录；
@@ -143,7 +151,21 @@ SELECT TOP 2 * FROM Persons 头两条
 SELECT TOP 2 percent * FROM Persons 结果的2%
 ```
 - limit 不支持运算 不能使用 limit 5-1 ；必须set N=5-1 然后再limit N
+### 大小写
+- 在 MySQL 中，LIKE 默认是否区分大小写，取决于你所使用的 字符集（CHARACTER SET）和排序规则（COLLATION）。
+- 假设你的表是 utf8mb4 字符集，你可以指定使用不区分大小写的排序规则（例如 utf8mb4_general_ci）来让 LIKE 不区分大小写。
+```cs
+SELECT * FROM your_table
+WHERE column_name COLLATE utf8mb4_general_ci LIKE '%abc%';
+# utf8mb4_general_ci（通用、不区分大小写）
+# utf8mb4_bin 区分大小写
+# utf8mb4_unicode_ci（支持国际化、不区分大小写）
+
+COLLATE utf8mb4_general_ci 会使比较变为不区分大小写，但不影响是否使用索引（关键还是 % 位置）。
+# 排序规则确定的大小写敏感还体现在使用等号查询时
+```
 ### like
+- 如果多个条件，只能用or联接
 - 模糊查询 like not like
 - 不会区分大小写了 like "Ab" 也能查到ab
 - 占位符
@@ -152,7 +174,15 @@ SELECT TOP 2 percent * FROM Persons 结果的2%
   - [abc] 字符a或者字符b或者字符c
   - [!abc] 除字符a或者字符b或者字符c的任意字符
   - `select * from user where name like ‘_[AB]%’` # 查找name第二个字符为A或者B的用户信息。
-
+### REGEXP 正则表达式（REGEXP）
+- 默认情况下，MySQL 中的 REGEXP 通常 不会走索引，也就是说这类查询大概率会 全表扫描，特别是当：
+column_name 不是最左前缀的匹配 和 模式中包含通配符（比如 .*, | 等）时
+- 极少数情况下，MySQL 的查询优化器能识别 REGEXP '^abc' 这种前缀正则，然后选择索引范围扫描：
+- 用 FULLTEXT 索引（适合复杂搜索）
+```cs
+SELECT * FROM your_table
+WHERE column_name REGEXP 'apple|banana|cherry';
+```
 ### on
 - 在 SQL 中，ON 子句用于指定连接两个表时的条件。他用于过滤连接的结果，只使两个表中满足条件的行返回。
 - ON 子句和笛卡尔积（Cartesian product）是相关的，但它们不是完全相同的概念。笛卡尔积返回的结果是两个表中所有行之间所有可能的组合。（笛卡尔积发生在没有指定连接条件，或者没有适当的连接条件）

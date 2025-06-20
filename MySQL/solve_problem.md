@@ -1,4 +1,5 @@
 ## 一些排错sql
+- SHOW FULL COLUMNS FROM virtual_machine;  查看表属性
 ```sql
 -- 查看引擎状态
 show engine innodb status \G;  -- mysql命令行中

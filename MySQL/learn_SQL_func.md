@@ -152,6 +152,12 @@ FROM
 - 作用与行，每行都有结果
 - 如果判断条件为True，就返回then后面的值，并结束case，否则继续往下执行，若是所有的case都不满足，返回else的值，若没有else，返回null
 ```cs
+update virtual_machine vm set cloud = case 
+	when cloud_account like "%Office-VC%" then "Office"
+	else cloud
+end
+where id =80;
+
 SELECT OrderID, Quantity,
 CASE
     WHEN Quantity > 30 THEN 'The quantity is greater than 30'

@@ -1,3 +1,14 @@
+### 配置
+```py
+    # 这里使用mysql+pymysql而不是mysql的原因是:
+    # 1. mysql是一个通用的前缀,需要指定具体的Python MySQL驱动
+    # 2. pymysql是纯Python实现的MySQL驱动,不依赖MySQL-python这样的C扩展
+    # 3. 如果只写mysql,SQLAlchemy会默认使用MySQL-python(MySQLdb)驱动,但该驱动:
+    #    - 需要编译安装
+    #    - 依赖MySQL客户端库
+    #    - 不支持Python 3
+    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DATABASE_USER}:{DATABASE_PASS}@{DATABASE_HOST}:{DATABASE_PORT}/{DATABASE_DB}"
+```
 ### 初始表
 ```py
 from sqlalchemy.ext.declarative import declarative_base
@@ -52,8 +63,6 @@ user_obj = db_session.query(User).filter(User.id == 179074001).update({"name":"X
 ticket_data_obj = self.db.query(ServerClusterCreateTicketData).filter(ServerClusterCreateTicketData.ticket_id == ticket_id)
 new_data = server_cluster_patch_ticket_schema.dump(payload)
 ticket_data_obj.update(new_data) # 注意ticket_data_obj是查询对象，不是ServerClusterCreateTicketData对象
-new_data = server_cluster_patch_ticket_schema.dump(payload)
-ticket_data_obj.update(new_data)
 # 方法三 引用更新，在原有的基础上更新
 res = db_session.query(Student).update({Student.student_id:Student.student_id + 10},synchronize_session=False)
 # 方法四
@@ -96,7 +105,20 @@ t_ids = (self.db.query(Ticket.id)
 self.db.query(Ticket.id).filter(xxx).first()结果是一个元组(289,) 取289是res[0]
 ```
 - 如果查询部分字段，可以通过query.all()[0]._asdict()将数据转换为字典，但是如果查询的多个表，只会转换一个表的字段到结果中（可以为另一个表中字段设置label）（不知道查询全表可不可以用这个）
+- 不区分大小写
+```py
+db.query(self.model).filter_by(is_deleted=0, d_version=app_config.USE_DATA_VERSION)
+query.filter(getattr(self.model, "owner").ilike(f"{value}"))
 
+# SELECT * FROM network_device 
+# WHERE network_device.is_deleted = 0 AND network_device.d_version = 'latest' AND lower(network_device.owner) LIKE lower('CN-jinweijiangod')
+
+query.filter(collate(getattr(self.model, "owner"), 'utf8mb4_general_ci')==value)
+
+# FROM virtual_machine, network_device 
+# WHERE virtual_machine.is_deleted = 0 AND virtual_machine.d_version = 'latest' AND (network_device.owner COLLATE utf8mb4_general_ci) = 'CN-jinweijiangod'
+
+```
 ### 子查询
 ```py
 # 创建子查询别名
@@ -194,6 +216,14 @@ query = session.query(Parent).outerjoin(child_subquery, Parent.id == child_subqu
 session.new  # ：包含自上次提交以来添加到会话但尚未提交的所有对象。
 session.dirty  #：包含自上次提交以来被修改的所有对象。
 session.deleted  #：包含自上次提交以来被删除的所有对象。
+# 使用db.session.rollback()可以清空未提交的更改
+db.dirty
+IdentitySet([])
+db.new
+IdentitySet([<app.models.access_log.AccessRecordData object at 0x00000295780A3A30>, <app.models.access_log.AccessRecordData object at 0x00000295790F47C0>])
+db.rollback()
+db.new
+IdentitySet([])
 ```
 
 ### 去重
@@ -223,6 +253,7 @@ version_list = db.query(module.version).group_by(module.version).order_by("versi
 version_list = db.query(module.version).group_by(module.version).order_by(module.version).all() # 使用模型属性
 # 倒序
 version_list = db.query(module.version).group_by(module.version).order_by(module.version.desc()).all()
+pm_group_dos = query.order_by(desc(func.count(PhysicalMachine.id).label("count"))).limit(50).all()
 # 根据其他列排序 根据重命名列
 >>> stmt = (
 ...     select(Address.user_id, func.count(Address.id).label("num_addresses"))

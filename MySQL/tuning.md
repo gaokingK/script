@@ -28,7 +28,9 @@
     - link:https://blog.csdn.net/poxiaonie/article/details/77757471
     - using index 索引覆盖
     - Using filesort 使用文件排序，使用非索引列进行排序时出现，非常消耗性能，尽量优化
-
+- key
+    - NULL 
+就说明是全表扫描，没有走索引。
 
 ### 加索引
 - 从1400万条数据中检索耗时从4.27s提高到0.01s ![](../../imgs/tunning_add_index_01.png)

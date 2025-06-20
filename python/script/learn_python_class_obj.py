@@ -67,7 +67,6 @@ def debug_decri():
     # learn_class_obj_wingman.super_func()
     # c.name = "ojb"
     # learn_class_obj_wingman.super_func()
- q  
     trace(t)
 
 

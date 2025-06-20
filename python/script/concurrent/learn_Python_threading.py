@@ -11,7 +11,9 @@ link: https://www.liaoxuefeng.com/wiki/1016959663602400/1017630786314240
 """
 # 线程隔离
 def isolation_thread():
-    thread_global.value1={threading.current_thread().name: threading.current_thread().name}
+    if not hasattr(thread_global, "value1"):
+        thread_global.value1 = {}
+    thread_global.value1.update({threading.current_thread().name: threading.current_thread().name})
     print(thread_global.value1)
     isolation_thread_after()
 
@@ -100,43 +102,71 @@ daemon=True 的作用
 需要明确完成的任务：
 程序退出前需要确保所有线程完成工作。
 """
+
+"""
+TO: 使用线程池时 # max_worker的设置
+- 虽然线程是轻量级的，但设置太大仍然可能带来 性能下降：
+问题	原因
+上下文切换频繁	操作系统要频繁调度，CPU 时间浪费
+内存占用高	每个线程都占用一定栈空间，线程越多越占内存
+竞争资源	如果任务操作 I/O 或共享变量，线程过多会产生争用
+反而变慢	线程数太多可能导致程序比串行还慢（尤其是 CPU 密集型任务）
+- 如果是 I/O 密集型任务（网络请求、磁盘 I/O 等）：
+可以设置得相对 大一些（如几十或更多），因为线程大多在等 I/O。
+- 如果是 CPU 密集型任务（数学计算、加密、图像处理等）：
+不建议使用线程池，而是使用 ProcessPoolExecutor
+如果硬要用线程池，max_workers 一般设置为：
+import os
+max_workers = os.cpu_count() or 4  # 推荐 = CPU 核心数
+- 实践 cpu_count=8
+with ThreadPoolExecutor(max_workers=10) as executor: # 25s
+with ThreadPoolExecutor(max_workers=16) as executor: # 12s
+with ThreadPoolExecutor(max_workers=18) as executor: # 11s
+with ThreadPoolExecutor(max_workers=20) as executor: # 9.5s
+with ThreadPoolExecutor(max_workers=21) as executor: # 10.97
+with ThreadPoolExecutor(max_workers=23) as executor: # 12s
+
+- 基本上为cpu_count的2倍 如果IO占用比较大就多一点
+
+
+"""
 if __name__ == '__main__':
     # TO: threading.local()
-    # test_dict={}
-    # processes = []
+    test_dict={}
+    processes = []
 
-    # thread_global = threading.local()
-    # for i in range(5):
-    #     t = threading.Thread(target=isolation_thread)
-    #     # t = threading.Thread(target=isolation_thread, args=(test_dict,))
-    #     processes.append(t)
-    #     t.start()
+    thread_global = threading.local()
+    for i in range(5):
+        t = threading.Thread(target=isolation_thread)
+        # t = threading.Thread(target=isolation_thread, args=(test_dict,))
+        processes.append(t)
+        t.start()
 
-    # for t in processes:
-    #     t.join()
+    for t in processes:
+        t.join()
 
     #TO: 线程池的使用
-    all_task = []
-    parm_list =[1,2,3,4,5]
-    with ThreadPoolExecutor(max_workers=2,thread_name_prefix="jjw") as t_pool:
-        # 使用map
-        # 如果timeout小于线程执行需要的时间，会报错concurrent.futures._base.TimeoutError
-        # for result in t_pool.map(some_func, parm_list, timeout=2):
-        #     pass
+    # all_task = []
+    # parm_list =[1,2,3,4,5]
+    # with ThreadPoolExecutor(max_workers=2,thread_name_prefix="jjw") as t_pool:
+    #     # 使用map
+    #     # 如果timeout小于线程执行需要的时间，会报错concurrent.futures._base.TimeoutError
+    #     # for result in t_pool.map(some_func, parm_list, timeout=2):
+    #     #     pass
 
-        # 使用submit
-        all_task=[t_pool.submit(some_func, p,) for p in parm_list[::-1]] # submit后就开始执行了 会全部提交
-        time.sleep(10)# 已经提交的子线程仍然后台并行在执行
-        # results = [f.result() for f in all_task] # 使用future对象获取返回
-        # wait(all_task,timeout=10, return_when=FIRST_COMPLETED)
+    #     # 使用submit
+    #     all_task=[t_pool.submit(some_func, p,) for p in parm_list[::-1]] # submit后就开始执行了 会全部提交
+    #     time.sleep(10)# 已经提交的子线程仍然后台并行在执行
+    #     # results = [f.result() for f in all_task] # 使用future对象获取返回
+    #     # wait(all_task,timeout=10, return_when=FIRST_COMPLETED)
 
-        # for f in as_completed(all_task): # 使用as_completed
-        #     print(f.result())
+    #     # for f in as_completed(all_task): # 使用as_completed
+    #     #     print(f.result())
 
-        # 添加回调函数
-        # all_task=[t_pool.submit(some_func, p,) for p in parm_list[::-1]]
-        # for f in all_task:
-        #     # f.add_done_callback(callback)
-        #     f.add_done_callback(functools.partial(callback,arg1=2))
-        pass
-    print("主进程结束")
+    #     # 添加回调函数
+    #     # all_task=[t_pool.submit(some_func, p,) for p in parm_list[::-1]]
+    #     # for f in all_task:
+    #     #     # f.add_done_callback(callback)
+    #     #     f.add_done_callback(functools.partial(callback,arg1=2))
+    #     pass
+    # print("主进程结束")

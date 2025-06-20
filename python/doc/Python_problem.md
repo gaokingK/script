@@ -71,8 +71,11 @@ True
           - 返回一个元组
           - 返回一个字典dict(sorted(dict.items()))
         - sorted(b) 返回按键排序的一个列表
-        - 若是想完成 “先按xx排序， 再按xxx排序”这种， 就把key=（xx, xxx）
+        - 若是想完成 “先按key1排序， 再按key2排序”这种， 就把key=（xx, xxx）
+        - 注意这次是data还是data.items()自己想一下，如果value不是字典或者列表元组，就不用items()
+          - sorted(data, key=lambda x: (-x["score"], x["age"])) 按 score 降序、age 升序
         - 还可以按照字典中没有的值来排序如 dir_list = sorted(dir_list,  key=lambda x: os.path.getmtime(os.path.join(file_path, x)))
+        - 
         - a = {'b': [{'a': 2}, {'a': 3}]}
         - sorted(a.get("b"), key=lambda x:x.get("a"))
         - >[{'a': 1}, {'a': 2}]
@@ -335,6 +338,13 @@ IndexError: list index out of range
     -  for key, value in tags_dict.items(): 不能用for key, value in tags_dict
     -  format_tags(data["tags"]) 这样不会改变data 要这样data["tags"] = format_tags(data["tags"])
     - for item in dic_obj: item[0] item是第一个key的值
+    - filter 处理对象 price_detail = dict(filter(lambda k: k[1], price_detail.items()))
+    - RuntimeError('dictionary changed size during iteration')" 下面的会报这个错
+    - ```py
+            for k, v in price_detail.items():
+            if not v:
+                price_detail.pop(k)
+    ```
 - 在 Python 中，函数内部对传入的可变对象（如字典、列表等）的修改会影响到函数外部的变量，因为在传递这些可变对象时，传递的是对象的引用，而不是对象的副本。然而，有一些情况下，函数内部的修改不会影响外部变量，具体情况取决于你如何操作这些对象。
 ```py
 # 重新赋值对象
@@ -546,4 +556,7 @@ a=[[1,2,3],[4,5,6]]
 [i if condition else exp for exp]  # 此时if...else被用来赋值，满足条件的i以及else被用来生成最终的列表
 # [i if i == 0 else 100 for i in range(10)] 
 [0, 100, 100, 100, 100, 100, 100, 100, 100, 100]
+
+# else 也可以写在这里
+{k:v.strip() if isinstance(v, str) else v for k,v in {"a": "b ","b": 2}.items()}
 ```

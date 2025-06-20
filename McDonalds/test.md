@@ -1,7 +1,36 @@
-
-<font color="Black">故障级别: INFO
-发布流程测试20241010 
->工单详情: [https://boss.dev.mcdonalds.cn/devops-wukongoperationweb/puppet-management/release-planning-detail?ticketId=281](https://boss.dev.mcdonalds.cn/devops-wukongoperationweb/puppet-management/release-planning-detail?ticketId=281)
->详细描述: 描述干什么，新增了那些东西
->工单id: 281
-</font>
+select count(*) from virtual_machine vm where 
+vm.mcd_project  COLLATE utf8mb4_general_ci  like '%test%'  
+or vm.mcd_project  COLLATE utf8mb4_general_ci  like '%dev%' 
+or vm.mcd_project  COLLATE utf8mb4_general_ci  like '%pt%' 
+or vm.mcd_project  COLLATE utf8mb4_general_ci  like '%uat%'
+or vm.mcd_project  COLLATE utf8mb4_general_ci  like '%sit%' 
+or vm.cloud_account  COLLATE utf8mb4_general_ci  like '%test%'  
+or vm.cloud_account  COLLATE utf8mb4_general_ci  like '%dev%' 
+or vm.cloud_account  COLLATE utf8mb4_general_ci  like '%pt%' 
+or vm.cloud_account  COLLATE utf8mb4_general_ci  like '%uat%'
+or vm.cloud_account  COLLATE utf8mb4_general_ci  like '%sit%' 
+or vm.vm_name  COLLATE utf8mb4_general_ci  like '%test%'  
+or vm.vm_name  COLLATE utf8mb4_general_ci  like '%dev%' 
+or vm.vm_name  COLLATE utf8mb4_general_ci  like '%pt%' 
+or vm.vm_name  COLLATE utf8mb4_general_ci  like '%uat%'
+or vm.vm_name  COLLATE utf8mb4_general_ci  like '%sit%' 
+and vm.cloud_account  COLLATE utf8mb4_general_ci  like '%prod%' 
+and vm.cloud_account  COLLATE utf8mb4_general_ci  like '%rpod%'
+and vm.cloud_account  COLLATE utf8mb4_general_ci  like '%pord%'
+and vm.cloud_account  COLLATE utf8mb4_general_ci  like '%test%'  
+and vm.cloud_account  COLLATE utf8mb4_general_ci  like '%dev%' 
+and vm.cloud_account  COLLATE utf8mb4_general_ci  like '%pt%' 
+and vm.cloud_account  COLLATE utf8mb4_general_ci  like '%office%'
+and vm.cloud_account  COLLATE utf8mb4_general_ci  like '%uat%'
+and vm.cloud_account  COLLATE utf8mb4_general_ci  like '%office%'
+and vm.cloud_account  COLLATE utf8mb4_general_ci  like '%sit%'
+and vm.vm_name  COLLATE utf8mb4_general_ci  like '%prod%' 
+and vm.vm_name  COLLATE utf8mb4_general_ci  like '%rpod%'
+and vm.vm_name  COLLATE utf8mb4_general_ci  like '%pord%'
+and vm.vm_name  COLLATE utf8mb4_general_ci  like '%test%'  
+and vm.vm_name  COLLATE utf8mb4_general_ci  like '%dev%' 
+and vm.vm_name  COLLATE utf8mb4_general_ci  like '%pt%' 
+and vm.vm_name  COLLATE utf8mb4_general_ci  like '%office%'
+and vm.vm_name  COLLATE utf8mb4_general_ci  like '%uat%'
+and vm.vm_name  COLLATE utf8mb4_general_ci  like '%office%'
+and vm.vm_name  COLLATE utf8mb4_general_ci  like '%sit%';
