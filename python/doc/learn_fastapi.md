@@ -18,9 +18,9 @@ def get_access_log(record_id: int, db: Session = Depends(get_db)):
 # get 请求
 # {{fin_host}}{{fin_port}}/cost/cloud_server_image?a=a&c=c&b=b
 @router.get("/cloud_server_image")
-async def get_cloud_server_image(a, b, db: Session = Depends(get_db)):
+async def get_cloud_server_image(a, b="", db: Session = Depends(get_db)):
     pass
-# a b 是查询参数的参数名
+# a b 是查询参数的参数名 a是必填，不填会报错，b不是必填
 
 @router.post("/estimation") # cost是整个post请求的请求体
 def cost_estimation(cost: CostQuery, db: Session = Depends(get_db)):

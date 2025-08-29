@@ -7,7 +7,7 @@
   - [MySQL索引原理以及查询优化](https://www.cnblogs.com/bypp/p/7755307.html)
 # 问题
 - 索引如果是连贯的1,2,3....10, 那非叶子节点存储什么？
-- BTree索引时，like中没有常量不会使用索引是啥意思？question_1
+- BTree索引时，like中没有常量不会使用索引是啥意思？question_1 意思是只有前缀匹配的时候才可以使用索引
 - 为什么 定义有外键的字段一定要建立索引？
 - B树和B+树的区别就是B+树的内部结点只存放键，叶子节点同时存放键值。这里的键和值分别指的什么？
   - 键是索引的值，值是指向当前行的地址吗？还是当前行的数据？
@@ -19,7 +19,8 @@
 # 索引的一些语法
 ```
 # 建立普通索引 
-alter table tbl_name add index field_name;
+alter table tbl_name add index index_name (field_name);
+alter table resource_relationship add key idx_source_uid (source_uid)  ;
 ALTER TABLE table_name ADD INDEX index_name(column1,column2,column3); # 普通组合索引
 
 # 查看可用索引
@@ -61,7 +62,9 @@ ALTER TABLE table_name ADD FULLTEXT(column， column2);
 ## 索引的使用场景
 - 一个字段上能建立多种索引，如果有多个，查询的时候会选一个较优的来作为检索的依据。（？怎么知道是最优呢？）
 - 不要想着为每个字段建立索引，因为优先使用索引的优势就在于其体积小。？
-
+    - 因为索引在数据发生变化时需要维护，会影响写入性能
+    - 索引会占用磁盘空间
+    - 可能使优化器选择非最优索引
 - 查询
   - select * from tbl_a where field_a xxx; 当field_a上建立了索引时，使用该字段查询的效率会有明显的提升（数据量越大越明显）。
   - 索引覆盖
@@ -116,6 +119,13 @@ ALTER TABLE table_name ADD FULLTEXT(column， column2);
 - 最左匹配
   - 对组合索引（A B C），B+树会按照从左到右来建立搜索树。比如搜索(A_value, B_value, C_value)时，会先去比较A来确定搜索方向，如果有相同的再去比较B这样依次来得到匹配数据。但是如果搜索(B_value, C_value)时， B+树就不知道该去查哪个节点。因为搜索树是把name作为第一个比较因子，没有name就不知道去哪里查询。同样的(A_value, C_value)也只能把所有匹配A的给找到，然后在一个一个匹配C的数据。
   - 我定义了 A,B,C的组合索引，如果 我只传递了 A,B 能走索引吗？答案是能，因为最左侧原理
+  - 注意最左匹配是要求列在查询条件中出现，并不是说查询条件中列的顺序（引擎会自己调度），也不是说在查询结果中的顺序
+  ```sql
+  ALTER TABLE resource_relationship ADD INDEX idx_source_relation (
+  relation_type, source_uid,d_version,  is_deleted);
+  select * from resource_relationship where source_uid = '0bd5e5cb' and relation_type = 'layer2_network-host'; # 可以完全使用索引
+  select * from resource_relationship where source_uid = '0bd5e5cb' -- 不能使用联合索引
+  ```
 
 ### 为什么是b树而不是平衡二叉树 及 局部性原理与磁盘预读 
 - 由于程序的局部性原理，磁盘在读取数据的时候，即使要的东西很少，也会从目标位置向后多读取一些数据来返回。那么如果是有局部性原理的程序，这样做就相当于加速了磁盘IO（就不需要多吃读取时的寻道时间了，只需要旋转时间）
@@ -157,7 +167,7 @@ ALTER TABLE table_name ADD FULLTEXT(column， column2);
 ## 索引的算法
 - 分为BTree算法和Hash算法
 - BTee算法（默认）
-  - 可以用于比较操作符，不以通配符开头的like操作符上；如果以通配符开头，或者没有使用常量，则不会使用索引，例如：`select * from tbl_name where name like '%jack'` # 以通配符开头；没有使用常量是什么情况？question_1
+  - 可以用于比较操作符，不以通配符开头的like操作符上；如果以通配符开头，或者没有使用常量，则不会使用索引，例如：`select * from tbl_name where name like '%jack'` # 以通配符开头；没有使用常量是什么情况？question_1 使用通配符会匹配到Ajack或者xjack, 就相当于不是常量
 - Hash算法
   - Hash索引只适用于对等查找，只需一次IO就能定位数据。所以查找效率远高于BTree
 

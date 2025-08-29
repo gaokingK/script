@@ -174,6 +174,14 @@ COLLATE utf8mb4_general_ci 会使比较变为不区分大小写，但不影响�
   - [abc] 字符a或者字符b或者字符c
   - [!abc] 除字符a或者字符b或者字符c的任意字符
   - `select * from user where name like ‘_[AB]%’` # 查找name第二个字符为A或者B的用户信息。
+### union all 垂直连接
+```
+select eip  ip from load_balancer where d_version="latest"
+  union all
+select private_ip ip from load_balancer where d_version="latest"
+  union all
+select address ip from load_balancer where d_version="latest"
+```
 ### REGEXP 正则表达式（REGEXP）
 - 默认情况下，MySQL 中的 REGEXP 通常 不会走索引，也就是说这类查询大概率会 全表扫描，特别是当：
 column_name 不是最左前缀的匹配 和 模式中包含通配符（比如 .*, | 等）时

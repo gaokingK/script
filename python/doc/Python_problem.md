@@ -549,6 +549,7 @@ TypeError: coercing to Unicode: need string or buffer, generator found
 a=[[1,2,3],[4,5,6]]
 [c for b in a for c in b]
 # 
+[ip for x in item if x for ip in x.split(",")]
 [int(x) for x in range(5)]
 [x+y for x,y in zip(1,2)]
 [i for i in range(k) if condition]  # 此时if起条件判断作用，满足条件的，将被返回成为最终生成的列表的一员。
@@ -556,7 +557,8 @@ a=[[1,2,3],[4,5,6]]
 [i if condition else exp for exp]  # 此时if...else被用来赋值，满足条件的i以及else被用来生成最终的列表
 # [i if i == 0 else 100 for i in range(10)] 
 [0, 100, 100, 100, 100, 100, 100, 100, 100, 100]
-
+# 多重循环
+ip_resource_type_data = [{"ip_addr": x, "ip_type": "ipv4", "resource_type": "虚拟机", "source": "vm_sync_task"}  for ip in ip_resource_type_list if ip for x in ip.split(",")]
 # else 也可以写在这里
 {k:v.strip() if isinstance(v, str) else v for k,v in {"a": "b ","b": 2}.items()}
 ```

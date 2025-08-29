@@ -36,6 +36,19 @@ db.session.commit()
 db.session.query(Note).filter(Note.title=='测试').delete()
 session.commit()
 ```
+# flush
+- flush()后需要提交吗？如果回滚的话会被回滚吗
+- flush() 的作用
+flush() 会将当前会话中的所有挂起的 SQL 语句发送到数据库执行
+
+它同步持久化上下文（session）与数据库，但不提交事务
+
+主要目的是为了确保后续操作能获取到正确的数据库状态
+
+提交与回滚的影响
+需要显式提交：即使调用了 flush()，仍然需要调用 commit() 才能使更改永久生效
+
+回滚会撤销 flush() 的更改：如果在 flush() 后调用 rollback()，所有已 flush 但未提交的更改都会被撤销
 # 插入 # 新增
 ```py
 db.add(price_obj) # add后不会有id，只能commit或者flush()后才有
@@ -84,6 +97,13 @@ self.db.query(F5VIPPoolInfo.partition, F5VIPPoolInfo.name.label("pools_name"),�
 query = session.query(User.name, Post.id.label('post_id')) \
     .select_from(User) \
     .join(Post, User.id == Post.user_id)
+
+# 查询是否为none
+query = query.filter(field_attr.is_(None))
+select * FROM network_device 
+WHERE network_device.is_deleted = 0 AND network_device.d_version = 'latest' AND network_device.sn IS NULL
+
+
 ```
 - 分页查询
 ```py
@@ -172,6 +192,16 @@ query = session.query(User).filter(User.name.like('A%')).filter(filter_condition
 session.query(Students).filter_by(name='yoyo', age=20).all()
 q = sess.query(IS).filter_by(node=node, password=password).all()
 
+
+self.db.query(ResourceRelationship).filter_by(relation_type="layer2_network-host").filter_by(relation_type="vpc-subnets").count()
+0
+self.db.query(ResourceRelationship).filter_by(relation_type="layer2_network-host").count()
+2620
+a=self.db.query(ResourceRelationship).filter_by(relation_type="layer2_network-host").filter_by(relation_type="vpc-subnets")
+print(a.statement.compile(compile_kwargs={"literal_binds": True}).__str__())
+SELECT resource_relationship.relation_type, resource_relationship.source_uid, resource_relationship.target_uid, resource_relationship.source_type, resource_relationship.target_type, resource_relationship.d_version, resource_relationship.id, resource_relationship.created_at, resource_relationship.updated_at, resource_relationship.is_deleted 
+FROM resource_relationship 
+WHERE resource_relationship.relation_type = 'layer2_network-host' AND resource_relationship.relation_type = 'vpc-subnets'
 ```
 - like 
 ```py
@@ -209,8 +239,31 @@ query = session.query(Parent).outerjoin(Child, Parent.id == Child.parent_id)
 child_subquery = session.query(Child.id).filter(Child.parent_id == Parent.id).subquery()
 # 使用子查询进行left JOIN
 query = session.query(Parent).outerjoin(child_subquery, Parent.id == child_subquery.c.id)
+# 多个条件连接
+from sqlalchemy import and_
+result = session.query(User, Order).join(
+    Order,
+    and_(
+        User.id == Order.user_id,
+        User.status == 'active',
+        Order.amount > 100
+    )
+).all()
+# select ... from tbl_a join tbl_b on cond1 and cond2 ...
+# 不可以使用func.and_ 语句会变成 select ... from tbl_a join tbl_b on and(cond1 , cond2) ... 会报错
 ```
-
+### func.and_和 from sqlalchemy import and_的区别
+方式	    导入方式	                        适用场景	                推荐度
+and_	   from sqlalchemy import and_	    标准的 SQL 逻辑 AND	        ✅ 推荐
+func.and_	from sqlalchemy import func	  也能用，但语义上不太准确	        ❌ 不推荐
+更 Pythonic 的写法 实际上，SQLAlchemy 支持直接用 & 运算符代替 and_：
+```py
+query = session.query(User).filter(
+    (User.age >= 18) & (User.status == 'active')
+)
+# 更简洁，和 Python 逻辑运算一致。
+# 但要注意 必须加括号，因为 & 优先级问题。
+```
 ### 查看未提交的修改
 ```py
 session.new  # ：包含自上次提交以来添加到会话但尚未提交的所有对象。
@@ -224,6 +277,11 @@ IdentitySet([<app.models.access_log.AccessRecordData object at 0x00000295780A3A3
 db.rollback()
 db.new
 IdentitySet([])
+
+# 注意bulk_insert_mappings 不会创建 ORM 对象，不会出现在 .new 中
+# 数据未提交，对其他连接不可见，包括新开的 session
+# 只有在当前 session 中查询	✅ 可行！	当前 session 能看到自己的未提交变更，只要你用同一个 session 查询
+res = session.query(ResourceRelationship).filter(...).all()
 ```
 
 ### 去重
@@ -261,6 +319,30 @@ pm_group_dos = query.order_by(desc(func.count(PhysicalMachine.id).label("count")
 ...     .order_by("user_id", desc("num_addresses"))
 ... )
 
+# 有子查询的话可能会改变排序结果
+sub_query = query_obj.subquery()
+query_obj = calc_cluster_data(sub_query)
+if filter_cond.get("utilization"):
+    query_obj = map_utilization_filter(filter_cond.get("utilization"), query_obj, sub_query)
+count = query_obj.count()
+query_obj = query_obj.order_by(StoreCluster.updated_at.desc())
+# 对应的sql为 结果按updated_at排序
+SELECT count(DISTINCT store_info.market_city_name_cn) AS market_count, count(store_info.cluster_id) AS store_count, anon_1.id, anon_1.cluster_name, anon_1.env, anon_1.domain, anon_1.tags, anon_1.created_at, anon_1.sku, anon_1.rancher_cluster_id, anon_1.k8s_ip, anon_1.ob_ip, anon_1.ob_vip, anon_1.updated_at, anon_1.ob_user_name, anon_1.lb_id, anon_1.ingress_ip 
+FROM (SELECT store_cluster.id AS id, store_cluster.cluster_name AS cluster_name, store_cluster.env AS env, store_cluster.domain AS domain, store_cluster.tags AS tags, store_cluster.created_at AS created_at, store_cluster.sku AS sku, store_cluster.rancher_cluster_id AS rancher_cluster_id, store_cluster.k8s_ip AS k8s_ip, store_cluster.ob_ip AS ob_ip, store_cluster.ob_vip AS ob_vip, store_cluster.updated_at AS updated_at, store_cluster.ob_user_name AS ob_user_name, store_cluster.lb_id AS lb_id, store_cluster.ingress_ip AS ingress_ip 
+FROM store_cluster 
+WHERE store_cluster.is_deleted = 0 ORDER BY store_cluster.updated_at DESC) AS anon_1 LEFT OUTER JOIN store_info ON store_info.cluster_id = anon_1.id AND store_info.is_deleted = 0 GROUP BY anon_1.id ORDER BY store_cluster.updated_at DESC
+
+query_obj = query_obj.order_by(StoreCluster.updated_at.desc())
+sub_query = query_obj.subquery()
+query_obj = calc_cluster_data(sub_query)
+if filter_cond.get("utilization"):
+    query_obj = map_utilization_filter(filter_cond.get("utilization"), query_obj, sub_query)
+count = query_obj.count()
+# 对应的sql为 结果没有按updated_at排序
+SELECT count(DISTINCT store_info.market_city_name_cn) AS market_count, count(store_info.cluster_id) AS store_count, anon_1.id, anon_1.cluster_name, anon_1.env, anon_1.domain, anon_1.tags, anon_1.created_at, anon_1.sku, anon_1.rancher_cluster_id, anon_1.k8s_ip, anon_1.ob_ip, anon_1.ob_vip, anon_1.updated_at, anon_1.ob_user_name, anon_1.lb_id, anon_1.ingress_ip 
+FROM (SELECT store_cluster.id AS id, store_cluster.cluster_name AS cluster_name, store_cluster.env AS env, store_cluster.domain AS domain, store_cluster.tags AS tags, store_cluster.created_at AS created_at, store_cluster.sku AS sku, store_cluster.rancher_cluster_id AS rancher_cluster_id, store_cluster.k8s_ip AS k8s_ip, store_cluster.ob_ip AS ob_ip, store_cluster.ob_vip AS ob_vip, store_cluster.updated_at AS updated_at, store_cluster.ob_user_name AS ob_user_name, store_cluster.lb_id AS lb_id, store_cluster.ingress_ip AS ingress_ip 
+FROM store_cluster 
+WHERE store_cluster.is_deleted = 0 ORDER BY store_cluster.updated_at DESC) AS anon_1 LEFT OUTER JOIN store_info ON store_info.cluster_id = anon_1.id AND store_info.is_deleted = 0 GROUP BY anon_1.id
 ```
 
 ### 函数
@@ -273,6 +355,9 @@ db.session().query(StoreInfo.cluster_id, func.count(distinct(StoreInfo.market_ci
 # 去空格
 user_info = (self.db.query(User)
                     .filter(or_(func.trim(User.username) == name, User.user_code  == code)).scalar())
+
+                    
+self.db.query(ResourceRelationship).filter(ResourceRelationship.relation_type.in_(["layer2_network-host", "vpc-subnets"])).count()
 ```
 
 # 其他
@@ -289,6 +374,28 @@ query_obj2 = (self.db.query(Ticket, ServerConfigReleaseTicketData, ServerConfigR
                 .join(ServerConfigReleaseData, ServerConfigReleaseData.ticket_id == Ticket.id)
                 .filter(Ticket.is_deleted == 0).filter(ServerConfigReleaseTicketData.is_deleted == 0)
                 .filter(ServerConfigReleaseData.is_deleted == 0).filter(ServerConfigReleaseData.is_activate == 1))
+
+# 这种也是一致的
+query_data = (db.query(ResourceRelationship.relation_type, target_model)
+                .join(target_model, and_(target_model.resource_uid==ResourceRelationship.target_uid, ResourceRelationship.relation_type==f"{source_model.__tablename__}-{target_model.__tablename__}"))
+                .filter(ResourceRelationship.source_uid==source_id)
+                .filter(ResourceRelationship.d_version==app_config.USE_DATA_VERSION)
+                .filter(ResourceRelationship.is_deleted==0)
+                .filter(target_model.is_deleted==0)
+                .all())
+query_data = (db.query(ResourceRelationship.relation_type, target_model)
+                .join(target_model, target_model.resource_uid==ResourceRelationship.target_uid)
+                .filter(ResourceRelationship.source_uid==source_id)
+                .filter(ResourceRelationship.relation_type==f"{source_model.__tablename__}-{target_model.__tablename__}")
+                .filter(ResourceRelationship.d_version==app_config.USE_DATA_VERSION)
+                .filter(ResourceRelationship.is_deleted==0)
+                .filter(target_model.is_deleted==0)
+                .all())
+语义上无区别：只要 .join() 后的 .filter() 不影响连接关系，两种写法结果一致。
+
+可读性角度：推荐使用第二种方式，将连接条件与查询过滤条件分开写。
+
+性能角度：最终会编译成类似的 SQL（SQL不一样，可能sql的编译器在编译后是一样的），不影响数据库执行计划。             
 ```
 
 
