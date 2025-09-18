@@ -5,6 +5,21 @@
 - ctrl + shift +up/down 多行编辑，移动光标 qq音乐会占用
 - ctrl + shift + p 输入setting.json打开json
 - ctrl + D 高亮选中的词，按enter能多点编辑
+- 选中TOC-TEST-Tidb
+```cs
+要选中整个“TOC-TEST-Tidb”而不是单独的“TEST”，可以使用以下方法：
+
+双击单词只能选中“TEST”，因为连字符“-”被视为分隔符。
+若要选中整个“TOC-TEST-Tidb”，可以：
+将光标放在单词上，然后按住 Ctrl 并单击鼠标左键拖动，手动选择整个字符串。
+或者使用键盘快捷键 Shift + 左/右箭头 扩展选择范围。
+你可以自定义“word separators”设置，让连字符不被视为分隔符。
+设置方法如下：
+
+修改 editor.wordSeparators 设置，去掉 -，这样双击时连字符不会分隔单词。
+默认值 `~!@#$%^&*()-=+[{]}\|;:'",.<>/?
+重新双击即可选中整个“TOC-TEST-Tidb”。
+```
 - 折叠
 ```cs
 要操作光标所在文件中的所有代码块：

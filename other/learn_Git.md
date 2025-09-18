@@ -395,3 +395,22 @@ Date:   Wed Sep 15 09:20:45 2021 +0800
 ### 将除了a.txt 外的文件都添加到
 - git add . -- :!a.txt
 - git add .; git reset a.txt
+
+
+### 搜索改动过某个文件的提交
+```py
+- git log --oneline --since="1 week" -- "*.config.js"
+- git log --name-status --grep="package.json"
+# 显示每次提交中修改的文件列表和状态
+git log --oneline --name-status
+
+# 查看某个文件的变更历史
+git whatchanged -- 文件名
+# 显示统计信息
+git whatchanged --stat -- 文件名
+
+# 搜索提交信息中包含文件名的提交
+git log --oneline --grep="文件名"
+```
+### 可以按提交信息搜索
+- 加上grep

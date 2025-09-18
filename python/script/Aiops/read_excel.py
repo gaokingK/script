@@ -49,6 +49,21 @@ def pandas_pro():
     # 保存修改
     df.to_excel("modified.xlsx", index=False)
 
+def xlxs2dict(file_path):
+    """读取表格，返回字典"""
+    import pandas as pd
+
+    df = pd.read_excel(file_path)
+    res = df.to_dict(orient='records')
+    # orient参数控制DataFrame转换为dict的格式，可选值包括:
+    # - 'dict': 列名作为key，每列数据作为value的列表
+    # - 'list': 返回列名和数据的嵌套列表
+    # - 'series': 每列作为一个Series对象
+    # - 'split': 返回{'index':[...], 'columns':[...], 'data':[...]}格式
+    # - 'records': 返回[{col1:val1, col2:val2,...}, {...}]格式的记录列表
+    # - 'index': 行索引作为key，每行数据作为value的字典
+
+
 if __name__ == '__main__':
     file_name = "./python/script/Aiops/网络设备表20240423.xlsx"
     read_excel(file_name)
