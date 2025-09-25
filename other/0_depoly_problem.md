@@ -431,6 +431,10 @@ export HOME=/d
 VIRTUALENVWRAPPER_PYTHON="C:\Users\CN-jinweijiangOD\AppData\Local\Programs\Python\Python39\python.exe" 
 export WORKON_HOME=$HOME/venvs
 source /d/Programs/Python/Python39/Scripts/virtualenvwrapper.sh
+
+# 如果路径里有空格
+export PYTHONHOME='/d/software/Python 3.13.7'
+source "$PYTHONHOME/Scripts/virtualenvwrapper.sh"
 ```
 
 - ## 问题
