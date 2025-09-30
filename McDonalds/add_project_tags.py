@@ -136,12 +136,12 @@ if __name__ == "__main__":
     prod_failed6 = ["INFRA-PROD-BAS", "INFRA-PROD-Zabbix", "TOC-PROD-CCC", "INFRA-PROD-BAS", "DCOE-PROD-AI中台", "TOC-PROD-OpenApi", "INFRA-PROD-BillingItemDetail", "INFRA-PROD-LogAudit", "INFRA-PROD-PingMesh", "INFRA-PROD-Security"]
 
 
-    project_names = list(set(["INFRA-PROD-Fortigate"]))
+    project_names = list(set([""]))
     db_cursor = db.cursor()
     fail_project = []
     for name in project_names:
-        # res = update_one_project_tags(db_cursor, name, "project", "resource_tag", is_prod=True)
-        res = update_one_project_tags(db_cursor, name, "project", "resource_tag", is_prod=True, filter_column='cloud_account', filter_v='阿里云小程序')
+        res = update_one_project_tags(db_cursor, name, "project", "resource_tag", is_prod=True)
+        # res = update_one_project_tags(db_cursor, name, "project", "resource_tag", is_prod=True, filter_column='cloud_account', filter_v='阿里云小程序')
         if res:
             fail_project.append(res)
     logger.info(f"失败项目: {fail_project}, 共有{len(fail_project)}个")

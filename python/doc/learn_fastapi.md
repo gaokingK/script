@@ -63,3 +63,19 @@ c:\Users\d1806\envs\finops\lib\site-packages\uvicorn\protocols\http\h11_impl.py:
 RuntimeWarning: Enable tracemalloc to get the object allocation traceback
 
 ```
+### BackGroundTasks
+```py
+BackgroundTasks 是 FastAPI 提供的一个用于在响应返回后执行后台任务的功能。
+主要特点
+执行时机：在 HTTP 响应发送给客户端之后才执行任务
+用途：
+清理临时文件、发送邮件通知、记录日志、更新缓存、其他不影响响应的操作
+
+执行顺序
+路由函数执行、HTTP 响应发送给客户端、然后执行后台任务
+
+优势
+不阻塞响应：用户立即收到响应
+自动管理：FastAPI 自动处理任务执行
+异常安全：后台任务异常不影响已发送的响应
+```

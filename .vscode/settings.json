@@ -1,4 +1,11 @@
 {
     "files.eol": "\n",
-    "editor.wordWrap": "on"
+    "editor.wordWrap": "on",
+    "python-envs.pythonProjects": [
+        {
+            "path": "",
+            "envManager": "ms-python.python:system",
+            "packageManager": "ms-python.python:pip"
+        }
+    ]
 }

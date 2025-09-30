@@ -17,7 +17,7 @@
     - simple：不包含子查询，union语句的
     - primary：包含子查询的最外层的查询
     - subquery：子查询
-- type：链接类型
+- type：它表示 MySQL 在表中找到所需行的方式，也就是访问类型
     - system > const > eq_ref > ref > range > index > ALL
     - ALL：扫描全部的表
     - index：遍历了索引，有时候比扫描全表的效率还低
