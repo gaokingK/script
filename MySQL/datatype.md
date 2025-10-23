@@ -27,7 +27,8 @@
 
 - TEXT 长文本字段，能存储64kb
 - blob 长文本字段， 保存的是二进制，可以用来存储图片
-
+- json 
+  - select count(*) from virtual_machine where d_version="latest" and json_length(tags) = 0; 查看json数据
 ### 查看当前时区
 ```cs
 # 查看当前 MySQL 服务器的时区设置

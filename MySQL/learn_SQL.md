@@ -36,6 +36,12 @@ limit offset
   - 表达式 是mysql函数如 AVG/count : https://www.runoob.com/mysql/mysql-functions.html
     - count() 返回查询的记录总数 `select id, count(*) as address_count from tbl_b group by id AS tbl_new;` 返回tbl_b的行数, 并生成一个两列名分别为id, address_count(表示tbl_b中id的个数)的新表, 新表名为tbl_new 用在查询中; 需要靠id分组, 要不只有一行
 
+### case 
+```sql
+select  case when tags->'$.business_scope' is not null then json_unquote(tags->'$.business_scope') else 'other' end as b from project;
+select  case when tags->'$.business_scope' is not null then tags->'$.business_scope' else 'other' end as b from project;
+
+```
 ### update
 
 ```cs
@@ -174,6 +180,14 @@ COLLATE utf8mb4_general_ci 会使比较变为不区分大小写，但不影响�
   - [abc] 字符a或者字符b或者字符c
   - [!abc] 除字符a或者字符b或者字符c的任意字符
   - `select * from user where name like ‘_[AB]%’` # 查找name第二个字符为A或者B的用户信息。
+### union all 垂直连接
+```
+select eip  ip from load_balancer where d_version="latest"
+  union all
+select private_ip ip from load_balancer where d_version="latest"
+  union all
+select address ip from load_balancer where d_version="latest"
+```
 ### REGEXP 正则表达式（REGEXP）
 - 默认情况下，MySQL 中的 REGEXP 通常 不会走索引，也就是说这类查询大概率会 全表扫描，特别是当：
 column_name 不是最左前缀的匹配 和 模式中包含通配符（比如 .*, | 等）时
@@ -273,6 +287,14 @@ FROM
 ### 比较操作符
 - =,>,>=,<,<=和between
 
+### json
+- 看datatype
+- 对于MySQL的JSON字段，直接访问可能返回带引号的JSON字符串，需要json_unquote()来获取纯字符串值。
+```
+select  case when tags->'$.business_scope' is not null then json_unquote(tags->'$.business_scope') else 'other' end as b from project;
+select  case when tags->'$.business_scope' is not null then tags->'$.business_scope' else 'other' end as b from project;
+
+```
 ### 排序规则 collate 创建表时使用
   - link
     - https://www.cnblogs.com/binjoy/articles/2638708.html

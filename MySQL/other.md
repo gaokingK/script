@@ -1,5 +1,11 @@
 - 从磁盘取数据是最影响性能的
 - 一般的应用系统，读写比例在10:1左右，而且插入操作和一般的更新操作很少出现性能问题，在生产环境中，我们遇到最多的，也是最容易出问题的，还是一些复杂的查询操作，因此对查询语句的优化显然是重中之重
+### 在JOIN、WHERE条件或唯一索引比较时，MySQL要求字段使用相同的排序规则
+- Error 1267: Illegal mix of collations (utf8mb4_unicode_ci,IMPLICIT) and (utf8mb4_general_ci,IMPLICIT) for operation '='
+- select a.ip, b.eip from eip a join load_balance b on a.ip=b.eip;
+- SELECT * FROM table1 t1 
+JOIN table2 t2 ON t1.field COLLATE utf8mb4_unicode_ci = t2.field COLLATE utf8mb4_unicode_ci;
+                    
 ### 细微的
 - 从磁盘取数据是最影响性能的
 - 一般的应用系统，读写比例在10:1左右，而且插入操作和一般的更新操作很少出现性能问题，在生产环境中，我们遇到最多的，也是最容易出问题的，还是一些复杂的查询操作，因此对查询语句的优化显然是重中之重

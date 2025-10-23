@@ -1,3 +1,14 @@
+### 其实这样market为空的也会有匹配，只是自己会默认为匹配不上
+```py
+# 如果门店没有市场属性会分配market不为空的集群
+db.session().query(StoreCluster)
+            .filter(StoreCluster.is_deleted == 0)
+            .filter(StoreCluster.env == 'prod')
+            .filter(func.JSON_UNQUOTE(func.JSON_EXTRACT(StoreCluster.tags, "$.Market"))
+                    .like(f"%{market}%"))
+
+select * from store_cluster where is_deleted=0 and JSON_UNQUOTE(json_extract(tags, "$.Market")) like "%%";                                    
+```
 ### getattr要写默认值
 ```py
 getattr(request, "environ", "")  # 没有属性返回 ""

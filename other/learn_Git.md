@@ -74,7 +74,7 @@
 - 直接修改的文件会在工作区显示出来，使用git add 后被添加到暂存区；commit后就在版本库了
 - 对暂存区的文件执行`git reset HEAD .`后，文件的改动在工作区
 - 对工作区的文件执行 `git checkout -- path/to/file` 后， 文件的改动被撤销了
-
+-- git checkout commit_id  -- app/reso_info/views.py 将文件回退到某个版本
 ### git clone
 -- git clone --depth=1 只克隆下包含最近一次commit的一个分支，这样这个项目文件就不会很大 https://blog.csdn.net/qq_43827595/article/details/104833980
 -- git clone --recursive
@@ -260,6 +260,7 @@ crlf->lf    lf->crlf     crlf->lf       \             /          \
       - git diff --no-index --color --ignore-all-space< file1> < file2> # 忽略换行符
       - git diff --no-index --word-diff-regex=[^[:space:]] a.html b.html # 只看文字是否相同, 但这个没有用,不知为啥
       - git diff [<options>] <commit> <commit>…​ <commit> [--] [<path>…​] 看某个路径下的两个提交之间的不同
+      - git diff 5605d96 HEAD --stat  -- app/reso_info/views.py 如果没有head 就是和当前做比较
 
 ### 查看分支的提交历史 git log --graph --pretty=oneline --abbrev-commit branch1 branch2
     ```
@@ -394,3 +395,22 @@ Date:   Wed Sep 15 09:20:45 2021 +0800
 ### 将除了a.txt 外的文件都添加到
 - git add . -- :!a.txt
 - git add .; git reset a.txt
+
+
+### 搜索改动过某个文件的提交
+```py
+- git log --oneline --since="1 week" -- "*.config.js"
+- git log --name-status --grep="package.json"
+# 显示每次提交中修改的文件列表和状态
+git log --oneline --name-status
+
+# 查看某个文件的变更历史
+git whatchanged -- 文件名
+# 显示统计信息
+git whatchanged --stat -- 文件名
+
+# 搜索提交信息中包含文件名的提交
+git log --oneline --grep="文件名"
+```
+### 可以按提交信息搜索
+- 加上grep

@@ -286,6 +286,8 @@ my_set in set(["a", "b"]) 这样怎样都是false
 - 保留function为true的
 - 结果是个可迭代对象
 - 即使可迭代对象为空，bool() 也是True， 要bool(list(filter())) 才能判断结果有没有值
+- list(filter(lambda x: "2" in x['owner'], res)) # res是个列表，里面是字典
+- 
 ### from openpyxl import load_workbook 处理excle表格
 ### if 类的某个实例会调用哪个方法
 - https://pycoders-weekly-chinese.readthedocs.io/en/latest/issue6/a-guide-to-pythons-magic-methods.html

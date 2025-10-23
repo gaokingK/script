@@ -55,7 +55,9 @@ Quad/duallit/solo sabre auto board
 $ adb devices
 List of devices attached
 R28M32FWJ6X     device
+如果是unauthried的话 重新插入 知道弹出允许usb调试对话框
 ```
+
 - 从手机复制到电脑
 adb pull 手机存储路径  电脑路径
 `adb pull  sdcard/xxx  /Users/xxxx/ xxx.tx` #注意手机路径最前面不能加/

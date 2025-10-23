@@ -25,7 +25,6 @@ class VMCountDataSchema(BaseModel):
                 raise ValueError("时间格式应为 YYYY-MM-DD HH:MM:SS")
         return value
 
-
 class VMCountResponseSchema(BaseModel):
     idc: VMCountDataSchema
     cloud: VMCountDataSchema
@@ -121,4 +120,21 @@ class RdsParamsGetSchema(BaseModel):
     @classmethod
     def validate_engine(cls, v):
         return validate_rds_resource_type(v)  
+
+    # 获取当前字段名
+    @field_validator('l_time', 'r_time')
+    @classmethod
+    def validate_time_format(cls, v, info):
+        field_name = info.field_name  # 获取当前字段名
+        if len(v) == 4:
+            v = f"{v}01" if field_name == "l_time" else f'{v}12'
+        if len(v) != 6 or not v.isdigit():
+            raise ValueError(f'{field_name}时间格式必须为YYYYMM，如202408')
+        
+        year, month = int(v[:4]), int(v[4:])
+        if year < 2020 or year > 2030:
+            raise ValueError(f'{field_name}年份必须在2020-2030之间')
+        if month < 1 or month > 12:
+            raise ValueError(f'{field_name}月份必须在01-12之间')
+        return v
 ```
